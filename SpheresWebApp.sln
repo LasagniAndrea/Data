@@ -66,8 +66,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonCSV", "CommonCSV\Comm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerClient", "LoggerClient\LoggerClient.csproj", "{55E5D84A-1D98-4C76-99DD-FBC4A2D316BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "..\SpheresServices\LoggerService\LoggerService.csproj", "{1FC02F1D-F965-4170-B1E9-4C3DDE2B1DFE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonLog", "CommonLog\CommonLog.csproj", "{4BFE53C9-DBCF-494C-A29F-738FDDB76D54}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyndicationFeed", "SyndicationFeed\SyndicationFeed.csproj", "{E9D21987-D46A-4EB3-9625-6640FAE57AD1}"
@@ -913,17 +911,14 @@ Global
 		SccProjectUniqueName32 = LoggerClient\\LoggerClient.csproj
 		SccProjectName32 = LoggerClient
 		SccLocalPath32 = LoggerClient
-		SccProjectUniqueName33 = ..\\SpheresServices\\LoggerService\\LoggerService.csproj
-		SccProjectName33 = ../SpheresServices/LoggerService
-		SccLocalPath33 = ..\\SpheresServices\\LoggerService
-		SccProjectUniqueName34 = CommonLog\\CommonLog.csproj
-		SccProjectName34 = CommonLog
-		SccLocalPath34 = CommonLog
-		SccProjectUniqueName35 = SyndicationFeed\\SyndicationFeed.csproj
-		SccProjectName35 = SyndicationFeed
-		SccLocalPath35 = SyndicationFeed
-		SccProjectUniqueName36 = DALOracleManaged\\DALOracleManaged.csproj
-		SccProjectName36 = DALOracleManaged
-		SccLocalPath36 = DALOracleManaged
+		SccProjectUniqueName33 = CommonLog\\CommonLog.csproj
+		SccProjectName33 = CommonLog
+		SccLocalPath33 = CommonLog
+		SccProjectUniqueName34 = SyndicationFeed\\SyndicationFeed.csproj
+		SccProjectName34 = SyndicationFeed
+		SccLocalPath34 = SyndicationFeed
+		SccProjectUniqueName35 = DALOracleManaged\\DALOracleManaged.csproj
+		SccProjectName35 = DALOracleManaged
+		SccLocalPath35 = DALOracleManaged
 	EndGlobalSection
 EndGlobal
