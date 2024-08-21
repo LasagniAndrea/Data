@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DALOracle", "DALOracle\DALO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DALOleDb", "DALOleDb\DALOleDb.csproj", "{B68C8188-99D4-4600-92A2-3AA8302E87B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DALOracleManaged", "DALOracleManaged\DALOracleManaged.csproj", "{DAFCDDC0-FBEC-4776-9FE9-61CEB806E9D4}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,18 +69,6 @@ Global
 		{B68C8188-99D4-4600-92A2-3AA8302E87B8}.ReleaseSetup|Any CPU.Build.0 = ReleaseSetup|Any CPU
 		{B68C8188-99D4-4600-92A2-3AA8302E87B8}.ReleaseSetup|x64.ActiveCfg = ReleaseSetup|x64
 		{B68C8188-99D4-4600-92A2-3AA8302E87B8}.ReleaseSetup|x64.Build.0 = ReleaseSetup|x64
-		{DAFCDDC0-FBEC-4776-9FE9-61CEB806E9D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DAFCDDC0-FBEC-4776-9FE9-61CEB806E9D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DAFCDDC0-FBEC-4776-9FE9-61CEB806E9D4}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{DAFCDDC0-FBEC-4776-9FE9-61CEB806E9D4}.Debug|x64.Build.0 = Debug|Any CPU
-		{DAFCDDC0-FBEC-4776-9FE9-61CEB806E9D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DAFCDDC0-FBEC-4776-9FE9-61CEB806E9D4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DAFCDDC0-FBEC-4776-9FE9-61CEB806E9D4}.Release|x64.ActiveCfg = Release|Any CPU
-		{DAFCDDC0-FBEC-4776-9FE9-61CEB806E9D4}.Release|x64.Build.0 = Release|Any CPU
-		{DAFCDDC0-FBEC-4776-9FE9-61CEB806E9D4}.ReleaseSetup|Any CPU.ActiveCfg = Release|Any CPU
-		{DAFCDDC0-FBEC-4776-9FE9-61CEB806E9D4}.ReleaseSetup|Any CPU.Build.0 = Release|Any CPU
-		{DAFCDDC0-FBEC-4776-9FE9-61CEB806E9D4}.ReleaseSetup|x64.ActiveCfg = Release|Any CPU
-		{DAFCDDC0-FBEC-4776-9FE9-61CEB806E9D4}.ReleaseSetup|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
