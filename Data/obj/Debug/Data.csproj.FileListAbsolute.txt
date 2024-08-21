@@ -1,13 +1,1 @@
-C:\Users\BDX088\Documents\GitHub\Spheres2\Data\bin\Debug\EFS.ApplicationBlocks.Data.dll
-C:\Users\BDX088\Documents\GitHub\Spheres2\Data\bin\Debug\EFS.ApplicationBlocks.Data.pdb
-C:\Users\BDX088\Documents\GitHub\Spheres2\Data\bin\Debug\EFS.ApplicationBlocks.Data.dll.CodeAnalysisLog.xml
-C:\Users\BDX088\Documents\GitHub\Spheres2\Data\bin\Debug\EFS.ApplicationBlocks.Data.dll.lastcodeanalysissucceeded
-C:\Users\BDX088\Documents\GitHub\Spheres2\Data\bin\Debug\EFS.ACommon.dll
-C:\Users\BDX088\Documents\GitHub\Spheres2\Data\bin\Debug\EFS.CommonData.dll
-C:\Users\BDX088\Documents\GitHub\Spheres2\Data\bin\Debug\EFS.ACommon.pdb
-C:\Users\BDX088\Documents\GitHub\Spheres2\Data\bin\Debug\EFS.CommonData.pdb
-C:\Users\BDX088\Documents\GitHub\Spheres2\Data\obj\Debug\Data.csproj.AssemblyReference.cache
-C:\Users\BDX088\Documents\GitHub\Spheres2\Data\obj\Debug\Data.csproj.CoreCompileInputs.cache
-C:\Users\BDX088\Documents\GitHub\Spheres2\Data\obj\Debug\Data.csproj.CopyComplete
 C:\Users\BDX088\Documents\GitHub\Spheres2\Data\obj\Debug\EFS.ApplicationBlocks.Data.dll
-C:\Users\BDX088\Documents\GitHub\Spheres2\Data\obj\Debug\EFS.ApplicationBlocks.Data.pdb
