@@ -143,6 +143,12 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EFS.ACommon">
+      <HintPath>..\..\..\..\..\..\TFS\SpheresProject\Development\Bobcat\Source\Spheres\ACommon\bin\Debug\EFS.ACommon.dll</HintPath>
+    </Reference>
+    <Reference Include="EFS.CommonData">
+      <HintPath>..\..\..\..\..\..\TFS\SpheresProject\Development\Bobcat\Source\Spheres\CommonData\bin\Debug\EFS.CommonData.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
@@ -150,15 +156,6 @@
       <Name>System.Data</Name>
     </Reference>
     <Reference Include="System.XML" />
-    <ProjectReference Include="..\ACommon\ACommon.csproj">
-      <Name>ACommon</Name>
-      <Project>{9FF00E89-DA79-4F89-B3A6-9995F502F080}</Project>
-      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
-    </ProjectReference>
-    <ProjectReference Include="..\CommonData\CommonData.csproj">
-      <Project>{A0323250-116A-43EF-9E7D-F3218B6246B1}</Project>
-      <Name>CommonData</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs">
