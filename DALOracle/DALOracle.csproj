@@ -143,6 +143,12 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EFS.ACommon">
+      <HintPath>..\..\..\..\..\..\TFS\SpheresProject\Development\Bobcat\Source\Spheres\ACommon\bin\Debug\EFS.ACommon.dll</HintPath>
+    </Reference>
+    <Reference Include="EFS.CommonData">
+      <HintPath>..\..\..\..\..\..\TFS\SpheresProject\Development\Bobcat\Source\Spheres\CommonData\bin\Debug\EFS.CommonData.dll</HintPath>
+    </Reference>
     <Reference Include="Oracle.DataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=AMD64">
       <Private>False</Private>
     </Reference>
@@ -179,16 +185,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ACommon\ACommon.csproj">
-      <Project>{9ff00e89-da79-4f89-b3a6-9995f502f080}</Project>
-      <Name>ACommon</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CommonData\CommonData.csproj">
-      <Project>{a0323250-116a-43ef-9e7d-f3218b6246b1}</Project>
-      <Name>CommonData</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

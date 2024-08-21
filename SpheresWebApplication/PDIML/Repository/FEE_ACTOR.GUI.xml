@@ -1,5 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
-  <customObject control="label"     clientid="DATE1"   caption = "lblDtConsult" xsi:type="CustomObjectLabel"/>
-  <customObject control="textbox"   clientid="DATE1"   datatype = "date" required="true" postback="true" postbackargument ="SELFRELOAD_"  xsi:type="CustomObjectTextBox" defaultvalue="TODAY"/>
-</customObjects>

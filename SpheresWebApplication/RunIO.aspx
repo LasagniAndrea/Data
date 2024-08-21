@@ -1,1 +1,0 @@
-<%@ Page language="c#" ValidateRequest="true" Inherits="EFS.Spheres.RunIOPage" Codebehind="RunIO.aspx.cs" %>

@@ -1,0 +1,10 @@
+C:\Users\BDX088\Documents\GitHub\Spheres2\DALOleDb\obj\Debug\DALOleDb.csproj.CoreCompileInputs.cache
+C:\Users\BDX088\Documents\GitHub\Spheres2\DALOleDb\bin\Debug\EFS.DALOleDb.dll
+C:\Users\BDX088\Documents\GitHub\Spheres2\DALOleDb\bin\Debug\EFS.DALOleDb.pdb
+C:\Users\BDX088\Documents\GitHub\Spheres2\DALOleDb\bin\Debug\EFS.ACommon.dll
+C:\Users\BDX088\Documents\GitHub\Spheres2\DALOleDb\bin\Debug\EFS.CommonData.dll
+C:\Users\BDX088\Documents\GitHub\Spheres2\DALOleDb\bin\Debug\EFS.ACommon.pdb
+C:\Users\BDX088\Documents\GitHub\Spheres2\DALOleDb\bin\Debug\EFS.CommonData.pdb
+C:\Users\BDX088\Documents\GitHub\Spheres2\DALOleDb\obj\Debug\DALOleDb.csproj.CopyComplete
+C:\Users\BDX088\Documents\GitHub\Spheres2\DALOleDb\obj\Debug\EFS.DALOleDb.dll
+C:\Users\BDX088\Documents\GitHub\Spheres2\DALOleDb\obj\Debug\EFS.DALOleDb.pdb

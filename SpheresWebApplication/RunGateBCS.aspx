@@ -1,1 +1,0 @@
-﻿<%@ Page language="C#" ValidateRequest="true" Inherits="EFS.Spheres.RunGateBCSPage" Codebehind="RunGateBCS.aspx.cs" %>

@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
-  <!-- PL 20180903 Mise en commentaire car usage de INNER JOIN non probant... -->
-  <!-- 
-  <customObject control="checkbox" clientid="ISWITHINCOMPLETETRADE" datatype="bool" postback="true" postbackargument ="SELFCLEAR_" caption="lblWithIncompleteTrade" width="200" required="true" />
-  <customObject control="space"    width="15"/>
-  <customObject control="panel"    clientid="ISWITHINCOMPLETETRADE" cssclass="fa-icon fas fa-info-circle blue" xsi:type="CustomObjectPanel" tooltip="WithIncompleteTrade" />
-  -->
-</customObjects>

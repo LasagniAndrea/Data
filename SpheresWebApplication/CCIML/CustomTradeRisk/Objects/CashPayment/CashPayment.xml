@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<Objects>
-  <!--CashPaymentBlock-->
-  <Object name="CashPaymentBlock">
-    <Table colspan="-1" style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:BulletPayment;" controlalignleft="true">
-      <Payment_ValueDate clientid="bulletPayment" helpschema="efsml" helpelement="Payment" />
-    </Table>
-  </Object>
-</Objects>

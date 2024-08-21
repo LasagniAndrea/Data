@@ -1,1 +1,0 @@
-<%@ Page language="c#" Inherits="EFS.Spheres.StatPage" Codebehind="Stat.aspx.cs" %>

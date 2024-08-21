@@ -1,1 +1,0 @@
-﻿<%@ Page language="c#" Inherits="EFS.Spheres.TradeAdminEventsPage" Codebehind="TradeAdminEvents.aspx.cs" %>

@@ -1,1 +1,0 @@
-<%@ Page language="c#" Inherits="EFS.Spheres.TrackerParamPage" Codebehind="TrackerParam.aspx.cs" %>

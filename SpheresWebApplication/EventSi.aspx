@@ -1,1 +1,0 @@
-<%@ Page language="c#" Inherits="EFS.Spheres.EventSiPage" Codebehind="EventSi.aspx.cs" %>

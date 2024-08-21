@@ -1,1 +1,0 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" Inherits="EFS.Spheres.TradeCapturePage" Codebehind="TradeCapturePage.aspx.cs" %>

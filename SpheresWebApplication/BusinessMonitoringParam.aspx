@@ -1,1 +1,0 @@
-<%@ Page language="c#" Inherits="EFS.Spheres.BusinessMonitoringParamPage" Codebehind="BusinessMonitoringParam.aspx.cs" %>

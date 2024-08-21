@@ -1,1 +1,0 @@
-<%@ Page language="c#" Inherits="EFS.Spheres.EarPage" Codebehind="Ear.aspx.cs" %>
