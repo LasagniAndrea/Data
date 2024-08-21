@@ -1,0 +1,938 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://cmegroup.com/api/risk/v1" xmlns:cme="http://cmegroup.com/api/risk/v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" version="1.0.39-SNAPSHOT">
+  <xsd:element name="riskPortfolioReq" type="cme:RiskPortfolioRequestMessage"/>
+  <xsd:element name="marginDetailRes" type="cme:MarginDetailResponseMessage"/>
+  <xsd:simpleType name="AcknowledgementStatus">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="ACCEPTED"/>
+      <xsd:enumeration value="COMPLETED"/>
+      <xsd:enumeration value="NONE"/>
+      <xsd:enumeration value="REJECTED"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="AveragingMethod">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="UNWEIGHTED"/>
+      <xsd:enumeration value="WEIGHTED"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="BusinessCenter">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="DZAL"/>
+      <xsd:enumeration value="AOLU"/>
+      <xsd:enumeration value="ARBA"/>
+      <xsd:enumeration value="AMYE"/>
+      <xsd:enumeration value="AUAD"/>
+      <xsd:enumeration value="AUBR"/>
+      <xsd:enumeration value="AUCA"/>
+      <xsd:enumeration value="AUDA"/>
+      <xsd:enumeration value="AUME"/>
+      <xsd:enumeration value="AUPE"/>
+      <xsd:enumeration value="AUSY"/>
+      <xsd:enumeration value="ATVI"/>
+      <xsd:enumeration value="BSNA"/>
+      <xsd:enumeration value="BHMA"/>
+      <xsd:enumeration value="BDDH"/>
+      <xsd:enumeration value="BBBR"/>
+      <xsd:enumeration value="BEBR"/>
+      <xsd:enumeration value="BMHA"/>
+      <xsd:enumeration value="BOLP"/>
+      <xsd:enumeration value="BWGA"/>
+      <xsd:enumeration value="BRBR"/>
+      <xsd:enumeration value="BRBD"/>
+      <xsd:enumeration value="BRRJ"/>
+      <xsd:enumeration value="BRSP"/>
+      <xsd:enumeration value="VGRT"/>
+      <xsd:enumeration value="BNBS"/>
+      <xsd:enumeration value="BGSO"/>
+      <xsd:enumeration value="CACL"/>
+      <xsd:enumeration value="CAMO"/>
+      <xsd:enumeration value="CAOT"/>
+      <xsd:enumeration value="CATO"/>
+      <xsd:enumeration value="CAVA"/>
+      <xsd:enumeration value="CAWI"/>
+      <xsd:enumeration value="KYGE"/>
+      <xsd:enumeration value="CLSA"/>
+      <xsd:enumeration value="CNBE"/>
+      <xsd:enumeration value="CNSH"/>
+      <xsd:enumeration value="COBO"/>
+      <xsd:enumeration value="CRSJ"/>
+      <xsd:enumeration value="CIAB"/>
+      <xsd:enumeration value="CYNI"/>
+      <xsd:enumeration value="CZPR"/>
+      <xsd:enumeration value="DKCO"/>
+      <xsd:enumeration value="DOSD"/>
+      <xsd:enumeration value="EGCA"/>
+      <xsd:enumeration value="SVSS"/>
+      <xsd:enumeration value="ESAS"/>
+      <xsd:enumeration value="EETA"/>
+      <xsd:enumeration value="ETAA"/>
+      <xsd:enumeration value="EUTA"/>
+      <xsd:enumeration value="FIHE"/>
+      <xsd:enumeration value="FRPA"/>
+      <xsd:enumeration value="GETB"/>
+      <xsd:enumeration value="DECO"/>
+      <xsd:enumeration value="DEDU"/>
+      <xsd:enumeration value="DEFR"/>
+      <xsd:enumeration value="DELE"/>
+      <xsd:enumeration value="DEMA"/>
+      <xsd:enumeration value="DEMU"/>
+      <xsd:enumeration value="DEST"/>
+      <xsd:enumeration value="GHAC"/>
+      <xsd:enumeration value="GBLO"/>
+      <xsd:enumeration value="GRAT"/>
+      <xsd:enumeration value="GGSP"/>
+      <xsd:enumeration value="HNTE"/>
+      <xsd:enumeration value="HKHK"/>
+      <xsd:enumeration value="HUBU"/>
+      <xsd:enumeration value="ISRE"/>
+      <xsd:enumeration value="INBA"/>
+      <xsd:enumeration value="INCH"/>
+      <xsd:enumeration value="INHY"/>
+      <xsd:enumeration value="INKO"/>
+      <xsd:enumeration value="INMU"/>
+      <xsd:enumeration value="INND"/>
+      <xsd:enumeration value="IDJA"/>
+      <xsd:enumeration value="IRTE"/>
+      <xsd:enumeration value="IEDU"/>
+      <xsd:enumeration value="ILJE"/>
+      <xsd:enumeration value="ILTA"/>
+      <xsd:enumeration value="ITMI"/>
+      <xsd:enumeration value="ITRO"/>
+      <xsd:enumeration value="ITTU"/>
+      <xsd:enumeration value="JMKI"/>
+      <xsd:enumeration value="JPTO"/>
+      <xsd:enumeration value="JESH"/>
+      <xsd:enumeration value="JOAM"/>
+      <xsd:enumeration value="KZAL"/>
+      <xsd:enumeration value="KENA"/>
+      <xsd:enumeration value="KWKC"/>
+      <xsd:enumeration value="LVRI"/>
+      <xsd:enumeration value="LBBE"/>
+      <xsd:enumeration value="LULU"/>
+      <xsd:enumeration value="MOMA"/>
+      <xsd:enumeration value="MWLI"/>
+      <xsd:enumeration value="MYKL"/>
+      <xsd:enumeration value="MYLA"/>
+      <xsd:enumeration value="MVMA"/>
+      <xsd:enumeration value="MTVA"/>
+      <xsd:enumeration value="MUPL"/>
+      <xsd:enumeration value="MXMC"/>
+      <xsd:enumeration value="MCMO"/>
+      <xsd:enumeration value="MACA"/>
+      <xsd:enumeration value="MARA"/>
+      <xsd:enumeration value="NAWI"/>
+      <xsd:enumeration value="NPKA"/>
+      <xsd:enumeration value="NLAM"/>
+      <xsd:enumeration value="NLRO"/>
+      <xsd:enumeration value="NYFD"/>
+      <xsd:enumeration value="NYSE"/>
+      <xsd:enumeration value="NZAU"/>
+      <xsd:enumeration value="NZWE"/>
+      <xsd:enumeration value="NGAB"/>
+      <xsd:enumeration value="NGLA"/>
+      <xsd:enumeration value="NOOS"/>
+      <xsd:enumeration value="OMMU"/>
+      <xsd:enumeration value="PKKA"/>
+      <xsd:enumeration value="PAPC"/>
+      <xsd:enumeration value="PELI"/>
+      <xsd:enumeration value="PHMK"/>
+      <xsd:enumeration value="PHMA"/>
+      <xsd:enumeration value="PLWA"/>
+      <xsd:enumeration value="PTLI"/>
+      <xsd:enumeration value="PRSJ"/>
+      <xsd:enumeration value="QADO"/>
+      <xsd:enumeration value="HRZA"/>
+      <xsd:enumeration value="KRSE"/>
+      <xsd:enumeration value="ROBU"/>
+      <xsd:enumeration value="RUMO"/>
+      <xsd:enumeration value="SAAB"/>
+      <xsd:enumeration value="SAJE"/>
+      <xsd:enumeration value="SARI"/>
+      <xsd:enumeration value="GBED"/>
+      <xsd:enumeration value="SNDA"/>
+      <xsd:enumeration value="RSBE"/>
+      <xsd:enumeration value="SGSI"/>
+      <xsd:enumeration value="SKBR"/>
+      <xsd:enumeration value="SILJ"/>
+      <xsd:enumeration value="ZAJO"/>
+      <xsd:enumeration value="ESBA"/>
+      <xsd:enumeration value="ESMA"/>
+      <xsd:enumeration value="LKCO"/>
+      <xsd:enumeration value="SEST"/>
+      <xsd:enumeration value="CHBA"/>
+      <xsd:enumeration value="CHGE"/>
+      <xsd:enumeration value="CHZU"/>
+      <xsd:enumeration value="TWTA"/>
+      <xsd:enumeration value="TZDA"/>
+      <xsd:enumeration value="TZDO"/>
+      <xsd:enumeration value="THBA"/>
+      <xsd:enumeration value="TTPS"/>
+      <xsd:enumeration value="TNTU"/>
+      <xsd:enumeration value="TRAN"/>
+      <xsd:enumeration value="TRIS"/>
+      <xsd:enumeration value="UGKA"/>
+      <xsd:enumeration value="UAKI"/>
+      <xsd:enumeration value="AEAD"/>
+      <xsd:enumeration value="AEDU"/>
+      <xsd:enumeration value="USBO"/>
+      <xsd:enumeration value="USCR"/>
+      <xsd:enumeration value="USCH"/>
+      <xsd:enumeration value="USDN"/>
+      <xsd:enumeration value="USDT"/>
+      <xsd:enumeration value="USGS"/>
+      <xsd:enumeration value="USHL"/>
+      <xsd:enumeration value="USHO"/>
+      <xsd:enumeration value="USLA"/>
+      <xsd:enumeration value="USMN"/>
+      <xsd:enumeration value="USMB"/>
+      <xsd:enumeration value="USNY"/>
+      <xsd:enumeration value="USPO"/>
+      <xsd:enumeration value="USSA"/>
+      <xsd:enumeration value="USSE"/>
+      <xsd:enumeration value="USDC"/>
+      <xsd:enumeration value="USWT"/>
+      <xsd:enumeration value="UYMO"/>
+      <xsd:enumeration value="VECA"/>
+      <xsd:enumeration value="VNHA"/>
+      <xsd:enumeration value="VNHC"/>
+      <xsd:enumeration value="YEAD"/>
+      <xsd:enumeration value="ZMLU"/>
+      <xsd:enumeration value="ZWHA"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="BusinessDateConvention">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="FOLLOWING"/>
+      <xsd:enumeration value="MODFOLLOWING"/>
+      <xsd:enumeration value="NONE"/>
+      <xsd:enumeration value="PRECEDING"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="CompoundingMethod">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="FLAT"/>
+      <xsd:enumeration value="NONE"/>
+      <xsd:enumeration value="SPREAD_EXCLUSIVE"/>
+      <xsd:enumeration value="STRAIGHT"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="Currency">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="AUD"/>
+      <xsd:enumeration value="BRL"/>
+      <xsd:enumeration value="GBP"/>
+      <xsd:enumeration value="CAD"/>
+      <xsd:enumeration value="CLP"/>
+      <xsd:enumeration value="CNH"/>
+      <xsd:enumeration value="CNY"/>
+      <xsd:enumeration value="COP"/>
+      <xsd:enumeration value="CZK"/>
+      <xsd:enumeration value="DKK"/>
+      <xsd:enumeration value="EUR"/>
+      <xsd:enumeration value="GLD"/>
+      <xsd:enumeration value="HKD"/>
+      <xsd:enumeration value="HUF"/>
+      <xsd:enumeration value="ISK"/>
+      <xsd:enumeration value="INR"/>
+      <xsd:enumeration value="IDR"/>
+      <xsd:enumeration value="ILS"/>
+      <xsd:enumeration value="JPY"/>
+      <xsd:enumeration value="KRW"/>
+      <xsd:enumeration value="MYR"/>
+      <xsd:enumeration value="MXN"/>
+      <xsd:enumeration value="NZD"/>
+      <xsd:enumeration value="NOK"/>
+      <xsd:enumeration value="PEN"/>
+      <xsd:enumeration value="PHP"/>
+      <xsd:enumeration value="PLN"/>
+      <xsd:enumeration value="RON"/>
+      <xsd:enumeration value="RUB"/>
+      <xsd:enumeration value="SAR"/>
+      <xsd:enumeration value="SGD"/>
+      <xsd:enumeration value="ZAR"/>
+      <xsd:enumeration value="SEK"/>
+      <xsd:enumeration value="CHF"/>
+      <xsd:enumeration value="TWD"/>
+      <xsd:enumeration value="THB"/>
+      <xsd:enumeration value="TRY"/>
+      <xsd:enumeration value="UAH"/>
+      <xsd:enumeration value="USD"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="CustomerAccountType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="HEDGE"/>
+      <xsd:enumeration value="HEIGHTENED"/>
+      <xsd:enumeration value="MEMBER"/>
+      <xsd:enumeration value="NON_HEIGHTENED"/>
+      <xsd:enumeration value="SPECULATOR"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="CycleCode">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="AI"/>
+      <xsd:enumeration value="CUR"/>
+      <xsd:enumeration value="EARLY"/>
+      <xsd:enumeration value="EOD"/>
+      <xsd:enumeration value="S"/>
+      <xsd:enumeration value="ITD"/>
+      <xsd:enumeration value="AM"/>
+      <xsd:enumeration value="BE"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="DateRelationshipType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="BEG_PER"/>
+      <xsd:enumeration value="END_PER"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="DateType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="BUSINESS"/>
+      <xsd:enumeration value="CALENDAR"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="DirectionIndicator">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="PAY"/>
+      <xsd:enumeration value="RECEIVE"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="DiscountingType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="AFMA"/>
+      <xsd:enumeration value="ISDA"/>
+      <xsd:enumeration value="NONE"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="FundSegregationType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="CSEG"/>
+      <xsd:enumeration value="CNSEG"/>
+      <xsd:enumeration value="COTC"/>
+      <xsd:enumeration value="NSEG"/>
+      <xsd:enumeration value="SECURED"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="IrsLegType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="FIXED"/>
+      <xsd:enumeration value="FIXED_FLOAT"/>
+      <xsd:enumeration value="FLOAT"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="IrsStubType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="LONG"/>
+      <xsd:enumeration value="SHORT"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="MarginMethod">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="CONCENTRATION"/>
+      <xsd:enumeration value="HVAR"/>
+      <xsd:enumeration value="LIQUIDITY"/>
+      <xsd:enumeration value="SPAN"/>
+      <xsd:enumeration value="SPAN2"/>
+      <xsd:enumeration value="SVAR"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="MarketSideIndicator">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="BUY"/>
+      <xsd:enumeration value="SELL"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="OriginType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="CUSTOMER"/>
+      <xsd:enumeration value="HOUSE"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="PaymentDateRollConvention">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="1"/>
+      <xsd:enumeration value="2"/>
+      <xsd:enumeration value="3"/>
+      <xsd:enumeration value="4"/>
+      <xsd:enumeration value="5"/>
+      <xsd:enumeration value="6"/>
+      <xsd:enumeration value="7"/>
+      <xsd:enumeration value="8"/>
+      <xsd:enumeration value="9"/>
+      <xsd:enumeration value="10"/>
+      <xsd:enumeration value="11"/>
+      <xsd:enumeration value="12"/>
+      <xsd:enumeration value="13"/>
+      <xsd:enumeration value="14"/>
+      <xsd:enumeration value="15"/>
+      <xsd:enumeration value="16"/>
+      <xsd:enumeration value="17"/>
+      <xsd:enumeration value="18"/>
+      <xsd:enumeration value="19"/>
+      <xsd:enumeration value="20"/>
+      <xsd:enumeration value="21"/>
+      <xsd:enumeration value="22"/>
+      <xsd:enumeration value="23"/>
+      <xsd:enumeration value="24"/>
+      <xsd:enumeration value="25"/>
+      <xsd:enumeration value="26"/>
+      <xsd:enumeration value="27"/>
+      <xsd:enumeration value="28"/>
+      <xsd:enumeration value="29"/>
+      <xsd:enumeration value="30"/>
+      <xsd:enumeration value="EOM"/>
+      <xsd:enumeration value="FRN"/>
+      <xsd:enumeration value="FRI"/>
+      <xsd:enumeration value="IMM"/>
+      <xsd:enumeration value="IMMAUD"/>
+      <xsd:enumeration value="IMMCAD"/>
+      <xsd:enumeration value="IMMNZD"/>
+      <xsd:enumeration value="MON"/>
+      <xsd:enumeration value="NONE"/>
+      <xsd:enumeration value="SAT"/>
+      <xsd:enumeration value="SUN"/>
+      <xsd:enumeration value="SFE"/>
+      <xsd:enumeration value="THU"/>
+      <xsd:enumeration value="TBILL"/>
+      <xsd:enumeration value="TUE"/>
+      <xsd:enumeration value="WED"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="PaymentDayCount">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="ACT/360"/>
+      <xsd:enumeration value="ACT/365.FIXED"/>
+      <xsd:enumeration value="ACT/365L"/>
+      <xsd:enumeration value="ACT/ACT.AFB"/>
+      <xsd:enumeration value="ACT/ACT.ICMA"/>
+      <xsd:enumeration value="ACT/ACT.ISDA"/>
+      <xsd:enumeration value="ACT/ACT.ISMA"/>
+      <xsd:enumeration value="BUS/252"/>
+      <xsd:enumeration value="30E/360"/>
+      <xsd:enumeration value="30E/360.ISDA"/>
+      <xsd:enumeration value="30/360"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ProductSubType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="BSP"/>
+      <xsd:enumeration value="GC"/>
+      <xsd:enumeration value="IRS"/>
+      <xsd:enumeration value="OIS"/>
+      <xsd:enumeration value="ZCS"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ProductType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="BOND"/>
+      <xsd:enumeration value="COMBO"/>
+      <xsd:enumeration value="EUSOV"/>
+      <xsd:enumeration value="EUSUP"/>
+      <xsd:enumeration value="FWD"/>
+      <xsd:enumeration value="FRA"/>
+      <xsd:enumeration value="FUT"/>
+      <xsd:enumeration value="IRS"/>
+      <xsd:enumeration value="TINT"/>
+      <xsd:enumeration value="TB"/>
+      <xsd:enumeration value="OPT"/>
+      <xsd:enumeration value="OOC"/>
+      <xsd:enumeration value="OOF"/>
+      <xsd:enumeration value="OOP"/>
+      <xsd:enumeration value="REPO"/>
+      <xsd:enumeration value="SWAPTION"/>
+      <xsd:enumeration value="TBA"/>
+      <xsd:enumeration value="TIPS"/>
+      <xsd:enumeration value="SOV"/>
+      <xsd:enumeration value="SUPRA"/>
+      <xsd:enumeration value="TBILL"/>
+      <xsd:enumeration value="TBOND"/>
+      <xsd:enumeration value="TNOTE"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="PutCallIndicator">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="C"/>
+      <xsd:enumeration value="P"/>
+      <xsd:enumeration value="S"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="RateCalculationMethod">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="DEFINED"/>
+      <xsd:enumeration value="INTERPOLATED"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="ResponseType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="CANCEL"/>
+      <xsd:enumeration value="MODIFY"/>
+      <xsd:enumeration value="NONE"/>
+      <xsd:enumeration value="STATUS"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="TimeUnit">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="DAY"/>
+      <xsd:enumeration value="MONTH"/>
+      <xsd:enumeration value="TERM"/>
+      <xsd:enumeration value="WEEK"/>
+      <xsd:enumeration value="YEAR"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="TradeStatus">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="ACCEPTED"/>
+      <xsd:enumeration value="CANCELED"/>
+      <xsd:enumeration value="CLEARED"/>
+      <xsd:enumeration value="HYPOTHETICAL"/>
+      <xsd:enumeration value="MATCHED"/>
+      <xsd:enumeration value="PENDING"/>
+      <xsd:enumeration value="REJECTED"/>
+      <xsd:enumeration value="TERMINATED"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="YesNoIndicator">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="NO"/>
+      <xsd:enumeration value="YES"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="CcpMarginAmounts">
+    <xsd:complexContent>
+      <xsd:extension base="cme:MarginAmountsBase">
+        <xsd:sequence>
+          <xsd:element name="clearingOrganizationId" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="currencyAmts" type="cme:CurrencyMarginAmounts" maxOccurs="unbounded"/>
+          <xsd:element name="customerAccountType" type="cme:CustomerAccountType" minOccurs="0"/>
+          <xsd:element name="pod" type="cme:PodMarginAmounts" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="CurrencyMarginAmounts">
+    <xsd:complexContent>
+      <xsd:extension base="cme:MarginAmountsBase">
+        <xsd:sequence>
+          <xsd:element name="currency" type="cme:Currency" minOccurs="0"/>
+          <xsd:element name="exchangeRt" type="xsd:decimal" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="Error">
+    <xsd:sequence>
+      <xsd:element name="code" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="HeaderBase">
+    <xsd:sequence>
+      <xsd:element name="applicationName" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="applicationVendor" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="applicationVersion" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="requestId" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="sentTime" type="xsd:dateTime" minOccurs="0"/>
+      <xsd:element name="version" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Instrument">
+    <xsd:sequence>
+      <xsd:element name="clearingOrganizationId" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="exchangeId" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="expirationDt" type="xsd:date" minOccurs="0"/>
+      <xsd:element name="fixingDt" type="xsd:date" minOccurs="0"/>
+      <xsd:element name="periodCode" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="productCode" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="productSubType" type="cme:ProductSubType" minOccurs="0"/>
+      <xsd:element name="productType" type="cme:ProductType" minOccurs="0"/>
+      <xsd:element name="putCallInd" type="cme:PutCallIndicator" minOccurs="0"/>
+      <xsd:element name="strike" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="symbol" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="underlyingPeriodCode" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="underlyingProductCode" type="xsd:string" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="IrsSingleSidedTrade">
+    <xsd:complexContent>
+      <xsd:extension base="cme:SingleSidedTrade">
+        <xsd:sequence>
+          <xsd:element name="endDt" type="xsd:date" minOccurs="0"/>
+          <xsd:element name="expirationDt" type="xsd:date" minOccurs="0"/>
+          <xsd:element name="expirationDtBusinessCenters" type="cme:BusinessCenter" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="expirationDtConvention" type="cme:BusinessDateConvention" minOccurs="0"/>
+          <xsd:element name="leg1" type="cme:IrsTradeLeg" minOccurs="0"/>
+          <xsd:element name="leg2" type="cme:IrsTradeLeg" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="IrsTradeLeg">
+    <xsd:sequence>
+      <xsd:element name="amts" type="cme:TradeAmounts" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="averagingMthd" type="cme:AveragingMethod" minOccurs="0"/>
+      <xsd:element name="calcPeriodBusinessCenters" type="cme:BusinessCenter" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="calcPeriodConvention" type="cme:BusinessDateConvention" minOccurs="0"/>
+      <xsd:element name="calcPeriodFrequencyQty" type="xsd:int" minOccurs="0"/>
+      <xsd:element name="calcPeriodFrequencyUnit" type="cme:TimeUnit" minOccurs="0"/>
+      <xsd:element name="calcPeriodRegularEndDt" type="xsd:date" minOccurs="0"/>
+      <xsd:element name="calcPeriodRegularStartDt" type="xsd:date" minOccurs="0"/>
+      <xsd:element name="cleanPrice" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="compoundingMthd" type="cme:CompoundingMethod" minOccurs="0"/>
+      <xsd:element name="currency" type="cme:Currency" minOccurs="0"/>
+      <xsd:element name="dayCnt" type="cme:PaymentDayCount" minOccurs="0"/>
+      <xsd:element name="directionInd" type="cme:DirectionIndicator" minOccurs="0"/>
+      <xsd:element name="dirtyPrice" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="discountingType" type="cme:DiscountingType" minOccurs="0"/>
+      <xsd:element name="endDt" type="xsd:date" minOccurs="0"/>
+      <xsd:element name="endDtBusinessCenters" type="cme:BusinessCenter" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="endDtConvention" type="cme:BusinessDateConvention" minOccurs="0"/>
+      <xsd:element name="finalStubIndex1TenorQty" type="xsd:int" minOccurs="0"/>
+      <xsd:element name="finalStubIndex1TenorUnit" type="cme:TimeUnit" minOccurs="0"/>
+      <xsd:element name="finalStubIndex2TenorQty" type="xsd:int" minOccurs="0"/>
+      <xsd:element name="finalStubIndex2TenorUnit" type="cme:TimeUnit" minOccurs="0"/>
+      <xsd:element name="finalStubRt" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="finalStubRtCalcMthd" type="cme:RateCalculationMethod" minOccurs="0"/>
+      <xsd:element name="finalStubType" type="cme:IrsStubType" minOccurs="0"/>
+      <xsd:element name="fixedRt" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="fixingDtBusinessCenters" type="cme:BusinessCenter" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="fixingDtConvention" type="cme:BusinessDateConvention" minOccurs="0"/>
+      <xsd:element name="fixingDtInitialBusinessCenters" type="cme:BusinessCenter" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="fixingDtInitialConvention" type="cme:BusinessDateConvention" minOccurs="0"/>
+      <xsd:element name="fixingDtInitialOffsetQty" type="xsd:int" minOccurs="0"/>
+      <xsd:element name="fixingDtInitialOffsetUnit" type="cme:TimeUnit" minOccurs="0"/>
+      <xsd:element name="fixingDtInitialType" type="cme:DateType" minOccurs="0"/>
+      <xsd:element name="fixingDtOffsetQty" type="xsd:int" minOccurs="0"/>
+      <xsd:element name="fixingDtOffsetUnit" type="cme:TimeUnit" minOccurs="0"/>
+      <xsd:element name="fixingDtType" type="cme:DateType" minOccurs="0"/>
+      <xsd:element name="futureValueNotionalAmt" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="index" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="indexTenor1Qty" type="xsd:int" minOccurs="0"/>
+      <xsd:element name="indexTenor1Unit" type="cme:TimeUnit" minOccurs="0"/>
+      <xsd:element name="indexTenor2Qty" type="xsd:int" minOccurs="0"/>
+      <xsd:element name="indexTenor2Unit" type="cme:TimeUnit" minOccurs="0"/>
+      <xsd:element name="initialStubIndex1TenorQty" type="xsd:int" minOccurs="0"/>
+      <xsd:element name="initialStubIndex1TenorUnit" type="cme:TimeUnit" minOccurs="0"/>
+      <xsd:element name="initialStubIndex2TenorQty" type="xsd:int" minOccurs="0"/>
+      <xsd:element name="initialStubIndex2TenorUnit" type="cme:TimeUnit" minOccurs="0"/>
+      <xsd:element name="initialStubRt" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="initialStubRtCalcMthd" type="cme:RateCalculationMethod" minOccurs="0"/>
+      <xsd:element name="initialStubType" type="cme:IrsStubType" minOccurs="0"/>
+      <xsd:element name="knownAmt" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="netCashFlowAmt" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="notionalAmt" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="notionalSchedules" type="cme:NotionalSchedule" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="paymentDtBusinessCenters" type="cme:BusinessCenter" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="paymentDtConvention" type="cme:BusinessDateConvention" minOccurs="0"/>
+      <xsd:element name="paymentDtOffsetQty" type="xsd:int" minOccurs="0"/>
+      <xsd:element name="paymentDtOffsetUnit" type="cme:TimeUnit" minOccurs="0"/>
+      <xsd:element name="paymentDtRelationshipType" type="cme:DateRelationshipType" minOccurs="0"/>
+      <xsd:element name="paymentDtRollConvention" type="cme:PaymentDateRollConvention" minOccurs="0"/>
+      <xsd:element name="paymentFrequencyQty" type="xsd:int" minOccurs="0"/>
+      <xsd:element name="paymentFrequencyUnit" type="cme:TimeUnit" minOccurs="0"/>
+      <xsd:element name="payments" type="cme:TradePayments" minOccurs="0"/>
+      <xsd:element name="resetCutOffDtType" type="cme:DateType" minOccurs="0"/>
+      <xsd:element name="resetCutOffOffsetQty" type="xsd:int" minOccurs="0"/>
+      <xsd:element name="resetCutOffOffsetUnit" type="cme:TimeUnit" minOccurs="0"/>
+      <xsd:element name="resetDtBusinessCenters" type="cme:BusinessCenter" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="resetDtConvention" type="cme:BusinessDateConvention" minOccurs="0"/>
+      <xsd:element name="resetDtRelationshipType" type="cme:DateRelationshipType" minOccurs="0"/>
+      <xsd:element name="resetFrequencyQty" type="xsd:int" minOccurs="0"/>
+      <xsd:element name="resetFrequencyUnit" type="cme:TimeUnit" minOccurs="0"/>
+      <xsd:element name="settlementCurrency" type="cme:Currency" minOccurs="0"/>
+      <xsd:element name="settlementRt" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="settlementRtFixingDt" type="xsd:date" minOccurs="0"/>
+      <xsd:element name="settlementRtFixingDtBusinessCenters" type="cme:BusinessCenter" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="settlementRtFixingDtConvention" type="cme:BusinessDateConvention" minOccurs="0"/>
+      <xsd:element name="settlementRtFixingDtOffsetQty" type="xsd:int" minOccurs="0"/>
+      <xsd:element name="settlementRtFixingDtOffsetUnit" type="cme:TimeUnit" minOccurs="0"/>
+      <xsd:element name="settlementRtFixingDtType" type="cme:DateType" minOccurs="0"/>
+      <xsd:element name="spreadAmt" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="startDt" type="xsd:date" minOccurs="0"/>
+      <xsd:element name="type" type="cme:IrsLegType" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MarginAmountsBase">
+    <xsd:sequence>
+      <xsd:element name="requirementAmts" type="cme:MarginRequirementAmounts"/>
+      <xsd:element name="valuationAmts" type="cme:MarginValuationAmounts"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MarginComponentAmounts">
+    <xsd:sequence>
+      <xsd:element name="concentrationComponent" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="fullValueComponent" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="hvarComponent" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="impliedOffset" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="interCmdtySpreadCredit" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="interCmdtyVolatilityCredit" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="interExchSpreadCredit" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="intraCmdtySpreadCharge" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="liquidityComponent" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="nakedLongComponent" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="nakedShortComponent" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="scanRisk" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="shortOptionMin" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="spotCharge" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="stressComponent" type="xsd:decimal" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MarginDetailResponse">
+    <xsd:sequence>
+      <xsd:element name="pointInTime" type="cme:PointInTime"/>
+      <xsd:element name="portfolios" type="cme:PortfolioMarginDetail" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MarginDetailResponseMessage">
+    <xsd:complexContent>
+      <xsd:extension base="cme:ResponseBase">
+        <xsd:sequence>
+          <xsd:element name="payload" type="cme:MarginDetailResponse"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="MarginRequirementAmounts">
+    <xsd:sequence>
+      <xsd:element name="componentAmts" type="cme:MarginComponentAmounts" minOccurs="0"/>
+      <xsd:element name="crossModelOffset" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="netOptionValue" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="riskInitialRequirement" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="riskMaintenanceRequirement" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="totalInitialMargin" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="totalMaintenanceMargin" type="xsd:decimal" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MarginSensitivityAmounts">
+    <xsd:sequence/>
+  </xsd:complexType>
+  <xsd:complexType name="MarginValuationAmounts">
+    <xsd:sequence>
+      <xsd:element name="netPresentValue" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="nonOptionValueLong" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="nonOptionValueShort" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="optionValueLongEquityStyle" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="optionValueLongFuturesStyle" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="optionValueShortEquityStyle" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="optionValueShortFuturesStyle" type="xsd:decimal" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="NotionalSchedule">
+    <xsd:sequence>
+      <xsd:element name="notionalAmt" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="stepDt" type="xsd:date" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="Payment">
+    <xsd:sequence>
+      <xsd:element name="amt" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="businessCenters" type="cme:BusinessCenter" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="currency" type="cme:Currency" minOccurs="0"/>
+      <xsd:element name="dt" type="xsd:date" minOccurs="0"/>
+      <xsd:element name="dtConvention" type="cme:BusinessDateConvention" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PodMarginAmounts">
+    <xsd:complexContent>
+      <xsd:extension base="cme:MarginAmountsBase">
+        <xsd:sequence>
+          <xsd:element name="currency" type="cme:Currency" minOccurs="0"/>
+          <xsd:element name="currencyAmts" type="cme:CurrencyMarginAmounts" maxOccurs="unbounded"/>
+          <xsd:element name="customerAccountType" type="cme:CustomerAccountType" minOccurs="0"/>
+          <xsd:element name="marginMthd" type="cme:MarginMethod"/>
+          <xsd:element name="podId" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="productDescription" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="productGroup" type="cme:ProductGroupAmounts" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="sensitivityAmts" type="cme:MarginSensitivityAmounts" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="PointInTime">
+    <xsd:sequence>
+      <xsd:element name="businessDt" type="xsd:date" minOccurs="0"/>
+      <xsd:element name="cycleCode" type="cme:CycleCode"/>
+      <xsd:element name="runNumber" type="xsd:int" minOccurs="0"/>
+      <xsd:element name="time" type="xsd:dateTime" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="PortfolioMarginDetail">
+    <xsd:complexContent>
+      <xsd:extension base="cme:MarginAmountsBase">
+        <xsd:sequence>
+          <xsd:element name="ccps" type="cme:CcpMarginAmounts" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="currency" type="cme:Currency" minOccurs="0"/>
+          <xsd:element name="currencyAmts" type="cme:CurrencyMarginAmounts" maxOccurs="unbounded"/>
+          <xsd:element name="customerAccountType" type="cme:CustomerAccountType" minOccurs="0"/>
+          <xsd:element name="entities" type="cme:RiskPortfolioEntities"/>
+          <xsd:element name="id" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="memo" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="omnibusInd" type="cme:YesNoIndicator" minOccurs="0"/>
+          <xsd:element name="parentPortfolioId" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="transactionCnt" type="xsd:int" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="PositionBase">
+    <xsd:sequence>
+      <xsd:element name="instrument" type="cme:Instrument"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ProductGroupAmounts">
+    <xsd:complexContent>
+      <xsd:extension base="cme:MarginAmountsBase">
+        <xsd:sequence>
+          <xsd:element name="currency" type="cme:Currency" minOccurs="0"/>
+          <xsd:element name="customerAccountType" type="cme:CustomerAccountType" minOccurs="0"/>
+          <xsd:element name="productDescription" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="productGroupId" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="sensitivityAmts" type="cme:MarginSensitivityAmounts" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RequestBase">
+    <xsd:sequence>
+      <xsd:element name="header" type="cme:RequestHeader" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RequestHeader">
+    <xsd:complexContent>
+      <xsd:extension base="cme:HeaderBase">
+        <xsd:sequence/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="ResponseBase">
+    <xsd:sequence>
+      <xsd:element name="errors" type="cme:Error" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="header" type="cme:ResponseHeader" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ResponseHeader">
+    <xsd:complexContent>
+      <xsd:extension base="cme:HeaderBase">
+        <xsd:sequence>
+          <xsd:element name="acknowledgementStatus" type="cme:AcknowledgementStatus" minOccurs="0"/>
+          <xsd:element name="responseType" type="cme:ResponseType" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RiskPortfolio">
+    <xsd:complexContent>
+      <xsd:extension base="cme:RiskPortfolioBase">
+        <xsd:sequence>
+          <xsd:element name="currency" type="cme:Currency" minOccurs="0"/>
+          <xsd:element name="customerAccountType" type="cme:CustomerAccountType" minOccurs="0"/>
+          <xsd:element name="entities" type="cme:RiskPortfolioEntities"/>
+          <xsd:element name="id" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="memo" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="omnibusInd" type="cme:YesNoIndicator" minOccurs="0"/>
+          <xsd:element name="parentPortfolioId" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RiskPortfolioBase">
+    <xsd:sequence>
+      <xsd:element name="irsTrades" type="cme:IrsSingleSidedTrade" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="positions" type="cme:RiskPosition" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RiskPortfolioEntities">
+    <xsd:sequence>
+      <xsd:element name="accountId" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="accountName" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="firmId" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="originType" type="cme:OriginType" minOccurs="0"/>
+      <xsd:element name="segregationType" type="cme:FundSegregationType" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RiskPortfolioRequest">
+    <xsd:sequence>
+      <xsd:element name="pointInTime" type="cme:PointInTime"/>
+      <xsd:element name="portfolios" type="cme:RiskPortfolio" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="RiskPortfolioRequestMessage">
+    <xsd:complexContent>
+      <xsd:extension base="cme:RequestBase">
+        <xsd:sequence>
+          <xsd:element name="payload" type="cme:RiskPortfolioRequest"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="RiskPosition">
+    <xsd:complexContent>
+      <xsd:extension base="cme:PositionBase">
+        <xsd:sequence>
+          <xsd:element name="customerAccountType" type="cme:CustomerAccountType" minOccurs="0"/>
+          <xsd:element name="memo" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="nakedLongQty" type="xsd:decimal" minOccurs="0"/>
+          <xsd:element name="nakedShortQty" type="xsd:decimal" minOccurs="0"/>
+          <xsd:element name="netQty" type="xsd:decimal" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="SingleSidedTrade">
+    <xsd:complexContent>
+      <xsd:extension base="cme:TradeBase">
+        <xsd:sequence>
+          <xsd:element name="side" type="cme:TradeSide" minOccurs="0"/>
+          <xsd:element name="venueTradeId" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="TradeAmounts">
+    <xsd:sequence>
+      <xsd:element name="accuredInterestAmt" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="couponAmt" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="priceAlignmentAmt" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="priceAlignmentRt" type="xsd:decimal" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TradeBase">
+    <xsd:complexContent>
+      <xsd:extension base="cme:TransactionBase">
+        <xsd:sequence>
+          <xsd:element name="executionTime" type="xsd:dateTime" minOccurs="0"/>
+          <xsd:element name="instrument" type="cme:Instrument"/>
+          <xsd:element name="price" type="xsd:decimal" minOccurs="0"/>
+          <xsd:element name="qty" type="xsd:decimal" minOccurs="0"/>
+          <xsd:element name="sideId" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="sideInd" type="cme:MarketSideIndicator"/>
+          <xsd:element name="status" type="cme:TradeStatus" minOccurs="0"/>
+          <xsd:element name="tradeDt" type="xsd:date" minOccurs="0"/>
+          <xsd:element name="tradeId" type="xsd:string" minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="TradePayments">
+    <xsd:sequence>
+      <xsd:element name="totalPresentValueAmt" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="transferAmt" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="transferDt" type="xsd:date" minOccurs="0"/>
+      <xsd:element name="upfrontAmt" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="upfrontDt" type="xsd:date" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TradeSide">
+    <xsd:sequence>
+      <xsd:element name="premiumPayment" type="cme:Payment" minOccurs="0"/>
+      <xsd:element name="transferPayment" type="cme:Payment" minOccurs="0"/>
+      <xsd:element name="upfrontPayment" type="cme:Payment" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="TransactionBase">
+    <xsd:sequence>
+      <xsd:element name="transactionTime" type="xsd:dateTime" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

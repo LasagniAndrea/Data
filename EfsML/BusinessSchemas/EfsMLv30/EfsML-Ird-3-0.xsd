@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://www.efs.org/2007/EFSmL-3-0"
+            xmlns="http://www.efs.org/2007/EFSmL-3-0"
+            xmlns:fpml="http://www.fpml.org/2007/FpML-4-4"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+  <xsd:import namespace="http://www.fpml.org/2007/FpML-4-4" schemaLocation="../FpML44/fpml-main-4-4.xsd" />
+  <xsd:include schemaLocation="EfsML-Shared-3-0.xsd"/>
+ <!--EG 20180608 Add entityPartyReference To BulletPayment (used by CashPayment)-->
+
+
+  <!-- ****************************** -->
+  <!-- AmericanTrigger                -->
+  <!-- ****************************** -->
+  <xsd:complexType name="AmericanTrigger">
+    <xsd:sequence>
+      <xsd:element name="touchCondition"             type="fpml:TouchConditionEnum"/>
+      <xsd:element name="triggerUnderlyer"           type="KnockUnderlyer" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="triggerUnderlyerBasketType" type="BasketTypeEnum" minOccurs="0" />
+      <xsd:element name="trigger"                    type="fpml:Trigger" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- AverageFeature                 -->
+  <!-- ****************************** -->
+  <xsd:complexType name="AverageFeature">
+    <xsd:sequence>
+      <xsd:element name="strikeFactor"       type="xsd:decimal"           minOccurs="0" />
+      <xsd:element name="averagingPeriodOut" type="FeatureAveragingPeriod" minOccurs="0" />
+      <xsd:element name="averagingType"      type="AveragingTypeEnum"     minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+	<!-- ****************************** -->
+	<!-- BulletPayment                  -->
+	<!-- ****************************** -->
+	<xsd:complexType name="BulletPayment">
+		<xsd:complexContent>
+			<xsd:extension base="fpml:BulletPayment">
+				<xsd:sequence>
+          <xsd:element name="entityPartyReference" type="fpml:PartyReference" minOccurs="0" />
+        </xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+  <!-- ****************************** -->
+  <!-- CapFloor                           -->
+  <!-- ****************************** -->
+  <xsd:complexType name="CapFloor">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:CapFloor">
+        <xsd:sequence>
+          <xsd:element name="implicitProvision" type="ImplicitProvision"      minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- CorridorBarriers               -->
+  <!-- ****************************** -->
+  <xsd:complexType name="CorridorBarriers">
+    <xsd:sequence>
+      <xsd:element name="barrierUpSchedule"   type="fpml:Schedule" />
+      <xsd:element name="barrierDownSchedule" type="fpml:Schedule" />
+      <xsd:element name="corridorType"        type="CorridorTypeEnum" />
+      <xsd:element name="nbMaxValues"         type="NbMaxValues" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- EuropeanTrigger                -->
+  <!-- ****************************** -->
+  <xsd:complexType name="EuropeanTrigger">
+    <xsd:sequence>
+      <xsd:element name="triggerCondition"           type="fpml:TriggerConditionEnum"/>
+      <xsd:element name="triggerUnderlyer"           type="KnockUnderlyer" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="triggerUnderlyerBasketType" type="BasketTypeEnum" minOccurs="0" />
+      <xsd:element name="trigger"                    type="fpml:Trigger" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- FeatureAveragingPeriod   -->
+  <!-- ****************************** -->
+  <xsd:complexType name="FeatureAveragingPeriod">
+    <xsd:sequence>
+      <xsd:element name="schedule"                  type="fpml:AveragingSchedule" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="averagingDateTimes"        type="fpml:DateTimeList"      minOccurs="0" />
+      <xsd:element name="weekNumber"                type="xsd:decimal"            minOccurs="0" />
+      <xsd:element name="averagingOnPreviousPeriod" type="xsd:boolean"            minOccurs="0" />
+      <xsd:element name="marketDisruption"          type="MarketDisruptionEnum" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- FxFeature                      -->
+  <!-- ****************************** -->
+  <xsd:complexType name="FxFeature">
+    <xsd:sequence>
+      <xsd:element name="description"       type="xsd:string"                 minOccurs="0" />
+      <xsd:element name="referenceCurrency" type="fpml:IdentifiedCurrency" />
+      <xsd:element name="fxFeatureType"     type="FxFeatureTypeEnum"          minOccurs="0" />
+      <xsd:element name="spotFxRate"        type="fpml:Composite"             minOccurs="0" />
+      <xsd:element name="prefixedFxRate"    type="fpml:Quanto"                minOccurs="0" />
+      <xsd:element name="spotFxRateSpread"  type="xsd:decimal"                minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- IndexRateFeature               -->
+  <!-- ****************************** -->
+  <xsd:complexType name="IndexedRateFeature">
+    <xsd:sequence>
+      <xsd:element name="description"            type="xsd:string"                 minOccurs="0" />
+      <xsd:choice>
+        <xsd:element name="index"              type="UnderlyerIndex" />
+        <xsd:element name="quotedCurrencyPair" type="fpml:QuotedCurrencyPair" />
+      </xsd:choice>
+      <xsd:element name="indexationPercentage"   type="xsd:decimal" />
+      <xsd:element name="indexationFormula"      type="IndexationFormulaEnum" />
+      <xsd:element name="averagingPeriodOut"     type="FeatureAveragingPeriod"     minOccurs="0" />
+      <xsd:element name="averagingType"          type="AveragingTypeEnum"          minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- InterestRateStream             -->
+  <!-- ****************************** -->
+  <xsd:complexType name="InterestRateStream">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:InterestRateStream">
+        <xsd:sequence>
+          <xsd:element name="streamExtension" type="StreamExtension" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- KnockFeatures                  -->
+  <!-- ****************************** -->
+  <xsd:complexType name="KnockFeature">
+    <xsd:sequence>
+      <xsd:element name="description"              type="xsd:string"     minOccurs="0" />
+      <xsd:element name="knockUnderlyer"           type="KnockUnderlyer" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="knockUnderlyerBasketType" type="BasketTypeEnum" minOccurs="0" />
+      <xsd:choice>
+        <xsd:element name="trigger"          type="fpml:Trigger" />
+        <xsd:element name="corridorBarriers" type="CorridorBarriers" />
+      </xsd:choice>
+      <xsd:element name="knockCondition"   type="KnockConditionEnum" />
+      <xsd:element name="knockEffectType"  type="KnockEffectTypeEnum" />
+      <xsd:element name="knockObservation" type="KnockObservation" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- KnockObservation               -->
+  <!-- ****************************** -->
+  <xsd:complexType name="KnockObservation">
+    <xsd:sequence>
+      <xsd:element name="observationType"     type="KnockObservationTypeEnum" />
+      <xsd:element name="observationPeriod"   type="fpml:BusinessDateRange" minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="observationDates"    type="fpml:DateList"          minOccurs="0" />
+      <xsd:element name="observationSchedule" type="fpml:AveragingSchedule" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- KnockUnderlyer                 -->
+  <!-- ****************************** -->
+  <xsd:complexType name="KnockUnderlyer">
+    <xsd:sequence>
+      <xsd:choice minOccurs="0">
+        <xsd:group ref="KnockUnderlyer.model" />
+      </xsd:choice>
+      <xsd:element name="knockInformationSource" type="fpml:InformationSource"  minOccurs="0" />
+      <xsd:element name="fixingTime"             type="fpml:BusinessCenterTime" minOccurs="0" />
+      <xsd:element name="associatedStrike"       type="xsd:decimal"             minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- KnownAmountSchedule            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="KnownAmountSchedule">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:AmountSchedule">
+        <xsd:sequence>
+          <xsd:element name="notionalValue"    type="fpml:Money"            minOccurs="0" />
+          <xsd:element name="dayCountFraction" type="fpml:DayCountFraction" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- NbMaxValues                    -->
+  <!-- ****************************** -->
+  <xsd:complexType name="NbMaxValues">
+    <xsd:sequence>
+      <xsd:element name="nbMaxValuesIn"   type="xsd:integer"         minOccurs="0" />
+      <xsd:element name="nbMaxValuesOut"  type="xsd:integer"         minOccurs="0" />
+      <xsd:element name="nbMaxValuesType" type="NbMaxValuesTypeEnum" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- StreamExtension                -->
+  <!-- ****************************** -->
+  <xsd:complexType name="StreamExtension">
+    <xsd:sequence>
+      <xsd:element name = "knockFeatures"       type = "KnockFeature"       minOccurs = "0" maxOccurs = "unbounded"/>
+      <xsd:element name = "triggerFeatures"     type = "TriggerFeature"     minOccurs = "0" maxOccurs = "unbounded"/>
+      <xsd:element name = "averageFeatures"     type = "AverageFeature"     minOccurs = "0"/>
+      <xsd:element name = "indexedRateFeatures" type = "IndexedRateFeature" minOccurs = "0"/>
+      <xsd:element name = "fxFeatures"          type = "FxFeature"          minOccurs = "0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- Swap                           -->
+  <!-- ****************************** -->
+  <xsd:complexType name="Swap">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:Swap">
+        <xsd:sequence>
+          <xsd:element name="stepUpProvision"   type="StepUpProvision"    minOccurs="0" />
+          <xsd:element name="implicitProvision" type="ImplicitProvision"  minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- TriggerEffect                  -->
+  <!-- ****************************** -->
+  <xsd:complexType name="TriggerEffect">
+    <xsd:sequence>
+      <xsd:element name="triggerEffectType" type="KnockEffectTypeEnum" />
+      <xsd:element name="triggerPayout"     type="TriggerPayout"       minOccurs="0"/>
+      <xsd:element name="triggerPrincipal"  type="TriggerPrincipal"    minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- TriggerFeature                 -->
+  <!-- ****************************** -->
+  <xsd:complexType name="TriggerFeature">
+    <xsd:sequence>
+      <xsd:element name="description" type="xsd:string" minOccurs="0" />
+      <xsd:choice>
+        <xsd:element name="americanTrigger"  type="AmericanTrigger" />
+        <xsd:element name="europeanTrigger"  type="EuropeanTrigger" />
+      </xsd:choice>
+      <xsd:element name="triggerObservation" type="KnockObservation" maxOccurs="unbounded" />
+      <xsd:element name="triggerEffect"      type="TriggerEffect" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- TriggerPayout                  -->
+  <!-- ****************************** -->
+  <xsd:complexType name="TriggerPayout">
+    <xsd:sequence>
+      <xsd:element name="featurePaymentValue"    type="fpml:FeaturePayment" minOccurs="0"/>
+      <xsd:element name="featureRateValue"       type="xsd:decimal"         minOccurs="0"/>
+      <xsd:element name="featureSpreadValue"     type="xsd:decimal"         minOccurs="0"/>
+      <xsd:element name="featureMultiplierValue" type="xsd:decimal"         minOccurs="0"/>
+      <xsd:element name="featurePayoutFormula"   type="fpml:Formula"        minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- TriggerPrincipal               -->
+  <!-- ****************************** -->
+  <xsd:complexType name="TriggerPrincipal">
+    <xsd:sequence>
+      <xsd:element name="featureNotionalPercentage"    type="xsd:decimal"                 minOccurs="0"/>
+      <xsd:element name="featurePrincipalExchange"     type="PrincipalExchangeEnum"/>
+      <xsd:element name="principalExchangeType"        type="PrincipalExchangeTypeEnum"/>
+      <xsd:element name="principalPaymentDualCurrency" type="fpml:Currency"               minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,1033 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+== Copyright (c) 2016. All rights reserved. 
+== EFS Extended FpML Products Markup Language. 
+EG 20171122 [23509] BookId déplacé dans EfsML-Shared-3-0.xsd
+-->
+<xsd:schema targetNamespace="http://www.efs.org/2007/EFSmL-3-0" xmlns="http://www.efs.org/2007/EFSmL-3-0" 
+            xmlns:fpml="http://www.fpml.org/2007/FpML-4-4" 
+            xmlns:fixml="http://www.fixprotocol.org/FIXML-5-0-SP1" 
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xsd:import namespace="http://www.fpml.org/2007/FpML-4-4" schemaLocation="../FpML44/fpml-main-4-4.xsd" />
+  <xsd:import namespace="http://www.fixprotocol.org/FIXML-5-0-SP1" schemaLocation="../FIXML50SP1/fixml-tradecapture-impl-5-0-SP1.xsd" />
+  <!-- Include -->
+  <xsd:include schemaLocation="EfsML-FuturesAndOptions-3-0.xsd"/>
+  <xsd:include schemaLocation="EfsML-FixML-3-0.xsd"/>
+  <xsd:include schemaLocation="EfsML-Com-3-0.xsd"/>
+  <xsd:include schemaLocation="EfsML-Fx-3-0.xsd"/>
+  <xsd:include schemaLocation="EfsML-LoanDeposit-3-0.xsd"/>
+  <xsd:include schemaLocation="EfsML-MarginRequirement-3-0.xsd"/>
+  <xsd:include schemaLocation="EfsML-Ird-3-0.xsd"/>
+  <xsd:include schemaLocation="EfsML-Options-Shared-3-0.xsd"/>
+  <xsd:include schemaLocation="EfsML-SettlementInstruction-3-0.xsd"/>
+  <xsd:include schemaLocation="EfsML-Invoice-3-0.xsd"/>
+  <xsd:include schemaLocation="EfsML-Security-3-0.xsd"/>
+  <xsd:include schemaLocation="EfsML-Repository-3-0.xsd"/>
+  <xsd:include schemaLocation="EfsML-CashBalance-3-0.xsd"/>
+  <xsd:include schemaLocation="EfsML-CashBalanceInterest-3-0.xsd"/>
+
+  <!-- ****************************** -->
+  <!-- AttributeGroup                 -->
+  <!-- ****************************** -->
+  <xsd:attributeGroup name="StandardAttributes.atts">
+    <xsd:attribute name="EfsMLversion" use="required">
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:token">
+          <xsd:enumeration value="3-0" />
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:attributeGroup>
+
+  <!-- ****************************** -->
+  <!-- Elements                       -->
+  <!-- ****************************** -->
+  <xsd:element name="EfsML" type="EfsDocument" />
+
+  <!-- ****************************** -->
+  <!-- ActorId                        -->
+  <!-- ****************************** -->
+  <xsd:complexType name="ActorId">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="actorIdScheme" type="xsd:anyURI" default="http://www.euro-finance-systems.fr/otcml/actorid" />
+        <xsd:attribute name="actorName" type="xsd:string" />
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- AdmissionToTrading             -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="AdmissionToTrading">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Information about whether and when a product was admitted to trading on a facility.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="requested" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Whether the issuer of the financial instrument has requested or approved the trading or admission to trading of their financial instruments on a trading venue.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="requestDate" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Date and time of the request for admission to trading on the trading venue.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="approvalDate" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Date and time the issuer has approved admission to trading or trading in its financial instruments on a trading venue.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="admissionDate" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Date and time of the admission to trading on the trading venue or the date and time when the instrument was first traded or an order or quote was first received by the trading venue.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="terminationDate" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Date and time when the financial instrument ceases to be traded or to be admitted to trading on the trading venue.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- Algorithm                      -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="Algorithm">
+    <xsd:sequence>
+      <xsd:element name="name" type="xsd:token">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The name of the algorithm.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="role" type="AlgorithmRole">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The category of the function of the algorithm. The related individual performs the role specified in this field for the base party. For example, if the role is "Trader", the related person acts acts or acted as the base party's trader.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+    <!-- FI 20170928 [23452] Add -->
+    <xsd:attribute name="OTCmlId" type="xsd:string" />
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- AlgorithmRole                  -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="AlgorithmRole">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A type describing a role played by an algorithm in one or more transactions. Examples include roles such as TradingDecision, RoutingDecision. This can be extended to provide custom roles.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute default="http://www.fpml.org/coding-scheme/algorithm-role" name="algorithmRoleScheme" type="NonEmptyURI"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- BookId                         -->
+  <!-- ****************************** -->
+  <!--<xsd:complexType name="BookId">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="bookIdScheme" type="xsd:anyURI" default="http://www.euro-finance-systems.fr/otcml/bookid" />
+        <xsd:attribute name="bookName" type="xsd:string" />
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>-->
+
+  <!-- ************************************* -->
+  <!-- CurrencyPairClassification            -->
+  <!-- New for MiFID II                      -->
+  <!-- EG 20170918 [23342]                   -->
+  <!-- ************************************* -->
+  <xsd:complexType name="CurrencyPairClassification">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A type containing a code representing the risk classification of a currency pair, as specified by a regulator.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute default="http://www.fpml.org/coding-scheme/esma-currency-pair-classification" name="currencyPairClassificationScheme" type="NonEmptyURI" use="optional"/>
+        <xsd:attribute name="id" type="xsd:ID"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- EfsDocument                    -->
+  <!-- ****************************** -->
+  <xsd:complexType name="EfsDocument">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:DataDocument">
+        <xsd:sequence>
+          <xsd:element name="repository" type="Repository" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attributeGroup ref="StandardAttributes.atts" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- ************************************* -->
+  <!-- EntityClassification                  -->
+  <!-- New for MiFID II                      -->
+  <!-- EG 20170918 [23342]                   -->
+  <!-- ************************************* -->
+  <xsd:complexType name="EntityClassification">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A type describing the entity of a party, for example Financial, NonFinancial etc.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute default="http://www.fpml.org/coding-scheme/entity-classification" name="entityClassificationScheme" type="NonEmptyURI" use="optional"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <!-- ************************************* -->
+  <!-- FacilityExecutionExceptionDeclaration -->
+  <!-- New for MiFID II                      -->
+  <!-- EG 20170918 [23342]                   -->
+  <!-- ************************************* -->
+  <xsd:complexType name="FacilityExecutionExceptionDeclaration">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Provides supporting evidence when a party invoked exception to not execute the trade on facility such as SEF and DCM even though the particular product is mandated to execute on a SEF.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="reason" type="Token">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Reason for not executing the trade on SEF or other facility.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="organizationCharacteristic" type="OrganizationCharacteristic">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Allows the organization to specify which categories or characteristics apply to it for end-user exception determination. Examples include "FinancialEntity", "CaptiveFinanceUnit", "BoardOfDirectorsApproval".</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="transactionCharacteristic" type="TransactionCharacteristic">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Allows the relevant transaction level categories or characteristics to be recorded for end-user exception determination. Examples include "BoardOfDirectorsApproval", "HedgesCommercialRisk".</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="supervisorRegistration" type="SupervisorRegistration">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Allows the organization to specify which if any relevant regulators it is registered with, and if so their identification number. For example, it could specify that it is SEC registered and provide its Central Index Key.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- FxClass                        -->
+  <!-- ****************************** -->
+  <xsd:complexType name="FxClass">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="fxClassScheme" type="xsd:anyURI" use="required" />
+        <xsd:attribute name="id" type="xsd:ID" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- HedgeClassDerv                 -->
+  <!-- ****************************** -->
+  <xsd:complexType name="HedgeClassDerv">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="hedgeClassDervScheme" type="xsd:anyURI" use="required" />
+        <xsd:attribute name="id" type="xsd:ID" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- HedgeClassNDrv                 -->
+  <!-- ****************************** -->
+  <xsd:complexType name="HedgeClassNDrv">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="hedgeClassNDrvScheme" type="xsd:anyURI" use="required" />
+        <xsd:attribute name="id" type="xsd:ID" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- HedgeFolder                    -->
+  <!-- ****************************** -->
+  <xsd:complexType name="HedgeFolder">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="hedgeFolderScheme" type="xsd:anyURI" use="required" />
+        <xsd:attribute name="id" type="xsd:ID" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- HedgeFactor                    -->
+  <!-- ****************************** -->
+  <xsd:complexType name="HedgeFactor">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="hedgeFactorScheme" type="xsd:anyURI" use="required" />
+        <xsd:attribute name="id" type="xsd:ID" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- IASClassDerv                   -->
+  <!-- ****************************** -->
+  <xsd:complexType name="IASClassDerv">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="iasClassDervScheme" type="xsd:anyURI" use="required" />
+        <xsd:attribute name="id" type="xsd:ID" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- IASClassNDrv                   -->
+  <!-- ****************************** -->
+  <xsd:complexType name="IASClassNDrv">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="iasClassNDrvScheme" type="xsd:anyURI" use="required" />
+        <xsd:attribute name="id" type="xsd:ID" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- LinkId                         -->
+  <!-- ****************************** -->
+  <xsd:complexType name="LinkId">
+    <xsd:simpleContent>
+      <xsd:extension base="fpml:LinkId">
+        <xsd:attribute name="factor" type="xsd:decimal" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- LocalClassDerv                 -->
+  <!-- ****************************** -->
+  <xsd:complexType name="LocalClassDerv">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="localClassDervScheme" type="xsd:anyURI" use="required" />
+        <xsd:attribute name="id" type="xsd:ID" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- LocalClassNDrv                 -->
+  <!-- ****************************** -->
+  <xsd:complexType name="LocalClassNDrv">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="localClassNDrvScheme" type="xsd:anyURI" use="required" />
+        <xsd:attribute name="id" type="xsd:ID" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- NotionalReportingType          -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="NotionalReportingType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">How a notional is to be reported for this reporting regime. E.g. for ESMA EMIR, it would be Nominal or Monetary Amount</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute default="http://www.fpml.org/coding-scheme/notional-type" name="notionalTypeScheme" type="NonEmptyURI"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- OrganizationCharacteristic     -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="OrganizationCharacteristic">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A characteristic of an organization used in declaring an end-user exception.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute default="http://www.fpml.org/coding-scheme/organization-characteristic" name="organizationCharacteristicScheme" type="NonEmptyURI"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- OtcClassification              -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="OtcClassification">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Indicator as to the type of transaction in accordance with Articles 20(3)(a) and 21(5)(a) of Regulation (EU) 600/2014.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute default="http://www.fpml.org/coding-scheme/esma-mifir-otc-classification" name="otcClassificationScheme" type="NonEmptyURI"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- PartyEntityClassification      -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="PartyEntityClassification">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A type that specifies the classification of a party.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="partyReference" type="fpml:PartyReference">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">A pointer style reference to a party identifier defined elsewhere in the document. The party referenced has the classification in the associated "entityClassification" element below.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="entityClassification" type="EntityClassification">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Indicates the category or classification or business role of the organization referenced by the partyTradeInformation with respect to this reporting regime, for example Financial, NonFinancial etc.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- PartyRelationshipType          -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="PartyRelationshipType">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A type containing a code representing how two parties are related, e.g. Affiliated, Intragroup, None.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute default="http://www.fpml.org/coding-scheme/party-relationship-type" name="partyRelationshipTypeScheme" type="NonEmptyURI" use="optional"/>
+        <xsd:attribute name="id" type="xsd:ID"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- PartyTradeIdentifier           -->
+  <!-- ****************************** -->
+  <xsd:complexType name="PartyTradeIdentifier">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:PartyTradeIdentifier">
+        <xsd:sequence>
+          <xsd:element name="bookId"         type="BookId"         minOccurs="0" />
+          <xsd:element name="localClassDerv" type="LocalClassDerv" minOccurs="0" />
+          <xsd:element name="iasClassDerv"   type="IASClassDerv"   minOccurs="0" />
+          <xsd:element name="hedgeClassDerv" type="HedgeClassDerv" minOccurs="0" />
+          <xsd:element name="hedgeFolder"    type="HedgeFolder"    minOccurs="0" />
+          <xsd:element name="hedgeFactor"    type="HedgeFactor"    minOccurs="0" />
+          <xsd:element name="fxClass"        type="FxClass"        minOccurs="0" />
+          <xsd:element name="localClassNDrv" type="LocalClassNDrv" minOccurs="0" />
+          <xsd:element name="iasClassNDrv"   type="IASClassNDrv"   minOccurs="0" />
+          <xsd:element name="hedgeClassNDrv" type="HedgeClassNDrv" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- PartyTradeInformation          -->
+  <!-- Add extensions for MiFID II    -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="PartyTradeInformation">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A type defining party-specific additional information that may be recorded against a trade.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="fpml:PartyTradeInformation">
+        <xsd:sequence>
+          <xsd:element name="sales" type="Trader" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="brokerPartyReference" type="fpml:PartyReference" minOccurs="0" maxOccurs="unbounded"/>
+          <!-- Add extensions for MiFID II    -->
+          <xsd:element maxOccurs="unbounded" minOccurs="0" name="relatedParty" type="RelatedParty">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">This may be used to identify one or more parties that perform a role within the transaction. If this is within a partyTradeInformation block, the related party performs the role with respect to the party identifie by the "partyReference" in the partyTradeInformation block.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" name="relatedPerson" type="RelatedPerson">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Provides information about a person that executed or supports this trade</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" name="algorithm" type="Algorithm">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Provides information about an algorithm that executed or otherwise participated in this trade this trade</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" name="category" type="TradeCategory">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Used to categorize trades into user-defined categories, such as house trades vs. customer trades.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="timestamps" type="TradeProcessingTimestamps">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Allows timing information about a trade to be recorded.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="intentToClear" type="xsd:boolean">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Specifies whether the trade is anticipated to be cleared via a derivative clearing organization</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" name="reportingRegime" type="ReportingRegime">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Allows the organization to specify which if any relevant regulators or other supervisory bodies this is relevant for, and what reporting rules apply.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:group minOccurs="0" ref="TransactionClassification.model">
+            <xsd:annotation>
+              <xsd:documentation>Provides classification of the transaction being reported</xsd:documentation>
+            </xsd:annotation>
+          </xsd:group>
+          <xsd:element minOccurs="0" name="isDisputed" type="xsd:boolean">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Used to report whether the trade is in dispute</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- ProductSummary                 -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="ProductSummary">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Summary information about the product that was traded. This is intended primarily for trade reporting by TRs.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="finalSettlementDate" type="xsd:date"/>
+      <xsd:element minOccurs="0" name="settlementType" type="SettlementTypeExtendedEnum"/>
+      <xsd:element minOccurs="0" name="seniority" type="fpml:CreditSeniority"/>
+      <xsd:element minOccurs="0" name="indexFactor" type="xsd:decimal"/>
+      <xsd:element minOccurs="0" name="admissionToTrading" type="AdmissionToTrading"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- ReportingBoolean               -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="ReportingBoolean">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">How a Boolean value is to be reported for this regulator. Typically "true" or "false", but for ESMA "X" is also allowed, to indicate not supplied.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute default="http://www.fpml.org/coding-scheme/reporting-boolean" name="reportingBooleanScheme" type="NonEmptyURI"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- ReportingPurpose               -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="ReportingPurpose">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A value that explains the reason or purpose that information is being reported. Examples might include RealTimePublic reporting, PrimaryEconomicTerms reporting, Confirmation reporting, or Snapshot reporting.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute default="http://www.fpml.org/coding-scheme/reporting-purpose" name="reportingPurposeScheme" type="NonEmptyURI"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- ReportingRegime                -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="ReportingRegime">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Provides information about how the information in this message is applicable to a regulatory reporting process.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:sequence>
+          <xsd:element name="name" type="ReportingRegimeName">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Identifies the reporting regime under which this data is reported. For example, Dodd-Frank, MiFID, HongKongOTCDRepository, ODRF</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element maxOccurs="unbounded" minOccurs="0" name="supervisorRegistration" type="SupervisorRegistration">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Identifies the specific regulator or other supervisory body for which this data is produced. For example, CFTC, SEC, UKFSA, ODRF, SFC, ESMA.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+        <xsd:element maxOccurs="unbounded" name="supervisorRegistration" type="SupervisorRegistration">
+          <xsd:annotation>
+            <xsd:documentation xml:lang="en">Identifies the specific regulator or other supervisory body for which this data is produced. For example, CFTC, SEC, UKFSA, ODRF, SFC, ESMA.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:choice>
+      <xsd:element minOccurs="0" name="reportingRole" type="ReportingRole">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Identifies the role of this party in reporting this trade for this regulator; roles could include ReportingParty and Voluntary reporting.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="reportingPurpose" type="ReportingPurpose">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The reason this message is being sent, for example Snapshot, PET, Confirmation, RealTimePublic.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="mandatorilyClearable" type="ReportingBoolean">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Whether the particular trade type in question is required by this regulator to be cleared.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="mandatoryFacilityExecution" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation xml:lang="en">Whether the particular product must be executed on a SEF or DCM. See to Dodd-Frank section 723(a)(8).</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element minOccurs="0" name="mandatoryFacilityExecutionException" type="xsd:boolean">
+          <xsd:annotation>
+            <xsd:documentation xml:lang="en">Specifies whether the party invoked exception to not execute the trade on facility such as SEF and DCM even though the particular product is mandated to execute on a SEF.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element minOccurs="0" name="mandatoryFacilityExecutionExceptionDeclaration" type="FacilityExecutionExceptionDeclaration">
+          <xsd:annotation>
+            <xsd:documentation xml:lang="en">Provides supporting evidence when a party invoked exception to not execute the trade on facility such as SEF and DCM even though the particular product is mandated to execute on a SEF.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+      <xsd:element minOccurs="0" name="exceedsClearingThreshold" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Indicates whether the counterparty exceeds the volume threshold above which trades are required to be cleared.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:choice minOccurs="0">
+        <xsd:element name="entityClassification" type="EntityClassification">
+          <xsd:annotation>
+            <xsd:documentation xml:lang="en">Indicates the category or classification or business role of the organization referenced by the partyTradeInformation with respect to this reporting regime, for example Financial, NonFinancial etc.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element maxOccurs="unbounded" name="partyEntityClassification" type="PartyEntityClassification">
+          <xsd:annotation>
+            <xsd:documentation xml:lang="en">Indicates the category or classification or business role of a trade party with respect to this reporting regime, for example Financial, NonFinancial, Dealer, Non-Dealer, LocalParty, etc.</xsd:documentation>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:choice>
+      <xsd:element minOccurs="0" name="tradePartyRelationshipType" type="PartyRelationshipType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Indicates how the parties to the trade (the counterparties) are related to each other with respect to this reporting regime, e.g. Affiliated, Intragroup, etc..</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="actionType" type="ActionType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Reports a regulator-specific code for the action associated with this submission. Used, for example, to report the ESMA action type.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="preEnactmentTrade" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Reports that this trade was executed prior to the enactment of the relevant reporting regulation.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="notionalType" type="NotionalReportingType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">How the notional amount should be reported for the reporting regime. For example, for ESMA MiFIR it would be Nominal or MonetaryAmount.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="currencyPairClassification" type="CurrencyPairClassification">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Reports a regulator-specific code classifying the currency pair in the trade into risk categories such as Major Currencies or Emerging Markets.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="transmissionOfOrder" type="xsd:boolean"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- ReportingRole                  -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="ReportingRole">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A type containing a code representing the role of a party in a report, e.g. the originator, the recipient, the counterparty, etc. This is used to clarify which participant's information is being reported.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute default="http://www.fpml.org/coding-scheme/reporting-role" name="reportingRoleScheme" type="NonEmptyURI" use="optional"/>
+        <xsd:attribute name="id" type="xsd:ID"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- ReturnLegValuation             -->
+  <!-- ****************************** -->
+  <xsd:complexType name="ReturnLegValuation">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:ReturnLegValuation">
+        <xsd:sequence>
+          <xsd:element name="marginRatio" type="MarginRatio" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- ShortSale                      -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="ShortSale">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A short sale concluded by an investment firm on its own behalf or on behalf of a client, as described in Article 11.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute default="http://www.fpml.org/coding-scheme/esma-mifir-short-sale" name="shortSaleScheme" type="NonEmptyURI"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- Strategy                       -->
+  <!-- ****************************** -->
+  <xsd:complexType name="Strategy">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:Strategy">
+        <xsd:sequence>
+          <xsd:element name="mainProductReference" type="fpml:ProductReference" minOccurs="0">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Indicates which product within a strategy represents the main product.</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- SupervisorRegistration         -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="SupervisorRegistration">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Provides information about a regulator or other supervisory body that an organization is registered with.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:group ref="SupervisorRegistration.model"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- TimestampTypeScheme            -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="TimestampTypeScheme">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The type or meaning of a timestamp.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute name="timestampScheme" type="NonEmptyURI"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- Trade                          -->
+  <!-- ****************************** -->
+  <xsd:complexType name="Trade">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:Trade">
+        <xsd:sequence>
+          <xsd:element name="tradeIntention" type="TradeIntention" minOccurs="0"/>
+          <xsd:element name="settlementInput" type="SettlementInput" minOccurs="0" maxOccurs="unbounded" />
+          <xsd:element name="nettingInformationInput" type="NettingInformationInput" minOccurs="0" />
+          <xsd:element name="tradeExtends" type="TradeExtends" minOccurs="0" maxOccurs="unbounded" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- TradeCategory                  -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="TradeCategory">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A scheme used to categorize positions.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute default="http://www.fpml.org/coding-scheme/org-type-category" name="categoryScheme" type="NonEmptyURI"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- TradeHeader                    -->
+  <!-- Add extensions for MiFID II    -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <!-- EG 20171003 [23452] add tradeDateTime -->
+  <xsd:complexType name="TradeHeader">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:TradeHeader">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="tradeDateTime" type="ZonedDateTime">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Trade date with timestamp (store in UTC).</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element minOccurs="0" name="productSummary" type="ProductSummary"/>
+          <xsd:element minOccurs="0" name="clearedDate" type="fpml:IdentifiedDate">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">If the trade was cleared (novated) through a central counterparty clearing service, this represents the date the trade was cleared (transferred to the central counterparty).</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- TradeId                        -->
+  <!-- ****************************** -->
+  <!-- EG 20220902 [XXXXX][WI415] UTI/PUTI Enhancement -->
+  <xsd:complexType name="TradeId">
+    <xsd:simpleContent>
+      <xsd:extension base="fpml:TradeId">
+        <xsd:attribute name="source" type="xsd:string" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- TradeIntention                 -->
+  <!-- ****************************** -->
+  <xsd:complexType name="TradeIntention">
+    <xsd:sequence>
+      <xsd:element name="initiator" type="fpml:PartyReference" minOccurs="1" maxOccurs="2"/>
+      <xsd:element name="reactor"   type="fpml:PartyReference" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:ID" />
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- TradeProcessingTimestamps      -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="TradeProcessingTimestamps">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Allows timing information about when a trade was processed and reported to be recorded.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="orderEntered" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">When an order was first generated, as recorded for the first time when it was first entered by a person or generated by a trading algorithm (i.e., the first record of the order).</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="orderSubmitted" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">The time when an order is submitted by a market participant to an execution facility, as recorded based on the timestamp of the message that was sent by the participant. If the participant records this time (i.e. it is in the participant's party trade information), it will be the time the message was sent. If the execution facility records this time (i.e. it is in the facility's party trade information), it will be the time the message was received.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="publiclyReported" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">When the public report of this was created or received by this party. If the participant records this time (i.e. it is in the participant's party trade information), it will be the time the message was sent. If the execution records this time (i.e. it is in the facility's party trade information), it will be the time the message was received.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="publicReportAccepted" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">When the public report of this was most recently corrected or corrections were sent or received by this party.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="publicReportUpdated" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">When the public report of this was first accepted for submission to a regulator.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="nonpubliclyReported" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">When the non-public report of this was created or received by this party.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="nonpublicReportAccepted" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">When the non-public report of this was first accepted for submission to a regulator.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="nonpublicReportUpdated" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">When the non-public report of this was most recently corrected or corrections were received by this party.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="submittedForConfirmation" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">When this trade was supplied to a confirmation service or counterparty for confirmation.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="updatedForConfirmation" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">When the most recent correction to this trade was supplied to a confirmation service or counterparty for confirmation.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="confirmed" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">When this trade was confirmed.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="submittedForClearing" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">When this trade was supplied to a clearing service for clearing.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="updatedForClearing" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">When the most recent correction to this trade was supplied to a clearing service for clearing.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="cleared" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">When this trade was cleared.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="allocationsSubmitted" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">When allocations for this trade were submitted or received by this party.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="allocationsUpdated" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">When allocations for this trade were most recently corrected.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="allocationsCompleted" type="xsd:dateTime">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">When allocations for this trade were completely processed.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="timestamp" type="TradeTimestamp">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Other timestamps for this trade. This is provisional in Recordkeeping and Transparency view and may be reviewed in a subsequent draft.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- TradeTimestamp                 -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="TradeTimestamp">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A generic trade timestamp</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="type" type="TimestampTypeScheme"/>
+      <xsd:element name="value" type="xsd:dateTime"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- TradingWaiver                  -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="TradingWaiver">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Indication as to whether the transaction was executed under a pre-trade waiver in accordance with Articles 4 and 9 of Regulation (EU) 600/2014.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute default="http://www.fpml.org/coding-scheme/esma-mifir-trading-waiver" name="tradingWaiverScheme" type="NonEmptyURI"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- TransactionCharacteristic      -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="TransactionCharacteristic">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A characteristic of a transaction used in declaring an end-user exception.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleContent>
+      <xsd:extension base="Scheme">
+        <xsd:attribute default="http://www.fpml.org/coding-scheme/transaction-characteristic" name="transactionCharacteristicScheme" type="NonEmptyURI"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  
+  <!-- ****************************** -->
+  <!-- Models                         -->
+  <!-- ****************************** -->
+
+  <!-- ****************************** -->
+  <!-- TransactionClassification      -->
+  <!-- New for MiFID II               -->
+  <!-- EG 20170918 [23342]            -->
+  <!-- ****************************** -->
+  <xsd:group name="TransactionClassification.model">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="isSecuritiesFinancing" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Whether the transaction falls within the scope of activity but is exempted from reporting under [Securities Financing Transactions Regulation]</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="otcClassification" type="OtcClassification">
+        <xsd:annotation>
+          <xsd:documentation>Classification of the OTC transaction. Note: Coding scheme definition to encapsulate: Articles 20(3)(a) and 21(5)(a) of Regulation (EU) 600/2014. e.g. default="http://www.fpml.org/coding-scheme/esma-mifir-otc-classification"</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="tradingWaiver" type="TradingWaiver">
+        <xsd:annotation>
+          <xsd:documentation>Classification of the pre-trade waiver, if any, that the transaction was executed under. Note: Coding scheme to encapsulate: Articles 4 and 9 of Regulation (EU) 600/2014. e.g. default="http://www.fpml.org/coding-scheme/esma-mifir-trading-waiver"</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="shortSale" type="ShortSale">
+        <xsd:annotation>
+          <xsd:documentation>Classification of the transaction as a short sale or not and, if short, of the type of transaction. Note: Coding scheme to encapsulate: Article 11 of Regulation (EU) 600/2014. e.g. default="http://www.fpml.org/coding-scheme/esma-mifir-short-sale"</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="isCommodityHedge" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation>Whether the transaction reduces risk in an objectively measurable way. Only applicable for commodity derivative transactions.</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:group>
+</xsd:schema>

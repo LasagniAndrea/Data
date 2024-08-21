@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xsd:schema targetNamespace="http://www.efs.org/2007/EFSmL-3-0"
+            xmlns="http://www.efs.org/2007/EFSmL-3-0"
+            xmlns:fpml="http://www.fpml.org/2007/FpML-4-4"
+			      xmlns:fixml="http://www.fixprotocol.org/FIXML-5-0-SP1"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+  <xsd:import namespace="http://www.fpml.org/2007/FpML-4-4" schemaLocation="../FpML44/fpml-main-4-4.xsd" />
+  <xsd:import namespace="http://www.fixprotocol.org/FIXML-5-0-SP1" schemaLocation="../FIXML50SP1/fixml-tradecapture-impl-5-0-SP1.xsd" />
+
+  <xsd:include schemaLocation="EfsML-3-0.xsd"/>
+  <xsd:include schemaLocation="EfsML-Shared-3-0.xsd"/>
+  <xsd:include schemaLocation="EfsML-Asset-3-0.xsd"/>
+
+  <!-- ****************************** -->
+  <!-- Elements                       -->
+  <!-- ****************************** -->
+  <xsd:element name="marginRequirement" type="MarginRequirement" substitutionGroup="fpml:product">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en"></xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <!-- ****************************** -->
+  <!-- InitialMarginMethodEnum        -->
+  <!-- ****************************** -->
+  <xsd:simpleType name="InitialMarginMethodEnum">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A type defining initial margin calculation method.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="CBOE_Margin"/>
+      <xsd:enumeration value="Custom"/>
+      <xsd:enumeration value="EUREX_PRISMA"/>
+      <xsd:enumeration value="IMSM"/>
+      <xsd:enumeration value="London_SPAN"/>
+      <xsd:enumeration value="MEFFCOM2"/>
+      <!-- PM 20190222 [24326] Nouvelle méthode NOMX_CFM -->
+      <xsd:enumeration value="NOMX_CFM"/>
+      <!-- PM 20221212 [XXXXX] Nouvelle méthode NOMARGIN -->
+      <xsd:enumeration value="NOMARGIN"/>
+      <xsd:enumeration value="OMX_RCAR"/>
+      <xsd:enumeration value="SPAN_C21"/>
+      <xsd:enumeration value="SPAN_CME"/>
+      <xsd:enumeration value="SPAN_2_CORE"/>
+      <xsd:enumeration value="SPAN_2_SOFTWARE"/>
+      <xsd:enumeration value="TIMS_EUREX"/>
+      <xsd:enumeration value="TIMS_IDEM"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <!-- ****************************** -->
+  <!-- MarginRequirement              -->
+  <!-- ****************************** -->
+  <!-- FI 20160613 [22256] Modify -->
+  <xsd:complexType name="MarginRequirement">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Initial and Maintenance Margin (modeled as an FpML:Product).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent mixed="false" >
+      <xsd:extension base="fpml:Product">
+        <xsd:sequence>
+          <xsd:element name="clearingOrganizationPartyReference" type="fpml:PartyReference" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Identifies the clearing Organization</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="marginRequirementOfficePartyReference" type="fpml:PartyReference" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Identifies the margin requirement office</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="entityPartyReference" type="fpml:PartyReference" minOccurs="1" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Identifies the entity</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="timing" type="fixml:SettlSessID_t">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Identifies the timing</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="isGrossMargin" type="xsd:boolean" minOccurs="0" maxOccurs="1">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Identifies the initial margin is gross or net</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <!-- PM 20160404 [22116] maxOccurs 1 => unbounded -->
+          <xsd:element name="initialMarginMethod" type="InitialMarginMethodEnum" minOccurs="0" maxOccurs="unbounded" nillable="true">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Identifies the initial margin calculation method</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="payment" type="fpml:SimplePayment"  minOccurs ="1"  maxOccurs ="unbounded"/>
+          <!-- FI 20160613 [22256] Add underlyingStocks-->
+          <xsd:element name="underlyingStocks" type="UnderlyingStocks"  minOccurs ="0"  maxOccurs ="1"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- FI 20160613 [22256] Add -->
+  <xsd:complexType name ="UnderlyingStocks">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Several Cover of short Call and Short Future Positions</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name ="underlyingStock" type ="UnderlyingStock" minOccurs ="1" maxOccurs ="unbounded"></xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- FI 20160613 [22256] Add -->
+  <xsd:complexType name ="UnderlyingStock">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Cover of short Call and Short Future Positions</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="bookId" type="BookId"  minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="equity" type="EquityAsset" minOccurs="1" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attribute name="OTCmlId" type="xsd:string"/>
+    <xsd:attribute name="qtyAvailable" type="xsd:integer"/>
+    <xsd:attribute name="qtyUsedFut" type="xsd:integer"/>
+    <xsd:attribute name="qtyUsedOpt" type="xsd:integer"/>
+  </xsd:complexType>
+
+</xsd:schema>

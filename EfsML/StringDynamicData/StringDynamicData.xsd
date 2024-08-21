@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" >
+  
+  <xs:element name="Data" nillable="true" type="StringDynamicData" />
+
+  <xs:complexType name="StringDynamicData" mixed="true">
+    <xs:annotation>
+      <xs:documentation xml:lang="fr">
+        Représente une donnée dont la valeur est:
+        - spécifiée ou
+        - le résultat de l'éxécution d'un requête SQL (select ou procedure) ou
+        - le résultat d'une fonction de la librairie SpheresLib
+
+        La donnée est spécifiée lorsque les éléments SQL et SpheresLib sont non renseignés.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SQL" type="DataSQL" >
+        <xs:annotation>
+          <xs:documentation xml:lang="fr">
+            La donnée est obtenue par exécution d'une requête SQL.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="SpheresLib" type="DataSpheresLib" >
+        <xs:annotation>
+          <xs:documentation xml:lang="fr">
+            La donnée est obtenue par exécution d'une fonction de la librairie SpheresLib.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" >
+      <xs:annotation>
+        <xs:documentation xml:lang="fr">
+          Nom de la donnée.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="datatype" type="xs:string" >
+      <xs:annotation>
+        <xs:documentation xml:lang="fr">
+          Type de la donnée.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="dataformat" type="xs:string" >
+      <xs:annotation>
+        <xs:documentation xml:lang="fr">
+          Format de la donnée (utiliser notamment lorsque la donnée est de type Date).
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="DataSQL" mixed="true" >
+    <xs:annotation>
+      <xs:documentation xml:lang="fr">
+        Représente une donnée obtenue par exécution d'une requête SQL (ordre select ou procedure).
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Param" type="ParamData" >
+        <xs:annotation>
+          <xs:documentation xml:lang="fr">
+            Liste des paramètres de la requête.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+
+    </xs:sequence>
+    <xs:attribute name="command" type="xs:string">
+      <xs:annotation>
+        <xs:documentation xml:lang ="fr">
+          Liste des valeurs possibles
+          "Select"    : Appel à une query select
+          "Procedure" : Appel à une query défini dans une procedure
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="name" type="xs:string" use ="optional">
+      <xs:annotation>
+        <xs:documentation xml:lang ="fr">
+          Nom de la procédure si command = "procedure"
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="result" type="xs:string" use ="required">
+      <xs:annotation>
+        <xs:documentation xml:lang ="fr">
+          Colonne du resultset qui contient la valeur de retour.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="ParamData">
+    <xs:annotation>
+      <xs:documentation xml:lang ="fr">
+        Représente un paramètre basé sur StringDynamicData.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="StringDynamicData">
+        <xs:attribute name="direction" type="ParameterDirection" use="optional" />
+        <xs:attribute name="size" type="xs:int" use="optional" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="ParameterDirection">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Input" />
+      <xs:enumeration value="Output" />
+      <xs:enumeration value="InputOutput" />
+      <xs:enumeration value="ReturnValue" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DataSpheresLib">
+    <xs:annotation>
+      <xs:documentation xml:lang="fr">
+        Représente une donnée obtenue par exécution d'une fonction de la librairie SpheresLib.
+      </xs:documentation>
+    </xs:annotation>
+
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Param" type="ParamData" >
+        <xs:annotation>
+          <xs:documentation xml:lang="fr">
+            Liste des paramètres passés à la fonction.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="function" type="xs:string" >
+      <xs:annotation>
+        <xs:documentation xml:lang="fr">
+          Nom de la fonction.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+</xs:schema>

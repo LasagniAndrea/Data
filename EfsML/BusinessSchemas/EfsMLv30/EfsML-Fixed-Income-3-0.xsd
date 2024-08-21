@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://www.efs.org/2007/EFSmL-3-0"
+            xmlns="http://www.efs.org/2007/EFSmL-3-0"
+            xmlns:fpml="http://www.fpml.org/2007/FpML-4-4"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+  <xsd:import namespace="http://www.fpml.org/2007/FpML-4-4" schemaLocation="../FpML44/fpml-main-4-4.xsd" />
+  <xsd:include schemaLocation="EfsML-Shared-3-0.xsd"/>
+  <!-- ****************************** -->
+  <!-- Elements                       -->
+  <!-- ****************************** -->
+  <xsd:element name="bondTransaction" substitutionGroup="fpml:product" type="BondTransaction">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">
+        Global element representing a Bond Transaction
+      </xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <!-- ****************************** -->
+  <!-- BondPrice                      -->
+  <!-- ****************************** -->
+  <xsd:complexType name="BondPrice">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Bond price expressions</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="cleanPrice" type="xsd:decimal">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Bond clean price, expressed in percentage points,100 is the initial value of the bond</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="cleanOfAccruedInterest" type="xsd:boolean">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">If true, this Transaction is Clean of Accrued Interest</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="accruals" type="xsd:decimal">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Accruals, relationship is clean price and accruals equals dirty price,
+          all prices are expressed in percentage points, 100 is the initial value of the bond</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element minOccurs="0" name="dirtyPrice" type="xsd:decimal">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en">Bond dirty price, expressed in percentage points,100 is the initial value of the bond</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- BondTransaction                -->
+  <!-- ****************************** -->
+  <xsd:complexType name="BondTransaction">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Bond Transaction</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="AbstractNotionalTransaction">
+        <xsd:sequence>
+          <xsd:element name="price" type="BondPrice">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Price of the Bond Transaction</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+          <xsd:element name="bond" type="fpml:Bond">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en">Identification of a Bond</xsd:documentation>
+            </xsd:annotation>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+</xsd:schema>

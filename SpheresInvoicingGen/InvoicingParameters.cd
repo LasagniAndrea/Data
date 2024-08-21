@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EFS.Administrative.Invoicing.InvoicingParameters">
+    <Position X="2.25" Y="1.25" Width="1.75" />
+    <Members>
+      <Field Name="criteriaSpecified" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAACEAAAAAAAEAAIAAAAACAAAAACAAAIA=</HashCode>
+      <FileName>InvoicingTools.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="criteria" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EFS.Common.SQL_Criteria">
+    <Position X="6" Y="1.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="ColumnCriteria" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EFS.Common.SQL_ColumnCriteria">
+    <Position X="9.5" Y="1.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

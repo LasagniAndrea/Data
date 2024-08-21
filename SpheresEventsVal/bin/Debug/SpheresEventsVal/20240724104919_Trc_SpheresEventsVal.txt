@@ -1,0 +1,1300 @@
+"SpheresTrace";Information;0;;"SpheresEventsValDEBUGv14.0.8970[1]","SpheresEventsValService","Start service (Instance: SpheresEventsVal, version: 14.0.8970, Windows® Account:Bdx088, Machine Name:BDX088N)";;;;"2024-07-24T08:42:23.9643233Z";;
+"SpheresTrace";Information;0;;"SpheresEventsValDEBUGv14.0.8970[1]","SpheresEventsValService","SqlDurationLimit: 120";;;;"2024-07-24T08:42:23.9643233Z";;
+"SpheresTrace";Information;0;;"SpheresEventsValDEBUGv14.0.8970[1]","SpheresEventsValService","Assemblies info:
+System:
+Assembly Identity=System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, FileVersion=4.6.28619.01, InformationalVersion=4.6.28619.01 @BuiltBy: dlab14-DDVSOWINAGE069 @Branch: release/2.1 @SrcCode: https://github.com/dotnet/corefx/tree/7601f4f6225089ffb291dc7d58293c7bbf5c5d4f
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/System.Buffers.dll
+Assembly Identity=System.Formats.Asn1, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, FileVersion=7.0.22.51805, InformationalVersion=7.0.0+d099f075e45d2aa6007a22b71b45a08758559f80
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/System.Formats.Asn1.dll
+Assembly Identity=System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, FileVersion=4.6.31308.01, InformationalVersion=4.6.31308.01 @BuiltBy: cloudtest-841353dfc000000 @Branch: release/2.1-MSRC @SrcCode: https://github.com/dotnet/corefx/tree/32b491939fbd125f304031c35038b1e14b4e3958
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/System.Memory.dll
+Assembly Identity=System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, FileVersion=4.6.26515.06, InformationalVersion=4.6.26515.06 @BuiltBy: dlab-DDVSOWINAGE059 @Branch: release/2.1 @SrcCode: https://github.com/dotnet/corefx/tree/30ab651fcb4354552bd4891619a0bdd81e0ebdbf
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/System.Numerics.Vectors.dll
+Assembly Identity=System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, FileVersion=6.0.21.52210, InformationalVersion=6.0.0
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/System.Runtime.CompilerServices.Unsafe.dll
+Assembly Identity=System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, FileVersion=6.0.21.52210, InformationalVersion=6.0.0+4822e3c3aa77eb82b2fb33c9321f923cf11ddde6
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/System.Text.Encodings.Web.dll
+Assembly Identity=System.Text.Json, Version=6.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, FileVersion=6.0.121.56705, InformationalVersion=6.0.1+3a25a7f1cc446b60678ed25c9d829420d6321eba
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/System.Text.Json.dll
+Assembly Identity=System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, FileVersion=4.6.28619.01, InformationalVersion=4.6.28619.01 @BuiltBy: dlab14-DDVSOWINAGE069 @Branch: release/2.1 @SrcCode: https://github.com/dotnet/corefx/tree/7601f4f6225089ffb291dc7d58293c7bbf5c5d4f
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/System.Threading.Tasks.Extensions.dll
+Assembly Identity=System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, FileVersion=4.6.26515.06, InformationalVersion=4.6.26515.06 @BuiltBy: dlab-DDVSOWINAGE059 @Branch: release/2.1 @SrcCode: https://github.com/dotnet/corefx/tree/30ab651fcb4354552bd4891619a0bdd81e0ebdbf
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/System.ValueTuple.dll
+Assembly Identity=System.Web.Ajax, Version=3.0.31106.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/System.Web.Ajax.dll
+Assembly Identity=System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, FileVersion=3.0.61128.0, InformationalVersion=3.0.7-61128 (39d3064baf13181f5718ec5d85ba644b47d0704b)
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/System.Web.Razor.dll
+Assembly Identity=System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/System.Web.WebPages.Deployment.dll
+Assembly Identity=System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/System.Web.WebPages.dll
+
+Oracle:
+Assembly Identity=Oracle.DataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/Oracle.DataAccess.dll
+Assembly Identity=Oracle.ManagedDataAccess, Version=4.122.21.1, Culture=neutral, PublicKeyToken=89b483f429c47342, InformationalVersion=4.122.21.1:20231218
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/Oracle.ManagedDataAccess.dll
+
+EFS:
+Assembly Identity=SpheresEventsVal, Version=14.0.8971.19165, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/SpheresEventsVal.exe
+Assembly Identity=SpheresCommonValBase, Version=14.0.8971.19165, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/SpheresCommonValBase.dll
+Assembly Identity=SpheresServiceBase, Version=14.0.8970.30378, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/SpheresServiceBase.dll
+Assembly Identity=EFS.ACommon, Version=14.0.8970.30377, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.ACommon.dll
+Assembly Identity=EFS.ApplicationBlocks.Data, Version=14.0.8970.30377, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.ApplicationBlocks.Data.dll
+Assembly Identity=EFS.Common, Version=14.0.8970.30378, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.Common.dll
+Assembly Identity=EFS.Common.Web, Version=14.0.8970.30379, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.Common.Web.dll
+Assembly Identity=EFS.CommonCaptureGen, Version=14.0.8971.19164, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.CommonCaptureGen.dll
+Assembly Identity=EFS.CommonData, Version=14.0.8970.30377, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.CommonData.dll
+Assembly Identity=EFS.CommonLog, Version=14.0.8970.30378, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.CommonLog.dll
+Assembly Identity=EFS.Curve, Version=14.0.8971.19164, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.Curve.dll
+Assembly Identity=EFS.DALOracle, Version=14.0.8970.30378, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.DALOracle.dll
+Assembly Identity=EFS.DALOracleManaged, Version=14.0.8970.30378, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.DALOracleManaged.dll
+Assembly Identity=EFS.DALSQLServer, Version=14.0.8970.30378, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.DALSQLServer.dll
+Assembly Identity=EFS.EfsML, Version=14.0.8971.19163, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.EfsML.dll
+Assembly Identity=EFS.EfsML.GUI, Version=14.0.8970.30379, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.EfsML.GUI.dll
+Assembly Identity=EFS.LoggerClient, Version=14.0.8970.30378, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.LoggerClient.dll
+Assembly Identity=EFS.NumericalRecipes, Version=14.0.8970.30378, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.NumericalRecipes.dll
+Assembly Identity=EFS.skmMenu, Version=14.0.8970.30379, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.skmMenu.dll
+Assembly Identity=EFS.SpheresResource, Version=14.0.8970.30376, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.SpheresResource.dll
+Assembly Identity=EFS.TimeZone, Version=14.0.8970.30378, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.TimeZone.dll
+Assembly Identity=EFS.TimeZoneWeb, Version=14.0.8970.30378, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.TimeZoneWeb.dll
+Assembly Identity=EFS.TradeCaptureGen, Version=14.0.8971.19164, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EFS.TradeCaptureGen.dll
+Assembly Identity=EfsML.Enum.Tools, Version=14.0.8970.30377, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/EfsML.Enum.Tools.dll
+
+External:
+Assembly Identity=FONet, Version=14.0.8934.28416, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/FONet.dll
+Assembly Identity=itextsharp, Version=4.1.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/itextsharp.dll
+Assembly Identity=NodaTime, Version=2.4.13.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, FileVersion=2.4.13.0, InformationalVersion=2.4.13
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/NodaTime.dll
+
+Other:
+Assembly Identity=DotNetZip, Version=1.16.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, FileVersion=1.16.0, InformationalVersion=1.16.0.4ab8c0
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/DotNetZip.dll
+Assembly Identity=Interop.IWshRuntimeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/Interop.IWshRuntimeLibrary.dll
+Assembly Identity=Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, FileVersion=6.0.21.52210, InformationalVersion=6.0.0+4822e3c3aa77eb82b2fb33c9321f923cf11ddde6
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/Microsoft.Bcl.AsyncInterfaces.dll
+Assembly Identity=Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, FileVersion=1.0.20105.407
+  ...Codebase=file:///C:/TFS/SpheresProject/Development/Bobcat/Source/SpheresServices/SpheresEventsVal/bin/Debug/Microsoft.Web.Infrastructure.dll
+
+";;;;"2024-07-24T08:42:24.1868845Z";;
+"SpheresTrace";Information;0;;"SpheresEventsValDEBUGv14.0.8970[1]","LoggerManager.Initialize","Logger client state: Created";;;;"2024-07-24T08:42:24.2480057Z";;
+"SpheresTrace";Information;0;;"SpheresEventsValDEBUGv14.0.8970[1]","LoggerManager.Initialize","Logger endpoint address: http://localhost:8736/SpheresLogger/SpheresLoggerService/";;;;"2024-07-24T08:42:24.2480057Z";;
+"SpheresTrace";Information;0;;"SpheresEventsValDEBUGv14.0.8970[1]","LoggerManager.Initialize","Logger client state: Created";;;;"2024-07-24T08:42:24.3691981Z";;
+"SpheresTrace";Information;0;;"SpheresEventsValDEBUGv14.0.8970[1]","LoggerManager.Initialize","Logger endpoint address: http://localhost:8736/SpheresLogger/SpheresLoggerService/";;;;"2024-07-24T08:42:24.3691981Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:bba4dad9-86d4-4ab2-8d2e-3975cdfd2aa3][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:04.919561][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:04.9862549Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:bba4dad9-86d4-4ab2-8d2e-3975cdfd2aa3][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:04.919561][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:07.0319637Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:bba4dad9-86d4-4ab2-8d2e-3975cdfd2aa3][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:04.919561][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:09.0672161Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:bba4dad9-86d4-4ab2-8d2e-3975cdfd2aa3][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:04.919561][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:11.1073852Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:bba4dad9-86d4-4ab2-8d2e-3975cdfd2aa3][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:04.919561][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:13.1510134Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:bba4dad9-86d4-4ab2-8d2e-3975cdfd2aa3][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:04.919561][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:15.2111682Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:bba4dad9-86d4-4ab2-8d2e-3975cdfd2aa3][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:04.919561][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:17.2706048Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:bba4dad9-86d4-4ab2-8d2e-3975cdfd2aa3][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:04.919561][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:19.3210445Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:bba4dad9-86d4-4ab2-8d2e-3975cdfd2aa3][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:04.919561][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:21.3601475Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:bba4dad9-86d4-4ab2-8d2e-3975cdfd2aa3][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:04.919561][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:23.4052183Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:bba4dad9-86d4-4ab2-8d2e-3975cdfd2aa3][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:04.919561][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:25.4598686Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:bba4dad9-86d4-4ab2-8d2e-3975cdfd2aa3][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:04.919561][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:27.4983667Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:bba4dad9-86d4-4ab2-8d2e-3975cdfd2aa3][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:04.919561][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:29.5432146Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:bba4dad9-86d4-4ab2-8d2e-3975cdfd2aa3][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:04.919561][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:31.5887430Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:bba4dad9-86d4-4ab2-8d2e-3975cdfd2aa3][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:04.919561][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:33.6504918Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:bba4dad9-86d4-4ab2-8d2e-3975cdfd2aa3][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:04.919561][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:35.7002810Z";;
+"SpheresTrace";Warning;0;;"no thread name[6]","Logger.Log","Msg: Warning !!!
+
+POSCOLLATERAL Id: 5 is locked
+
+Mode: X
+Action: COLLATERALVAL
+Session: User SYSTEM, Hostname BDX088N, Process SpheresEventsVal v14.0.8970, SessionId 94513c68-ff0e-4b43-83af-290fc7c98a54
+DateTime: 2024-07-24T08:36:34 Etc/UTC
+";;;;"2024-07-24T08:43:37.7672141Z";;
+"SpheresTrace";Warning;0;;"no thread name[6]","Logger.Log","Code: SYS-00050 Msg: Lock denied.
+Cause: An existing lock forbidden the establishment of the lock.
+Action: Refer to other log details for more information.";;;;"2024-07-24T08:43:37.7761117Z";;
+"SpheresTrace";Information;0;;"no thread name[6]","Logger.Log","Msg: [Code Return: LOCKUNSUCCESSFUL ]";;;;"2024-07-24T08:43:37.7961140Z";;
+"SpheresTrace";Warning;0;;"no thread name[6]","Logger.Log","Code: SYS-00100 Msg: Error in reading quotation.
+Cause: Quotation is missing.
+Action: Refer to other log details for more information.
+Details:
+- Asset: NL0000235190 - XPAR [id:2156] [EquityAsset]
+- Type: OfficialClose
+- QuoteTiming: Close
+- Date: 2024-07-24T00:00:00
+- Market environment - Val.Scenario: DEFAULT_MARKET_ENV - EOD_VALUATION";;;;"2024-07-24T08:43:42.5669597Z";;
+"SpheresTrace";Information;0;;"no thread name[6]","Logger.Log","Msg: [Code Return: QUOTENOTFOUND ]";;;;"2024-07-24T08:43:42.6120234Z";;
+"SpheresTrace";Warning;0;;"no thread name[6]","Logger.Log","Code: SYS-00100 Msg: Error in reading quotation.
+Cause: Quotation is missing.
+Action: Refer to other log details for more information.
+Details:
+- Asset: NL0000235190 - XPAR [id:2156] [EquityAsset]
+- Type: OfficialClose
+- QuoteTiming: Close
+- Date: 2024-07-24T00:00:00
+- Market environment - Val.Scenario: DEFAULT_MARKET_ENV - EOD_VALUATION";;;;"2024-07-24T08:43:43.7563510Z";;
+"SpheresTrace";Information;0;;"no thread name[6]","Logger.Log","Msg: [Code Return: QUOTENOTFOUND ]";;;;"2024-07-24T08:43:43.7877292Z";;
+"SpheresTrace";Warning;0;;"no thread name[6]","Logger.Log","Code: SYS-00100 Msg: Error in reading quotation.
+Cause: Quotation is missing.
+Action: Refer to other log details for more information.
+Details:
+- Asset: NL0000235190 - XPAR [id:2156] [EquityAsset]
+- Type: OfficialClose
+- QuoteTiming: Close
+- Date: 2024-07-24T00:00:00
+- Market environment - Val.Scenario: DEFAULT_MARKET_ENV - EOD_VALUATION";;;;"2024-07-24T08:43:47.0354761Z";;
+"SpheresTrace";Information;0;;"no thread name[6]","Logger.Log","Msg: [Code Return: QUOTENOTFOUND ]";;;;"2024-07-24T08:43:47.0643040Z";;
+"SpheresTrace";Warning;0;;"no thread name[6]","Logger.Log","Code: SYS-00100 Msg: Error in reading quotation.
+Cause: Quotation is missing.
+Action: Refer to other log details for more information.
+Details:
+- Asset: NL0000235190 - XPAR [id:2156] [EquityAsset]
+- Type: OfficialClose
+- QuoteTiming: Close
+- Date: 2024-07-24T00:00:00
+- Market environment - Val.Scenario: DEFAULT_MARKET_ENV - EOD_VALUATION";;;;"2024-07-24T08:43:47.3232021Z";;
+"SpheresTrace";Information;0;;"no thread name[6]","Logger.Log","Msg: [Code Return: QUOTENOTFOUND ]";;;;"2024-07-24T08:43:47.3497527Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:6a781af6-3d43-4341-b147-73c1b037716e][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:47.528045][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:47.5532958Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:6a781af6-3d43-4341-b147-73c1b037716e][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:47.528045][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:49.5958527Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:6a781af6-3d43-4341-b147-73c1b037716e][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:47.528045][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:51.6326010Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:6a781af6-3d43-4341-b147-73c1b037716e][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:47.528045][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:53.7027643Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:6a781af6-3d43-4341-b147-73c1b037716e][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:47.528045][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:55.7622880Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:6a781af6-3d43-4341-b147-73c1b037716e][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:47.528045][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:57.8071888Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:6a781af6-3d43-4341-b147-73c1b037716e][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:47.528045][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:43:59.8565820Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:6a781af6-3d43-4341-b147-73c1b037716e][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:47.528045][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:01.9027532Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:6a781af6-3d43-4341-b147-73c1b037716e][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:47.528045][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:03.9541823Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:6a781af6-3d43-4341-b147-73c1b037716e][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:47.528045][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:06.0012257Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:6a781af6-3d43-4341-b147-73c1b037716e][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:47.528045][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:08.0435451Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:6a781af6-3d43-4341-b147-73c1b037716e][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:47.528045][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:10.0899299Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:6a781af6-3d43-4341-b147-73c1b037716e][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:47.528045][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:12.1431949Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:6a781af6-3d43-4341-b147-73c1b037716e][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:47.528045][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:14.1928443Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:6a781af6-3d43-4341-b147-73c1b037716e][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:47.528045][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:16.2291917Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:6a781af6-3d43-4341-b147-73c1b037716e][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:43:47.528045][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:18.2701024Z";;
+"SpheresTrace";Warning;0;;"no thread name[6]","Logger.Log","Msg: Warning !!!
+
+POSCOLLATERAL Id: 5 is locked
+
+Mode: X
+Action: COLLATERALVAL
+Session: User SYSTEM, Hostname BDX088N, Process SpheresEventsVal v14.0.8970, SessionId 94513c68-ff0e-4b43-83af-290fc7c98a54
+DateTime: 2024-07-24T08:36:34 Etc/UTC
+";;;;"2024-07-24T08:44:20.2926655Z";;
+"SpheresTrace";Warning;0;;"no thread name[6]","Logger.Log","Code: SYS-00050 Msg: Lock denied.
+Cause: An existing lock forbidden the establishment of the lock.
+Action: Refer to other log details for more information.";;;;"2024-07-24T08:44:20.2937649Z";;
+"SpheresTrace";Information;0;;"no thread name[6]","Logger.Log","Msg: [Code Return: LOCKUNSUCCESSFUL ]";;;;"2024-07-24T08:44:20.3060669Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:d54b48ea-ad23-41fd-9e41-98900f4567c7][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:20.450000][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:20.4699029Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:d54b48ea-ad23-41fd-9e41-98900f4567c7][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:20.450000][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:22.5123033Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:d54b48ea-ad23-41fd-9e41-98900f4567c7][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:20.450000][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:24.5496987Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:d54b48ea-ad23-41fd-9e41-98900f4567c7][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:20.450000][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:26.5916000Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:d54b48ea-ad23-41fd-9e41-98900f4567c7][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:20.450000][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:28.6282474Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:d54b48ea-ad23-41fd-9e41-98900f4567c7][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:20.450000][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:30.6708519Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:d54b48ea-ad23-41fd-9e41-98900f4567c7][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:20.450000][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:32.7103495Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:d54b48ea-ad23-41fd-9e41-98900f4567c7][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:20.450000][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:34.7759596Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:d54b48ea-ad23-41fd-9e41-98900f4567c7][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:20.450000][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:36.8197269Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:d54b48ea-ad23-41fd-9e41-98900f4567c7][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:20.450000][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:38.8732412Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:d54b48ea-ad23-41fd-9e41-98900f4567c7][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:20.450000][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:40.9423797Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:d54b48ea-ad23-41fd-9e41-98900f4567c7][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:20.450000][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:42.9881716Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:d54b48ea-ad23-41fd-9e41-98900f4567c7][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:20.450000][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:45.0445546Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:d54b48ea-ad23-41fd-9e41-98900f4567c7][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:20.450000][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:47.0869466Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:d54b48ea-ad23-41fd-9e41-98900f4567c7][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:20.450000][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:49.1254434Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:d54b48ea-ad23-41fd-9e41-98900f4567c7][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:20.450000][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:51.1683130Z";;
+"SpheresTrace";Warning;0;;"no thread name[6]","Logger.Log","Msg: Warning !!!
+
+POSCOLLATERAL Id: 5 is locked
+
+Mode: X
+Action: COLLATERALVAL
+Session: User SYSTEM, Hostname BDX088N, Process SpheresEventsVal v14.0.8970, SessionId 94513c68-ff0e-4b43-83af-290fc7c98a54
+DateTime: 2024-07-24T08:36:34 Etc/UTC
+";;;;"2024-07-24T08:44:53.2050326Z";;
+"SpheresTrace";Warning;0;;"no thread name[6]","Logger.Log","Code: SYS-00050 Msg: Lock denied.
+Cause: An existing lock forbidden the establishment of the lock.
+Action: Refer to other log details for more information.";;;;"2024-07-24T08:44:53.2070325Z";;
+"SpheresTrace";Information;0;;"no thread name[6]","Logger.Log","Msg: [Code Return: LOCKUNSUCCESSFUL ]";;;;"2024-07-24T08:44:53.2315529Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:c71e800d-18df-42ca-922b-402ec27a7631][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:53.472424][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:53.4939737Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:c71e800d-18df-42ca-922b-402ec27a7631][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:53.472424][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:55.5349342Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:c71e800d-18df-42ca-922b-402ec27a7631][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:53.472424][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:57.5958878Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:c71e800d-18df-42ca-922b-402ec27a7631][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:53.472424][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:44:59.6413088Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:c71e800d-18df-42ca-922b-402ec27a7631][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:53.472424][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:45:01.6908574Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:c71e800d-18df-42ca-922b-402ec27a7631][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:53.472424][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:45:03.7430926Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:c71e800d-18df-42ca-922b-402ec27a7631][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:53.472424][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:45:05.7901720Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:c71e800d-18df-42ca-922b-402ec27a7631][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:53.472424][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:45:07.8350330Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:c71e800d-18df-42ca-922b-402ec27a7631][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:53.472424][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:45:09.8793514Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:c71e800d-18df-42ca-922b-402ec27a7631][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:53.472424][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:45:11.9312614Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:c71e800d-18df-42ca-922b-402ec27a7631][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:53.472424][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:45:13.9726920Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:c71e800d-18df-42ca-922b-402ec27a7631][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:53.472424][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:45:16.0126639Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:c71e800d-18df-42ca-922b-402ec27a7631][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:53.472424][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:45:18.0537779Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:c71e800d-18df-42ca-922b-402ec27a7631][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:53.472424][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:45:20.1059975Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:c71e800d-18df-42ca-922b-402ec27a7631][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:53.472424][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:45:22.1415927Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","DataHelper","SQL:
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+insert into dbo.EFSLOCK (OBJECTNAME, OBJECTID, LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)
+select @OBJECTNAME, @OBJECTID, @LOCKMODE, @ACTION, @SESSIONID, @HOSTNAME, @APPNAME, @APPVERSION, @NOTE, @IDAINS, @DTINS, @EXTLLINK, @ROWATTRIBUT
+ 
+ union all 
+select OBJECTNAME, OBJECTID, @LOCKMODE, ACTION, SESSIONID, HOSTNAME, APPNAME, APPVERSION, NOTE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT
+ from dbo.EFSLOCK
+ where (OBJECTNAME=@OBJECTNAME) and (OBJECTID=@OBJECTID) and (LOCKMODE<>'X')
+
+Params:[@SESSIONID:c71e800d-18df-42ca-922b-402ec27a7631][@OBJECTNAME:POSCOLLATERAL][@EXTLLINK:NULL][@APPVERSION:14.0.8970][@ROWATTRIBUT:NULL][@ACTION:COLLATERALVAL][@APPNAME:SpheresEventsVal][@HOSTNAME:BDX088N][@IDAINS:1][@DTINS:2024-07-24T08:44:53.472424][@OBJECTID:5][@LOCKMODE:X][@NOTE:NULL]
+Exception:Non è possibile inserire la riga di chiave duplicata nell'oggetto 'dbo.EFSLOCK' con indice univoco 'UX_EFSLOCK'. Valore della chiave duplicata: (POSCOLLATERAL, 5, X).
+L'istruzione è stata interrotta.
+Connection Info:Application Name=Spheres v14.0 - SpheresEventsVal Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 Connection Timeout=60
+-- -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+";;;;"2024-07-24T08:45:24.1888275Z";;
+"SpheresTrace";Warning;0;;"no thread name[6]","Logger.Log","Msg: Warning !!!
+
+POSCOLLATERAL Id: 5 is locked
+
+Mode: X
+Action: COLLATERALVAL
+Session: User SYSTEM, Hostname BDX088N, Process SpheresEventsVal v14.0.8970, SessionId 94513c68-ff0e-4b43-83af-290fc7c98a54
+DateTime: 2024-07-24T08:36:34 Etc/UTC
+";;;;"2024-07-24T08:45:26.2065182Z";;
+"SpheresTrace";Warning;0;;"no thread name[6]","Logger.Log","Code: SYS-00050 Msg: Lock denied.
+Cause: An existing lock forbidden the establishment of the lock.
+Action: Refer to other log details for more information.";;;;"2024-07-24T08:45:26.2124745Z";;
+"SpheresTrace";Information;0;;"no thread name[6]","Logger.Log","Msg: [Code Return: LOCKUNSUCCESSFUL ]";;;;"2024-07-24T08:45:26.2174756Z";;
+"SpheresTrace";Error;0;;"no thread name[6]","Logger.Log","Msg: -- Message(s) --
+Collateral [Id:5] not found
+-- StackTrace(s) --
+   at EFS.Process.CollateralValProcess.ProcessPreExecute() in C:\TFS\SpheresProject\Development\Bobcat\Source\SpheresServices\SpheresEventsVal\PosCollateralVal\CollateralVal.cs:line 133
+   at EFS.Process.ProcessBase.ProcessStart() in C:\TFS\SpheresProject\Development\Bobcat\Source\Spheres\Common\Process\ProcessBase.cs:line 1045";;;;"2024-07-24T08:45:26.3676696Z";;
+"SpheresTrace";Information;0;;"no thread name[6]","Logger.Log","Msg: [Code Return: DATANOTFOUND ]";;;;"2024-07-24T08:45:26.3686691Z";;
+"SpheresTrace";Information;0;;"no thread name[6]","Tracker","Acknowledgment Generation: 
+<?xml version=""1.0"" encoding=""utf-16""?>
+<acknowledgment xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" EfsMLversion=""3-0"">
+  <schedules>
+    <webSession>
+      <response>
+        <MOMType>FileWatcher</MOMType>
+        <MOMPath>C:\EFS\Process\Queue_v14.0</MOMPath>
+        <MOMEncrypt>false</MOMEncrypt>
+        <MOMRecoverable>true</MOMRecoverable>
+      </response>
+    </webSession>
+  </schedules>
+</acknowledgment>";;;;"2024-07-24T08:45:26.3985957Z";;
+"SpheresTrace";Warning;0;;"no thread name[11]","Logger.Log","Code: SYS-00100 Msg: Error in reading quotation.
+Cause: Quotation is missing.
+Action: Refer to other log details for more information.
+Details:
+- Asset: NL0000235190 - XPAR [id:2156] [EquityAsset]
+- Type: OfficialClose
+- QuoteTiming: Close
+- Date: 2024-07-24T00:00:00
+- Market environment - Val.Scenario: DEFAULT_MARKET_ENV - EOD_VALUATION";;;;"2024-07-24T08:47:06.4126564Z";;
+"SpheresTrace";Information;0;;"no thread name[11]","Logger.Log","Msg: [Code Return: QUOTENOTFOUND ]";;;;"2024-07-24T08:47:06.4491734Z";;
+"SpheresTrace";Warning;0;;"no thread name[11]","Logger.Log","Code: SYS-00100 Msg: Error in reading quotation.
+Cause: Quotation is missing.
+Action: Refer to other log details for more information.
+Details:
+- Asset: NL0000235190 - XPAR [id:2156] [EquityAsset]
+- Type: OfficialClose
+- QuoteTiming: Close
+- Date: 2024-07-24T00:00:00
+- Market environment - Val.Scenario: DEFAULT_MARKET_ENV - EOD_VALUATION";;;;"2024-07-24T08:47:06.7030740Z";;
+"SpheresTrace";Information;0;;"no thread name[11]","Logger.Log","Msg: [Code Return: QUOTENOTFOUND ]";;;;"2024-07-24T08:47:06.7267308Z";;
+"SpheresTrace";Warning;0;;"no thread name[11]","Logger.Log","Code: SYS-00100 Msg: Error in reading quotation.
+Cause: Quotation is missing.
+Action: Refer to other log details for more information.
+Details:
+- Asset: NL0000235190 - XPAR [id:2156] [EquityAsset]
+- Type: OfficialClose
+- QuoteTiming: Close
+- Date: 2024-07-24T00:00:00
+- Market environment - Val.Scenario: DEFAULT_MARKET_ENV - EOD_VALUATION";;;;"2024-07-24T08:47:06.9754823Z";;
+"SpheresTrace";Information;0;;"no thread name[11]","Logger.Log","Msg: [Code Return: QUOTENOTFOUND ]";;;;"2024-07-24T08:47:06.9995454Z";;
+"SpheresTrace";Warning;0;;"no thread name[11]","Logger.Log","Code: SYS-00100 Msg: Error in reading quotation.
+Cause: Quotation is missing.
+Action: Refer to other log details for more information.
+Details:
+- Asset: NL0000235190 - XPAR [id:2156] [EquityAsset]
+- Type: OfficialClose
+- QuoteTiming: Close
+- Date: 2024-07-24T00:00:00
+- Market environment - Val.Scenario: DEFAULT_MARKET_ENV - EOD_VALUATION";;;;"2024-07-24T08:47:07.2564986Z";;
+"SpheresTrace";Information;0;;"no thread name[11]","Logger.Log","Msg: [Code Return: QUOTENOTFOUND ]";;;;"2024-07-24T08:47:07.2854583Z";;
+"SpheresTrace";Warning;0;;"no thread name[11]","Logger.Log","Code: SYS-00100 Msg: Error in reading quotation.
+Cause: Quotation is missing.
+Action: Refer to other log details for more information.
+Details:
+- Asset: NL0000235190 - XPAR [id:2156] [EquityAsset]
+- Type: OfficialClose
+- QuoteTiming: Close
+- Date: 2024-07-24T00:00:00
+- Market environment - Val.Scenario: DEFAULT_MARKET_ENV - EOD_VALUATION";;;;"2024-07-24T08:47:07.5351060Z";;
+"SpheresTrace";Information;0;;"no thread name[11]","Logger.Log","Msg: [Code Return: QUOTENOTFOUND ]";;;;"2024-07-24T08:47:07.5601545Z";;
+"SpheresTrace";Information;0;;"no thread name[11]","Tracker","Acknowledgment Generation: 
+<?xml version=""1.0"" encoding=""utf-16""?>
+<acknowledgment xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" EfsMLversion=""3-0"">
+  <schedules>
+    <webSession>
+      <response>
+        <MOMType>FileWatcher</MOMType>
+        <MOMPath>C:\EFS\Process\Queue_v14.0</MOMPath>
+        <MOMEncrypt>false</MOMEncrypt>
+        <MOMRecoverable>true</MOMRecoverable>
+      </response>
+    </webSession>
+  </schedules>
+</acknowledgment>";;;;"2024-07-24T08:47:07.5761536Z";;
+"SpheresTrace";Information;0;;"no thread name[14]","Logger.Log","Msg: [Code Return: SUCCESS ]";;;;"2024-07-24T08:48:35.7575193Z";;
+"SpheresTrace";Information;0;;"no thread name[14]","Logger.Log","Msg: [Code Return: SUCCESS ]";;;;"2024-07-24T08:48:36.0427505Z";;
+"SpheresTrace";Information;0;;"no thread name[14]","Logger.Log","Msg: [Code Return: SUCCESS ]";;;;"2024-07-24T08:48:36.2941986Z";;
+"SpheresTrace";Information;0;;"no thread name[14]","Logger.Log","Msg: [Code Return: SUCCESS ]";;;;"2024-07-24T08:48:36.5567422Z";;
+"SpheresTrace";Information;0;;"no thread name[14]","Logger.Log","Msg: [Code Return: SUCCESS ]";;;;"2024-07-24T08:48:36.8132726Z";;
+"SpheresTrace";Information;0;;"no thread name[14]","Logger.Log","Msg: [Code Return: SUCCESS ]";;;;"2024-07-24T08:48:37.0525349Z";;
+"SpheresTrace";Information;0;;"no thread name[14]","Tracker","Acknowledgment Generation: 
+<?xml version=""1.0"" encoding=""utf-16""?>
+<acknowledgment xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" EfsMLversion=""3-0"">
+  <schedules>
+    <webSession>
+      <response>
+        <MOMType>FileWatcher</MOMType>
+        <MOMPath>C:\EFS\Process\Queue_v14.0</MOMPath>
+        <MOMEncrypt>false</MOMEncrypt>
+        <MOMRecoverable>true</MOMRecoverable>
+      </response>
+    </webSession>
+  </schedules>
+</acknowledgment>";;;;"2024-07-24T08:48:37.0676024Z";;
+"SpheresTrace";Error;0;;"no thread name[12]","Logger.Log","Code: SYS-00100 Msg: Error in reading quotation.
+Cause: Quotation is missing.
+Action: Refer to other log details for more information.
+Details:
+- Asset: NL0000235190 - XPAR [id:2156] [EquityAsset]
+- Type: OfficialClose
+- QuoteTiming: Close
+- Date: 2024-07-18T00:00:00
+- Market environment - Val.Scenario: DEFAULT_MARKET_ENV - EOD_VALUATION";;;;"2024-07-24T08:49:19.4567850Z";;
+"SpheresTrace";Information;0;;"no thread name[12]","Logger.Log","Msg: [Code Return: QUOTENOTFOUND ]";;;;"2024-07-24T08:49:19.4787830Z";;
+"SpheresTrace";Error;0;;"no thread name[12]","Logger.Log","Code: SYS-00100 Msg: Error in reading quotation.
+Cause: Quotation is missing.
+Action: Refer to other log details for more information.
+Details:
+- Asset: NL0000235190 - XPAR [id:2156] [EquityAsset]
+- Type: OfficialClose
+- QuoteTiming: Close
+- Date: 2024-07-18T00:00:00
+- Market environment - Val.Scenario: DEFAULT_MARKET_ENV - EOD_VALUATION";;;;"2024-07-24T08:49:19.7188964Z";;
+"SpheresTrace";Information;0;;"no thread name[12]","Logger.Log","Msg: [Code Return: QUOTENOTFOUND ]";;;;"2024-07-24T08:49:19.7353288Z";;
+"SpheresTrace";Information;0;;"no thread name[12]","Tracker","Acknowledgment Generation: 
+<?xml version=""1.0"" encoding=""utf-16""?>
+<acknowledgment xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" EfsMLversion=""3-0"">
+  <schedules>
+    <webSession>
+      <response>
+        <MOMType>FileWatcher</MOMType>
+        <MOMPath>C:\EFS\Process\Queue_v14.0</MOMPath>
+        <MOMEncrypt>false</MOMEncrypt>
+        <MOMRecoverable>true</MOMRecoverable>
+      </response>
+    </webSession>
+  </schedules>
+</acknowledgment>";;;;"2024-07-24T08:49:19.7547562Z";;

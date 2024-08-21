@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="RD_SPHERES_TST260" Class="TRADEMARGINTRACKDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=SVR-MSS-2\SVRMSS2;Initial Catalog=RD_SPHERES_TST260;Persist Security Info=True;User ID=sa" SettingsObjectName="EFS.SpheresRiskPerformance.Properties.Settings" SettingsPropertyName="RD_SPHERES_TST260ConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.TRADEMARGINTRACK" Member="TRADEMARGINTRACK">
+    <Type Name="TRADEMARGINTRACK">
+      <Column Name="IDT" Type="System.Decimal" DbType="Decimal(10,0) NOT NULL" CanBeNull="false" />
+      <Column Name="IDMARGINTRACK" Type="System.Decimal" DbType="Decimal(10,0)" CanBeNull="true" />
+      <Column Name="TRADEXML" Type="System.Xml.Linq.XElement" DbType="Xml NOT NULL" CanBeNull="false" />
+      <Column Name="DTINS" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IDAINS" Type="System.Decimal" DbType="Decimal(10,0) NOT NULL" CanBeNull="false" />
+      <Column Name="ROWVERSION" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+    </Type>
+  </Table>
+</Database>

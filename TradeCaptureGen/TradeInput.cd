@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Font Name="Segoe UI" Size="9" />
+  <Comment CommentText="&#x1E;TRADE INPUT">
+    <Position X="4.885" Y="5.469" Height="0.333" Width="1.023" />
+  </Comment>
+  <Class Name="EFS.TradeInformation.TradeInput">
+    <Position X="4" Y="8" Width="3.5" />
+    <TypeIdentifier>
+      <FileName>TradeInput.cs</FileName>
+      <HashCode>ABAEAAAAACBAAAIEwAAQEgAAQICABBQAAAABAAAEAAA=</HashCode>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="CustomCaptureInfos" />
+    </ShowAsCollectionAssociation>
+    <AssociationLine Name="CustomCaptureInfos" Type="EFS.GUI.CCI.CustomCaptureInfo">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.235" Y="-3.033" Height="0.182" Width="3.268" />
+      </MemberNameLabel>
+    </AssociationLine>
+  </Class>
+  <Class Name="EFS.TradeInformation.TradeCommonInput">
+    <Position X="7.75" Y="0.5" Width="3.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EFS.TradeInformation.CommonInput">
+    <Position X="4" Y="0.5" Width="2.75" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EFS.GUI.CCI.CustomCaptureInfo">
+    <Position X="0.75" Y="0.5" Width="2.75" />
+    <TypeIdentifier />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="EFS.GUI.CCI.CustomCaptureInfo.CloneMode">
+        <TypeIdentifier />
+      </Enum>
+    </NestedTypes>
+    <Lollipop Position="0.2" />
+  </Class>
+</ClassDiagram>

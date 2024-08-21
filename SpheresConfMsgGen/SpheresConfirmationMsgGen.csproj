@@ -1,0 +1,699 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{41E99412-83EA-4B07-BDED-CDF405984631}</ProjectGuid>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>SpheresConfirmationMsgGen</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>SpheresConfirmationMsgGen</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publier\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseSetup|AnyCPU'">
+    <OutputPath>bin\ReleaseSetup\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <Optimize>true</Optimize>
+    <FileAlignment>4096</FileAlignment>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <FileAlignment>4096</FileAlignment>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <Optimize>true</Optimize>
+    <FileAlignment>4096</FileAlignment>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseSetup|x64'">
+    <OutputPath>bin\x64\ReleaseSetup\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <Optimize>true</Optimize>
+    <FileAlignment>4096</FileAlignment>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility">
+      <Name>Accessibility</Name>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Configuration.Install">
+      <Name>System.Configuration.Install</Name>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Management">
+      <Name>System.Management</Name>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceProcess">
+      <Name>System.ServiceProcess</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <ProjectReference Include="..\ACommon\ACommon.csproj">
+      <Project>{9FF00E89-DA79-4F89-B3A6-9995F502F080}</Project>
+      <Name>ACommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonData\CommonData.csproj">
+      <Project>{A0323250-116A-43EF-9E7D-F3218B6246B1}</Project>
+      <Name>CommonData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonLog\CommonLog.csproj">
+      <Project>{4bfe53c9-dbcf-494c-a29f-738fddb76d54}</Project>
+      <Name>CommonLog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{CDACCA1B-403B-47F5-9F1B-E1A1AC4A7FE3}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DALOracleManaged\DALOracleManaged.csproj">
+      <Project>{dafcddc0-fbec-4776-9fe9-61ceb806e9d4}</Project>
+      <Name>DALOracleManaged</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DALOracle\DALOracle.csproj">
+      <Project>{7BB59F8C-6339-4613-BAAA-06FA589483F4}</Project>
+      <Name>DALOracle</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DALSqlServer\DALSQLServer.csproj">
+      <Project>{B41A7061-0283-43A6-8007-F1F350E1C869}</Project>
+      <Name>DALSQLServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{1DCDE042-2496-46AE-A0B9-CE9C994D92E2}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EfsMLEnum\Enums.csproj">
+      <Project>{4117F946-D2FD-4EAB-A4A0-F3FB8B1732CC}</Project>
+      <Name>Enums</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EfsML\EfsML.csproj">
+      <Project>{A7E609D0-E67C-4997-B798-8974716D413C}</Project>
+      <Name>EfsML</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FpMLGUI\EfsMLGUI.csproj">
+      <Project>{DE7F74E2-9431-44D4-8A38-3C0884D6719F}</Project>
+      <Name>EfsMLGUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LoggerClient\LoggerClient.csproj">
+      <Project>{55e5d84a-1d98-4c76-99dd-fbc4a2d316bf}</Project>
+      <Name>LoggerClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpheresResource\SpheresResource.csproj">
+      <Project>{568a7d8f-7522-44ec-aeec-2e94c84250db}</Project>
+      <Name>SpheresResource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TimeZone\TimeZone.csproj">
+      <Project>{36a1ff15-5123-43b6-b05e-2da7091b0c76}</Project>
+      <Name>TimeZone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpheresServiceBase\SpheresServiceBase.csproj">
+      <Name>SpheresServiceBase</Name>
+      <Project>{D8AF9FF5-71D6-4B16-9D07-9895E86E50CE}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\Common\Library\DtFunc.xslt">
+      <Link>Library\DtFunc.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Common\Library\Main.xslt">
+      <Link>Library\Main.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Common\Library\NbrFunc.xslt">
+      <Link>Library\NbrFunc.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Common\Library\RemXmlnsAlias.xslt">
+      <Link>Library\RemXmlnsAlias.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Common\Library\Resource.xml">
+      <Link>Library\Resource.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Common\Library\Resource.xslt">
+      <Link>Library\Resource.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Common\Library\StrFunc.xslt">
+      <Link>Library\StrFunc.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\Common\Library\xsltsl\date-time.xsl">
+      <Link>Library\xsltsl\date-time.xsl</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\MessageSWIFT\Category3\MT300_SWIFT.xslt">
+      <Link>Message\SWIFT\Category3\MT300_SWIFT.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\MessageSWIFT\Category3\MT305_SWIFT.xslt">
+      <Link>Message\SWIFT\Category3\MT305_SWIFT.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\MessageSWIFT\Category3\MT360_SWIFT.xslt">
+      <Link>Message\SWIFT\Category3\MT360_SWIFT.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\MessageSWIFT\Lib_SWIFT.xslt">
+      <Link>Message\SWIFT\Lib_SWIFT.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Custom\Custom_Message_HTML.xslt">
+      <Link>Message\Custom\Custom_Message_HTML.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Custom\Custom_Message_PDF.xslt">
+      <Link>Message\Custom\Custom_Message_PDF.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\EQD\EquityOption_ISDA_Business.xslt">
+      <Link>Message\ISDA\EQD\EquityOption_ISDA_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\EQD\EquityOption_ISDA_PDF.xslt">
+      <Link>Message\ISDA\EQD\EquityOption_ISDA_PDF.xslt</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\FX\FxBarrierOption_ISDA_Business.xslt">
+      <Link>Message\ISDA\FX\FxBarrierOption_ISDA_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\FX\FxBarrierOption_ISDA_PDF.xslt">
+      <Link>Message\ISDA\FX\FxBarrierOption_ISDA_PDF.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\FX\FxDigitalOption_ISDA_Business.xslt">
+      <Link>Message\ISDA\FX\FxDigitalOption_ISDA_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\FX\FxDigitalOption_ISDA_PDF.xslt">
+      <Link>Message\ISDA\FX\FxDigitalOption_ISDA_PDF.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\FX\FxLeg_ISDA_Business.xslt">
+      <Link>Message\ISDA\FX\FxLeg_ISDA_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\FX\FxLeg_ISDA_PDF.xslt">
+      <Link>Message\ISDA\FX\FxLeg_ISDA_PDF.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\FX\FxOptionLeg_ISDA_Business.xslt">
+      <Link>Message\ISDA\FX\FxOptionLeg_ISDA_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\FX\FxOptionLeg_ISDA_PDF.xslt">
+      <Link>Message\ISDA\FX\FxOptionLeg_ISDA_PDF.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\FX\FxSwap_ISDA_Business.xslt">
+      <Link>Message\ISDA\FX\FxSwap_ISDA_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\FX\FxSwap_ISDA_PDF.xslt">
+      <Link>Message\ISDA\FX\FxSwap_ISDA_PDF.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\IRD\CapFloor_ISDA_Business.xslt">
+      <Link>Message\ISDA\IRD\CapFloor_ISDA_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\IRD\CapFloor_ISDA_PDF.xslt">
+      <Link>Message\ISDA\IRD\CapFloor_ISDA_PDF.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\IRD\Fra_ISDA_Business.xslt">
+      <Link>Message\ISDA\IRD\Fra_ISDA_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\IRD\Fra_ISDA_PDF.xslt">
+      <Link>Message\ISDA\IRD\Fra_ISDA_PDF.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\IRD\LoanDeposit_ISDA_Business.xslt">
+      <Link>Message\ISDA\IRD\LoanDeposit_ISDA_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\IRD\LoanDeposit_ISDA_PDF.xslt">
+      <Link>Message\ISDA\IRD\LoanDeposit_ISDA_PDF.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\IRD\Swaption_ISDA_Business.xslt">
+      <Link>Message\ISDA\IRD\Swaption_ISDA_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\IRD\Swaption_ISDA_PDF.xslt">
+      <Link>Message\ISDA\IRD\Swaption_ISDA_PDF.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\IRD\Swap_ISDA_Business.xslt">
+      <Link>Message\ISDA\IRD\Swap_ISDA_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\IRD\Swap_ISDA_PDF.xslt">
+      <Link>Message\ISDA\IRD\Swap_ISDA_PDF.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\Shared\Shared_ISDA_Business.xslt">
+      <Link>Message\ISDA\Shared\Shared_ISDA_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\Shared\Shared_ISDA_HTML.xslt">
+      <Link>Message\ISDA\Shared\Shared_ISDA_HTML.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\Shared\Shared_ISDA_PDF.xslt">
+      <Link>Message\ISDA\Shared\Shared_ISDA_PDF.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\ISDA\Shared\Shared_Variables.xslt">
+      <Link>Message\ISDA\Shared\Shared_Variables.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\AccountStatementReport.xsl">
+      <Link>Message\Report\AccountStatementReport.xsl</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\DetailedFinancialReport.xsl">
+      <Link>Message\Report\DetailedFinancialReport.xsl</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\FinancialReport.xsl">
+      <Link>Message\Report\FinancialReport.xsl</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\InterestStatementReport.xsl">
+      <Link>Message\Report\InterestStatementReport.xsl</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\InvoiceReport.xsl">
+      <Link>Message\Report\InvoiceReport.xsl</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\Invoice\Invoice.xslt">
+      <Link>Message\Report\Invoice\Invoice.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\Invoice\InvoiceCommon.xslt">
+      <Link>Message\Report\Invoice\InvoiceCommon.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\PosActionReport.xsl">
+      <Link>Message\Report\PosActionReport.xsl</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\PositionReport.xsl">
+      <Link>Message\Report\PositionReport.xsl</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\PosSyntheticReport.xsl">
+      <Link>Message\Report\PosSyntheticReport.xsl</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\Shared\Shared_Report_BusinessCB.xslt">
+      <Link>Message\Report\Shared\Shared_Report_BusinessCB.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\Shared\Shared_Report_BusinessCommon.xslt">
+      <Link>Message\Report\Shared\Shared_Report_BusinessCommon.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\Shared\Shared_Report_BusinessETD.xslt">
+      <Link>Message\Report\Shared\Shared_Report_BusinessETD.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\Shared\Shared_Report_Main.xslt">
+      <Link>Message\Report\Shared\Shared_Report_Main.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\Shared\Shared_Report_PDFCB.xslt">
+      <Link>Message\Report\Shared\Shared_Report_PDFCB.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\Shared\Shared_Report_PDFCommon.xslt">
+      <Link>Message\Report\Shared\Shared_Report_PDFCommon.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\Shared\Shared_Report_PDFCommon_Page.xslt">
+      <Link>Message\Report\Shared\Shared_Report_PDFCommon_Page.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\Shared\Shared_Report_PDFETD.xslt">
+      <Link>Message\Report\Shared\Shared_Report_PDFETD.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\Shared\Shared_Report_VariablesCB.xslt">
+      <Link>Message\Report\Shared\Shared_Report_VariablesCB.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\Shared\Shared_Report_VariablesCommon.xslt">
+      <Link>Message\Report\Shared\Shared_Report_VariablesCommon.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\Shared\Shared_Report_VariablesETD.xslt">
+      <Link>Message\Report\Shared\Shared_Report_VariablesETD.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report\TransactReport.xsl">
+      <Link>Message\Report\TransactReport.xsl</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\COMS\CommoditySpot_Report_v2_Business.xslt">
+      <Link>Message\Report_v2\COMS\CommoditySpot_Report_v2_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\COMS\CommoditySpot_Report_v2_Tools.xslt">
+      <Link>Message\Report_v2\COMS\CommoditySpot_Report_v2_Tools.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\DSE\DST_Report_v2_Business.xslt">
+      <Link>Message\Report_v2\DSE\DST_Report_v2_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\DSE\DST_Report_v2_Tools.xslt">
+      <Link>Message\Report_v2\DSE\DST_Report_v2_Tools.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\ESE\EST_Report_v2_Business.xslt">
+      <Link>Message\Report_v2\ESE\EST_Report_v2_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\ESE\EST_Report_v2_Tools.xslt">
+      <Link>Message\Report_v2\ESE\EST_Report_v2_Tools.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\ETDOrderConfirmation.xsl">
+      <Link>Message\Report_v2\ETDOrderConfirmation.xsl</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\FX\FxLeg_Report_v2_Business.xslt">
+      <Link>Message\Report_v2\FX\FxLeg_Report_v2_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\FX\FxLeg_Report_v2_Tools.xslt">
+      <Link>Message\Report_v2\FX\FxLeg_Report_v2_Tools.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\FX\FxOptionLeg_Report_v2_Business.xslt">
+      <Link>Message\Report_v2\FX\FxOptionLeg_Report_v2_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\FX\FxOptionLeg_Report_v2_Tools.xslt">
+      <Link>Message\Report_v2\FX\FxOptionLeg_Report_v2_Tools.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\LSD\ETD_Report_v2_Business.xslt">
+      <Link>Message\Report_v2\LSD\ETD_Report_v2_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\LSD\ETD_Report_v2_Tools.xslt">
+      <Link>Message\Report_v2\LSD\ETD_Report_v2_Tools.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\RTS\RTS_Report_v2_Business.xslt">
+      <Link>Message\Report_v2\RTS\RTS_Report_v2_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\RTS\RTS_Report_v2_Tools.xslt">
+      <Link>Message\Report_v2\RTS\RTS_Report_v2_Tools.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\Shared\Shared_Report_v2_A4Vertical.xslt">
+      <Link>Message\Report_v2\Shared\Shared_Report_v2_A4Vertical.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\Shared\Shared_Report_v2_Business.xslt">
+      <Link>Message\Report_v2\Shared\Shared_Report_v2_Business.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\Shared\Shared_Report_v2_FixmlTools.xslt">
+      <Link>Message\Report_v2\Shared\Shared_Report_v2_FixmlTools.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\Shared\Shared_Report_v2_Tools.xslt">
+      <Link>Message\Report_v2\Shared\Shared_Report_v2_Tools.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\Shared\Shared_Report_v2_UK.xslt">
+      <Link>Message\Report_v2\Shared\Shared_Report_v2_UK.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\Shared\Shared_Report_v2_Variables.xslt">
+      <Link>Message\Report_v2\Shared\Shared_Report_v2_Variables.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\EfsML\Message\Report_v2\SynthesisReport.xsl">
+      <Link>Message\Report_v2\SynthesisReport.xsl</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\SpheresResource\EAR_Resource\EarEnumsResource.xml">
+      <Link>Resource\EarEnumsResource.xml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App.ico" />
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ConfirmationMsgGen.cs" />
+    <Compile Include="ProcessConfirmation\ConfMsgGenProcess.cs" />
+    <Compile Include="ProcessReport\TradeMcoInput.cs" />
+    <Compile Include="ConfMsgGenInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ProcessReport\ReportMsgGenProcess.cs" />
+    <Compile Include="SpheresConfMsgGenService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Content Include="..\SpheresResource\Custom_Resource\Custom_Resource.de-DE.resx">
+      <Link>Resource\Custom_Resource.de-DE.resx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\SpheresResource\Custom_Resource\Custom_Resource.es-ES.resx">
+      <Link>Resource\Custom_Resource.es-ES.resx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\SpheresResource\Custom_Resource\Custom_Resource.fr.resx">
+      <Link>Resource\Custom_Resource.fr.resx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\SpheresResource\Custom_Resource\Custom_Resource.it-IT.resx">
+      <Link>Resource\Custom_Resource.it-IT.resx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\SpheresResource\Custom_Resource\Custom_Resource.resx">
+      <Link>Resource\Custom_Resource.resx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\SpheresResource\ISDA_Resource\ISDA_Resource.de-DE.resx">
+      <Link>Resource\ISDA_Resource.de-DE.resx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\SpheresResource\ISDA_Resource\ISDA_Resource.es-ES.resx">
+      <Link>Resource\ISDA_Resource.es-ES.resx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\SpheresResource\ISDA_Resource\ISDA_Resource.fr.resx">
+      <Link>Resource\ISDA_Resource.fr.resx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\SpheresResource\ISDA_Resource\ISDA_Resource.it-IT.resx">
+      <Link>Resource\ISDA_Resource.it-IT.resx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\SpheresResource\ISDA_Resource\ISDA_Resource.resx">
+      <Link>Resource\ISDA_Resource.resx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\SpheresResource\SpheresResource.de-DE.resx">
+      <Link>Resource\SpheresResource.de-DE.resx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\SpheresResource\SpheresResource.el-GR.resx">
+      <Link>Resource\SpheresResource.el-GR.resx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\SpheresResource\SpheresResource.es-ES.resx">
+      <Link>Resource\SpheresResource.es-ES.resx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\SpheresResource\SpheresResource.fr.resx">
+      <Link>Resource\SpheresResource.fr.resx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="..\SpheresResource\SpheresResource.it-IT.resx">
+      <Link>Resource\SpheresResource.it-IT.resx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="..\SpheresResource\SpheresResource.resx">
+      <Link>Resource\SpheresResource.resx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <EmbeddedResource Include="ConfMsgGenInstaller.resx">
+      <DependentUpon>ConfMsgGenInstaller.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SpheresConfMsgGenService.resx">
+      <DependentUpon>SpheresConfMsgGenService.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

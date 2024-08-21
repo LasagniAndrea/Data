@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://www.efs.org/2007/EFSmL-3-0"
+            xmlns="http://www.efs.org/2007/EFSmL-3-0"
+            xmlns:fpml="http://www.fpml.org/2007/FpML-4-4"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+  <xsd:import namespace="http://www.fpml.org/2007/FpML-4-4" schemaLocation="../FpML44/fpml-main-4-4.xsd" />
+  <xsd:include schemaLocation="EfsML-Shared-3-0.xsd"/>
+
+  <!-- ****************************** -->
+  <!-- Elements                       -->
+  <!-- ****************************** -->
+  <xsd:element name="EfsSettlementInstruction" type="EfsSettlementInstruction" />
+
+  <!-- ****************************** -->
+  <!-- Css                            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="Css">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- CssCriteria                     -->
+  <!-- ****************************** -->
+  <xsd:complexType name="CssCriteria">
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:element name="css"     type="Css" />
+        <xsd:element name="cssInfo" type="CssInfo" />
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- CssInfo                        -->
+  <!-- ****************************** -->
+  <xsd:complexType name="CssInfo">
+    <xsd:sequence>
+      <xsd:element name="cssCountry"        type="fpml:Country"       minOccurs="0" />
+      <xsd:element name="cssType"           type="CssType"            minOccurs="0" />
+      <xsd:element name="cssSystemType"     type="CssSystemType"      minOccurs="0" />
+      <xsd:element name="cssSettlementType" type="CssSettlementType"  minOccurs="0" />
+      <xsd:element name="cssPaymentType"    type="CssPaymentType"     minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- CssPaymentType                 -->
+  <!-- ****************************** -->
+  <xsd:complexType name="CssPaymentType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="cssPaymentTypeScheme" type="xsd:anyURI" default="http://www.euro-finance-systems.fr/otcml/cssPaymentType" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- CssSettlementType              -->
+  <!-- ****************************** -->
+  <xsd:complexType name="CssSettlementType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="cssSettlementTypeScheme" type="xsd:anyURI" default="http://www.euro-finance-systems.fr/otcml/cssSettlementType" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- CssSystemType                  -->
+  <!-- ****************************** -->
+  <xsd:complexType name="CssSystemType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="cssSystemTypeScheme" type="xsd:anyURI" default="http://www.euro-finance-systems.fr/otcml/cssSystemType" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- CssType                        -->
+  <!-- ****************************** -->
+  <xsd:complexType name="CssType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="cssTypeScheme" type="xsd:anyURI" default="http://www.euro-finance-systems.fr/otcml/cssType" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- EfsSettlementInformation       -->
+  <!-- ****************************** -->
+  <xsd:complexType name="EfsSettlementInformation">
+    <xsd:choice>
+      <xsd:element name="standardSettlementStyle" type="fpml:StandardSettlementStyleEnum" />
+      <xsd:element name="settlementInstruction"   type="EfsSettlementInstruction" />
+    </xsd:choice>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- EfsSettlementInstruction       -->
+  <!-- ****************************** -->
+  <xsd:complexType name="EfsSettlementInstruction">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:SettlementInstruction">
+        <xsd:sequence>
+          <xsd:element name="settlementMethodInformation" type="fpml:Routing" minOccurs="0" />
+          <xsd:element name="investorInformation"         type="fpml:Routing" minOccurs="0" />
+          <xsd:element name="originatorInformation"       type="fpml:Routing" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- EventCode                      -->
+  <!-- ****************************** -->
+  <xsd:complexType name="EventCode">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="eventCodeScheme" type="xsd:anyURI" default="http://www.euro-finance-systems.fr/otcml/eventCode" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- EventCodes                     -->
+  <!-- ****************************** -->
+  <xsd:complexType name="EventCodes">
+    <xsd:sequence>
+      <xsd:element name="productReference"  type="fpml:ProductReference"  minOccurs="0" />
+      <xsd:element name="streamId"          type="xsd:int"                minOccurs="0" />
+      <xsd:element name="eventCode"         type="EventCode"              minOccurs="0" />
+      <xsd:element name="eventType"         type="EventType"              minOccurs="0" />
+      <xsd:element name="settlementDate"    type="xsd:integer"            minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- EventCodesSchedule             -->
+  <!-- ****************************** -->
+  <xsd:complexType name="EventCodesSchedule">
+    <xsd:sequence>
+      <xsd:element name="eventCodes" type="EventCodes" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- FlowContext                    -->
+  <!-- ****************************** -->
+  <xsd:complexType name="FlowContext">
+    <xsd:sequence>
+      <xsd:element name="partyContext"        type="PartyPayerReceiverReference"  minOccurs="0" maxOccurs="unbounded" />
+      <xsd:element name="eventCodesSchedule"  type="EventCodesSchedule"           minOccurs="0" />
+      <xsd:element name="currency"            type="fpml:Currency"                minOccurs="0" />
+      <xsd:element name="cashSecurities"      type="CashSecuritiesEnum"           minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- NettingDesignation             -->
+  <!-- ****************************** -->
+  <xsd:complexType name="NettingDesignation">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- NettingInformationInput        -->
+  <!-- ****************************** -->
+  <xsd:complexType name="NettingInformationInput">
+    <xsd:sequence>
+      <xsd:element name="nettingMethod" type="NettingMethodEnum" />
+      <xsd:element name="nettingDesignation" type="NettingDesignation" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- PartyPayerReceiverReference    -->
+  <!-- ****************************** -->
+  <xsd:complexType name="PartyPayerReceiverReference">
+    <xsd:choice>
+      <xsd:element name="payerPartyReference"    type="fpml:PartyReference" />
+      <xsd:element name="receiverPartyReference" type="fpml:PartyReference" />
+    </xsd:choice>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- SettlementInput                -->
+  <!-- ****************************** -->
+  <xsd:complexType name="SettlementInput">
+    <xsd:sequence>
+      <xsd:element name="settlementContext"   type="FlowContext" minOccurs="0" />
+      <xsd:element name="settlementInputInfo" type="SettlementInputInfo" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- SettlementInputInfo            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="SettlementInputInfo">
+    <xsd:sequence>
+      <xsd:element name="settlementInformation" type="EfsSettlementInformation" />
+      <xsd:element name="cssCriteria"           type="CssCriteria" minOccurs="0" />
+      <xsd:element name="ssiCriteria"           type="SsiCriteria" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- SsiCriteria                    -->
+  <!-- ****************************** -->
+  <xsd:complexType name="SsiCriteria">
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:element name="ssiCountry" type="fpml:Country" />
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  
+</xsd:schema>

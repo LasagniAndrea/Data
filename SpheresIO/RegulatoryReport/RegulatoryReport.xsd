@@ -1,0 +1,1371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="regulatoryReport">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A element containing the datas designed to regulatory reports.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="trade">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">
+              A element containing the business datas of the trade.
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="header">
+                <xs:annotation>
+                  <xs:documentation xml:lang="en">
+                    A element containing the global business datas common to all products.
+                  </xs:documentation>
+                </xs:annotation>
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="beginDate" type="xs:date" />
+                    <xs:element name="endDate" type="xs:date" />
+                    <xs:element name="sysDate" type="xs:date" />
+                    <xs:element name="packageVersion" type="xs:string" />
+                    <xs:element name="eFSMLVersion" type="xs:string" />
+                    <xs:element name="idtTemplate" type="xs:unsignedShort" />
+                    <xs:element maxOccurs="unbounded" name="tradeId">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:unsignedInt">
+                            <xs:attribute name="tradeIdScheme" type="xs:string" use="required" />
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="idt" type="xs:unsignedShort" />
+                    <xs:element name="identifier" type="xs:string" />
+                    <xs:element name="frontId" type="xs:string" />
+                    <xs:element name="productFamily" type="xs:string" />
+                    <xs:element name="productGroupIdentifier" type="xs:string"/>
+                    <xs:element name="productIdentifier" type="xs:string" />
+                    <xs:element name="productType" type="xs:string" />
+                    <xs:element name="instrumentGroupIdentifier" type="xs:string"/>
+                    <xs:element name="instrumentIdentifier" type="xs:string"/>
+                    <!-- GS 20160201 (ticket 21183 CT 41: add "Gerarchia Fair value"-->
+                    <xs:element name="fairValueHierarchy" type="xs:string"/>
+                    <xs:element name="tradeDate" type="xs:date" />
+                    <xs:element name="terminationDate" type="xs:date">
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">
+                          The last day of the term of the trade. It is an adjusted date.
+                        </xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="isOpen" type="xs:boolean" >
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">
+                          Returns true value if the trade is open.
+                        </xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="isOpenAndClosed" type="xs:boolean">
+                      <xs:annotation>
+                        <xs:documentation xml:lang="en">
+                          Returns true value if the trade is opened and closed between during the observation period.
+                        </xs:documentation>
+                      </xs:annotation>
+                    </xs:element>
+                    <xs:element name="isDeliverable" type="xs:boolean" />
+                    <xs:element name="isAccountingCurrency" type="xs:boolean" />
+                    <xs:element name="isInTheScope" type="xs:boolean" />
+                    <xs:element name="isStructuredProduct" type="xs:boolean" />
+                    <xs:element name="isStructuredMaster" type="xs:boolean" />
+                    <xs:element name="structuredIdentifier" type="xs:string" />
+                  </xs:sequence>
+                  <xs:attribute name="OTCmlId" type="xs:unsignedByte" use="required" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="dataDocument">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="repository">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="mainActor">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="ida" type="xs:unsignedShort" />
+                                <xs:element name="identifier" type="xs:string" />
+                                <xs:element name="bookIdb" type="xs:unsignedShort" />
+                                <xs:element name="bookIdentifier" type="xs:string" />
+                                <xs:element name="bookExtllink" type="xs:string"/>
+                                <xs:element name="bookEntityIda" type="xs:unsignedShort" />
+                                <xs:element name="buyerSeller" type="xs:string" />
+                                <xs:element name="accountingLocalClass" type="xs:string" />
+                                <xs:element name="residenceCode" type="xs:unsignedShort" />
+                                <!-- GS 20110707 verify if this field is in use-->
+                                <xs:element name="economicAreaCode" type="xs:unsignedShort" />
+                                <xs:element name="countervalueCurrency" type="xs:string" />
+                                <xs:element name="accountingCurrency" type="xs:string" />
+                                <xs:element name="tradeLocalClass" type="xs:string" />
+                                <xs:element name="iasDerivativeClassification" type="xs:string" />
+                                <xs:element name="iasHedgedDerivativeClassification" type="xs:string" />
+                                <!-- from book - this field contains IAS Category (Derivative or hedging)-->
+                                <xs:element name="iasCategory" type="xs:string" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="counterparty">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="isCounterpartyResident" type="xs:boolean" />
+                                <xs:element name="isClient" type="xs:boolean" />
+                                <xs:element name="ida" type="xs:unsignedShort" />
+                                <xs:element name="identifier" type="xs:string" />
+                                <xs:element name="extllink" type="xs:string" />
+                                <xs:element name="numeroDirezioneGenerale" type="xs:string" />
+                                <xs:element name="numeroRapporto" type="xs:string" />
+                                <xs:element name="codiceBanca" type="xs:string" />
+                                <xs:element name="codiceAziendale" type="xs:string" />
+                                <xs:element name="sportello" type="xs:string" />
+                                <xs:element name="numeroContoRapporto" type="xs:string" />
+                                <xs:element name="servizioProvenienza" type="xs:string" />
+                                <xs:element name="servizioRapporto" type="xs:string" />
+                                <xs:element name="bookIdb" type="xs:unsignedShort" />
+                                <xs:element name="bookIdentifier" type="xs:string" />
+                                <xs:element name="buyerSeller" type="xs:string" />
+                                <xs:element name="residenceCode" type="xs:string" />
+                                <xs:element name="idCountryResidence" type="xs:string" />
+                                <xs:element name="uicCountryCode" type="xs:string" />
+                                <xs:element name="mifidClientCategorisation" type="xs:string" />
+                                <!-- GS 20110707 verify if this field is in use-->
+                                <xs:element name="economicAreaCode" type="xs:unsignedShort" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="masterAgreement">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <!-- Master Agreement -->
+                                <xs:element name="id" type="xs:unsignedShort" />
+                                <xs:element name="identifier" type="xs:string" />
+                                <xs:element name="displayname" type="xs:string" />
+                                <xs:element name="party1Ida" type="xs:unsignedShort" />
+                                <xs:element name="party1Identifier" type="xs:string" />
+                                <xs:element name="party2Ida" type="xs:unsignedShort" />
+                                <xs:element name="party2Identifier" type="xs:string" />
+                                <xs:element name="signatureDate" type="xs:date" />
+                                <xs:element name="agreementType" type="xs:string" />
+                                <!-- Confirmation -->
+                                <xs:element name="confirmationType" type="xs:string" />
+                                <xs:element name="confirmationDate" type="xs:date" />
+                                <xs:element name="confirmationAnnexType" type="xs:string" />
+                                <xs:element name="confirmationAnnexDate" type="xs:date" />
+                                <!-- Credit Support Agreement -->
+                                <xs:element name="creditSupportAgreementIdentifier" type="xs:string" />
+                                <xs:element name="creditSupportAgreementType" type="xs:string" />
+                                <xs:element name="creditSupportAgreementDate" type="xs:date" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>                      
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="business">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="swap">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="isAmortizing" type="xs:boolean" />
+                                <xs:element name="isOvernight" type="xs:boolean" />
+                                <xs:element name="productType" type="xs:string" />
+                                <xs:element name="nextResetDate" type="xs:date" />
+                                <xs:element name="payerStream">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <!-- global streams -->
+                                      <xs:element name="streamRateType" type="xs:string" />
+                                      <xs:element name="streamNumber" type="xs:unsignedByte" />
+                                      <xs:element name="endDate" type="xs:date" />
+                                      <xs:element name="periodRateType" type="xs:string" />
+                                      <xs:element name="assetCode" type="xs:string" />
+                                      <!-- fixed stream -->
+                                      <xs:element name="fixedRate" type="xs:decimal" />
+                                      <!-- floating stream -->
+                                      <xs:element name="isInterpolateFloatRate" type="xs:boolean" />
+                                      <xs:element name="floatRateAssetIdent" type="xs:string" />
+                                      <xs:element name="spreadEndDate" type="xs:date" />
+                                      <xs:element name="spread" type="xs:decimal" />
+                                      <!-- zero coupon specified-->
+                                      <xs:element name="elapsedDays" type="xs:unsignedShort" >
+                                        <xs:annotation>
+                                          <xs:documentation xml:lang="en">
+                                            elapsed days between effective and treatment date.
+                                          </xs:documentation>
+                                        </xs:annotation>
+                                      </xs:element>
+                                      <xs:element name="idc" type="xs:string"/>
+                                      <xs:element name="accruedInterest" type="xs:decimal" />
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:string" use="optional" />
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="receiverStream">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <!-- global streams -->
+                                      <xs:element name="streamRateType" type="xs:string" />
+                                      <xs:element name="streamNumber" type="xs:unsignedByte" />
+                                      <xs:element name="endDate" type="xs:date" />
+                                      <xs:element name="periodRateType" type="xs:string" />
+                                      <xs:element name="assetCode" type="xs:string" />
+                                      <!-- fixed stream -->
+                                      <xs:element name="fixedRate" type="xs:decimal" />
+                                      <!-- floating stream -->
+                                      <xs:element name="isInterpolateFloatRate" type="xs:boolean" />
+                                      <xs:element name="floatRateAssetIdent" type="xs:string" />
+                                      <xs:element name="spreadEndDate" type="xs:date" />
+                                      <xs:element name="spread" type="xs:decimal" />
+                                      <!-- zero coupon specified-->
+                                      <xs:element name="elapsedDays" type="xs:unsignedShort" >
+                                        <xs:annotation>
+                                          <xs:documentation xml:lang="en">
+                                            elapsed days between effective and treatment date.
+                                          </xs:documentation>
+                                        </xs:annotation>
+                                      </xs:element>
+                                      <xs:element name="idc" type="xs:string"/>
+                                      <xs:element name="accruedInterest" type="xs:decimal" />
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:string" use="optional" />
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="upfront">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="settlementDate" type="xs:date"/>
+                                      <xs:element name="idaPay" type="xs:unsignedShort" />
+                                      <xs:element name="idaRec" type="xs:unsignedShort"/>
+                                      <xs:element name="idc" type="xs:string"/>
+                                      <xs:element name="amount" type="xs:decimal"/>
+                                      <xs:element name="counterValueAmount">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:decimal">
+                                              <xs:attribute name="idc1" type="xs:string" use="required" />
+                                              <xs:attribute name="idc2" type="xs:string" use="required" />
+                                              <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                              <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                              <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                              <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="nominal">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="currentNominalStepAmount" type="xs:decimal" />
+                                      <xs:element maxOccurs="unbounded" name="notionalSchedule">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="stepEndDate" type="xs:date" />
+                                            <xs:element name="remainingDurationDay" type="xs:unsignedShort" />
+                                            <xs:element name="remainingDurationRatio" type="xs:decimal" />
+                                            <xs:element name="idc" type="xs:string" />
+                                            <xs:element name="uicCurrencyCode" type="xs:string" />
+                                            <xs:element name="amount" type="xs:decimal" />
+                                            <xs:element name="counterValueAmount">
+                                              <xs:complexType>
+                                                <xs:simpleContent>
+                                                  <xs:extension base="xs:decimal">
+                                                    <xs:attribute name="idc1" type="xs:string" use="required" />
+                                                    <xs:attribute name="idc2" type="xs:string" use="required" />
+                                                    <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                                    <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                                    <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                                    <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                                  </xs:extension>
+                                                </xs:simpleContent>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                          <xs:attribute name="id" type="xs:string" use="optional" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="capFloor">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="isAmortizing" type="xs:boolean" />
+                                <xs:element name="isOvernight" type="xs:boolean" />
+                                <xs:element name="productType" type="xs:string" />
+                                <xs:element name="nextResetDate" type="xs:date" />
+                                <xs:element name="capFloorStream">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="endDate" type="xs:date" />
+                                      <xs:element name="payerIdentifier" type="xs:string"/>
+                                      <xs:element name="payerIda" type="xs:unsignedShort" />
+                                      <xs:element name="receiverIdentifier" type="xs:string"/>
+                                      <xs:element name="receiverIda" type="xs:unsignedShort" />
+                                      <xs:element name="mainActorPayerReceiver" type="xs:string" />
+                                      <xs:element name="assetCode" type="xs:string" />
+                                      <xs:element name="floatRateAssetIdent" type="xs:string"/>
+                                      <xs:element name="strike" type="xs:decimal"/>
+                                      <xs:element name="spreadEndDate" type="xs:date" />
+                                      <xs:element name="spread" type="xs:decimal" />
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:string" use="required" />
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element maxOccurs="unbounded" name="premium">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="paymentDate" type="xs:date" />
+                                      <xs:element name="payerIdentifier" type="xs:string"/>
+                                      <xs:element name="payerIda" type="xs:unsignedShort" />
+                                      <xs:element name="receiverIdentifier" type="xs:string"/>
+                                      <xs:element name="receiverIda" type="xs:unsignedShort" />
+                                      <xs:element name="mainActorPayerReceiver" type="xs:string" />
+                                      <xs:element name="idc" type="xs:string" />
+                                      <xs:element name="uicCurrencyCode" type="xs:string" />
+                                      <xs:element name="amount" type="xs:decimal" />
+                                      <xs:element name="counterValueAmount">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:decimal">
+                                              <xs:attribute name="idc1" type="xs:string" use="required" />
+                                              <xs:attribute name="idc2" type="xs:string" use="required" />
+                                              <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                              <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                              <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                              <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:string" use="required" />
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="nominal">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="currentNominalStepAmount" type="xs:decimal" />
+                                      <xs:element maxOccurs="unbounded" name="notionalSchedule">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="stepEndDate" type="xs:date" />
+                                            <xs:element name="remainingDurationDay" type="xs:unsignedShort" />
+                                            <xs:element name="remainingDurationRatio" type="xs:decimal" />
+                                            <xs:element name="idc" type="xs:string" />
+                                            <xs:element name="uicCurrencyCode" type="xs:string" />
+                                            <xs:element name="amount" type="xs:decimal" />
+                                            <xs:element name="counterValueAmount">
+                                              <xs:complexType>
+                                                <xs:simpleContent>
+                                                  <xs:extension base="xs:decimal">
+                                                    <xs:attribute name="idc1" type="xs:string" use="required" />
+                                                    <xs:attribute name="idc2" type="xs:string" use="required" />
+                                                    <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                                    <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                                    <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                                    <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                                  </xs:extension>
+                                                </xs:simpleContent>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                          <xs:attribute name="id" type="xs:string" use="required" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="bondOption">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="productType" type="xs:string" />
+                                <xs:element name="optionType" type="xs:string" />
+                                <xs:element name="exerciseStyle" type="xs:string" />
+                                <xs:element name="remainingDurationDay" type="xs:unsignedShort" />
+                                <xs:element name="remainingDurationRatio" type="xs:decimal" />
+                                <xs:element name="optionEntitlement" type="xs:decimal" />
+                                <xs:element name="entitlementCurrency" type="xs:string" />
+                                <xs:element name="numberOfOptions" type="xs:decimal" />
+                                <xs:element name="settlementType" type="xs:string" />
+                                <xs:element name="settlementDate" type="xs:date" />
+                                <xs:element name="strike" type="xs:decimal" />
+                                <xs:element name="notionalAmount">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="idc" type="xs:string" />
+                                      <xs:element name="uicCurrencyCode" type="xs:string" />
+                                      <xs:element name="amount" type="xs:decimal" />
+                                      <xs:element name="counterValueAmount">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:decimal">
+                                              <xs:attribute name="idc1" type="xs:string" use="required" />
+                                              <xs:attribute name="idc2" type="xs:string" use="required" />
+                                              <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                              <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                              <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                              <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="premium">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="paymentDate" type="xs:date" />
+                                      <xs:element name="premiumType" type="xs:string"/>
+                                      <xs:element name="payerIdentifier" type="xs:string"/>
+                                      <xs:element name="payerIda" type="xs:unsignedShort" />
+                                      <xs:element name="receiverIdentifier" type="xs:string"/>
+                                      <xs:element name="receiverIda" type="xs:unsignedShort" />
+                                      <xs:element name="mainActorPayerReceiver" type="xs:string" />
+                                      <xs:element name="idc" type="xs:string" />
+                                      <xs:element name="uicCurrencyCode" type="xs:string" />
+                                      <xs:element name="amount" type="xs:decimal" />
+                                      <xs:element name="counterValueAmount">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:decimal">
+                                              <xs:attribute name="idc1" type="xs:string" use="required" />
+                                              <xs:attribute name="idc2" type="xs:string" use="required" />
+                                              <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                              <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                              <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                              <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:string" use="required" />
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="exercise">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="exerciseType" type="xs:string"/>
+                                      <xs:element name="expirationDate" type="xs:date" />
+                                      <xs:element name="earliestExerciseTime" type="xs:time" />
+                                      <xs:element name="expirationTime" type="xs:time" />
+                                      <xs:element name="businessCenter" type="xs:string"/>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="bond">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="ISIN" type="xs:string"/>
+                                      <xs:element name="proprietaryId" type="xs:string"/>
+                                      <xs:element name="CFICode" type="xs:string"/>
+                                      <xs:element name="securityId" type="xs:string"/>
+                                      <xs:element name="securityName" type="xs:string" />
+                                      <xs:element name="exchange" type="xs:string" />
+                                      <xs:element name="issuerPartyReference" type="xs:string" />
+                                      <xs:element name="issuerCountry" type="xs:string" />
+                                      <xs:element name="issuerCurrency" type="xs:string" />
+                                      <xs:element name="couponType" type="xs:string"/>
+                                      <xs:element name="parValue" type="xs:decimal"/>
+                                      <xs:element name="parValueCurrency" type="xs:string" />
+                                      <xs:element name="maturity" type="xs:date"/>
+                                      <xs:element name="proprietaryId" type="xs:string"/>
+                                      <!--<xs:element name="faceAmount" type="xs:decimal"/>-->
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <!-- 
+                                <xs:element name="securityAsset">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="securityId" type="xs:string"/>
+                                      <xs:element name="securityName" type="xs:string" />
+                                      <xs:element name="securityIssueDate" type="xs:date" />
+                                      <xs:element name="issuerReference" type="xs:string" />
+                                    
+                                      <xs:element name="debtSecurity">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="productType" type="xs:string"/>
+                                            
+                                            <xs:element name="security">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="ISIN" type="xs:string"/>
+                                                  <xs:element name="currency" type="xs:string" />
+                                                  <xs:element name="exchange" type="xs:string" />
+                                                  <xs:element name="couponType" type="xs:string" />
+                                                  <xs:element name="priceRateType" type="xs:string" />
+                                                  <xs:element name="countryOfIssue" type="xs:string" />
+                                                  <xs:element name="numberOfIssuedSecurities" type="xs:unsignedShort" />
+                                                  <xs:element name="faceAmount">
+                                                    <xs:complexType>
+                                                      <xs:sequence>
+                                                        <xs:element name="currency" type="xs:string" />
+                                                        <xs:element name="amount" type="xs:decimal" />
+                                                      </xs:sequence>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element name="price">
+                                                    <xs:complexType>
+                                                      <xs:sequence>
+                                                        <xs:element name="issuePricePercentage" type="xs:decimal" />
+                                                        <xs:element name="redemptionPricePercentage" type="xs:decimal" />
+                                                      </xs:sequence>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element name="yieldType" type="xs:string" />
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                            
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>-->
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="fxSimpleOption">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="optionType" type="xs:string" />
+                                <xs:element name="exerciseStyle" type="xs:string" />
+                                <xs:element name="settlementType" type="xs:string" />
+                                <xs:element name="remainingDurationDay" type="xs:unsignedShort" />
+                                <xs:element name="remainingDurationRatio" type="xs:decimal" />
+                                <xs:element name ="fxStrikePrice">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name ="rate" type="xs:decimal" />
+                                      <xs:element name ="strikeQuoteBasis" type="xs:string" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="putCurrencyAmount">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="idc" type="xs:string" />
+                                      <xs:element name="uicCurrencyCode" type="xs:string" />
+                                      <xs:element name="amount" type="xs:decimal" />
+                                      <xs:element name="counterValueAmount">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:decimal">
+                                              <xs:attribute name="idc1" type="xs:string" use="required" />
+                                              <xs:attribute name="idc2" type="xs:string" use="required" />
+                                              <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                              <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                              <!-- reference date for next dev (report date, trade date, etc)-->
+                                              <xs:attribute name="dateRef" type="xs:date" use="optional" />
+                                              <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                              <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="callCurrencyAmount">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="idc" type="xs:string" />
+                                      <xs:element name="uicCurrencyCode" type="xs:string" />
+                                      <xs:element name="amount" type="xs:decimal" />
+                                      <xs:element name="counterValueAmount">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:decimal">
+                                              <xs:attribute name="idc1" type="xs:string" use="required" />
+                                              <xs:attribute name="idc2" type="xs:string" use="required" />
+                                              <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                              <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                              <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                              <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="payCurrencyAmount">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="isCommodity" type="xs:boolean" />
+                                      <xs:element name ="commodityExtraInfo">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="code_0183" type="xs:string" />
+                                            <xs:element name="code_0525" type="xs:string" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="idc" type="xs:string" />
+                                      <xs:element name="uicCurrencyCode" type="xs:string" />
+                                      <xs:element name="amount" type="xs:decimal" />
+                                      <xs:element name="counterValueAmount">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:decimal">
+                                              <xs:attribute name="idc1" type="xs:string" use="required" />
+                                              <xs:attribute name="idc2" type="xs:string" use="required" />
+                                              <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                              <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                              <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                              <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="recCurrencyAmount">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="isCommodity" type="xs:boolean" />
+                                      <xs:element name ="commodityExtraInfo">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="code_0183" type="xs:string" />
+                                            <xs:element name="code_0525" type="xs:string" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="idc" type="xs:string" />
+                                      <xs:element name="uicCurrencyCode" type="xs:string" />
+                                      <xs:element name="amount" type="xs:decimal" />
+                                      <xs:element name="counterValueAmount">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:decimal">
+                                              <xs:attribute name="idc1" type="xs:string" use="required" />
+                                              <xs:attribute name="idc2" type="xs:string" use="required" />
+                                              <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                              <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                              <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                              <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element maxOccurs="unbounded" name="premium">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="paymentDate" type="xs:date" />
+                                      <xs:element name="payerIdentifier" type="xs:string"/>
+                                      <xs:element name="payerIda" type="xs:unsignedShort" />
+                                      <xs:element name="receiverIdentifier" type="xs:string"/>
+                                      <xs:element name="receiverIda" type="xs:unsignedShort" />
+                                      <xs:element name="mainActorPayerReceiver" type="xs:string" />
+                                      <xs:element name="idc" type="xs:string" />
+                                      <xs:element name="uicCurrencyCode" type="xs:string" />
+                                      <xs:element name="amount" type="xs:decimal" />
+                                      <xs:element name="counterValueAmount">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:decimal">
+                                              <xs:attribute name="idc1" type="xs:string" use="required" />
+                                              <xs:attribute name="idc2" type="xs:string" use="required" />
+                                              <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                              <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                              <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                              <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:string" use="required" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="fxBarrierOption">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="optionType" type="xs:string" />
+                                <xs:element name="exerciseStyle" type="xs:string" />
+                                <xs:element name="settlementType" type="xs:string" />
+                                <xs:element name="remainingDurationDay" type="xs:unsignedShort" />
+                                <xs:element name="remainingDurationRatio" type="xs:decimal" />
+                                <xs:element name ="fxStrikePrice">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name ="rate" type="xs:decimal" />
+                                      <xs:element name ="strikeQuoteBasis" type="xs:string" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="putCurrencyAmount">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="idc" type="xs:string" />
+                                      <xs:element name="uicCurrencyCode" type="xs:string" />
+                                      <xs:element name="amount" type="xs:decimal" />
+                                      <xs:element name="counterValueAmount">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:decimal">
+                                              <xs:attribute name="idc1" type="xs:string" use="required" />
+                                              <xs:attribute name="idc2" type="xs:string" use="required" />
+                                              <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                              <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                              <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                              <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="callCurrencyAmount">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="idc" type="xs:string" />
+                                      <xs:element name="uicCurrencyCode" type="xs:string" />
+                                      <xs:element name="amount" type="xs:decimal" />
+                                      <xs:element name="counterValueAmount">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:decimal">
+                                              <xs:attribute name="idc1" type="xs:string" use="required" />
+                                              <xs:attribute name="idc2" type="xs:string" use="required" />
+                                              <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                              <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                              <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                              <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="payCurrencyAmount">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="isCommodity" type="xs:boolean" />
+                                      <xs:element name ="commodityExtraInfo">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="code_0183" type="xs:string" />
+                                            <xs:element name="code_0525" type="xs:string" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="idc" type="xs:string" />
+                                      <xs:element name="uicCurrencyCode" type="xs:string" />
+                                      <xs:element name="amount" type="xs:decimal" />
+                                      <xs:element name="counterValueAmount">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:decimal">
+                                              <xs:attribute name="idc1" type="xs:string" use="required" />
+                                              <xs:attribute name="idc2" type="xs:string" use="required" />
+                                              <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                              <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                              <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                              <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="recCurrencyAmount">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="isCommodity" type="xs:boolean" />
+                                      <xs:element name ="commodityExtraInfo">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="code_0183" type="xs:string" />
+                                            <xs:element name="code_0525" type="xs:string" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="idc" type="xs:string" />
+                                      <xs:element name="uicCurrencyCode" type="xs:string" />
+                                      <xs:element name="amount" type="xs:decimal" />
+                                      <xs:element name="counterValueAmount">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:decimal">
+                                              <xs:attribute name="idc1" type="xs:string" use="required" />
+                                              <xs:attribute name="idc2" type="xs:string" use="required" />
+                                              <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                              <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                              <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                              <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element maxOccurs="unbounded" name="premium">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="paymentDate" type="xs:date" />
+                                      <xs:element name="payerIdentifier" type="xs:string"/>
+                                      <xs:element name="payerIda" type="xs:unsignedShort" />
+                                      <xs:element name="receiverIdentifier" type="xs:string"/>
+                                      <xs:element name="receiverIda" type="xs:unsignedShort" />
+                                      <xs:element name="mainActorPayerReceiver" type="xs:string" />
+                                      <xs:element name="idc" type="xs:string" />
+                                      <xs:element name="uicCurrencyCode" type="xs:string" />
+                                      <xs:element name="amount" type="xs:decimal" />
+                                      <xs:element name="counterValueAmount">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:decimal">
+                                              <xs:attribute name="idc1" type="xs:string" use="required" />
+                                              <xs:attribute name="idc2" type="xs:string" use="required" />
+                                              <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                              <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                              <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                              <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:string" use="required" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="fxDigitalOption">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="currency1Idc" type="xs:string"/>
+                                <xs:element name="currency2Idc" type="xs:string"/>
+                                <xs:element name="remainingDurationDay" type="xs:unsignedShort" />
+                                <xs:element name="remainingDurationRatio" type="xs:decimal" />
+                                <xs:element name ="fxStrikePrice">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name ="rate" type="xs:decimal" />
+                                      <xs:element name ="strikeQuoteBasis" type="xs:string" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="payoutAmount">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="settlementDate" type="xs:date" />
+                                      <xs:element name="payerIda" type="xs:unsignedShort"/>
+                                      <xs:element name="receiverIda" type="xs:unsignedShort" />
+                                      <xs:element name="idc" type="xs:string" />
+                                      <xs:element name="uicCurrencyCode" type="xs:string" />
+                                      <xs:element name="amount" type="xs:decimal" />
+                                      <xs:element name="counterValueAmount">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:decimal">
+                                              <xs:attribute name="idc1" type="xs:string" use="required" />
+                                              <xs:attribute name="idc2" type="xs:string" use="required" />
+                                              <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                              <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                              <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                              <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="isCommodity" type="xs:boolean" />
+                                      <xs:element name ="commodityExtraInfo">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="code_0183" type="xs:string" />
+                                            <xs:element name="code_0525" type="xs:string" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <!-- GS 20110128: verified this definition. before we had used notPayout-->
+                                <xs:element name="incomeAmount">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="settlementDate" type="xs:date" />
+                                      <xs:element name="payerIda" type="xs:unsignedShort"/>
+                                      <xs:element name="receiverIda" type="xs:unsignedShort" />
+                                      <xs:element name="idc" type="xs:string" />
+                                      <xs:element name="uicCurrencyCode" type="xs:string" />
+                                      <xs:element name="amount" type="xs:decimal" />
+                                      <xs:element name="counterValueAmount">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:decimal">
+                                              <xs:attribute name="idc1" type="xs:string" use="required" />
+                                              <xs:attribute name="idc2" type="xs:string" use="required" />
+                                              <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                              <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                              <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                              <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="isCommodity" type="xs:boolean" />
+                                      <xs:element name ="commodityExtraInfo">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="code_0183" type="xs:string" />
+                                            <xs:element name="code_0525" type="xs:string" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element maxOccurs="unbounded" name="premium">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="paymentDate" type="xs:date" />
+                                      <xs:element name="payerIdentifier" type="xs:string"/>
+                                      <xs:element name="payerIda" type="xs:unsignedShort" />
+                                      <xs:element name="receiverIdentifier" type="xs:string"/>
+                                      <xs:element name="receiverIda" type="xs:unsignedShort" />
+                                      <xs:element name="mainActorPayerReceiver" type="xs:string" />
+                                      <xs:element name="idc" type="xs:string" />
+                                      <xs:element name="uicCurrencyCode" type="xs:string" />
+                                      <xs:element name="amount" type="xs:decimal" />
+                                      <xs:element name="counterValueAmount">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:decimal">
+                                              <xs:attribute name="idc1" type="xs:string" use="required" />
+                                              <xs:attribute name="idc2" type="xs:string" use="required" />
+                                              <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                              <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                              <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                              <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:string" use="required" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="exchangedCashFlows">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="cleanCashFlows">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element maxOccurs="unbounded" name="cleanCashFlow">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="eventId" type="xs:unsignedLong" />
+                                            <xs:element name="eventType" type="xs:string" />
+                                            <xs:element name="settlementDate" type="xs:date"/>
+                                            <xs:element name="idaPay" type="xs:unsignedShort"/>
+                                            <xs:element name="idaRec" type="xs:unsignedShort"/>
+                                            <xs:element name="idc" type="xs:string"/>
+                                            <xs:element name="uicCurrencyCode" type="xs:string"/>
+                                            <xs:element name="amount" type="xs:decimal"/>
+                                            <xs:element name="counterValueAmount">
+                                              <xs:complexType>
+                                                <xs:simpleContent>
+                                                  <xs:extension base="xs:decimal">
+                                                    <xs:attribute name="idc1" type="xs:string" use="required" />
+                                                    <xs:attribute name="idc2" type="xs:string" use="required" />
+                                                    <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                                    <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                                    <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                                    <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                                  </xs:extension>
+                                                </xs:simpleContent>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                          <xs:attribute name="id" type="xs:string" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="grossCashFlows">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element  maxOccurs="unbounded" name="grossCashFlow">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="settlementDate" type="xs:date"/>
+                                            <xs:element name="idaPay" type="xs:unsignedShort"/>
+                                            <xs:element name="idaRec" type="xs:unsignedShort"/>
+                                            <xs:element name="idc" type="xs:string"/>
+                                            <xs:element name="uicCurrencyCode" type="xs:string"/>
+                                            <xs:element name="amount" type="xs:decimal"/>
+                                            <xs:element name="counterValueAmount">
+                                              <xs:complexType>
+                                                <xs:simpleContent>
+                                                  <xs:extension base="xs:decimal">
+                                                    <xs:attribute name="idc1" type="xs:string" use="required" />
+                                                    <xs:attribute name="idc2" type="xs:string" use="required" />
+                                                    <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                                    <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                                    <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                                    <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                                  </xs:extension>
+                                                </xs:simpleContent>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                          <xs:attribute name="id" type="xs:string" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="forwardCashFlows">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="cleanCashFlows">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element maxOccurs="unbounded" name="cleanCashFlow">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="eventId" type="xs:unsignedLong"/>
+                                            <xs:element name="eventType" type="xs:string"/>
+                                            <xs:element name="settlementDate" type="xs:date"/>
+                                            <xs:element name="idaPay" type="xs:unsignedShort"/>
+                                            <xs:element name="idaRec" type="xs:unsignedShort"/>
+                                            <xs:element name="idc" type="xs:string" />
+                                            <xs:element name="uicCurrencyCode" type="xs:string" />
+                                            <xs:element name="amount" type="xs:decimal"/>
+                                            <xs:element name="counterValueAmount">
+                                              <xs:complexType>
+                                                <xs:simpleContent>
+                                                  <xs:extension base="xs:decimal">
+                                                    <xs:attribute name="idc1" type="xs:string" use="required" />
+                                                    <xs:attribute name="idc2" type="xs:string" use="required" />
+                                                    <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                                    <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                                    <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                                    <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                                  </xs:extension>
+                                                </xs:simpleContent>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                          <xs:attribute name="id" type="xs:string" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="grossCashFlows">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element maxOccurs="unbounded" name="grossCashFlow">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="settlementDate" type="xs:date"/>
+                                            <xs:element name="idaPay" type="xs:unsignedShort" />
+                                            <xs:element name="idaRec" type="xs:unsignedShort"/>
+                                            <xs:element name="idc" type="xs:string"/>
+                                            <xs:element name="uicCurrencyCode" type="xs:string"/>
+                                            <xs:element name="amount" type="xs:decimal"/>
+                                            <xs:element name="counterValueAmount">
+                                              <xs:complexType>
+                                                <xs:simpleContent>
+                                                  <xs:extension base="xs:decimal">
+                                                    <xs:attribute name="idc1" type="xs:string" use="required" />
+                                                    <xs:attribute name="idc2" type="xs:string" use="required" />
+                                                    <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                                    <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                                    <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                                    <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                                  </xs:extension>
+                                                </xs:simpleContent>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                          <xs:attribute name="id" type="xs:string"/>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="closingEvents">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="closingDate" type="xs:date" />
+                                <xs:element name="spotRate" type="xs:decimal" />
+                                <!-- MTM clean price-->
+                                <xs:element name="markToMarket">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="toReceiveDate" type="xs:date"/>
+                                      <xs:element name="toReceiveIdc" type="xs:string"/>
+                                      <xs:element name="toReceiveAmount" type="xs:decimal"/>
+                                      <xs:element name="toPayDate" type="xs:date"/>
+                                      <xs:element name="toPayIdc" type="xs:string"/>
+                                      <xs:element name="toPayAmount" type="xs:decimal"/>
+                                      <xs:element name="nettedAmount" type="xs:decimal"/>
+                                      <xs:element name="closingPrice" type="xs:decimal"/>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+
+                                <!--linear depreciation for upfront (swap) or premium (cap - fxoption) -->
+                                <xs:element name="linearDepreciation">
+                                  <xs:annotation>
+                                  </xs:annotation>
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="closingDate" type="xs:date" />
+                                      <xs:element name="receivedAmount" type="xs:decimal" />
+                                      <xs:element name="paidAmount" type="xs:decimal" />
+                                      <xs:element name="nettedAmount" type="xs:decimal" />
+                                      <xs:element name="linearDepreciationRemainingNettedAmount" type="xs:decimal" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+
+                                <!--<xs:element name="linearDepreciationRemaining">
+                                  <xs:annotation>
+                                    <xs:documentation xml:lang="en">
+                                      A element containing the referrals (RISCONTI).
+                                      In this version(1) this element returns the linear depreciation remaining of upfront
+                                    </xs:documentation>
+                                  </xs:annotation>
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="closingDate" type="xs:date" />
+                                      <xs:element name="receivedAmount" type="xs:decimal" />
+                                      <xs:element name="paidAmount" type="xs:decimal" />
+                                      <xs:element name="nettedAmount" type="xs:decimal" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>-->
+
+                                <xs:element name="accruedInterest">
+                                  <xs:annotation>
+                                    <xs:documentation xml:lang="en">
+                                      A element containing the accrued interests.
+                                    </xs:documentation>
+                                  </xs:annotation>
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="receivedDate" type="xs:date" />
+                                      <xs:element name="receivedAmount" type="xs:decimal" />
+                                      <xs:element name="paidDate" type="xs:date"/>
+                                      <xs:element name="paidAmount" type="xs:decimal" />
+                                      <xs:element name="nettedAmount" type="xs:decimal" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+
+                                <xs:element name="intrinsicValues">
+                                  <xs:annotation>
+                                    <xs:documentation xml:lang="en">
+                                      Mark to market dirty price is:
+                                      MTMCleanPrice +/-
+                                      Accrued interest +/-
+                                      Premium paied or received +/-
+                                      Upfront paied or received +/-
+                                      Linear depreciation for premium or upfront
+                                    </xs:documentation>
+                                  </xs:annotation>
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element maxOccurs="unbounded" name="schedule" >
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="stepDate" type="xs:date" />
+                                            <xs:element name="amount" type="xs:decimal" />
+                                            <xs:element name="amountIAS" type="xs:decimal" />
+                                          </xs:sequence>
+                                          <xs:attribute name="id" type="xs:string" use="optional" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:anyAttribute/>
+                                  </xs:complexType>
+                                </xs:element>
+
+                                <xs:element name="greeks">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="implicitVolatility" type="xs:decimal" />
+                                      <xs:element name="gamma" type="xs:decimal" />
+                                      <xs:element name="delta" type="xs:decimal" />
+                                      <xs:element name="vega" type="xs:decimal"  />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+
+                                <xs:element name="capLetsFloorLets">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <!--Todo: validate the name element-->
+                                      <xs:element maxOccurs="unbounded" name="schedule">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="uniqueCodeRelationship" type="xs:string" />
+                                            <xs:element name="sequenceNumber" type="xs:unsignedShort" />
+                                            <!-- data di inizio del capLet floorLet (inizio del periodo di calcolo degli interessi) -->
+                                            <!-- (in OASI data revisione contratto)-->
+                                            <xs:element name="stepBeginDate" type="xs:date" />
+                                            <!-- data di fine del capLet floorLet (fine del periodo di calcolo degli interessi)-->
+                                            <xs:element name="stepEndDate" type="xs:date" />
+                                            <!-- in OASI viene definita data scadenza rapporto -->
+                                            <xs:element name="notionalStepEndDate" type="xs:date" />
+                                            <xs:element name="idc" type="xs:string" />
+                                            <xs:element name="uicCurrencyCode" type="xs:string" />
+                                            <xs:element name="notionalAmount" type="xs:decimal" />
+                                            <xs:element name="counterValueAmount">
+                                              <xs:complexType>
+                                                <xs:simpleContent>
+                                                  <xs:extension base="xs:decimal">
+                                                    <xs:attribute name="idc1" type="xs:string" use="required" />
+                                                    <xs:attribute name="idc2" type="xs:string" use="required" />
+                                                    <xs:attribute name="quoteBasis" type="xs:string" use="required" />
+                                                    <xs:attribute name="fixingDate" type="xs:date" use="required" />
+                                                    <xs:attribute name="fxAsset" type="xs:string" use="required" />
+                                                    <xs:attribute name="fxQuotation" type="xs:decimal" use="required" />
+                                                  </xs:extension>
+                                                </xs:simpleContent>
+                                              </xs:complexType>
+                                            </xs:element>
+                                            <xs:element name="implicitVolatility" type="xs:decimal" />
+                                            <xs:element name="gamma" type="xs:decimal" />
+                                            <xs:element name="delta" type="xs:decimal" />
+                                            <xs:element name="vega" type="xs:decimal"  />
+                                            <xs:element name="fraValue" type="xs:decimal"  />
+                                            <xs:element name="positiveMTM" type="xs:decimal"  />
+                                            <xs:element name="mtmEventId" type="xs:unsignedLong" />
+                                            <xs:element name="resDateEvent" type="xs:date" />
+                                          </xs:sequence>
+                                          <!--id = capletxx or floorLetxx-->
+                                          <xs:attribute name="id" type="xs:string" use="required" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:anyAttribute/>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element maxOccurs="unbounded" name="report">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="formaTecnica">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="data">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute name="sqc" type="xs:string" use="required" />
+                            <!-- d01 sequenceno -->
+                            <xs:attribute name="field" type="xs:string" use="required" />
+                            <!--id-->
+                            <xs:attribute name="displayName" type="xs:string" use="optional" />
+                            <!--dname-->
+                            <xs:attribute name="originalName" type="xs:string" use="optional" />
+                            <!--oname-->
+                            <xs:attribute name="src" type="xs:string" use="required" />
+                            <!--source-->
+                            <xs:attribute name="alertLevel" type="xs:string" use="optional" />
+                            <!--mal-->
+                            <xs:attribute name="errMsg" type="xs:string" use="optional"/>
+                            <!--errorMessage-->
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="sqc" type="xs:string" use="required" />
+                  <!-- ft01-->
+                  <xs:attribute name="name" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element maxOccurs="unbounded" name="log">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="data">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element  name="msg" type="xs:string" />
+                  </xs:sequence>
+                  <xs:attribute name="progId" type="xs:string" use="required" />
+                  <xs:attribute name="ftkey" type="xs:string" use="optional" />
+                  <xs:attribute name="ftname" type="xs:string" use="optional" />
+                  <xs:attribute name="field" type="xs:string" use="optional" />
+                  <xs:attribute name="orField" type="xs:string" use="optional" />
+                  <xs:attribute name="pathField" type="xs:string" use="optional" />
+                  <xs:attribute name="logLevel" type="xs:string" use="optional" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <!-- log attribute -->
+            <!-- id = reportId="bancaItalia" -->
+            <xs:attribute name="name" type="xs:string" use="required" />
+            <!--id-->
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Configuration">
+<!--
+ The root configuration must have 2 child nodes : Templates et Parameters.
+ The Templates node is a collection of Template, IOW comparison models.
+ The Parameters node is the collection of the configuration datas for all the possible IO parameters that they are editable by the user.
+ 
+ -->
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="1" maxOccurs="1" name="Templates">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="Template">
+                <!--     
+    All the Parameter nodes are owned by one single reconciliation model :
+    - they have type EXCEPT.
+    - they must fetch a unique Spheres table (in other words they must share the same table name)
+    -->
+              <!--
+    All the EXCEPT parameters must be string type
+    --> 
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Id" type="xs:string" />
+                    <xs:element name="Parameters">
+                      <xs:complexType mixed="true">
+                        <xs:sequence minOccurs="0">
+                          <xs:element maxOccurs="unbounded" name="Parameter">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:string" />
+                                <xs:element minOccurs="1" maxOccurs="1" name="Type" type="xs:string" />
+                                <xs:element maxOccurs="1" name="SQLInfos">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element minOccurs="0" maxOccurs="unbounded" name="SQLInfo">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element minOccurs="1" maxOccurs="1" name="SQLTable" type="xs:string" />
+                                            <xs:element minOccurs="1" maxOccurs="1" name="SQLField" type="xs:string" />
+                                            <xs:element minOccurs="1" maxOccurs="1" name="SQLType" type="xs:string" />
+                                            <xs:element minOccurs="0" maxOccurs="1" name="SQLOperator" type="xs:string" />
+                                            <xs:element minOccurs="1" maxOccurs="1" name="XPath" type="xs:string" />
+                                            <xs:element minOccurs="1" maxOccurs="1" name="XPathType" type="xs:string" />
+                                            <xs:element minOccurs="0" maxOccurs="1" name="GroupByRule" type="xs:string" />
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element minOccurs="1" maxOccurs="1" name="Parameters">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="Parameter">
+                <!-- All the FILTER type parameters will be concatenated to the sql where condition using the order they are listed -->
+                <!-- The sql type is compliant with the IOTaskParamsParam.datatype values set -->
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="1" maxOccurs="1" name="Id" type="xs:string" />
+                    <xs:element minOccurs="1" maxOccurs="1" name="Type" type="xs:string" />
+                    <xs:element minOccurs="1" maxOccurs="1" name="SQLInfos">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element minOccurs="0" maxOccurs="unbounded" name="SQLInfo">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element minOccurs="1" maxOccurs="1" name="SQLTable" type="xs:string" />
+                                <xs:element minOccurs="1" maxOccurs="1" name="SQLField" type="xs:string" />
+                                <xs:element minOccurs="1" maxOccurs="1" name="SQLType" type="xs:string" />
+                                <xs:element minOccurs="0" maxOccurs="1" name="SQLOperator" type="xs:string" />
+                                <xs:element minOccurs="1" maxOccurs="1" name="XPath" type="xs:string" />
+                                <xs:element minOccurs="1" maxOccurs="1" name="XPathType" type="xs:string" />
+                                <xs:element minOccurs="0" maxOccurs="1" name="GroupByRule" type="xs:string" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="defaultValue" type="xs:string" use="optional" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

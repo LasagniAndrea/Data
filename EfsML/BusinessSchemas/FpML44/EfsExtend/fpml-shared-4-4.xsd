@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.fpml.org/2007/FpML-4-4" xmlns:fpml="http://www.fpml.org/2007/FpML-4-4" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:fpml-annotation="http://www.fpml.org/annotation" ecore:nsPrefix="fpml" ecore:package="org.fpml" ecore:documentRoot="FpML" targetNamespace="http://www.fpml.org/2007/FpML-4-4" version="$Revision: 2797 $" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xsd:include schemaLocation="../fpml-shared-4-4.xsd" />
+
+  <xsd:element name="dayCountFraction" type="fpml:DayCountFraction" >
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The day count fraction.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:element name="formula" type="fpml:Formula" >
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">An interest rate derivative formula.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:element name="knownAmountSchedule" type="fpml:AmountSchedule">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">The known calculation period amount or a known amount schedule expressed as explicit known amounts and dates. In the case of a schedule, the step dates may be subject to adjustment in accordance with any adjustments specified in calculationPeriodDatesAdjustments.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+</xsd:schema >

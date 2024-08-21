@@ -1,0 +1,1605 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Updating vendredi 8 août 2008 17:44:17 -->
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <!-- EG 20160404 Migration vs2013 -->
+                <xsd:element name="value" type="ResValue" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="Comment" minOccurs="0" msdata:Ordinal="2" />
+                <!-- EG 20160404 Migration vs2013 -->
+                <xsd:element name="statut" type="xsd:string" minOccurs="0" msdata:Ordinal="3" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute name="category" type="xsd:string" />
+              <xsd:attribute name="flag" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+    <!-- EG 20160404 Migration vs2013 -->
+    <xsd:complexType name="ResValue">
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:normalizedString">
+          <xsd:attribute name="fr" type="xsd:string" />
+          <xsd:attribute name="en" type="xsd:string" />
+          <xsd:attribute name="it" type="xsd:string" />
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+    <xsd:complexType name="Comment">
+      <xsd:simpleContent>
+        <xsd:extension base="xsd:normalizedString">
+          <xsd:attribute name="culture" type="xsd:string" />
+        </xsd:extension>
+      </xsd:simpleContent>
+    </xsd:complexType>
+  </xsd:schema>
+  <resheader name="ResMimeType">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="Version">
+		<value>1.0.0.0</value>
+	</resheader>
+	<resheader name="Reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=1.0.3102.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="Writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=1.0.3102.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<!--- begin section -->
+	<data name="ConfirmationOf">
+		<value>Conferma della stipula di un contratto </value>
+		<comment culture="en">Confirmation of a </comment>
+	</data>
+	<data name="Transaction">
+		<value></value>
+		<comment culture="en"> Transaction</comment>
+	</data>
+	<data name="TradeDate">
+		<value>Data di esecuzione:</value>
+		<comment culture="en">Trade Date:</comment>
+	</data>
+	<data name="Swaption">
+		<value>Swaption</value>
+		<comment culture="en">Swaption</comment>
+	</data>
+	<data name="To">
+		<value>A : </value>
+		<comment culture="en">To :</comment>
+	</data>
+	<data name="From">
+		<value>Da : </value>
+		<comment culture="en">From :</comment>
+	</data>
+	<data name="T/Ref">
+		<value>T/Rif. :</value>
+		<comment culture="en">T/Ref. :</comment>
+	</data>
+	<data name="enom">
+		<value>enom : </value>
+		<comment culture="en">enom :</comment>
+	</data>
+	<data name="F/Ref">
+		<value>Rif. Front : </value>
+		<comment culture="en">F/Ref :</comment>
+	</data>
+	<data name="Att">
+		<value>Att. : </value>
+		<comment culture="en">Att. :</comment>
+	</data>
+	<data name="IRDConfText1">
+		<value>Gentile Signore o Signora, </value>
+		<comment culture="en">Dear Sir or Madam, :</comment>
+	</data>
+	<data name="IRDConfText2">
+		<value>Lo scopo di questa lettera (la "Conferma") è definire i termini e le condizioni della transazione di uno swap da noi stipulata alla data di esecuzione sotto riportata.</value>
+		<comment culture="en">The purpose of this letter (this "Confirmation") is to confirm the terms and conditions of the Swap Transaction entered into between us on the Trade Date specified below.</comment>
+	</data>
+	<data name="IRDConfText3">
+		<value>
+			Le definizioni e le clausole qui di seguito utilizzate si riferiscono alle definizioni ISDA 2006 pubblicate dall'International Swaps and Derivatives Association e sono incluse in questa Conferma.
+			Nel caso di eventuali incoerenze tra le definizioni e quanto indicato in questa conferma, prevale quest'ultima.</value>
+		<comment culture="en">The definitions and provisions contained in the 2006 ISDA Definitions, as published by the International Swaps and Derivatives Association, Inc., are incorporated into this Confirmation. 
+			  In the event of any inconsistency between those definitions and provisions and this Confirmation, this Confirmation will govern.
+		</comment>
+	</data>
+	<data name="IRDConfText4">
+		<value>Questo documento che costituisce una "Conferma", rappresenta quanto indicato nell'"ISDA Master Agreement" ed eventuali supplementi stipulato in data </value>
+		<comment culture="en"> This Confirmation constitutes a "Confirmation" as referred to in, and supplements, forms part of and is subject to, the ISDA Master Agreement dated as of</comment>
+	</data>
+	<data name="IRDConfText5">
+		<value> emendato e revisionato tra </value>
+		<comment culture="en">as amended and supplemented from time to time (the "Agreement"), between </comment>
+	</data>
+	<data name="IRDConfText6">
+		<value> e </value>
+		<comment culture="en">and</comment>
+	</data>
+	<data name="IRDConfText7">
+		<value>
+		Tutte le clausole contenute nel contratto quadro ("Master Agreement") regolano questa "Conferma" ad eccezione di quanto diversamente riportato. 
+		</value>
+		<comment culture="en">All provisions contained in the Agreement govern this Confirmation except as expressly modified below.</comment>
+	</data>
+	<!-- To do begin -->
+	<data name="FixedRateDayCountenaction">
+		<value>Fixed Rate Day Count enaction: </value>
+		<comment culture="en">Fixed Rate Day Count enaction:</comment>
+	</data>
+	<data name="FixedRatePaymentDatesenequency">
+		<value>Fixed Rate Payment Dates enequency: </value>
+		<comment culture="en">  Fixed Rate Payment Dates enequency:</comment>
+	</data>
+	<data name="FloatingRateDayCountenaction">
+		<value>Floating Rate Day Count enaction: </value>
+		<comment culture="en">Floating Rate Day Count enaction:</comment>
+	</data>
+	<data name="FloatingRatePaymentDatesenequency">
+		<value>Floating Rate Payment Dates enequency: </value>
+		<comment culture="en">Floating Rate Payment Dates enequency:</comment>
+	</data>
+	<data name="asFrom">
+		<value> as from </value>
+		<comment culture="en"> as from </comment>
+	</data>
+	<!-- To do end -->
+
+	<data name="NotionalAmount">
+		<value>Importo nozionale: </value>
+		<comment culture="en">Notional Amount:</comment>
+	</data>
+	<data name="EffectiveDate">
+		<value>Data di partenza: </value>
+		<comment culture="en">Effective Date:</comment>
+	</data>
+	<data name="TerminationDate">
+		<value>Data di scadenza: </value>
+		<comment culture="en">Termination Date:</comment>
+	</data>
+	<data name="FixedRatePayer">
+		<value>Debitore tasso parametro fisso:</value>
+		<comment culture="en">Fixed Rate Payer:</comment>
+	</data>
+	<data name="FixedRate">
+		<value>Tasso parametro fisso:</value>
+		<comment culture="en">Fixed Rate:</comment>
+	</data>
+	<data name="FixedAmount">
+		<value>Importi fissi:</value>
+		<comment culture="en">Fixed Amount:</comment>
+	</data>
+	<data name="FixedRatePayerCurrencyAmount">
+		<value>Ammontare del tasso fisso da pagare:</value>
+		<comment culture="en">Fixed Rate Payer Currency Amount:</comment>
+	</data>
+	<data name="FixedRateForInitialCalculationPeriod">
+		<value>Tasso parametro fisso per periodo di calcolo iniziale:</value>
+		<comment culture="en">Fixed Rate for Initial Calculation Period:</comment>
+	</data>
+	<data name="FixedRateForFinalCalculationPeriod">
+		<value>Tasso parametro fisso per periodo di calcolo finale:</value>
+		<comment culture="en">Fixed Rate for Final Calculation Period:</comment>
+	</data>
+	<data name="FloatingRateForInitialCalculationPeriod">
+		<value>Tasso parametro variabile per periodo di calcolo iniziale:</value>
+		<comment culture="en">Floating Rate for Initial Calculation Period:</comment>
+	</data>
+	<data name="FloatingRateForFinalCalculationPeriod">
+		<value>Tasso parametro variabile per periodo di calcolo finale:</value>
+		<comment culture="en">Floating Rate for Final Calculation Period:</comment>
+	</data>
+	<data name="InterpolationBetween_">
+		<value>Interpolazione tra </value>
+		<comment culture="en">Interpolation Between </comment>
+	</data>
+	<data name="_And_">
+		<value> e </value>
+		<comment culture="en"> and </comment>
+	</data>
+  <data name="SameLikeRegular">
+    <value>Come il periodo regolare</value>
+    <comment culture="en">Same like regular period</comment>
+  </data>
+  <data name="ToBeDetermined">
+		<value>Da determinare</value>
+		<comment culture="en">To Be Determined</comment>
+	</data>
+	<data name="FixedRatePayerPaymentDate">
+		<value>Date di pagamento tasso parametro fisso:</value>
+		<comment culture="en">Fixed Rate Payer Payment Date(s):</comment>
+	</data>
+	<data name="FixedRateDayCountFraction">
+		<value>Convenzione di calcolo:</value>
+		<comment culture="en">Fixed Rate Day Count Fraction:</comment>
+	</data>
+	<data name="BusinessDaysforFixedAmounts">
+		<value>Business Days per tasso parametro fisso: </value>
+		<comment culture="en">Business Days for Fixed Amounts:</comment>
+	</data>
+	<data name="BusinessDaysForPayment">
+		<value>Business Days per pagamento: </value>
+		<comment culture="en">Business Days for Payment:</comment>
+	</data>
+	<data name="BusinessDaysForFixing">
+		<value>Business Days per fixing: </value>
+		<comment culture="en">Business Days for Fixing:</comment>
+	</data>
+	<data name="FloatingRatePayer">
+		<value>Debitore tasso parametro variabile: </value>
+		<comment culture="en">Floating Rate Payer:</comment>
+	</data>
+	<data name="FloatingRateOption">
+		<value>Tasso parametro variabile: </value>
+		<comment culture="en">Floating Rate Option:</comment>
+	</data>
+	<data name="PaymentDate">
+		<value>Data di pagamento: </value>
+		<comment culture="en">Payment Date:</comment>
+	</data>
+	<data name="Source">
+		<value>Sorgente: </value>
+		<comment culture="en">Source:</comment>
+	</data>
+	<data name="DesignatedMaturity">
+		<value>Periodicità di calcolo tasso parametro variabile: </value>
+		<comment culture="en">Designated Maturity:</comment>
+	</data>
+	<data name="Spread">
+		<value>Spread: </value>
+		<comment culture="en">Spread:</comment>
+	</data>	
+	<data name="BusinessDaysforFloatingAmounts">
+		<value>Business Days per importi variabili:</value>
+		<comment culture="en">Business Days for Floating Amounts:</comment>
+	</data>
+	<data name="FixingDates">
+		<value>Date di fixing:</value>
+		<comment culture="en">Fixing Dates:</comment>
+	</data>
+	<data name="FixingTime">
+		<value>Orario di fixing :</value>
+		<comment culture="en">Fixing Time:</comment>
+	</data>
+	<data name="ResetDate">
+		<value> date di reset</value>
+		<comment culture="en"> Reset Dates</comment>
+	</data>
+	<data name="CalculationPeriodEndDate">
+		<value> data di fine del periodo di calcolo</value>
+		<comment culture="en"> Calculation Period End Date</comment>
+	</data>
+	<data name="CalculationPeriodStartDate">
+		<value> data di inizio del periodo di calcolo</value>
+		<comment culture="en"> Calculation Period Start Date</comment>
+	</data>
+	<data name="RelativeTo">
+		<value> relativa a </value>
+		<comment culture="en"> Relative To</comment>
+	</data>
+	<data name="Compounding">
+		<value>Compounding:</value>
+		<comment culture="en">Compounding:</comment>
+	</data>
+	<data name="Signature">
+		<value>
+			Si prega di confermare che quanto sopra riportato sia correttamente espresso secondo le condizioni del nostro accordo inviandoci copia
+		    del presente contratto da Voi controfirmato.
+		</value>
+		<comment culture="en">Please confirm that the foregoing correctly sets forth the terms of our agreement by executing the copy of this 
+			  Confirmation enclosed for that purpose and returning it to us or by sending to us a letter substantially similar 
+			  to this letter, which letter sets forth the material terms of the Transaction to which this Confirmation relates 
+			  and indicates your agreement to those terms.</comment>
+	</data>
+	<data name="YoursSincerely">
+		<value>Cordiali Saluti</value>
+		<comment culture="en">Yours sincerely,</comment>
+	</data>
+	<data name="By">
+		<value>Da: __________________________________</value>
+		<comment culture="en">By: __________________________________</comment>
+	</data>
+	<data name="Name">
+		<value>Nome: </value>
+		<comment culture="en">Name:</comment>
+	</data>
+	<data name="Title">
+		<value>Titolo: </value>
+		<comment culture="en">Title:</comment>
+	</data>
+	<data name="Confirmed">
+		<value>Letto confermato e sottoscritto alla data sopra indicata: </value>
+		<comment culture="en">Confirmed as of the date first above written:</comment>
+	</data>
+	<data name="Fees">
+		<value>Commissioni</value>
+		<comment culture="en">Fees</comment>
+	</data>
+	<data name="AdditionalPayment">
+		<value>Pagamenti addizionali</value>
+		<comment culture="en">Additional Payment</comment>
+	</data>
+	<data name="UPFRONT">
+		<value>Upfront</value>
+		<comment culture="en">Upfront</comment>
+	</data>
+	<data name="AdditionalInformation">
+		<value>Informazioni addizionali</value>
+		<comment culture="en">Additional Information</comment>
+	</data>
+	<data name="FloatingAmounts">
+		<value>Importi variabili </value>
+		<comment culture="en">Floating Amounts</comment>
+	</data>
+	<data name="FixedAmounts">
+		<value>Importi fissi </value>
+		<comment culture="en">Fixed Amounts</comment>
+	</data>
+	<data name="Terms">
+		<value>Clausole generali </value>
+		<comment culture="en">Terms</comment>
+	</data>
+	<data name="FirstDayOfEachCalPeriod">
+		<value>Il primo giorno di ogni periodo di calcolo</value>
+		<comment culture="en">The first day of each Calculation Period</comment>
+	</data>
+	<data name="BusinessDayConventionMODF">
+		<value>, soggetto ad aggiustamento di data in accordo con il Modified Following Business Day Convention</value>
+		<comment culture="en">, subject to adjustment in accordance with the Modified Following Business Day Convention</comment>
+	</data>
+	<data name="BusinessDayConventionFOL">
+		<value>>, soggetto ad aggiustamento di data in accordo con il Following Business Day Convention </value>
+		<comment culture="en">, subject to adjustment in accordance with the Following Business Day Convention</comment>
+	</data>
+	<data name="BusinessDayConventionMODP">
+		<value>>, soggetto ad aggiustamento di data in accordo con il Modified Preceding Business Day Convention </value>
+		<comment culture="en">, subject to adjustment in accordance with the Modified Preceding Business Day Convention</comment>
+	</data>
+	<data name="BusinessDayConventionPREC">
+		<value>>, soggetto ad aggiustamento di data in accordo con il  Preceding Business Day Convention </value>
+		<comment culture="en">, subject to adjustment in accordance with the Preceding Business Day Convention</comment>
+	</data>
+	<data name="BusinessDayConventionFRN">
+		<value>FRN </value>
+		<comment culture="en">FRN</comment>
+	</data>
+	<data name="Applicable">
+		<value>Applicabile </value>
+		<comment culture="en">Applicable</comment>
+	</data>
+	<data name="Applicable_AFNA">
+		<value>Applicabile (AFMA)</value>
+		<comment culture="en">Applicable (AFMA)</comment>
+	</data>
+	<data name="Inapplicable">
+		<value>Non applicabile </value>
+		<comment culture="en">Inapplicable</comment>
+	</data>
+	<data name="throughAndIncludingTheTerminationDate">
+		<value> fino a e inclusa la data di scadenza </value>
+		<comment culture="en"> through and including the Termination Date </comment>
+	</data>
+	<data name="UpToAndIncludingTheTerminationDate">
+		<value> fino a e inclusa la data di scadenza </value>
+		<comment culture="en"> up to and including the Termination Date</comment>
+	</data>
+  <!-- EG 20160404 Migration vs2013 -->
+	<data name="commencingOn_">
+		<value> cominciando da </value>
+		<comment culture="en"> commencing on </comment>
+	</data>
+	<data name="CommencingOn">
+		<value>Cominciando da </value>
+		<comment culture="en">Commencing on </comment>
+	</data>
+	<data name="_throughAndIncluding_">
+		<value> fino a e inclusa </value>
+		<comment culture="en"> through and including </comment>
+	</data>
+	<data name="_UpToAndIncluding_">
+		<value> fino a e inclusa </value>
+		<comment culture="en"> up to and including </comment>
+	</data>
+	<data name="onThe">
+		<value> sul </value>
+		<comment culture="en"> on the </comment>
+	</data>
+	<data name="on">
+		<value> su </value>
+		<comment culture="en"> on </comment>
+	</data>
+	<data name="Every">
+		<value>Ogni </value>
+		<comment culture="en">Every </comment>
+	</data>
+
+	<data name="month">
+		<value>mese </value>
+		<comment culture="en">month </comment>
+	</data>
+  <!-- EG 20160404 Migration vs2013 -->
+	<!--<data name="months">
+		<value>mesi </value>
+		<comment culture="en">months </comment>
+	</data>-->
+  <!-- EG 20160404 Migration vs2013 -->
+  <!--<data name="weeks">
+		<value>settimane </value>
+		<comment culture="en">weeks </comment>
+	</data>-->
+	<data name="week">
+		<value>settimana </value>
+		<comment culture="en">week </comment>
+	</data>
+  <!-- EG 20160404 Migration vs2013 -->
+  <!--<data name="days">
+		<value>giorni </value>
+		<comment culture="en">days </comment>
+	</data>-->
+	<data name="day">
+		<value>giorno </value>
+		<comment culture="en">day </comment>
+	</data>
+	<data name="year">
+		<value>anno </value>
+		<comment culture="en">year </comment>
+	</data>
+  <!-- EG 20160404 Migration vs2013 -->
+  <!--<data name="years">
+		<value>anni </value>
+		<comment culture="en">years </comment>
+	</data>-->
+	<data name="PriorToEachResetDate">
+		<value>prima di ogni data di reset </value>
+		<comment culture="en">prior to each Reset Date </comment>
+	</data>
+	<data name="AfterToEachResetDate">
+		<value>dopo ogni data di reset </value>
+		<comment culture="en">after to each Reset Date </comment>
+	</data>
+	<data name="PriorToEach">
+		<value>prima di ogni  </value>
+		<comment culture="en">prior to each  </comment>
+	</data>
+	<data name="AfterToEach">
+		<value>dopo ogni  </value>
+		<comment culture="en">after to each  </comment>
+	</data>
+	<data name="The">
+		<value>Il </value>
+		<comment culture="en">The </comment>
+	</data>
+	<data name="PeriodEndDates">
+		<value>Data(e) di fine periodo: </value>
+		<comment culture="en">Period End Date(s): </comment>
+	</data>
+	<data name="PaymentConvention">
+		<value>Convenzione di pagamento: </value>
+		<comment culture="en">Payment Convention: </comment>
+	</data>
+  <data name="PaymentLag">
+    <value>Offset di pagamento: </value>
+    <comment culture="en">Payment Lag: </comment>
+  </data>
+	<data name="OneTermOn">
+		<value>A termine di </value>
+		<comment culture="en">One Term on </comment>
+	</data>
+  <data name="OneTerm">
+    <value>A termine </value>
+    <comment culture="en">One Term </comment>
+  </data>
+	<data name="Every">
+		<value>Ogni </value>
+		<comment culture="en">Every </comment>
+	</data>
+	<data name="enequencyPeriode1">
+		<value> on </value>
+		<comment culture="en"> on </comment>
+	</data>
+	<data name="enequencyPeriode2">
+		<value> on the </value>
+		<comment culture="en"> on the </comment>
+	</data>
+	<data name="enequencyPeriode3">
+		<value> commencing on </value>
+		<comment culture="en"> commencing on </comment>
+	</data>
+	<data name="enequencyPeriode4">
+		<value> through and including the Termination Date </value>
+		<comment culture="en"> through and including the Termination Date</comment>
+	</data>
+	<data name="enequencyPeriode5">
+		<value>One Term on </value>
+		<comment culture="en">One Term on </comment>
+	</data>
+	<data name="EachResetDate">
+		<value>Ogni data di reset </value>
+		<comment culture="en">Each Reset Date</comment>
+	</data>
+	<data name="IsOvernightInterestSwap">
+		<value>Ultimo giorno di ogni periodo di calcolo </value>
+		<comment culture="en">The last day of each Calculation Period </comment>
+	</data>
+	<data name="TheLastDayEachCalcPeriod">
+		<value>Ultimo giorno di ogni periodo di calcolo </value>
+		<comment culture="en">The last day of each Calculation Period </comment>
+	</data>
+	<data name="PaymentDates">
+		<value>Data(e) di pagamento:</value>
+		<comment culture="en">Payment Date(s)</comment>
+	</data>
+	<data name="PremiumRate">
+		<value>Tasso del premio:</value>
+		<comment culture="en">Premium Rate:</comment>
+	</data>
+	<data name="PremiumAmount">
+		<value>Ammontare del premio:</value>
+		<comment culture="en">Premium Amount:</comment>
+	</data>
+	<data name="PremiumPaymentDate">
+		<value>Data di pagamento del premio:</value>
+		<comment culture="en">Premium Payment Date:</comment>
+	</data>
+	<data name="Error">
+		<value>[Errore]</value>
+		<comment culture="en">[Error]</comment>
+	</data>
+	<data name="Daily">
+		<value>Giornaliero</value>
+		<comment culture="en">Daily</comment>
+	</data>
+	<data name="Weekly">
+		<value>Settimanale</value>
+		<comment culture="en">Weekly</comment>
+	</data>
+	<data name="Monthly">
+		<value>Mensile</value>
+		<comment culture="en">Monthly</comment>
+	</data>
+	<data name="Yearly">
+		<value>Annuale</value>
+		<comment culture="en">Yearly</comment>
+	</data>
+	<data name="NotAvailable">
+		<value>Non disponibile</value>
+		<comment culture="en">Not Available</comment>
+	</data>
+	<data name="StartDate">
+		<value>[Data di inizio]</value>
+		<comment culture="en">[Start date]</comment>
+	</data>
+	<data name="EndDate">
+		<value>[Data di fine]</value>
+		<comment culture="en">[End date]</comment>
+	</data>
+	<data name="Frequency">
+		<value>[Frequenza]</value>
+		<comment culture="en">[Frequency]</comment>
+	</data>
+	<data name="determinedWithRespectTo">
+		<value> determinato rispetto a </value>
+		<comment culture="en"> determined with respect to </comment>
+	</data>
+	<data name="EndOfMonth">
+		<value>Fine mese </value>
+		<comment culture="en">End of Month </comment>
+	</data>
+	<data name="_day">
+		<value> giorno </value>
+		<comment culture="en"> day </comment>
+	</data>
+	<data name="_days">
+		<value> giorni </value>
+		<comment culture="en"> days </comment>
+	</data>
+	<data name="_week">
+		<value> settimana </value>
+		<comment culture="en"> week </comment>
+	</data>
+	<data name="_weeks">
+		<value> settimane </value>
+		<comment culture="en"> weeks </comment>
+	</data>
+	<data name="_month">
+		<value> mese </value>
+		<comment culture="en"> month </comment>
+	</data>
+	<data name="_months">
+		<value> mesi </value>
+		<comment culture="en"> months </comment>
+	</data>
+	<data name="_year">
+		<value> anno </value>
+		<comment culture="en"> year </comment>
+	</data>
+	<data name="_years">
+		<value> anni </value>
+		<comment culture="en"> year </comment>
+	</data>
+	<data name="_Term">
+		<value> termine </value>
+		<comment culture="en"> Term </comment>
+	</data>
+	<data name="Days">
+		<value>Giorni</value>
+		<comment culture="en">Days</comment>
+	</data>
+	<data name="Months">
+		<value>Mesi</value>
+		<comment culture="en">Months</comment>
+	</data>
+	<data name="Weeks">
+		<value>Settimane</value>
+		<comment culture="en">Weeks</comment>
+	</data>
+	<data name="Years">
+		<value>Anni</value>
+		<comment culture="en">Years</comment>
+	</data>
+	<data name="None">
+		<value>NA</value>
+		<comment culture="en">None</comment>
+	</data>
+	<data name="One-Touch">
+		<value>One-Touch</value>
+		<comment culture="en">One-Touch</comment>
+	</data>
+	<data name="No-Touch">
+		<value>No-Touch</value>
+		<comment culture="en">No-Touch</comment>
+	</data>
+	<data name="January">
+		<value>Gennaio</value>
+		<comment culture="en">January</comment>
+	</data>
+	<data name="February">
+		<value>Febbraio</value>
+		<comment culture="en">February</comment>
+	</data>
+	<data name="March">
+		<value>Marzo</value>
+		<comment culture="en">March</comment>
+	</data>
+	<data name="April">
+		<value>Aprile</value>
+		<comment culture="en">April</comment>
+	</data>
+	<data name="May">
+		<value>Maggio</value>
+		<comment culture="en">May</comment>
+	</data>
+	<data name="June">
+		<value>Giugno</value>
+		<comment culture="en">June</comment>
+	</data>
+	<data name="July">
+		<value>Luglio</value>
+		<comment culture="en">July</comment>
+	</data>
+	<data name="August">
+		<value>Agosto</value>
+		<comment culture="en">August</comment>
+	</data>
+	<data name="September">
+		<value>Settembre</value>
+		<comment culture="en">September</comment>
+	</data>
+	<data name="October">
+		<value>Ottobre</value>
+		<comment culture="en">October</comment>
+	</data>
+	<data name="November">
+		<value>Novembre</value>
+		<comment culture="en">November</comment>
+	</data>
+	<data name="December">
+		<value>Dicembre</value>
+		<comment culture="en">December</comment>
+	</data>
+	<data name="CallCurrencyAmount">
+		<value>Ammontare call </value>
+		<comment culture="en">Call Currency Amount</comment>
+	</data>
+	<data name="PutCurrencyAmount">
+		<value>Ammontare put </value>
+		<comment culture="en">Call Currency Amount</comment>
+	</data>
+	<data name="PutCurrencyAmountInCallCurrencyAmount">
+		<value>Put Currency Amount in Call Currency Amount</value>
+		<comment culture="en">Put Currency Amount in Call Currency Amount</comment>
+	</data>
+	<data name="CallCurrencyAmountInPutCurrencyAmount">
+		<value>Call Currency Amount in Put Currency Amount</value>
+		<comment culture="en">Call Currency Amount in Put Currency Amount</comment>
+	</data>
+	<data name="priorThe">
+		<value> prima di </value>
+		<comment culture="en"> prior the </comment>
+	</data>
+	<data name="afterThe">
+		<value> dopo </value>
+		<comment culture="en"> after the </comment>
+	</data>
+	<data name="ExerciseDate">
+		<value>Data di esercizio</value>
+		<comment culture="en">Exercise Date</comment>
+	</data>
+	<data name="CashPrice">
+		<value>Per contanti</value>
+		<comment culture="en">Cash Price</comment>
+	</data>
+	<data name="ParYieldCurveUnadjusted">
+		<value>Par Yield Curve Unadjusted</value>
+		<comment culture="en">Par Yield Curve Unadjusted</comment>
+	</data>
+	<data name="ZeroCouponCurveAdjusted">
+		<value>Zero Coupon Curve Adjusted</value>
+		<comment culture="en">Zero Coupon Curve Adjusted</comment>
+	</data>
+	<data name="CashPriceAlternatedMethod">
+		<value>Cash Price Alternated Method</value>
+		<comment culture="en">Cash Price Alternated Method</comment>
+	</data>
+	<data name="ParYieldCurveAdjusted">
+		<value>Par Yield Curve Adjusted</value>
+		<comment culture="en">Par Yield Curve Adjusted</comment>
+	</data>
+	<data name="Source">
+		<value>Sorgente</value>
+		<comment culture="en">Source</comment>
+	</data>
+	<data name="Page">
+		<value>Pagina</value>
+		<comment culture="en">Page</comment>
+	</data>
+	<data name="Heading">
+		<value>Intestazione</value>
+		<comment culture="en">Heading</comment>
+	</data>
+
+	<data name="DoubleKnock-Out">
+		<value>Double Knock-Out</value>
+		<comment culture="en">Double Knock-Out</comment>
+	</data>
+	<data name="DoubleKnock-In">
+		<value>Double Knock-In</value>
+		<comment culture="en">Double Knock-In</comment>
+	</data>
+	<data name="DoubleNo-TouchBinary">
+		<value>Double No-Touch Binary</value>
+		<comment culture="en">Double No-Touch Binary</comment>
+	</data>
+	<data name="DoubleOne-TouchBinary">
+		<value>Double One-Touch Binary</value>
+		<comment culture="en">Double One-Touch Binary</comment>
+	</data>
+	<data name="Knock-Out">
+		<value>Knock-Out</value>
+		<comment culture="en">Knock-Out</comment>
+	</data>
+	<data name="Knock-In">
+		<value>Knock-In</value>
+		<comment culture="en">Knock-In</comment>
+	</data>
+	<data name="No-Touch">
+		<value>No-Touch</value>
+		<comment culture="en">No-Touch</comment>
+	</data>
+	<data name="DoubleNo-Touch">
+		<value>Double No-Touch</value>
+		<comment culture="en">Double No-Touch</comment>
+	</data>
+	<data name="One-Touch">
+		<value>One-Touch</value>
+		<comment culture="en">One-Touch</comment>
+	</data>
+	<data name="DoubleOne-Touch">
+		<value>Double One-Touch</value>
+		<comment culture="en">Double One-Touch</comment>
+	</data>
+	<data name="GreaterThanOrEqualToTheBarrierLevel">
+		<value>Maggiore o uguale al livello della barriera</value>
+		<comment culture="en">Greater than or equal to the Barrier Level</comment>
+	</data>
+	<data name="LessThanOrEqualToTheBarrierLevel">
+		<value>Minore o uguale al livello della barriera</value>
+		<comment culture="en">Less than or equal to the Barrier Level</comment>
+	</data>
+	<data name="Calculation">
+		<value>Calcolo</value>
+		<comment culture="en">Calculation</comment>
+	</data>
+	<data name="CalculationAgent">
+		<value>Calculation Agent:</value>
+		<comment culture="en">Calculation Agent:</comment>
+	</data>
+	<data name="_Amount">
+		<value> ammontare:</value>
+		<comment culture="en"> Amount:</comment>
+	</data>
+	<data name="Brokerage_Amount">
+		<value>Ammontare commissioni di mediazione:</value>
+		<comment culture="en">Brokerage Amount:</comment>
+	</data>
+	<data name="_Payer">
+		<value> Debitore:</value>
+		<comment culture="en"> Payer:</comment>
+	</data>
+	<data name="Brokerage_Payer">
+		<value>Debitore delle commissioni di mediazione:</value>
+		<comment culture="en">Brokerage Payer:</comment>
+	</data>
+	<data name="_Receiver">
+		<value> Creditore:</value>
+		<comment culture="en"> Receiver:</comment>
+	</data>
+	<data name="Brokerage_Receiver">
+		<value>Debitore delle commissioni di mediazione::</value>
+		<comment culture="en">Brokerage Receiver:</comment>
+	</data>
+	<data name="_PaymentDate">
+		<value> Data di pagamento:</value>
+		<comment culture="en"> Payment Date:</comment>
+	</data>
+	<data name="AccountDetails">
+		<value>Conti di regolamento</value>
+		<comment culture="en">Account Details</comment>
+	</data>
+	<data name="Offices">
+		<value>Uffici</value>
+		<comment culture="en">Offices</comment>
+	</data>
+	<data name="TheOfficeOf">
+		<value> Gli uffici di </value>
+		<comment culture="en"> The office(s) of </comment>
+	</data>
+	<data name="forTheTransactionIs">
+		<value> per la transazione sono: </value>
+		<comment culture="en"> for the Transaction is (are): </comment>
+	</data>
+	<data name="Back-OfficeManager">
+		<value>Il responsabile del Back-Office</value>
+		<comment culture="en">Back-Office Manager</comment>
+	</data>
+	<data name="SwaptionTerms">
+		<value>Clausole generali swaption</value>
+		<comment culture="en">Swaption Terms</comment>
+	</data>
+	<data name="OptionStyle">
+		<value>Stile dell'opzione:</value>
+		<comment culture="en">Option Style:</comment>
+	</data>
+	<data name="Seller">
+		<value>Venditore:</value>
+		<comment culture="en">Seller:</comment>
+	</data>
+	<data name="Buyer">
+		<value>Acquirente:</value>
+		<comment culture="en">Buyer:</comment>
+	</data>
+	<data name="Seller_">
+		<value>Venditore </value>
+		<comment culture="en">Seller </comment>
+	</data>
+	<data name="Buyer_">
+		<value>Acquirente </value>
+		<comment culture="en">Buyer </comment>
+	</data>
+	<!-- begin early termination region -->
+	<data name="EarlyTermination">
+		<value>Estinzione anticipata</value>
+		<comment culture="en">Early Termination</comment>
+	</data>
+	<data name="OptionalEarlyTermination">
+		<value>Estinzione anticipata opzionale:</value>
+		<comment culture="en">Optional Early Termination:</comment>
+	</data>
+	<data name="MandatoryEarlyTermination">
+		<value>Estinzione anticipata obbligatorio:</value>
+		<comment culture="en">Mandatory Early Termination:</comment>
+	</data>
+	<data name="OptionalEarlyTerminationDate">
+		<value>Data di estinzione anticipata Optionale:</value>
+		<comment culture="en">Optional Early Termination Date:</comment>
+	</data>
+	<data name="PartialExercise">
+		<value>Esercizio parziale:</value>
+		<comment culture="en">Partial Exercise:</comment>
+	</data>
+	<data name="MultipleExercise">
+		<value>Esercizio multiplo:</value>
+		<comment culture="en">Multiple Exercise:</comment>
+	</data>
+	<data name="BermudaExerciseDates">
+		<value>Date di esercizio Bermuda:</value>
+		<comment culture="en">Bermuda Exercise Dates:</comment>
+	</data>
+	<data name="OET_ExerciseDates">
+		<value>Date di esercizio</value>
+		<comment culture="en">Exercise Dates</comment>
+	</data>
+	<data name="OET_CashSettlementPaymentDate">
+		<value>Data di pagamento del regolamento di cassa</value>
+		<comment culture="en">Cash Settlement Payment Date</comment>
+	</data>
+	<data name="calculationPeriodDates">
+		<value>date del periodo di calcolo</value>
+		<comment culture="en">Calculation Period Dates</comment>
+	</data>
+  <!-- EG 20160404 Migration vs2013 -->
+  <data name="effectiveDate_">
+		<value>Data di partenza</value>
+		<comment culture="en">Effective Date</comment>
+	</data>
+	<data name="floatingCalcPeriodDates">
+		<value>Date del periodo di calcolo del tasso parametro variabile</value>
+		<comment culture="en">Floating Calculation Period Dates</comment>
+	</data>
+  <!-- EG 20160404 Migration vs2013 -->
+  <data name="paymentDates_">
+		<value>Date di pagamento</value>
+		<comment culture="en">Payment Dates</comment>
+	</data>
+  <!-- EG 20160404 Migration vs2013 -->
+  <data name="resetDates_">
+		<value>Date di reset</value>
+		<comment culture="en">Reset Dates</comment>
+	</data>
+  <!-- EG 20160404 Migration vs2013 -->
+  <data name="terminationDate_">
+		<value>Data di scadenza</value>
+		<comment culture="en">Termination Date</comment>
+	</data>
+  <!-- EG 20160404 Migration vs2013 -->
+  <data name="tradeDate_">
+		<value>Data di esecuzione</value>
+		<comment culture="en">Trade Date</comment>
+	</data>
+	<data name="earlyTerminationDate">
+		<value>data di estinzione anticipata</value>
+		<comment culture="en">Early Termination Date</comment>
+	</data>
+
+	<!-- end early termination region -->
+	<data name="Premium">
+		<value>Premio:</value>
+		<comment culture="en">Premium:</comment>
+	</data>
+	<data name="BusinessDayConventionFor">
+		<value>Convenzione business day per</value>
+		<comment culture="en">Business Day Convention for</comment>
+	</data>
+	<data name="BusinessDaysForPayments">
+		<value>Business Days per i pagamenti:</value>
+		<comment culture="en">Business Days for Payments:</comment>
+	</data>
+	<data name="ProcedureForExercise">
+		<value>Procedure di esercizio</value>
+		<comment culture="en">Procedure for Exercise</comment>
+	</data>
+	<data name="BermudaOptionExerciseDates">
+		<value>Date di esercizio opzioni Bermuda:</value>
+		<comment culture="en">Bermuda Option Exercise Dates:</comment>
+	</data>
+	<data name="EarliestExerciseTime">
+		<value>Orario di esercizio iniziale:</value>
+		<comment culture="en">Earliest Exercise Time:</comment>
+	</data>
+	<data name="LatestExerciseTime">
+		<value>Orario di esercizio finale:</value>
+		<comment culture="en">Latest Exercise Time:</comment>
+	</data>
+	<data name="CommencementDate">
+		<value>Data di inizio:</value>
+		<comment culture="en">Commencement Date:</comment>
+	</data>
+	<data name="ExpirationDate">
+		<value>Data di termine:</value>
+		<comment culture="en">Expiration Date:</comment>
+	</data>
+	<data name="ExpirationTime">
+		<value>Orario di termine:</value>
+		<comment culture="en">Expiration Time:</comment>
+	</data>
+	<data name="SettlementTerms">
+		<value>Termini di regolamento</value>
+		<comment culture="en">Settlement Terms</comment>
+	</data>
+	<data name="Settlement">
+		<value>Regolamento:</value>
+		<comment culture="en">Settlement:</comment>
+	</data>
+	<data name="Cash">
+		<value>Cassa</value>
+		<comment culture="en">Cash</comment>
+	</data>
+	<data name="Physical">
+		<value>Fisica</value>
+		<comment culture="en">Physical</comment>
+	</data>
+	<data name="CashSettlementValuationTime">
+		<value>Orario di valutazione del regolamento di cassa:</value>
+		<comment culture="en">Cash Settlement Valuation Time:</comment>
+	</data>
+	<data name="CashSettlementValuationDate">
+		<value>Data di valutazione del regolamento di cassa:</value>
+		<comment culture="en">Cash Settlement Valuation Date:</comment>
+	</data>
+	<data name="ValuationBusinessDays">
+		<value>Business Days di valutazione:</value>
+		<comment culture="en">Valuation Business Days:</comment>
+	</data>
+	<data name="CashSettlementPaymentDate">
+		<value>Data di pagamento del regolamento dicassa:</value>
+		<comment culture="en">Cash Settlement Payment Date:</comment>
+	</data>
+	<data name="BusinessDayConventionForCashSettlementPaymentDate">
+		<value>Conventione business day  per la data di pagamento del regolamento di cassa:</value>
+		<comment culture="en">Business Day Convention for Cash Settlement Payment Date:</comment>
+	</data>
+	<data name="CashSettlementMethod">
+		<value>Metodo di regolamento di cassa:</value>
+		<comment culture="en">Cash Settlement Method:</comment>
+	</data>
+	<data name="CashSettlementCurrency">
+		<value>Divisa del regolamento di cassa:</value>
+		<comment culture="en">Cash Settlement Currency:</comment>
+	</data>
+	<data name="QuotationRate">
+		<value>Tasso di quotazione:</value>
+		<comment culture="en">Quotation Rate:</comment>
+	</data>
+	<data name="FloatingRateDayCountFraction">
+		<value>Convenzione di calcolo:</value>
+		<comment culture="en">Floating Rate Day Count Fraction:</comment>
+	</data>
+	<data name="ResetDates">
+		<value>Date di reset:</value>
+		<comment culture="en">Reset Dates:</comment>
+	</data>
+	<data name="FRADiscounting">
+		<value>Sconto FRA:</value>
+		<comment culture="en">FRA Discounting:</comment>
+	</data>
+	<data name="BusinessDayConvention">
+		<value>Convenzione Business Day:</value>
+		<comment culture="en">Business Day Convention:</comment>
+	</data>
+	<data name="UnderlyingSwap">
+		<value>Swap sottostante</value>
+		<comment culture="en">Underlying Swap</comment>
+	</data>
+	<data name="TheParticularTermsOfUnderlyingSwap">
+		<value>Qui di seguito sono riportati i termini dello swap sottostante che costituisce questo Swaption Straddle:</value>
+		<comment culture="en">The particular terms of the underlying swap transactions to which this Swaption Straddle relates are as follows:</comment>
+	</data>
+	<data name="SpecificTermsForUnderlyingPayerSwap">
+		<value>Termini specifici sul debitore dello swap sottostante</value>
+		<comment culture="en">Specific terms for the Underlying Payer Swap</comment>
+	</data>
+	<data name="SpecificTermsForUnderlyingReceiverSwap">
+		<value>Termini specifici sul creditore dello swap sottostante</value>
+		<comment culture="en">Specific terms for the Underlying Receiver Swap</comment>
+	</data>
+	<data name="FirstRegularPeriodDate">
+		<value>Data del primo periodo regolare:</value>
+		<comment culture="en">First Regular Period Date:</comment>
+	</data>
+	<data name="LastRegularPeriodDate">
+		<value>Data dell'ultimo periodo regolare:</value>
+		<comment culture="en">Last Regular Period Date:</comment>
+	</data>
+	<data name="_Rate1">
+		<value> Tasso 1:</value>
+		<comment culture="en"> Rate 1:</comment>
+	</data>
+	<data name="_Rate2">
+		<value> Tasso 2:</value>
+		<comment culture="en"> Rate 2:</comment>
+	</data>
+	<data name="_Rate">
+		<value> Tasso:</value>
+		<comment culture="en"> Rate:</comment>
+	</data>
+	<data name="FixedRatePaymentDates">
+		<value>Date di pagamento del tasso fisso:</value>
+		<comment culture="en">Fixed Rate Payment Dates:</comment>
+	</data>
+	<data name="Rate">
+		<value>Tasso:</value>
+		<comment culture="en">Rate:</comment>
+	</data>
+	<data name="FloatingCapRatePayer">
+		<value>Debitore del tasso cap variabile:</value>
+		<comment culture="en">Floating Cap Rate Payer:</comment>
+	</data>
+	<data name="FloatingCapRate1Payer">
+		<value>Debitore del tasso Cap1 variabile:</value>
+		<comment culture="en">Floating Cap Rate 1 Payer:</comment>
+	</data>
+	<data name="FloatingCapRate2Payer">
+		<value>Debitore del tasso Cap1 variabile:</value>
+		<comment culture="en">Floating Cap Rate 2 Payer:</comment>
+	</data>
+	<data name="FloatingFloorRatePayer">
+		<value>Debitore del tasso floor variabile:</value>
+		<comment culture="en">Floating Floor Rate Payer:</comment>
+	</data>
+	<data name="FloatingRatePayerCurrencyAmount">
+		<value>Ammontare del tasso variabile da pagare:</value>
+		<comment culture="en">Floating Rate Payer Currency Amount:</comment>
+	</data>
+	<data name="FloatingRatePaymentDatesFrequency">
+		<value>Frequenza delle date di pagamento del tasso variabile:</value>
+		<comment culture="en">Floating Rate Payment Dates Frequency:</comment>
+	</data>
+	<data name="RateCutOffDates">
+		<value>Date cut-off del tasso:</value>
+		<comment culture="en">Rate Cut-off Dates:</comment>
+	</data>
+	<data name="MethodOfAveraging">
+		<value>Calcolo della media :</value>
+		<comment culture="en">Method of Averaging:</comment>
+	</data>
+	<data name="_Exchange">
+		<value> cambio</value>
+		<comment culture="en"> Exchange</comment>
+	</data>
+	<data name="_ExchangeDate">
+		<value> data di cambio:</value>
+		<comment culture="en"> Exchange Date:</comment>
+	</data>
+	<data name="_ExchangeAmount">
+		<value> Ammontare di cambio:</value>
+		<comment culture="en"> Exchange Amount:</comment>
+	</data>
+	<data name="Discounting">
+		<value>Discounting</value>
+		<comment culture="en">Discounting</comment>
+	</data>
+	<data name="DiscountRate">
+		<value>Tasso di sconto:</value>
+		<comment culture="en">Discount Rate:</comment>
+	</data>
+	<data name="DiscountRateDayCountFraction">
+		<value>Convenzione di calcolo per tasso di sconto:</value>
+		<comment culture="en">Discount Rate Day Count Fraction:</comment>
+	</data>
+	<data name="FixedRatePaymentDatesFrequency">
+		<value>Frequenza date di pagamento del tasso fisso:</value>
+		<comment culture="en">Fixed Rate Payment Dates Frequency:</comment>
+	</data>
+	<!-- 
+	============== 
+	FX products
+	=============
+	-->
+	<data name="FXConfText1">
+		<value>Gentile Signore o Signora,</value>
+		<comment culture="en">Dear Sir or Madam,</comment>
+	</data>
+	<data name="FXConfText2">
+		<value>
+			Lo scopo di questa lettera (la "Conferma") è definire i termini e le condizioni della transazione da noi stipulata alla data di esecuzione sotto riportata..
+		</value>
+		<comment culture="en">
+			The purpose of this letter agreement (this "Confirmation") is to confirm the terms and conditions of the Transaction entered into between us on the Trade Date specified below (the "Transaction").
+		</comment>
+	</data>
+	<data name="FXConfText3">
+		<value>
+			Le definizioni e le clausole qui di seguito utilizzate si riferiscono alle definizioni 1998 FX and Currency Option
+			pubblicate dall'International Swaps and Derivatives Association, dall'Emerging Markets Traders Association
+			e dal Foreign Exchange Committee e sono incluse in questa Conferma.
+			Nel caso di eventuali incoerenze tra le definizioni e quanto indicato in questa conferma, prevale quest'ultima.
+		</value>
+		<comment culture="en">
+			This Confirmation constitutes a "Confirmation" as referred to in the Agreement specified below.
+			The definitions and provisions contained in the 1998 FX and Currency Option Definitions (as published
+			by the International Swaps and Derivatives Association, Inc., the Emerging Markets Traders Association
+			and The Foreign Exchange Committee) are incorporated into this Confirmation. In the event of any inconsistency
+			between those definitions and provisions and this Confirmation, this Confirmation will govern.
+		</comment>
+	</data>
+	<data name="FXConfText4">
+		<value>
+			Questo documento che costituisce una "Conferma", rappresenta quanto indicato nell'"ISDA Master Agreement" ed eventuali supplementi
+		</value>
+		<comment culture="en">
+			This Confirmation supplements, forms a part of, and is subject to, the ISDA Master Agreement
+		</comment>
+	</data>
+	<data name="FXConfText5">
+		<value> stipulato in data </value>
+		<comment culture="en"> dated as of </comment>
+	</data>
+	<data name="FXConfText6">
+		<value> emendato e revisionato tra </value>
+		<comment culture="en">, as amended and supplemented from time to time (the "Agreement"), between </comment>
+	</data>
+	<data name="FXConfText7">
+		<value> e </value>
+		<comment culture="en"> and </comment>
+	</data>
+	<data name="FXConfText8">
+		<value>Tutte le clausole contenute nel contratto quadro ("Master Agreement") regolano questa "Conferma" ad eccezione di quanto diversamente riportato.</value>
+		<comment culture="en">All provisions contained in the Agreement govern this Confirmation except as expressly modified below.</comment>
+	</data>
+	<data name="CurrencyOptionType">
+		<value>Tipo di opzione:</value>
+		<comment culture="en">Currency Option Type:</comment>
+	</data>
+	<data name="_Binary">
+		<value> Binaria</value>
+		<comment culture="en"> Binary</comment>
+	</data>
+	<data name="_at_">
+		<value> a </value>
+		<comment culture="en"> at </comment>
+	</data>
+	<data name="NonDeliverable">
+		<value>Non consegnabile</value>
+		<comment culture="en">Non-Deliverable</comment>
+	</data>
+	<data name="Deliverable">
+		<value>Consegnabile</value>
+		<comment culture="en">Deliverable</comment>
+	</data>
+	<data name="SettlementAmount">
+		<value>Ammontare di regolamento:</value>
+		<comment culture="en">Settlement Amount:</comment>
+	</data>
+	<data name="SettlementDate">
+		<value>Data di regolamento:</value>
+		<comment culture="en">Settlement Date:</comment>
+	</data>
+	<data name="TwoBusinessDaysAfterTheDateThatTheBinaryEventOccurs">
+		<value>Due giorni business successivi alla data di occorrenza dell'evento binario.</value>
+		<comment culture="en">Two Business Days after the date that the Binary Event (if any) occurs.</comment>
+	</data>
+	<data name="BarrierEvent">
+		<value>Evento barriera:</value>
+		<comment culture="en">Barrier Event:</comment>
+	</data>
+	<data name="TriggerEvent">
+		<value>Evento grigger:</value>
+		<comment culture="en">Trigger Event:</comment>
+	</data>
+	<data name="EventType">
+		<value>Tipo di evento:</value>
+		<comment culture="en">Event Type:</comment>
+	</data>
+	<data name="_AtExpirationBinary">
+		<value> alla scadenza dell'evento binario</value>
+		<comment culture="en"> At Expiration Binary</comment>
+	</data>
+	<data name="InitialSpotRate">
+		<value>Tasso spot iniziale:</value>
+		<comment culture="en">Initial Spot Rate:</comment>
+	</data>
+	<data name="BarrierLevel">
+		<value>Livello della barriera:</value>
+		<comment culture="en">Barrier Level:</comment>
+	</data>
+	<data name="TriggerLevel">
+		<value>Livello del trigger:</value>
+		<comment culture="en">Trigger Level:</comment>
+	</data>
+	<data name="UpperBarrierLevel">
+		<value>Livello superiore della barriera:</value>
+		<comment culture="en">Upper Barrier Level:</comment>
+	</data>
+	<data name="UpperTriggerLevel">
+		<value>Livello superiore del trigger:</value>
+		<comment culture="en">Upper Trigger Level:</comment>
+	</data>
+	<data name="LowerBarrierLevel">
+		<value>Livello inferiore della barriera:</value>
+		<comment culture="en">Lower Barrier Level:</comment>
+	</data>
+	<data name="LowerTriggerLevel">
+		<value>Livello inferiore del trigger:</value>
+		<comment culture="en">Lower Trigger Level:</comment>
+	</data>
+	<data name="BarrierEventRateSource">
+		<value>Fonte del tasso di evento della barriera:</value>
+		<comment culture="en">Barrier Event Rate Source:</comment>
+	</data>
+	<data name="TriggerEventRateSource">
+		<value>Fonte del tasso di evento del trigger:</value>
+		<comment culture="en">Trigger Event Rate Source:</comment>
+	</data>
+	<data name="ObservationStartDate">
+		<value>Data di inizio del periodo di osservazione:</value>
+		<comment culture="en">Observation Start Date:</comment>
+	</data>
+	<data name="TriggerObservationStartDate">
+		<value>Data di inizio del periodo di osservazione del trigger:</value>
+		<comment culture="en">Trigger Observation Start Date:</comment>
+	</data>
+	<data name="ObservationEndDate">
+		<value>Data di fine del periodo di osservazione:</value>
+		<comment culture="en">Observation End Date:</comment>
+	</data>
+	<data name="TriggerObservationEndDate">
+		<value>Data di fine del periodo di osservazione del trigger:</value>
+		<comment culture="en">Trigger Observation End Date:</comment>
+	</data>
+	<data name="CurrencyOptionStyle">
+		<value>Stile dell'opzione:</value>
+		<comment culture="en">Currency Option Style:</comment>
+	</data>
+	<data name="Put">
+		<value> Put </value>
+		<comment culture="en"> Put </comment>
+	</data>
+	<data name="Call">
+		<value> Call </value>
+		<comment culture="en"> Call </comment>
+	</data>
+	<data name="CallCurrencyCallCurrencyAmount">
+		<value>Ammontare call:</value>
+		<comment culture="en">Call Currency and Call Currency Amount:</comment>
+	</data>
+	<data name="PutCurrencyPutCurrencyAmount">
+		<value>Ammontare put:</value>
+		<comment culture="en">Put Currency and Put Currency Amount:</comment>
+	</data>
+	<data name="StrikePrice">
+		<value>Prezzo strike:</value>
+		<comment culture="en">Strike Price:</comment>
+	</data>
+	<data name="localTimeIn_">
+		<value>orario locale di </value>
+		<comment culture="en">local time in </comment>
+	</data>
+	<data name="SettlementCurrency">
+		<value>Divisa di regolamento:</value>
+		<comment culture="en">Settlement Currency:</comment>
+	</data>
+	<data name="SpecifiedExerciseDate">
+		<value>Data(e) di esercizio specificata:</value>
+		<comment culture="en">Specified Exercise Date(s):</comment>
+	</data>
+	<data name="SpotExchangeRateDirection">
+		<value>Direzione del tasso di cambio spot:</value>
+		<comment culture="en">Spot Exchange Rate Direction:</comment>
+	</data>
+	<data name="InitialSpotPrice">
+		<value>Prezzo spot iniziale:</value>
+		<comment culture="en">Initial Spot Price:</comment>
+	</data>
+	<data name="EventPeriodStartDateAndTime">
+		<value>Data e orario di inizio del periodo eventi:</value>
+		<comment culture="en">Event Period Start Date and Time:</comment>
+	</data>
+	<data name="EventPeriodEndDateAndTime">
+		<value>Data e orario di fine del periodo eventi:</value>
+		<comment culture="en">Event Period End Date and Time:</comment>
+	</data>
+	<data name="Price">
+		<value>Prezzo:</value>
+		<comment culture="en">Price:</comment>
+	</data>
+	<data name="ReferenceCurrency">
+		<value>Divisa di riferimento:</value>
+		<comment culture="en">Reference Currency:</comment>
+	</data>
+	<data name="ReferenceCurrencyNotionalAmount">
+		<value>Ammontare di riferimento:</value>
+		<comment culture="en">Reference Currency Notional Amount:</comment>
+	</data>
+	<data name="ForwardRate">
+		<value>Tasso forward:</value>
+		<comment culture="en">Forward Rate:</comment>
+	</data>
+	<data name="ReferenceCurrencyBuyer">
+		<value>Divisa di riferimento dell'acquirente:</value>
+		<comment culture="en">Reference Currency Buyer:</comment>
+	</data>
+	<data name="ReferenceCurrencySeller">
+		<value>Divisa di riferimento del venditore:</value>
+		<comment culture="en">Reference Currency Seller:</comment>
+	</data>
+	<data name="SpotAmounts">
+		<value>Ammontari spot</value>
+		<comment culture="en">Spot Amounts</comment>
+	</data>
+	<data name="ForwardAmounts">
+		<value>Ammontari forward</value>
+		<comment culture="en">Forward Amounts</comment>
+	</data>
+	<data name="AmountAndCurrencyPayableBy_">
+		<value>Ammontari pagabili da </value>
+		<comment culture="en">Amount and Currency payable by </comment>
+	</data>
+	<data name="SpotRate">
+		<value>Tasso spot:</value>
+		<comment culture="en">Spot Rate:</comment>
+	</data>
+	<!-- TO DO BEGIN -->
+	<data name="AdditionalDefinitions">
+		<value>Additional definitions for the Transaction to which this Confirmation relates are as follows:</value>
+		<comment culture="en">Additional definitions for the Transaction to which this Confirmation relates are as follows:</comment>
+	</data>
+	<data name="EventPeriodMeans">
+		<value>"Event Period" means the period commencing on the date and at the time this Currency Option is entered into and ending at the Expiration Time on the Expiration Date.</value>
+		<comment culture="en">"Event Period" means the period commencing on the date and at the time this Currency Option is entered into and ending at the Expiration Time on the Expiration Date.</comment>
+	</data>
+	<data name="BinaryEventMeans">
+		<value>"Binary Event" means that, at any time during the Event Period , the Spot Exchange Rate (in comparison to the Initial Spot Rate) is equal to or beyond the Binary Level, as determined by the Calculation Agent.</value>
+		<comment culture="en">"Binary Event" means that, at any time during the Event Period , the Spot Exchange Rate (in comparison to the Initial Spot Rate) is equal to or beyond the Binary Level, as determined by the Calculation Agent.</comment>
+	</data>
+	<data name="SpotExchangeMeans">
+		<value>"Spot Exchange Rate" means the price in the Spot Market for one or more actual foreign exchange transactions involving the Currency Pair (or cross-rates constituting such Currency Pair) which is the subject of this Currency Option as determined by the  Calculation Agent.</value>
+		<comment culture="en">"Spot Exchange Rate" means the price in the Spot Market for one or more actual foreign exchange transactions involving the Currency Pair (or cross-rates constituting such Currency Pair) which is the subject of this Currency Option as determined by the  Calculation Agent.</comment>
+	</data>
+	<data name="SpotMarketMeans">
+		<value>"Spot Market" means the global spot foreign exchange market, open continuously from 5:00 a.m. Sydney time on a Monday in any week to 5:00 p.m. New York time on the Friday of that week.</value>
+		<comment culture="en">"Spot Market" means the global spot foreign exchange market, open continuously from 5:00 a.m. Sydney time on a Monday in any week to 5:00 p.m. New York time on the Friday of that week.</comment>
+	</data>
+	<data name="NotificationOfEvent">
+		<value>"Notification of event": the Calculation Agent shall promptly notify the other Party (or Parties if the Calculation Agent is not a Party) of the occurrence of an event relating to this Currency Option.  A failure to give such notice shall not prejudice or invalidate the occurrence or effect of an event.</value>
+		<comment culture="en">"Notification of event": the Calculation Agent shall promptly notify the other Party (or Parties if the Calculation Agent is not a Party) of the occurrence of an event relating to this Currency Option.  A failure to give such notice shall not prejudice or invalidate the occurrence or effect of an event.</comment>
+	</data>
+	<data name="Settlement:IfBinaryEventHasOccurred">
+		<value>"Settlement": if a Binary Event has occurred, the Seller will pay the Buyer the Binary Payout on the Settlement Date.</value>
+		<comment culture="en">"Settlement": if a Binary Event has occurred, the Seller will pay the Buyer the Binary Payout on the Settlement Date.</comment>
+	</data>
+	<!-- TO DO END -->
+	<!-- 
+	============== 
+	EQD products
+	=============
+	-->
+	<data name="EQDConfText1">
+		<value>Gentile Signore o Signora,</value>
+		<comment culture="en">Dear Sir or Madam,</comment>
+	</data>
+	<data name="EQDConfText2">
+		<value>Lo scopo di questa lettera (la "Conferma") è definire i termini e le condizioni della transazione da noi stipulata alla data di esecuzione sotto riportata.</value>
+		<comment culture="en">The purpose of this letter agreement (this "Confirmation") is to confirm the terms and conditions of the Transaction entered into between us on the Trade Date specified below (the "Transaction").</comment>
+	</data>
+	<data name="EQDConfText3">
+		<value>Questo documento che costituisce una "Conferma", rappresenta quanto indicato nell'"ISDA Master Agreement" di seguito specificato.</value>
+		<comment culture="en">This Confirmation constitutes a "Confirmation" as referred to in the Agreement specified below.</comment>
+	</data>
+	<data name="EQDConfText4">
+		<value>
+			Le definizioni e le clausole qui di seguito utilizzate si riferiscono alle definizioni ISDA 2002 pubblicate dall'International Swaps and Derivatives Association e sono incluse in questa Conferma.
+		</value>
+		<comment culture="en">The definitions and provisions contained in the 2002 ISDA Equity Derivatives Definitions (the "Equity Definitions"), as published by the International Swaps and Derivatives Association, Inc., are incorporated into this Confirmation.</comment>
+	</data>
+	<data name="EQDConfText5">
+		<value>Nel caso di eventuali incoerenze tra le definizioni e quanto indicato in questa conferma, prevale quest'ultima.</value>
+		<comment culture="en">In the event of any inconsistency between the Equity Definitions and this Confirmation, this Confirmation will govern.</comment>
+	</data>
+	<data name="EQDConfText6">
+		<value>Questo documento che costituisce una "Conferma", rappresenta quanto indicato nell'"ISDA Master Agreement" ed eventuali supplementi</value>
+		<comment culture="en">This Confirmation supplements, forms a part of, and is subject to, the ISDA Master Agreement</comment>
+	</data>
+	<data name="EQDConfText7">
+		<value> stipulato in data </value>
+		<comment culture="en">dated as of</comment>
+	</data>
+	<data name="EQDConfText8">
+		<value> emendato e revisionato tra </value>
+		<comment culture="en">, as amended and supplemented from time to time (the "Agreement"), between </comment>
+	</data>
+	<data name="EQDConfText9">
+		<value> e </value>
+		<comment culture="en"> and </comment>
+	</data>
+	<data name="EQDConfText10">
+		<value>Tutte le clausole contenute nel contratto quadro ("Master Agreement") regolano questa "Conferma" ad eccezione di quanto diversamente riportato.</value>
+		<comment culture="en">All provisions contained in the Agreement govern this Confirmation except as expressly modified below.</comment>
+	</data>
+	<data name="American">
+		<value>Americana</value>
+		<comment culture="en">American</comment>
+	</data>
+	<data name="Bermuda">
+		<value>Bermuda</value>
+		<comment culture="en">Bermuda</comment>
+	</data>
+	<data name="European">
+		<value>Europea</value>
+		<comment culture="en">European</comment>
+	</data>
+	<data name="OptionType">
+		<value>Tipo di opzione:</value>
+		<comment culture="en">Option Type:</comment>
+	</data>
+	<data name="Shares">
+		<value>Azioni:</value>
+		<comment culture="en">Shares:</comment>
+	</data>
+	<data name="Index">
+		<value>Indici:</value>
+		<comment culture="en">Index:</comment>
+	</data>
+	<data name="NumberOfOptions">
+		<value>Numero di opzioni:</value>
+		<comment culture="en">Number of Options:</comment>
+	</data>
+	<data name="OptionEntitlement">
+		<value>Diritto di opzione:</value>
+		<comment culture="en">Option Entitlement:</comment>
+	</data>
+	<data name="_SharePerOption">
+		<value> azioni per opzione</value>
+		<comment culture="en"> Share(s) per Option</comment>
+	</data>
+	<data name="Exchange">
+		<value>Cambio:</value>
+		<comment culture="en">Exchange:</comment>
+	</data>
+	<data name="CashSettlement">
+		<value>Regolamento di cassa:</value>
+		<comment culture="en">Cash Settlement:</comment>
+	</data>
+	<data name="SettlementPrice">
+		<value>Prezzo di regolamento:</value>
+		<comment culture="en">Settlement Price:</comment>
+	</data>
+	<data name="PhysicalSettlement">
+		<value>Regolamento fisico:</value>
+		<comment culture="en">Physical Settlement:</comment>
+	</data>
+	<!-- TO DO SECTION: END -->
+	
+	<!-- Used before after the city and before the date -->
+	<!-- Ex. for french: Paris, le 18 août 2009         -->
+	<!-- In english it is not required, so it is empty  -->
+	<data name="The2">
+		<value></value>
+		<comment culture="en"></comment>
+	</data>
+
+	<data name="Rate2">
+		<value>Tasso</value>
+		<comment culture="en">Rate</comment>
+	</data>
+	<!-- Annex (Scheduled Nominal): Begin Region -->
+	<data name="Annex_">
+		<value>Allegato </value>
+		<comment culture="en">Annex </comment>
+	</data>
+	<data name="NotionalSchedule">
+		<value>Nozionale schedulato</value>
+		<comment culture="en">Notional Schedule</comment>
+	</data>
+	<data name="FromAndIncluding">
+		<value>Da (inclusa)</value>
+		<comment culture="en">From and including</comment>
+	</data>
+	<data name="ToButExcluding">
+		<value>A (esclusa)</value>
+		<comment culture="en">To but excluding</comment>
+	</data>
+	<data name="NotionalAmount_">
+		<value>Ammontare nozionale </value>
+		<comment culture="en">Notional Amount </comment>
+	</data>
+	<data name="SeeAnnex_">
+		<value>Vedi allegato </value>
+		<comment culture="en">See Annex </comment>
+	</data>
+  
+</root>

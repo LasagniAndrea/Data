@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DiscoveryClientResultsFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Results>
+    <DiscoveryClientResult referenceType="System.Web.Services.Discovery.ContractReference" url="file:///C:/RD_Spheres_v2.x.x/Code_Source/Spheres/FlyDocLibrary/WSDL_Files/QueryService.wsdl" filename="QueryService.wsdl" />
+  </Results>
+</DiscoveryClientResultsFile>
