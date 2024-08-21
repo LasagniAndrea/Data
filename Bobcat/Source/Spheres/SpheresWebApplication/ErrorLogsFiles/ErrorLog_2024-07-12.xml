@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<exceptions>
+  <exception>
+    <date>2024-07-12</date>
+    <time>07:24:16</time>
+    <severity>HIGH</severity>
+    <method>EFS.Spheres.ProfilePage.Page_Load (Method)</method>
+    <source>EFS.Spheres</source>
+    <message>-- Message(s) --
+Object reference not set to an instance of an object.
+-- StackTrace(s) --
+   at EFS.Spheres.ProfilePage.Page_Load(Object sender, EventArgs e) in C:\TFS\SpheresProject\Development\Bobcat\Source\Spheres\SpheresWebApplication\Profile.aspx.cs:line 107
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at EFS.Common.Web.PageBase.OnLoad(EventArgs e) in C:\TFS\SpheresProject\Development\Bobcat\Source\Spheres\CommonWeb\PageBase.cs:line 892
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)</message>
+    <appName>Spheres</appName>
+    <appVersion>14.0.8952</appVersion>
+    <hostname>BDX088N</hostname>
+    <username>Unspecified</username>
+    <browser>Chrome126.0 - JS=3.0 - OS=WinNT - CLR=0.0.-1-1</browser>
+    <url>http://localhost/SpheresWebApplicationBobCat/Profile.aspx</url>
+  </exception>
+  <exception>
+    <date>2024-07-12</date>
+    <time>07:38:21</time>
+    <severity>HIGH</severity>
+    <method>EFS.Spheres.ProfilePage.Page_Load (Method)</method>
+    <source>EFS.Spheres</source>
+    <message>-- Message(s) --
+Object reference not set to an instance of an object.
+-- StackTrace(s) --
+   at EFS.Spheres.ProfilePage.Page_Load(Object sender, EventArgs e) in C:\TFS\SpheresProject\Development\Bobcat\Source\Spheres\SpheresWebApplication\Profile.aspx.cs:line 107
+   at System.Web.UI.Control.OnLoad(EventArgs e)
+   at EFS.Common.Web.PageBase.OnLoad(EventArgs e) in C:\TFS\SpheresProject\Development\Bobcat\Source\Spheres\CommonWeb\PageBase.cs:line 892
+   at System.Web.UI.Control.LoadRecursive()
+   at System.Web.UI.Page.ProcessRequestMain(Boolean includeStagesBeforeAsyncPoint, Boolean includeStagesAfterAsyncPoint)</message>
+    <appName>Spheres</appName>
+    <appVersion>14.0.8952</appVersion>
+    <hostname>BDX088N</hostname>
+    <username>Unspecified</username>
+    <browser>Chrome126.0 - JS=3.0 - OS=WinNT - CLR=0.0.-1-1</browser>
+    <url>http://localhost/SpheresWebApplicationBobCat/Profile.aspx</url>
+  </exception>
+</exceptions>

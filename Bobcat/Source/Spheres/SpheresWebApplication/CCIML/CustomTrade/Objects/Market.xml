@@ -1,0 +1,563 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- 
+  EG 20221201 Corrections diverses coquilles sur les noms des objets
+  EG 20221201 [25639][WI484] New : Gestion des commodity spot environmentaux (COMSEnvironmentalMarketHeader ...)
+-->
+<!-- 
+  CC 20180119 Ajout nouveaux objets pour limiter Facility par Instrument 
+  EG 20171113 [23509] Upd Gestion Objets Facility / Dates et Marché 
+  -->
+<Objects>
+
+  <!-- ************************************************** -->
+  <!-- *** FACILITY BLOCK                             *** -->
+  <!-- ************************************************** -->
+  <!-- Line 1 : PlateForme identifier + orderEntered      -->
+  <!-- Line 2 : Fill                  + executionDateTime -->
+  <!-- ************************************************** -->
+
+  <!-- Facility = Marché où le trade est exécuté (sont exclus les SOUS-SEGMENTS (ex. IDEX, AGREX, XHEX)) -->
+
+  <!-- ************************************************** -->
+  <!-- To display all facilities -->
+  <Object  name="FacilityHeader">
+    <FacilityMarketIdentifier/>
+    <FacilityDates/>
+  </Object>
+
+  <Object  name="FacilityMarketIdentifier">
+    <FacilityMarket_L clientid="tradeHeader_market1_identifier" required="false"  postback="true"   />
+    <MarketDisplay clientid="tradeHeader_market1_identifier" helpelement="none" />
+  </Object>
+
+  <Object name="FacilityMarket_L">
+    <label helpschema="fixml" helpelement="SecurityExchange" />
+    <!--<FacilityMarket/>-->
+    <FacilityMarket2/>
+  </Object>
+
+  <Object name="FacilityMarket">
+    <DropDown datatype="string" width="270px" readonlymode ="isload:false;columntext:SHORT_ACRONYM;width:Empty"
+              accesskey="NextBlock"
+              listretrieval="sql:
+              select m.FIXML_SecurityExchange as VALUE, m.SHORT_ACRONYM as TEXT
+              from dbo.VW_MARKET_IDENTIFIER m 
+              where (m.FIXML_SecurityExchange=m.ISO10383_ALPHA4) and 
+              (m.DTENABLED &lt;= getdate() and (m.DTDISABLED is null or m.DTDISABLED>getdate()))"
+              />
+  </Object>
+
+  <Object name="FacilityMarket2">
+      <table controlalignleft="1">
+        <TextBox datatype="string" accesskey="NextBlock"  style="width:240px;" autocomplete="true"/>
+        <Button type="Submit" referential="VW_MARKET_IDENTIFIER" condition="FACILITY" cssclass="fa-icon"  tooltip="search"/>
+      </table>
+  </Object>
+  
+  <!-- ************************************************** -->
+  <!-- To display facilities corresponding to Listed Derivative markets (MARKET.ISTRADEDDERIVATIVE = 1) -->
+  <Object  name="ETDFacilityHeader">
+    <ETDFacilityMarketIdentifier/>
+    <FacilityDates/>
+  </Object>
+
+  <Object  name="ETDFacilityMarketIdentifier">
+    <ETDFacilityMarket_L clientid="tradeHeader_market1_identifier" required="false"  postback="true"   />
+    <MarketDisplay clientid="tradeHeader_market1_identifier" helpelement="none" />
+  </Object>
+
+  <Object name="ETDFacilityMarket_L">
+    <label helpschema="fixml" helpelement="SecurityExchange" />
+    <ETDFacilityMarket2/>
+  </Object>
+
+  <Object name="ETDFacilityMarket">
+    <DropDown datatype="string" width="270px" readonlymode ="isload:false;columntext:SHORT_ACRONYM;width:Empty"
+              accesskey="NextBlock"
+              listretrieval="sql:
+              select m.FIXML_SecurityExchange as VALUE, m.SHORT_ACRONYM as TEXT
+              from dbo.VW_MARKET_IDENTIFIER m 
+              where 
+              (m.ISTRADEDDERIVATIVE = 1) and (m.FIXML_SecurityExchange=m.ISO10383_ALPHA4) and 
+              (m.DTENABLED &lt;= getdate() and (m.DTDISABLED is null or m.DTDISABLED>getdate()))"
+              />
+  </Object>
+
+  <Object name="ETDFacilityMarket2">
+    <table controlalignleft="1">
+      <TextBox datatype="string" accesskey="NextBlock"  style="width:240px;" autocomplete="true"/>
+      <Button type="Submit" referential="VW_MARKET_IDENTIFIER" condition="ETD_FACILITY" cssclass="fa-icon" tooltip="search"/>
+    </table>
+  </Object>
+
+  <!-- ************************************************** -->
+  <!-- To display facilities corresponding to Commodity Spot markets (MARKET.ISCOMMODITYSPOT = 1) -->
+  <Object  name="COMFacilityHeader">
+    <COMFacilityMarketIdentifier/>
+    <FacilityDates/>
+  </Object>
+
+  <Object  name="COMFacilityMarketIdentifier">
+    <COMFacilityMarket_L clientid="tradeHeader_market1_identifier" required="false"  postback="true"   />
+    <MarketDisplay clientid="tradeHeader_market1_identifier" helpelement="none" />
+  </Object>
+
+  <Object name="COMFacilityMarket_L">
+    <label helpschema="fixml" helpelement="SecurityExchange" />
+    <!--<COMFacilityMarket/>-->
+    <COMFacilityMarket2/>
+  </Object>
+
+  <Object name="COMFacilityMarket">
+    <DropDown datatype="string" width="270px" readonlymode ="isload:false;columntext:SHORT_ACRONYM;width:Empty"
+              accesskey="NextBlock"
+              listretrieval="sql:
+              select m.FIXML_SecurityExchange as VALUE, m.SHORT_ACRONYM as TEXT
+              from dbo.VW_MARKET_IDENTIFIER m 
+              where 
+              (m.ISCOMMODITYSPOT = 1) and (m.FIXML_SecurityExchange=m.ISO10383_ALPHA4) and 
+              (m.DTENABLED &lt;= getdate() and (m.DTDISABLED is null or m.DTDISABLED>getdate()))"
+              />
+  </Object>
+
+  <Object name="COMFacilityMarket2">
+    <table controlalignleft="1">
+      <TextBox datatype="string" accesskey="NextBlock"  style="width:240px;" autocomplete="true"/>
+      <Button type="Submit" referential="VW_MARKET_IDENTIFIER" condition="COM_FACILITY" cssclass="fa-icon"  tooltip="search"/>
+    </table>
+  </Object>
+
+
+  <!-- ************************************************** -->
+  <!-- To display facilities corresponding to Equity markets (MARKET.ISEQUITYMARKET = 1) -->
+  <Object  name="ESEFacilityHeader">
+    <ESEFacilityMarketIdentifier/>
+    <FacilityDates/>
+  </Object>
+
+  <Object  name="ESEFacilityMarketIdentifier">
+    <ESEFacilityMarket_L clientid="tradeHeader_market1_identifier" required="false"  postback="true"   />
+    <MarketDisplay clientid="tradeHeader_market1_identifier" helpelement="none" />
+  </Object>
+
+  <Object name="ESEFacilityMarket_L">
+    <label helpschema="fixml" helpelement="SecurityExchange" />
+    <!--<ESEFacilityMarket/>-->
+    <ESEFacilityMarket2/>
+  </Object>
+
+  <Object name="ESEFacilityMarket">
+    <DropDown datatype="string" width="270px" readonlymode ="isload:false;columntext:SHORT_ACRONYM;width:Empty"
+              accesskey="NextBlock"
+              listretrieval="sql:
+              select m.FIXML_SecurityExchange as VALUE, m.SHORT_ACRONYM as TEXT
+              from dbo.VW_MARKET_IDENTIFIER m 
+              where 
+              (m.ISEQUITYMARKET = 1) and (m.FIXML_SecurityExchange=m.ISO10383_ALPHA4) and 
+              (m.DTENABLED &lt;= getdate() and (m.DTDISABLED is null or m.DTDISABLED>getdate()))"
+              />
+  </Object>
+
+  <Object name="ESEFacilityMarket2">
+    <table controlalignleft="1">
+      <TextBox datatype="string" accesskey="NextBlock"  style="width:240px;" autocomplete="true"/>
+      <Button type="Submit" referential="VW_MARKET_IDENTIFIER" condition="ESE_FACILITY" cssclass="fa-icon"  tooltip="search"/>
+    </table>
+  </Object>
+
+
+  <!-- ************************************************** -->
+  <!-- Common objects -->
+  <!--EG 20240227 [WI855] Trade input : New data TVTIC-->
+  <Object  name="FacilityDates">
+    <AltDateTimeOffset_L clientid="tradeHeader_market1_orderEntered" postback="true" required="true" />
+    <br/>
+    <FacilityIdentifierFiller/>
+    <AltDateTimeOffset_L clientid="tradeHeader_market1_executionDateTime" postback="true" required="true" helpschema="efsml" helpelement="ExecutionDateTime"/>
+    <Tvtic/>
+  </Object>
+
+  <Object  name="FacilityIdentifierFiller">
+    <space/>
+    <space/>
+    <space/>
+    <space/>
+    <space/>
+  </Object>
+
+  <!-- clearedDate -->
+  <Object  name="ClearedDate">
+    <Date60_L clientid="tradeHeader_market1_clearedDate" postback="true" required="true" helpschema="efsml" helpelement="ClearedDate"/>
+  </Object>
+
+  <!--EG 20240227 [WI855] Trade input : New data TVTIC-->
+  <Object  name="Tvtic">
+    <String400_L clientid="tradeHeader_market1_tvtic" required="false" />
+  </Object>
+
+  <!--EG 20240227 [WI855] Trade input : New data TRDID-->
+  <Object  name="TrdId">
+    <String400_L clientid="tradeHeader_market1_trdId" required="false" />
+  </Object>
+
+  <!-- Used on all screens EXCEPT ETD, COM and ESE -->
+  <Object  name="FacilityHeaderBlock">
+    <table id="tbl_market" style="istableB:true;tblB-mainclass:gray;" verticalAlign="top" colspan="-1" controlalignleft="1">
+      <FacilityHeader/>
+      <br/>
+      <FacilityIdentifierFiller/>
+      <ClearedDate/>
+      <TrdId/>
+    </table>
+  </Object>
+
+  <!--EG 20240227 [WI855] Trade input : New data TRDID-->
+  <!--
+  <Object  name="FacilityHeaderBlock" context="allocation">
+    <table id="tbl_market" style="istableB:true;tblB-mainclass:gray;" verticalAlign="top" colspan="-1" controlalignleft="1">
+      <FacilityHeader/>
+      <br/>
+      <FacilityIdentifierFiller/>
+      <ClearedDate/>
+      <TrdId/>
+    </table>
+  </Object>
+  -->
+
+
+  <!-- ************************************************** -->
+  <!-- *** MARKET BLOCK                               *** -->
+  <!-- ************************************************** -->
+  <!-- Market + clearedDate + trdId                       -->
+  <!-- ************************************************** -->
+
+  <!-- CommoditySpot -->
+  <!--EG 20240227 [WI855] Trade input : New data TRDID-->
+  <!--
+  <Object  name="COMSElectricityMarketHeader">
+    <COMSElectricityMarketIdentifier/>
+    <space/>
+    <space/>
+    <TrdId/>
+  </Object>
+  -->
+
+  <!--EG 20240227 [WI855] Trade input : New data TRDID-->
+  <!--
+  <Object  name="COMSElectricityMarketHeader" context="allocation">
+    <COMSElectricityMarketIdentifier/>
+    <ClearedDate/>
+    <TrdId/>
+  </Object>
+
+  <Object  name="COMSElectricityMarketIdentifier">
+    <COMSMarket_L clientid="commoditySpot_electricityPhysicalLeg_commodityAsset_exchangeId" required="false" postback="true"/>
+    <MarketDisplay clientid="commoditySpot_electricityPhysicalLeg_commodityAsset_exchangeId"/>
+  </Object>
+
+  <Object  name="COMSGasMarketHeader">
+    <COMSGasMarketIdentifier/>
+    <space/>
+    <space/>
+    <TrdId/>
+  </Object>
+  -->
+
+  <!--EG 20240227 [WI855] Trade input : New data TRDID-->
+  <!--
+  <Object  name="COMSGasMarketHeader" context="allocation">
+    <COMSGasMarketIdentifier/>
+    <ClearedDate/>
+    <TrdId/>
+  </Object>
+
+  <Object  name="COMSGasMarketIdentifier">
+    <COMSMarket_L clientid="commoditySpot_gasPhysicalLeg_commodityAsset_exchangeId" required="false" postback="true"/>
+    <MarketDisplay clientid="commoditySpot_gasPhysicalLeg_commodityAsset_exchangeId"/>
+  </Object>
+  -->
+
+  <!-- EG 20221201 [25639][WI484] New -->
+  <!--EG 20240227 [WI855] Trade input : New data TRDID-->
+  <!--
+  <Object  name="COMSEnvironmentalMarketHeader">
+    <COMSEnvironmentalMarketIdentifier/>
+    <space/>
+    <space/>
+    <TrdId/>
+  </Object>
+  -->
+  <!--EG 20240227 [WI855] Trade input : New data TRDID-->
+  <!--
+  <Object  name="COMSEnvironmentalMarketHeader" context="allocation">
+    <COMSEnvironmentalMarketIdentifier/>
+    <ClearedDate/>
+    <TrdId/>
+  </Object>
+
+  <Object  name="COMSEnvironmentalMarketIdentifier">
+    <COMSMarket_L clientid="commoditySpot_environmentalPhysicalLeg_commodityAsset_exchangeId" required="false" postback="true"/>
+    <MarketDisplay clientid="commoditySpot_environmentalPhysicalLeg_commodityAsset_exchangeId"/>
+  </Object>
+  -->
+
+  <!-- EquitySecurityTransaction -->
+  <!--EG 20240227 [WI855] Trade input : New data TRDID-->
+  <Object  name="ESEMarketHeader">
+    <ESEMarketIdentifier/>
+    <ClearedDate/>
+    <TrdId/>
+  </Object>
+
+  <!--EG 20240227 [WI855] Trade input : New data TRDID-->
+  <!--
+  <Object  name="ESEMarketHeader" context="allocation">
+    <ESEMarketIdentifier/>
+    <ClearedDate/>
+    <TrdId/>
+  </Object>
+  -->
+  <Object  name="ESEMarketIdentifier">
+    <ESEMarket_L clientid="equitySecurityTransaction_FIXML_TrdCapRpt_Instrmt_Exch" required="false" postback="true"/>
+    <MarketDisplay clientid="equitySecurityTransaction_FIXML_TrdCapRpt_Instrmt_Exch"/>
+  </Object>
+
+  <!-- ExchangeTradedDerivative -->
+  <!--EG 20240227 [WI855] Trade input : New data TRDID-->
+  <Object  name="ETDMarketHeader">
+    <ETDMarketIdentifier/>
+    <ClearedDate/>
+    <TrdId/>
+  </Object>
+
+  <!-- StrategyETDMarketHeader -->
+  <Object  name="StrategyETDMarketHeader">
+    <ETDMarketIdentifier clientid="strategy" />
+    <ClearedDate/>
+    <TrdId/>
+  </Object>
+  
+  <!--EG 20240227 [WI855] Trade input : New data TRDID-->
+  <!--
+  <Object  name="ETDMarketHeader" context="allocation">
+    <ETDMarketIdentifier/>
+    <ClearedDate/>
+    <TrdId/>
+  </Object>
+  -->
+
+  <Object  name="ETDMarketIdentifier">
+    <ETDMarket_L clientid="exchangeTradedDerivative_FIXML_TrdCapRpt_Instrmt_Exch" required="false" postback="true"/>
+    <MarketDisplay clientid="exchangeTradedDerivative_FIXML_TrdCapRpt_Instrmt_Exch"/>
+  </Object>
+
+  <!-- CommoditySpot -->
+  <!--EG 20240227 [WI855] Trade input : New data TRDID-->
+  <Object  name="COMSElectricityMarketHeader">
+    <COMSMarketIdentifier clientid="commoditySpot_electricityPhysicalLeg_commodityAsset" />"
+    <ClearedDate/>
+    <TrdId/>
+  </Object>
+
+  <Object  name="COMSGasMarketHeader">
+    <COMSMarketIdentifier clientid="commoditySpot_gasPhysicalLeg_commodityAsset" />"
+    <ClearedDate/>
+    <TrdId/>
+  </Object>
+
+  <!-- EG 20221201 [25639][WI484] New -->
+  <!--EG 20240227 [WI855] Trade input : New data TRDID-->
+  <Object  name="COMSEnvironmentalMarketHeader">
+    <COMSMarketIdentifier clientid="commoditySpot_environmentalPhysicalLeg_commodityAsset" />"
+    <ClearedDate/>
+    <TrdId/>
+  </Object>
+
+  <Object  name="COMSMarketIdentifier">
+    <COMSMarket_L clientid="exchangeId" required="false" postback="true"/>
+    <MarketDisplay clientid="exchangeId"/>
+  </Object>
+  <!-- ************************************************** -->
+
+  <Object name="MarketDisplay" >
+    <space/>
+    <Button clientid="img" />
+    <Display helpelement="none" style="white-space:nowrap"/>
+  </Object>
+
+  <Object name="ETDMarket" helpschema="fixml" helpelement="SecurityExchange" >
+    <DropDown datatype="string" width="270px" readonlymode ="isload:false;columntext:SHORT_ACRONYM;width:Empty"
+              listretrieval="sql:
+    select m.FIXML_SecurityExchange as VALUE, SHORT_ACRONYM as TEXT
+    from dbo.VW_MARKET_FACILITY m
+    where (m.ISTRADEDDERIVATIVE = 1) and (m.FACILITY = '%%FACILITY%%') and 
+    (m.DTENABLED &lt;= getdate() and (m.DTDISABLED is null or m.DTDISABLED > getdate()))"
+    />
+  </Object>
+
+  <Object name="ETDMarket"  context="allocation" helpschema="fixml" helpelement="SecurityExchange" >
+    <DropDown datatype="string" width="270px"
+              readonlymode ="isload:false;columntext:SHORT_ACRONYM;width:Empty"
+              listretrieval="sql:
+    select m.FIXML_SecurityExchange as VALUE, SHORT_ACRONYM as TEXT
+    from dbo.VW_MARKET_FACILITY m
+    where (m.ISTRADEDDERIVATIVE = 1) and (%%ID_PARTY2%% &lt;= 0) and (m.FACILITY = '%%FACILITY%%') and 
+    (m.DTENABLED &lt;= getdate() and (m.DTDISABLED is null or m.DTDISABLED > getdate()))
+    union
+    select
+    m.FIXML_SecurityExchange as VALUE,SHORT_ACRONYM as TEXT
+    from dbo.VW_MARKET_FACILITY m
+    inner join dbo.ACTORROLE ar on ar.IDA = m.IDA
+    where (m.ISTRADEDDERIVATIVE = 1) and (ar.IDROLEACTOR = 'CSS') and (m.IDA = %%ID_PARTY2%%)  and (m.FACILITY = '%%FACILITY%%') and 
+    (m.DTENABLED &lt;= getdate() and (m.DTDISABLED is null or m.DTDISABLED > getdate()))
+    union
+    select
+    m.FIXML_SecurityExchange as VALUE,SHORT_ACRONYM as TEXT
+    from dbo.VW_MARKET_FACILITY m
+    inner join dbo.ACTOR ac on (ac.IDA = %%ID_PARTY2%%)
+    inner join dbo.ACTORROLE ar on (ar.IDA = ac.IDA) and (ar.IDROLEACTOR = 'CLEARER')
+    where (m.ISTRADEDDERIVATIVE = 1)  and (m.FACILITY = '%%FACILITY%%') and 
+    (m.DTENABLED &lt;= getdate() and (m.DTDISABLED is null or m.DTDISABLED > getdate()))"
+    />
+  </Object>
+
+  <Object name="ETDMarket2" >
+    <table controlalignleft="1">
+      <TextBox datatype="string" accesskey="NextBlock"  style="width:240px;" autocomplete="true" />
+      <Button type="Submit" referential="VW_MARKET_IDENTIFIER" condition="ETD_MARKET_FACILITY" cssclass="fa-icon"  tooltip="search"/>
+    </table>
+  </Object>
+
+  <Object name="ETDMarket_L">
+    <label helpschema="fixml" helpelement="SecurityExchange"/>
+    <!--<ETDMarket/>-->
+    <ETDMarket2/>
+  </Object>
+
+  <Object name="ESEMarket" helpschema="fixml" helpelement="SecurityExchange_t" >
+    <DropDown datatype="string" width="270px" readonlymode ="isload:false;columntext:SHORT_ACRONYM;width:Empty"
+              listretrieval="sql:
+    select m.FIXML_SecurityExchange as VALUE, m.SHORT_ACRONYM as TEXT
+    from dbo.VW_MARKET_FACILITY m 
+    inner join dbo.ASSETENV ae on (ae.IDI = %%ID_INSTRUMENT%%) and ((ae.IDM is null) or (m.IDM = ae.IDM))
+    where (m.ISEQUITYMARKET = 1) and (m.FACILITY = '%%FACILITY%%') and 
+    (m.DTENABLED &lt;= getdate() and (m.DTDISABLED is null or m.DTDISABLED > getdate()))"
+    />
+  </Object>
+
+  <!--
+  Si party2 non alimentée               => Chargement de tous les marchés 
+  Si party2 est un CSS (Clearing House) => Chargement de tous les marchés associés à la chambre de compensation
+  Si party2 est un CLEARER|CUSTODIAN    => Chargement de tous les marchés
+  // EG 20150611 [21057]
+  -->
+  <Object name="ESEMarket" context="allocation" helpschema="fixml" helpelement="SecurityExchange_t" >
+    <DropDown datatype="string" width="270px" readonlymode ="isload:false;columntext:SHORT_ACRONYM;width:Empty"
+              listretrieval="sql:
+    select m.FIXML_SecurityExchange as VALUE,m.SHORT_ACRONYM as TEXT
+    from dbo.VW_MARKET_FACILITY m
+    inner join dbo.ASSETENV ae on (ae.IDI = %%ID_INSTRUMENT%%) and ((ae.IDM is null) or (m.IDM = ae.IDM))
+    where (m.ISEQUITYMARKET = 1) and (%%ID_PARTY2%% &lt;= 0) and (m.FACILITY = '%%FACILITY%%') and  
+    (m.DTENABLED &lt;= getdate() and (m.DTDISABLED is null or m.DTDISABLED > getdate()))
+    union
+    select m.FIXML_SecurityExchange as VALUE,SHORT_ACRONYM as TEXT
+    from dbo.VW_MARKET_FACILITY m
+    inner join ASSETENV ae on (ae.IDI = %%ID_INSTRUMENT%%) and ((ae.IDM is null) or (m.IDM = ae.IDM))
+    inner join dbo.ACTORROLE ar on (ar.IDA = m.IDA)
+    where (m.ISEQUITYMARKET = 1) and (ar.IDROLEACTOR = 'CSS') and (m.IDA = %%ID_PARTY2%%) and (m.FACILITY = '%%FACILITY%%') and 
+    (m.DTENABLED &lt;= getdate() and (m.DTDISABLED is null or m.DTDISABLED > getdate()))
+    union
+    select m.FIXML_SecurityExchange as VALUE,SHORT_ACRONYM as TEXT
+    from dbo.VW_MARKET_FACILITY m
+    inner join dbo.ASSETENV ae on (ae.IDI = %%ID_INSTRUMENT%%) and ((ae.IDM is null) or (m.IDM = ae.IDM))
+    inner join dbo.ACTOR ac on (ac.IDA = %%ID_PARTY2%%)
+    inner join dbo.ACTORROLE ar on (ar.IDA = ac.IDA) and ar.IDROLEACTOR in ('CLEARER','CUSTODIAN')
+    where (m.ISEQUITYMARKET = 1) and (m.FACILITY = '%%FACILITY%%') and 
+    (m.DTENABLED &lt;= getdate() and (m.DTDISABLED is null or m.DTDISABLED > getdate()))"
+    />
+  </Object>
+
+  <Object name="ESEMarket2">
+    <table controlalignleft="1">
+      <TextBox datatype="string" accesskey="NextBlock"  style="width:240px;" autocomplete="true" />
+      <Button type="Submit" referential="VW_MARKET_IDENTIFIER" condition="ESE_MARKET_FACILITY" cssclass="fa-icon"  tooltip="search"/>
+    </table>
+  </Object>
+
+  <Object name="ESEMarket_L" >
+    <label elpschema="fixml" helpelement="SecurityExchange_t"/>
+    <!--<ESEMarket/>-->
+    <ESEMarket2/>
+  </Object>
+
+  <Object name="COMSMarket" helpschema="efsml" helpelement="CommodityAsset" >
+    <DropDown datatype="string" width="270px" readonlymode ="isload:false;columntext:SHORT_ACRONYM;width:Empty"
+              listretrieval="sql:
+    select m.FIXML_SecurityExchange as VALUE, m.SHORT_ACRONYM as TEXT
+    from dbo.VW_MARKET_FACILITY m 
+    inner join dbo.ASSETENV ae on (ae.IDI = %%ID_INSTRUMENT%%) and ((ae.IDM is null) or (m.IDM = ae.IDM))
+    where (m.ISCOMMODITYSPOT = 1) and (m.FACILITY = '%%FACILITY%%') and  
+    (m.DTENABLED &lt;= getdate() and (m.DTDISABLED is null or m.DTDISABLED > getdate()))"
+    />
+  </Object>
+
+  <!--
+  Si party2 non alimentée               => Chargement de tous les marchés 
+  Si party2 est un CSS (Clearing House) => Chargement de tous les marchés associés à la chambre de compensation
+  Si party2 est un CLEARER              => Chargement de tous les marchés
+  -->
+  <Object name="COMSMarket" context="allocation" helpschema="efsml" helpelement="CommodityAsset" >
+    <DropDown datatype="string" width="270px" readonlymode ="isload:false;columntext:SHORT_ACRONYM;width:Empty"
+              listretrieval="sql:
+    select m.FIXML_SecurityExchange as VALUE,m.SHORT_ACRONYM as TEXT
+    from dbo.VW_MARKET_FACILITY m
+    inner join dbo.ASSETENV ae on (ae.IDI = %%ID_INSTRUMENT%%) and ((ae.IDM is null) or (m.IDM = ae.IDM))
+    where (m.ISCOMMODITYSPOT = 1) and (%%ID_PARTY2%% &lt;= 0) and (m.FACILITY = '%%FACILITY%%') and 
+    (m.DTENABLED &lt;= getdate() and (m.DTDISABLED is null or m.DTDISABLED > getdate()))
+    union
+    select m.FIXML_SecurityExchange as VALUE,SHORT_ACRONYM as TEXT
+    from dbo.VW_MARKET_FACILITY m
+    inner join dbo.ASSETENV ae on (ae.IDI = %%ID_INSTRUMENT%%) and ((ae.IDM is null) or (m.IDM = ae.IDM))
+    inner join dbo.ACTORROLE ar on (ar.IDA = m.IDA)
+    where (m.ISCOMMODITYSPOT = 1) and (ar.IDROLEACTOR = 'CSS') and (m.IDA = %%ID_PARTY2%%) and (m.FACILITY = '%%FACILITY%%') and 
+    (m.DTENABLED &lt;= getdate() and (m.DTDISABLED is null or m.DTDISABLED > getdate()))
+    union
+    select m.FIXML_SecurityExchange as VALUE,SHORT_ACRONYM as TEXT
+    from dbo.VW_MARKET_FACILITY m
+    inner join dbo.ASSETENV ae on (ae.IDI = %%ID_INSTRUMENT%%) and ((ae.IDM is null) or (m.IDM = ae.IDM))
+    inner join dbo.ACTOR ac on (ac.IDA = %%ID_PARTY2%%)
+    inner join dbo.ACTORROLE ar on (ar.IDA = ac.IDA) and ar.IDROLEACTOR in ('CLEARER')
+    where (m.ISCOMMODITYSPOT = 1) and (m.FACILITY = '%%FACILITY%%') and 
+    (m.DTENABLED &lt;= getdate() and (m.DTDISABLED is null or m.DTDISABLED > getdate()))"
+    />
+  </Object>
+
+  <Object name="COMSMarket2">
+    <table controlalignleft="1">
+      <TextBox datatype="string" accesskey="NextBlock"  style="width:240px;" autocomplete="true" />
+      <Button type="Submit" referential="VW_MARKET_IDENTIFIER" condition="COM_MARKET_FACILITY" cssclass="fa-icon"  tooltip="search"/>
+    </table>
+  </Object>
+
+  <Object name="COMSMarket_L">
+    <label helpschema="efsml" helpelement="CommodityAsset" />
+    <!--<COMSMarket/>-->
+    <COMSMarket2/>
+  </Object>
+
+  <Object name="DSEMarket_L">
+    <label helpschema="efsml" helpelement="SecurityAsset" />
+    <DSEMarket/>
+  </Object>
+
+  <Object name="DSEMarket" helpschema="efsml" helpelement="SecurityAsset" >
+    <DropDown datatype="string" width="270px" readonlymode ="isload:false;columntext:SHORT_ACRONYM;width:Empty"
+              listretrieval="sql:
+    select m.FIXML_SecurityExchange as VALUE, m.SHORT_ACRONYM as TEXT
+    from dbo.VW_MARKET_IDENTIFIER m 
+    where (m.ISTRADEDDERIVATIVE = 0) and (m.DTENABLED &lt;= getdate() and (m.DTDISABLED is null or m.DTDISABLED > getdate()))"
+    />
+  </Object>
+
+</Objects>

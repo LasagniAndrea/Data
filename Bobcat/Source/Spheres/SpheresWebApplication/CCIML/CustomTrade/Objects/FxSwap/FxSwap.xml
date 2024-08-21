@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+	<!--FxSwapBlock-->
+	<Object name="FxSwapBlock">
+		<Table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:FxSwap;">
+			<table style="istableH:true;tblH-title:Fx Leg 1;tblH-css:size5;tblH-reverse:1;helpschema:efsml;helpelement:FxLeg;" colspan="-1" >
+				<FxLegLight clientid="fx" occurs="1" firstindex="1" helpschema="fpml" helpelement="FxLeg"/>
+			</table>
+			<table style="istableH:true;tblH-title:Fx Leg 2;tblH-css:size5;tblH-reverse:1;helpschema:efsml;helpelement:FxLeg;" colspan="-1" >
+				<FxLegRich clientid="fx" occurs="1" firstindex="2" helpschema="fpml" helpelement="FxLeg"/>
+			</table>
+		</Table>
+	</Object>
+
+  <!--FI 20161114 [RATP] add -->
+  <Object name="FxSwapNBlock">
+    <Table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:FxSwap;">
+      <FxLegLightInTable clientid="fx" occurs="2" minoccurs="2" addsuboperator="true"  helpschema="fpml" helpelement="FxLeg"/>
+    </Table>
+  </Object>
+
+</Objects>

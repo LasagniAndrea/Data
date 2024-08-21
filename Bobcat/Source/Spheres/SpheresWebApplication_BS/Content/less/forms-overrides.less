@@ -1,0 +1,73 @@
+﻿//
+// Override Variables
+// --------------------------------------------------
+@import (reference) "../bootstrap/variables.less";
+@import (reference) "../bootstrap/mixins/forms.less";
+
+.input-xs {
+    .input-size(@input-height-xs; @padding-xs-vertical; @padding-xs-horizontal; @font-size-small; @line-height-small; @input-border-radius-small);
+}
+
+.form-group-xs {
+    @media (min-width: @screen-sm-min) {
+        .control-label {
+            padding-top: 0;
+            font-size: @font-size-small;
+        }
+    }
+}
+
+@media (min-width: @screen-sm-min) {
+    .control-label {
+        padding-top: 0;
+    }
+}
+
+// Style pour les validateurs de contrôles
+.has-error {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.has-error .form-control {
+    background-color: @alert-danger-bg;
+}
+
+.has-error .vtor {
+    color: @alert-danger-text;
+    font-size:75%;
+    padding-left:4px;
+
+    &::before{
+        font-family: 'Glyphicons Halflings';
+        content: "\270f";
+        padding-right:6px;
+    }
+}
+
+// Style pour les validateurs de contrôles
+
+.vtor {
+    &[style*="visibility: visible"],
+    &[style*="display: inline"]{
+
+    color: @alert-danger-text;
+    font-size:75%;
+    padding-left:4px;
+
+        &::before{
+            font-family: 'Glyphicons Halflings';
+            content: "\270f";
+            padding-right:6px;
+        }
+
+        & + *.form-control{
+            background-color: @alert-danger-bg;
+        }
+
+    }
+
+
+}
+

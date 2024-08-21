@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://www.efs.org/2007/EFSmL-3-0"
+            xmlns="http://www.efs.org/2007/EFSmL-3-0"
+            xmlns:fpml="http://www.fpml.org/2007/FpML-4-4"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+  <xsd:import namespace="http://www.fpml.org/2007/FpML-4-4" schemaLocation="../FpML44/fpml-main-4-4.xsd" />
+  <xsd:include schemaLocation="EfsML-Shared-3-0.xsd"/>
+
+  <xsd:element name="asset" type="ShortAsset" substitutionGroup="fpml:underlyingAsset"/>
+
+  <!-- ****************************** -->
+  <!-- Basket                         -->
+  <!-- ****************************** -->
+  <xsd:complexType name="Basket">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:Basket">
+        <xsd:sequence>
+          <xsd:element name="cappedFlooredPrice" type="UnderlyerCappedFlooredPrice" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- BasketConstituent              -->
+  <!-- ****************************** -->
+  <xsd:complexType name="BasketConstituent">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:BasketConstituent">
+        <xsd:sequence>
+          <xsd:element name="cappedFlooredPrice" type="UnderlyerCappedFlooredPrice" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- Bond                           -->
+  <!-- ****************************** -->
+  <xsd:complexType name="Bond">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:Bond">
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- CommodityAsset                 -->
+  <!-- ****************************** -->
+  <xsd:complexType name="CommodityAsset">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:ExchangeTraded">
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- ConvertibleBond                -->
+  <!-- ****************************** -->
+  <xsd:complexType name="ConvertibleBond">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:ConvertibleBond">
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- Deposit                        -->
+  <!-- ****************************** -->
+  <xsd:complexType name="Deposit">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:Deposit">
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- EquityAsset                    -->
+  <!-- ****************************** -->
+  <xsd:complexType name="EquityAsset">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:EquityAsset">
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- ExchangeTradedContract         -->
+  <!-- ****************************** -->
+  <xsd:complexType name="ExchangeTradedContract">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:ExchangeTradedContract">
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- ExchangeTradedFund             -->
+  <!-- ****************************** -->
+  <xsd:complexType name="ExchangeTradedFund">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:ExchangeTradedFund">
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- Future                         -->
+  <!-- ****************************** -->
+  <xsd:complexType name="Future">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:Future">
+        <xsd:sequence>
+          <xsd:element name="settlementType" type="fpml:SettlementTypeEnum" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- FxRateAsset                    -->
+  <!-- ****************************** -->
+  <xsd:complexType name="FxRateAsset">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:FxRateAsset">
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- Index                          -->
+  <!-- ****************************** -->
+  <xsd:complexType name="Index">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:Index">
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- Loan                          -->
+  <!-- ****************************** -->
+  <xsd:complexType name="Loan">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:Loan">
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- Mortgage                       -->
+  <!-- ****************************** -->
+  <xsd:complexType name="Mortgage">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:Mortgage">
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- MutualFund                     -->
+  <!-- ****************************** -->
+  <xsd:complexType name="MutualFund">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:MutualFund">
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- RateIndex                      -->
+  <!-- ****************************** -->
+  <xsd:complexType name="RateIndex">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:RateIndex">
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+	<!-- ****************************** -->
+	<!-- ShortAsset                     -->
+	<!-- ****************************** -->
+
+  <xsd:complexType name="ShortAsset">
+		<xsd:complexContent>
+			<xsd:extension base="fpml:UnderlyingAsset">
+				<xsd:sequence>
+					<xsd:element name="instrument" type="ProductType" minOccurs ="0" maxOccurs ="1"/>
+					<xsd:element name="notionalAmount" type="fpml:Money" minOccurs ="0" maxOccurs ="1"/>
+					<xsd:element name="periodNumberOfDays" type="xsd:integer" minOccurs ="0" maxOccurs ="1"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- ****************************** -->
+  <!-- SimpleCreditDefaultSwap        -->
+  <!-- ****************************** -->
+  <xsd:complexType name="SimpleCreditDefaultSwap">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:SimpleCreditDefaultSwap">
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- SimpleIRSwap                   -->
+  <!-- ****************************** -->
+  <xsd:complexType name="SimpleIRSwap">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:SimpleIRSwap">
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- SingleUnderlyer                -->
+  <!-- ****************************** -->
+  <xsd:complexType name="SingleUnderlyer">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:SingleUnderlyer">
+        <xsd:sequence>
+          <xsd:element name="cappedFlooredPrice" type="UnderlyerCappedFlooredPrice" minOccurs="0" />
+          <xsd:element name="notionalBase" type="fpml:Money" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- UnderlyerCappedFlooredPrice    -->
+  <!-- ****************************** -->
+  <xsd:complexType name="UnderlyerCappedFlooredPrice">
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:element name="price"           type="xsd:decimal" />
+        <xsd:element name="priceRelativeTo" type="PriceReference" />
+      </xsd:choice>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

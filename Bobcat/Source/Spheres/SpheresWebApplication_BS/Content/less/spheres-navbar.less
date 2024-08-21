@@ -1,0 +1,158 @@
+@import (reference) "../bootstrap/bootstrap.less";
+@import (reference) "spheres-variables.less";
+@import (reference) "mixins/spheres.less";
+
+/******************************************************************************/
+/* START : NAVBAR (TOP-BOTTOM)                                                */
+/******************************************************************************/
+
+.sph-navbarbottom {
+    min-height: 30px !important;
+    font-size: 85%;
+    color: #5c5b5b;
+    border-top: 3pt solid #545454;
+
+    .navbar-brand {
+        padding-bottom: 0px !important;
+        height: 30px !important;
+        color: #545454;
+        background: url(../../Images/Spheres-Blue.png) no-repeat;
+        font-size: larger;
+        background-position: 5px 12px;
+        padding-top: 13px;
+        padding-left: 25px;
+
+        @media (min-width: @screen-xs-min) {
+            background-position: 5px 5px;
+            padding-top: 6px !important;
+            padding-left: 25px;
+            font-size: 100%;
+        }
+
+        @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
+            background-position: 12px 12px;
+            padding-top: 12px !important;
+            padding-left: 30px;
+            font-size: larger;
+        }
+    }
+
+    .navbar-nav {
+        > li > a {
+            padding-top: 6px !important;
+            padding-bottom: 0px !important;
+            height: 30px !important;
+            font-size: larger;
+        }
+    }
+}
+
+.sph-v-divider {
+    .v-divider;
+}
+
+.v-divider(@color: #cecbcb,@height: 30px) {
+    border-left: 1px solid @color;
+    border-right: 1px solid #ffffff;
+    height: @height;
+    margin: 0 5px;
+    .hidden-xs;
+}
+
+#navbartop {
+    .container-fluid {
+        .navbar-header {
+            > a.navbar-brand {
+                color: #fff;
+            }
+        }
+    }
+}
+
+
+#navbartopsecond {
+    top: 50px;
+    min-height: 30px;
+    max-height: 30px;
+    z-index: 1000;
+
+    .navbar-nav > li {
+        > a {
+            padding-top: 5px;
+        }
+
+        > button {
+            margin: 4px 2px;
+        }
+    }
+
+    .container-fluid {
+        .navbar-header {
+            > a.navbar-brand {
+                color: @sph-repository-color;
+                padding: 0px 5px;
+                font-size: 18px;
+                font-weight:bold;
+                line-height: inherit;
+                height: inherit;
+            }
+        }
+    }
+}
+
+#navbarbottom {
+    .sph-navbarbottom;
+
+    .container-fluid {
+
+        .navbar-header {
+            > button {
+                .icon-bar {
+                    display: block;
+                    width: 11px;
+                    height: 1px;
+                    border-radius: 1px;
+                }
+
+                .icon-bar + .icon-bar {
+                    margin-top: 2px;
+                }
+            }
+        }
+    }
+}
+
+/******************************************************************************/
+/* END : NAVBAR (TOP-BOTTOM)                                                  */
+/******************************************************************************/
+
+/******************************************************************************/
+/* START : NAVBAR TABS with PANEL                                             */
+/******************************************************************************/
+
+.sph-nav-tabs .nav-justified {
+    margin-bottom: -1px;
+}
+
+.panel.sph-nav-tabs.panel-default {
+    > .panel-heading {
+        .sph-nav-tabs-styles();
+    }
+
+    > .panel-body {
+        background-color: #e8e8e8;
+    }
+}
+
+.sph-nav-tabs-init(primary, @btn-primary-color,@btn-primary-bg, darken(@btn-primary-bg, 9%));
+.sph-nav-tabs-init(danger, @btn-danger-color,@btn-danger-bg, darken(@btn-danger-bg, 9%));
+.sph-nav-tabs-init(success, @btn-success-color,@btn-success-bg, darken(@btn-success-bg, 9%));
+.sph-nav-tabs-init(warning, @btn-warning-color,@btn-warning-bg, darken(@btn-warning-bg, 9%));
+.sph-nav-tabs-init(info, @btn-info-color,@btn-info-bg, darken(@btn-info-bg, 9%));
+.sph-nav-tabs-init(default, @sph-gray-color,@sph-gray-medium-color, #dddddd, #e8e8e8);
+.sph-nav-tabs-init(secondary, @sph-gray-color, @sph-gray-color, @sph-gray-medium-color);
+
+/******************************************************************************/
+/* END : NAVBAR TABS with PANEL                                               */
+/******************************************************************************/
+

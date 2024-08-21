@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Screens>
+  <!-- EG 20171113 [23509] Upd Gestion Objets Facility / Dates et Marché -->
+	<!-- SwaptionOTCml -->
+	<Screen name="SwaptionAmerican-Broker" caption="Swaption American (Screen Broker)" product="swaption">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSales-DRV-Block/>
+		<SwaptionAmericanBlock clientid="swaption"/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+    <ComplianceBlock/>
+	</Screen>
+	<Screen name="SwaptionBermuda-Broker" caption="Swaption Bermuda (Screen Broker)" product="swaption">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSales-DRV-Block/>
+		<SwaptionBermudaBlock clientid="swaption"/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+    <ComplianceBlock/>
+	</Screen>
+	<Screen name="SwaptionEuropean-Broker" caption="Swaption European (Screen Broker)" product="swaption">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSales-DRV-Block/>
+		<SwaptionEuropeanBlock clientid="swaption"/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+    <ComplianceBlock/>
+	</Screen>
+</Screens>

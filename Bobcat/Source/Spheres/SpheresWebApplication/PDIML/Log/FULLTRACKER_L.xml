@@ -1,0 +1,1239 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- FI 20130113 [19476] Gestion de la colonne UPD -->
+<!-- RD 20130114 [18349] Gérer la compatibilité avec Spheres Vision et Portal en utilisant %%DH:SQLIF%%-->
+<!-- RD 20171020 [23522] Rollback des modifs d'Eric dans le cadre du projet BS-->
+<!-- EG 20180525 [23979] IRQ Processing -->
+<!-- FI 20190828 [24869] Ajout du bouton IO -->
+<!-- FI 20200810 [XXXXX] Add .ToUTC() method-->
+<!-- FI 20201030 [25537] Gestion des Messages sans incidence -->
+<!-- FI 20210121 [XXXXX] Add column TRACKERDTINS et TRACKERDTUPD -->
+<!-- EG 20210823 [XXXXX] Scission colonne IDAINS/DTINS et READYSTATE/DTUPD pour possibilité de trier via le Header de colonne sur l'horodatage -->
+<!-- EG 20240125 [WI825] Logs: Harmonization data of consultation(via Tracker or Processing requests) -->
+<!-- AL 20240703 [WI605] Add column Duration -->
+<Referentials>
+	<Referential>
+		<IsUseSQLParameters>true</IsUseSQLParameters>
+		<TableName>TRACKER_L</TableName>
+		<ColumnByRow>3</ColumnByRow>
+		<Create>false</Create>
+		<Modify>true</Modify>
+		<Remove>false</Remove>
+		<!-- FI 20191002 Lecture de la vue VW_ATTACHEDDOC_TRACKER_L -->
+		<AttachedDoc viewName="VW_ATTACHEDDOC_TRACKER_L">true</AttachedDoc>
+		<XSLFileName/>
+
+		<!-- FI 20190828 [24869] Ajout du bouton IO -->
+		<Button title="IO" url="List.aspx?Log=IOTRACK&amp;InputMode=2&amp;P1=IDTRK_L&amp;FK=%%COLUMN_VALUE%%IDTRK_L%%&amp;IDMenu=OTC_VIEW_IOTRACK" tooltip="Msg_IODetailedTrack" bkgcolor="green"/>
+
+		<Button title="btnErrorDetailedLog" url="List.aspx?Log=TRACKERDET_L&amp;InputMode=2&amp;IDMenu=OTC_VIEW_LOGREQUESTPROCESS&amp;OpenerSpecifiedSQLField=ISSHOWONERROR&amp;ValueForFilter=True" tooltip="Msg_ErrorDetailedLog" bkgcolor="red"/>
+		<Button title="btnWarningDetailedLog" url="List.aspx?Log=TRACKERDET_L&amp;InputMode=2&amp;IDMenu=OTC_VIEW_LOGREQUESTPROCESS&amp;OpenerSpecifiedSQLField=ISSHOWONWARNING&amp;ValueForFilter=True" tooltip="Msg_ErrorAndWarningDetailedLog" bkgcolor="orange"/>
+		<Button title="btnInterruptDetailedLog" url="List.aspx?Log=TRACKERDET_L&amp;InputMode=2&amp;IDMenu=OTC_VIEW_LOGREQUESTPROCESS&amp;OpenerSpecifiedSQLField=MESSAGE&amp;ValueForFilter=IRQ_EXECUTED" tooltip="Msg_InterruptDetailedLog" bkgcolor="gray"/>
+		<Button title="btnFullDetailedLog" url="List.aspx?Log=TRACKERDET_L&amp;InputMode=2&amp;IDMenu=OTC_VIEW_LOGREQUESTPROCESS" tooltip="Msg_FullDetailedLog" bkgcolor="blue"/>
+
+		<SQLSelect>
+			<Command rdbms="sqlserver">
+				<![CDATA[
+		select  
+		CASE tk.READYSTATE
+			WHEN 'TERMINATED' THEN DATEDIFF(s, tk.DTINS, tk.DTUPD) 
+			ELSE DATEDIFF(s, tk.DTINS, GETUTCDATE())
+			END as DURATION,		
+        tk.GROUPTRACKER, tk.GROUPTRACKER as GROUPTRACKERDISPLAYNAME, 
+        tk.IDTRK_L, tk.DTINS, tk.IDAINS, tk.HOSTNAMEINS , tk.IDSESSIONINS, 
+        tk.READYSTATE, tk.STATUSTRACKER, 
+        tk.ISMARKED, tk.NOTEMARKED, tk.IDAMARKED, tk.DTMARKED, 
+        tk.POSTEDMSG, tk.POSTEDSUBMSG, tk.SUCCESSMSG, tk.WARNINGMSG, tk.ERRORMSG, tk.NONEMSG,
+        pl.IDPROCESS_L, pl.PROCESS, pl.DTSTPROCESS, pl.IDA, pl.HOSTNAME, pl.APPNAME, pl.APPVERSION,                
+		
+        tk.GROUPTRACKER as GROUPTRACKER2,
+        tk.IDAINS as IDAINS2, tk.DTINS as TRACKERDTINS, 
+        tk.READYSTATE as READYSTATE2, tk.DTUPD as TRACKERDTUPD, tk.STATUSTRACKER as STATUSTRACKER2, 
+		tk.DTUPD, tk.IDAUPD, tk.HOSTNAMEUPD , tk.IDSESSIONUPD,
+        tk.IDDATAIDENT, smd.SHORTMESSAGE, 
+        %%DH:SQLIF%%[%%PARAM1%%;COMMON;case when mat.MATURITYMONTHYEAR is not null then mat.MATURITYMONTHYEAR 
+ 			  	   when asset.IDENTIFIER is not null then asset.IDENTIFIER 
+				     when io.IDENTIFIER is not null then io.IDENTIFIER 
+				     when ac.IDENTIFIER is not null then ac.IDENTIFIER 
+				     when tr.IDENTIFIER is not null then tr.IDENTIFIER 
+             when tk.IDDATA > 0 then convert(varchar(32), tk.IDDATA)
+				     else '-'
+				     end as IDDATA,]
+        %%DH:SQLIF%%[%%PARAM1%%;ONLYSIO;case when io.IDENTIFIER is not null then io.IDENTIFIER
+				     when ac.IDENTIFIER is not null then ac.IDENTIFIER 
+				     when tk.IDDATA > 0 then convert(varchar(32), tk.IDDATA)
+				     else '-'
+				     end as IDDATA,]
+            case when smd.SYSCODE is null and smd_gb.SYSCODE is null
+            then pl.MESSAGE
+            else
+            case sm.SYSCODE when 'LOG' then '' when 'TRK' then ''
+                 else sm.SYSCODE || '-' || right('00000' || convert(varchar,sm.SYSNUMBER),5) || ': '
+                 end
+            ||
+            replace(replace(replace(replace(replace(
+            isnull(smd.MESSAGE,smd_gb.MESSAGE),
+            '{1}',isnull(tk.DATA1,'{1}')),
+            '{2}',isnull(tk.DATA2,'{2}')),
+            '{3}',isnull(tk.DATA3,'{3}')),
+            '{4}',isnull(tk.DATA4,'{4}')),
+            '{5}',isnull(tk.DATA5,'{5}'))
+            end 
+            || 
+            case when pl.QUEUEMSG is null then '' else '<br/> - Message: <b>' || pl.QUEUEMSG || '</b>' end
+            as MESSAGE,
+             
+          tk.DATA1IDENT, tk.DATA1, tk.DATA2IDENT, tk.DATA2, tk.DATA3IDENT, tk.DATA3, tk.DATA4IDENT, tk.DATA4, tk.DATA5IDENT, tk.DATA5,
+          tk.EXTLID, tk.ACKXML, tk.ACKSTATUS, tk.SYSNUMBER,
+          tk.EXTLLINK, tk.ROWATTRIBUT, tk.ROWVERSION		  
+          from dbo.TRACKER_L tk 
+          left outer join (
+            select IDTRK_L, IDPROCESS_L, PROCESS, DTSTPROCESS, IDA, HOSTNAME, APPNAME, APPVERSION, 
+            MESSAGE, QUEUEMSG 
+            from dbo.PROCESS_L 
+            where %%WHEREDATAKEY%% order by IDPROCESS_L offset 0 row fetch next 1 rows only
+          ) pl on (pl.IDTRK_L = tk.IDTRK_L)
+          left outer join dbo.SYSTEMMSG sm on (sm.SYSCODE=tk.SYSCODE) and (sm.SYSNUMBER=tk.SYSNUMBER)
+          left outer join dbo.SYSTEMMSGDET smd on (smd.SYSCODE=sm.SYSCODE) and (smd.SYSNUMBER=sm.SYSNUMBER) and (smd.CULTURE='%%CULTURE_USER_ISO3166_ALPHA2%%')
+          left outer join dbo.SYSTEMMSGDET smd_gb on (smd_gb.SYSCODE=sm.SYSCODE) and (smd_gb.SYSNUMBER=sm.SYSNUMBER) and (smd_gb.CULTURE='en')
+          left outer join dbo.ACTOR ac on (ac.IDA = tk.IDDATA) and (tk.IDDATAIDENT = 'ACTOR')
+          %%DH:SQLIF%%[%%PARAM1%%;COMMON;left outer join dbo.TRADE tr on (tr.IDT = tk.IDDATA) and (tk.IDDATAIDENT like 'TRADE%') 
+          left outer join dbo.IOTASK io on (io.IDIOTASK = tk.IDDATA) and (tk.IDDATAIDENT = 'IOTASK') 
+          left outer join dbo.QUOTE_FXRATE_H quote on (quote.IDQUOTE_H = tk.IDDATA) and (tk.IDDATAIDENT = 'QUOTE_FXRATE_H')
+          left outer join dbo.ASSET_FXRATE asset on (asset.IDASSET = quote.IDASSET)
+          left outer join dbo.MATURITY mat on (mat.IDMATURITY = tk.IDDATA) and (tk.IDDATAIDENT = 'MATURITY')]
+          %%DH:SQLIF%%[%%PARAM1%%;ONLYSIO;left outer join dbo.IOTASK io on (io.IDIOTASK = tk.IDDATA) and (tk.IDDATAIDENT = 'IOTASK')]
+        
+         where
+          <choose>
+            <when test="{GROUPTRACKER}=null">
+              (1=1)
+            </when>
+            <otherwise>
+              (tk.GROUPTRACKER = @GROUPTRACKER)
+            </otherwise>
+          </choose>  
+          <choose>
+            <when test="{READYSTATE}=null">
+              and (1=1)
+            </when>
+            <otherwise>
+              and (tk.READYSTATE = @READYSTATE)
+            </otherwise>
+          </choose>  
+          <choose>
+            <when test="{STATUSTRACKER}=null">
+              and (1=1)
+            </when>
+            <otherwise>
+              and (tk.STATUSTRACKER = @STATUSTRACKER)
+            </otherwise>
+          </choose>  
+          <choose>
+            <when test="{DTHISTORY} > 0001-01-01">
+              and (isnull(tk.DTUPD, tk.DTINS)) >= @DTHISTORY.ToUTC()
+            </when>
+          </choose>
+          <choose>
+            <when test="{ISMARKED}=1">
+              and (tk.ISMARKED = 1) 
+            </when>
+            <when test="{ISMARKED}=0">
+              and (tk.ISMARKED = 0) 
+            </when>
+          </choose>
+        ]]>
+			</Command>
+			<Command rdbms="oracle">
+				<![CDATA[
+		select 
+			CASE tk.READYSTATE
+				WHEN 'TERMINATED' THEN EXTRACT(DAY FROM (tk.DTUPD - tk.DTINS)*24*60*60) 
+				ELSE EXTRACT(DAY FROM (SYS_EXTRACT_UTC(SYSTIMESTAMP) - tk.DTINS)*24*60*60) 
+				END as DURATION,
+        tk.GROUPTRACKER, tk.GROUPTRACKER as GROUPTRACKERDISPLAYNAME, 
+        tk.IDTRK_L, tk.DTINS, tk.IDAINS, tk.HOSTNAMEINS , tk.IDSESSIONINS, 
+        tk.READYSTATE, tk.STATUSTRACKER, 
+        tk.ISMARKED, tk.NOTEMARKED, tk.IDAMARKED, tk.DTMARKED, 
+        tk.POSTEDMSG, tk.POSTEDSUBMSG, tk.SUCCESSMSG, tk.WARNINGMSG, tk.ERRORMSG, tk.NONEMSG,
+        pl.IDPROCESS_L, pl.PROCESS, pl.DTSTPROCESS, pl.IDA, pl.HOSTNAME, pl.APPNAME, pl.APPVERSION,
+        
+        tk.GROUPTRACKER as GROUPTRACKER2,
+        tk.IDAINS as IDAINS2, tk.DTINS as TRACKERDTINS, 
+        tk.READYSTATE as READYSTATE2, tk.DTUPD as TRACKERDTUPD, tk.STATUSTRACKER as STATUSTRACKER2, 
+		tk.DTUPD, tk.IDAUPD, tk.HOSTNAMEUPD , tk.IDSESSIONUPD,
+        tk.IDDATAIDENT, smd.SHORTMESSAGE, 
+        %%DH:SQLIF%%[%%PARAM1%%;COMMON;case when mat.MATURITYMONTHYEAR is not null then mat.MATURITYMONTHYEAR 
+ 			  	   when asset.IDENTIFIER is not null then asset.IDENTIFIER 
+				     when io.IDENTIFIER is not null then io.IDENTIFIER 
+				     when ac.IDENTIFIER is not null then ac.IDENTIFIER 
+				     when tr.IDENTIFIER is not null then tr.IDENTIFIER 
+				     when tk.IDDATA > 0 then to_char(tk.IDDATA)
+				     else '-'
+				     end as IDDATA,]
+        %%DH:SQLIF%%[%%PARAM1%%;ONLYSIO;case when io.IDENTIFIER is not null then io.IDENTIFIER 
+				     when ac.IDENTIFIER is not null then ac.IDENTIFIER 
+				     when tk.IDDATA > 0 then to_char(tk.IDDATA)
+				     else '-'
+				     end as IDDATA,]
+            case when smd.SYSCODE is null and smd_gb.SYSCODE is null
+            then pl.MESSAGE
+            else
+            case sm.SYSCODE when 'LOG' then '' when 'TRK' then ''
+                 else sm.SYSCODE || '-' || substr('00000' || to_char(sm.SYSNUMBER),-5) || ': '
+                 end
+            ||
+            replace(replace(replace(replace(replace(
+            nvl(smd.MESSAGE,smd_gb.MESSAGE),
+            '{1}',nvl(tk.DATA1,'{1}')),
+            '{2}',nvl(tk.DATA2,'{2}')),
+            '{3}',nvl(tk.DATA3,'{3}')),
+            '{4}',nvl(tk.DATA4,'{4}')),
+            '{5}',nvl(tk.DATA5,'{5}'))
+            end 
+            || 
+            case when pl.QUEUEMSG is null then '' else '<br/> - Message: <b>' || pl.QUEUEMSG || '</b>' end
+            as MESSAGE,
+             
+        tk.DATA1IDENT, tk.DATA1, tk.DATA2IDENT, tk.DATA2, tk.DATA3IDENT, tk.DATA3, tk.DATA4IDENT, tk.DATA4, tk.DATA5IDENT, tk.DATA5,
+        tk.EXTLID, tk.ACKXML, tk.ACKSTATUS, tk.SYSNUMBER,
+        tk.EXTLLINK, tk.ROWATTRIBUT, tk.ROWVERSION
+        from dbo.TRACKER_L tk 
+        left outer join (
+          select IDTRK_L, IDPROCESS_L, PROCESS, DTSTPROCESS, IDA, HOSTNAME, APPNAME, APPVERSION, 
+          MESSAGE, QUEUEMSG 
+          from dbo.PROCESS_L  
+          where %%WHEREDATAKEY%% order by IDPROCESS_L offset 0 row fetch next 1 rows only
+        ) pl on (pl.IDTRK_L = tk.IDTRK_L)
+        left outer join dbo.SYSTEMMSG sm on (sm.SYSCODE=tk.SYSCODE) and (sm.SYSNUMBER=tk.SYSNUMBER)
+        left outer join dbo.SYSTEMMSGDET smd on (smd.SYSCODE=sm.SYSCODE) and (smd.SYSNUMBER=sm.SYSNUMBER) and (smd.CULTURE='%%CULTURE_USER_ISO3166_ALPHA2%%')
+        left outer join dbo.SYSTEMMSGDET smd_gb on (smd_gb.SYSCODE=sm.SYSCODE) and (smd_gb.SYSNUMBER=sm.SYSNUMBER) and (smd_gb.CULTURE='en')
+        left outer join dbo.ACTOR ac on (ac.IDA = tk.IDDATA) and (tk.IDDATAIDENT = 'ACTOR')
+        %%DH:SQLIF%%[%%PARAM1%%;COMMON;left outer join dbo.TRADE tr on (tr.IDT = tk.IDDATA) and (tk.IDDATAIDENT like 'TRADE%') 
+        left outer join dbo.IOTASK io on (io.IDIOTASK = tk.IDDATA) and (tk.IDDATAIDENT = 'IOTASK') 
+        left outer join dbo.QUOTE_FXRATE_H quote on (quote.IDQUOTE_H = tk.IDDATA) and (tk.IDDATAIDENT = 'QUOTE_FXRATE_H')
+        left outer join dbo.ASSET_FXRATE asset on (asset.IDASSET = quote.IDASSET)
+        left outer join dbo.MATURITY mat on (mat.IDMATURITY = tk.IDDATA) and (tk.IDDATAIDENT = 'MATURITY')]
+        %%DH:SQLIF%%[%%PARAM1%%;ONLYSIO;left outer join dbo.IOTASK io on (io.IDIOTASK = tk.IDDATA) and (tk.IDDATAIDENT = 'IOTASK')]
+        
+        where
+        <choose>
+          <when test="{GROUPTRACKER}=null">
+            (1=1)
+          </when>
+          <otherwise>
+            (tk.GROUPTRACKER = @GROUPTRACKER)
+          </otherwise>
+        </choose>  
+        <choose>
+          <when test="{READYSTATE}=null">
+            and (1=1)
+          </when>
+          <otherwise>
+            and (tk.READYSTATE = @READYSTATE)
+          </otherwise>
+        </choose>  
+        <choose>
+          <when test="{STATUSTRACKER}=null">
+            and (1=1)
+          </when>
+          <otherwise>
+            and (tk.STATUSTRACKER = @STATUSTRACKER)
+          </otherwise>
+        </choose>
+        <choose>
+          <when test="{DTHISTORY} > 0001-01-01">
+           and  (nvl(tk.DTUPD, tk.DTINS)) >= @DTHISTORY.ToUTC()
+          </when>
+        </choose>
+        <choose>
+          <when test="{ISMARKED}=1">
+            and (tk.ISMARKED = 1) 
+          </when>
+          <when test="{ISMARKED}=0">
+            and (tk.ISMARKED = 0) 
+          </when>
+        </choose>
+        ]]>
+			</Command>
+		</SQLSelect>
+
+		<SQLRowStyle type="class">
+			<![CDATA[
+      case STATUSTRACKER
+      when 'ERROR' then 'DataGrid-ERROR_2'
+      when 'IRQ' then 'DataGrid-IRQ_2'
+      when 'WARNING' then 'DataGrid-WARNING_2'
+      when 'PENDING' then 'DataGrid-PENDING_2'
+      else 'DataGrid-NA'
+      end
+      ]]>
+		</SQLRowStyle>
+
+		<SQLRowState headerText="ISMARKED">
+			<![CDATA[
+      case when ISMARKED = 1 then 'lstaw=name:marked ' || STATUSTRACKER || ';' || 
+      'alt:' || convert(varchar,DTMARKED ,112)|| '<br/>' || NOTEMARKED || ';' end 
+      ]]>
+		</SQLRowState>
+
+		<!-- Characteristics-->
+		<Column>
+			<ColumnName>IDTRK_L</ColumnName>
+			<ColumnPositionInDataGrid>0</ColumnPositionInDataGrid>
+			<Ressource>Request</Ressource>
+			<DataType>int</DataType>
+			<Length>10</Length>
+			<Align>left</Align>
+			<InputWidth>20%</InputWidth>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsDataKeyField>true</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<Relation/>
+			<html_BLOCK title="Characteristics" columnbyrow="3" backcolorheader="status:STATUSTRACKER"></html_BLOCK>
+			<html_HR title="Request" size="2"></html_HR>
+		</Column>
+
+		<Column>
+			<ColumnName>SHORTMESSAGE</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>1</ColumnPositionInDataGrid>
+			<Ressource></Ressource>
+			<DataType>string</DataType>
+			<Length>128</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation/>
+		</Column>
+		<Column>
+			<ColumnName>POSTEDMSG</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>13</ColumnPositionInDataGrid>
+			<Ressource>REQUESTPOSTEDMESSAGE</Ressource>
+			<DataType>int</DataType>
+			<Length>5</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsHideInCriteria>true</IsHideInCriteria>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation/>
+			<Align>Left</Align>
+		</Column>
+		<Column>
+			<ColumnName>SUCCESSMSG</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>15</ColumnPositionInDataGrid>
+			<Ressource>REQUESTPROCESSEDSUCCESS</Ressource>
+			<DataType>int</DataType>
+			<Length>5</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsHideInCriteria>true</IsHideInCriteria>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Align>Left</Align>
+			<Relation/>
+		</Column>
+
+		<Column>
+			<ColumnName>GROUPTRACKER</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>2</ColumnPositionInDataGrid>
+			<Ressource>GROUPTRACKER</Ressource>
+			<DataType>string</DataType>
+			<Length>128</Length>
+			<InputWidth>20%</InputWidth>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsHideInCriteria>true</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+		</Column>
+		<Column>
+			<ColumnName>GROUPTRACKERDISPLAYNAME</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>3</ColumnPositionInDataGrid>
+			<Ressource></Ressource>
+			<DataType>string</DataType>
+			<Length>128</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsHideInCriteria>true</IsHideInCriteria>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<IsResource>true</IsResource>
+			<Relation>
+				<TableName>ENUM</TableName>
+				<AliasTableName>grptrk</AliasTableName>
+				<ColumnRelation>
+					<ColumnName>VALUE</ColumnName>
+					<DataType>string</DataType>
+				</ColumnRelation>
+				<ColumnSelect>
+					<ColumnName>EXTVALUE</ColumnName>
+					<Ressource>GROUPTRACKER</Ressource>
+					<DataType>string</DataType>
+				</ColumnSelect>
+				<Condition apply="ALL">
+					<SQLWhere>CODE='GroupTrackerEnum'</SQLWhere>
+				</Condition>
+			</Relation>
+		</Column>
+		<Column>
+			<ColumnName>POSTEDSUBMSG</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>14</ColumnPositionInDataGrid>
+			<Ressource>REQUESTPOSTEDSUBMESSAGE</Ressource>
+			<DataType>int</DataType>
+			<Length>5</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsHideInCriteria>true</IsHideInCriteria>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation/>
+			<Align>Left</Align>
+		</Column>
+		<Column>
+			<ColumnName>WARNINGMSG</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>16</ColumnPositionInDataGrid>
+			<Ressource>REQUESTPROCESSEDWARNING</Ressource>
+			<DataType>int</DataType>			
+			<Length>5</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsHideInCriteria>true</IsHideInCriteria>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Align>Left</Align>
+			<Relation/>
+		</Column>
+
+		<Column>
+			<ColumnName>READYSTATE</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>8</ColumnPositionInDataGrid>
+			<Ressource>ReadyState</Ressource>
+			<InputWidth>10%</InputWidth>
+			<DataType>string</DataType>
+			<Length>64</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsHideInCriteria>true</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsResource>false</IsResource>
+			<CellStyle model="readystate"/>
+			<Colspan>2</Colspan>
+		</Column>
+		<Column>
+			<ColumnName>DTUPD</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<Colspan>0</Colspan>
+			<ColumnPositionInDataGrid>9</ColumnPositionInDataGrid>
+			<DataType datakind='Timestamp' tzdbid='Etc/UTC' display='Audit'>datetime</DataType>
+			<Length>8</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsHideInCriteria>true</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation/>
+		</Column>
+		<Column>
+			<ColumnName>ERRORMSG</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>17</ColumnPositionInDataGrid>
+			<Ressource>REQUESTPROCESSEDERROR</Ressource>
+			<DataType>int</DataType>
+			<Length>5</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsHideInCriteria>true</IsHideInCriteria>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Align>Left</Align>
+			<Relation/>
+		</Column>
+		<!-- AL 20240703 [WI605] Add column Duration -->
+		<Column>
+			<ColumnName>DURATION</ColumnName>
+			<ColumnPositionInDataGrid>10</ColumnPositionInDataGrid>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<Ressource>DURATION</Ressource>
+			<Colspan>2</Colspan>			
+			<DataType datakind='Seconds'>int</DataType>
+			<Length>10</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsHideInCriteria>false</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation/>
+			<Align>Left</Align>
+		</Column>
+		<Column>
+			<ColumnName>NONEMSG</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>18</ColumnPositionInDataGrid>
+			<Ressource>REQUESTPROCESSEDNONE</Ressource>
+			<DataType>int</DataType>
+			<Length>5</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsHideInCriteria>true</IsHideInCriteria>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Align>Left</Align>
+			<Relation/>
+		</Column>
+
+		<Column>
+			<ColumnName>STATUSTRACKER</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>11</ColumnPositionInDataGrid>
+			<Ressource>StatusTracker</Ressource>
+			<DataType>string</DataType>
+			<Length>64</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsHideInCriteria>true</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<CellStyle model="status"/>
+			<Colspan>0</Colspan>
+		</Column>
+
+		<Column>
+			<ColumnName>IDDATA</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>20</ColumnPositionInDataGrid>
+			<Ressource>IDENTIFIER</Ressource>
+			<!-- string for left position -->
+			<DataType>string</DataType>
+			<Length>10</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation/>
+		</Column>
+
+		<!-- Characteristics-->
+		<Column>
+			<ColumnName>IDAINS</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>4</ColumnPositionInDataGrid>
+			<Ressource>REQUESTER</Ressource>
+			<Colspan>0</Colspan>
+			<DataType>int</DataType>
+			<Length>10</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsHideInCriteria>true</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation>
+				<TableName>ACTOR</TableName>
+				<ColumnRelation>
+					<ColumnName>IDA</ColumnName>
+					<Ressource>REQUESTER</Ressource>
+					<DataType>int</DataType>
+				</ColumnRelation>
+				<ColumnSelect>
+					<ColumnName>IDENTIFIER</ColumnName>
+					<Ressource>REQUESTER</Ressource>
+					<DataType>string</DataType>
+				</ColumnSelect>
+				<ColumnLabel>
+					<ColumnName>DISPLAYNAME</ColumnName>
+					<Ressource>DISPLAYNAME</Ressource>
+					<DataType>string</DataType>
+				</ColumnLabel>
+			</Relation>
+			<html_HR title="Requester" size="2"></html_HR>
+		</Column>
+		<Column>
+			<ColumnName>DTINS</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>5</ColumnPositionInDataGrid>
+			<Colspan>0</Colspan>
+			<DataType datakind='Timestamp' tzdbid='Etc/UTC' display='Audit'>datetime</DataType>
+			<Length>8</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsHideInCriteria>true</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation/>
+		</Column>
+		<Column>
+			<ColumnName>HOSTNAMEINS</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>6</ColumnPositionInDataGrid>
+			<Ressource>HOSTNAMEREQUESTER</Ressource>
+			<DataType>string</DataType>
+			<Length>64</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsHideInCriteria>true</IsHideInCriteria>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation/>
+		</Column>
+		<Column>
+			<ColumnName>IDSESSIONINS</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>7</ColumnPositionInDataGrid>
+			<Ressource>SESSIONIDREQUESTER</Ressource>
+			<DataType>string</DataType>
+			<Length>64</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>true</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsHideInCriteria>true</IsHideInCriteria>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation>
+			</Relation>
+		</Column>
+
+		<Column>
+			<ColumnName>PROCESS</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>21</ColumnPositionInDataGrid>
+			<Ressource>PROCESS</Ressource>
+			<Colspan>0</Colspan>
+			<DataType>string</DataType>
+			<Length>64</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<IsResource>true</IsResource>
+			<Relation/>
+			<html_HR title="Process" size="2"></html_HR>
+		</Column>
+		<Column>
+			<ColumnName>APPNAME</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>22</ColumnPositionInDataGrid>
+			<Ressource>APPNAME</Ressource>
+			<Colspan>0</Colspan>
+			<DataType>string</DataType>
+			<Length>64</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation/>
+
+		</Column>
+		<Column>
+			<ColumnName>APPVERSION</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>23</ColumnPositionInDataGrid>
+			<Ressource>APPVERSION</Ressource>
+			<Colspan>0</Colspan>
+			<DataType>string</DataType>
+			<Length>64</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation/>
+		</Column>
+
+		<Column>
+			<ColumnName>HOSTNAME</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>24</ColumnPositionInDataGrid>
+			<Ressource>HOSTNAMEREQUESTER</Ressource>
+			<DataType>string</DataType>
+			<Length>64</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation/>
+		</Column>
+
+		<!-- Message -->
+		<Column>
+			<ColumnName>MESSAGE</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>12</ColumnPositionInDataGrid>
+			<Ressource>Empty</Ressource>
+			<DataType>string</DataType>
+			<GridWidth>-100</GridWidth>
+			<Length>4000</Length>
+			<LengthInDataGrid>1000</LengthInDataGrid>
+			<Scale>0</Scale>
+			<Colspan>0</Colspan>
+			<InputHeight>120</InputHeight>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsHideInCriteria>true</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation/>
+			<html_BLOCK title="MESSAGE" blockbyrow="1" width="100%" columnbyrow="1" />
+		</Column>
+
+		<Column>
+			<ColumnName>GROUPTRACKER2</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>19</ColumnPositionInDataGrid>
+			<Ressource>GROUPTRACKER</Ressource>
+			<DataType>string</DataType>
+			<Length>128</Length>
+			<InputWidth>10%</InputWidth>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>true</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsHideInCriteria>false</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation>
+				<DDLType>enum.GroupTrackerEnum</DDLType>
+			</Relation>
+		</Column>
+		<Column>
+			<ColumnName>IDAINS2</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<ColumnPositionInDataGrid>4</ColumnPositionInDataGrid>
+			<Ressource>REQUESTER</Ressource>
+			<Colspan>0</Colspan>
+			<DataType>int</DataType>
+			<Length>10</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>true</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsHideInCriteria>false</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation>
+				<TableName>ACTOR</TableName>
+				<ColumnRelation>
+					<ColumnName>IDA</ColumnName>
+					<Ressource>REQUESTER</Ressource>
+					<DataType>int</DataType>
+				</ColumnRelation>
+				<ColumnSelect>
+					<ColumnName>IDENTIFIER</ColumnName>
+					<Ressource>REQUESTER</Ressource>
+					<DataType>string</DataType>
+				</ColumnSelect>
+				<ColumnLabel>
+					<ColumnName>DISPLAYNAME</ColumnName>
+					<Ressource>DISPLAYNAME</Ressource>
+					<DataType>string</DataType>
+				</ColumnLabel>
+			</Relation>
+		</Column>
+		<Column>
+			<ColumnName>TRACKERDTINS</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<DataType datakind='Timestamp' tzdbid='Etc/UTC' display='Audit'>datetime</DataType>
+			<Length>8</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>true</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsHideInCriteria>false</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation/>
+		</Column>
+
+		<Column>
+			<ColumnName>READYSTATE2</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<Ressource>ReadyState</Ressource>
+			<DataType>string</DataType>
+			<Length>64</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>true</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsHideInCriteria>false</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsResource>false</IsResource>
+			<Relation>
+				<DDLType>enum.ReadyStateTrackerEnum</DDLType>
+			</Relation>
+			<CellStyle model="readystate"/>
+		</Column>
+
+		<Column>
+			<ColumnName>TRACKERDTUPD</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<Colspan>1</Colspan>
+			<DataType datakind='Timestamp' tzdbid='Etc/UTC' display='Audit'>datetime</DataType>
+			<Length>8</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>true</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsHideInCriteria>false</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation/>
+		</Column>
+
+		<Column>
+			<ColumnName>STATUSTRACKER2</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<Ressource>StatusTracker</Ressource>
+			<DataType>string</DataType>
+			<Length>64</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>true</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsHideInCriteria>false</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<Relation>
+				<DDLType>enum.StatusTrackerEnum</DDLType>
+			</Relation>
+			<CellStyle model="status"/>
+		</Column>
+
+		<Column>
+			<ColumnName>ISMARKED</ColumnName>
+			<Ressource>ISMARKED</Ressource>
+			<DataType>bool</DataType>
+			<Colspan>0</Colspan>
+			<Length>1</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>true</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation></Relation>
+			<Information>
+				<Type>information</Type>
+				<LabelMessage>Msg_ISMARKEDForTRACKER</LabelMessage>
+			</Information>
+			<html_HR></html_HR>
+			<html_BLOCK title="MARKED" blockbyrow="2" width="50%" columnbyrow="1" />
+		</Column>
+
+		<Column>
+			<ColumnName>NOTEMARKED</ColumnName>
+			<Ressource>NoteMARKED</Ressource>
+			<DataType>string</DataType>
+			<Length>2000</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>true</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation>
+			</Relation>
+		</Column>
+
+		<Column>
+			<ColumnName>IDAMARKED</ColumnName>
+			<Ressource>ActorMARKED</Ressource>
+			<Colspan>0</Colspan>
+			<DataType>int</DataType>
+			<Length>10</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default>
+				<Value>%%ID_USER%%</Value>
+			</Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>true</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation>
+				<TableName>ACTOR</TableName>
+				<AliasTableName>acmarked</AliasTableName>
+				<ColumnRelation>
+					<ColumnName>IDA</ColumnName>
+					<DataType>int</DataType>
+				</ColumnRelation>
+				<ColumnSelect>
+					<ColumnName>IDENTIFIER</ColumnName>
+					<Ressource>ActorMARKED</Ressource>
+					<DataType>string</DataType>
+				</ColumnSelect>
+				<ColumnLabel>
+					<ColumnName>DISPLAYNAME</ColumnName>
+					<Ressource>DISPLAYNAME</Ressource>
+					<DataType>string</DataType>
+				</ColumnLabel>
+				<Condition>
+					<TableName>ACTORROLE</TableName>
+					<ColumnRelation>
+						<ColumnName>IDA</ColumnName>
+						<DataType>int</DataType>
+					</ColumnRelation>
+					<SQLWhere>ACTORROLE.IDROLEACTOR in ('SYSADMIN','SYSOPER','USER')</SQLWhere>
+				</Condition>
+				<AutoComplete enabled="true"/>
+			</Relation>
+		</Column>
+		<Column>
+			<ColumnName>DTMARKED</ColumnName>
+			<Ressource>DateMARKED</Ressource>
+			<DataType>datetime</DataType>
+			<Colspan>0</Colspan>
+			<Length>8</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation/>
+		</Column>
+
+		<Column>
+			<ColumnName>EXTLID</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<Ressource>EXTLLINK</Ressource>
+			<!-- string for left position -->
+			<DataType>string</DataType>
+			<Length>10</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation/>
+			<html_BLOCK title="ACKNOWLEDGMENT" columnbyrow="1"></html_BLOCK>
+		</Column>
+		<Column>
+			<ColumnName>ACKSTATUS</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<Ressource>StatusAckTracker</Ressource>
+			<DataType>string</DataType>
+			<Length>64</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsResource>false</IsResource>
+			<!---->
+			<Relation>
+				<DDLType>enum.StatusTrackerEnum</DDLType>
+			</Relation>
+			<CellStyle model="status"/>
+		</Column>
+		<Column>
+			<ColumnName>ACKXML</ColumnName>
+			<Ressource>Detail</Ressource>
+			<InputWidth>660</InputWidth>
+			<InputHeight>80</InputHeight>
+			<DataType>text</DataType>
+			<IsDataXml>true</IsDataXml>
+			<Length>16</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<LengthInDataGrid>-1</LengthInDataGrid>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsHideInCriteria>true</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+		</Column>
+
+		<Column>
+			<ColumnName>SYSNUMBER</ColumnName>
+			<IsVirtualColumn>true</IsVirtualColumn>
+			<Ressource></Ressource>
+			<DataType>int</DataType>
+			<Length>5</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>true</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation/>
+			<Align>Left</Align>
+		</Column>
+	</Referential>
+</Referentials>

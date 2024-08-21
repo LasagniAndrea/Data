@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+  <!--ROW-->
+  <!--DATE1-->
+  <customObject control="label" clientid="DATE1"  caption="lblDtFrom" xsi:type="CustomObjectLabel"/>
+  <customObject control="textbox" clientid="DATE1" datatype="date" required="true" defaultvalue="BUSINESS"
+                postback="true" postbackargument="SELFCLEAR_"
+                xsi:type="CustomObjectTextBox" />
+  <!--DATE2-->
+  <customObject control="label" clientid="DATE2"  caption="lblDtTo" xsi:type="CustomObjectLabel"/>
+  <customObject control="textbox" clientid="DATE2" datatype="date" required="true" defaultvalue="BUSINESS"
+                postback="true" postbackargument="SELFCLEAR_" 
+                xsi:type="CustomObjectTextBox" />
+  <customObject control="space" width="5" />
+  <!--ENTITY-->
+  <customObject control="label" clientid="ENTITY" caption = "lblEntity" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown" clientid="ENTITY" datatype="integer" required="true" listretrieval="predef:ActorEntity"
+                postback="true" postbackargument ="SELFCLEAR_"
+                width="250px" misc="isAddAll:true;isUseSessionRestrict:true;isClear:false"
+                xsi:type="CustomObjectDropDown"/>
+  <!--CSS/CUSTODIAN-->
+  <customObject control="label"     clientid="CSSCUSTODIAN"  caption = "CssCustodian!br" width="150px" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="CSSCUSTODIAN"  datatype="integer" required="true" listretrieval="predef:csscustodian"
+                postback="true"  postbackargument ="SELFCLEAR_" 
+                width="300px" misc="isAddAll:true;isUseSessionRestrict:true;isClear:false;displayNameMaxLen:50"
+                xsi:type="CustomObjectDropDown"/>
+  <customObject control="fill" xsi:type="CustomObject" colspan="2"/>
+
+  <!--ROW-->
+  <customObject control="hr"   xsi:type="CustomObject"  style="height:5px"  colspan="16"/>
+
+  <!--ROW-->
+  <!-- FI 20200602 [25370] lstParam:false -->
+  <!--DIRECTIVES-->
+  <customObject control="label" clientid="INSTRUCTIONS" style="font-size: 10pt" caption="lblInstructions" xsi:type="CustomObjectLabel" colspan="4"/>
+  <customObject control="fill" xsi:type="CustomObject" colspan="12"/>
+
+  <customObject control="hr"   xsi:type="CustomObject"  style="display:none"  colspan="16"/>
+
+  <!--MODALITY-->
+  <customObject control="label"     clientid="FEESCALCULATIONMODE" caption = "lblFeesCalculationMode" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="FEESCALCULATIONMODE" datatype="string" required="true" listretrieval="predef:FEESCALCULATIONMODE"
+                postback="true"  postbackargument ="SELFCLEAR_"
+                width="250px" misc="isAddAll:false;isClear:false;lstParam:false;isResource:true;" colspan="3"
+                xsi:type="CustomObjectDropDown"/>
+  <customObject control="panel" clientid="FEESCALCULATIONMODEINFO" cssclass="fa-icon fas fa-info-circle blue" xsi:type="CustomObjectPanel"
+                tooltip="imgFeesCalculationMode"/>
+
+  <!--PARTYROLE-->
+  <customObject control="label"     clientid="PARTYROLE" caption = "lblRoles" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="PARTYROLE" width="250px" datatype="string" required="true" listretrieval="predef:enum.[code:PartyRoleEnum;forcedenum:1|14|27|28|4]"
+                postback="false"  
+                misc="isAddAll:true;isClear:false;lstParam:false" colspan="3"
+                xsi:type="CustomObjectDropDown"/>
+  <customObject control="fill" xsi:type="CustomObject" colspan="9"/>
+
+  <!--ROW-->
+  <customObject control="hr"   xsi:type="CustomObject"  colspan="16"/>
+
+  <!--ROW-->
+  <!--FEE-->
+  <customObject control="label" clientid="FEE" caption="lblFee" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown" clientid="FEE" datatype="integer" required="true" listretrieval="predef:FEE" 
+                postback="false"  
+                width="250px"  misc="isAddAll:true;isClear:false;lstParam:false" colspan="4"
+                xsi:type="CustomObjectDropDown"/>
+  <!--FEESCHEDULE -->
+  <customObject control="label"     clientid="FEESCHEDULE" caption="lblFeeSchedule" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="FEESCHEDULE" datatype="integer" required="true"
+                listretrieval="predef:FEESCHEDULE"
+                postback="false"  
+                width="250px" misc="isAddAll:true;isClear:false;lstParam:false"
+                xsi:type="CustomObjectDropDown"/>
+  <!--FEEMATRIX -->
+  <customObject control="label"     clientid="FEEMATRIX" caption="lblFeeMatrix" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="FEEMATRIX" datatype="integer" required="true" listretrieval="predef:FEEMATRIX"
+                postback="false"   
+                width="400px" misc="isAddAll:true;isClear:false;lstParam:false"
+                xsi:type="CustomObjectDropDown"/>
+  <customObject control="fill" xsi:type="CustomObject" colspan="7"/>
+
+  <!--ROW-->
+  <customObject control="hr"   xsi:type="CustomObject"  colspan="16"/>
+
+  <!--ROW-->
+  <customObject control="space" xsi:type="CustomObject" />
+  <!--ISMANFEES_PRESERVED -->
+  <customObject control="checkbox"  clientid="ISMANFEES_PRESERVED"   caption="chkManualFeesPreserved"  tooltip="ManualFeesPreserved"
+                defaultvalue="true" datatype="bool" required="true"
+                postback="false"  
+                misc="lstParam:false" colspan="6"/>
+
+  <!--ISFORCEDFEES_PRESERVED -->
+  <customObject control="checkbox"  clientid="ISFORCEDFEES_PRESERVED" caption="chkForcedFeesPreserved"  tooltip="ForcedFeesPreserved"
+                defaultvalue="true" datatype="bool" required="true"
+                postback="false"
+                misc="lstParam:false" colspan="2"/>
+  <customObject control="fill" xsi:type="CustomObject" colspan="8"/>
+</customObjects>

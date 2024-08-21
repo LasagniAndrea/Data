@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Screens>
+	<!-- FxSwapOTCml -->
+	<Screen name="FxSwap-Broker" caption="FX Swap (Screen Broker)" product="fxSwap">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSales-FX-Block/>
+		<FxSwapBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentBlock/>
+    <Settlement2InputBlock/>
+    <ComplianceBlock/>
+  </Screen>
+  <!--FI 20161114 [RATP]  add -->
+  <Screen name="FxSwapNBlock-Broker" caption="FX Swap NBlock (Screen Broker)" product="fxSwap">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSales-FX-Block/>
+    <FxSwapNBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentBlock/>
+    <Settlement2InputBlock/>
+    <ComplianceBlock/>
+  </Screen>
+</Screens>

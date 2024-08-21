@@ -1,0 +1,544 @@
+﻿@import (reference) "../bootstrap/bootstrap.less";
+@import (reference) "spheres-variables.less";
+
+/* Génération des couleur du panel  en fonction du STATUS */
+.generateStatusColor() {
+    .generateHeading("ERROR",@sph-error-color);
+    .generateHeading("NA",@sph-na-color);
+    .generateHeading("NONE",@sph-main-color);
+    .generateHeading("PENDING",@sph-pending-color);
+    .generateHeading("PROGRESS",@sph-progress-color);
+    .generateHeading("SUCCESS",@sph-success-color);
+    .generateHeading("WARNING",@sph-warning-color);
+}
+/* Génération des couleur du panel  en fonction du READYSTATE */
+.generateReadyStateColor() {
+    .generateHeading("ACTIVE",@sph-progress-color);
+    .generateHeading("REQUESTED",@sph-na-color);
+    .generateHeading("TERMINATED",@sph-main-color);
+}
+/* Génération des couleur du panel  en fonction du READYSTATE */
+.generateGroupColor() {
+    .generateHeading("ACC");
+    .generateHeading("CLO");
+    .generateHeading("EXT");
+    .generateHeading("INV");
+    .generateHeading("IO");
+    .generateHeading("MSG");
+    .generateHeading("TRD");
+}
+
+.generateHeading(@enumvalue, @color: @sph-main-color) {
+    &[id*="_@{enumvalue}_"] {
+
+        & {
+            border: 1pt solid @color;
+            padding: 0px;
+
+            .panel-body {
+                padding: 3px;
+            }
+        }
+
+        &.panel {
+            border-color: @color;
+        }
+
+        & > div.panel-heading {
+            background-color: @color;
+            border-color: @color;
+            border-top-right-radius: 2px;
+            border-top-left-radius: 2px;
+
+            > span {
+                color: #fff;
+            }
+
+            > div.sph-r-badge {
+                float: right;
+
+
+                span:last-child {
+                    float: right !important;
+                    display: inline-block;
+                    min-width: 10px;
+                    padding: 3px 7px;
+                    font-weight: bold;
+                    line-height: 1;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    text-align: center;
+                    border-radius: 10px;
+                    font-size: xx-small;
+                    margin-left: 2px;
+                }
+
+                .generateCounterColor(@reverse:true);
+            }
+        }
+    }
+}
+
+/*#tracker-dp, #tracker-dp2 {
+    min-width: 600px;
+    padding: 14px;
+    overflow: hidden;
+    background-color: rgba(255,255,255,.8);
+}*/
+
+
+/* Tracker Content */
+div[id^=mc_trk] {
+
+    > a {
+        font-size: 12px;
+    }
+
+    > ul {
+        max-height: 60px;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        > li {
+            padding: 2px 2px;
+            .generateStatusColorText();
+
+            /* Message */
+            span:nth-child(2) {
+                padding-left: 10px;
+            }
+            /* Data */
+            span:last-child{
+                float: right;
+            }
+        }
+    }
+}
+
+
+#trkBody {
+
+    ul.trkgrid > li {
+        .generateStatusColor();
+        .generateReadyStateColor();
+        .generateGroupColor();
+    }
+
+
+    ul li.list-group-item {
+        padding: 2px 2px;
+
+        div[class*="col-sm-"] {
+            padding-left: 2px;
+            padding-right: 2px;
+        }
+    }
+
+    .panel-heading {
+        padding: 5px 7px;
+    }
+
+    li.list-group {
+        margin-bottom: 0px;
+    }
+}
+
+#trackerParam .modal-dialog {
+    width: 80%;
+}
+
+
+#trkTab .tab-pane {
+    min-height: 500px;
+}
+
+.trkgrid {
+
+    div.sph-badge {
+        float: right;
+        font-size: x-small;
+
+        span:last-child {
+            float: right !important;
+            display: inline-block;
+            min-width: 10px;
+            padding: 3px 7px;
+            font-weight: bold;
+            line-height: 1;
+            vertical-align: middle;
+            white-space: nowrap;
+            text-align: center;
+            border-radius: 10px;
+            font-size: xx-small;
+            margin-left: 2px;
+        }
+
+        .generateCounterColor(@reverse:false);
+    }
+}
+
+.generateCounter(@enumvalue, @color: @sph-main-color, @reverse: true) {
+
+    &[class$="@{enumvalue}"] {
+
+        span:first-child when not (@reverse) {
+            color: @color;
+            background-color: transparent !important;
+        }
+
+        span:first-child when (@reverse) {
+            color: #fff;
+            background-color: transparent !important;
+        }
+
+        span:last-child when not (@reverse) {
+            background-color: @color !important;
+            color: #fff;
+        }
+
+        span:last-child when (@reverse) {
+            background-color: #fff !important;
+            color: @color;
+        }
+    }
+}
+
+.generateHeadingParam(@enumvalue, @color: @sph-main-color) {
+    &[id*="_@{enumvalue}_"] {
+
+        .panel {
+            border-color: @color;
+        }
+
+        .panel-heading {
+            background-color: @color;
+            border-color: @color;
+        }
+    }
+
+    & {
+        > div.input-group {
+
+            span {
+                color: @sph-main-color;
+            }
+
+            label {
+                color: @sph-main-color;
+            }
+
+            input[type="text"] {
+                color: @sph-main-color;
+            }
+
+            span[id*="_@{enumvalue}_"] {
+                color: @color;
+            }
+
+            label[id*="_@{enumvalue}_"] {
+                font-weight: bolder;
+                color: @color;
+            }
+
+            input[type="text"][id*="_@{enumvalue}_"] {
+                font-weight: bolder;
+                color: @color;
+                background-color: #fff;
+
+                &:focus {
+                    outline: 0;
+                    border: 1px solid #cccccc;
+                    -webkit-box-shadow: none;
+                    box-shadow: none;
+                }
+            }
+        }
+    }
+
+    & {
+        p[class="@{enumvalue}"] > span.badge {
+            background-color: @color;
+        }
+    }
+}
+
+.generateStatusColorText(@enumvalue, @color: @sph-main-color) {
+    &[class$="@{enumvalue}"] {
+        color: @color;
+    }
+}
+/* Génération des couleur du panel en fonction du STATUS */
+.generateStatusColorText() {
+    .generateStatusColorText("ERROR",@sph-error-color);
+    .generateStatusColorText("WARNING",@sph-warning-color);
+    .generateStatusColorText("PENDING",@sph-pending-color);
+    .generateStatusColorText("SUCCESS",@sph-success-color);
+    .generateStatusColorText("NA",@sph-na-color);
+    .generateStatusColorText("NONE",@sph-main-color);
+    .generateStatusColorText("PROGRESS",@sph-progress-color);
+}
+/* Génération des couleur du panel  en fonction du STATUS */
+.generateCounterColor(@reverse) {
+    .generateCounter("ERROR",@sph-error-color, @reverse);
+    .generateCounter("WARNING",@sph-warning-color, @reverse);
+    .generateCounter("PENDING",@sph-pending-color, @reverse);
+    .generateCounter("SUCCESS",@sph-success-color, @reverse);
+    .generateCounter("NA",@sph-na-color, @reverse);
+    .generateCounter("NONE",@sph-main-color, @reverse);
+    .generateCounter("PROGRESS",@sph-progress-color, @reverse);
+}
+/* Génération des couleur du panel  en fonction du STATUS */
+.generateStatusColorParam() {
+    .generateHeadingParam("ERROR",@sph-error-color);
+    .generateHeadingParam("WARNING",@sph-warning-color);
+    .generateHeadingParam("PENDING",@sph-pending-color);
+    .generateHeadingParam("SUCCESS",@sph-success-color);
+    .generateHeadingParam("NA",@sph-na-color);
+    .generateHeadingParam("NONE",@sph-main-color);
+    .generateHeadingParam("PROGRESS",@sph-progress-color);
+}
+/* Génération des couleur du panel  en fonction du READYSTATE */
+.generateReadyStateColorParam() {
+    .generateHeadingParam("ACTIVE",@sph-progress-color);
+    .generateHeadingParam("REQUESTED",@sph-na-color);
+    .generateHeadingParam("TERMINATED",@sph-main-color);
+}
+/* Génération des couleur du panel sur notification service */
+.generateServiceColorParam() {
+    .generateHeadingParam("service",@sph-progress-color);
+}
+
+
+.mainCheckList(@col-xs: 12,@col-sm: 6,@col-md: 4,@col-lg: 3,@color: @sph-process-color) {
+
+    > div {
+
+        &[id$="_ucStart"] {
+            border-bottom: 2pt solid @color;
+
+            > span:first-child {
+                color: @color;
+                font-size: larger;
+                font-weight: bold;
+            }
+
+            > span:last-child {
+                margin-right: 8px;
+
+                > input[type="checkbox"] {
+                    margin-left: 5px;
+                    vertical-align: text-bottom;
+                }
+            }
+        }
+
+
+        &[id$="_container"] {
+            .make-xs-column(@col-xs);
+            .make-sm-column(@col-sm);
+            .make-md-column(@col-md);
+            .make-lg-column(@col-lg);
+            &:extend(.clearfix all);
+            margin-bottom: 10px;
+            .generateStatusColorParam();
+            .generateReadyStateColorParam();
+            .generateServiceColorParam();
+        }
+
+
+        > div.input-group {
+            margin-bottom: 5px;
+
+            label {
+                font-weight: bolder;
+            }
+
+            input[type="text"] {
+                font-weight: bolder;
+                background-color: #fff;
+
+                &:focus {
+                    outline: 0;
+                    border: 1px solid #cccccc;
+                    -webkit-box-shadow: none;
+                    box-shadow: none;
+                }
+            }
+        }
+
+        > div.checkList {
+
+            > span[id$="_chkChildList"] {
+
+                > span {
+
+                    > label {
+                        display: inline;
+                        font-size: 11px;
+                        font-weight: normal;
+                        .make-xs-column(11);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.childCheckList(@col-xs: 12,@col-sm: 6,@col-md: 4,@col-lg: 3,@color: @sph-process-color) {
+
+    > div {
+
+        &[id$="_container"] {
+
+            div[id$="_subContainer"] {
+                .make-xs-column(@col-xs);
+                .make-sm-column(@col-sm);
+                .make-md-column(@col-md);
+                .make-lg-column(@col-lg);
+                &:extend(.clearfix all);
+            }
+        }
+    }
+}
+
+.subChildCheckList(@col-xs: 12,@col-sm: 12,@col-md: 4,@col-lg: 4,@color: @sph-process-color) {
+
+    div {
+        &[id$="_subContainer"] {
+            .generateStatusColorParam();
+            .generateReadyStateColorParam();
+
+            .panel-heading {
+                padding: 0px;
+                border-top-right-radius: 0px;
+                border-top-left-radius: 0px;
+
+                > span {
+                    display: inline;
+                    font-size: 12px;
+                    padding-top: 2px;
+                    font-weight: normal;
+                    .make-xs-column(11);
+                }
+            }
+        }
+    }
+
+    .panel-group {
+        margin-bottom: -1px;
+    }
+
+    .panel {
+        border-radius: 0;
+        margin-bottom: -4px;
+
+        > .panel-body {
+            padding: 2px;
+
+            > div {
+                .make-xs-column(@col-xs);
+                .make-sm-column(@col-sm);
+                .make-md-column(@col-md);
+                .make-lg-column(@col-lg);
+                &:extend(.clearfix all);
+            }
+
+            label {
+                font-size: 11px;
+                font-weight: normal;
+            }
+
+            input[type="checkbox"] {
+                float: right;
+            }
+        }
+    }
+}
+/* Distribution des colonnes sur le carousel du paramétrage*/
+.ucMainChecklist.readystate {
+    .mainCheckList(@col-xs: 12,@col-sm: 12,@col-md: 12, @col-lg:12,@color:@sph-main-color);
+    .childCheckList(@col-xs: 12,@col-sm: 12,@col-md: 6, @col-lg:4,@color:@sph-main-color);
+    .subChildCheckList(@col-xs: 12,@col-sm: 12,@col-md: 6, @col-lg:6,@color:@sph-main-color);
+}
+
+.ucMainChecklist.groupTracker {
+    .mainCheckList(@col-xs: 12,@col-sm: 6,@col-md: 6, @col-lg:4,@color:@sph-main-color);
+    .childCheckList(@col-xs: 12,@col-sm: 12,@col-md: 12, @col-lg:12,@color:@sph-main-color);
+    .subChildCheckList(@col-xs: 12,@col-sm: 6,@col-md: 6, @col-lg:4,@color:@sph-main-color);
+}
+
+.ucMainChecklist.statusTracker {
+    .mainCheckList(@col-xs: 12,@col-sm: 6,@col-md: 6, @col-lg:6,@color:@sph-main-color);
+    .childCheckList(@col-xs: 12,@col-sm: 12,@col-md: 6, @col-lg:4,@color:@sph-main-color);
+    .subChildCheckList(@col-xs: 12,@col-sm: 12,@col-md: 12, @col-lg:12,@color:@sph-main-color);
+}
+/* Distribution des colonnes sur la notification de traitement du paramétrage*/
+.ucMainChecklist.service {
+    .mainCheckList(@color:@sph-process-color);
+}
+/* Help on line */
+.trkhelp.readystate {
+    .make-sm-column(4);
+
+    > div > div {
+        .make-sm-column(12);
+    }
+}
+
+.trkhelp.group {
+    .make-sm-column(8);
+
+    > div > div {
+        .make-sm-column(6);
+    }
+}
+
+.trkhelp.status {
+    .make-sm-column(12);
+
+    > div > div {
+        .make-sm-column(4);
+    }
+}
+
+.trkhelp {
+    .make-xs-column(12);
+
+    > div > div {
+        .make-xs-column(12);
+    }
+
+    height: inherit;
+
+    blockquote {
+        padding: 3px 12px;
+        text-align: justify;
+        font-size: 12px;
+        font-weight: bold;
+        margin: 0 0 10px;
+    }
+
+    .badge {
+        margin-left: 2px;
+        padding: 3px 4px 2px 4px;
+        font-size: 8px;
+        font-weight: normal;
+        vertical-align: super;
+        background-color: @sph-main-color;
+    }
+
+    &:not(:last-child) {
+        border-right: 1px solid @blockquote-border-color;
+    }
+
+    > div {
+
+        p:first-child {
+            font-weight: bold;
+            font-size: larger;
+        }
+    }
+
+    .generateStatusColorParam();
+    .generateReadyStateColorParam();
+}

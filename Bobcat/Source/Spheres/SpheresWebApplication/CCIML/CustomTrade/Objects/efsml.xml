@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+
+<Objects>
+	<!--Complex_Css-->
+	<Object name="Css">
+		<TextBox datatype="string" style="width:150px;" autocomplete="true"/>
+		<Button type="Submit" referential="ACTOR" condition="ACTORS" cssclass="fa-icon"  tooltip="search"/>
+	</Object>
+	<Object name="Css_L">
+		<Label helpschema="efsml" helpelement="CssCriteria"/>
+		<Css/>
+	</Object>
+	
+	<!-- Complex_settlementInput -->
+  <Object name="SettlementInput_Css" >
+    <Table>
+      <Css_L clientid = "settlementInputInfo_cssCriteria_cssCriteriaCss"  postback="true" required="false" />
+    </Table>
+  </Object>
+  <Object name="SettlementInput_CssCurrency" >
+		<Table colspan="-1">
+			<Table>
+				<Css_L clientid = "settlementInputInfo_cssCriteria_cssCriteriaCss"  postback="true" required="false" />
+				<Currency_L clientid = "settlementContext_currency"  postback="true" required="false" />
+			</Table>
+		</Table>
+	</Object>
+  <Object name="SettlementInput_CssCashSecurities" >
+    <Table colspan="-1">
+      <Table>
+        <Css_L clientid = "settlementInputInfo_cssCriteria_cssCriteriaCss"  postback="true" required="false" />
+        <CashSecurities_L clientid = "settlementContext_cashSecurities"  postback="true" required="false" />
+      </Table>
+    </Table>
+  </Object>
+  
+	<!-- SettlementInput_Detail -->
+	<Object name="SettlementInput_Detail" >
+		<Table>
+			<SPACE/>
+			<Button type="Submit" imageurl="fas fa-external-link-square-alt" xcaption="Detail"/>
+		</Table>
+	</Object>
+	<!-- Complex_CustomerSettlementPayment-->
+	<Object name="CustomerSettlementPayment">
+		<Currency_L clientid="currency" required="true" postback="true"/>
+		<ExchangeRateLightNoSideRates clientid="rate" required="true" postback="true" helpschema="efsml" helpelement="ExchangeRate" />
+		<Amount_L clientid="amount" required="false" postback="true"/> 
+	</Object>
+	<!-- Complex_PaymentQuote -->
+	<Object name="PaymentQuote" helpschema="efsml" helpelement="PaymentQuote">
+		<Label clientid="percentageRate" />
+		<Table>
+			<DecimalPercent clientid="percentageRate" />
+			<Space/>
+			<PaymentQuoteRelativeTo clientid="paymentRelativeTo" />
+		</Table>
+	</Object>
+	<Object name="PaymentQuoteRateOnly">
+		<Label clientid="percentageRateOrpercentageRateFraction" />
+		<DecimalPercentFraction clientid="percentageRateOrpercentageRateFraction" />
+	</Object>
+</Objects>
+	

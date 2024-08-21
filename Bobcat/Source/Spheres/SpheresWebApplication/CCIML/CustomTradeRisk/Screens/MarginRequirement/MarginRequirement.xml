@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- ************************************ -->
+<!-- Screens                              -->
+<!-- ************************************ -->
+<Screens>
+  <!-- MarginRequirement -->
+  <Screen name="MarginRequirement" caption="MarginRequirement" product="MarginRequirement">
+    <ClearingOrganizationBlock/>
+    <PartyMarginRequirementBlock />
+    <TradeHeaderMarginRequirementBlock/>
+    <MarginRequirementPaymentBlock/>
+  </Screen>
+</Screens>

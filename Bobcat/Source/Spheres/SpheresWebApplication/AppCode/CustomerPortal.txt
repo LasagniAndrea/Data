@@ -1,0 +1,22 @@
+﻿Pour lancer l'application en mode Portail client
+
+1. Définir la page CustomPortal.aspx comme page de démarrage
+
+2. Modifier le fichier Web.Config ou WebCustom.Config pour 
+
+	a) passer en mode Portail
+
+	  <add key="Software" value="EFS"/>
+	  <add key="ConnectionString" value="...
+
+    b) Authentification
+
+	  Utiliser la déclaration suivante à la place de celle d'origine (Mode On ou RemoteOnly)
+
+      <forms loginUrl="~/CustomerPortal/Page/Login.aspx" timeout="20" />
+
+	c) Customization de la page d'affichage des erreurs
+
+  	  Utiliser la déclaration suivante à la place de celle d'origine (Mode On ou RemoteOnly)
+
+	  <customErrors defaultRedirect="~/CustomerPortal/Page/Errors/DefaultError.aspx" mode="On">

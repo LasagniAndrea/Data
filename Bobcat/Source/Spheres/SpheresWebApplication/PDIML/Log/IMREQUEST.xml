@@ -1,0 +1,655 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- FI 20200820 [25468] dates systemes en UTC -->
+<Referentials>
+  <Referential>
+    <TableName>POSREQUEST</TableName>
+    <AliasTableName>pr</AliasTableName>
+    <ColumnByRow>4</ColumnByRow>
+    <Create>false</Create>
+    <Modify>false</Modify>
+    <Remove>false</Remove>
+    <AttachedDoc>false</AttachedDoc>
+    <SQLSelect>
+      <Command rdbms = "all">
+        <![CDATA[
+          select im.IDIMREQUEST, im.STATUS as STATUSRETURN, 
+          im.IDA_ENTITY, im.IDA_CSS, im.IDA_MRO, im.IDB_MRO, im.IDA_MRO_IMREQUEST, 
+          im.DTBUSINESS, 
+          im.IDT, im.DTSTART, im.DTEND, im.IDAINS, im.DTINS as DTINS, isnull(im.DTUPD,im.DTINS) as DTUPD, 
+          im.EXTLLINK, im.ROWATTRIBUT, im.ROWVERSION,
+          pr.IDPR, pr.REQUESTTYPE, en.DOCUMENTATION, 
+          a_ETY.IDENTIFIER as ETY_IDENTIFIER,
+          a_CSS.IDENTIFIER as CSS_IDENTIFIER,
+          a_MRO.IDENTIFIER as MRO_IDENTIFIER, a_MRO.DISPLAYNAME as MRO_DISPLAYNAME,
+          b_MRO.IDENTIFIER as MRO_BOOKIDENTIFIER, b_MRO.DISPLAYNAME as MRO_BOOKDISPLAYNAME,
+          a_MRO_PARENT.IDENTIFIER as MROPARENT_IDENTIFIER, a_MRO_PARENT.DISPLAYNAME as MROPARENT_DISPLAYNAME,
+          ev.VALORISATION as MARGINREQAMOUNT, ev.UNIT as MARGINREQCURRENCY, 'RISK' as GPRODUCT,
+          pr.REQUESTTYPE || '-' || isnull(im.STATUS,'NONE') || '-0' as REQUESTTYPE_DISPLAY
+          from dbo.POSREQUEST pr
+          inner join dbo.IMREQUEST im on (im.IDPR = isnull(pr.IDPR_POSREQUEST,pr.IDPR)) and (pr.REQUESTTYPE in ('EOD','EOD_INITIALMARGIN'))
+          inner join dbo.ACTOR a_ETY on (a_ETY.IDA=im.IDA_ENTITY)
+          inner join dbo.ACTOR a_CSS on (a_CSS.IDA=im.IDA_CSS)
+          left outer join dbo.ACTOR a_MRO on (a_MRO.IDA=im.IDA_MRO)
+          left outer join dbo.BOOK b_MRO on (b_MRO.IDB=im.IDB_MRO)
+          inner join dbo.ENUM en on (en.CODE = 'PosRequestTypeEnum') and (en.VALUE = pr.REQUESTTYPE)
+          left outer join dbo.TRADE tr on (tr.IDT = im.IDT)
+          left outer join dbo.ACTOR a_MRO_PARENT on (a_MRO_PARENT.IDA=im.IDA_MRO_IMREQUEST)
+          left outer join dbo.EVENT ev on (ev.IDT = im.IDT) and (ev.EVENTTYPE = 'MGR')
+      ]]>
+      </Command>
+    </SQLSelect>
+
+    <SQLRowStyle type="class">
+      case STATUSRETURN
+      when 'SUCCESS' then 'DataGrid-SUCCESS_2'
+      when 'ERROR' then 'DataGrid-ERROR'
+      else 'DataGrid_ItemStyle'
+      end
+    </SQLRowStyle>
+
+    <!-- REQUEST -->
+
+    <Column>
+      <ColumnName>IDPR</ColumnName>
+      <Ressource>ID2</Ressource>
+      <DataType>int</DataType>
+      <Align>left</Align>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>true</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>true</IsForeignKeyField>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>IDIMREQUEST</ColumnName>
+      <Ressource>ID</Ressource>
+      <DataType>int</DataType>
+      <Align>left</Align>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>true</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>true</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>REQUESTTYPE</ColumnName>
+      <Ressource>PROCESSREQUEST</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Colspan>2</Colspan>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>REQUESTTYPE_DISPLAY</ColumnName>
+      <Ressource>EXTVALUE_REQUESTTYPE_</Ressource>
+      <DataType>string</DataType>
+      <Colspan>2</Colspan>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <CellStyle complexModel="logPosRequestType" version="h2"/>
+    </Column>
+
+    <Column>
+      <ColumnName>STATUSRETURN</ColumnName>
+      <Ressource>STATUSRETURN</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>DOCUMENTATION</ColumnName>
+      <Ressource>PROCESS</Ressource>
+      <DataType>text</DataType>
+      <xLength>2000</xLength>
+      <GridWidth>1000</GridWidth>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <html_HR size="2"></html_HR>
+    </Column>
+
+    <!-- DTBUSINESS -->
+    <Column>
+      <ColumnName>DTBUSINESS</ColumnName>
+      <Ressource>DTBUSINESS_</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <!-- MRO_BOOK -->
+    <Column>
+      <ColumnName>MRO_BOOKIDENTIFIER</ColumnName>
+      <Ressource>Book</Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>MRO_BOOKDISPLAYNAME</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <!-- MRO_DISPLAYNAME -->
+    <Column>
+      <ColumnName>MRO_DISPLAYNAME</ColumnName>
+      <Ressource>Actor</Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <!-- MROPARENT_DISPLAYNAME -->
+    <Column>
+      <ColumnName>MROPARENT_DISPLAYNAME</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <!-- CSS_IDENTIFIER -->
+    <Column>
+      <ColumnName>CSS_IDENTIFIER</ColumnName>
+      <Ressource>ClearingHouse</Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <!-- ETY_IDENTIFIER -->
+    <Column>
+      <ColumnName>ETY_IDENTIFIER</ColumnName>
+      <Ressource>IDA_ENTITY_</Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+
+    <Column>
+      <ColumnName>IDT</ColumnName>
+      <Ressource>Identifier</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>true</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>TRADE</TableName>
+        <AliasTableName>trb</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDT</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>ConcernedTrade</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <ColumnLabel>
+          <ColumnName>DISPLAYNAME</ColumnName>
+          <Ressource>DISPLAYNAME</Ressource>
+          <DataType>string</DataType>
+        </ColumnLabel>
+      </Relation>
+    </Column>-->
+
+      <!-- INITIAL MARGIN AMOUNT -->
+    <Column>
+      <ColumnName>MARGINREQAMOUNT</ColumnName>
+      <Ressource>INITIALMARGIN</Ressource>
+      <DataType>decimal</DataType>
+      <Scale>2</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>MARGINREQCURRENCY</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>DTSTART</ColumnName>
+      <Ressource>StartEndProcess</Ressource>
+      <DataType datakind='Timestamp' tzdbid='Etc/UTC' display='Audit'>datetime</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DTEND</ColumnName>
+      <DataType datakind='Timestamp' tzdbid='Etc/UTC' display='Audit'>datetime</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>IDAINS</ColumnName>
+      <Ressource>IDA_OPERATEDBY</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>ACTOR</TableName>
+        <AliasTableName>acReq</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDA</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>REQUESTER</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <ColumnLabel>
+          <ColumnName>DISPLAYNAME</ColumnName>
+          <Ressource>DISPLAYNAME</Ressource>
+          <DataType>string</DataType>
+        </ColumnLabel>
+      </Relation>
+      <html_HR size="1"></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>DTINS</ColumnName>
+      <Ressource>DTREQUESTER</Ressource>
+      <DataType datakind='Timestamp' tzdbid='Etc/UTC' display='Audit'>datetime</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DTUPD</ColumnName>
+      <Ressource>DTREQUESTER</Ressource>
+      <DataType datakind='Timestamp' tzdbid='Etc/UTC' display='Audit'>datetime</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+
+    <!-- LIEN EXTERNE -->
+    <Column>
+      <ColumnName>EXTLLINK</ColumnName>
+      <Ressource>EXTLLINK</Ressource>
+      <DataType>string</DataType>
+      <Colspan>3</Colspan>
+      <LabelWidth>10%</LabelWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+      <html_BLOCK title="ExtlLink_" columnbyrow="3"></html_BLOCK>
+    </Column>
+    <Column>
+      <ColumnName>ROWATTRIBUT</ColumnName>
+      <Ressource>ROWATTRIBUT</Ressource>
+      <DataType>string</DataType>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>IDA_CSS</ColumnName>
+      <Ressource>ID</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>IDA_MRO</ColumnName>
+      <Ressource>ID</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>IDB_MRO</ColumnName>
+      <Ressource>ID</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>IDA_MRO_IMREQUEST</ColumnName>
+      <Ressource>ID</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>GPRODUCT</ColumnName>
+      <Ressource>GPRODUCT</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+    </Column>
+
+
+    <Column>
+      <ColumnName>ROWVERSION</ColumnName>
+      <Ressource>ROWVERSION</Ressource>
+      <DataType>string</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+
+  </Referential>
+</Referentials>
+

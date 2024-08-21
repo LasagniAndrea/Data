@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access">
+  <Font Name="Segoe UI" Size="9" />
+  <Class Name="EFS.ApplicationBlocks.Data.DataHelper">
+    <Position X="0.5" Y="0.5" Width="3.75" />
+    <TypeIdentifier>
+      <FileName>DALDataHelper.cs</FileName>
+      <HashCode>xAGyjAMIICABSCSAIFAjgXkCTVBHABaBgBs9AEk+AAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.ApplicationBlocks.Data.ConnectionStringCache" Collapsed="true">
+    <Position X="6.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>DALDataHelper.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAIAIAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.ApplicationBlocks.Data.DALCache">
+    <Position X="8.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>DALDataHelper.cs</FileName>
+      <HashCode>AAABAAAAAAAACEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.ApplicationBlocks.Data.EfsTransaction" Collapsed="true">
+    <Position X="4.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>DALDataHelper.cs</FileName>
+      <HashCode>AACAAAAAAAAAAAAAAAAgAABAAAAIEAAwBAIAAAgAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.ApplicationBlocks.Data.DatasetSerializer" Collapsed="true">
+    <Position X="6.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>DALDataHelper.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAACAAAAAAAAAAAAAEAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.ApplicationBlocks.Data.EFSParameter" Collapsed="true">
+    <Position X="4.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>DALDataParameter.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAgAAAAAAAAAAABAAAAAQAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.ApplicationBlocks.Data.DataParameter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>DALDataParameter.cs</FileName>
+      <HashCode>AgGQCEgBAQAIgoCAgCIAAApAAAEAADAABBIgAAhkMBA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EFS.ApplicationBlocks.Data.DataParameters" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>DALDataParameter.cs</FileName>
+      <HashCode>AAIAAAAAAAAAAAIACAQgDAQAAAAAAAAAEAAAAABQBBA=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EFS.ApplicationBlocks.Data.DataAccessBase">
+    <Position X="8.25" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <FileName>DALInterface.cs</FileName>
+      <HashCode>gACCAAAAAAEBAiAAABAAAEACARAIAAIBQAAAAAAAAAg=</HashCode>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EFS.ApplicationBlocks.Data.SQLCst" Collapsed="true">
+    <Position X="6.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>OTCmlHelper.cs</FileName>
+      <HashCode>QVPFDTiGJKSBhVzwGEcAzhLggWlOpJ3pJBYCGFDohlA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.ApplicationBlocks.Data.OTCmlHelper">
+    <Position X="4.5" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <FileName>OTCmlHelper.cs</FileName>
+      <HashCode>AoAIAAAAIAAAAAAAAIBASACgAUAAAMAAAAAEAACIAAg=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.ApplicationBlocks.Data.SQLWhere" Collapsed="true">
+    <Position X="6.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>OTCmlHelper.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAABAAAAAAQAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.ApplicationBlocks.Data.QueryParameters" Collapsed="true">
+    <Position X="4.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>OTCmlHelper.cs</FileName>
+      <HashCode>AAABAAAAAAAEAAAiAAAAAAAAAAAAIAAAAAAIgACAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.ApplicationBlocks.Data.LOColumn" Collapsed="true">
+    <Position X="6.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>OTCmlHelper.cs</FileName>
+      <HashCode>CCUAoIAAAAIAIQUAAAACBAAAAAFACIAAEEEAAAABAYE=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="EFS.ApplicationBlocks.Data.IDataAccess">
+    <Position X="8.25" Y="5.25" Width="2.75" />
+    <TypeIdentifier>
+      <FileName>DALInterface.cs</FileName>
+      <HashCode>gACCAAAAAAEBAiAAABAAAEACARAIAAIBQAAAAAAAAAg=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="EFS.ApplicationBlocks.Data.CompareEnum" Collapsed="true">
+    <Position X="4.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>DALDataHelper.cs</FileName>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAIAQAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EFS.ApplicationBlocks.Data.ConnectionStringCacheState" Collapsed="true">
+    <Position X="6.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>DALDataHelper.cs</FileName>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAACAABAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EFS.ApplicationBlocks.Data.DbConnectionOwnership" Collapsed="true">
+    <Position X="6.25" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>DALDataHelper.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EFS.ApplicationBlocks.Data.DbSvrType" Collapsed="true">
+    <Position X="4.5" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>DALDataHelper.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAgAACAAAAEAAAAAAAgAAAAAAIAAI=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EFS.ApplicationBlocks.Data.RdbmsEnum" Collapsed="true">
+    <Position X="6.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>DALDataHelper.cs</FileName>
+      <HashCode>ACEAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAADAAgAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EFS.ApplicationBlocks.Data.SQLJoinTypeEnum" Collapsed="true">
+    <Position X="4.5" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>OTCmlHelper.cs</FileName>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAACgCAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EFS.ApplicationBlocks.Data.DataEnum" Collapsed="true">
+    <Position X="4.5" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>OTCmlHelper.cs</FileName>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Enum>
+</ClassDiagram>

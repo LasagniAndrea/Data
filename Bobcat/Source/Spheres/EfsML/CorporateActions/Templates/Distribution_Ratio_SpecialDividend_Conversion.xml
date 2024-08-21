@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<procedures xmlns="http://www.efs.org/2007/EFSmL-3-0"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xmlns:ecoreB="http://www.eclipse.org/emf/2002/Ecore"
+                xsi:schemaLocation="http://www.efs.org/2007/EFSmL-3-0 ../Schemas/EfsML-CorporateActions-3-0.xsd">
+  <underlyers>
+    <underlyer>
+      <componentMethod id="cumPrice">
+        <description>Cum price Trading day</description>
+        <method>
+          <name>CumPriceTradingDay</name>
+        </method>
+      </componentMethod>
+    </underlyer>
+  </underlyers>
+  <ratio>
+    <description>Special dividend with conversion</description>
+    <methodType>Ratio</methodType>
+    <rFactor>
+      <componentFormula  id="ratioFactor" name="R">
+        <description>Adjustment ratio</description>
+        <formula>
+          <mathExpression>(P-(Do*C)-(Ds*C))/(P-(Do*C))</mathExpression>
+          <componentReference href="cumPrice" name="P" id="cumPrice_r1"/>
+          <component id="ordiDividend" name="Do" >
+            <description>Ordinary dividend</description>
+            <result>
+              <amount/>
+            </result>
+          </component>
+          <component id="specialDividend" name="Ds" >
+            <description>Special dividend</description>
+            <result>
+              <amount/>
+            </result>
+          </component>
+
+          <componentMethod id="C" name="C">
+            <description>Rate conversion</description>
+            <method>
+              <name assembly="EFS.EfsML" class="EfsML.CorporateActions.RFactor">FxRate(idc1,idc2,idc3)</name>
+            </method>
+          </componentMethod>
+
+          <component id="idc1" name="cur1" >
+            <description>Currency 1</description>
+            <result>
+              <info/>
+            </result>
+          </component>
+          <component id="idc2" name="cur2" >
+            <description>Currency 2</description>
+            <result>
+              <info/>
+            </result>
+          </component>
+          <component id="idc3" name="cur3" >
+            <description>Currency pivot</description>
+            <result>
+              <info/>
+            </result>
+          </component>
+        </formula>
+      </componentFormula>
+    </rFactor>
+    <contract>
+      <!-- Add Ratio XML -->
+    </contract>
+  </ratio>
+</procedures>

@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://www.efs.org/2007/EFSmL-3-0"
+      xmlns="http://www.efs.org/2007/EFSmL-3-0"
+      xmlns:fpml="http://www.fpml.org/2007/FpML-4-4"
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+  <xsd:import namespace="http://www.fpml.org/2007/FpML-4-4" schemaLocation="../FpML44/fpml-main-4-4.xsd" />
+  <xsd:include schemaLocation="EfsML-Shared-3-0.xsd"/>
+  <xsd:include schemaLocation="EfsML-Asset-3-0.xsd"/>
+  <xsd:include schemaLocation="EfsML-Repository-3-0.xsd"/>
+  
+  <!-- ****************************** -->
+  <!-- Elements                       -->
+  <!-- ****************************** -->
+  <xsd:element name="additionalInvoice" substitutionGroup="fpml:product" type="AdditionalInvoice">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Global element representing additionalInvoice.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="creditNote" substitutionGroup="fpml:product" type="CreditNote">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Global element representing creditNote.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="invoice" substitutionGroup="fpml:product" type="Invoice">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Global element representing invoice.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+  <xsd:element name="invoiceSettlement" substitutionGroup="fpml:product" type="InvoiceSettlement">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">Global element representing invoice Settlement.</xsd:documentation>
+    </xsd:annotation>
+  </xsd:element>
+
+  <xsd:element name="tripleInvoiceamounts" type="TripleInvoiceAmounts" abstract="true"/>
+
+
+  <!-- ****************************** -->
+  <!-- AdditionalInvoice              -->
+  <!-- ****************************** -->
+  <xsd:complexType name="AdditionalInvoice">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A type defining Additional Invoice (modeled as an FpML:Product).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="Invoice">
+        <xsd:sequence>
+          <xsd:element name="initialInvoiceAmount" type="InitialInvoiceAmounts" />
+          <xsd:element name="baseNetInvoiceAmount" type="NetInvoiceAmounts" />
+          <xsd:element name="theoricInvoiceAmount" type="InvoiceAmounts" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ******************************* -->
+  <!-- AllocatedInvoice                -->
+  <!-- ******************************* -->
+  <xsd:complexType name="AllocatedInvoice">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="InitialNetInvoiceAmounts">
+        <xsd:sequence>
+          <xsd:element name="invoiceDate"        type="fpml:IdentifiedDate" />
+          <xsd:element name="allocatedAmounts"   type="NetInvoiceAmounts" minOccurs="1"/>
+          <xsd:element name="fxGainOrLossAmount" type="fpml:Money" minOccurs="0" />
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:ID" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ******************************* -->
+  <!-- AvailableInvoice                -->
+  <!-- ******************************* -->
+  <xsd:complexType name="AvailableInvoice">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="InitialNetInvoiceAmounts">
+        <xsd:sequence>
+          <xsd:element name="invoiceDate"                type="fpml:IdentifiedDate" />
+          <xsd:element name="availableAmounts"           type="NetInvoiceAmounts"/>
+          <xsd:element name="allocatedAccountingAmount"  type="fpml:Money" minOccurs="0" />
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:ID" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- ******************************* -->
+  <!-- Bracket                         -->
+  <!-- ******************************* -->
+  <xsd:complexType name="Bracket">
+    <xsd:sequence>
+      <xsd:element name="lowValue"  type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="highValue" type="xsd:decimal" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- CreditNote                     -->
+  <!-- ****************************** -->
+  <xsd:complexType name="CreditNote">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A type defining CreditNote (modeled as an FpML:Product).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="Invoice">
+        <xsd:sequence>
+          <xsd:element name="initialInvoiceAmount" type="InitialInvoiceAmounts" />
+          <xsd:element name="baseNetInvoiceAmount" type="NetInvoiceAmounts" />
+          <xsd:element name="theoricInvoiceAmount" type="InvoiceAmounts" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- InitialInvoiceAmounts          -->
+  <!-- ****************************** -->
+  <xsd:complexType name="InitialInvoiceAmounts">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="InvoiceAmounts">
+        <xsd:sequence>
+          <xsd:element name="identifier" type="xsd:string" />
+        </xsd:sequence>
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- InitialNetInvoiceAmounts       -->
+  <!-- ****************************** -->
+  <xsd:complexType name="InitialNetInvoiceAmounts">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="NetInvoiceAmounts">
+        <xsd:sequence>
+          <xsd:element name="identifier" type="xsd:string" />
+        </xsd:sequence>
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- Invoice                        -->
+  <!-- ****************************** -->
+  <!-- EG 20101022 Add TAX amounts -->
+  <xsd:complexType name="Invoice">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A type defining Invoice (modeled as an FpML:Product).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="fpml:Product">
+        <xsd:sequence>
+          <xsd:group ref="fpml:PayerReceiver.model" />
+          <xsd:element name="scope"                       type="InvoicingScope" />
+          <xsd:element name="invoiceDate"                 type="fpml:IdentifiedDate" />
+          <xsd:element name="paymentDate"                 type="fpml:AdjustableOrRelativeAndAdjustedDate" />
+          <xsd:element name="grossTurnOverAmount"         type="fpml:Money"        minOccurs="0"/>
+          <xsd:element name="rebateIsInExcess"            type="xsd:boolean"       minOccurs="0" />
+          <xsd:element name="rebateAmount"                type="fpml:Money"        minOccurs="0" />
+          <xsd:element name="rebateConditions"            type="RebateConditions"  minOccurs="0" />
+          <!-- EG 20101022 Add TAX amount -->
+          <xsd:element name="tax"                         type="InvoiceTax"        minOccurs="0" />
+          <xsd:element name="netTurnOverAmount"           type="fpml:Money" />
+          <xsd:element name="netTurnOverIssueAmount"      type="fpml:Money" />
+          <xsd:element name="netTurnOverIssueRate"        type="xsd:decimal"       minOccurs="0" />
+          <xsd:element name="issueRateIsReverse"          type="xsd:boolean"       minOccurs="0" />
+          <xsd:element name="issueRateRead"               type="xsd:decimal"       minOccurs="0" />
+          <xsd:element name="invoiceRateSource"           type="InvoiceRateSource" minOccurs="0" />
+          <xsd:element name="netTurnOverAccountingAmount" type="fpml:Money"        minOccurs="0"/>
+          <xsd:element name="netTurnOverAccountingRate"   type="xsd:decimal"       minOccurs="0" />
+          <xsd:element name="accountingRateIsReverse"     type="xsd:boolean"       minOccurs="0" />
+          <xsd:element name="accountingRateRead"          type="xsd:decimal"       minOccurs="0" />
+
+          <xsd:element name="invoiceDetails"              type="InvoiceDetails" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- InvoiceAmounts                 -->
+  <!-- ****************************** -->
+  <!-- EG 20101022 Add TAX amounts -->
+  <xsd:complexType name="InvoiceAmounts">
+    <xsd:sequence>
+      <xsd:element name="grossTurnOverAmount"         type="fpml:Money" />
+      <xsd:element name="rebateAmount"                type="fpml:Money" minOccurs="0"/>
+      <!-- EG 20101022 Add TAX amounts -->
+      <xsd:element name="tax"                         type="InvoiceTax" minOccurs="0" />
+      <xsd:element name="netTurnOverAmount"           type="fpml:Money" />
+      <xsd:element name="netTurnOverIssueAmount"      type="fpml:Money" />
+      <xsd:element name="netTurnOverAccountingAmount" type="fpml:Money" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- ******************************* -->
+  <!-- InvoiceDetails                  -->
+  <!-- ******************************* -->
+  <xsd:complexType name="InvoiceDetails">
+    <xsd:sequence>
+      <xsd:element name="invoiceTrade" type="InvoiceTrade" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ******************************* -->
+  <!-- InvoiceFee                      -->
+  <!-- ******************************* -->
+  <!-- EG 20091110 feeBaseAmount & feeBaseAccountingAmount -->
+  <xsd:complexType name="InvoiceFee">
+    <xsd:sequence>
+      <xsd:element name="feeType"                       type="xsd:string" />
+      <xsd:element name="feeAmount"                     type="fpml:Money" />
+      <xsd:element name="feeAccountingAmount"           type="fpml:Money"         minOccurs="0"/>
+      <xsd:element name="feeBaseAmount"                 type="fpml:Money" />
+      <xsd:element name="feeBaseAccountingAmount"       type="fpml:Money"         minOccurs="0"/>
+      <xsd:element name="feeInitialAmount"              type="fpml:Money" />
+      <xsd:element name="feeInitialAccountingAmount"    type="fpml:Money"         minOccurs="0"/>
+      <xsd:element name="feeDate"                       type="xsd:date" />
+      <xsd:element name="idA_Pay"                       type="xsd:integer" />
+      <xsd:element name="idB_Pay"                       type="xsd:integer"        minOccurs="0"/>
+      <xsd:element name="feeSchedule"                   type="InvoiceFeeSchedule" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="OTCmlId" type="xsd:string" />
+  </xsd:complexType>
+  <!-- ******************************* -->
+  <!-- InvoiceFeeSchedule              -->
+  <!-- ******************************* -->
+  <!-- EG 20091110 change duration (string) -->
+  <xsd:complexType name="InvoiceFeeSchedule">
+    <xsd:sequence>
+      <xsd:element name="identifier"           type="xsd:string"  minOccurs="0"/>
+      <xsd:element name="formulaDCF"           type="xsd:string"  minOccurs="0"/>
+      <xsd:element name="duration"             type="xsd:string" minOccurs="0"/>
+      <!--PL 20141023-->
+      <!--<xsd:element name="assessmentBasisValue" type="xsd:decimal" minOccurs="0"/>-->
+      <xsd:element name="assessmentBasisValue1" type="xsd:decimal" minOccurs="0"/>
+      <xsd:element name="assessmentBasisValue2" type="xsd:decimal" minOccurs="0"/>
+    </xsd:sequence>
+    <xsd:attribute name="OTCmlId" type="xsd:string" />
+  </xsd:complexType>
+  <!-- ******************************* -->
+  <!-- InvoiceFees                     -->
+  <!-- ******************************* -->
+  <xsd:complexType name="InvoiceFees">
+    <xsd:sequence>
+      <xsd:element name="invoiceFee" type="InvoiceFee" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- InvoiceRateSource              -->
+  <!-- ****************************** -->
+  <xsd:complexType name="InvoiceRateSource">
+    <xsd:sequence>
+      <xsd:element name="rateSource"         type="InformationSource" />
+      <xsd:element name="fixingTime"         type="fpml:BusinessCenterTime" />
+      <xsd:element name="fixingDate"         type="fpml:RelativeDateOffset" />
+      <xsd:element name="adjustedFixingDate" type="fpml:IdentifiedDate" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- InvoicingScope                 -->
+  <!-- ****************************** -->
+  <xsd:complexType name="InvoicingScope">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:normalizedString">
+        <xsd:attribute name="invoicingScopeScheme" type="xsd:anyURI" default="http://www.euro-finance-systems.fr/otcml/invoicingScope" />
+        <xsd:attribute name="OTCmlId" type="xsd:string" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- InvoiceSettlement              -->
+  <!-- ****************************** -->
+  <xsd:complexType name="InvoiceSettlement">
+    <xsd:annotation>
+      <xsd:documentation xml:lang="en">A type defining Invoice Settlement (modeled as an FpML:Product).</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="fpml:Product">
+        <xsd:sequence>
+          <xsd:group ref="fpml:PayerReceiver.model" />
+          <xsd:element name="accountNumber"           type="AccountNumber" />
+          <xsd:element name="receptionDate"           type="fpml:IdentifiedDate" />
+          <xsd:element name="settlementAmount"        type="fpml:Money"          />
+          <xsd:element name="cashAmount"              type="fpml:Money"          />
+          <xsd:element name="bankChargesAmount"       type="fpml:Money"       minOccurs="0" />
+          <xsd:element name="vatBankChargesAmount"    type="fpml:Money"       minOccurs="0" />
+          <xsd:element name="netCashAmount"           type="fpml:Money" />
+          <xsd:element name="unallocatedAmount"       type="fpml:Money" />
+          <xsd:element name="allocatedInvoice"        type="AllocatedInvoice" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="fxGainOrLossAmount"      type="fpml:Money"       minOccurs="0" />
+          <xsd:element name="availableInvoice"        type="AvailableInvoice" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- InvoiceTax                     -->
+  <!-- ****************************** -->
+  <xsd:complexType name="InvoiceTax">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="TripleInvoiceAmounts">
+        <xsd:sequence>
+          <xsd:element name="details"   type="TaxSchedule" minOccurs="1" maxOccurs="unbounded"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ******************************* -->
+  <!-- InvoiceTrade                    -->
+  <!-- ******************************* -->
+  <!-- EG 20220324 Change type of element "Contract" to ContractRepository -->
+  <xsd:complexType name="InvoiceTrade">
+    <xsd:sequence>
+      <xsd:element name="identifier"                 type="xsd:string" />
+      <xsd:element name="instrument"                 type="ProductType" />
+      <xsd:element name="tradeDate"                  type="TradeDate" />
+      <xsd:element name="inDate"                     type="xsd:date" />
+      <xsd:element name="outDate"                    type="xsd:date" />
+      <xsd:element name="currency"                   type="fpml:Currency" />
+      <xsd:element name="side"                       type="TradeSideEnum" />
+      <xsd:element name="counterpartyPartyReference" type="fpml:PartyOrAccountReference" />
+      <xsd:element name="notionalAmount"             type="fpml:Money"  minOccurs="0"/>
+      <xsd:element name="periodNumberOfDays"         type="xsd:integer"  minOccurs="0"/>
+      <xsd:element name="invoiceFees"                type="InvoiceFees" />
+      <xsd:element name="trader"                     type="Trader"      minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="sales "                     type="Trader"      minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="asset"                      type="ShortAsset"  minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="price"                      type="xsd:string"  minOccurs="0" />
+      <xsd:element name="market"                     type="CommonRepository" minOccurs="0" />
+      <xsd:element name="contract"                   type="ContractRepository" minOccurs="0" />
+    </xsd:sequence>
+    <xsd:attribute name="OTCmlId" type="xsd:string" />
+    <xsd:attribute name="id"      type="xsd:ID" />
+  </xsd:complexType>
+
+  <!-- ******************************* -->
+  <!-- NetInvoiceAmounts               -->
+  <!-- ******************************* -->
+  <!-- EG 20101022 Refactoring for Tax element -->
+  <xsd:complexType name="NetInvoiceAmounts">
+    <xsd:complexContent mixed="false">
+      <xsd:extension base="TripleInvoiceAmounts">
+        <xsd:sequence>
+          <!-- EG 20101022 Add TAX amount -->
+          <xsd:element name="tax" type="InvoiceTax" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- ********************************* -->
+  <!-- RebateBracketCalculations         -->
+  <!-- ********************************* -->
+  <xsd:complexType name="RebateBracketCalculations">
+    <xsd:sequence>
+      <xsd:element name="calculation" type="RebateBracketCalculation" minOccurs="1" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ********************************* -->
+  <!-- RebateBracketCalculation          -->
+  <!-- ********************************* -->
+  <xsd:complexType name="RebateBracketCalculation">
+    <xsd:sequence>
+      <xsd:element name="bracket"             type="Bracket" />
+      <xsd:element name="rebateBracketRate"   type="xsd:decimal" />
+      <xsd:element name="rebateBracketAmount" type="fpml:Money" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- RebateBracketConditions        -->
+  <!-- ****************************** -->
+  <xsd:complexType name="RebateBracketConditions">
+    <xsd:sequence>
+      <xsd:element name="parameters" type="RebateBracketParameters" />
+      <xsd:element name="result"     type="RebateBracketResult" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- RebateCapConditions            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="RebateCapConditions">
+    <xsd:sequence>
+      <xsd:element name="parameters" type="RebateCapParameters" />
+      <xsd:element name="result"     type="RebateCapResult" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ******************************* -->
+  <!-- RebateBracketParameter          -->
+  <!-- ******************************* -->
+  <xsd:complexType name="RebateBracketParameter">
+    <xsd:sequence>
+      <xsd:element name="bracket" type="Bracket" />
+      <xsd:element name="rate"    type="xsd:decimal" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ******************************* -->
+  <!-- RebateBracketParameters         -->
+  <!-- ******************************* -->
+  <xsd:complexType name="RebateBracketParameters">
+    <xsd:sequence>
+      <xsd:element name="applicationPeriod"           type="fpml:CalculationPeriodFrequency" />
+      <xsd:element name="rebateBracketManagementType" type="BracketApplicationEnum" />
+      <xsd:element name="parameter"                   type="RebateBracketParameter" minOccurs="0" maxOccurs="unbounded" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ******************************* -->
+  <!-- RebateBracketResult             -->
+  <!-- ******************************* -->
+  <xsd:complexType name="RebateBracketResult">
+    <xsd:sequence>
+      <xsd:sequence minOccurs="0">
+        <xsd:element name="sumOfGrossTurnOverPreviousPeriodAmount" type="fpml:Money" />
+        <xsd:element name="sumOfNetTurnOverPreviousPeriodAmount"   type="fpml:Money" />
+      </xsd:sequence>
+      <xsd:element name="calculations"              type="RebateBracketCalculations" />
+      <xsd:element name="totalRebateBracketAmount"  type="fpml:Money" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ******************************* -->
+  <!-- RebateCapParameters             -->
+  <!-- ******************************* -->
+  <xsd:complexType name="RebateCapParameters">
+    <xsd:sequence>
+      <xsd:element name="applicationPeriod"        type="fpml:CalculationPeriodFrequency" />
+      <xsd:element name="maximumNetTurnOverAmount" type="fpml:Money"         minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ******************************* -->
+  <!-- RebateCapResult                 -->
+  <!-- ******************************* -->
+  <xsd:complexType name="RebateCapResult">
+    <xsd:sequence>
+      <xsd:element name="sumOfNetTurnOverPreviousPeriodAmount" type="fpml:Money" minOccurs="0" />
+      <xsd:element name="netTurnOverInExcessAmount"            type="fpml:Money" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- RebateConditions               -->
+  <!-- ****************************** -->
+  <xsd:complexType name="RebateConditions">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="bracketConditions" type="RebateBracketConditions" />
+      <xsd:element minOccurs="0" name="capConditions"     type="RebateCapConditions" />
+      <xsd:element minOccurs="0" name="totalRebateAmount" type="fpml:Money" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

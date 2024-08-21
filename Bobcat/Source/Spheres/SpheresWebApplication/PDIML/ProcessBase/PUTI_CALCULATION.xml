@@ -1,0 +1,1014 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+FI 20160503 [XXXXX] ajout de plusieurs choose
+CC 20160503 [22126] Correction restriction sur ti.IDA_CSSCUSTODIAN et ajout choose
+PL 20160428 [22107] EUREX C7 3.0 Release - Add RELTDPOSID 
+FI 20140919 [20353] Ajout des colonnes COMPARTCODE_CLEAR et STRIKEDECLOCATOR_DC et divers refactoring 
+                         CONTRACT_TYPE est désormais utilisable dans les filtres pour exclure les flexs du traitement (puisqu'il n'y a pas de PUTI sur les Flexs de EUREX)
+
+FI 20140604 [20005] Utilisation de la vue VW_TRADE_POSETD 
+FI 20140624 [20126] Exclusion dest trades tels que EMIRUTIETDRULE='NONE' 
+FI 20140604 [20005] Affichage de l'asset 
+FI 20140603 [20005] Affichage, filtre, tri sur la colonne DTBUSINESS 
+EG 20191115 [25077] RDBMS : New version of Trades tables architecture (TRADESTSYS merge to TRADE, NEW TABLE TRADEXML)
+EG 20200226 [25077] RDBMS : New version of Trades tables architecture (TRADEINSTRUMENT (INSTRUMENTNO=1) to TRADE)
+FI 20210331 [XXXXX] use SR:TRADEALLOC
+FI 20240425 [26593] UTI/PUTI REFIT
+FI 20240627 [WI983] Add IDT_OPENING
+-->
+<Referentials>
+  <Referential>
+    <IsUseSQLParameters>true</IsUseSQLParameters>
+    <TableName>PUTICALCULATION</TableName>
+    <AliasTableName>tr</AliasTableName>
+    <Create>false</Create>
+    <Modify>false</Modify>
+    <Remove>false</Remove>
+    <LoadOnStart>false</LoadOnStart>
+    <Notepad>false</Notepad>
+    <AttachedDoc>false</AttachedDoc>
+    <IsLoupe>false</IsLoupe>
+    <IsDblClick>false</IsDblClick>
+
+    <SQLSelect>
+      <Command rdbms = "all">
+        <![CDATA[
+            select t.IDT, t.IDENTIFIER, t.DTBUSINESS, t.DTTRADE,
+            t.EXECUTIONID, t.RELTDPOSID, t.ORDERID, t.TRDTYPE, 
+            case when t.SIDE=1 then 'Buyer' else 'Seller' end as BUYER_SELLER,
+            putidet_d.UTI as PUTI_DEAL,
+            case when putidet_d.IDPOSUTI is null then 'MISSING' when putidet_d.UTI='N/A' then 'INVALID' else 'OK' end as STATUSPUTI_DEAL,          
+            putidet_c.UTI as PUTI_CLEAR,
+            case when putidet_c.IDPOSUTI is null then 'MISSING' when putidet_c.UTI='N/A' then 'INVALID' else 'OK' end as STATUSPUTI_CLEAR,   
+            t.IDI, p.GPRODUCT,
+            mk.IDM, mk.ISO10383_ALPHA4,
+            t.IDA_CSSCUSTODIAN as IDA_CSSCUST, a_csscust.IDENTIFIER as IDENTIFIER_CSSCUST, a_csscust.BIC as BIC_CSSCUST, a_csscust.ISO17442 as LEI_CSSCUST,
+            dc.IDDC, dc.CONTRACTTYPE as CONTRACTTYPE_DC, dc.CATEGORY as CATEGORY_DC, dc.CONTRACTSYMBOL as CONTRACTSYMBOL_DC, dc.CONTRACTATTRIBUTE as CONTRACTATTRIBUTE_DC,
+            dc.IDENTIFIER as IDENTIFIER_DC, dc.STRIKEDECLOCATOR as STRIKEDECLOCATOR_DC,
+          
+            ass.IDASSET, ass.IDENTIFIER as IDENTIFIER_ASSET, case ass.PUTCALL when '0' then 'Put' when '1' then 'Call' else '' end as PUTCALL_ASSET,
+            ass.STRIKEPRICE as STRIKEPRICE_ASSET,ass.ISINCODE as ISINCODE_ASSET,ass.CFICODE as CFICODE_ASSET,
+          
+            mat.MATURITYMONTHYEAR as MATURITYMONTHYEAR,isnull(mat.MATURITYDATESYS,mat.MATURITYDATE) as MATURITYDATE,
+            
+            puti.IDPOSUTI, puti.IDT_OPENING,
+            
+            a_e.IDA as IDA_ENT,a_e.IDENTIFIER as IDENTIFIER_ENT,a_e.ISO17442 as LEI_ENT,
+            csmid.CSSMEMBERCODE as CSSMEMBERCODE_ENT,
+            reg_e.EMIRETDISSUER as EMIRETDISSUER_ENT,
+            reg_e.EMIRPUTIETDRULE as EMIRPUTIETDRULE_ENT,
+            
+            t.IDA_DEALER as IDA_DEAL,a_d.BIC as BIC_DEAL,a_d.ISO17442 as LEI_DEAL,
+            case when bar_d.IDROLEACTOR is null then 0 else 1 end as ISCLIENT_DEAL,
+            t.IDB_DEALER as IDB_DEAL,
+            
+            t.IDA_CLEARER as IDA_CLEAR,
+            a_c.BIC as BIC_CLEAR,a_c.ISO17442 as LEI_CLEAR,
+            t.IDB_CLEARER as IDB_CLEAR,
+            ccompart.COMPARTMENTCODE as COMPARTCODE_CLEAR,
+            case when t.IDA_CLEARER=t.IDA_CSSCUSTODIAN then 1 else 0 end as ISCCP_CLEAR,
+            reg_c.EMIRETDISSUER as EMIRETDISSUER_CLEAR,
+            reg_c.EMIRPUTIETDRULE as EMIRPUTIETDRULE_CLEAR
+            
+            from dbo.TRADE t
+            %%SR:TRADEALLOC_JOIN%%(t.IDT, t)
+            inner join dbo.INSTRUMENT i on i.IDI=t.IDI
+            inner join dbo.PRODUCT p on p.IDP=i.IDP and p.IDENTIFIER='exchangeTradedDerivative'
+            inner join (
+              select t.IDA_DEALER, t.IDB_DEALER, t.IDA_CLEARER, t.IDB_CLEARER, t.IDASSET,min(t.IDT) as IDT
+              from dbo.VW_TRADE_POSETD  t 
+              group by t.IDA_DEALER, t.IDB_DEALER, t.IDA_CLEARER, t.IDB_CLEARER, t.IDASSET
+            ) pos on pos.IDT=t.IDT
+            inner join dbo.MARKET mk on mk.IDM=t.IDM
+            inner join dbo.ACTOR a_csscust on a_csscust.IDA=t.IDA_CSSCUSTODIAN
+            inner join dbo.ASSET_ETD ass on ass.IDASSET=t.IDASSET
+            inner join dbo.DERIVATIVEATTRIB da on da.IDDERIVATIVEATTRIB=ass.IDDERIVATIVEATTRIB
+            inner join dbo.DERIVATIVECONTRACT dc on dc.IDDC=da.IDDC
+            inner join dbo.MATURITY mat on mat.IDMATURITY=da.IDMATURITY
+            inner join dbo.ACTOR a_d on a_d.IDA=t.IDA_DEALER
+            inner join dbo.ACTOR a_e on a_e.IDA=t.IDA_ENTITY
+            inner join dbo.ACTOR a_c on a_c.IDA=t.IDA_CLEARER
+            left outer join dbo.BOOK  b_c on b_c.IDB=t.IDB_CLEARER
+            left outer join dbo.CLEARINGCOMPART ccompart on ccompart.IDA_CSS = t.IDA_CSSCUSTODIAN and ccompart.IDA=b_c.IDA
+            left outer join dbo.BOOKACTOR_R bar_d on bar_d.IDB=t.IDB_DEALER and bar_d.IDA_ACTOR=a_e.IDA and bar_d.IDROLEACTOR='CLIENT'
+            left outer join dbo.REGULATORY reg_e on reg_e.IDA=a_e.IDA 
+            left outer join dbo.REGULATORY reg_c on reg_c.IDA=a_c.IDA
+            left outer join dbo.CSMID csmid on csmid.IDA=a_e.IDA and csmid.IDA_CSS=t.IDA_CSSCUSTODIAN and isnull(csmid.IDM,mk.IDM)=mk.IDM 
+                                         and csmid.CSSMEMBERIDENT= case a_c.BIC when 'CCEGITRR' then 'ITIT' 
+                                                                                when 'EUXCDEFF' then 'ECAG' else '*' end
+            left outer join dbo.POSUTI puti on puti.IDI=t.IDI and puti.IDASSET=t.IDASSET 
+                                         and puti.IDA_DEALER=t.IDA_DEALER and puti.IDB_DEALER=t.IDB_DEALER 
+                                         and puti.IDA_CLEARER=t.IDA_CLEARER
+                                         and puti.IDB_CLEARER=t.IDB_CLEARER
+            left outer join dbo.POSUTIDET putidet_d on putidet_d.IDPOSUTI=puti.IDPOSUTI and putidet_d.IDA=puti.IDA_DEALER
+            left outer join dbo.POSUTIDET putidet_c on putidet_c.IDPOSUTI=puti.IDPOSUTI and putidet_c.IDA=puti.IDA_CLEARER
+
+
+            where 
+            (%%SR:TRADEALLOC_WHERE_PREDICATE%%) and
+            (t.IDSTACTIVATION in ('REGULAR','LOCKED')) and (t.IDSTENVIRONMENT='REGULAR') and (t.IDSTBUSINESS='ALLOC')            
+            
+            <choose>
+              <when test ="{ENTITY}>0">
+               and (t.IDA_ENTITY = @ENTITY)
+              </when>
+            </choose>
+          
+            <choose>
+              <when test ="{CSSCUSTODIAN}>0"> 
+                and (t.IDA_CSSCUSTODIAN = @CSSCUSTODIAN)
+              </when>
+              <when test ="{CSSCUSTODIAN}=-1 or {CSSCUSTODIAN}=-2">  
+                /* All Clearing houses/All Custodians(-1) or All Clearing houses(-2)=> No restriction */
+                and (1=1)
+              </when>
+              <when test ="{CSSCUSTODIAN}=-3"> 
+                /* le traitement de calcul des UTI ne traite que des ETD */
+                and (t.IDA_CSSCUSTODIAN = -3)   
+              </when>
+            </choose>
+
+            <choose>  
+            <when test ="{MISSINGUTI}='UNRESTRICTED'"> 
+              /* UNRESTRICTED */
+              and (1=1)
+            </when>
+            <when test ="{MISSINGUTI}='MISSINGDEALERONLY'">
+              /* MISSINGDEALERONLY */
+              and  (
+                     (('OK'!=case when putidet_d.IDPOSUTI is null then 'MISSING' when putidet_d.UTI='N/A' then 'INVALID' else 'OK' end)
+                        and (isnull(reg_e.EMIRPUTIETDRULE,'notSpecified')!='NONE')
+                      )
+                   )
+            </when>
+            <when test ="{MISSINGUTI}='MISSINGCLEARERONLY'">
+              /* MISSINGCLEARERONLY */
+              and (
+                     (('OK'!=case when putidet_c.IDPOSUTI is null then 'MISSING' when putidet_c.UTI='N/A' then 'INVALID' else 'OK' end)
+                        and (isnull(reg_c.EMIRPUTIETDRULE,'notSpecified')!='NONE')
+                      )
+                   )
+            </when>
+            <when test ="{MISSINGUTI}='MISSINGONLY'">
+               /* MISSINGONLY */
+               and (
+                      (('OK'!=case when putidet_d.IDPOSUTI is null then 'MISSING' when putidet_d.UTI='N/A' then 'INVALID' else 'OK' end)
+                        and (isnull(reg_e.EMIRPUTIETDRULE,'notSpecified')!='NONE')
+                      )
+                      or
+                      (('OK'!=case when putidet_c.IDPOSUTI is null then 'MISSING' when putidet_c.UTI='N/A' then 'INVALID' else 'OK' end)
+                        and (isnull(reg_c.EMIRPUTIETDRULE,'notSpecified')!='NONE')
+                      )
+                   )
+            </when>
+          </choose>
+      ]]>
+      </Command>
+    </SQLSelect>
+
+    <SQLWhere>
+      <ConditionSystem>SESSIONRESTRICT</ConditionSystem>
+      <SQLJoin>left outer join dbo.SESSIONRESTRICT sra on sra.ID=tr.IDA_ENT and sra.CLASS='ACTOR' and sra.SESSIONID='%%SESSIONID%%'</SQLJoin>
+      <SQLJoin>left outer join dbo.SESSIONRESTRICT srch on srch.ID=tr.IDA_CSSCUST and srch.CLASS='ACTOR' and srch.SESSIONID='%%SESSIONID%%'</SQLJoin>
+      <SQLWhere>
+        (
+        ((tr.IDA_ENT is null) or (sra.ID is not null)) and
+        ((tr.IDA_CSSCUST is null) or (srch.ID is not null))
+        )
+      </SQLWhere>
+    </SQLWhere>
+
+    <Column>
+      <ColumnName>IDI</ColumnName>
+      <Ressource>IDI</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+
+    <Column>
+      <ColumnName>GPRODUCT</ColumnName>
+      <Ressource>GPRODUCT</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+
+    <Column>
+      <ColumnName>DTBUSINESS</ColumnName>
+      <Ressource>DTOPEN</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsOrderBy>true</IsOrderBy>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>IDM</ColumnName>
+      <Ressource>IDM</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>ISO10383_ALPHA4</ColumnName>
+      <Ressource>IDM_SHORT_ACRONYM</Ressource>
+      <DataType>string</DataType>
+      <Length>4</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsOrderBy>true</IsOrderBy>
+      <IsHyperLink linktype="column" type="IDM" data="IDM" linktable="VW_MARKET_IDENTIFIER" name="SHORT_ACRONYM">true</IsHyperLink>
+    </Column>
+
+    <Column>
+      <ColumnName>IDA_CSSCUST</ColumnName>
+      <Ressource>IDA_CSSCUSTODIAN</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>IDENTIFIER_CSSCUST</ColumnName>
+      <Ressource>CssCustodian</Ressource>
+      <DataType>string</DataType>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>BIC_CSSCUST</ColumnName>
+      <Ressource>BIC_CSS</Ressource>
+      <DataType>string</DataType>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <!-- FI 20240425 [26593] UTI/PUTI REFIT-->
+    <Column>
+      <ColumnName>LEI_CSSCUST</ColumnName>
+      <Ressource>LEI_CSS</Ressource>
+      <DataType>string</DataType>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>DTTRADE</ColumnName>
+      <Ressource>DTTRADE2</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsOrderBy>true</IsOrderBy>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>IDT</ColumnName>
+      <Ressource>Trade</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation>
+        <TableName>TRADE</TableName>
+        <AliasTableName>t2</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDT</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>Trade</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDENTIFIER</ColumnName>
+      <Ressource>IDENTIFIER</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsOrderBy>true</IsOrderBy>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>EXECUTIONID</ColumnName>
+      <Ressource>COL_ExecutionID</Ressource>
+      <DataType>string</DataType>
+      <Nowrap>true</Nowrap>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>RELTDPOSID</ColumnName>
+      <Ressource>COL_ReltdPosID</Ressource>
+      <DataType>string</DataType>
+      <Nowrap>true</Nowrap>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>ORDERID</ColumnName>
+      <Ressource>ORDERID</Ressource>
+      <DataType>string</DataType>
+      <Nowrap>true</Nowrap>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>BUYER_SELLER</ColumnName>
+      <Ressource>BUYER_SELLER</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsResource>true</IsResource>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <CellStyle model="tradeside"/>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>TRDTYPE</ColumnName>
+      <Ressource>TRDTYPE</Ressource>
+      <DataType>string</DataType>
+      <Nowrap>true</Nowrap>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>IDB_DEAL</ColumnName>
+      <Ressource>COL_BookDealer</Ressource>
+      <DataType>int</DataType>
+      <Nowrap>true</Nowrap>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <Relation>
+        <TableName>BOOK</TableName>
+        <AliasTableName>b_deal</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDB</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>COL_BookDealer</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDA_ENT</ColumnName>
+      <Ressource>IDA_ENT</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>IDENTIFIER_ENT</ColumnName>
+      <Ressource>IDENTIFIER_ENT</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>LEI_ENT</ColumnName>
+      <Ressource>LEI_ENT</Ressource>
+      <DataType>string</DataType>
+      <Length>20</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>IDA_DEAL</ColumnName>
+      <Ressource>COL_Dealer</Ressource>
+      <DataType>int</DataType>
+      <Nowrap>true</Nowrap>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <Relation>
+        <TableName>ACTOR</TableName>
+        <AliasTableName>a_deal</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDA</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>COL_Dealer</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>BIC_DEAL</ColumnName>
+      <Ressource>BIC_DEAL</Ressource>
+      <DataType>string</DataType>
+      <Length>11</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>LEI_DEAL</ColumnName>
+      <Ressource>LEI_DEAL</Ressource>
+      <DataType>string</DataType>
+      <Length>20</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>ISCLIENT_DEAL</ColumnName>
+      <Ressource>ISCLIENT_DEAL</Ressource>
+      <DataType>bool</DataType>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>PUTI_DEAL</ColumnName>
+      <Ressource>PUTI_DEAL</Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>IDPOSUTI</ColumnName>
+      <Ressource>IDPOSUTI</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>IDT_OPENING</ColumnName>
+      <Ressource>IDT_OPENING</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>STATUSPUTI_DEAL</ColumnName>
+      <Ressource>STATUSPUTI_DEAL</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>IDB_CLEAR</ColumnName>
+      <Ressource>COL_BookClearer</Ressource>
+      <DataType>int</DataType>
+      <Nowrap>true</Nowrap>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <Relation>
+        <TableName>BOOK</TableName>
+        <AliasTableName>b_clear</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDB</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>COL_BookClearer</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDA_CLEAR</ColumnName>
+      <Ressource>COL_Clearer</Ressource>
+      <DataType>int</DataType>
+      <Nowrap>true</Nowrap>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <Relation>
+        <TableName>ACTOR</TableName>
+        <AliasTableName>a_clear</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDA</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>COL_Clearing</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>BIC_CLEAR</ColumnName>
+      <Ressource>BIC_CLEAR</Ressource>
+      <DataType>string</DataType>
+      <Length>11</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>LEI_CLEAR</ColumnName>
+      <Ressource>LEI_CLEAR</Ressource>
+      <DataType>string</DataType>
+      <Length>20</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>COMPARTCODE_CLEAR</ColumnName>
+      <Ressource>COMPARTCODE</Ressource>
+      <DataType>string</DataType>
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>PUTI_CLEAR</ColumnName>
+      <Ressource>PUTI_CLEAR</Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>STATUSPUTI_CLEAR</ColumnName>
+      <Ressource>STATUSPUTI_CLEAR</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>EMIRETDISSUER_ENT</ColumnName>
+      <Ressource>EMIRETDISSUER_ENT</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>EMIRPUTIETDRULE_ENT</ColumnName>
+      <Ressource>EMIRPUTIETDRULE_ENT</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>CSSMEMBERCODE_ENT</ColumnName>
+      <Ressource>CSSMEMBERCODE_ENT</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>EMIRETDISSUER_CLEAR</ColumnName>
+      <Ressource>EMIRETDISSUER_CLEAR</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>EMIRPUTIETDRULE_CLEAR</ColumnName>
+      <Ressource>EMIRPUTIETDRULE_CLEAR</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>ISCCP_CLEAR</ColumnName>
+      <Ressource>ISCCP_CLEAR</Ressource>
+      <DataType>bool</DataType>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>IDENTIFIER_ASSET</ColumnName>
+      <Ressource>IDASSET</Ressource>
+      <DataType>string</DataType>
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsHyperLink linktype="column" type="IDASSET_ETD" data="IDASSET">true</IsHyperLink>
+    </Column>
+    <Column>
+      <ColumnName>IDDC</ColumnName>
+      <Ressource>COL_ContractSymbol_</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <Relation>
+        <TableName>DERIVATIVECONTRACT</TableName>
+        <AliasTableName>dc2</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDDC</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>COL_CONTRACTIDENTIFIER</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDENTIFIER_DC</ColumnName>
+      <Ressource>CONTRACTIDENTIFIER</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>CONTRACTTYPE_DC</ColumnName>
+      <Ressource>CONTRACTTYPE</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>CATEGORY_DC</ColumnName>
+      <Ressource>CATEGORY</Ressource>
+      <DataType>string</DataType>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>CFICODE_ASSET</ColumnName>
+      <Ressource>CFICODE_ASSET</Ressource>
+      <DataType>string</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>CONTRACTSYMBOL_DC</ColumnName>
+      <Ressource>CONTRACTSYMBOL</Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>CONTRACTATTRIBUTE_DC</ColumnName>
+      <Ressource>CONTRACTATTRIBUTE</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>STRIKEDECLOCATOR_DC</ColumnName>
+      <Ressource>STRIKEDECLOCATOR</Ressource>
+      <DataType>int</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>IDASSET</ColumnName>
+      <Ressource>IDASSET</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>PUTCALL_ASSET</ColumnName>
+      <Ressource>COL_PutCall_</Ressource>
+      <DataType>string</DataType>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>MATURITYMONTHYEAR</ColumnName>
+      <Ressource>MATURITYMONTHYEAR</Ressource>
+      <DataType>string</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>MATURITYDATE</ColumnName>
+      <Ressource>MATURITYDATE</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>STRIKEPRICE_ASSET</ColumnName>
+      <Ressource>STRIKEPRICE</Ressource>
+      <DataType>decimal</DataType>
+      <Length>15</Length>
+      <!--<Scale>4</Scale>-->
+      <Scale>5</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>ISINCODE_ASSET</ColumnName>
+      <Ressource>ISINCODE</Ressource>
+      <DataType>string</DataType>
+      <Length>12</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <Relation/>
+    </Column>
+  </Referential>
+</Referentials>

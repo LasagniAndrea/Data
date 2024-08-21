@@ -1,0 +1,1289 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- RD 20191114 [25071] Oracle: Use to_clob(PROCESSDET_L.MESSAGE) to manage the case of concatenation of a large content of column PROCESSDET_L.MESSAGE-->
+<!-- PM 20200514 [XXXXX] New log : drop ROWVERSION from PROCESSDET_L -->
+<!-- PM 20200514 [XXXXX] New log : add column SEQNO from PROCESSDET_L -->
+<!-- PL 20210325 [XXXXX] Add CODE (SYSCODESYSNUMBER) -->
+<!-- PM 20210427 [XXXXX] Add ISSHOWONERROR & ISSHOWONWARNING (Forced display management) -->
+<!-- PL 20210423 [XXXXX] Modify ISSHOWONERROR & ISSHOWONWARNING -->
+<!-- PL 20210423 [XXXXX] Add filter on THREADID to avoid duplicate on multiple Task SIO -->
+<Referentials>
+  <Referential>
+    <!-- CmptLevel nécessaire au tri sur la colonne IDPROCESS_L -->
+    <CmptLevel>2.5</CmptLevel>
+    <TableName>TRACKER_L</TableName>
+    <Ressource>OTC_VIEW_LOGREQUESTPROCESS_DET</Ressource>
+    <ColumnByRow>4</ColumnByRow>
+    <Create>false</Create>
+    <Modify>false</Modify>
+    <Remove>false</Remove>
+    <Image>gif/Views.gif</Image>
+    <Notepad tablename="PROCESSDET_L">true</Notepad>
+    <AttachedDoc tablename="PROCESSDET_L">true</AttachedDoc>
+
+    <SQLSelect>
+      <Command rdbms = "sqlserver">
+        <![CDATA[
+    select pdl.IDPROCESS_L, pl.PROCESS, pl.PROCESS as PROCESSDISPLAYNAME, 
+    pl.IDSTPROCESS as IDSTPROCESS, pl.DTSTPROCESS as DTSTPROCESS, 
+    pl.IDDATAIDENT, pl.IDDATA, pl.IDA, 
+    pl.HOSTNAME, pl.APPNAME, pl.APPVERSION,
+    
+    pdl.IDPROCESSDET_L, pdl.PROCESS as PROCESSDET, pdl.PROCESS as PROCESSDETDISPLAYNAME, 
+    isnull(pdlg.IDSTPROCESS,pdl.IDSTPROCESS) as IDSTPROCESSDET, pdl.DTSTPROCESS as DTSTPROCESSDET,
+    case when pdl.SEQNO is null then pdl.IDPROCESSDET_L else pdl.SEQNO end as SEQNO,
+    case when pl.PROCESS = pdl.PROCESS then '0' || pl.PROCESS else 
+    case pdl.PROCESS when 'EVENTSGEN' then '1' when 'EVENTSVAL' then '2' when 'CIGEN' then '3' when 'SIGEN' then '4' when 'ACCOUNTGEN' then '5' end || pl.PROCESS 
+    end as ORDERPROCESS,
+    case 
+      when smd.SYSCODE is null and smd_gb.SYSCODE is null then 
+        pdl.MESSAGE
+      else
+          case when sm.SYSCODE = 'LOG'
+          then ''
+          else sm.SYSCODE || '-' || right('00000' || convert(varchar,sm.SYSNUMBER),5) || ': '
+          end
+        ||
+        replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(
+        isnull(smd.MESSAGE,smd_gb.MESSAGE),
+        '{1}',isnull(pdl.DATA1,'{1}')),
+        '{2}',isnull(pdl.DATA2,'{2}')),
+        '{3}',isnull(pdl.DATA3,'{3}')),
+        '{4}',isnull(pdl.DATA4,'{4}')),
+        '{5}',isnull(pdl.DATA5,'{5}')),
+        '{6}',isnull(pdl.DATA6,'{6}')),
+        '{7}',isnull(pdl.DATA7,'{7}')),
+        '{8}',isnull(pdl.DATA8,'{8}')),
+        '{9}',isnull(pdl.DATA9,'{9}')),
+        '{10}',isnull(pdl.DATA10,'{10}'))
+        ||
+        case when pdl.MESSAGE is null then '' else '<br/>' || pdl.MESSAGE  end
+        ||
+        case when isnull(smd.MESSAGE,smd_gb.MESSAGE) like '%{1}%' then '' else 
+        case when nullif(pdl.DATA1,'') is null then '' else '<br/>' || case when nullif(pdl.DATA1IDENT,'') is null then '' else pdl.DATA1IDENT || ': ' end || '<b>' || pdl.DATA1 || '</b>' end end
+        ||
+        case when isnull(smd.MESSAGE,smd_gb.MESSAGE) like '%{2}%' then '' else 
+        case when nullif(pdl.DATA2,'') is null then '' else '<br/>' || case when nullif(pdl.DATA2IDENT,'') is null then '' else pdl.DATA2IDENT || ': ' end || '<b>' || pdl.DATA2 || '</b>' end end
+        ||
+        case when isnull(smd.MESSAGE,smd_gb.MESSAGE) like '%{3}%' then '' else 
+        case when nullif(pdl.DATA3,'') is null then '' else '<br/>' || case when nullif(pdl.DATA3IDENT,'') is null then '' else pdl.DATA3IDENT || ': ' end || '<b>' || pdl.DATA3 || '</b>' end end
+        ||
+        case when isnull(smd.MESSAGE,smd_gb.MESSAGE) like '%{4}%' then '' else 
+        case when nullif(pdl.DATA4,'') is null then '' else '<br/>' || case when nullif(pdl.DATA4IDENT,'') is null then '' else pdl.DATA4IDENT || ': ' end || '<b>' || pdl.DATA4 || '</b>' end end
+        ||
+        case when isnull(smd.MESSAGE,smd_gb.MESSAGE) like '%{5}%' then '' else 
+        case when nullif(pdl.DATA5,'') is null then '' else '<br/>' || case when nullif(pdl.DATA5IDENT,'') is null then '' else pdl.DATA5IDENT || ': ' end || '<b>' || pdl.DATA5 || '</b>' end end
+        ||
+        case when isnull(smd.MESSAGE,smd_gb.MESSAGE) like '%{6}%' then '' else 
+        case when nullif(pdl.DATA6,'') is null then '' else '<br/>' || case when nullif(pdl.DATA6IDENT,'') is null then '' else pdl.DATA6IDENT || ': ' end || '<b>' || pdl.DATA6 || '</b>' end end
+        ||
+        case when isnull(smd.MESSAGE,smd_gb.MESSAGE) like '%{7}%' then '' else 
+        case when nullif(pdl.DATA7,'') is null then '' else '<br/>' || case when nullif(pdl.DATA7IDENT,'') is null then '' else pdl.DATA7IDENT || ': ' end || '<b>' || pdl.DATA7 || '</b>' end end
+        ||
+        case when isnull(smd.MESSAGE,smd_gb.MESSAGE) like '%{8}%' then '' else 
+        case when nullif(pdl.DATA8,'') is null then '' else '<br/>' || case when nullif(pdl.DATA8IDENT,'') is null then '' else pdl.DATA8IDENT || ': ' end || '<b>' || pdl.DATA8 || '</b>' end end
+        ||
+        case when isnull(smd.MESSAGE,smd_gb.MESSAGE) like '%{9}%' then '' else 
+        case when nullif(pdl.DATA9,'') is null then '' else '<br/>' || case when nullif(pdl.DATA9IDENT,'') is null then '' else pdl.DATA9IDENT || ': ' end || '<b>' || pdl.DATA9 || '</b>' end end
+        ||
+        case when isnull(smd.MESSAGE,smd_gb.MESSAGE) like '%{10}%' then '' else 
+        case when nullif(pdl.DATA10,'') is null then '' else '<br/>' || case when nullif(pdl.DATA10IDENT,'') is null then '' else pdl.DATA10IDENT || ': ' end || '<b>' || pdl.DATA10 || '</b>' end end
+    end as MESSAGE,
+    isnull(pdl.SYSCODE || '-' || right('00000' || convert(varchar,pdl.SYSNUMBER),5), 'n/a') as CODE,
+    pdl.IDDATA as IDDATADET, pdl.IDDATAIDENT as IDDATAIDENTDET,
+    pdl.DATA1,pdl.DATA2,pdl.DATA3,pdl.DATA4,pdl.DATA5,
+    pdl.DATA6,pdl.DATA7,pdl.DATA8,pdl.DATA9,pdl.DATA10,
+    pdl.DATA1IDENT,pdl.DATA2IDENT,pdl.DATA3IDENT,pdl.DATA4IDENT,pdl.DATA5IDENT,
+    pdl.DATA6IDENT,pdl.DATA7IDENT,pdl.DATA8IDENT,pdl.DATA9IDENT,pdl.DATA10IDENT,
+    pdl.LEVELORDER,
+    pdl.EXTLLINK,pdl.ROWATTRIBUT, /*pdl.ROWVERSION,*/
+    pl.IDTRK_L,
+    --PL 20210423 case when isnull(pdlg.IDSTPROCESS, pdl.IDSTPROCESS) in ('CRITICAL','ERROR') then 1 else isnull(sm.ISSHOWONERROR, 0) end as ISSHOWONERROR,
+    case when isnull(pdlg.IDSTPROCESS, pdl.IDSTPROCESS) in ('CRITICAL','ERROR') then 1 
+         when isnull(sm.ISSHOWONERROR, 0) = 0 then 0
+         else (select min(1) from dbo.PROCESSDET_L pd_err where pd_err.IDSTPROCESS in ('CRITICAL','ERROR') and pd_err.IDPROCESS_L=pl.IDPROCESS_L)
+    end as ISSHOWONERROR,
+    --PL 20210423 case when isnull(pdlg.IDSTPROCESS, pdl.IDSTPROCESS) in ('CRITICAL','ERROR','WARNING') then 1 else isnull(sm.ISSHOWONERROR, 0) end as ISSHOWONWARNING
+    case when isnull(pdlg.IDSTPROCESS, pdl.IDSTPROCESS) in ('CRITICAL','ERROR','WARNING') then 1 
+         when isnull(sm.ISSHOWONERROR, 0) = 0 then 0
+         else (select min(1) from dbo.PROCESSDET_L pd_wng where pd_wng.IDSTPROCESS in ('CRITICAL','ERROR','WARNING') and pd_wng.IDPROCESS_L=pl.IDPROCESS_L)
+    end as ISSHOWONWARNING
+    from dbo.TRACKER_L t 
+    inner join dbo.PROCESS_L pl on (pl.IDTRK_L = t.IDTRK_L)
+    inner join dbo.PROCESSDET_L pdl on (pdl.IDPROCESS_L = pl.IDPROCESS_L)
+    left outer join dbo.PROCESSDET_L pdlg on (pdlg.IDPROCESS_L = pdl.IDPROCESS_L) and (pdlg.PROCESS = pdl.PROCESS) and (pdlg.OSPID = pdl.OSPID) and (pdlg.GRPNO = pdl.SEQNO)
+                                         and (pdlg.THREADID = pdl.THREADID) --PL 20210423
+    left outer join dbo.SYSTEMMSG sm on (sm.SYSCODE = pdl.SYSCODE) and (sm.SYSNUMBER = pdl.SYSNUMBER)
+    left outer join dbo.SYSTEMMSGDET smd on (smd.SYSCODE = sm.SYSCODE) and (smd.SYSNUMBER = sm.SYSNUMBER) and (smd.CULTURE = '%%CULTURE_USER_ISO3166_ALPHA2%%')
+    left outer join dbo.SYSTEMMSGDET smd_gb on (smd_gb.SYSCODE = sm.SYSCODE) and (smd_gb.SYSNUMBER = sm.SYSNUMBER) and (smd_gb.CULTURE = 'en')
+      ]]>
+      </Command>
+      <Command rdbms = "oracle">
+        <![CDATA[
+        select pdl.IDPROCESS_L, pl.PROCESS, pl.PROCESS as PROCESSDISPLAYNAME, 
+        pl.IDSTPROCESS as IDSTPROCESS, pl.DTSTPROCESS as DTSTPROCESS, 
+        pl.IDDATAIDENT, pl.IDDATA, pl.IDA, 
+        pl.HOSTNAME, pl.APPNAME, pl.APPVERSION,
+        
+        pdl.IDPROCESSDET_L, pdl.PROCESS as PROCESSDET, pdl.PROCESS as PROCESSDETDISPLAYNAME, 
+        isnull(pdlg.IDSTPROCESS,pdl.IDSTPROCESS) as IDSTPROCESSDET, pdl.DTSTPROCESS as DTSTPROCESSDET,
+        case when pdl.SEQNO is null then pdl.IDPROCESSDET_L else pdl.SEQNO end as SEQNO,
+        case when pl.PROCESS = pdl.PROCESS then '0' || pl.PROCESS else 
+        case pdl.PROCESS when 'EVENTSGEN' then '1' when 'EVENTSVAL' then '2' when 'CIGEN' then '3' when 'SIGEN' then '4' when 'ACCOUNTGEN' then '5' end || pl.PROCESS         
+        end as ORDERPROCESS,
+        case 
+          when smd.SYSCODE is null and smd_gb.SYSCODE is null then 
+            to_clob(pdl.MESSAGE)
+          else            
+            case 
+              when sm.SYSCODE = 'LOG' then 
+                ''
+              else 
+                sm.SYSCODE || '-' || substr('00000' || to_char(sm.SYSNUMBER),-5) || ': '
+            end
+            ||
+            replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(
+            nvl(smd.MESSAGE,smd_gb.MESSAGE),
+            '{1}',nvl(pdl.DATA1,'{1}')),
+            '{2}',nvl(pdl.DATA2,'{2}')),
+            '{3}',nvl(pdl.DATA3,'{3}')),
+            '{4}',nvl(pdl.DATA4,'{4}')),
+            '{5}',nvl(pdl.DATA5,'{5}')),
+            '{6}',nvl(pdl.DATA6,'{6}')),
+            '{7}',nvl(pdl.DATA7,'{7}')),
+            '{8}',nvl(pdl.DATA8,'{8}')),
+            '{9}',nvl(pdl.DATA9,'{9}')),
+            '{10}',nvl(pdl.DATA10,'{10}'))
+            ||
+            case when pdl.MESSAGE is null then to_clob('') else '<br/>' || to_clob(pdl.MESSAGE)  end
+            ||
+            case when nvl(smd.MESSAGE,smd_gb.MESSAGE) like '%{1}%' then '' else 
+            case when nullif(pdl.DATA1,'') is null then '' else '<br/>' || case when nullif(pdl.DATA1IDENT,'') is null then '' else pdl.DATA1IDENT || ': ' end || '<b>' || pdl.DATA1 || '</b>' end end
+            ||
+            case when nvl(smd.MESSAGE,smd_gb.MESSAGE) like '%{2}%' then '' else 
+            case when nullif(pdl.DATA2,'') is null then '' else '<br/>' || case when nullif(pdl.DATA2IDENT,'') is null then '' else pdl.DATA2IDENT || ': ' end || '<b>' || pdl.DATA2 || '</b>' end end
+            ||
+            case when nvl(smd.MESSAGE,smd_gb.MESSAGE) like '%{3}%' then '' else 
+            case when nullif(pdl.DATA3,'') is null then '' else '<br/>' || case when nullif(pdl.DATA3IDENT,'') is null then '' else pdl.DATA3IDENT || ': ' end || '<b>' || pdl.DATA3 || '</b>' end end
+            ||
+            case when nvl(smd.MESSAGE,smd_gb.MESSAGE) like '%{4}%' then '' else 
+            case when nullif(pdl.DATA4,'') is null then '' else '<br/>' || case when nullif(pdl.DATA4IDENT,'') is null then '' else pdl.DATA4IDENT || ': ' end || '<b>' || pdl.DATA4 || '</b>' end end
+            ||
+            case when nvl(smd.MESSAGE,smd_gb.MESSAGE) like '%{5}%' then '' else 
+            case when nullif(pdl.DATA5,'') is null then '' else '<br/>' || case when nullif(pdl.DATA5IDENT,'') is null then '' else pdl.DATA5IDENT || ': ' end || '<b>' || pdl.DATA5 || '</b>' end end
+            ||
+            case when nvl(smd.MESSAGE,smd_gb.MESSAGE) like '%{6}%' then '' else 
+            case when nullif(pdl.DATA6,'') is null then '' else '<br/>' || case when nullif(pdl.DATA6IDENT,'') is null then '' else pdl.DATA6IDENT || ': ' end || '<b>' || pdl.DATA6 || '</b>' end end
+            ||
+            case when nvl(smd.MESSAGE,smd_gb.MESSAGE) like '%{7}%' then '' else 
+            case when nullif(pdl.DATA7,'') is null then '' else '<br/>' || case when nullif(pdl.DATA7IDENT,'') is null then '' else pdl.DATA7IDENT || ': ' end || '<b>' || pdl.DATA7 || '</b>' end end
+            ||
+            case when nvl(smd.MESSAGE,smd_gb.MESSAGE) like '%{8}%' then '' else 
+            case when nullif(pdl.DATA8,'') is null then '' else '<br/>' || case when nullif(pdl.DATA8IDENT,'') is null then '' else pdl.DATA8IDENT || ': ' end || '<b>' || pdl.DATA8 || '</b>' end end
+            ||
+            case when nvl(smd.MESSAGE,smd_gb.MESSAGE) like '%{9}%' then '' else 
+            case when nullif(pdl.DATA9,'') is null then '' else '<br/>' || case when nullif(pdl.DATA9IDENT,'') is null then '' else pdl.DATA9IDENT || ': ' end || '<b>' || pdl.DATA9 || '</b>' end end
+            ||
+            case when nvl(smd.MESSAGE,smd_gb.MESSAGE) like '%{10}%' then '' else 
+            case when nullif(pdl.DATA10,'') is null then '' else '<br/>' || case when nullif(pdl.DATA10IDENT,'') is null then '' else pdl.DATA10IDENT || ': ' end || '<b>' || pdl.DATA10 || '</b>' end end
+        end as MESSAGE,
+        case when pdl.SYSCODE is null then 'n/a' else pdl.SYSCODE || '-' || substr('00000' || to_char(pdl.SYSNUMBER),-5) end as CODE,             
+        pdl.IDDATA as IDDATADET, pdl.IDDATAIDENT as IDDATAIDENTDET,
+        pdl.DATA1,pdl.DATA2,pdl.DATA3,pdl.DATA4,pdl.DATA5,
+        pdl.DATA6,pdl.DATA7,pdl.DATA8,pdl.DATA9,pdl.DATA10,
+        pdl.DATA1IDENT,pdl.DATA2IDENT,pdl.DATA3IDENT,pdl.DATA4IDENT,pdl.DATA5IDENT,
+        pdl.DATA6IDENT,pdl.DATA7IDENT,pdl.DATA8IDENT,pdl.DATA9IDENT,pdl.DATA10IDENT,
+        pdl.LEVELORDER,
+        pdl.EXTLLINK,pdl.ROWATTRIBUT, /*pdl.ROWVERSION,*/
+        pl.IDTRK_L,
+        --PL 20210423 case when nvl(pdlg.IDSTPROCESS, pdl.IDSTPROCESS) in ('CRITICAL','ERROR') then 1 else nvl(sm.ISSHOWONERROR, 0) end as ISSHOWONERROR,
+        case when nvl(pdlg.IDSTPROCESS, pdl.IDSTPROCESS) in ('CRITICAL','ERROR') then 1 
+             when nvl(sm.ISSHOWONERROR, 0) = 0 then 0
+             else (select min(1) from dbo.PROCESSDET_L pd_err where pd_err.IDSTPROCESS in ('CRITICAL','ERROR') and pd_err.IDPROCESS_L=pl.IDPROCESS_L)
+        end as ISSHOWONERROR,
+        --PL 20210423 case when nvl(pdlg.IDSTPROCESS, pdl.IDSTPROCESS) in ('CRITICAL','ERROR','WARNING') then 1 else nvl(sm.ISSHOWONERROR, 0) end as ISSHOWONWARNING
+        case when nvl(pdlg.IDSTPROCESS, pdl.IDSTPROCESS) in ('CRITICAL','ERROR','WARNING') then 1 
+             when nvl(sm.ISSHOWONERROR, 0) = 0 then 0
+             else (select min(1) from dbo.PROCESSDET_L pd_wng where pd_wng.IDSTPROCESS in ('CRITICAL','ERROR','WARNING') and pd_wng.IDPROCESS_L=pl.IDPROCESS_L)
+        end as ISSHOWONWARNING
+        from dbo.TRACKER_L t 
+        inner join dbo.PROCESS_L pl on (pl.IDTRK_L = t.IDTRK_L)
+        inner join dbo.PROCESSDET_L pdl on (pdl.IDPROCESS_L = pl.IDPROCESS_L)
+        left outer join dbo.PROCESSDET_L pdlg on (pdlg.IDPROCESS_L = pdl.IDPROCESS_L) and (pdlg.PROCESS = pdl.PROCESS) and (pdlg.OSPID = pdl.OSPID) and (pdlg.GRPNO = pdl.SEQNO)
+                                             and (pdlg.THREADID = pdl.THREADID) --PL 20210423
+        left outer join dbo.SYSTEMMSG sm on (sm.SYSCODE = pdl.SYSCODE) and (sm.SYSNUMBER = pdl.SYSNUMBER)
+        left outer join dbo.SYSTEMMSGDET smd on (smd.SYSCODE = sm.SYSCODE) and (smd.SYSNUMBER = sm.SYSNUMBER) and (smd.CULTURE = '%%CULTURE_USER_ISO3166_ALPHA2%%')
+        left outer join dbo.SYSTEMMSGDET smd_gb on (smd_gb.SYSCODE = sm.SYSCODE) and (smd_gb.SYSNUMBER = sm.SYSNUMBER) and (smd_gb.CULTURE = 'en')
+        ]]>
+      </Command>
+    </SQLSelect>
+
+    <!--<SQLRowStyle type="class">
+      'DataGrid-' || IDSTPROCESSDET || '_2' ||
+      case when LEVELORDER is not null then ' LVL' || convert(varchar,LEVELORDER) end
+    </SQLRowStyle>-->
+    <!-- PL 20190408 Set default value 'LVL2' when LEVELORDER is null -->
+    <SQLRowStyle type="class">
+      'DataGrid-' || IDSTPROCESSDET || '_2' ||
+      case when LEVELORDER is not null then ' LVL' || convert(varchar,LEVELORDER)
+      when LEVELORDER is null and tblmain.ROWATTRIBUT is null then ' LVL2' end
+    </SQLRowStyle>
+
+    <Column>
+      <ColumnName>IDPROCESS_L</ColumnName>
+      <Colspan>0</Colspan>
+      <Ressource>IDPROCESS_L</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Align>left</Align>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>true</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy order="IDPROCESS_L, DTSTPROCESSDET, ORDERPROCESS, SEQNO">true</IsOrderBy>
+      <html_BLOCK title="Process" columnbyrow="2" backcolorheader="status:IDSTPROCESS"></html_BLOCK>
+    </Column>
+
+    <Column>
+      <ColumnName>PROCESS</ColumnName>
+      <Ressource>Request</Ressource>
+      <Colspan>0</Colspan>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <InputWidth>10%</InputWidth>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>PROCESSDISPLAYNAME</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsResource>true</IsResource>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>IDSTPROCESS</ColumnName>
+      <Ressource>IDSTPROCESS_L</Ressource>
+      <Colspan>0</Colspan>
+      <DataType>string</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <CellStyle model="status"/>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DTSTPROCESS</ColumnName>
+      <Ressource>DTSTPROCESS_L</Ressource>
+      <DataType datakind='Timestamp' tzdbid='Etc/UTC' display='Audit'>datetime</DataType>
+      <Colspan>0</Colspan>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+    </Column>
+
+    <Column>
+      <ColumnName>IDDATA</ColumnName>
+      <Ressource>ID System</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Align>left</Align>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+      <html_HR size="1"></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>IDDATAIDENT</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <InputWidth>20%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>IDA</ColumnName>
+      <Ressource>IDA_L</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <!-- IDA=0 on WebSession Process -->
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>ACTOR</TableName>
+        <ColumnRelation>
+          <ColumnName>IDA</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>IDA_L</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <ColumnLabel>
+          <ColumnName>DISPLAYNAME</ColumnName>
+          <Ressource>DISPLAYNAME</Ressource>
+          <DataType>string</DataType>
+        </ColumnLabel>
+      </Relation>
+      <html_HR size="1"></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>HOSTNAME</ColumnName>
+      <Ressource>HOSTNAME_L</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>APPNAME</ColumnName>
+      <Ressource>APPNAME_L</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>APPVERSION</ColumnName>
+      <Ressource>APPVERSION_L</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDPROCESSDET_L</ColumnName>
+      <Ressource>IDPROCESSDET_L</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>true</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>true</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+      <html_BLOCK title="CurrentElement_Title" columnbyrow="1" backcolorheader="status:IDSTPROCESSDET"></html_BLOCK>
+    </Column>
+    <Column>
+      <ColumnName>PROCESSDET</ColumnName>
+      <Ressource>PROCESSREQUEST</Ressource>
+      <Colspan>0</Colspan>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <InputWidth>10%</InputWidth>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>PROCESSDETDISPLAYNAME</ColumnName>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <IsResource>true</IsResource>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>IDSTPROCESSDET</ColumnName>
+      <Ressource>IDSTPROCESS</Ressource>
+      <DataType>string</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <CellStyle model="status"/>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DTSTPROCESSDET</ColumnName>
+      <Ressource>DTSTPROCESS</Ressource>
+      <DataType datakind='Timestamp' tzdbid='Etc/UTC' display='Audit'>datetime</DataType>
+      <Colspan>0</Colspan>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>SEQNO</ColumnName>
+      <Ressource>SEQNO</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDDATADET</ColumnName>
+      <Ressource>ID System</Ressource>
+      <!-- string for left position -->
+      <DataType>int</DataType>
+      <Align>left</Align>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDDATAIDENTDET</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <InputWidth>20%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>MESSAGE</ColumnName>
+      <Ressource>MESSAGE</Ressource>
+      <DataType>string</DataType>
+      <GridWidth>-100</GridWidth>
+      <Length>4000</Length>
+      <LengthInDataGrid>1000</LengthInDataGrid>
+      <Scale>0</Scale>
+      <Colspan>0</Colspan>
+      <InputHeight>120</InputHeight>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+      <CellStyle type="class">
+        <Otherwise>level</Otherwise>
+      </CellStyle>
+    </Column>
+    <Column>
+      <ColumnName>CODE</ColumnName>
+      <Ressource>CODE</Ressource>
+      <DataType>string</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <Colspan>0</Colspan>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation/>
+    </Column>
+
+    <Column>
+      <ColumnName>ISSHOWONERROR</ColumnName>
+      <Ressource>ISSHOWONERROR</Ressource>
+      <DataType>bool</DataType>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsUpdatable>false</IsUpdatable>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>ISSHOWONWARNING</ColumnName>
+      <Ressource>ISSHOWONWARNING</Ressource>
+      <DataType>bool</DataType>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsUpdatable>false</IsUpdatable>
+      <Relation/>
+    </Column>
+
+    <Column>
+      <ColumnName>DATA1</ColumnName>
+      <Ressource>DATA1_</Ressource>
+      <DataType>string</DataType>
+      <InputWidth>70%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <Colspan>0</Colspan>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+      <html_HR></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>DATA1IDENT</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Colspan>2</Colspan>
+      <InputWidth>30%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>DATA2</ColumnName>
+      <Ressource>DATA2_</Ressource>
+      <DataType>string</DataType>
+      <InputWidth>70%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <Colspan>0</Colspan>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DATA2IDENT</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Colspan>2</Colspan>
+      <InputWidth>30%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>DATA3</ColumnName>
+      <Ressource>DATA3_</Ressource>
+      <DataType>string</DataType>
+      <InputWidth>70%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <Colspan>0</Colspan>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DATA3IDENT</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Colspan>2</Colspan>
+      <InputWidth>30%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>DATA4</ColumnName>
+      <Ressource>DATA4_</Ressource>
+      <DataType>string</DataType>
+      <InputWidth>70%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <Colspan>0</Colspan>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DATA4IDENT</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Colspan>2</Colspan>
+      <InputWidth>30%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>DATA5</ColumnName>
+      <Ressource>DATA5_</Ressource>
+      <DataType>string</DataType>
+      <InputWidth>70%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <Colspan>0</Colspan>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DATA5IDENT</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <InputWidth>30%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>DATA6</ColumnName>
+      <Ressource>DATA6_</Ressource>
+      <DataType>string</DataType>
+      <InputWidth>70%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <Colspan>0</Colspan>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DATA6IDENT</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Colspan>2</Colspan>
+      <InputWidth>30%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>DATA7</ColumnName>
+      <Ressource>DATA7_</Ressource>
+      <DataType>string</DataType>
+      <InputWidth>70%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <Colspan>0</Colspan>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DATA7IDENT</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Colspan>2</Colspan>
+      <InputWidth>30%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>DATA8</ColumnName>
+      <Ressource>DATA8_</Ressource>
+      <DataType>string</DataType>
+      <InputWidth>70%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <Colspan>0</Colspan>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DATA8IDENT</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Colspan>2</Colspan>
+      <InputWidth>30%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>DATA9</ColumnName>
+      <Ressource>DATA9_</Ressource>
+      <DataType>string</DataType>
+      <InputWidth>70%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <Colspan>0</Colspan>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DATA9IDENT</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Colspan>2</Colspan>
+      <InputWidth>30%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>DATA10</ColumnName>
+      <Ressource>DATA10_</Ressource>
+      <DataType>string</DataType>
+      <InputWidth>70%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <Colspan>0</Colspan>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DATA10IDENT</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <InputWidth>30%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>EXTLLINK</ColumnName>
+      <Ressource>EXTLLINK</Ressource>
+      <DataType>string</DataType>
+      <Colspan>3</Colspan>
+      <LabelWidth>10%</LabelWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+      <html_BLOCK title="ExtlLink_" columnbyrow="3"></html_BLOCK>
+    </Column>
+
+    <!-- HIDDEN COLUMNS  (use for look and others) -->
+    <Column>
+      <ColumnName>IDTRK_L</ColumnName>
+      <Ressource>IDTRK_L</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>true</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <Relation/>
+    </Column>
+
+    <Column>
+      <ColumnName>ORDERPROCESS</ColumnName>
+      <Ressource>ORDERPROCESS</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>LEVELORDER</ColumnName>
+      <Ressource>LEVELORDER</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>ROWATTRIBUT</ColumnName>
+      <Ressource>ROWATTRIBUT</Ressource>
+      <DataType>string</DataType>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+
+
+    <!-- PM 20200514 [XXXXX] New log : drop ROWVERSION from PROCESSDET_L -->
+    <!--<Column>
+      <ColumnName>ROWVERSION</ColumnName>
+      <Ressource>ROWVERSION</Ressource>
+      <DataType>string</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>-->
+  </Referential>
+</Referentials>
+<!-- <html_BLOCK title="ExtlLink_" blockbyrow="2" width="75%" columnbyrow="1"></html_BLOCK> -->
+<!-- <html_HR color="red"></html_HR> -->

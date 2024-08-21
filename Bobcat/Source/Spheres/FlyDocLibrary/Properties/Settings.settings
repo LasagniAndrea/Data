@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FlyDocLibrary.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="FlyDoc_FlyDocLibrary_QueryService_QueryService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://as1.ondemand.esker.com:443/EDPWS/EDPWS.dll?Handler=QueryHandler&amp;Version=1.0</Value>
+    </Setting>
+    <Setting Name="FlyDoc_FlyDocLibrary_SessionService_SessionService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://as1.ondemand.esker.com:443/EDPWS/EDPWS.dll?Handler=Default&amp;Version=1.0</Value>
+    </Setting>
+    <Setting Name="FlyDoc_FlyDocLibrary_SubmissionService_SubmissionService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://as1.ondemand.esker.com:443/EDPWS/EDPWS.dll?Handler=SubmissionHandler&amp;Version=1.0</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

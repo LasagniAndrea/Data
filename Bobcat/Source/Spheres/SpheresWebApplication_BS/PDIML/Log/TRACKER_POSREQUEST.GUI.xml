@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+  <customObject control="label"     clientid="NIVEAU"          caption = "PosRequestLevel_Title"  xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="NIVEAU"          width="170px"   datatype="integer" listretrieval="predef:posrequestlevel" required="true" postback="true"  postbackargument ="SELFRELOAD_" xsi:type="CustomObjectDropDown"  misc="isClear:true"/>
+</customObjects>
+

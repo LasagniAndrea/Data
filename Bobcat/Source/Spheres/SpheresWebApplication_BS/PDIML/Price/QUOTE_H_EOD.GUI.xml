@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+  <customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">  
+  <customObject control="label"   clientid="DATE1"  caption = "Date" xsi:type="CustomObjectLabel" />
+
+  <customObject control="textbox" clientid="DATE1"  datatype = "date" required="true" postback="true"
+			postbackargument="SELFCLEAR_" xsi:type="CustomObjectTextBox" defaultvalue="BUSINESS"/>
+
+  <customObject control="label"     clientid="ENTITY"         caption = "Entity_Title" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="ENTITY"         width="250px"   datatype="integer"
+                listretrieval="predef:ActorEntity" required="true" postback="true"
+                postbackargument="SELFCLEAR_" xsi:type="CustomObjectDropDown"
+                misc="isAddAll:true;isUseSessionRestrict:true;isClear:false"/>
+
+  <!--
+  <customObject control="label"     clientid="CLEARINGHOUSE"  caption = "ClearingHouse!br"  xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="CLEARINGHOUSE"  width="250px"   datatype="integer"
+                listretrieval="predef:clearinghouse" required="true" postback="true"
+                postbackargument="SELFCLEAR_" xsi:type="CustomObjectDropDown"
+                misc="isAddAll:true;isUseSessionRestrict:true;isClear:true"/>
+                -->
+
+    <customObject control="label"     clientid="CSSCUSTODIAN"  caption = "CssCustodian!br"  xsi:type="CustomObjectLabel"/>
+    <customObject control="dropdown"  clientid="CSSCUSTODIAN"  width="270px"   datatype="integer"
+                  listretrieval="predef:csscustodian" required="true" postback="true"
+                  postbackargument ="SELFCLEAR_" xsi:type="CustomObjectDropDown"
+                  misc="isAddAll:true;isUseSessionRestrict:true;isClear:true"/>
+        
+    <customObject control="space"    width="15"/>
+    <customObject control="label"    clientid="ACTIVITYTYPE" caption = "lblActivityType"
+                  xsi:type="CustomObjectLabel"/>
+    <customObject control="dropdown" clientid="ACTIVITYTYPE" datatype="integer"
+                  listretrieval="Predef:activitytypeview" width="50"
+                  required="true" postback="true"  postbackargument="SELFCLEAR_"
+                  xsi:type="CustomObjectDropDown" misc="isClear:true" defaultvalue="1" />
+    
+</customObjects>

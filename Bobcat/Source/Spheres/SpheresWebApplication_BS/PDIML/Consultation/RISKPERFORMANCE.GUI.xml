@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+  
+  <customObject control="dropdown" clientid="POSITIONSIDE" xsi:type="CustomObjectDropDown" defaultvalue="1" datatype="integer"
+                caption = "lblActorSide" listretrieval="Predef:positionsideview"
+                required="true" postback="true" postbackargument ="SELFCLEAR_" misc="isClear:true" />
+
+</customObjects>

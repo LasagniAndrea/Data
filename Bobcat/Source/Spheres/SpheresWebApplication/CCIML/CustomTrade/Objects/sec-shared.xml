@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+	<!-- AmountDisplay_L-->
+	<Object name="AmountDisplay_L">
+		<Amount_L/>
+		<Space />
+		<Table style="width:100%;">
+			<Display helpelement="none"/>
+		</Table>
+	</Object>
+	<!--//-->
+	<!--ArrayOfInstrumentId-->
+	<Object name="ArrayOfInstrumentId" helpschema="fpml" helpelement="InstrumentId">
+		<InstrumentId clientid="instrumentId" locked="modifypostevts:no" occurs="1"  minoccurs="1" addsuboperator="true"  helpschema="fpml" helpelement="InstrumentId" />
+	</Object>
+	<!--ArrayOfInstrumentId_LockedOnModifPostEvts -->
+	<Object name="ArrayOfInstrumentId_LockedOnModifPostEvts" helpschema="fpml" helpelement="InstrumentId">
+		<InstrumentId clientid="instrumentId" occurs="1"  minoccurs="1" addsuboperator="true"  helpschema="fpml" helpelement="InstrumentId" />
+	</Object>
+	<!--//-->
+	<!--AmountAndQuantityBlock-->
+	<Object name="AmountAndQuantityBlock1">
+		<table>
+			<Banner caption="debSecurity_AmountTitle" level="3"  helpschema="efsml" helpelement="CalculationBase"/>
+			<CalculationNotionalDebtSecurity clientid="debtSecurity_debtSecurityStream_calculationPeriodAmount_calculation" required="true" helpschema="efsml" helpelement="CalculationBase" />
+		</table>
+	</Object>
+	<Object name="AmountAndQuantityBlock2">
+		<table>
+			<Banner caption="debSecurity_AmountAndQuantityTitle" level="3"  helpschema="efsml" helpelement="CalculationPeriodAmountBase"/>
+			<CalculationNotionalDebtSecurity clientid="debtSecurity_debtSecurityStream_calculationPeriodAmount_calculation" required="true" helpschema="efsml" helpelement="CalculationBase" />
+			<br/>
+      <table id="tblAmountDetH" verticalAlign="Top" style="istableH:true;tblH-titleR:Detail;tblH-css:size5;tblH-reverse:1;tblH-startdisplay:collapse;">
+        <table id="tblAmountDet">
+          <IntegerQte_L clientid="debtSecurity_security_numberOfIssuedSecurities" required="false" postback="true" helpschema="efsml" helpelement="Security" />
+          <br/>
+          <Money_L clientid="debtSecurity_security_faceAmount" required="false" postback="true" helpschema="efsml" helpelement="Security"/>
+          <fill/>
+        </table>
+      </table>
+		</table>
+	</Object>
+	<!--//-->
+	<!--Coupon-->
+	<Object name="SecurityAssetRateBlock">
+		<label caption="debtSecurity_debtSecurityStream_calculationPeriodAmount_calculation_rate" clientid="debtSecurity_debtSecurityStream1_calculationPeriodAmount_calculation_rate1"/>
+		<table xcolspan="-1" xcontrolalignleft="true">
+			<AssetRate clientid="debtSecurity_debtSecurityStream1_calculationPeriodAmount_calculation_rate" required="false" postback="true" helpschema="efsml" helpelement="CalculationBase"/>
+			<space/>
+			<Schedule_ButtonInitialValue clientid="debtSecurity_debtSecurityStream1_calculationPeriodAmount_calculation_fixedRateSchedule" required="false" helpschema="efsml" helpelement="fixedRateSchedule"/>
+			<space/>
+			<Schedule_initialValue_L clientid="debtSecurity_debtSecurityStream1_calculationPeriodAmount_calculation_floatingRateCalculation_floatingRateMultiplierSchedule" required="false" helpschema="fpml" helpelement="Schedule" />
+			<space/>
+			<Schedule_initialValueFixedRate clientid="debtSecurity_debtSecurityStream1_calculationPeriodAmount_calculation_floatingRateCalculation_spreadSchedule" required="false" helpschema="fpml" helpelement="SpreadSchedule"/>
+			<fill/>
+		</table>
+	</Object>
+
+	<!--//-->
+	<!--SecurityCalculationBlock1-->
+	<Object name="SecurityCalculationBlock1">
+		<Label clientid="SecurityCalculationBlock2_1" caption="debtSecurity_debtSecurityStream_calculationPeriodDates_calculationPeriodFrequency_periodFrequency" helpschema="fpml" helpelement="BusinessDayAdjustments" />
+		<table>
+			<CalculationFrequencyNoRollConv clientid="debtSecurity_debtSecurityStream_calculationPeriodDates_calculationPeriodFrequency_periodFrequency" required="true" keepinquickinput="false"
+								   helpschema="fpml" helpelement="CalculationPeriodFrequency" postback="true"/>
+			<DayCountFraction_L clientid="debtSecurity_debtSecurityStream_calculationPeriodAmount_calculation_dayCountFraction" required="true"	keepinquickinput="false" />
+			<!--<space/>
+			<YieldType_L clientid="debtSecurity_security_yieldType" required="false" keepinquickinput="false" helpschema="efsml" helpelement="YieldTypeEnum"/>-->
+			<fill/>
+		</table>
+	</Object>
+	<!--SecurityCalculationBlock2-->
+	<Object name="SecurityCalculationBlock2">
+		<Label clientid="SecurityCalculationBlock2_1" caption="debtSecurity_debtSecurityStream_calculationPeriodDates_calculationPeriodFrequency_periodFrequency" helpschema="fpml" helpelement="BusinessDayAdjustments" />
+		<table>
+			<CalculationFrequencyNoRollConv clientid="debtSecurity_debtSecurityStream1_calculationPeriodDates_calculationPeriodFrequency_periodFrequency" required="true" keepinquickinput="false"
+									   helpschema="fpml" helpelement="CalculationPeriodFrequency" postback="true"/>
+			<RollConvention_L clientid="debtSecurity_debtSecurityStream1_calculationPeriodDates_calculationPeriodFrequency_rollConvention" required="true" helpschema="fpml" helpelement="RollConventionEnum" />
+			<DayCountFraction_L clientid="debtSecurity_debtSecurityStream1_calculationPeriodAmount_calculation_dayCountFraction" required="true"	keepinquickinput="false" />
+			<fill/>
+		</table>
+		<br/>
+		<Label clientid="SecurityCalculationBlock2_2" caption="debtSecurity_debtSecurityStream_calculationPeriodDates_calculationPeriodDatesAdjustments_bDC" helpschema="fpml" helpelement="BusinessDayAdjustments" />
+		<table>
+      <BDC_BC clientid="debtSecurity_debtSecurityStream1_calculationPeriodDates_calculationPeriodDatesAdjustments_bDC"/>
+			<BDC_BC_L clientid="debtSecurity_debtSecurityStream1_paymentDates_paymentDatesAdjustments_bDC"/>
+			<Button clientid = "debtSecurity_debtSecurityStream1_paymentDates_offset" type="Submit" imageurl="fas fa-external-link-square-alt" caption="Offset" helpschema="fpml" helpelement="Offset" />
+			<fill/>
+		</table>
+	</Object>
+
+	<!--//-->
+	<!--CalculationNotionalDebtSecurity-->
+	<Object name="CalculationNotionalDebtSecurity" helpschema="efsml" helpelement="Calculation">
+		<Notional clientid="notionalSchedule" required="false" helpschema="fpml" helpelement="AmountSchedule" />
+		<Fill/>
+	</Object>
+	<!--Issuer-->
+	<Object name="IssuerBlock">
+		<table colspan="-1" xcontrolalignleft="true" >
+			<Banner caption="Issuer" level="3"  helpschema="fpml" helpelement="PartyOrAccountReference" />
+			<PartyIssuer clientid="tradeHeader_party1_actor" required="true" postback="true" />
+			<Fill/>
+		</table>
+	</Object>
+	<!--//-->
+	<!--IdentifierBlock-->
+	<Object name="IdentifierBlock1">
+		<table colspan="-1" controlalignleft="true">
+			<Banner caption="Identifiers" level="3"  helpschema="efsml" helpelement="Security" />
+			<ArrayOfInstrumentId clientid="debtSecurity_security" required="true" />"
+		</table>
+	</Object>
+	<!--IdentifierBlock1 avec modif post evt impossible (Object utilisé dans DebtSecurityTransaction)-->
+	<Object name="IdentifierBlock1_ArrayOfInstrumentId_LockedOnModifPostEvts">
+		<table colspan="-1" controlalignleft="true">
+			<Banner caption="Identifiers" level="3"  helpschema="efsml" helpelement="Security" startdisplay="expand" tablelinkid="tblIdentifiers" />
+			<ArrayOfInstrumentId_LockedOnModifPostEvts clientid="debtSecurity_security" required="true" />"
+		</table>
+	</Object>
+
+	<Object name="IdentifierBlock2">
+		<table colspan="-1" controlalignleft="true">
+			<Banner caption="Identifiers" level="3"  helpschema="efsml" helpelement="Security" startdisplay="expand" tablelinkid="tblIdentifiers" />
+			<ArrayOfInstrumentId clientid="debtSecurity_security" required="true" />"
+			<br/>
+      <table id="tblIdentifierDetH" verticalAlign="Top" style="istableH:true;tblH-titleR:Detail;tblH-css:size5;tblH-reverse:1;tblH-startdisplay:collapse;">
+        <table id="tblIdentifierDet"  controlalignleft="true" colspan="-1">
+          <DebtSecurityClass_L clientid="debtSecurity_security_classification_debtSecurityClass" locked="modifypostevts:false" required="false" postback="false" helpschema="efsml" helpelement="Identification"/>
+          <br/>
+          <CFIIdentifier_L clientid="debtSecurity_security_classification_cfiCode" locked="modifypostevts:false" required="false" helpschema="efsml" helpelement="CFIIdentifier"/>
+          <br/>
+          <ProductTypeCode_L clientid="debtSecurity_security_classification_productTypeCode"  locked="modifypostevts:false" required="false"  helpschema="efsml" helpelement="ProductTypeCodeEnum"/>
+          <br/>
+          <FinancialInstrumentProductTypeCode_L clientid="debtSecurity_security_classification_financialInstrumentProductTypeCode" locked="modifypostevts:false" required="false" />
+        </table>
+      </table>
+		</table>
+	</Object>
+	<!--//-->
+	<!--Information-->
+	<Object name="InformationBlock1">
+		<table colspan="-1">
+			<Banner caption="Informations" level="3"  helpschema="efsml" helpelement="Localization" />
+      <Market clientid="debtSecurity_security_exch" required="false" postback="false"  />
+			<LocalizationCountry clientid="debtSecurity_security_localization" helpschema="efsml" helpelement="Localization" required="false" postback="false"  />
+			<Currency_L clientid="debtSecurity_security_currency" helpschema="fpml" helpelement="Currency" required="false" postback="true"  />
+			<Fill/>
+		</table>
+	</Object>
+	<Object name="InformationBlock2">
+    <table id="tblInfoDetH" verticalAlign="Top" style="istableH:true;tblH-titleR:Detail;tblH-css:size5;tblH-reverse:1;tblH-startdisplay:collapse;">
+      <table id="tblInfoDet" controlalignleft="true" >
+        <String300_L clientid="debtSecurity_security_localization_stateOrProvinceOfIssue" locked="modifypostevts:false" helpschema="efsml" helpelement="Localization" required="false" postback="false" />
+        <br/>
+        <String300_L clientid="debtSecurity_security_localization_localeOfIssue" locked="modifypostevts:false" helpschema="efsml" helpelement="Localization" required="false" postback="false" />
+        <br/>
+      </table>
+    </table>
+		<br/>
+	</Object>
+
+  <Object name="Market">
+    <label />
+    <DropDown datatype="string" width="300px" listretrieval="sql:
+    select m.FIXML_SecurityExchange as VALUE, m.SHORT_ACRONYM as TEXT
+    from dbo.VW_MARKET_IDENTIFIER m 
+    where (m.ISTRADEDDERIVATIVE=0) and (m.DTENABLED&lt;=getdate() and (m.DTDISABLED is null or m.DTDISABLED>getdate()))" readonlymode ="isload:false;columntext:SHORT_ACRONYM"/>
+  </Object>
+    <!--inner join ASSETENV ae on (ae.IDI = %%ID_INSTRUMENT%%) and ((ae.IDM is null) or (m.IDM = ae.IDM))-->
+
+  <!--//-->
+	<!--MaturityBlock-->
+  <!-- EG 20190819 [FIXEDINCOME] Perpetual|Ordinary -->  
+	<Object name="MaturityBlock" helpschema="fpml" helpelement="CalculationPeriodDates">
+		<!--<Banner caption="Characteristics" level="3"  helpschema="fpml" helpelement="AdjustableDate" />-->
+    <label clientid="debtSecurity_debtSecurityStream_calculationPeriodDates_terminationDate" />
+    <table>
+			<Date  clientid="debtSecurity_debtSecurityStream_calculationPeriodDates_terminationDate" required="true" postback="true" helpschema="fpml" helpelement="AdjustableDate"  />
+			<fill/>
+		</table>
+	</Object>
+  <Object name="DebtSecurityTypeBlock" helpschema="fpml" helpelement="DebtSecurityTypeEnum">
+    <Banner caption="Characteristics" level="3"  helpschema="fpml" helpelement="AdjustableDate" />
+    <Label clientid="debtSecurity_type" helpschema="efsml" helpelement="SecurityAsset"/>
+    <table>
+      <DebtSecurityTypeEnum clientid="debtSecurity_type" required="true" postback="true" helpschema="efsml" helpelement="DebtSecurityTypeEnum"/>
+    </table>
+  </Object>
+  <!--//-->
+	<!-- SecurityId_L-->
+	<Object name="SecurityAssetId_L">
+		<Label helpschema="efsml" helpelement="SecurityAsset"/>
+		<Table>
+			<TextBox datatype="string" style="width:300px" autocomplete="true" />
+			<Button type="Submit" consultation="DEBTSECURITY" sqlspecifiedfield="IDENTIFIER" cssclass="fa-icon"  tooltip="search"/>
+			<Space />
+			<Table style="width:100%;">
+				<Display helpelement="none"/>
+			</Table>
+		</Table>
+	</Object>
+  <Object name="SecurityAssetId_Lv2">
+    <table>
+      <Label helpschema="efsml" helpelement="SecurityAsset"/>
+      <br/>
+      <space/>
+    </table>
+    <table>
+      <TextBox datatype="string" style="width:300px;" />
+      <Button type="Submit" consultation="DEBTSECURITY" sqlspecifiedfield="IDENTIFIER" cssclass="fa-icon"  tooltip="search"/>
+      <br/>
+      <Display helpelement="none" style="font-size:x-small;font-weight:normal;overflow:hidden;width:400px"/>
+    </table>
+  </Object>
+  <!--//-->
+	<!-- QuantityAmount-->
+	<Object name="QuantityAmount" helpelement="none" >
+		<DecimalNoRegexOnDataType/>
+    <Table style="width:10%;">
+      <Space />
+      <!--<Space />
+      <Space />
+      <Space />-->
+      <Display helpelement="none" />
+		</Table>
+	</Object>
+	<!-- SecurityRateBlock1-->
+  <!-- EG 20190819 [FIXEDINCOME] Perpetual|Ordinary -->  
+	<Object name="SecurityRateBlock1">
+		<table colspan="-1" controlalignleft="-1">
+      <DebtSecurityTypeBlock/>
+      <br/>
+			<MaturityBlock/>
+			<br/>
+			<SecurityAssetRateBlock/>
+			<br/>
+			<SecurityRateType2/>
+			<br/>
+			<SecurityCalculationBlock1/>
+		</table>
+	</Object>
+	<!-- SecurityRateBlock2-->
+  <!-- EG 20190819 [FIXEDINCOME] Perpetual|Ordinary -->  
+	<Object name="SecurityRateBlock2">
+		<table colspan="-1" controlalignleft="-1">
+      <DebtSecurityTypeBlock/>
+      <br/>
+			<MaturityBlock/>
+			<br/>
+			<SecurityAssetRateBlock/>
+			<br/>
+			<SecurityRateType2/>
+			<br/>
+			<SecurityCalculationBlock2/>
+		</table>
+	</Object>
+
+	<!--//-->
+	<!--SecurityOrderQuantity-->
+	<Object name="SecurityOrderQuantity">
+    <!--<table id="tblPriceH" verticalAlign="Top" style="istableH:false;tblH-titleR:debtSecurityTransaction_QtyAmountTitle;tblH-css:size5;tblH-reverse:1;tblH-startdisplay:expand;">-->
+      <table controlalignleft="true">
+        <Banner caption="debtSecurityTransaction_QtyAmountTitle" level="3"  helpschema="efsml" helpelement="OrderPrice"/>
+        <OrderQuantityType3CodeEnum clientid="quantityType" required="true" postback="true" />
+        <Space />
+        <QuantityAmount clientid="quantityAmount" required="true" postback="true"/>
+        <Fill/>
+      </table>
+    <!--</table>-->
+	</Object>
+  <Object name="SecurityOrderQuantity_L" helpschema="efsml" helpelement="OrderQuantity">
+    <table>
+      <Label helpschema="efsml" helpelement="XXX"/>
+      <br/>
+      <space/>
+    </table>
+    <table>
+      <table>
+        <OrderQuantityType3CodeEnum clientid="quantityType" required="true" postback="true" helpschema="efsml" helpelement="OrderQuantityType3CodeEnum"/>
+        <DecimalNoRegexOnDataType clientid="quantityAmount" required="true" postback="true"/>
+      </table>
+      <br/>                                
+      <Display clientid="quantityAmount" helpelement="none" style="font-size:x-small;font-weight:normal;overflow:hidden;width:400px"/>
+    </table>
+  </Object>
+  <!--//-->
+	<!--SecurityPayment-->
+	<Object name="SecurityPayment" helpschema="fpml" helpelement="Payment">
+		<Table colspan="-1" controlalignleft="true" >
+			<DLLBannerFeeBlock/>
+			<Table>
+				<PartyReference_L clientid="payer" postback="true" required="true" helpschema="fpml" helpelement="PayerReceiver.model"/>
+				<Space />
+				<Date_L clientid="paymentDate_unadjustedDate" required="true" helpschema="fpml" helpelement="AdjustableDate" postback="true" match="true"/>
+				<Space />
+        <MoneyMatchAmount_L clientid="paymentAmount" required="true" postback="true" helpschema="fpml" helpelement="Money" />
+				<Space />
+				<SettlementInformation_L clientid="settlementInformation" postback="true" helpschema="fpml" helpelement="SettlementInformation"/>         
+        <Fill/>
+			</Table>
+		</Table>
+	</Object>
+	<!--//-->
+	<!--SecurityPrice-->
+	<Object name="SecurityPrice">
+    <table controlalignleft="true" >
+      <Banner caption="debtSecurityTransaction_PriceTitle" level="3"  helpschema="efsml" helpelement="OrderPrice"/>
+      <PriceQuoteUnitsEnum clientid="priceUnits" required="true" postback="true" helpschema="efsml" helpelement="PriceUnits"/>
+      <Space />
+      <DecimalNoRegexOnDataType clientid="price" required="true" postback="true"/>
+      <Space />
+      <AssetMeasureEnum clientid="assetMesure" required="false" postback="true" helpschema="fpml" helpelement="AssetMeasureType"/>
+      <Fill/>
+    </table>
+	</Object>
+
+  <Object name="SecurityCoupon">
+    <table controlalignleft="true" colspan="-1">
+      <Banner caption="debtSecurityTransaction_CouponTitle" level="3"/>
+      <FixedRate_L clientid="accruedInterestRate" required="false" postback="true" helpschema="efsml" helpelement="OrderPrice"/>
+      <Space />
+      <AmountDisplay_L clientid="accruedInterestAmount_amount" required="false" postback="true" helpschema="efsml" helpelement="OrderPrice"/>
+      <Fill/>
+    </table>
+  </Object>
+	<!--//-->
+	<!--SecurityGrossAmount-->
+	<Object name="SecurityGrossAmount">
+		<table colspan="-1">
+			<Banner caption="debtSecurityTransaction_grossAmountTitle" level="3"/>
+			<SecurityPayment />
+		</table>
+	</Object>
+	<!--//-->
+	<!--PriceBlock-->
+	<Object name="PriceBlock">
+		<table>
+			<Banner caption="Price" level="3"  helpschema="efsml" helpelement="SecurityPrice" />
+			<SecurityPricePercentage clientid="debtSecurity_security_price" required="false" postback="false"/>
+			<Fill/>
+		</table>
+	</Object>
+	<!--//-->
+	<!--SecurityRateType1-->
+	<Object name="SecurityRateType1"  helpschema="efsml" helpelement="debtSecurity">
+		<label caption="debtSecurity_security_couponType" clientid="securityRateType1"/>
+		<table>
+			<CouponType clientid="debtSecurity_security_couponType" postback="false" required="false" helpschema="fpml" helpelement="CouponType"/>
+			<space/>
+			<PriceRateTypeCode clientid="debtSecurity_security_priceRateType" postback="true" required="false" helpschema="efsml" helpelement="PriceRateType3CodeEnum"/>
+			<fill/>
+		</table>
+		<fill/>
+	</Object>
+	<!--//-->
+	<!--SecurityRateType2-->
+	<Object name="SecurityRateType2"  helpschema="efsml" helpelement="debtSecurity">
+		<label caption="debtSecurity_security_couponType" clientid="securityRateType2"/>
+		<table>
+			<CouponType clientid="debtSecurity_security_couponType" postback="false" required="false" helpschema="fpml" helpelement="CouponType"/>
+			<space/>
+			<PriceRateTypeCode clientid="debtSecurity_security_priceRateType" postback="true" required="false" helpschema="efsml" helpelement="PriceRateType3CodeEnum"/>
+			<YieldType_L clientid="debtSecurity_security_yieldType" required="false" keepinquickinput="false" helpschema="efsml" helpelement="YieldTypeEnum"/>
+			<fill/>
+		</table>
+		<fill/>
+	</Object>
+	<!--//-->
+	<!--SecurityBoutonBlock-->
+	<Object name="SecurityBoutonBlock">
+		<br/>
+		<table controlalignleft="true" xcolspan="-1" >
+			<Button clientid = "debtSecurity_security_calculationRules" caption="Calculation rules" imageurl="fas fa-external-link-square-alt" locked="modifypostevts:false" type="Submit" />
+			<space/>
+			<Button clientid = "debtSecurity_security_orderRules" caption="Order rules" imageurl="fas fa-external-link-square-alt" locked="modifypostevts:false" type="Submit" />
+			<space/>
+			<Button clientid = "debtSecurity_security_quoteRules" caption="Quote rules" imageurl="fas fa-external-link-square-alt" locked="modifypostevts:false" type="Submit"  />
+			<space/>
+			<Button clientid = "debtSecurity_security_indicator" caption="Indicator" imageurl="fas fa-external-link-square-alt" locked="modifypostevts:false" type="Submit"  />
+			<!--space></space>
+			<Button clientid = "debtSecurity_security_yield" type="Submit"  /-->
+		</table>
+	</Object>
+	<!--//-->
+	<!--SecurityDateBlock-->
+  <!-- EG 20190819 [FIXEDINCOME] Perpetual|Ordinary -->  
+	<Object name="SecurityDateBlock">
+		<Banner caption="Dates" level="3" />
+		<table  controlalignleft="true">
+			<table>
+				<Date_L caption="debtSecurity_tradeDate" clientid="tradeHeader_tradeDate" required="false" postback="false" helpschema="fpml" helpelement="IdentifiedDate"/>
+				<br/>
+				<Date_L clientid="debtSecurity_debtSecurityStream_calculationPeriodDates_effectiveDate" required="false"  postback="false" helpschema="fpml" helpelement="AdjustableDate"/>
+				<br/>
+				<Date_L  clientid="debtSecurity_debtSecurityStream_calculationPeriodDates_firstPeriodStartDate" required="false" postback="false" helpschema="fpml" helpelement="AdjustableDate"/>
+				<br/>
+				<Date_L clientid="debtSecurity_debtSecurityStream_paymentDates_firstPaymentDate" required="false"  postback="false" helpschema="fpml" helpelement="PaymentDates"/>
+				<br/>
+        <Date_L clientid="debtSecurity_previousCouponDate" required="false"  postback="false" helpschema="fpml" helpelement="AdjustableDate"/>
+        <br/>
+        <fill/>
+			</table>
+		</table>
+	</Object>
+	<!--//-->
+	<!--SecurityDateStubBlock-->
+	<Object name="SecurityDateStubBlock">
+		<Banner caption="Dates" level="3" />
+		<table controlalignleft="true">
+			<table>
+				<Date_L caption="debtSecurity_tradeDate" clientid="tradeHeader_tradeDate" required="false" postback="false" helpschema="fpml" helpelement="IdentifiedDate"/>
+				<br/>
+				<Date_L clientid="debtSecurity_debtSecurityStream_calculationPeriodDates_effectiveDate" required="false"  postback="true" helpschema="fpml" helpelement="AdjustableDate"/>
+				<br/>
+				<Date_L  clientid="debtSecurity_debtSecurityStream_calculationPeriodDates_firstPeriodStartDate" required="false" postback="true" helpschema="fpml" helpelement="AdjustableDate"/>
+				<space/>
+				<Date_L clientid="debtSecurity_debtSecurityStream_calculationPeriodDates_firstRegularPeriodStartDate" required="false"  postback="true" helpschema="fpml" helpelement="AdjustableDate"/>
+        <space/>
+        <Date_L clientid="debtSecurity_debtSecurityStream_calculationPeriodDates_lastRegularPeriodEndDate" required="false"  postback="true" helpschema="fpml" helpelement="AdjustableDate"/>
+        <br/>
+				<Date_L clientid="debtSecurity_debtSecurityStream_paymentDates_firstPaymentDate" required="false"  postback="false" helpschema="fpml" helpelement="PaymentDates"/>
+				<br/>
+        <Date_L clientid="debtSecurity_previousCouponDate" required="false"  postback="false" />
+        <br/>
+        <fill/>
+			</table>
+		</table>
+	</Object>
+
+	<!--CFIIdentifier_L-->
+	<Object name="CFIIdentifier_L" helpschema="efsml" helpelement="CFIIdentifier">
+		<Label />
+		<CFIIdentifier />
+		<Fill/>
+	</Object>
+	<Object name="CFIIdentifier">
+		<TextBox datatype="string" regex="RegexCFIIdentifier" style="width:248px;margin-top:2px;margin-bottom:2px;" />
+	</Object>
+
+	<!--Complex_Localization-->
+	<Object name="LocalizationCountry" helpschema="efsml" helpelement="Localization">
+		<Country_L clientid="countryOfIssue" postback="true" required="true" helpschema="fpml" helpelement="Country"/>
+	</Object>
+
+	<!--Complex_SecurityPrice-->
+	<Object name="SecurityPricePercentage" helpschema="efsml" helpelement="SecurityPrice">
+		<Label clientid="issuePricePercentage" helpschema="efsml" helpelement="SecurityPrice"/>
+		<DecimalPercent clientid="issuePricePercentage" />
+		<br/>
+		<Label clientid="redemptionPricePercentage" helpschema="efsml" helpelement="SecurityPrice"/>
+		<DecimalPercent clientid="redemptionPricePercentage" />
+	</Object>
+
+	<!--YieldType_L-->
+	<Object name="YieldType_L" helpschema="fpml-enum" helpelement="YieldType">
+		<Label />
+		<YieldType />
+	</Object>
+	<Object name="YieldType" helpschema="fpml-enum" helpelement="YieldType">
+		<DropDown datatype="string" listretrieval="predef:enum.[code:YieldTypeEnum;isresource:false;forcedenum:COMPOUND|SIMPLE]" width="130px"  />
+	</Object>
+</Objects>

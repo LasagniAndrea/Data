@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- ************************************ -->
+<!-- Screens                              -->
+<!-- ************************************ -->
+<Screens>
+  <!-- Invoice -->
+  <Screen name="AdditionalInvoice" caption="AdditionalInvoice" product="AdditionalInvoice">
+		<TradeAdminRemoveBlock/>
+    <InvoiceHeaderBlock />
+	  <AdditionalInvoiceBlock clientid="invoice"/>
+  </Screen>
+
+  <Screen name="AdditionalInvoice-Enhanced" caption="AdditionalInvoice (Enhanced)" product="AdditionalInvoice">
+    <TradeAdminRemoveBlock/>
+    <InvoiceHeaderBlock />
+    <AdditionalInvoiceEnhancedBlock clientid="invoice"/>
+  </Screen>
+
+  <Screen name="AdditionalInvoice-Light" caption="AdditionalInvoice (Light)" product="AdditionalInvoice">
+    <TradeAdminRemoveBlock/>
+    <InvoiceHeaderBlock />
+    <AdditionalInvoiceLightBlock clientid="invoice"/>
+  </Screen>
+
+</Screens>

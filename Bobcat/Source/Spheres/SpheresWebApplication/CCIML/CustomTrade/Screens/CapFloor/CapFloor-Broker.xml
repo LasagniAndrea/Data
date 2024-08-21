@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Screens>
+  <!-- EG 20171113 [23509] Upd Gestion Objets Facility / Dates et Marché -->
+	<!-- CapOTCml -->
+	<Screen name="Cap-Broker" caption="Cap (Screen Broker)" product="capFloor">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSales-DRV-Block/>
+		<CapStreamBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+		<EarlyTerminationProvisionBlock/>
+    <ComplianceBlock/>
+	</Screen>
+  <!-- CapStubOTCml -->
+  <Screen name="CapStub-Broker" caption="Cap with Stubs (Screen Broker)" product="capFloor">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSales-DRV-Block/>
+    <CapStreamStubBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+    <SettlementInputBlock/>
+    <EarlyTerminationProvisionBlock/>
+    <ComplianceBlock/>
+  </Screen>
+  
+	<!-- FloorOTCml -->
+	<Screen name="Floor-Broker" caption="Floor (Screen Broker)" product="capFloor">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSales-DRV-Block/>
+		<FloorStreamBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+		<EarlyTerminationProvisionBlock/>
+    <ComplianceBlock/>
+	</Screen>
+  <!-- FloorStubOTCml -->
+  <Screen name="FloorStub-Broker" caption="Floor with Stubs (Screen Broker)" product="capFloor">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSales-DRV-Block/>
+    <FloorStreamStubBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+    <SettlementInputBlock/>
+    <EarlyTerminationProvisionBlock/>
+    <ComplianceBlock/>
+  </Screen>
+  
+	<!-- CollarOTCml -->
+	<Screen name="Collar-Broker" caption="Collar (Screen Broker)" product="capFloor">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSales-DRV-Block/>
+		<CollarStreamBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+		<EarlyTerminationProvisionBlock/>
+    <ComplianceBlock/>
+	</Screen>
+  <!-- CollarStubOTCml -->
+  <Screen name="CollarStub-Broker" caption="Collar with Stubs (Screen Broker)" product="capFloor">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSales-DRV-Block/>
+    <CollarStreamStubBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+    <SettlementInputBlock/>
+    <EarlyTerminationProvisionBlock/>
+    <ComplianceBlock/>
+  </Screen>
+
+	<!-- CapFloorStraddle-Broker -->
+	<Screen name="CapFloorStraddle-Broker" caption="CapFloor Straddle (Screen Broker)" product="capFloor">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSales-DRV-Block/>
+		<StraddleStreamBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+		<EarlyTerminationProvisionBlock/>
+    <ComplianceBlock/>
+	</Screen>
+
+	<!-- CapFloorStrangle-Broker -->
+	<Screen name="CapFloorStrangle-Broker" caption="CapFloor Strangle (Screen Broker)" product="capFloor">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSales-DRV-Block/>
+		<CollarStreamBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+		<EarlyTerminationProvisionBlock/>
+    <ComplianceBlock/>
+	</Screen>
+
+</Screens>

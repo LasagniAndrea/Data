@@ -1,0 +1,52 @@
+﻿//
+// Override Variables
+// --------------------------------------------------
+@import (reference) "../bootstrap/variables.less";
+@import (reference) "../bootstrap/mixins/reset-text.less";
+@import (reference) "../bootstrap/mixins/reset-filter.less";
+@import (reference) "spheres-variables.less";
+
+//
+// Popovers
+// --------------------------------------------------
+
+
+.popover {
+    /*padding: 0;*/
+    /*font-size: @font-size-base;*/
+    /*background-color: @popover-bg;*/
+    /*background-clip: padding-box;*/
+    /*border: 1px solid @popover-fallback-border-color;*/
+    /*border: 1px solid @popover-border-color;*/
+    /*border-radius: @border-radius-large;*/
+    /*.box-shadow(0 5px 10px rgba(0,0,0,.2));*/
+    // Offset the popover to account for the popover arrow
+    /*&.top     { margin-top: -@popover-arrow-width; }*/
+    /*&.right   { margin-left: @popover-arrow-width; }*/
+    /*&.bottom  { margin-top: @popover-arrow-width; }*/
+    /*&.left    { margin-left: -@popover-arrow-width; }*/
+}
+
+.popover-title {
+    padding: 2px 5px;
+    color: #fff;
+
+    &:before{
+        font-family: 'Glyphicons Halflings';
+        content: "\e086";
+        float: left;
+        color: #fff;
+        font-size: @font-size-base;
+        padding-right:10px;
+    }
+}
+
+.popover-content {
+    padding: 5px 5px;
+    font-size: (@font-size-base - 1);
+    max-height: 200px;
+    max-width: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    white-space: normal;
+}

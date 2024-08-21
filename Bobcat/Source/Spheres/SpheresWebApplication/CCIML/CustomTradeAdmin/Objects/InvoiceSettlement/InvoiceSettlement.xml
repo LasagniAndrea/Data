@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+	<!-- InvoiceSettlementBlock -->
+	<Object name="InvoiceSettlementBlock">
+		<InvoiceSettlementAndReceptionDatesBlock />
+		<table xstyle="width:10px;">
+			<InvoiceSettlementHeaderBlock clientid="invoiceSettlementHeader" />
+			<InvoiceSettlementAmountsBlock clientid="invoiceSettlement" />
+			<br/>
+		</table>
+		<InvoiceSettlementDetailBlock />
+	</Object>
+
+	<!-- InvoiceSettlementAndReceptionDatesBlock -->
+	<Object name="InvoiceSettlementAndReceptionDatesBlock">
+		<Table style="class:PnlRoundedColor1;">
+			<Table style="width:10px;">
+        <AltDateTimeOffset_L clientid="invoiceSettlement_orderEntered" postback="true" required="true" />
+        <br/>
+        <Date60_L clientid="invoiceSettlement_receptionDate" postback="true" required="true" helpschema="fpml" helpelement="IdentifiedDate"/>
+			</Table>
+		</Table>
+	</Object>
+
+	<!-- InvoiceSettlementHeaderBlock -->
+  <!-- EG 20150116 [20700] Change EntityBlock to BeneficiaryBlock -->
+	<Object name="InvoiceSettlementHeaderBlock">
+		<Table verticalAlign="Top" xstyle="width:10px;">
+			<Table style="istableH:true;tblH-bkgH-color:#036AB5;tblH-titleR:Beneficiary;">
+        <BeneficiaryBlock clientid="party" occurs="1" firstindex="1" required="true" />
+				<br/>
+				<AccountBlock postback="true" required="true" />
+				<br/>
+			</Table>
+			<br/>
+			<Table style="istableH:true;tblH-bkgH-color:#C00303;tblH-titleR:Payer;">						 
+				<ClientDossierBlock clientid="party" occurs="1" firstindex="2" required="true" />
+      </Table>
+		</Table>
+	</Object>
+
+	<!-- AccountBlock -->
+	<Object name="AccountBlock">
+		<Banner caption="Account" level="3" helpschema="efsml" helpelement="AccountNumber"/>
+		<Currency_L      clientid="cashCurrency"  postback="true" required="true" />
+		<br />
+		<Correspondant   clientid="correspondant" postback="true" required="true"/>
+		<br />
+    <AccountNumber_L clientid="accountNumber" postback="true" required="true"/>
+		<br/>
+		<AccountNumber_L clientid="nostroAccount" postback="true" required="false"/>
+    <br/>
+    <JournalCode_L clientid="journalCode" postback="true" required="false" />
+  </Object>
+
+	<!-- Correspondant -->
+	<Object name="Correspondant">
+		<Label helpschema="efsml" helpelement="correspondant"/>
+		<TextBox datatype="string" style="width:170px" autocomplete="true" />
+		<Button type="Submit" referential="ACTOR" condition="ACCOUNTSERVICER" cssclass="fa-icon"  tooltip="search"/>
+		<Space />
+		<Display width="100%" />
+	</Object>
+
+	<!--AccountNumber_L-->
+	<Object name="AccountNumber_L">
+		<Label helpschema="efsml" helpelement="nostroAccountNumber" />
+		<table colspan="5" style="width:90%;">
+			<TextBox datatype="string" style="width:100%" />
+		</table>
+	</Object>
+
+  <!--JournalCode_L-->
+  <Object name="JournalCode_L">
+    <Label helpschema="efsml" helpelement="journalCode" />
+    <table colspan="5" style="width:90%;">
+      <TextBox datatype="string" style="width:100%" misc="IsReadOnly:true"/>
+    </table>
+  </Object>
+
+  <!-- InvoiceSettlementAmountsBlock -->
+	<Object name="InvoiceSettlementAmountsBlock">
+		<Table verticalAlign="Top" >
+			<Table style="istableH:true;tblH-titleR:InvoiceAmounts;">
+				<Table style="width:10px;">
+					<SettlementMasterAmountBlock/>
+					<br/>
+					<SettlementCalculatedAmountBlock/>
+				</Table>
+			</Table>
+		</Table>
+	</Object>
+
+	<!-- SettlementMasterAmountBlock -->
+	<Object name="SettlementMasterAmountBlock">
+		<InvStlAmount_L clientid="settlementAmount" postback="true" required="true" />
+		<br/>
+		<InvStlAmount_L_RO4 clientid="unallocatedAmount" required="true" />
+		<br/>
+		<hr style="margin-top:5px;margin-bottom:5px;" />
+		<InvStlAmount_L_RO1 clientid="cashAmount" postback="true" required="true" />
+		<br/>
+		<InvStlAmount_L_RO1 clientid="bankChargesAmount" postback="true" required="false" />
+		<br/>
+		<InvStlAmount_L_RO1 clientid="vatBankChargesAmount" postback="true" required="false" />
+		<br/>
+		<hr style="margin-top:5px;margin-bottom:5px;" />
+		<InvStlAmount_L_RO4 clientid="netCashAmount" postback="true" required="true" />
+		<br/>
+	</Object>
+
+	<!-- SettlementCalculatedAmountBlock -->
+	<Object name="SettlementCalculatedAmountBlock">
+		<hr style="margin-top:5px;margin-bottom:5px;" />
+		<InvStlAmount_L_Signed clientid="fxGainOrLossAmount" postback="true" required="false" />
+	</Object>
+
+	<!-- InvoiceSettlementDetailBlock -->
+	<Object name="InvoiceSettlementDetailBlock">
+		<Table id="tblAllocatedInvoice" style="istableH:true;tblH-titleR:invoiceSettlement_AllocatedInvoices;">
+			<AllocatedActionBlock clientid="invoiceSettlement"/>
+			<br/>
+			<AllocatedInvoiceBlock />
+			<br/>
+		</Table>>
+		<Table id="tblAvailableInvoice" style="istableH:true;tblH-titleR:invoiceSettlement_AvailableInvoices;">			
+			<AvailableActionBlock clientid="invoiceSettlement"/>
+			<br/>
+			<AvailableInvoiceBlock />
+		</Table>
+	</Object>
+
+	<!-- AvailableActionBlock -->
+  <!--EG 20200908 [XXXXX] Nouvelle interface GUI v10 (Mode Noir ou blanc) Correction et compléments-->
+  <Object name="AvailableActionBlock">
+		<table verticalAlign="top" >
+			<Button type="Submit" blockUI="true" accesskey="K" clientid = "availableCheckInvoice" onclick="AvailableCheckInvoice" imageurl="fas fa-clipboard-check" title="AvailableCheckInvoice" tooltip="AvailableCheckInvoice" />
+			<Button type="Submit" blockUI="true" clientid = "refreshAvailableInvoice" onclick="RefreshAvailableInvoice" imageurl="fas fa-sync-alt" title="RefreshAvailableInvoice" tooltip="RefreshAvailableInvoice" />
+			<Button type="Submit" blockUI="true" postback="true" accesskey="A" clientid = "selectAvailableInvoice" onclick="SelectAvailableInvoice" imageurl="fas fa-plus-square" title="SelectAvailableInvoice" tooltip="SelectAvailableInvoice" />
+			<Banner level="2"/>
+		</table>
+	</Object>
+	<!-- AvailableInvoiceBlock -->
+	<Object name="AvailableInvoiceBlock">
+		<Table verticalAlign="top">
+			<space/>
+			<Table overflow="110" style="class:tableH;" xgridlines="both" bordercolor="cornflowerblue">
+				<AvailableInvoiceHeader clientid="availableInvoice_header" />
+				<AvailableInvoiceBody clientid="availableInvoice_body" occurs="0" helpschema="efsml" helpelement="AvailableInvoice"/>
+				<br/>
+			</Table>
+		</Table>
+	</Object>
+	<!-- AvailableInvoiceHeader -->
+	<Object name="AvailableInvoiceHeader">
+		<rowheader cssclass="tableH">
+			<cellheader clientid="date" helpschema="efsml" helpelement="invoiceDate"/>
+			<cellheader clientid="identifier" helpschema="efsml" helpelement="identifier"/>
+			<cellheader clientid="amount" helpschema="efsml" helpelement="amount"/>
+			<cellheader clientid="issueAmount" helpschema="efsml" helpelement="issueAmount"/>
+			<cellheader clientid="accountingAmount" helpschema="efsml" helpelement="accountingAmount"/>
+			<cellheader clientid="allocatedAmount" helpschema="efsml" helpelement="allocatedAmounts"/>
+		</rowheader>
+		<br/>
+	</Object>
+	<!-- AvailableInvoiceBody -->
+	<Object name="AvailableInvoiceBody">
+		<InvoiceDateSelect/>
+		<InvoiceInfoId    clientid="identifier"/>
+		<InvStlAmount_RO2 clientid="amount"/>
+		<InvStlAmount_RO2 clientid="issueAmount"/>
+		<InvStlAmount_RO2 clientid="accountingAmount"/>
+		<InvStlAmount_RO2 clientid="allocatedAmount"/>
+		<br/>
+	</Object>
+	<!-- AllocatedActionBlock -->
+  <!--EG 20200908 [XXXXX] Nouvelle interface GUI v10 (Mode Noir ou blanc) Correction et compléments-->
+  <Object name="AllocatedActionBlock">
+		<table verticalAlign="top" >
+			<TotalAmount_L clientid="totalRemainAllocatedAmount"/>
+			<Button type="Submit" blockUI="true" accesskey="K" clientid = "allocatedCheckInvoice" onclick="AllocatedCheckInvoice" imageurl="fas fa-clipboard-check" title="AllocatedCheckInvoice" tooltip="AllocatedCheckInvoice" />
+			<Button type="Submit" blockUI="true" accesskey="D" clientid = "fxGainOrLossCalculation" onclick="FxGainOrLossCalculation" imageurl="fas fa-not-equal" title="FxGainOrLossCalculation" tooltip="FxGainOrLossCalculation" />
+			<Button type="Submit" blockUI="true" accesskey="G" clientid = "allocateAllNewInvoice" onclick="AllocatedAllNewInvoiceOnBasket" imageurl="fas fa-calculator" title="AllocatedAllNewInvoiceOnBasket" tooltip="AllocatedAllNewInvoiceOnBasket" />
+			<Button type="Submit" blockUI="true" accesskey="Z" clientid = "clearAllNewInvoice" onclick="ClearAllNewInvoiceOnBasket" imageurl="fas fa-redo-alt" title="ClearAllNewInvoiceOnBasket" tooltip="ClearAllNewInvoiceOnBasket" />
+			<Button type="Submit" blockUI="true" accesskey="U" clientid = "deleteAllocatedInvoice" onclick="DeleteAllocatedInvoice" imageurl="fas fa-minus-square" title="DeleteAllocatedInvoice" tooltip="DeleteAllocatedInvoice" />
+			<Banner level="2"/>
+		</table>
+	</Object>
+	<!-- AllocatedInvoiceBlock -->
+	<Object name="AllocatedInvoiceBlock">
+		<Table verticalAlign="top">
+			<space/>
+			<Table overflow="180" style="class:tableH;" gridlines="both" >
+				<AllocatedInvoiceHeader clientid="allocatedInvoice_header" />
+				<AllocatedInvoiceBody   clientid="allocatedInvoice_body" occurs="1" helpschema="efsml" helpelement="AllocatedInvoice"/>
+			</Table>
+		</Table>
+	</Object>
+	<!-- AllocatedInvoiceHeader -->
+	<Object name="AllocatedInvoiceHeader">
+		<rowheader cssclass="tableH">
+			<cellheader clientid="date" helpschema="efsml" helpelement="invoiceDate"/>
+			<cellheader clientid="identifier"  helpschema="efsml" helpelement="identifier"/>
+			<cellheader clientid="amount" helpschema="efsml" helpelement="amount"/>
+			<cellheader clientid="issueAmount" helpschema="efsml" helpelement="issueAmount"/>
+			<cellheader clientid="accountingAmount" helpschema="efsml" helpelement="accountingAmount"/>
+			<cellheader clientid="allocatedAmount" helpschema="efsml" helpelement="allocatedAmounts"/>
+		</rowheader>
+		<br/>
+	</Object>
+	<!-- AllocatedInvoiceBody -->
+	<Object name="AllocatedInvoiceBody">
+		<InvoiceDateSelect/>
+		<InvoiceInfoId        clientid="identifier"/>
+		<InvStlAmount_RO2     clientid="allocated_amount"/>
+		<InvStlAmount_RO2     clientid="allocated_issueAmount"/>
+		<InvStlAmount_RO2     clientid="allocated_accountingAmount"/>
+		<InvStlAmount         clientid="allocated_enter" locked="allocatedinvoice:no"/>
+		<br/>
+		<AllocatedRowTitle />
+		<TotalAmount clientid="unallocated_amount"/>
+		<TotalAmount clientid="unallocated_issueAmount"/>
+		<TotalAmount clientid="unallocated_accountingAmount"/>
+		<FxGainOrLossRowTitle clientid="fxGainOrLossAmount"  helpschema="efsml" helpelement="fxGainOrLossAmount"/>
+		<br/>
+	</Object>
+
+	<!-- InvoiceDateSelect -->
+	<Object name="InvoiceDateSelect">
+		<Table style="class:rowBorderNone;width:10px;">
+			<Check clientid="selected" required="false" postback="false" locked="allocatedinvoice:no"/>
+			<Date_RO clientid="date" misc="IsReadOnly:true"/>
+		</Table>
+	</Object>
+
+	<!-- InvoiceInfoId -->
+	<Object name="InvoiceInfoId">
+		<Table style="class:rowBorderNone;width:10px;">
+			<TextBox style="width:120px" datatype="string"  required="false" misc="IsReadOnly:true;" />
+			<Button type="Submit" menu="OTC_INP_ADM" cssclass="fa-icon"  imageurl="fas fa-external-link-square-alt" tooltip="ViewInvoice"/>
+		</Table>
+	</Object>
+
+	<!-- InvStlAmount_L -->
+	<Object name="InvStlAmount_L">
+		<Label clientid="amount" helpschema="fpml" helpelement="Money" />
+		<InvStlAmount/>
+	</Object>
+
+	<!-- InvStlAmount_L_RO1 -->
+	<Object name="InvStlAmount_L_RO1">
+		<Label clientid="amount" helpschema="fpml" helpelement="Money" />
+		<InvStlAmount_RO1/>
+	</Object>
+
+	<!-- InvStlAmount_L_RO2 -->
+	<Object name="InvStlAmount_L_RO2">
+		<Label clientid="amount" helpschema="fpml" helpelement="Money" />
+		<InvStlAmount_RO2/>
+	</Object>
+
+	<!-- InvStlAmount_L_RO4 -->
+	<Object name="InvStlAmount_L_RO4">
+		<Label clientid="amount" helpschema="fpml" helpelement="Money" />
+		<InvStlAmount_RO4/>
+	</Object>
+
+	<!-- InvStlAmount_L_Signed -->
+	<Object name="InvStlAmount_L_Signed">
+		<Label clientid="amount" helpschema="fpml" helpelement="Money" />
+		<InvStlAmount_Signed/>
+	</Object>
+
+	<!-- AllocatedEnterAmount -->
+	<Object name="AllocatedEnterAmount">
+		<Table style="width:10px;">
+			<TextBox clientid="amount" datatype="decimal" required="true" postback="true" regex="RegexAmountExtend" style="width:130px" />
+			<Space />
+			<DropDown clientid="currency" style="align:right;" postback="true" datatype="string" width="60px" />
+		</Table>
+	</Object>
+
+	<!-- InvStlAmount -->
+	<Object name="InvStlAmount">
+		<Table style="class:rowBorderNone;width:10px;">
+			<TextBox clientid="amount" datatype="decimal" required="false" postback="true" regex="RegexAmountExtend" style="width:140px" />
+			<Space />
+			<DropDown clientid="currency" style="align:right;" postback="true" datatype="string" width="60px" required="false" listretrieval="predef:CURRENCY" />
+		</Table>
+	</Object>
+
+	<!-- InvStlAmount_RO1 -->
+	<Object name="InvStlAmount_RO1">
+		<Table style="class:rowBorderNone;width:10px;">
+			<TextBox clientid="amount" datatype="decimal" postback="true" regex="RegexAmountExtend" style="width:140px" required="false" />
+			<Space />
+			<DropDown cssclass="lblDisplay" clientid="currency" datatype="string" width="35px" required="false" listretrieval="predef:CURRENCY" misc="IsReadOnly:true"/>
+		</Table>
+	</Object>
+
+	<!-- InvStlAmount_RO2 -->
+	<Object name="InvStlAmount_RO2">
+		<Table style="class:rowBorderNone;width:10px;">
+			<TextBox clientid="amount" datatype="decimal" regex="RegexAmountExtend" style="width:130px" required="false" misc="IsReadOnly:true"/>
+			<Space />
+			<DropDown cssclass="lblDisplay" clientid="currency" datatype="string" width="35px" required="false" listretrieval="predef:CURRENCY" misc="IsReadOnly:true"/>
+		</Table>
+	</Object>
+
+	<!-- InvStlAmount_RO3 -->
+	<Object name="InvStlAmount_RO3">
+		<Table style="width:10px;">
+			<TextBox clientid="amount" datatype="decimal" regex="RegexAmountExtend" style="width:140px" required="false" misc="IsReadOnly:true"/>
+			<Space />
+			<DropDown cssclass="lblDisplay" clientid="currency" datatype="string" width="60px" required="false" listretrieval="predef:CURRENCY" misc="IsReadOnly:true"/>
+		</Table>
+	</Object>
+
+	<!-- InvStlAmount_RO4 -->
+	<Object name="InvStlAmount_RO4">
+		<Table style="width:10px;">
+			<TextBox cssclass="txtTotal" clientid="amount" datatype="decimal" regex="RegexAmountExtend" style="width:140px" required="false" misc="IsReadOnly:true"/>
+			<Space />
+			<DropDown cssclass="lblDisplay" clientid="currency" datatype="string" width="35px" required="false" listretrieval="predef:CURRENCY" misc="IsReadOnly:true"/>
+		</Table>
+	</Object>
+
+	<!-- InvStlAmount_Signed -->
+	<Object name="InvStlAmount_Signed">
+		<Table style="width:10px;">
+			<TextBox cssclass="txtTotal" clientid="amount" datatype="decimal" regex="RegexAmountSignedExtend" style="width:140px" required="false" misc="IsReadOnly:true"/>
+			<Space />
+			<DropDown cssclass="lblDisplay" clientid="currency" datatype="string" width="35px" required="false" listretrieval="predef:CURRENCY" misc="IsReadOnly:true"/>
+		</Table>
+	</Object>
+
+	<!-- TotalAmount -->
+	<Object name="TotalAmount">
+		<Table style="class:rowBorderNone;width:10px;">
+			<TextBox cssclass="txtTotal" clientid="amount" datatype="decimal" regex="RegexAmountExtend" style="width:130px" required="false" misc="IsReadOnly:true"/>
+			<Space />
+			<DropDown cssclass="txtTotalConsult" clientid="currency" style="align:right;" datatype="string" width="35px" listretrieval="predef:CURRENCY" required="false" misc="IsReadOnly:true"/>
+		</Table>
+	</Object>
+
+	<!-- TotalAmount_L -->
+	<Object name="TotalAmount_L">
+		<Table style="class:rowBorderNone;width:10px;">
+			<Label clientid="amount" />
+			<TextBox cssclass="txtTotal" clientid="amount" datatype="decimal" regex="RegexAmountExtend" style="width:70px" required="false" misc="IsReadOnly:true"/>
+			<Space />
+			<DropDown cssclass="txtTotalConsult" clientid="currency" style="align:right;" datatype="string" width="35px" listretrieval="predef:CURRENCY" required="false" misc="IsReadOnly:true"/>
+		</Table>
+	</Object>
+
+	<!-- AllocatedRowTitle-->
+	<Object name="AllocatedRowTitle">
+		<table colspan="2" style="class:rowBorderNone;">
+			<NetIssueAmount clientid="issueAmount"/>
+			<label clientid="unallocated" cssclass="lblDisplay"/>
+		</table>
+	</Object>
+
+	<!-- FxGainOrLossRowTitle-->
+	<Object name="FxGainOrLossRowTitle">
+		<Table style="class:rowBorderNone;width:100%;">
+			<label cssclass="lblDisplay"/>
+			<TextBox clientid="amount" cssclass="txtTotal" datatype="decimal" postback="true" regex="RegexAmountSignedExtend" style="width:60px;" misc="IsReadOnly:true"/>
+			<Space />
+			<DropDown cssclass="txtTotalConsult" clientid="currency" postback="true" datatype="string" style="align:right;" width="35px" xrequired="false" listretrieval="predef:CURRENCY" misc="IsReadOnly:true"/>
+			<fill />
+		</Table>
+	</Object>
+
+	<!-- NetIssueAmount -->
+	<Object name="NetIssueAmount">
+		<Table style="class:rowBorderNone;width:100%;">
+			<label cssclass="lblDisplay" />
+			<TextBox clientid="amount" cssclass="txtTotal" datatype="decimal" postback="true" regex="RegexAmountExtend" style="width:100px;" required="false" misc="IsReadOnly:true"/>
+			<Space />
+			<DropDown cssclass="txtTotalConsult" clientid="currency" style="align:right;" postback="true" datatype="string" width="35px" required="false" listretrieval="predef:CURRENCY" misc="IsReadOnly:true"/>
+			<fill />
+		</Table>
+	</Object>
+</Objects>
+

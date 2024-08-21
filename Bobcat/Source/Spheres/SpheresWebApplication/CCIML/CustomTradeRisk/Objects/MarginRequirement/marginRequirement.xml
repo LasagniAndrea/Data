@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+  <!--//-->
+  <Object name="ClearingOrganizationBlock">
+    <ClearingOrganizationReference clientid="marginRequirement_clearingOrganizationPartyReference" postback="true" required="true"/>
+  </Object>
+  <!--//--> 
+  <Object name="MarginRequirementPaymentBlock">
+    <Table colspan="-1" style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:BulletPayment;" >
+      <SimplePaymentMoneyFormWithOrigin clientid="marginRequirement_payment" occurs="1" addsuboperator="true" helpschema="efsml" helpelement="SimplePayment" />
+    </Table>
+  </Object>
+</Objects>

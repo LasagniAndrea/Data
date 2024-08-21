@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+  <customObject control="label"     clientid="DTHISTORY"    caption = "DateFrom" xsi:type="CustomObjectLabel"/>
+  
+  <!-- FI 20190221 [XXXXX] DTHISTORY devient obligatoire et sera alimentée via le mot clé TODAY-->
+  <!-- FI 20200602 [25370] TODAY for DEFAULT -->
+  <customObject control="textbox"   clientid="DTHISTORY"    datatype = "date"  required="true" postback="true" postbackargument ="SELFCLEAR_"  xsi:type="CustomObjectTextBox" defaultvalue="TODAY"/>
+  <customObject control="label"     clientid="GROUPTRACKER" caption = "GROUPTRACKER"  xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="GROUPTRACKER" width="170px"   datatype="string" 
+                listretrieval="predef:enum.[code:GroupTrackerEnum;isResource:true;]" 
+                required="false" postback="true"  postbackargument ="SELFCLEAR_" xsi:type="CustomObjectDropDown"  misc="isClear:true"/>
+  <customObject control="label"     clientid="READYSTATE"   caption = "ReadyState"  xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="READYSTATE"   width="170px"   datatype="string" 
+                listretrieval="predef:enum.[code:ReadyStateTrackerEnum;isResource:true;]"
+                required="false" postback="true"  postbackargument ="SELFCLEAR_" xsi:type="CustomObjectDropDown"  misc="isClear:true"/>
+  <customObject control="label"     clientid="STATUSTRACKER" caption = "StatusTracker"  xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="STATUSTRACKER" width="170px"   datatype="string" 
+                listretrieval="predef:enum.[code:StatusTrackerEnum;isResource:true;resourceprefix:TRACKERSTATUS;condition:(VALUE not in('NA'))]" 
+                required="false" postback="true"  postbackargument ="SELFCLEAR_" xsi:type="CustomObjectDropDown"  misc="isClear:true"/>
+  <customObject control="space"   width="30"/>
+  <customObject control="checkbox"  clientid="ISMARKED" defaultvalue="false" datatype="bool" postback="true" postbackargument ="SELFCLEAR_" caption="ISMARKED" required="false" />
+
+  <!--
+  <customObject control="checkbox"  clientid="HIDEGROUP" defaultvalue="true" datatype="bool" postback="true" postbackargument ="SELFCLEAR_" caption="ShowDetails" required="true" />
+  -->
+
+</customObjects>
+

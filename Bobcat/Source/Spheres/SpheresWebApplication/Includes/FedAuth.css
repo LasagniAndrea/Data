@@ -1,0 +1,110 @@
+﻿/*====================================================*/
+/* Caractéristiques générales des formes FedAuth      */
+/*====================================================*/
+
+#fedauthbody {
+    background-image: url(../images/logo_software/WelcomeBody_v2024.png);
+    background-image: url(../images/Logo_Entity/EuroFinanceSystems/Spheres-Bkg-EFSBDX.png);
+    /*background-size: 50%;*/
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
+.contenth {
+    border: 1pt solid lightgray;
+    opacity: 90% !important;
+    background-color: #fff;
+}
+
+#pnlHeader {
+    color: #fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-size: 20pt;
+    background-color: #000;
+    border: 1pt solid #000;
+    padding:0px 5px
+}
+
+#pnlHeader.authentified {
+    background-color: #51AD26;
+    border: 1pt solid #51AD26;
+}
+
+#pnlHeader > span:nth-child(2) {
+    font-size: 10px;
+    cursor: pointer;
+}
+
+form {
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+#pnlFederate {
+    margin: 10% auto;
+}
+
+.grid {
+    width: 100%;
+    display: grid;
+    grid-column-gap: 40px;
+}
+
+    .grid > div.title {
+        grid-column-start: 1;
+        grid-column-end: span 2;
+        border-bottom: solid 2pt #036AB5;
+        color: #036AB5;
+    }
+
+        .grid > div.title h3 {
+            margin-block-end: 3px;
+        }
+
+    .grid > div.value {
+        font-weight: bold;
+    }
+
+    .grid > div.value {
+        font-weight: bold;
+        overflow-wrap: anywhere;
+    }
+
+input {
+    background-color: #000;
+    color: #fff;
+    width: 300px;
+    margin: auto;
+    border-radius: 4px;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    outline: none;
+    overflow: hidden;
+    padding: 9px 20px 8px;
+    text-align: center;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+input:hover,
+input:focus {
+    opacity: .75;
+    color: #036AB5;
+    background-color: #fff;
+    border-color: #036AB5;
+    border-style: solid;
+    border-width: 3px;
+}
+
+input:visited {
+    color: yellow;
+}

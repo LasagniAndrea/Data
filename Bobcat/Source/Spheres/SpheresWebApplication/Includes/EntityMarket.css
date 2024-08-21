@@ -1,0 +1,105 @@
+﻿#entityMarketbody {
+    overflow: hidden;
+}
+
+#entityMarket {
+    margin-block-start: 2px;
+}
+.tickercontainer 
+{ 
+    width: 100%;
+    height: 15px;
+    margin-top: 2px!important;
+}
+
+.tickercontainer .mask 
+{ 
+    position: relative;
+    top: 0px;
+    overflow: hidden;
+}
+
+.tickercontainer .masktop
+{
+    position: relative;
+    overflow: hidden;
+}
+
+
+ul.allnewsticker {
+    font: bold 10px Arial, Segoe UI, sans-serif;
+    list-style-type: none;
+    margin: 3px 0px;
+}
+ul.newsticker {
+    font: bold 10px Arial, Segoe UI, sans-serif;
+    list-style-type: none;
+    position: relative;
+    left: 0px;
+    margin: 0px;
+}
+
+ul.allnewsticker li,
+ul.newsticker li {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+ul.allnewsticker *,
+ul.newsticker * {
+    color: #000000;
+}
+
+ul.newsticker > li > div,
+ul.allnewsticker > li > div {
+    display:inline-block;
+    padding-left: 5px;
+}
+
+ul.newsticker a,
+ul.allnewsticker a {
+    padding: 0px;
+}
+
+ul.allnewsticker span,
+ul.newsticker span {
+    padding: 0px 5px;
+}
+
+ul.allnewsticker a[id*="-market-"],
+ul.newsticker span[id*="-market-"],
+ul.allnewsticker span[id*="-market-"],
+ul.newsticker span[id*="-market-"] {
+    padding-left: 5px;
+    padding-right: 0px;
+}
+
+ul.allnewsticker a > span[id*="-csscustodian-"],
+ul.newsticker a > span[id*="-csscustodian-"],
+ul.allnewsticker a > span[id*="-closed-"],
+ul.newsticker a > span[id*="-closed-"] {
+    font-size: 75%;
+    padding: 0px 2px
+}
+
+ul.newsticker a[id^="css-"],
+ul.newsticker span[id^="css-"] {
+    color: #000000;
+}
+ul.newsticker a[id^="otc-"],
+ul.newsticker span[id^="otc-"] {
+    color: #EA71A8;
+}
+
+ul.allnewsticker a[id$="-closed"],
+ul.allnewsticker span[id$="-closed"],
+ul.newsticker a[id$="-closed"],
+ul.newsticker span[id$="-closed"] {
+    color: #8b0000;
+}
+
+
+

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+
+  <customObject control="label"    clientid="DTBUSINESS" caption = "lblDtBusiness" xsi:type="CustomObjectLabel"/>
+  <customObject control="textbox"  clientid="DTBUSINESS" datatype = "date" required="true" postback="true" postbackargument ="SELFCLEAR_"  xsi:type="CustomObjectTextBox"  defaultvalue="BUSINESS"/>
+
+  <customObject control="space"    width="30"/>
+  <customObject control="label"    clientid="ACTORSIDE" caption = "lblActorSide" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown" clientid="ACTORSIDE" datatype="integer"
+                  listretrieval="Predef:actorsideview" width="300"
+                  required="true" postback="true"  postbackargument ="SELFCLEAR_" xsi:type="CustomObjectDropDown" misc="isClear:true" defaultvalue="1" />
+</customObjects>

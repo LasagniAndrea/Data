@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Screens>
+  <!-- EG 20171113 [23509] Upd Gestion Objets Facility / Dates et Marché -->
+  <!-- FxSpotOTCml -->
+  <Screen name="FxSpot-Broker" caption="FX Spot (Screen Broker)" product="fxSingleLeg">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSalesFXBlock/>
+    <FxSpotBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentBlock/>
+    <Settlement2InputBlock/>
+    <ComplianceBlock/>
+  </Screen>
+  <!-- FxFixingOTCml -->
+  <Screen name="FxFixing-Broker" caption="FX Fixing (Screen Broker)" product="fxSingleLeg">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSalesFXBlock/>
+    <FxLegFixingBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentBlock/>
+    <Settlement2InputBlock/>
+    <ComplianceBlock/>
+  </Screen>
+  <!-- FxForwardOTCml -->
+  <Screen name="FxForward-Broker" caption="FX Forward (Screen Broker)" product="fxSingleLeg">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSalesFXBlock/>
+    <FxForwardBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentBlock/>
+    <Settlement2InputBlock/>
+    <ComplianceBlock/>
+  </Screen>
+  <!-- FxNonDeliverableForwardOTCml -->
+  <Screen name="FxNonDeliverableForward-Broker" caption="FX Non Deliverable Forward (Screen Broker)" product="fxSingleLeg">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSalesFXBlock/>
+    <FxLegNDFBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentBlock/>
+    <Settlement2InputBlock/>
+    <ComplianceBlock/>
+  </Screen>
+  <!-- FxDCSOTCml -->
+  <Screen name="FxDCS-Broker" caption="FX DCS (Screen Broker)" product="fxSingleLeg">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSalesFXBlock/>
+    <FxLegDCSBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentBlock/>
+    <Settlement2InputBlock/>
+    <ComplianceBlock/>
+  </Screen>
+</Screens>

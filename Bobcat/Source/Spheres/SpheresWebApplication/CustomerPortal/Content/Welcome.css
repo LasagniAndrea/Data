@@ -1,0 +1,98 @@
+﻿body {
+    overflow:hidden;
+}
+#pg-welcome {
+    /*padding-top: 168px;*/
+    /*display:flex;*/
+}
+
+#pg-welcome {
+    background-color: #fff;
+    position: relative;
+    text-align: left;
+    background-image: url(../image/Spheres-Bkg-EFSBDX.png);
+    background-image: url(../image/BkgLight-EFSBDX.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+#pg-welcome-box {
+    height: calc(100vh);
+    display:flex;
+}
+
+#pg-welcome-content {
+    display: grid;
+    grid-template-rows: 180px;
+    grid-template-columns: repeat(2, 1fr);
+    height: 100%;
+    background-color: #fff;
+    color: #ae0e3e;
+    width: 40%;
+    margin: 5% 30%;
+    padding: 15% 0%;
+    opacity: .95;
+}
+
+#pg-welcome-title {
+    display: flex;
+    flex-direction:column;
+    margin: 20% 0%;
+}
+
+#logoCustomer {
+    /*padding: 10% 30%;*/
+    /*margin: 5% 20%;*/
+    white-space: nowrap;
+    background-image: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:contain;
+}
+
+#infologin {
+    text-align: center;
+}
+
+#infoCustomer {
+    margin-top: 20px;
+    white-space: nowrap;
+    text-align: center;
+    /*background-color: #036AB5;*/
+    color: #fff;
+    line-height:25px;
+}
+
+
+#pg-welcome-box h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 4vw;
+    color: #ae0e3e;
+    font-weight: 500;
+    /*margin:10% 5% 0% 5%;*/
+    /*line-height: 50px;*/
+    /*text-align: center;*/
+    white-space: nowrap;
+}
+#pg-welcome-box h1 small {
+    font-weight: 300;
+    font-size: 1.4vw;
+    text-align:center;
+    white-space: nowrap;
+}
+
+#pg-welcome-box h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.4vw;
+    color: #ae0e3e;
+    font-weight: 300;
+    margin-top: 10%;
+    /*line-height: 25px;*/
+    /*text-align: center;*/
+    white-space: nowrap;
+}
+
+#activeUser{
+    display:none;
+}

@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- FI 20120104 [] mise en place des mots clefs %%SR SESSIONRESTRICT-->
+<!-- EG 20140826 Gestion IsNull sur Montants -->
+<!-- EG 20191115 [25077] RDBMS : New version of Trades tables architecture (TRADESTSYS merge to TRADE, NEW TABLE TRADEXML)-->
+<Referentials>
+	<Referential>
+    <IsUseSQLParameters>true</IsUseSQLParameters>
+    <TableName>VW_INVOICETURNOVER</TableName>
+		<AliasTableName>tover</AliasTableName>
+		<Ressource></Ressource>
+		<ColumnByRow>3</ColumnByRow>
+		<Create>false</Create>
+		<Modify>false</Modify>
+		<Remove>false</Remove>
+		<Image>gif\Views.gif</Image>
+		<Notepad>false</Notepad>
+    <LoadOnStart>false</LoadOnStart>
+    <Timeout>200</Timeout>
+
+
+    <SQLSelect>
+      <Command rdbms = "all">
+        <![CDATA[
+        select ev_NET.IDA_BENEFICIARY, ev_NET.IDB_BENEFICIARY, ev_NET.INVOICEDATE, ev_NET.IDA_INVOICED,
+        /* SUM(ev_NET.NET_AMOUNT) - SUM(isnull(ev_NET.TAX_AMOUNT,0)) - SUM(isnull(tl_cn.NETHT_AMOUNT,0)) as NETHT_AMOUNT, */
+        SUM(isnull(ev_NET.NET_AMOUNT,0)) - SUM(isnull(ev_NET.TAX_AMOUNT,0)) - SUM(isnull(tl_cn.NET_AMOUNT,0)- isnull(tl_cn.TAX_AMOUNT,0)) as NETHT_AMOUNT,
+        ev_NET.NET_CUR as NETHT_CUR,
+        SUM(isnull(ev_NET.TAX_AMOUNT,0)) - SUM(isnull(tl_cn.TAX_AMOUNT,0)) as TAX_AMOUNT, 
+        ev_NET.NET_CUR as TAX_CUR,
+        SUM(isnull(ev_NET.NET_AMOUNT,0)) - SUM(isnull(tl_cn.NET_AMOUNT,0)) as NET_AMOUNT, 
+        ev_NET.NET_CUR as NET_CUR,
+        tr.IDA_ENTITY
+        from dbo.TRADE tr
+        inner join dbo.INSTRUMENT ns on (ns.IDI = tr.IDI)
+        inner join dbo.PRODUCT pr on (pr.IDP = ns.IDP) and (pr.IDENTIFIER in ('invoice','additionalInvoice'))
+        left outer join 
+        (
+              select ev.IDT,
+              ev.VALORISATION as NET_AMOUNT, ev_tax.VALORISATION as TAX_AMOUNT, ev.UNIT as NET_CUR,
+              ev.IDA_PAY as IDA_INVOICED, ev.IDB_PAY as IDB_INVOICED, 
+              ev.IDA_REC as IDA_BENEFICIARY, ev.IDB_REC as IDB_BENEFICIARY, 
+              ec.DTEVENT as INVOICEDATE
+              from dbo.EVENT ev
+              inner join dbo.EVENTCLASS ec on (ec.IDE = ev.IDE) and (ec.EVENTCLASS='REC') 
+              left join dbo.EVENT ev_tax on (ev_tax.IDE_EVENT = ev.IDE) and ev_tax.EVENTTYPE in ('TXO','TXI','TXA')
+              where (ev.EVENTCODE='LPP') and (ev.EVENTTYPE=@EVENTTYPE)
+        ) ev_NET on (ev_NET.IDT = tr.IDT)
+        left outer join 
+        (
+              select tl.IDT_B, 
+              /* sum(ev_NET.VALORISATION) - sum(isnull(ev_tax.VALORISATION,0)) as NETHT_AMOUNT, */
+              sum(isnull(ev_tax.VALORISATION,0)) as TAX_AMOUNT,
+              sum(isnull(ev_NET.VALORISATION,0)) as NET_AMOUNT
+              from dbo.TRADELINK tl
+              inner join dbo.TRADE tr on (tr.IDT = tl.IDT_A)
+              inner join dbo.INSTRUMENT ns on (ns.IDI = tr.IDI)
+              inner join dbo.PRODUCT pr on (pr.IDP = ns.IDP) and (pr.IDENTIFIER = 'credit')
+              inner join dbo.EVENT ev_NET on (ev_NET.IDT = tr.IDT) and (ev_NET.EVENTCODE='LPP') and (ev_NET.EVENTTYPE=@EVENTTYPE)
+              inner join dbo.EVENTCLASS ec_NET on (ec_NET.IDE = ev_NET.IDE) and (ec_NET.EVENTCLASS='REC')
+              left join dbo.EVENT ev_tax on (ev_tax.IDE_EVENT = ev_NET.IDE) and ev_tax.EVENTTYPE in ('TXO','TXI','TXA')
+              where (tr.IDSTACTIVATION='REGULAR')
+              group by tl.IDT_B
+        ) tl_cn on (tl_cn.IDT_B = tr.IDT)
+        where (tr.IDSTENVIRONMENT <> 'TEMPLATE') and (tr.IDSTACTIVATION='REGULAR')
+        group by ev_NET.INVOICEDATE, ev_NET.IDA_BENEFICIARY, ev_NET.IDB_BENEFICIARY, ev_NET.IDA_INVOICED, ev_NET.NET_CUR, tr.IDA_ENTITY
+        ]]>
+      </Command>
+    </SQLSelect>
+
+    <SQLWhere>
+      <ConditionSystem>SESSIONRESTRICT</ConditionSystem>
+      <SQLJoin>%%SR:ACTOR_JOIN%%(asr1,tover.IDA_INVOICED)</SQLJoin>
+      <SQLJoin>%%SR:ACTOR_JOIN%%(asr2,tover.IDA_BENEFICIARY)</SQLJoin>
+    </SQLWhere>
+
+
+    <SQLWhere>
+			<!--<SQLWhere>
+        <![CDATA[
+				(tover.INVOICEDATE = @DATE1)
+				and
+				(tover.IDA_BENEFICIARY = case when -1=@ENTITY Then  tover.IDA_BENEFICIARY else @ENTITY end )
+        ]]>
+			</SQLWhere>-->
+
+      <SQLWhere>
+        <![CDATA[
+        (tover.INVOICEDATE = @DATE1) and (tover.IDA_ENTITY = @ENTITY)
+        and (tover.IDA_BENEFICIARY = case when -1=@BENEFICIARY Then tover.IDA_BENEFICIARY else @BENEFICIARY end )
+--        and (tover.IDA_INVOICED = case when tover.IDA_BENEFICIARY=@ENTITY then tover.IDA_INVOICED else @ENTITY end )        
+        ]]>
+      </SQLWhere>
+
+    </SQLWhere>
+
+    
+		<Column>
+			<ColumnName>IDA_BENEFICIARY</ColumnName>
+			<Ressource>ENTITY</Ressource>
+			<DataType>int</DataType>
+			<Length>10</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsHideInCriteria>true</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>true</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation>
+				<TableName>ACTOR</TableName>
+				<AliasTableName>ac_beneficiary</AliasTableName>
+				<ColumnRelation>
+					<ColumnName>IDA</ColumnName>
+					<DataType>int</DataType>
+				</ColumnRelation>
+				<ColumnSelect>
+					<ColumnName>IDENTIFIER</ColumnName>
+					<Ressource>ENTITY</Ressource>
+					<DataType>string</DataType>
+				</ColumnSelect>
+				<ColumnLabel>
+					<ColumnName>DISPLAYNAME</ColumnName>
+					<Ressource>DISPLAYNAME</Ressource>
+					<DataType>string</DataType>
+				</ColumnLabel>
+        <AutoComplete enabled="true"/>
+			</Relation>
+		</Column>
+		<Column>
+			<ColumnName>IDB_BENEFICIARY</ColumnName>
+			<Ressource>BeneficiaryBook</Ressource>
+			<DataType>int</DataType>
+			<Length>10</Length>
+			<Nowrap>true</Nowrap>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation>
+				<TableName>BOOK</TableName>
+				<AliasTableName>bk_beneficiary</AliasTableName>
+				<ColumnRelation>
+					<ColumnName>IDB</ColumnName>
+					<DataType>int</DataType>
+				</ColumnRelation>
+				<ColumnSelect>
+					<ColumnName>IDENTIFIER</ColumnName>
+					<Ressource>BeneficiaryBook</Ressource>
+					<DataType>string</DataType>
+				</ColumnSelect>
+				<ColumnLabel>
+					<ColumnName>DISPLAYNAME</ColumnName>
+					<Ressource>DISPLAYNAME</Ressource>
+					<DataType>string</DataType>
+				</ColumnLabel>
+			</Relation>
+		</Column>
+		<Column>
+			<ColumnName>IDA_INVOICED</ColumnName>
+			<Ressource>IDA_INVOICED</Ressource>
+			<DataType>int</DataType>
+			<Length>10</Length>
+			<GridWidth>-100</GridWidth>
+			<Nowrap>true</Nowrap>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsHideInCriteria>false</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation>
+				<TableName>ACTOR</TableName>
+				<AliasTableName>ac_invoiced</AliasTableName>
+				<ColumnRelation>
+					<ColumnName>IDA</ColumnName>
+					<DataType>int</DataType>
+				</ColumnRelation>
+				<ColumnSelect>
+					<ColumnName>IDENTIFIER</ColumnName>
+					<Ressource>IDA_INVOICED</Ressource>
+					<DataType>string</DataType>
+				</ColumnSelect>
+				<ColumnLabel>
+					<ColumnName>DISPLAYNAME</ColumnName>
+					<Ressource>DISPLAYNAME</Ressource>
+					<DataType>string</DataType>
+				</ColumnLabel>
+        <AutoComplete enabled="true"/>
+			</Relation>
+		</Column>
+    <Column>
+      <ColumnName>NETHT_AMOUNT</ColumnName>
+      <Ressource>NETHT_Amount_</Ressource>
+      <DataType>decimal</DataType>
+      <Length>26</Length>
+      <Scale>3</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>NETHT_CUR</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Length>3</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>TAX_AMOUNT</ColumnName>
+      <Ressource>TAX_Amount_</Ressource>
+      <DataType>decimal</DataType>
+      <Length>26</Length>
+      <Scale>3</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>TAX_CUR</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Length>3</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+			<ColumnName>NET_AMOUNT</ColumnName>
+      <Ressource>NET_Amount_</Ressource>
+      <!--<Ressource>InitNetTurnOverAccountingAmount</Ressource>-->
+			<DataType>decimal</DataType>
+			<Length>26</Length>
+			<Scale>3</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsHideInCriteria>false</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>desc</IsOrderBy>
+		</Column>
+		<Column>
+			<ColumnName>NET_CUR</ColumnName>
+			<Ressource></Ressource>
+			<DataType>string</DataType>
+			<Length>3</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsHideInCriteria>false</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+		</Column>
+	</Referential>
+</Referentials>

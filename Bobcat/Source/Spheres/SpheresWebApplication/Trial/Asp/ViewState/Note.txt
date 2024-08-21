@@ -1,0 +1,49 @@
+﻿WiewStateForm.aspx
+Cette page met en évidence le mécanisme de maintient d'état de asp .net, également appelé ViewState
+
+Contenu de la page
+--------------------
+La page contient 2 div (asp:Panel) et 1 bouton pour poster la page.
+div1 => EnableViewState="false"
+div2 => EnableViewState="true"
+
+Chaque div contient 
+- 1 control asp:label 
+- 1 control asp.text
+
+PageLoad contient le code 
+if (false == IsPostBack)
+{
+    LBL_div1.Text = "Nom";
+    LBL_div2.Text = "Prénom";
+}
+
+Demo
+--------------------
+1er affichage de la page
+	- La page affiche bien Nom et prénom, les zones texte sont vides
+
+L'utilisateur renseigne les zones texte et poste la page
+
+affichages suivants de la page
+	- Les zones textes sont conservées 
+	- Le label LBL_div1 a perdu son contenu "Nom"
+
+
+Conclusion
+--------------------
+EnableViewState permet de maintenir l'état d'un contrôle serveur.
+Grace à ce mécanisme, Il n'est pas nécessaire de redéfinir ses propriétés à chaque post de la page (mais uniquement sur if (false == IsPostBack) )
+Cela permet d'économiser des lignes de code d'initialisation dont l'appel ne devrait être effectué qu'une seule fois 
+
+EnableViewState ne rentre en rien dans le mécanisme de lecture des données saisie par l'utilisateur
+
+Spheres® incohérences
+--------------------
+De manière générale,
+- Spheres® maintient l'état des contrôles des pages (EnableViewState étant actif par défaut)
+- Spheres® redéfinie aussi les propriétés de chaque contrôle à chaque post de la page
+
+=> Le maintient des états des contrôles via le ViewState ne semble donc pas nécessaire. Cela nous permettrait d'accélérer le rendu des pages.
+Sur certaines de nos pages le viewState est par ailleurs énorme, pénalisant ainsi les performances.
+

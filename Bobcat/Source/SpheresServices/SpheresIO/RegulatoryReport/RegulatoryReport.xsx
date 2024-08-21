@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Ce fichier est automatiquement généré par le Concepteur de schémas XML. Il contient des informations de disposition pour les composants dans l'aire du concepteur.-->
+<XSDDesignerLayout Style="LeftRight" layoutVersion="2" viewPortLeft="0" viewPortTop="0" zoom="100">
+    <regulatoryReport_XmlElement left="317" top="254" width="5292" height="3149" selected="0" zOrder="1" index="0" expanded="1">
+        <trade_XmlElement left="6243" top="-43556" width="5292" height="3281" selected="0" zOrder="2" index="0" expanded="1">
+            <header_XmlElement left="12169" top="-58238" width="5292" height="3281" selected="0" zOrder="28" index="0" expanded="1">
+                <tradeId_XmlElement left="18095" top="-58238" width="5292" height="3281" selected="0" zOrder="30" index="6" expanded="1" />
+            </header_XmlElement>
+            <dataDocument_XmlElement left="12169" top="-28874" width="5292" height="3281" selected="0" zOrder="4" index="1" expanded="1">
+                <repository_XmlElement left="18095" top="-54449" width="5292" height="3281" selected="0" zOrder="32" index="0" expanded="1">
+                    <mainActor_XmlElement left="24021" top="-56343" width="5292" height="3281" selected="0" zOrder="34" index="0" expanded="1" />
+                    <counterparty_XmlElement left="24021" top="-52554" width="5292" height="3281" selected="0" zOrder="36" index="1" expanded="1" />
+                </repository_XmlElement>
+                <business_XmlElement left="18095" top="-3298" width="5292" height="3281" selected="0" zOrder="6" index="1" expanded="1">
+                    <swap_XmlElement left="24021" top="-46871" width="5292" height="3281" selected="0" zOrder="38" index="2" expanded="1">
+                        <payerStream_XmlElement left="29947" top="-58238" width="5292" height="3281" selected="0" zOrder="40" index="5" expanded="1" />
+                        <receiverStream_XmlElement left="29947" top="-54449" width="5292" height="3281" selected="0" zOrder="42" index="6" expanded="1" />
+                        <upfront_XmlElement left="29947" top="-50660" width="5292" height="3281" selected="0" zOrder="44" index="7" expanded="1">
+                            <ctrAmount_XmlElement left="35873" top="-50660" width="5292" height="3281" selected="0" zOrder="46" index="5" expanded="1" />
+                        </upfront_XmlElement>
+                        <closingEvents_XmlElement left="29947" top="-43082" width="5292" height="3281" selected="0" zOrder="48" index="8" expanded="1">
+                            <markToMarket_XmlElement left="35873" top="-46871" width="5292" height="3281" selected="0" zOrder="50" index="0" expanded="1" />
+                            <valoreIntrinseco_XmlElement left="35873" top="-43082" width="5292" height="3281" selected="0" zOrder="52" index="1" expanded="1" />
+                            <accruedInterest_XmlElement left="35873" top="-39293" width="5292" height="3281" selected="0" zOrder="54" index="2" expanded="1" />
+                        </closingEvents_XmlElement>
+                        <nominal_XmlElement left="29947" top="-35504" width="5292" height="3281" selected="0" zOrder="56" index="9" expanded="1">
+                            <notionalSchedule_XmlElement left="35873" top="-35504" width="5292" height="3281" selected="0" zOrder="58" index="0" expanded="1" />
+                        </nominal_XmlElement>
+                    </swap_XmlElement>
+                    <capFloor_XmlElement left="24021" top="-29821" width="5292" height="3281" selected="0" zOrder="60" index="3" expanded="1">
+                        <premium_XmlElement left="29947" top="-31715" width="5292" height="3281" selected="0" zOrder="62" index="0" expanded="1" />
+                        <closingEvents_XmlElement left="29947" top="-27926" width="5292" height="3281" selected="0" zOrder="64" index="2" expanded="1">
+                            <markToMarket_XmlElement left="35873" top="-31715" width="5292" height="3281" selected="0" zOrder="66" index="0" expanded="1" />
+                            <valoreIntrinseco_XmlElement left="35873" top="-27926" width="5292" height="3281" selected="0" zOrder="68" index="1" expanded="1" />
+                            <accruedInterest_XmlElement left="35873" top="-24137" width="5292" height="3281" selected="0" zOrder="70" index="2" expanded="1" />
+                        </closingEvents_XmlElement>
+                    </capFloor_XmlElement>
+                    <fxSimpleOption_XmlElement left="24021" top="-9929" width="5292" height="3281" selected="0" zOrder="8" index="4" expanded="1">
+                        <closingEvents_XmlElement left="29947" top="-18454" width="5292" height="3281" selected="0" zOrder="72" index="0" expanded="1">
+                            <markToMarket_XmlElement left="35873" top="-20348" width="5292" height="3281" selected="0" zOrder="74" index="0" expanded="1">
+                                <greeks_XmlElement left="41799" top="-20348" width="5292" height="3281" selected="0" zOrder="76" index="0" expanded="1" />
+                            </markToMarket_XmlElement>
+                            <valoreIntrinseco_XmlElement left="35873" top="-16559" width="5292" height="3281" selected="0" zOrder="78" index="1" expanded="1" />
+                        </closingEvents_XmlElement>
+                        <underlyingType_XmlElement left="29947" top="-12770" width="5292" height="3281" selected="0" zOrder="80" index="4" expanded="1">
+                            <commodity_XmlElement left="35873" top="-12770" width="5292" height="3281" selected="0" zOrder="82" index="0" expanded="1" />
+                        </underlyingType_XmlElement>
+                        <putCurrency_XmlElement left="29947" top="-8981" width="5292" height="3281" selected="0" zOrder="84" index="7" expanded="1">
+                            <ctrAmount_XmlElement left="35873" top="-8981" width="5292" height="3281" selected="0" zOrder="86" index="1" expanded="1" />
+                        </putCurrency_XmlElement>
+                        <callCurrency_XmlElement left="29947" top="-5192" width="5292" height="3281" selected="0" zOrder="88" index="8" expanded="1">
+                            <ctrAmount_XmlElement left="35873" top="-5192" width="5292" height="3281" selected="0" zOrder="90" index="1" expanded="1" />
+                        </callCurrency_XmlElement>
+                        <mainActor_XmlElement left="29947" top="-1403" width="5292" height="3149" selected="0" zOrder="10" index="9" expanded="1" />
+                    </fxSimpleOption_XmlElement>
+                    <fxBarrierOption_XmlElement left="24021" top="9964" width="5292" height="3149" selected="0" zOrder="13" index="5" expanded="1">
+                        <underlyingType_XmlElement left="29947" top="2386" width="5292" height="3149" selected="0" zOrder="16" index="3" expanded="1">
+                            <commodity_XmlElement left="35873" top="2386" width="5292" height="3281" selected="0" zOrder="92" index="0" expanded="1" />
+                        </underlyingType_XmlElement>
+                        <putCurrency_XmlElement left="29947" top="6175" width="5292" height="3149" selected="0" zOrder="19" index="6" expanded="1">
+                            <ctrAmount_XmlElement left="35873" top="6175" width="5292" height="3281" selected="0" zOrder="94" index="1" expanded="1" />
+                        </putCurrency_XmlElement>
+                        <callCurrency_XmlElement left="29947" top="9964" width="5292" height="3149" selected="0" zOrder="22" index="7" expanded="1">
+                            <ctrAmount_XmlElement left="35873" top="9964" width="5292" height="3281" selected="0" zOrder="96" index="1" expanded="1" />
+                        </callCurrency_XmlElement>
+                        <mainActor_XmlElement left="29947" top="13753" width="5292" height="3149" selected="0" zOrder="25" index="8" expanded="1" />
+                        <closingEvents_XmlElement left="29947" top="17542" width="5292" height="3281" selected="0" zOrder="98" index="9" expanded="1">
+                            <markToMarket_XmlElement left="35873" top="15648" width="5292" height="3281" selected="0" zOrder="100" index="0" expanded="1">
+                                <greeks_XmlElement left="41799" top="15648" width="5292" height="3281" selected="0" zOrder="102" index="0" expanded="1" />
+                            </markToMarket_XmlElement>
+                            <valoreIntrinseco_XmlElement left="35873" top="19437" width="5292" height="3281" selected="0" zOrder="104" index="1" expanded="1" />
+                        </closingEvents_XmlElement>
+                    </fxBarrierOption_XmlElement>
+                    <fxDigitalOption_XmlElement left="24021" top="23225" width="5292" height="3281" selected="0" zOrder="106" index="6" expanded="1">
+                        <payout_XmlElement left="29947" top="21331" width="5292" height="3281" selected="0" zOrder="108" index="4" expanded="1" />
+                        <closingEvents_XmlElement left="29947" top="25120" width="5292" height="3281" selected="0" zOrder="110" index="5" expanded="1">
+                            <markToMarket_XmlElement left="35873" top="23226" width="5292" height="3281" selected="0" zOrder="112" index="0" expanded="1">
+                                <greeks_XmlElement left="41799" top="23226" width="5292" height="3281" selected="0" zOrder="114" index="0" expanded="1" />
+                            </markToMarket_XmlElement>
+                            <valoreIntrinseco_XmlElement left="35873" top="27015" width="5292" height="3281" selected="0" zOrder="116" index="1" expanded="1" />
+                        </closingEvents_XmlElement>
+                    </fxDigitalOption_XmlElement>
+                    <paidReceivedCashFlows_XmlElement left="24021" top="32698" width="5292" height="3281" selected="0" zOrder="118" index="7" expanded="1">
+                        <grossCashFlows_XmlElement left="29947" top="30804" width="5292" height="3281" selected="0" zOrder="120" index="0" expanded="1">
+                            <grossCashFlow_XmlElement left="35873" top="30804" width="5292" height="3281" selected="0" zOrder="122" index="0" expanded="1" />
+                        </grossCashFlows_XmlElement>
+                        <cleanCashFlows_XmlElement left="29947" top="34593" width="5292" height="3281" selected="0" zOrder="124" index="1" expanded="1">
+                            <cleanCashFlow_XmlElement left="35873" top="34593" width="5292" height="3281" selected="0" zOrder="126" index="0" expanded="1" />
+                        </cleanCashFlows_XmlElement>
+                    </paidReceivedCashFlows_XmlElement>
+                    <ForwardCashFlows_XmlElement left="24021" top="40276" width="5292" height="3281" selected="0" zOrder="128" index="8" expanded="1">
+                        <grossForwardCashFlows_XmlElement left="29947" top="38382" width="5292" height="3281" selected="0" zOrder="130" index="0" expanded="1">
+                            <grossCashFlow_XmlElement left="35873" top="38382" width="5292" height="3281" selected="0" zOrder="132" index="0" expanded="1" />
+                        </grossForwardCashFlows_XmlElement>
+                        <cleanForwardCashFlows_XmlElement left="29947" top="42171" width="5292" height="3281" selected="0" zOrder="134" index="1" expanded="1">
+                            <cleanCashFlow_XmlElement left="35873" top="42171" width="5292" height="3281" selected="0" zOrder="136" index="0" expanded="1" />
+                        </cleanForwardCashFlows_XmlElement>
+                    </ForwardCashFlows_XmlElement>
+                </business_XmlElement>
+            </dataDocument_XmlElement>
+        </trade_XmlElement>
+        <report_XmlElement left="6243" top="44065" width="5292" height="3281" selected="0" zOrder="138" index="1" expanded="1">
+            <bancaItalia_XmlElement left="12169" top="44065" width="5292" height="3281" selected="0" zOrder="140" index="0" expanded="1">
+                <formaTecnica_XmlElement left="18095" top="44065" width="5292" height="3281" selected="0" zOrder="142" index="0" expanded="1">
+                    <data_XmlElement left="24021" top="44065" width="5292" height="3281" selected="0" zOrder="144" index="0" expanded="1" />
+                </formaTecnica_XmlElement>
+            </bancaItalia_XmlElement>
+        </report_XmlElement>
+    </regulatoryReport_XmlElement>
+</XSDDesignerLayout>

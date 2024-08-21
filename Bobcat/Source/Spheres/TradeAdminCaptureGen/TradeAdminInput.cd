@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Font Name="Segoe UI" Size="9" />
+  <Comment CommentText="TRADEAMIN INPUT">
+    <Position X="4.645" Y="6.052" Height="0.333" Width="1.523" />
+  </Comment>
+  <Class Name="EFS.TradeInformation.TradeAdminInput">
+    <Position X="7.25" Y="9.5" Width="3.75" />
+    <TypeIdentifier>
+      <FileName>TradeAdminInput.cs</FileName>
+      <HashCode>AEAAAAAAAAAAAAAAgAAAAgAAAAAQAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="CustomCaptureInfos" />
+    </ShowAsCollectionAssociation>
+    <AssociationLine Name="CustomCaptureInfos" Type="EFS.GUI.CCI.CustomCaptureInfo">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-3.721" Y="6.672" Height="0.182" Width="3.507" />
+      </MemberNameLabel>
+    </AssociationLine>
+  </Class>
+  <Class Name="EFS.TradeInformation.TradeCommonInput">
+    <Position X="7.5" Y="1" Width="3.25" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="EFS.GUI.CCI.CustomCaptureInfo">
+    <Position X="0.5" Y="1" Width="2.75" />
+    <TypeIdentifier />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EFS.TradeInformation.CommonInput">
+    <Position X="3.75" Y="1" Width="2.75" />
+    <TypeIdentifier />
+  </Class>
+</ClassDiagram>

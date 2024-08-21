@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access">
+  <Font Name="Segoe UI" Size="9" />
+  <Class Name="EFS.DALSQLServer.DataAccess">
+    <Position X="0.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <FileName>DataAccess.cs</FileName>
+      <HashCode>gACCAAAAAAEDAiCAABAAAEACARAIAAIBQAAAAAAAAAg=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.ApplicationBlocks.Data.SqlHelper">
+    <Position X="3.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <FileName>SqlHelper.cs</FileName>
+      <HashCode>AACCAACAAAAAACAEABAAAEAAgAAAAAIBAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="EFS.ApplicationBlocks.Data.SqlHelper.SqlConnectionOwnership" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>SqlHelper.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+  </Class>
+  <Class Name="EFS.ApplicationBlocks.Data.SqlHelperParameterCache">
+    <Position X="3.5" Y="5.25" Width="2.75" />
+    <TypeIdentifier>
+      <FileName>SqlHelper.cs</FileName>
+      <HashCode>AEAAAAAAAECAAIAAAAAAAARAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.ApplicationBlocks.Data.DataAccessBase" Collapsed="true">
+    <Position X="0.5" Y="6" Width="2.75" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+</ClassDiagram>

@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{142B10A1-7781-4351-BACE-F6E773457D3F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TradeCaptureGen</RootNamespace>
+    <AssemblyName>EFS.TradeCaptureGen</AssemblyName>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>false</DebugSymbols>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseSetup|AnyCPU'">
+    <OutputPath>bin\ReleaseSetup\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseSetup|x64'">
+    <OutputPath>bin\x64\ReleaseSetup\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions.Design">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CCI\CciProduct\CciProductCashPayment.cs" />
+    <Compile Include="CCI\CciRptSide.cs" />
+    <Compile Include="CCI\CciTrade\CciTradeBase.cs" />
+    <Compile Include="CCI\CciTrade\CciTrade.cs" />
+    <Compile Include="CCI\CciTrade\CciTradeRisk.cs" />
+    <Compile Include="CCI\CciTrade\CciTradeDebtSecurity.cs" />
+    <Compile Include="CCI\CommodityDerivative\CciCommodityNotionalQuantity.cs" />
+    <Compile Include="CCI\CommodityDerivative\CciElectricityDelivery.cs" />
+    <Compile Include="CCI\CommodityDerivative\CciEnvironmentalProductionFeatures.cs" />
+    <Compile Include="CCI\CommodityDerivative\CciEnvironmentalPhysicalLeg.cs" />
+    <Compile Include="CCI\CommodityDerivative\CciFixedPriceSpotLeg.cs" />
+    <Compile Include="CCI\CommodityDerivative\CciGasDeliveryPeriods.cs" />
+    <Compile Include="CCI\CommodityDerivative\CciGasPhysicalQuantity.cs" />
+    <Compile Include="CCI\CommodityDerivative\CciGasDelivery.cs" />
+    <Compile Include="CCI\CommodityDerivative\CciPrevailingTime.cs" />
+    <Compile Include="CCI\CciProduct\CciProductDebtSecurityOption.cs" />
+    <Compile Include="CCI\CciProduct\CciProductOptionBase.cs" />
+    <Compile Include="CCI\CciProduct\CciProductOptionBaseExtended.cs" />
+    <Compile Include="CCI\CciProduct\CciProductCommoditySpot.cs" />
+    <Compile Include="CCI\CciReturnLeg.cs" />
+    <Compile Include="CCI\CciPremium.cs" />
+    <Compile Include="CCI\CommodityDerivative\CciGasPhysicalLeg.cs" />
+    <Compile Include="CCI\CommodityDerivative\CciElectricityPhysicalLeg.cs" />
+    <Compile Include="CCI\CommodityDerivative\CciPhysicalSwapLeg.cs" />
+    <Compile Include="CCI\CommodityDerivative\CciElectricityPhysicalQuantity.cs" />
+    <Compile Include="CCI\CommodityDerivative\CciSettlementPeriods.cs" />
+    <Compile Include="CCI\TemplateCSharp\CciTemplate.cs" />
+    <Compile Include="Fee\FeeProcessing.cs" />
+    <Compile Include="Fee\FeeRequest.cs" />
+    <Compile Include="Fee\FeeResponse.cs" />
+    <Compile Include="Fee\FeeMatrix.cs" />
+    <Compile Include="Fee\FundingProcessing.cs" />
+    <Compile Include="Fee\FundingResponse.cs" />
+    <Compile Include="Fee\Party.cs" />
+    <Compile Include="Capturegen\DebtSecCaptureGen.cs" />
+    <Compile Include="Capturegen\TradeRiskCaptureGen.cs" />
+    <Compile Include="Capturegen\TradeStream.cs" />
+    <Compile Include="CCI\CciBC.cs" />
+    <Compile Include="CCI\CciCancelableProvision.cs" />
+    <Compile Include="CCI\CciCustomerSettlementPayment.cs" />
+    <Compile Include="CCI\CciDebtSecurity.cs" />
+    <Compile Include="CCI\CciDebtSecurityTransaction.cs" />
+    <Compile Include="CCI\CciEarlyTerminationProvision.cs" />
+    <Compile Include="CCI\CciEquityDerivativeBase.cs" />
+    <Compile Include="CCI\CciEquityDerivativeLongFormBase.cs" />
+    <Compile Include="CCI\CciEquityExerciceValuationSettlement.cs" />
+    <Compile Include="CCI\CciEquityExercise.cs" />
+    <Compile Include="CCI\CciEquityOption.cs" />
+    <Compile Include="CCI\CciEquityPremium.cs" />
+    <Compile Include="CCI\CciEquitySwapAdditionnalPayment.cs" />
+    <Compile Include="CCI\CciEquityValuation.cs" />
+    <Compile Include="CCI\CciFixInstrument.cs" />
+    <Compile Include="CCI\CciExchangeRate.cs" />
+    <Compile Include="CCI\CciFixTradeCaptureReport.cs" />
+    <Compile Include="CCI\CciProduct\CciProductBulletPayment.cs" />
+    <Compile Include="CCI\CciProduct\CciProductBuyAndSellBack.cs" />
+    <Compile Include="CCI\CciProduct\CciProductCapFloor.cs" />
+    <Compile Include="CCI\CciProduct\CciProductDebtSecurity.cs" />
+    <Compile Include="CCI\CciProduct\CciProductDebtSecurityTransaction.cs" />
+    <Compile Include="CCI\CciProduct\CciProductEquityDerivativeBase.cs" />
+    <Compile Include="CCI\CciProduct\CciProductEquityDerivativeLongFormBase.cs" />
+    <Compile Include="CCI\CciProduct\CciProductEquityOption.cs" />
+    <Compile Include="CCI\CciProduct\CciProductExchangeTradedBase.cs" />
+    <Compile Include="CCI\CciProduct\CciProductFra.cs" />
+    <Compile Include="CCI\CciProduct\CciProductFx.cs" />
+    <Compile Include="CCI\CciProduct\CciProductFxAverageRateOption.cs" />
+    <Compile Include="CCI\CciProduct\CciProductFxBarrierOption.cs" />
+    <Compile Include="CCI\CciProduct\CciProductFxDigitalOption.cs" />
+    <Compile Include="CCI\CciProduct\CciProductFxOptionLeg.cs" />
+    <Compile Include="CCI\CciProduct\CciProductRepo.cs" />
+    <Compile Include="CCI\CciProduct\CciProductReturnSwap.cs" />
+    <Compile Include="CCI\CciProduct\CciProductExchangeTradeDerivative.cs" />
+    <Compile Include="CCI\CciProduct\CciProductLoanDeposit.cs" />
+    <Compile Include="CCI\CciProduct\CciProductSaleAndRepurchaseAgreement.cs" />
+    <Compile Include="CCI\CciProduct\CciProductStrategy.cs" />
+    <Compile Include="CCI\CciProduct\CciProductSwap.cs" />
+    <Compile Include="CCI\CciProduct\CciProductSwaption.cs" />
+    <Compile Include="CCI\CciProduct\CciProductTermDeposit.cs" />
+    <Compile Include="CCI\CciExercise.cs" />
+    <Compile Include="CCI\CciExtendibleProvision.cs" />
+    <Compile Include="CCI\CciFxBarrier.cs" />
+    <Compile Include="CCI\CciFxFixing.cs" />
+    <Compile Include="CCI\CciFXLeg.cs" />
+    <Compile Include="CCI\CciFxTrigger.cs" />
+    <Compile Include="CCI\CciInterestLeg.cs" />
+    <Compile Include="CCI\CciLoanDeposit.cs" />
+    <Compile Include="CCI\CciNettingInformation.cs" />
+    <Compile Include="CCI\CciPayment.cs" />
+    <Compile Include="CCI\CciProvisionBase.cs" />
+    <Compile Include="CCI\CciScheme.cs" />
+    <Compile Include="CCI\CciSettlementInformations.cs" />
+    <Compile Include="CCI\CciSettlementInput.cs" />
+    <Compile Include="CCI\CciSimplePayment.cs" />
+    <Compile Include="CCI\CciSingleUnderlyer.cs" />
+    <Compile Include="CCI\CciStream.cs" />
+    <Compile Include="CCI\CciStub.cs" />
+    <Compile Include="CCI\CciTradeAction.cs" />
+    <Compile Include="CCI\CciUnderlyingAsset.cs" />
+    <Compile Include="CCI\CciUnderlyingDelivery.cs" />
+    <Compile Include="CheckTradeValidationLock.cs" />
+    <Compile Include="CCI\CciExtends.cs" />
+    <Compile Include="CCI\CciSecurity.cs" />
+    <Compile Include="CCI\CciLocalization.cs" />
+    <Compile Include="CCI\CciClassification.cs" />
+    <Compile Include="CCI\CciSecurityAsset.cs" />
+    <Compile Include="CCI\CciOrderQuantity.cs" />
+    <Compile Include="CCI\CciOrderPrice.cs" />
+    <Compile Include="CCI\CciSecurityLeg.cs" />
+    <Compile Include="CCI\CciProduct\CciProductMarginRequirement.cs" />
+    <Compile Include="CCI\CciProduct\CciProductEquitiySecurityTransaction.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Capturegen\TradeCaptureGen.cs" />
+    <Compile Include="CCI\TradeCustomCaptureInfos.cs" />
+    <Compile Include="TradeInput\CciTradeFxOptionEarlyTermination.cs" />
+    <Compile Include="TradeInput\TradeRiskInput.cs" />
+    <Compile Include="TradeInput\DebtSecInput.cs" />
+    <Compile Include="TradeInput\TradeInput.cs" />
+    <Compile Include="TradeInput\TradeInputAction.cs" />
+    <Compile Include="UTI\UTIComponents.cs" />
+    <Compile Include="UTI\RegulatoryTools.cs" />
+    <Compile Include="UTI\RegulatoryOffices.cs" />
+    <Compile Include="UTI\UTIBuilder.cs" />
+    <Compile Include="UTI\UTIEnum.cs" />
+    <Compile Include="UTI\UTITools.cs" />
+    <Compile Include="ValidationRule\CheckTradeValidationRule.cs" />
+    <Compile Include="ValidationRule\CheckDebtSecValidationRule.cs" />
+    <Compile Include="ValidationRule\CheckTradeRiskValidationRule.cs" />
+    <Compile Include="ValidationRule\CheckCorrectionOfQuantityValidationRule.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ACommon\ACommon.csproj">
+      <Project>{9FF00E89-DA79-4F89-B3A6-9995F502F080}</Project>
+      <Name>ACommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonCaptureGen\CommonCaptureGen.csproj">
+      <Project>{1E32262C-564A-4382-ACE7-22D47C934352}</Project>
+      <Name>CommonCaptureGen</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonData\CommonData.csproj">
+      <Project>{A0323250-116A-43EF-9E7D-F3218B6246B1}</Project>
+      <Name>CommonData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonWeb\CommonWeb.csproj">
+      <Project>{870A39EA-BDAA-43FE-81E5-8A8AB600E83C}</Project>
+      <Name>CommonWeb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{CDACCA1B-403B-47F5-9F1B-E1A1AC4A7FE3}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{1DCDE042-2496-46AE-A0B9-CE9C994D92E2}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DPAPI\DPAPI.csproj">
+      <Project>{9A89EEBE-C534-4B2E-AB72-AEDF28C16696}</Project>
+      <Name>DPAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EfsMLEnum\Enums.csproj">
+      <Project>{4117F946-D2FD-4EAB-A4A0-F3FB8B1732CC}</Project>
+      <Name>Enums</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EfsML\EfsML.csproj">
+      <Project>{A7E609D0-E67C-4997-B798-8974716D413C}</Project>
+      <Name>EfsML</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FpMLGUI\EfsMLGUI.csproj">
+      <Project>{DE7F74E2-9431-44D4-8A38-3C0884D6719F}</Project>
+      <Name>EfsMLGUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TimeZone\TimeZone.csproj">
+      <Project>{36a1ff15-5123-43b6-b05e-2da7091b0c76}</Project>
+      <Name>TimeZone</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="TradeCustomCaptureInfos.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Fee\ReadMe.txt" />
+    <Content Include="BuildIdentifier\DebtSecurity_Identifier.xslt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

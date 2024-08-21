@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+  <!-- Complex_ActualPrice -->
+  <Object name="ActualPrice_L" helpschema="fpml" helpelement="ActualPrice">
+    <label/>
+    <Table>
+      <PriceExpression clientid="priceExpression" required="true" postback="true" />
+      <Space />
+      <DecimalNoRegex clientid="amount" required="true" postback="true" />
+      <Space />
+      <Currency clientid="currency" required="false" postback="true" />
+    </Table>
+  </Object>
+
+  <!--Complex_BondAsset_L-->
+  <Object name="BondAsset_L"  helpschema="efsml" helpelement="Bond">
+    <Label />
+    <Table>
+      <TextBox datatype="string" style="width:180px" autocomplete="true" />
+      <Space />
+      <Button type="Submit" referential="ASSET_DEBTSECURITY" sqlspecifiedfield="IDENTIFIER" cssclass="fa-icon" tooltip="search"/>
+    </Table>
+  </Object>
+
+
+  <!-- Complex_CouponType -->
+  <Object name="CouponType" helpschema="fpml" helpelement="CouponType">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:CouponType;isresource:false]" width="100px"/>
+  </Object>
+  <Object name="CouponType_L" helpschema="fpml" helpelement="CouponType">
+    <Label />
+    <CouponType />
+  </Object>
+
+
+  <!-- Complex_Commission -->
+  <Object name="Commission" helpschema="fpml" helpelement="Commission">
+    <Table>
+      <CommissionDenomination clientid="commissionDenomination" required="true" postback="true" />
+      <Space />
+      <Amount clientid="commissionAmount" required="true" postback="true" />
+      <Space />
+      <Currency clientid="currency" required="false" postback="true" />
+    </Table>
+  </Object>
+  <Object name="Commission_L" helpschema="fpml" helpelement="Commission">
+    <Label />
+    <Commission />
+  </Object>
+
+
+  <!--Complex_IndexAsset-->
+  <Object name="IndexAsset_L"  helpschema="efsml" helpelement="Index">
+    <Label />
+    <Table>
+      <TextBox datatype="string" style="width:180px" autocomplete="true"/>
+      <Space />
+      <Button type="Submit" referential="ASSET_INDEX" cssclass="fa-icon"  tooltip="search"/>
+    </Table>
+  </Object>
+
+  <!--Complex_InstrumentId-->
+  <Object name="InstrumentId" helpschema="fpml" helpelement="InstrumentId">
+    <InstrumentIdScheme_L clientid="scheme" />
+    <space/>
+    <InstrumentIdValue_L clientid="value" />
+    <br/>
+  </Object>
+  <Object name="InstrumentIdScheme_L">
+    <Label />
+    <DropDown datatype="string" listretrieval="predef:enum.[code:SecurityIDSourceEnum]" />
+  </Object>
+  <Object name="InstrumentIdValue_L">
+    <TextBox datatype="string" style="width:200px;" />
+  </Object>
+  
+  
+  <!--Complex_EquityAsset-->
+  <Object name="EquityAsset_L"  helpschema="efsml" helpelement="EquityAsset">
+    <Label />
+    <Table>
+      <TextBox datatype="string" style="width:180px" autocomplete="true" />
+      <Space />
+      <Button type="Submit" referential="ASSET_EQUITY" cssclass="fa-icon"   tooltip="search"/>
+    </Table>
+  </Object>
+  <!--complex_price-->
+  <Object name="PriceNetPrice" helpschema="fpml" helpelement="Price">
+    <ActualPrice_L clientid="netPrice" required="true" postback="true" helpschema="fpml" helpelement="Price" />
+    <br />
+    <Commission_L clientid="commission" required="false" helpschema="fpml" helpelement="Commission"/>
+  </Object>
+  <Object name="PriceDeterminationMethod" helpschema="fpml" helpelement="Price">
+    <DeterminationMethodValuation_L clientid="determinationMethod" required="true" helpschema="fpml" helpelement="Price" />
+    <br/>
+    <Commission_L clientid="commission" required="false" helpschema="fpml" helpelement="Commission"/>
+  </Object>
+  <!--Complex_SingleUnderlyer-->
+  <Object name="EquityAssetUnderlyer" helpschema="efsml" helpelement="SingleUnderlyer" >
+    <EquityAsset_L clientid="underlyingAsset" required="true" postback="true" helpschema="fpml-asset" helpelement="UnderlyingAsset"/>
+    <space />
+    <OpenUnits_L clientid="openUnits" required="false" postback="false" />
+    <FixedRate_L clientid="dividendPayout_dividendPayoutRatio" required="false" postback="true" helpschema="fpml-asset" helpelement="DividendPayout"/>
+  </Object>
+</Objects>

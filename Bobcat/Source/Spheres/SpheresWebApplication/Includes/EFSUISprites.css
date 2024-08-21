@@ -1,0 +1,917 @@
+﻿input[class^="ui-main"]
+{
+	background-color: transparent;
+}
+
+/* FLAGS */
+
+.ui-flags 
+{
+    background-image: url(../Images/PNG/ui-flags.png);
+    background-repeat: no-repeat;
+    background-color:Transparent;
+    border:none;
+}
+
+.ui-flags-zz,.ui-flags-unlisted { background-image:none}
+.ui-flags-ad { background-position:  -0px -0px; height: 11px; width: 16px; }
+.ui-flags-ae { background-position:  -16px -0px; height: 11px; width: 16px; }
+.ui-flags-af { background-position:  -32px -0px; height: 11px; width: 16px; }
+.ui-flags-ag { background-position:  -48px -0px; height: 11px; width: 16px; }
+.ui-flags-ai { background-position:  -64px -0px; height: 11px; width: 16px; }
+.ui-flags-al { background-position:  -80px -0px; height: 11px; width: 16px; }
+.ui-flags-am { background-position:  -96px -0px; height: 11px; width: 16px; }
+.ui-flags-an { background-position:  -112px -0px; height: 11px; width: 16px; }
+.ui-flags-ao { background-position:  -128px -0px; height: 11px; width: 16px; }
+.ui-flags-ar { background-position:  -144px -0px; height: 11px; width: 16px; }
+.ui-flags-as { background-position:  -160px -0px; height: 11px; width: 16px; }
+.ui-flags-at { background-position:  -176px -0px; height: 11px; width: 16px; }
+.ui-flags-au { background-position:  -192px -0px; height: 11px; width: 16px; }
+.ui-flags-aw { background-position:  -0px -11px; height: 11px; width: 16px; }
+.ui-flags-ax { background-position:  -0px -22px; height: 11px; width: 16px; }
+.ui-flags-az { background-position:  -0px -33px; height: 11px; width: 16px; }
+.ui-flags-ba { background-position:  -0px -44px; height: 11px; width: 16px; }
+.ui-flags-bb { background-position:  -0px -55px; height: 11px; width: 16px; }
+.ui-flags-bd { background-position:  -0px -66px; height: 11px; width: 16px; }
+.ui-flags-be { background-position:  -0px -77px; height: 11px; width: 16px; }
+.ui-flags-bf { background-position:  -0px -88px; height: 11px; width: 16px; }
+.ui-flags-bg { background-position:  -0px -99px; height: 11px; width: 16px; }
+.ui-flags-bh { background-position:  -0px -110px; height: 11px; width: 16px; }
+.ui-flags-bi { background-position:  -0px -121px; height: 11px; width: 16px; }
+.ui-flags-bj { background-position:  -0px -132px; height: 11px; width: 16px; }
+.ui-flags-bm { background-position:  -0px -143px; height: 11px; width: 16px; }
+.ui-flags-bn { background-position:  -0px -154px; height: 11px; width: 16px; }
+.ui-flags-bo { background-position:  -0px -165px; height: 11px; width: 16px; }
+.ui-flags-br { background-position:  -0px -176px; height: 11px; width: 16px; }
+.ui-flags-bs { background-position:  -0px -187px; height: 11px; width: 16px; }
+.ui-flags-bt { background-position:  -0px -198px; height: 11px; width: 16px; }
+.ui-flags-bv { background-position:  -16px -11px; height: 11px; width: 16px; }
+.ui-flags-bw { background-position:  -32px -11px; height: 11px; width: 16px; }
+.ui-flags-by { background-position:  -48px -11px; height: 11px; width: 16px; }
+.ui-flags-bz { background-position:  -64px -11px; height: 11px; width: 16px; }
+.ui-flags-ca { background-position:  -80px -11px; height: 11px; width: 16px; }
+.ui-flags-catalonia { background-position:  -96px -11px; height: 11px; width: 16px; }
+.ui-flags-cc { background-position:  -112px -11px; height: 11px; width: 16px; }
+.ui-flags-cd { background-position:  -128px -11px; height: 11px; width: 16px; }
+.ui-flags-cf { background-position:  -144px -11px; height: 11px; width: 16px; }
+.ui-flags-cg { background-position:  -160px -11px; height: 11px; width: 16px; }
+.ui-flags-ch { background-position:  -176px -11px; height: 11px; width: 11px; }
+.ui-flags-ci { background-position:  -187px -11px; height: 11px; width: 16px; }
+.ui-flags-ck { background-position:  -16px -22px; height: 11px; width: 16px; }
+.ui-flags-cl { background-position:  -16px -33px; height: 11px; width: 16px; }
+.ui-flags-cm { background-position:  -16px -44px; height: 11px; width: 16px; }
+.ui-flags-cn { background-position:  -16px -55px; height: 11px; width: 16px; }
+.ui-flags-co { background-position:  -16px -66px; height: 11px; width: 16px; }
+.ui-flags-cr { background-position:  -16px -77px; height: 11px; width: 16px; }
+.ui-flags-cs { background-position:  -16px -88px; height: 11px; width: 16px; }
+.ui-flags-cu { background-position:  -16px -99px; height: 11px; width: 16px; }
+.ui-flags-cv { background-position:  -16px -110px; height: 11px; width: 16px; }
+.ui-flags-cx { background-position:  -16px -121px; height: 11px; width: 16px; }
+.ui-flags-cy { background-position:  -16px -132px; height: 11px; width: 16px; }
+.ui-flags-cz { background-position:  -16px -143px; height: 11px; width: 16px; }
+.ui-flags-de { background-position:  -16px -154px; height: 11px; width: 16px; }
+.ui-flags-dj { background-position:  -16px -165px; height: 11px; width: 16px; }
+.ui-flags-dk { background-position:  -16px -176px; height: 11px; width: 16px; }
+.ui-flags-dm { background-position:  -16px -187px; height: 11px; width: 16px; }
+.ui-flags-do { background-position:  -16px -198px; height: 11px; width: 16px; }
+.ui-flags-dz { background-position:  -32px -22px; height: 11px; width: 16px; }
+.ui-flags-ec { background-position:  -48px -22px; height: 11px; width: 16px; }
+.ui-flags-ee { background-position:  -64px -22px; height: 11px; width: 16px; }
+.ui-flags-eg { background-position:  -80px -22px; height: 11px; width: 16px; }
+.ui-flags-eh { background-position:  -96px -22px; height: 11px; width: 16px; }
+.ui-flags-england { background-position:  -112px -22px; height: 11px; width: 16px; }
+.ui-flags-er { background-position:  -128px -22px; height: 11px; width: 16px; }
+.ui-flags-es { background-position:  -144px -22px; height: 11px; width: 16px; }
+.ui-flags-et { background-position:  -160px -22px; height: 11px; width: 16px; }
+.ui-flags-europeanunion { background-position:  -176px -22px; height: 11px; width: 16px; }
+.ui-flags-fam { background-position:  -192px -22px; height: 11px; width: 16px; }
+.ui-flags-fi { background-position:  -32px -33px; height: 11px; width: 16px; }
+.ui-flags-fj { background-position:  -48px -33px; height: 11px; width: 16px; }
+.ui-flags-fk { background-position:  -64px -33px; height: 11px; width: 16px; }
+.ui-flags-fm { background-position:  -80px -33px; height: 11px; width: 16px; }
+.ui-flags-fo { background-position:  -96px -33px; height: 11px; width: 16px; }
+.ui-flags-fr { background-position:  -112px -33px; height: 11px; width: 16px; }
+.ui-flags-ga { background-position:  -128px -33px; height: 11px; width: 16px; }
+.ui-flags-gb { background-position:  -144px -33px; height: 11px; width: 16px; }
+.ui-flags-gd { background-position:  -160px -33px; height: 11px; width: 16px; }
+.ui-flags-ge { background-position:  -176px -33px; height: 11px; width: 16px; }
+.ui-flags-gf { background-position:  -192px -33px; height: 11px; width: 16px; }
+.ui-flags-gh { background-position:  -32px -44px; height: 11px; width: 16px; }
+.ui-flags-gi { background-position:  -32px -55px; height: 11px; width: 16px; }
+.ui-flags-gl { background-position:  -32px -66px; height: 11px; width: 16px; }
+.ui-flags-gm { background-position:  -32px -77px; height: 11px; width: 16px; }
+.ui-flags-gn { background-position:  -32px -88px; height: 11px; width: 16px; }
+.ui-flags-gp { background-position:  -32px -99px; height: 11px; width: 16px; }
+.ui-flags-gq { background-position:  -32px -110px; height: 11px; width: 16px; }
+.ui-flags-gr { background-position:  -32px -121px; height: 11px; width: 16px; }
+.ui-flags-gs { background-position:  -32px -132px; height: 11px; width: 16px; }
+.ui-flags-gt { background-position:  -32px -143px; height: 11px; width: 16px; }
+.ui-flags-gu { background-position:  -32px -154px; height: 11px; width: 16px; }
+.ui-flags-gw { background-position:  -32px -165px; height: 11px; width: 16px; }
+.ui-flags-gy { background-position:  -32px -176px; height: 11px; width: 16px; }
+.ui-flags-hk { background-position:  -32px -187px; height: 11px; width: 16px; }
+.ui-flags-hm { background-position:  -32px -198px; height: 11px; width: 16px; }
+.ui-flags-hn { background-position:  -48px -44px; height: 11px; width: 16px; }
+.ui-flags-hr { background-position:  -64px -44px; height: 11px; width: 16px; }
+.ui-flags-ht { background-position:  -80px -44px; height: 11px; width: 16px; }
+.ui-flags-hu { background-position:  -96px -44px; height: 11px; width: 16px; }
+.ui-flags-id { background-position:  -112px -44px; height: 11px; width: 16px; }
+.ui-flags-ie { background-position:  -128px -44px; height: 11px; width: 16px; }
+.ui-flags-il { background-position:  -144px -44px; height: 11px; width: 16px; }
+.ui-flags-in { background-position:  -160px -44px; height: 11px; width: 16px; }
+.ui-flags-io { background-position:  -176px -44px; height: 11px; width: 16px; }
+.ui-flags-iq { background-position:  -192px -44px; height: 11px; width: 16px; }
+.ui-flags-ir { background-position:  -48px -55px; height: 11px; width: 16px; }
+.ui-flags-is { background-position:  -48px -66px; height: 11px; width: 16px; }
+.ui-flags-it { background-position:  -48px -77px; height: 11px; width: 16px; }
+.ui-flags-jm { background-position:  -48px -88px; height: 11px; width: 16px; }
+.ui-flags-jo { background-position:  -48px -99px; height: 11px; width: 16px; }
+.ui-flags-jp { background-position:  -48px -110px; height: 11px; width: 16px; }
+.ui-flags-ke { background-position:  -48px -121px; height: 11px; width: 16px; }
+.ui-flags-kg { background-position:  -48px -132px; height: 11px; width: 16px; }
+.ui-flags-kh { background-position:  -48px -143px; height: 11px; width: 16px; }
+.ui-flags-ki { background-position:  -48px -154px; height: 11px; width: 16px; }
+.ui-flags-km { background-position:  -48px -165px; height: 11px; width: 16px; }
+.ui-flags-kn { background-position:  -48px -176px; height: 11px; width: 16px; }
+.ui-flags-kp { background-position:  -48px -187px; height: 11px; width: 16px; }
+.ui-flags-kr { background-position:  -48px -198px; height: 11px; width: 16px; }
+.ui-flags-kw { background-position:  -64px -55px; height: 11px; width: 16px; }
+.ui-flags-ky { background-position:  -80px -55px; height: 11px; width: 16px; }
+.ui-flags-kz { background-position:  -96px -55px; height: 11px; width: 16px; }
+.ui-flags-la { background-position:  -112px -55px; height: 11px; width: 16px; }
+.ui-flags-lb { background-position:  -128px -55px; height: 11px; width: 16px; }
+.ui-flags-lc { background-position:  -144px -55px; height: 11px; width: 16px; }
+.ui-flags-li { background-position:  -160px -55px; height: 11px; width: 16px; }
+.ui-flags-lk { background-position:  -176px -55px; height: 11px; width: 16px; }
+.ui-flags-lr { background-position:  -192px -55px; height: 11px; width: 16px; }
+.ui-flags-ls { background-position:  -64px -66px; height: 11px; width: 16px; }
+.ui-flags-lt { background-position:  -80px -66px; height: 11px; width: 16px; }
+.ui-flags-lu { background-position:  -96px -66px; height: 11px; width: 16px; }
+.ui-flags-lv { background-position:  -112px -66px; height: 11px; width: 16px; }
+.ui-flags-ly { background-position:  -128px -66px; height: 11px; width: 16px; }
+.ui-flags-ma { background-position:  -144px -66px; height: 11px; width: 16px; }
+.ui-flags-mc { background-position:  -160px -66px; height: 11px; width: 16px; }
+.ui-flags-md { background-position:  -176px -66px; height: 11px; width: 16px; }
+.ui-flags-me { background-position:  -64px -77px; height: 12px; width: 16px; }
+.ui-flags-mg { background-position:  -192px -66px; height: 11px; width: 16px; }
+.ui-flags-mh { background-position:  -64px -89px; height: 11px; width: 16px; }
+.ui-flags-mk { background-position:  -64px -100px; height: 11px; width: 16px; }
+.ui-flags-ml { background-position:  -64px -111px; height: 11px; width: 16px; }
+.ui-flags-mm { background-position:  -64px -122px; height: 11px; width: 16px; }
+.ui-flags-mn { background-position:  -64px -133px; height: 11px; width: 16px; }
+.ui-flags-mo { background-position:  -64px -144px; height: 11px; width: 16px; }
+.ui-flags-mp { background-position:  -64px -155px; height: 11px; width: 16px; }
+.ui-flags-mq { background-position:  -64px -166px; height: 11px; width: 16px; }
+.ui-flags-mr { background-position:  -64px -177px; height: 11px; width: 16px; }
+.ui-flags-ms { background-position:  -64px -188px; height: 11px; width: 16px; }
+.ui-flags-mt { background-position:  -64px -199px; height: 11px; width: 16px; }
+.ui-flags-mu { background-position:  -80px -77px; height: 11px; width: 16px; }
+.ui-flags-mv { background-position:  -96px -77px; height: 11px; width: 16px; }
+.ui-flags-mw { background-position:  -112px -77px; height: 11px; width: 16px; }
+.ui-flags-mx { background-position:  -128px -77px; height: 11px; width: 16px; }
+.ui-flags-my { background-position:  -144px -77px; height: 11px; width: 16px; }
+.ui-flags-mz { background-position:  -160px -77px; height: 11px; width: 16px; }
+.ui-flags-na { background-position:  -176px -77px; height: 11px; width: 16px; }
+.ui-flags-nc { background-position:  -192px -77px; height: 11px; width: 16px; }
+.ui-flags-ne { background-position:  -80px -88px; height: 11px; width: 16px; }
+.ui-flags-nf { background-position:  -80px -99px; height: 11px; width: 16px; }
+.ui-flags-ng { background-position:  -80px -110px; height: 11px; width: 16px; }
+.ui-flags-ni { background-position:  -80px -121px; height: 11px; width: 16px; }
+.ui-flags-nl { background-position:  -80px -132px; height: 11px; width: 16px; }
+.ui-flags-no { background-position:  -80px -143px; height: 11px; width: 16px; }
+.ui-flags-np { background-position:  -80px -154px; height: 11px; width: 9px; }
+.ui-flags-nr { background-position:  -80px -165px; height: 11px; width: 16px; }
+.ui-flags-nu { background-position:  -80px -176px; height: 11px; width: 16px; }
+.ui-flags-nz { background-position:  -80px -187px; height: 11px; width: 16px; }
+.ui-flags-om { background-position:  -80px -198px; height: 11px; width: 16px; }
+.ui-flags-pa { background-position:  -96px -88px; height: 11px; width: 16px; }
+.ui-flags-pe { background-position:  -112px -88px; height: 11px; width: 16px; }
+.ui-flags-pf { background-position:  -128px -88px; height: 11px; width: 16px; }
+.ui-flags-pg { background-position:  -144px -88px; height: 11px; width: 16px; }
+.ui-flags-ph { background-position:  -160px -88px; height: 11px; width: 16px; }
+.ui-flags-pk { background-position:  -176px -88px; height: 11px; width: 16px; }
+.ui-flags-pl { background-position:  -192px -88px; height: 11px; width: 16px; }
+.ui-flags-pm { background-position:  -96px -99px; height: 11px; width: 16px; }
+.ui-flags-pn { background-position:  -112px -99px; height: 11px; width: 16px; }
+.ui-flags-pr { background-position:  -128px -99px; height: 11px; width: 16px; }
+.ui-flags-ps { background-position:  -144px -99px; height: 11px; width: 16px; }
+.ui-flags-pt { background-position:  -160px -99px; height: 11px; width: 16px; }
+.ui-flags-pw { background-position:  -176px -99px; height: 11px; width: 16px; }
+.ui-flags-py { background-position:  -192px -99px; height: 11px; width: 16px; }
+.ui-flags-qa { background-position:  -96px -110px; height: 11px; width: 16px; }
+.ui-flags-re { background-position:  -96px -121px; height: 11px; width: 16px; }
+.ui-flags-ro { background-position:  -96px -132px; height: 11px; width: 16px; }
+.ui-flags-rs { background-position:  -96px -143px; height: 11px; width: 16px; }
+.ui-flags-ru { background-position:  -96px -154px; height: 11px; width: 16px; }
+.ui-flags-rw { background-position:  -96px -165px; height: 11px; width: 16px; }
+.ui-flags-sa { background-position:  -96px -176px; height: 11px; width: 16px; }
+.ui-flags-sb { background-position:  -96px -187px; height: 11px; width: 16px; }
+.ui-flags-sc { background-position:  -96px -198px; height: 11px; width: 16px; }
+.ui-flags-scotland { background-position:  -112px -110px; height: 11px; width: 16px; }
+.ui-flags-sd { background-position:  -128px -110px; height: 11px; width: 16px; }
+.ui-flags-se { background-position:  -144px -110px; height: 11px; width: 16px; }
+.ui-flags-sg { background-position:  -160px -110px; height: 11px; width: 16px; }
+.ui-flags-sh { background-position:  -176px -110px; height: 11px; width: 16px; }
+.ui-flags-si { background-position:  -192px -110px; height: 11px; width: 16px; }
+.ui-flags-sj { background-position:  -112px -121px; height: 11px; width: 16px; }
+.ui-flags-sk { background-position:  -112px -132px; height: 11px; width: 16px; }
+.ui-flags-sl { background-position:  -112px -143px; height: 11px; width: 16px; }
+.ui-flags-sm { background-position:  -112px -154px; height: 11px; width: 16px; }
+.ui-flags-sn { background-position:  -112px -165px; height: 11px; width: 16px; }
+.ui-flags-so { background-position:  -112px -176px; height: 11px; width: 16px; }
+.ui-flags-sr { background-position:  -112px -187px; height: 11px; width: 16px; }
+.ui-flags-st { background-position:  -112px -198px; height: 11px; width: 16px; }
+.ui-flags-sv { background-position:  -128px -121px; height: 11px; width: 16px; }
+.ui-flags-sy { background-position:  -144px -121px; height: 11px; width: 16px; }
+.ui-flags-sz { background-position:  -160px -121px; height: 11px; width: 16px; }
+.ui-flags-tc { background-position:  -176px -121px; height: 11px; width: 16px; }
+.ui-flags-td { background-position:  -192px -121px; height: 11px; width: 16px; }
+.ui-flags-tf { background-position:  -128px -132px; height: 11px; width: 16px; }
+.ui-flags-tg { background-position:  -144px -132px; height: 11px; width: 16px; }
+.ui-flags-th { background-position:  -160px -132px; height: 11px; width: 16px; }
+.ui-flags-tj { background-position:  -176px -132px; height: 11px; width: 16px; }
+.ui-flags-tk { background-position:  -192px -132px; height: 11px; width: 16px; }
+.ui-flags-tl { background-position:  -128px -143px; height: 11px; width: 16px; }
+.ui-flags-tm { background-position:  -128px -154px; height: 11px; width: 16px; }
+.ui-flags-tn { background-position:  -128px -165px; height: 11px; width: 16px; }
+.ui-flags-to { background-position:  -128px -176px; height: 11px; width: 16px; }
+.ui-flags-tr { background-position:  -128px -187px; height: 11px; width: 16px; }
+.ui-flags-tt { background-position:  -128px -198px; height: 11px; width: 16px; }
+.ui-flags-tv { background-position:  -144px -143px; height: 11px; width: 16px; }
+.ui-flags-tw { background-position:  -160px -143px; height: 11px; width: 16px; }
+.ui-flags-tz { background-position:  -176px -143px; height: 11px; width: 16px; }
+.ui-flags-ua { background-position:  -192px -143px; height: 11px; width: 16px; }
+.ui-flags-ug { background-position:  -144px -154px; height: 11px; width: 16px; }
+.ui-flags-um { background-position:  -144px -165px; height: 11px; width: 16px; }
+.ui-flags-us { background-position:  -144px -176px; height: 11px; width: 16px; }
+.ui-flags-uy { background-position:  -144px -187px; height: 11px; width: 16px; }
+.ui-flags-uz { background-position:  -144px -198px; height: 11px; width: 16px; }
+.ui-flags-va { background-position:  -160px -154px; height: 11px; width: 16px; }
+.ui-flags-vc { background-position:  -176px -154px; height: 11px; width: 16px; }
+.ui-flags-ve { background-position:  -192px -154px; height: 11px; width: 16px; }
+.ui-flags-vg { background-position:  -160px -165px; height: 11px; width: 16px; }
+.ui-flags-vi { background-position:  -176px -165px; height: 11px; width: 16px; }
+.ui-flags-vn { background-position:  -192px -165px; height: 11px; width: 16px; }
+.ui-flags-vu { background-position:  -160px -176px; height: 11px; width: 16px; }
+.ui-flags-wales { background-position:  -160px -187px; height: 11px; width: 16px; }
+.ui-flags-wf { background-position:  -160px -198px; height: 11px; width: 16px; }
+.ui-flags-ws { background-position:  -176px -176px; height: 11px; width: 16px; }
+.ui-flags-ye { background-position:  -192px -176px; height: 11px; width: 16px; }
+.ui-flags-yt { background-position:  -176px -187px; height: 11px; width: 16px; }
+.ui-flags-za { background-position:  -176px -198px; height: 11px; width: 16px; }
+.ui-flags-zm { background-position:  -192px -187px; height: 11px; width: 16px; }
+.ui-flags-zw { background-position:  -192px -198px; height: 11px; width: 16px; }
+
+
+
+/* BANNER */
+.ui-banner
+{
+	font: 8pt Segoe UI, sans-serif;
+	cursor: pointer;
+	color: #4169e1;
+	background-color: transparent;
+	text-align: center;
+	border-style: none;
+	background-image: url(../Images/PNG/ui-banner.png);
+    background-repeat: no-repeat;
+}
+
+.ui-banner-actoradmin span, .ui-banner-actorguest span, .ui-banner-actoroper span, .ui-banner-actoruser span
+{
+    cursor:pointer;
+    background-image: none;
+    font-weight: bold;
+	font-size: 12px;
+    padding-left:20px;
+    width: 24px;
+    height: 18px;
+}
+
+
+.ui-banner-actoradmin {color:#AE0303;}
+.ui-banner-actorguest {color:#C00303;}
+.ui-banner-actoroper {color:#51AD26;}
+.ui-banner-actoruser {color:#036AB5;}
+
+.ui-banner-actoradmin { background-position:  -0px -0px; height: 18px; width: 24px; }
+.ui-banner-actorguest { background-position:  -0px -18px; height: 18px; width: 24px; }
+.ui-banner-actoroper { background-position:  -0px -36px; height: 18px; width: 24px; }
+.ui-banner-actoruser { background-position:  -0px -54px; height: 18px; width: 24px; }
+.ui-banner-flag-be { background-position:  -0px -72px; height: 24px; width: 24px; }
+.ui-banner-flag-en { background-position:  -0px -96px; height: 24px; width: 24px; }
+.ui-banner-flag-es { background-position:  -0px -120px; height: 24px; width: 24px; }
+.ui-banner-flag-fr { background-position:  -24px -0px; height: 24px; width: 24px; }
+.ui-banner-flag-it { background-position:  -48px -0px; height: 24px; width: 24px; }
+.ui-banner-help-about { background-position:  -72px -0px; height: 24px; width: 24px; }
+.ui-banner-help-admin { background-position:  -96px -0px; height: 24px; width: 24px; }
+.ui-banner-help-external { background-position:  -120px -0px; height: 24px; width: 24px; }
+.ui-banner-help-input { background-position:  -144px -0px; height: 24px; width: 24px; }
+.ui-banner-help-invoicing { background-position:  -24px -24px; height: 24px; width: 24px; }
+.ui-banner-help-process { background-position:  -24px -48px; height: 24px; width: 24px; }
+.ui-banner-help-repository { background-position:  -24px -72px; height: 24px; width: 24px; }
+.ui-banner-help,
+.ui-banner-help-unknown { background-position:  -24px -96px; height: 24px; width: 24px; }
+.ui-banner-help-views { background-position:  -24px -120px; height: 24px; width: 24px; }
+.ui-banner-help-yellow { background-position:  -48px -24px; height: 24px; width: 24px; }
+.ui-banner-home-blue { background-position:  -72px -24px; height: 24px; width: 24px; }
+.ui-banner-home { background-position:  -96px -24px; height: 24px; width: 24px; }
+.ui-banner-ledblack { background-position:  -0px -144px; height: 16px; width: 16px; }
+.ui-banner-ledblue { background-position:  -24px -144px; height: 16px; width: 16px; }
+.ui-banner-ledcyan { background-position:  -120px -24px; height: 16px; width: 16px; }
+.ui-banner-ledgray { background-position:  -136px -24px; height: 16px; width: 16px; }
+.ui-banner-ledgreen { background-position:  -152px -24px; height: 16px; width: 16px; }
+.ui-banner-ledmarron { background-position:  -48px -48px; height: 16px; width: 16px; }
+.ui-banner-ledorange { background-position:  -48px -64px; height: 16px; width: 16px; }
+.ui-banner-ledred { background-position:  -48px -80px; height: 16px; width: 16px; }
+.ui-banner-ledrose { background-position:  -48px -96px; height: 16px; width: 16px; }
+.ui-banner-ledviolet { background-position:  -48px -112px; height: 16px; width: 16px; }
+.ui-banner-ledyellow { background-position:  -48px -128px; height: 16px; width: 16px; }
+.ui-banner-print-about { background-position:  -64px -48px; height: 24px; width: 24px; }
+.ui-banner-print-admin { background-position:  -88px -48px; height: 24px; width: 24px; }
+.ui-banner-print-external { background-position:  -112px -48px; height: 24px; width: 24px; }
+.ui-banner-print-input { background-position:  -136px -48px; height: 24px; width: 24px; }
+.ui-banner-print-invoicing { background-position:  -64px -72px; height: 24px; width: 24px; }
+.ui-banner-print-process { background-position:  -64px -96px; height: 24px; width: 24px; }
+.ui-banner-print-repository { background-position:  -64px -120px; height: 24px; width: 24px; }
+.ui-banner-print,
+.ui-banner-print-unknown { background-position:  -88px -72px; height: 24px; width: 24px; }
+.ui-banner-print-views { background-position:  -112px -72px; height: 24px; width: 24px; }
+.ui-banner-print-yellow { background-position:  -136px -72px; height: 24px; width: 24px; }
+.ui-banner-reload { background-position:  -48px -144px; height: 10px; width: 10px; }
+.ui-banner-squareblack { background-position:  -64px -144px; height: 16px; width: 16px; }
+.ui-banner-squareblue { background-position:  -88px -96px; height: 16px; width: 16px; }
+.ui-banner-squarecyan { background-position:  -88px -112px; height: 16px; width: 16px; }
+.ui-banner-squaregray { background-position:  -88px -128px; height: 16px; width: 16px; }
+.ui-banner-squaregreen { background-position:  -88px -144px; height: 16px; width: 16px; }
+.ui-banner-squaremarron { background-position:  -104px -96px; height: 16px; width: 16px; }
+.ui-banner-squareorange { background-position:  -104px -112px; height: 16px; width: 16px; }
+.ui-banner-squarered { background-position:  -104px -128px; height: 16px; width: 16px; }
+.ui-banner-squarerose { background-position:  -104px -144px; height: 16px; width: 16px; }
+.ui-banner-squareviolet { background-position:  -120px -96px; height: 16px; width: 16px; }
+.ui-banner-squareyellow { background-position:  -136px -96px; height: 16px; width: 16px; }
+
+/* EVENTS */
+.ui-eventzoom
+{
+    height: 16px;
+    background-image: url(../Images/PNG/ui-titlebkg.png);
+    background-repeat: repeat-x;
+	cursor: pointer;
+}
+div[class^="qtip-title-"]
+{
+    /*background-image: url(../Images/PNG/ui-titlebkg.png)!important;*/
+    /*background-repeat: repeat-x;*/
+    /*background-color: transparent!important;*/
+	cursor: pointer;
+}
+/* .ui-titlebkg-evtred */
+.qtip-title-alert,.qtip-title-error{
+    /*background-position:  -0px -482px!important;*/ 
+    height: 16px;
+    background-color:#C00303!important;}
+/* .ui-titlebkg-evtorange */
+.qtip-title-warning{
+    /*background-position:  -0px -457px!important;*/ 
+    height: 16px;
+    background-color:#EA5A00!important;
+}
+/* .ui-titlebkg-evtblue */
+.qtip-title-info,.qtip-title-none{
+    /*background-position:  -0px -307px!important;*/ 
+    height: 16px;
+    background-color:#036AB5!important;
+
+}
+/* .ui-titlebkg-evtgray */
+.qtip-title-na{
+    /*background-position:  -0px -382px!important;*/ 
+    height: 16px; 
+    background-color:#545454!important;
+}
+/* .ui-titlebkg-evtgreen */
+.qtip-title-helponline{
+    /*background-position:  -0px -407px!important;*/ 
+    height: 16px; 
+    background-color:#036AB5!important;
+}
+
+/* TITLE */
+.ui-titlebkg 
+{
+	font: bold 8pt Segoe UI, sans-serif;
+	color: White;
+	line-height: 11px;
+    background-image: url(../Images/PNG/ui-titlebkg.png);
+    background-repeat: repeat-x;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.ui-titlebkg-filterclose 
+{
+    vertical-align:middle; 
+}
+
+.ui-titlebkg-btnblack
+{
+	text-align: center;
+    border: #000 1pt solid;
+}
+
+.ui-titlebkg-btnblue
+{
+	text-align: center;
+    border: #036AB5 1pt solid;
+}
+
+.ui-titlebkg-btnbluelight 
+{
+	text-align: center;
+    border: #7DA0CD 1pt solid;
+}
+
+.ui-titlebkg-btncyan
+{
+	text-align: center;
+    border: #4BACC6 1pt solid;
+}
+
+.ui-titlebkg-filter 
+{
+    color:#000;
+    width: 10px;
+    height: 20px;
+}
+
+.ui-titlebkg-btngray
+{
+	text-align: center;
+    border: #D3D3D3 1pt solid;
+}
+
+.ui-titlebkg-btngreen
+{
+	text-align: center;
+    border: #51AD26 1pt solid;
+}
+
+.ui-titlebkg-btnmarron 
+{
+	text-align: center;
+    border: #673406 1pt solid;
+}
+
+.ui-titlebkg-btnorange
+{
+	text-align: center;
+    border: #EA5A00 1pt solid;
+}
+
+.ui-titlebkg-btnred
+{
+	text-align: center;
+    border: #C00303 1pt solid;
+}
+
+.ui-titlebkg-btnrose
+{
+	text-align: center;
+    border: #EA71A8 1pt solid;
+}
+
+.ui-titlebkg-btnviolet
+{
+	text-align: center;
+    border: #8B569F 1pt solid;
+    background-color:#8B569F;
+}
+
+.ui-titlebkg-btnyellow 
+{
+	text-align: center;
+    border: #D8C825 1pt solid;
+}
+
+.ui-titlebkg-about { background-position:  -0px -0px; height: 45px;  }
+.ui-titlebkg-admin { background-position:  -0px -45px; height: 45px;  }
+.ui-titlebkg-btnblack { background-position:  -0px -90px; height: 16px;  }
+.ui-titlebkg-btnblue { background-position:  -0px -106px; height: 16px;  }
+.ui-titlebkg-btnbluelight { background-position:  -0px -122px; height: 16px;  }
+.ui-titlebkg-btncyan { background-position:  -0px -138px; height: 16px;  }
+.ui-titlebkg-btngray { background-position:  -0px -154px; height: 16px;  }
+.ui-titlebkg-btngreen { background-position:  -0px -170px; height: 16px;  }
+.ui-titlebkg-btnmarron { background-position:  -0px -186px; height: 16px;  }
+.ui-titlebkg-btnorange { background-position:  -0px -202px; height: 16px;  }
+.ui-titlebkg-btnred { background-position:  -0px -218px; height: 16px;  }
+.ui-titlebkg-btnrose { background-position:  -0px -234px; height: 16px;  }
+.ui-titlebkg-btnviolet { background-position:  -0px -250px; height: 16px;  }
+.ui-titlebkg-btnyellow { background-position:  -0px -266px; height: 16px;  }
+.ui-titlebkg-evtblack { background-position:  -0px -282px; height: 25px;  }
+.ui-titlebkg-evtblue { background-position:  -0px -307px; height: 25px;  }
+.ui-titlebkg-evtbluelight { background-position:  -0px -332px; height: 25px;  }
+.ui-titlebkg-evtcyan { background-position:  -0px -357px; height: 25px;  }
+.ui-titlebkg-evtgray { background-position:  -0px -382px; height: 25px;  }
+.ui-titlebkg-evtgreen { background-position:  -0px -407px; height: 25px;  }
+.ui-titlebkg-evtmarron { background-position:  -0px -432px; height: 25px;  }
+.ui-titlebkg-evtorange { background-position:  -0px -457px; height: 25px;  }
+.ui-titlebkg-evtred { background-position:  -0px -482px; height: 25px;  }
+.ui-titlebkg-evtrose { background-position:  -0px -507px; height: 25px;  }
+.ui-titlebkg-evtviolet { background-position:  -0px -532px; height: 25px;  }
+.ui-titlebkg-evtyellow { background-position:  -0px -557px; height: 25px;  }
+.ui-titlebkg-external { background-position:  -0px -582px; height: 45px;  }
+.ui-titlebkg-filter { background-position:  -0px -627px; height: 20px;  }
+.ui-titlebkg-input { background-position:  -0px -647px; height: 45px;  }
+.ui-titlebkg-invoicing { background-position:  -0px -692px; height: 45px;  }
+.ui-titlebkg-mainabout { background-position:  -0px -737px; height: 45px;  }
+.ui-titlebkg-mainadmin { background-position:  -0px -782px; height: 45px;  }
+.ui-titlebkg-mainexternal { background-position:  -0px -827px; height: 45px;  }
+.ui-titlebkg-maininput { background-position:  -0px -872px; height: 45px;  }
+.ui-titlebkg-maininvoicing { background-position:  -0px -917px; height: 45px;  }
+.ui-titlebkg-mainprocess { background-position:  -0px -962px; height: 45px;  }
+.ui-titlebkg-mainrepository { background-position:  -0px -1007px; height: 45px;  }
+.ui-titlebkg-mainunknown { background-position:  -0px -1052px; height: 45px;  }
+.ui-titlebkg-mainviews { background-position:  -0px -1097px; height: 45px;  }
+.ui-titlebkg-process { background-position:  -0px -1142px; height: 45px;  }
+.ui-titlebkg-repository { background-position:  -0px -1187px; height: 45px;  }
+.ui-titlebkg-titleblack { background-position:  -0px -1232px; height: 30px;  }
+.ui-titlebkg-titleblue { background-position:  -0px -1262px; height: 30px;  }
+.ui-titlebkg-titlebluelight { background-position:  -0px -1292px; height: 30px;  }
+.ui-titlebkg-titlecyan { background-position:  -0px -1322px; height: 30px;  }
+.ui-titlebkg-titlegray { background-position:  -0px -1352px; height: 30px;  }
+.ui-titlebkg-titlegreen { background-position:  -0px -1382px; height: 30px;  }
+.ui-titlebkg-titlemarron { background-position:  -0px -1412px; height: 30px;  }
+.ui-titlebkg-titleorange { background-position:  -0px -1442px; height: 30px;  }
+.ui-titlebkg-titlered { background-position:  -0px -1472px; height: 30px;  }
+.ui-titlebkg-titlerose { background-position:  -0px -1502px; height: 30px;  }
+.ui-titlebkg-titleviolet { background-position:  -0px -1532px; height: 30px;  }
+.ui-titlebkg-titleyellow { background-position:  -0px -1562px; height: 30px;  }
+.ui-titlebkg-unknown { background-position:  -0px -1592px; height: 45px;  }
+.ui-titlebkg-views { background-position:  -0px -1637px; height: 45px;  }
+
+
+/* MAIN */
+
+/*.ui-datepicker-trigger,*/
+.ui-main
+{
+    cursor:pointer;
+    background-image: url(../Images/PNG/ui-main.png);
+    background-repeat: no-repeat;
+    background-color:Transparent;
+    border:none;
+    vertical-align:middle;
+}
+
+div.ui-banner{display: inline-block;}
+div.ui-main{display: inline-block;cursor:pointer;outline:none;}
+i.ui-main{display: inline-block;cursor:pointer;outline:none;}
+a.ui-main{display: inline-block;}
+
+
+.ui-main:active{outline:none;}
+
+/* ui-main-startrefresh : Traitement image qui suit l'élément avec class = TimePicker */
+.TimePicker + img { background-position:  -246px -284px; height: 16px; width: 16px; }
+/* ui-main-calendar  */
+/*.ui-datepicker-trigger { background-position:  -395px -14px; height: 16px; width: 16px; }*/
+
+.ui-main-smalllinkhelp {float: right;margin-top: 4px;margin-right: 4px;}
+
+/* Mise à jour des "disable" par :disabled */
+.ui-main-abn { background-position:  -0px -0px; height: 14px; width: 80px; }
+.ui-main-account { background-position:  -0px -14px; height: 16px; width: 30px; }
+.ui-main-acroreader { background-position:  -30px -14px; height: 16px; width: 16px; }
+.ui-main-actions { background-position:  -46px -14px; height: 16px; width: 16px; }
+.ui-main-actions:disabled { background-position:  -62px -14px; height: 16px; width: 16px; }
+.ui-main-actoradmin { background-position:  -0px -30px; height: 18px; width: 24px; }
+.ui-main-actorbroker { background-position:  -0px -48px; height: 18px; width: 24px; }
+.ui-main-actorclearer { background-position:  -0px -66px; height: 18px; width: 24px; }
+.ui-main-actorclient { background-position:  -0px -84px; height: 18px; width: 24px; }
+.ui-main-actorcorrespondant { background-position:  -0px -102px; height: 18px; width: 24px; }
+.ui-main-actorcss { background-position:  -0px -120px; height: 18px; width: 24px; }
+.ui-main-actorcustodian { background-position:  -0px -138px; height: 18px; width: 24px; }
+.ui-main-actordept { background-position:  -0px -156px; height: 18px; width: 24px; }
+.ui-main-actordesk { background-position:  -0px -174px; height: 18px; width: 24px; }
+.ui-main-actorentity { background-position:  -0px -192px; height: 18px; width: 24px; }
+.ui-main-actorguest { background-position:  -0px -210px; height: 18px; width: 24px; }
+.ui-main-actoroper { background-position:  -0px -228px; height: 18px; width: 24px; }
+.ui-main-actorsale { background-position:  -0px -246px; height: 18px; width: 24px; }
+.ui-main-actortrader { background-position:  -0px -264px; height: 18px; width: 24px; }
+.ui-main-actoruser { background-position:  -0px -282px; height: 18px; width: 24px; }
+.ui-main-add { background-position:  -0px -300px; height: 20px; width: 20px; }
+.ui-main-addarray { background-position:  -78px -14px; height: 16px; width: 16px; }
+.ui-main-added { background-position:  -80px -0px; height: 14px; width: 50px; }
+.ui-main-addxs { background-position:  -94px -14px; height: 16px; width: 16px; }
+.ui-main-aid { background-position:  -130px -0px; height: 14px; width: 80px; }
+.ui-main-ald { background-position:  -210px -0px; height: 14px; width: 80px; }
+.ui-main-allfilterclose { background-position:  -110px -14px; height: 16px; width: 16px; }
+.ui-main-allocated { background-position:  -290px -0px; height: 14px; width: 50px; }
+.ui-main-asc { background-position:  -0px -320px; height: 20px; width: 20px; }
+.ui-main-ass { background-position:  -126px -14px; height: 14px; width: 80px; }
+.ui-main-attach { background-position:  -206px -14px; height: 16px; width: 16px; }
+.ui-main-attacheddoc { background-position:  -222px -14px; height: 16px; width: 16px; }
+.ui-main-attacheddocempty { background-position:  -238px -14px; height: 16px; width: 16px; }
+.ui-main-audit { background-position:  -340px -0px; height: 14px; width: 32px; }
+.ui-main-auditactions { background-position:  -254px -14px; height: 14px; width: 45px; }
+.ui-main-autoabn { background-position:  -299px -14px; height: 14px; width: 80px; }
+.ui-main-autoass { background-position:  -24px -30px; height: 14px; width: 80px; }
+.ui-main-autoexe { background-position:  -104px -30px; height: 14px; width: 80px; }
+.ui-main-bar { background-position:  -184px -30px; height: 14px; width: 80px; }
+.ui-main-caassets { background-position:  -264px -30px; height: 14px; width: 70px; }
+.ui-main-cacontracts { background-position:  -334px -30px; height: 14px; width: 70px; }
+.ui-main-calculator { background-position:  -379px -14px; height: 16px; width: 16px; }
+.ui-main-calendar { background-position:  -395px -14px; height: 16px; width: 16px; }
+.ui-main-camessage { background-position:  -24px -44px; height: 14px; width: 70px; }
+.ui-main-canprovision { background-position:  -24px -58px; height: 16px; width: 30px; }
+.ui-main-canprovision:disabled { background-position:  -24px -74px; height: 16px; width: 30px; }
+.ui-main-caprocedure { background-position:  -94px -44px; height: 14px; width: 70px; }
+.ui-main-caresult { background-position:  -164px -44px; height: 14px; width: 70px; }
+.ui-main-cas { background-position:  -234px -44px; height: 14px; width: 80px; }
+.ui-main-cashflows { background-position:  -314px -44px; height: 14px; width: 45px; }
+.ui-main-changed { background-position:  -54px -58px; height: 14px; width: 60px; }
+.ui-main-checklist { background-position:  -0px -340px; height: 16px; width: 16px; }
+.ui-main-clear { background-position:  -0px -356px; height: 16px; width: 16px; }
+.ui-main-clearbulk { background-position:  -114px -58px; height: 14px; width: 80px; }
+.ui-main-cleareod { background-position:  -194px -58px; height: 14px; width: 80px; }
+.ui-main-clearspec { background-position:  -274px -58px; height: 14px; width: 80px; }
+.ui-main-clone { background-position:  -0px -372px; height: 20px; width: 20px; }
+.ui-main-clonexs { background-position:  -0px -392px; height: 16px; width: 16px; }
+.ui-main-close { background-position:  -24px -90px; height: 16px; width: 16px; }
+.ui-main-cnd { background-position:  -54px -72px; height: 14px; width: 80px; }
+.ui-main-collapse { background-position:  -24px -106px; height: 16px; width: 16px; }
+.ui-main-compressfile { background-position:  -24px -122px; height: 22px; width: 22px; }
+.ui-main-conf { background-position:  -359px -44px; height: 14px; width: 50px; }
+.ui-main-consult { background-position:  -24px -144px; height: 16px; width: 16px; }
+.ui-main-consult:disabled { background-position:  -24px -160px; height: 16px; width: 16px; }
+.ui-main-copy { background-position:  -24px -176px; height: 16px; width: 16px; }
+.ui-main-corpoaction { background-position:  -134px -72px; height: 14px; width: 80px; }
+.ui-main-corrected { background-position:  -24px -192px; height: 16px; width: 16px; }
+.ui-main-currency { background-position:  -24px -208px; height: 24px; width: 24px; }
+.ui-main-currencyctr { background-position:  -24px -232px; height: 24px; width: 24px; }
+.ui-main-customer { background-position:  -372px -0px; height: 8px; width: 9px; }
+.ui-main-dblleft { background-position:  -24px -256px; height: 20px; width: 20px; }
+.ui-main-dblright { background-position:  -24px -276px; height: 20px; width: 20px; }
+.ui-main-deactiv { background-position:  -354px -58px; height: 12px; width: 50px; }
+.ui-main-delarray { background-position:  -24px -296px; height: 16px; width: 16px; }
+.ui-main-delivery { background-position:  -24px -312px; height: 16px; width: 16px; }
+.ui-main-delta { background-position:  -24px -328px; height: 16px; width: 16px; }
+.ui-main-delupload { background-position:  -24px -344px; height: 16px; width: 16px; }
+.ui-main-desc { background-position:  -24px -360px; height: 20px; width: 20px; }
+.ui-main-dirupload { background-position:  -24px -380px; height: 16px; width: 16px; }
+.ui-main-dlgalert { background-position:  -54px -86px; height: 24px; width: 24px; }
+.ui-main-dlginfo { background-position:  -54px -110px; height: 24px; width: 24px; }
+.ui-main-dlgwarning { background-position:  -54px -134px; height: 24px; width: 24px; }
+.ui-main-docfile { background-position:  -54px -158px; height: 22px; width: 22px; }
+.ui-main-down { background-position:  -54px -180px; height: 20px; width: 20px; }
+.ui-main-duplicate { background-position:  -24px -396px; height: 16px; width: 16px; }
+.ui-main-duplicate:disabled { background-position:  -54px -200px; height: 16px; width: 16px; }
+.ui-main-ear { background-position:  -78px -86px; height: 16px; width: 30px; }
+.ui-main-entity { background-position:  -381px -0px; height: 8px; width: 9px; }
+.ui-main-entry { background-position:  -214px -72px; height: 14px; width: 80px; }
+.ui-main-event { background-position:  -294px -72px; height: 14px; width: 50px; }
+.ui-main-events { background-position:  -344px -72px; height: 14px; width: 40px; }
+.ui-main-exc { background-position:  -108px -86px; height: 14px; width: 80px; }
+.ui-main-excelfile { background-position:  -54px -216px; height: 22px; width: 22px; }
+.ui-main-exe { background-position:  -188px -86px; height: 14px; width: 80px; }
+.ui-main-exit { background-position:  -78px -102px; height: 18px; width: 40px; }
+.ui-main-exitbanner { background-position:  -54px -238px; height: 32px; width: 20px; }
+.ui-main-exm { background-position:  -268px -86px; height: 14px; width: 80px; }
+.ui-main-exo { background-position:  -118px -102px; height: 14px; width: 80px; }
+.ui-main-expand { background-position:  -54px -270px; height: 16px; width: 16px; }
+.ui-main-extabn { background-position:  -198px -102px; height: 14px; width: 80px; }
+.ui-main-extass { background-position:  -278px -102px; height: 14px; width: 80px; }
+.ui-main-external { background-position:  -390px -0px; height: 8px; width: 9px; }
+.ui-main-extexe { background-position:  -118px -116px; height: 14px; width: 80px; }
+.ui-main-exx { background-position:  -198px -116px; height: 14px; width: 80px; }
+.ui-main-false { background-position:  -54px -286px; height: 16px; width: 16px; }
+.ui-main-filterbkg { background-position:  -54px -302px; height: 20px; width: 16px; }
+.ui-main-filtercancel { background-position:  -54px -322px; height: 16px; width: 16px; }
+.ui-main-filterclose { background-position:  -54px -338px; height: 16px; width: 16px; }
+.ui-main-first { background-position:  -54px -354px; height: 16px; width: 16px; }
+.ui-main-folderblue { background-position:  -78px -120px; height: 32px; width: 32px; }
+.ui-main-folderbluexs { background-position:  -54px -370px; height: 24px; width: 24px; }
+.ui-main-foldergray { background-position:  -78px -152px; height: 32px; width: 32px; }
+.ui-main-foldergreen { background-position:  -78px -184px; height: 32px; width: 32px; }
+.ui-main-foldergreenxs { background-position:  -78px -216px; height: 24px; width: 24px; }
+.ui-main-foldermarron { background-position:  -78px -240px; height: 32px; width: 32px; }
+.ui-main-folderorange { background-position:  -78px -272px; height: 32px; width: 32px; }
+.ui-main-folderorangexs { background-position:  -78px -304px; height: 24px; width: 24px; }
+.ui-main-folderred { background-position:  -78px -328px; height: 32px; width: 32px; }
+.ui-main-folderredxs { background-position:  -78px -360px; height: 24px; width: 24px; }
+.ui-main-forced { background-position:  -54px -394px; height: 16px; width: 16px; }
+.ui-main-fr { background-position:  -399px -0px; height: 11px; width: 16px; }
+.ui-main-fullcomplement { background-position:  -348px -86px; height: 16px; width: 16px; }
+.ui-main-fullcomplementempty { background-position:  -364px -86px; height: 16px; width: 16px; }
+.ui-main-fullyunallocated { background-position:  -358px -102px; height: 14px; width: 50px; }
+.ui-main-gb { background-position:  -384px -72px; height: 11px; width: 16px; }
+.ui-main-giveuph { background-position:  -118px -130px; height: 24px; width: 90px; }
+.ui-main-groupby { background-position:  -380px -86px; height: 16px; width: 16px; }
+.ui-main-help3pts { background-position:  -396px -86px; height: 16px; width: 16px; }
+.ui-main-htmlfile { background-position:  -78px -384px; height: 22px; width: 22px; }
+.ui-main-ignored { background-position:  -278px -116px; height: 14px; width: 60px; }
+.ui-main-instrument { background-position:  -102px -216px; height: 16px; width: 16px; }
+.ui-main-invoice { background-position:  -102px -304px; height: 16px; width: 16px; }
+.ui-main-isda { background-position:  -338px -116px; height: 14px; width: 50px; }
+.ui-main-it { background-position:  -102px -360px; height: 11px; width: 16px; }
+.ui-main-key { background-position:  -208px -130px; height: 23px; width: 23px; }
+.ui-main-last { background-position:  -100px -384px; height: 16px; width: 16px; }
+.ui-main-lederror { background-position:  -231px -130px; height: 16px; width: 16px; }
+.ui-main-ledinfo { background-position:  -247px -130px; height: 16px; width: 16px; }
+.ui-main-ledmoins { background-position:  -263px -130px; height: 16px; width: 16px; }
+.ui-main-ledplus { background-position:  -279px -130px; height: 16px; width: 16px; }
+.ui-main-ledsuccess { background-position:  -295px -130px; height: 16px; width: 16px; }
+.ui-main-ledwarning { background-position:  -311px -130px; height: 16px; width: 16px; }
+.ui-main-left { background-position:  -327px -130px; height: 20px; width: 20px; }
+.ui-main-listitem { background-position:  -347px -130px; height: 16px; width: 16px; }
+.ui-main-locked { background-position:  -363px -130px; height: 12px; width: 50px; }
+.ui-main-login { background-position:  -118px -154px; height: 20px; width: 20px; }
+.ui-main-logo { background-position:  -118px -174px; height: 16px; width: 16px; }
+.ui-main-logout { background-position:  -118px -190px; height: 20px; width: 20px; }
+.ui-main-logs { background-position:  -138px -154px; height: 14px; width: 50px; }
+.ui-main-loupe { background-position:  -100px -400px; height: 15px; width: 16px; }
+.ui-main-mail { background-position:  -118px -210px; height: 16px; width: 16px; }
+.ui-main-manual { background-position:  -118px -226px; height: 16px; width: 16px; }
+.ui-main-mapping { background-position:  -188px -154px; height: 14px; width: 50px; }
+.ui-main-markederror { background-position:  -118px -242px; height: 16px; width: 16px; }
+.ui-main-markedna { background-position:  -118px -258px; height: 16px; width: 16px; }
+.ui-main-markednone { background-position:  -118px -274px; height: 16px; width: 16px; }
+.ui-main-markedpending { background-position:  -118px -290px; height: 16px; width: 16px; }
+.ui-main-markedprogress { background-position:  -118px -306px; height: 16px; width: 16px; }
+.ui-main-markedsuccess { background-position:  -118px -322px; height: 16px; width: 16px; }
+.ui-main-markedwarning { background-position:  -118px -338px; height: 16px; width: 16px; }
+.ui-main-maskmenuin { background-position:  -118px -354px; height: 20px; width: 20px; }
+.ui-main-maskmenuout { background-position:  -118px -374px; height: 20px; width: 20px; }
+.ui-main-metprovision { background-position:  -138px -168px; height: 16px; width: 30px; }
+.ui-main-metprovision:disabled { background-position:  -138px -184px; height: 16px; width: 30px; }
+.ui-main-mnudblleft { background-position:  -404px -30px; height: 10px; width: 10px; }
+.ui-main-mnudblright { background-position:  -40px -90px; height: 10px; width: 10px; }
+.ui-main-mnudown { background-position:  -40px -106px; height: 10px; width: 10px; }
+.ui-main-mnuempty { background-position:  -40px -144px; height: 10px; width: 10px; }
+.ui-main-mnuleft { background-position:  -40px -160px; height: 10px; width: 10px; }
+.ui-main-mnuright { background-position:  -118px -394px; height: 20px; width: 20px; }
+.ui-main-mnuup { background-position:  -40px -176px; height: 10px; width: 10px; }
+.ui-main-mof { background-position:  -238px -154px; height: 14px; width: 80px; }
+.ui-main-movedfrom { background-position:  -318px -154px; height: 14px; width: 60px; }
+.ui-main-movedto { background-position:  -168px -168px; height: 14px; width: 60px; }
+.ui-main-msexcel { background-position:  -138px -200px; height: 16px; width: 16px; }
+.ui-main-msg { background-position:  -228px -168px; height: 14px; width: 50px; }
+.ui-main-mssqlserver { background-position:  -278px -168px; height: 14px; width: 50px; }
+.ui-main-new { background-position:  -138px -216px; height: 16px; width: 16px; }
+.ui-main-new:disabled { background-position:  -138px -232px; height: 16px; width: 16px; }
+.ui-main-next { background-position:  -138px -248px; height: 16px; width: 16px; }
+.ui-main-nodechild { background-position:  -138px -264px; height: 16px; width: 16px; }
+.ui-main-none { background-position:  -328px -168px; height: 14px; width: 50px; }
+.ui-main-notepad { background-position:  -138px -280px; height: 16px; width: 16px; }
+.ui-main-notepad2 { background-position:  -138px -296px; height: 16px; width: 16px; }
+.ui-main-notepadempty { background-position:  -138px -312px; height: 16px; width: 16px; }
+.ui-main-oetprovision { background-position:  -138px -328px; height: 16px; width: 30px; }
+.ui-main-oetprovision:disabled { background-position:  -138px -344px; height: 16px; width: 30px; }
+.ui-main-offsetting_unclearing { background-position:  -168px -182px; height: 14px; width: 80px; }
+.ui-main-oracle { background-position:  -248px -182px; height: 14px; width: 50px; }
+.ui-main-otc { background-position:  -138px -360px; height: 16px; width: 24px; }
+.ui-main-otcmarket { background-position:  -138px -376px; height: 18px; width: 24px; }
+.ui-main-out { background-position:  -298px -182px; height: 14px; width: 80px; }
+.ui-main-parentfolder { background-position:  -168px -196px; height: 24px; width: 24px; }
+.ui-main-partialunallocated { background-position:  -192px -196px; height: 14px; width: 50px; }
+.ui-main-paste { background-position:  -138px -394px; height: 16px; width: 16px; }
+.ui-main-pastechoice { background-position:  -168px -220px; height: 16px; width: 16px; }
+.ui-main-payment { background-position:  -168px -236px; height: 16px; width: 16px; }
+.ui-main-pdffile { background-position:  -168px -252px; height: 22px; width: 22px; }
+.ui-main-play { background-position:  -168px -274px; height: 16px; width: 16px; }
+.ui-main-poc { background-position:  -242px -196px; height: 14px; width: 80px; }
+.ui-main-posactions { background-position:  -322px -196px; height: 14px; width: 45px; }
+.ui-main-post { background-position:  -192px -210px; height: 14px; width: 50px; }
+.ui-main-pot { background-position:  -242px -210px; height: 14px; width: 80px; }
+.ui-main-prev { background-position:  -168px -290px; height: 16px; width: 16px; }
+.ui-main-price { background-position:  -168px -306px; height: 16px; width: 16px; }
+.ui-main-printer { background-position:  -168px -322px; height: 16px; width: 16px; }
+.ui-main-processblue { background-position:  -168px -338px; height: 16px; width: 16px; }
+.ui-main-processbluelight { background-position:  -168px -354px; height: 16px; width: 16px; }
+.ui-main-processcyan { background-position:  -168px -370px; height: 16px; width: 16px; }
+.ui-main-processgray { background-position:  -168px -386px; height: 16px; width: 16px; }
+.ui-main-processgreen { background-position:  -192px -224px; height: 16px; width: 16px; }
+.ui-main-processmarron { background-position:  -192px -240px; height: 16px; width: 16px; }
+.ui-main-processorange { background-position:  -192px -256px; height: 16px; width: 16px; }
+.ui-main-processred { background-position:  -192px -272px; height: 16px; width: 16px; }
+.ui-main-processrose { background-position:  -192px -288px; height: 16px; width: 16px; }
+.ui-main-processviolet { background-position:  -192px -304px; height: 16px; width: 16px; }
+.ui-main-processyellow { background-position:  -192px -320px; height: 16px; width: 16px; }
+.ui-main-product { background-position:  -192px -336px; height: 16px; width: 16px; }
+.ui-main-rarfile { background-position:  -208px -224px; height: 22px; width: 22px; }
+.ui-main-refresh { background-position:  -192px -352px; height: 16px; width: 16px; }
+.ui-main-reload { background-position:  -192px -368px; height: 16px; width: 16px; }
+.ui-main-reloadxs { background-position:  -40px -192px; height: 10px; width: 10px; }
+.ui-main-remove { background-position:  -192px -384px; height: 16px; width: 16px; }
+.ui-main-removed { background-position:  -322px -210px; height: 14px; width: 60px; }
+.ui-main-remove:disabled { background-position:  -208px -246px; height: 16px; width: 16px; }
+.ui-main-replace { background-position:  -208px -262px; height: 16px; width: 16px; }
+.ui-main-replace:disabled { background-position:  -208px -278px; height: 16px; width: 16px; }
+.ui-main-reset { background-position:  -230px -224px; height: 14px; width: 50px; }
+.ui-main-right { background-position:  -208px -294px; height: 20px; width: 20px; }
+.ui-main-rmv { background-position:  -280px -224px; height: 14px; width: 80px; }
+.ui-main-rmvalloc { background-position:  -230px -238px; height: 14px; width: 80px; }
+.ui-main-rtfFile { background-position:  -208px -314px; height: 22px; width: 22px; }
+.ui-main-schedule { background-position:  -208px -336px; height: 16px; width: 16px; }
+.ui-main-screen { background-position:  -208px -352px; height: 16px; width: 16px; }
+.ui-main-servicemanager { background-position:  -208px -368px; height: 16px; width: 16px; }
+.ui-main-serviceobserver { background-position:  -208px -384px; height: 16px; width: 16px; }
+.ui-main-settings { background-position:  -230px -252px; height: 16px; width: 16px; }
+.ui-main-shi { background-position:  -310px -238px; height: 14px; width: 80px; }
+.ui-main-smalllinkhelp { background-position:  -40px -296px; height: 14px; width: 14px; }
+.ui-main-squareblack { background-position:  -230px -268px; height: 16px; width: 16px; }
+.ui-main-squareblue { background-position:  -230px -284px; height: 16px; width: 16px; }
+.ui-main-squarecyan { background-position:  -230px -300px; height: 16px; width: 16px; }
+.ui-main-squaregray { background-position:  -230px -316px; height: 16px; width: 16px; }
+.ui-main-squaregreen { background-position:  -230px -332px; height: 16px; width: 16px; }
+.ui-main-squaremarron { background-position:  -230px -348px; height: 16px; width: 16px; }
+.ui-main-squareorange { background-position:  -230px -364px; height: 16px; width: 16px; }
+.ui-main-squarered { background-position:  -230px -380px; height: 16px; width: 16px; }
+.ui-main-squarerose { background-position:  -230px -396px; height: 16px; width: 16px; }
+.ui-main-squareviolet { background-position:  -246px -252px; height: 16px; width: 16px; }
+.ui-main-squareyellow { background-position:  -246px -268px; height: 16px; width: 16px; }
+.ui-main-startrefresh { background-position:  -246px -284px; height: 16px; width: 16px; }
+.ui-main-stoprefresh { background-position:  -246px -300px; height: 16px; width: 16px; }
+.ui-main-submenublack { background-position:  -246px -316px; height: 16px; width: 16px; }
+.ui-main-submenublue { background-position:  -246px -332px; height: 16px; width: 16px; }
+.ui-main-submenucyan { background-position:  -246px -348px; height: 16px; width: 16px; }
+.ui-main-submenugray { background-position:  -246px -364px; height: 16px; width: 16px; }
+.ui-main-submenugreen { background-position:  -246px -380px; height: 16px; width: 16px; }
+.ui-main-submenumarron { background-position:  -246px -396px; height: 16px; width: 16px; }
+.ui-main-submenuorange { background-position:  -262px -252px; height: 16px; width: 16px; }
+.ui-main-submenured { background-position:  -278px -252px; height: 16px; width: 16px; }
+.ui-main-submenurose { background-position:  -294px -252px; height: 16px; width: 16px; }
+.ui-main-submenuviolet { background-position:  -310px -252px; height: 16px; width: 16px; }
+.ui-main-submenuyellow { background-position:  -326px -252px; height: 16px; width: 16px; }
+.ui-main-substract { background-position:  -262px -268px; height: 20px; width: 20px; }
+.ui-main-substractxs { background-position:  -342px -252px; height: 16px; width: 16px; }
+.ui-main-swift { background-position:  -360px -224px; height: 14px; width: 50px; }
+.ui-main-takeuph { background-position:  -282px -268px; height: 24px; width: 90px; }
+.ui-main-template { background-position:  -358px -252px; height: 16px; width: 16px; }
+.ui-main-terminationprovision { background-position:  -374px -252px; height: 16px; width: 30px; }
+.ui-main-terminationprovision:disabled { background-position:  -372px -268px; height: 16px; width: 30px; }
+.ui-main-tooltipalert { background-position:  -262px -288px; height: 16px; width: 16px; }
+.ui-main-tooltipinfo { background-position:  -262px -304px; height: 16px; width: 16px; }
+.ui-main-tooltipinfobrut { background-position:  -262px -320px; height: 16px; width: 16px; }
+.ui-main-tooltipinfoempty { background-position:  -262px -336px; height: 16px; width: 16px; }
+.ui-main-tooltipinfoenum { background-position:  -262px -352px; height: 16px; width: 16px; }
+.ui-main-tooltipnotabene { background-position:  -262px -368px; height: 16px; width: 16px; }
+.ui-main-tooltipsuccess { background-position:  -262px -384px; height: 16px; width: 16px; }
+.ui-main-tooltipwarning { background-position:  -282px -292px; height: 16px; width: 16px; }
+.ui-main-transfer { background-position:  -298px -292px; height: 14px; width: 80px; }
+.ui-main-trg { background-position:  -298px -306px; height: 14px; width: 80px; }
+.ui-main-true { background-position:  -282px -308px; height: 16px; width: 16px; }
+.ui-main-txtfile { background-position:  -282px -324px; height: 16px; width: 16px; }
+.ui-main-unclearing { background-position:  -298px -320px; height: 14px; width: 80px; }
+.ui-main-unclearing_offsetting { background-position:  -298px -334px; height: 14px; width: 80px; }
+.ui-main-unldlvr { background-position:  -298px -348px; height: 14px; width: 80px; }
+.ui-main-unlike { background-position:  -102px -371px; height: 11px; width: 16px; }
+.ui-main-up { background-position:  -298px -362px; height: 20px; width: 20px; }
+.ui-main-update { background-position:  -282px -340px; height: 16px; width: 16px; }
+.ui-main-update:disabled { background-position:  -282px -356px; height: 16px; width: 16px; }
+.ui-main-updentry { background-position:  -318px -362px; height: 14px; width: 80px; }
+.ui-main-upload { background-position:  -282px -372px; height: 16px; width: 16px; }
+.ui-main-wcollapse { background-position:  -282px -388px; height: 16px; width: 16px; }
+.ui-main-wexpand { background-position:  -298px -382px; height: 16px; width: 16px; }
+.ui-main-xml { background-position:  -318px -376px; height: 14px; width: 50px; }
+.ui-main-zipfile { background-position:  -318px -390px; height: 22px; width: 22px; }
+
+/* EVENTS */
+tr[class*="ui-titlebkg-evt"] td 
+{
+	color: White;
+	font-weight: bolder;
+	font-size: 10pt;
+	text-transform: uppercase;
+	font-family: Segoe UI, sans-serif;
+	letter-spacing: 2pt;
+}
+
+.ui-eventzoom
+{
+	font: 7pt Segoe UI, sans-serif;
+	color: white;
+	text-align: center;
+}
+
+.ui-subevent
+{
+	font-weight: bolder;
+	font-size: 9pt;
+	text-indent: 5pt;
+	font-family: Segoe UI, sans-serif;
+	letter-spacing: 3pt;
+	background-color: white;
+	background-image:none;
+    
+}
+.ui-subevent-title {color: #000;}
+.ui-subevent-titleblue{color: #4169e1;}
+.ui-subevent-titlegreen{color: #2e8b57;}
+.ui-subevent-titleorange{color: #ff8c00;}
+.ui-subevent-titleviolet{color: #800080;}
+.ui-subevent-titlegray{color: #696969;}
+.ui-subevent-titlered{color: #CC0000;}
+.ui-subevent-titlecyan{color: #009999;}
+.ui-subevent-titlerose{color: #EA71A8;}

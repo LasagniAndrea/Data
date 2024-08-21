@@ -1,0 +1,945 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A7E609D0-E67C-4997-B798-8974716D413C}</ProjectGuid>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>
+    </ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>EFS.EfsML</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <RootNamespace>EfsML</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>publier\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>3</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugDev|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugDev\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEBUGDEV</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>bin\Debug\EFS.EfsML.XML</DocumentationFile>
+    <WarningLevel>3</WarningLevel>
+    <FileAlignment>4096</FileAlignment>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseSetup|AnyCPU'">
+    <OutputPath>bin\ReleaseSetup\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <Optimize>true</Optimize>
+    <FileAlignment>4096</FileAlignment>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <WarningLevel>3</WarningLevel>
+    <FileAlignment>4096</FileAlignment>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <Optimize>true</Optimize>
+    <FileAlignment>4096</FileAlignment>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugDev|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\DebugDev\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEBUGDEV</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>bin\Debug\EFS.EfsML.XML</DocumentationFile>
+    <WarningLevel>3</WarningLevel>
+    <FileAlignment>4096</FileAlignment>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseSetup|x64'">
+    <OutputPath>bin\x64\ReleaseSetup\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <Optimize>true</Optimize>
+    <FileAlignment>4096</FileAlignment>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LoggerClient\LoggerClient.csproj">
+      <Project>{55e5d84a-1d98-4c76-99dd-fbc4a2d316bf}</Project>
+      <Name>LoggerClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TimeZone\TimeZone.csproj">
+      <Project>{36a1ff15-5123-43b6-b05e-2da7091b0c76}</Project>
+      <Name>TimeZone</Name>
+    </ProjectReference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web">
+      <Name>System.Web</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <ProjectReference Include="..\ACommon\ACommon.csproj">
+      <Name>ACommon</Name>
+      <Project>{9FF00E89-DA79-4F89-B3A6-9995F502F080}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonData\CommonData.csproj">
+      <Project>{A0323250-116A-43EF-9E7D-F3218B6246B1}</Project>
+      <Name>CommonData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CommonWeb\CommonWeb.csproj">
+      <Project>{870A39EA-BDAA-43FE-81E5-8A8AB600E83C}</Project>
+      <Name>CommonWeb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Name>Common</Name>
+      <Project>{CDACCA1B-403B-47F5-9F1B-E1A1AC4A7FE3}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Name>Data</Name>
+      <Project>{1DCDE042-2496-46AE-A0B9-CE9C994D92E2}</Project>
+      <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
+    </ProjectReference>
+    <ProjectReference Include="..\EfsMLEnum\Enums.csproj">
+      <Project>{4117F946-D2FD-4EAB-A4A0-F3FB8B1732CC}</Project>
+      <Name>Enums</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FpMLGUI\EfsMLGUI.csproj">
+      <Project>{de7f74e2-9431-44d4-8a38-3c0884d6719f}</Project>
+      <Name>EfsMLGUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NumericalRecipes\NumericalRecipes.csproj">
+      <Project>{91EB66FE-7812-4F7A-8E41-5EB9C953F703}</Project>
+      <Name>NumericalRecipes</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AssetTools.cs" />
+    <Compile Include="CCI\CustomCaptureInfoDynamicData.cs" />
+    <Compile Include="EfsMLInterface\EfsML_Interface_Extended.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_MiFIDII_Extended_ext.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_Com.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_MiFIDII_Extended.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_Com_ext.cs" />
+    <Compile Include="EfsMLv30\FpML\Core Definitions\FpML_Shared_Extended.cs" />
+    <Compile Include="EfsML_Business_Shared_COMD.cs" />
+    <Compile Include="EfsML_ClosingReopeningAction.cs" />
+    <Compile Include="EventMatrix\EfsML_EventMatrix_COMD.cs" />
+    <Compile Include="MaturityRule\MaturityPeriodicDeliveryCharacteristics.cs" />
+    <Compile Include="MaturityRule\MaturityRule.cs" />
+    <Compile Include="MaturityRule\MaturityRuleCalcDate.cs" />
+    <Compile Include="MaturityRule\MaturityRuleHelper.cs" />
+    <Compile Include="Maturity\MaturityHelper.cs" />
+    <Compile Include="Process\ProcessTradeBase.cs" />
+    <Compile Include="EfsML_EarAcc_Tools.cs" />
+    <Compile Include="Notification\CashBalanceProductEnv.cs" />
+    <Compile Include="Notification\Notification_Interface.cs" />
+    <Compile Include="Notification\ReportSettings.cs" />
+    <Compile Include="Notification\ReportSettings_ext.cs" />
+    <Compile Include="Process\EfsMLProcessBase.cs" />
+    <Compile Include="Process\Event.cs" />
+    <Compile Include="StringDynamicData\TypeBuilder.cs" />
+    <Compile Include="SwiftTools.cs" />
+    <Compile Include="TradeAction\EfsML_TradeActionIRD.cs" />
+    <Compile Include="TradeAction\EfsML_TradeActionBondOption.cs" />
+    <Compile Include="EfsML_Business_Shared_IRD.cs" />
+    <Compile Include="EfsML_Business_Shared_Events.cs" />
+    <Compile Include="EfsML_Business_Shared_Interpolation.cs" />
+    <Compile Include="EfsML_Business_Shared_FX.cs" />
+    <Compile Include="EventMatrix\EfsML_EventMatrix_BO.cs" />
+    <Compile Include="EfsML_Business_Shared_EQD.cs" />
+    <Compile Include="EfsML_Business_Shared_BO.cs" />
+    <Compile Include="TradeAction\EfsML_TradeActionEqdOption.cs" />
+    <Compile Include="EfsML_Business_Shared_RTS.cs" />
+    <Compile Include="EventMatrix\EfsML_EventMatrix_RTS.cs" />
+    <Compile Include="EfsML_BusinessTools_Shared2.cs" />
+    <Compile Include="EfsMLv30\FpML\Messaging Framework\FpML_Trade_Request.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_Notification_CashBalance.cs" />
+    <Compile Include="EfsML_PosKeepingTools2.cs" />
+    <Compile Include="EfsML_ConvertedPrices.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_CashBalanceInterest.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_CashBalanceInterest_ext.cs" />
+    <Compile Include="EfsML_CorporateAction.cs">
+    </Compile>
+    <Compile Include="EfsML_CorporateAction_Tools.cs" />
+    <Compile Include="EventMatrix\EfsML_EventMatrix_ESE.cs" />
+    <Compile Include="EfsMLInterface\EfsML_Interface.cs" />
+    <Compile Include="EfsMLInterface\EfsML_Interface_Repository.cs" />
+    <Compile Include="EfsMLInterface\FixML_Interface.cs" />
+    <Compile Include="EfsMLInterface\FpML_Interface.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_Asset.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_CashBalance.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_Notification.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_Doc.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_Fix.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_FixedIncome.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_FuturesAndOptions.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_Fx.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_Invoice.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_Ird.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_LoanDeposit.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_MarginDetailsDocument.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_Option_Shared.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_PosKeeping.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_Repository.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_Security.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_Security_Shared.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_Settlement.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_SettlementMessage.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_Shared.cs" />
+    <Compile Include="EfsMLv30\EfsML\EfsML_MarginRequirement.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_CashBalance_ext.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_MarginRequirement.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_Asset_ext.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_Notification_ext.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_Doc_ext.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_FixedIncome_ext.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_Fix_ext.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_FuturesAndOptions_ext.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_Fx_ext.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_Invoice_ext.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_Ird_ext.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_LoanDeposit_ext.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_Option_Shared_ext.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_PosKeeping_ext.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_Repository_ext.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_Security_ext.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_Security_Shared_ext.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_SettlementMessage_ext.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_Settlement_ext.cs" />
+    <Compile Include="EfsMLv30\extEfsML\EfsML_Shared_ext.cs" />
+    <Compile Include="EfsMLv30\extFixML\FixML_ext.cs" />
+    <Compile Include="EfsMLv30\extFpML\FpML_Asset_ext.cs" />
+    <Compile Include="EfsMLv30\extFpML\FpML_Bond_Option_ext.cs" />
+    <Compile Include="EfsMLv30\extFpML\FpML_Cd_ext.cs" />
+    <Compile Include="EfsMLv30\extFpML\FpML_Correlation_Swaps_ext.cs" />
+    <Compile Include="EfsMLv30\extFpML\FpML_Dividend_Swaps_ext.cs" />
+    <Compile Include="EfsMLv30\extFpML\FpML_Doc_ext.cs" />
+    <Compile Include="EfsMLv30\extFpML\FpML_Eqd_ext.cs" />
+    <Compile Include="EfsMLv30\extFpML\FpML_Eq_Shared_ext.cs" />
+    <Compile Include="EfsMLv30\extFpML\FpML_Fx_ext.cs" />
+    <Compile Include="EfsMLv30\extFpML\FpML_Ird_ext.cs" />
+    <Compile Include="EfsMLv30\extFpML\FpML_Option_Shared_ext.cs" />
+    <Compile Include="EfsMLv30\extFpML\FpML_PostTrade_ext.cs" />
+    <Compile Include="EfsMLv30\extFpML\FpML_Return_Swaps_ext.cs" />
+    <Compile Include="EfsMLv30\extFpML\FpML_Shared_ext.cs" />
+    <Compile Include="EfsMLv30\extFpML\FpML_Variance_Swaps_ext.cs" />
+    <Compile Include="EfsMLv30\FixML\FixML.cs" />
+    <Compile Include="EfsMLv30\FpML\Core Definitions\FpML_Asset.cs" />
+    <Compile Include="EfsMLv30\FpML\Core Definitions\FpML_Doc.cs" />
+    <Compile Include="EfsMLv30\FpML\Core Definitions\FpML_Main.cs" />
+    <Compile Include="EfsMLv30\FpML\Core Definitions\FpML_Shared.cs" />
+    <Compile Include="EfsMLv30\FpML\Messaging Framework\FpML_Allocation.cs" />
+    <Compile Include="EfsMLv30\FpML\Messaging Framework\FpML_Confirmation.cs" />
+    <Compile Include="EfsMLv30\FpML\Messaging Framework\FpML_Contract_Notification.cs" />
+    <Compile Include="EfsMLv30\FpML\Messaging Framework\FpML_CreditEvent_Notification.cs" />
+    <Compile Include="EfsMLv30\FpML\Messaging Framework\FpML_Matching_Status.cs" />
+    <Compile Include="EfsMLv30\FpML\Messaging Framework\FpML_Msg.cs" />
+    <Compile Include="EfsMLv30\FpML\Messaging Framework\FpML_PostTrade.cs" />
+    <Compile Include="EfsMLv30\FpML\Messaging Framework\FpML_PostTrade_Confirmation.cs" />
+    <Compile Include="EfsMLv30\FpML\Messaging Framework\FpML_PostTrade_Execution.cs" />
+    <Compile Include="EfsMLv30\FpML\Messaging Framework\FpML_PostTrade_Negotiation.cs" />
+    <Compile Include="EfsMLv30\FpML\Messaging Framework\FpML_PreTrade.cs" />
+    <Compile Include="EfsMLv30\FpML\Messaging Framework\FpML_Reconciliation.cs" />
+    <Compile Include="EfsMLv30\FpML\Messaging Framework\FpML_Trade_Execution.cs" />
+    <Compile Include="EfsMLv30\FpML\Messaging Framework\FpML_Trade_Notification.cs" />
+    <Compile Include="EfsMLv30\FpML\Pricing and Risking\FpML_Mktenv.cs" />
+    <Compile Include="EfsMLv30\FpML\Pricing and Risking\FpML_Reporting.cs" />
+    <Compile Include="EfsMLv30\FpML\Pricing and Risking\FpML_Riskdef.cs" />
+    <Compile Include="EfsMLv30\FpML\Pricing and Risking\FpML_Valuation.cs" />
+    <Compile Include="EfsMLv30\FpML\Products\Bond Options\FpML_Bond_Option.cs" />
+    <Compile Include="EfsMLv30\FpML\Products\CD\FpML_Cd.cs" />
+    <Compile Include="EfsMLv30\FpML\Products\EQD\FpML_Correlation_Swaps.cs" />
+    <Compile Include="EfsMLv30\FpML\Products\EQD\FpML_Dividend_Swaps.cs" />
+    <Compile Include="EfsMLv30\FpML\Products\EQD\FpML_Eqd.cs" />
+    <Compile Include="EfsMLv30\FpML\Products\EQD\FpML_Eq_Shared.cs" />
+    <Compile Include="EfsMLv30\FpML\Products\EQD\FpML_Return_Swaps.cs" />
+    <Compile Include="EfsMLv30\FpML\Products\EQD\FpML_Variance_Swaps.cs" />
+    <Compile Include="EfsMLv30\FpML\Products\FX\FpML_Fx.cs" />
+    <Compile Include="EfsMLv30\FpML\Products\IRD\FpML_Ird.cs" />
+    <Compile Include="EfsMLv30\FpML\Products\Options\FpML_Option_Shared.cs" />
+    <Compile Include="EfsML_BusinessTools_Shared.cs" />
+    <Compile Include="EfsML_Business_Shared.cs" />
+    <Compile Include="EfsML_Business_Shared_ADM.cs" />
+    <Compile Include="EfsML_Business_Shared_ETD.cs" />
+    <Compile Include="EfsML_Business_Shared_RISK.cs" />
+    <Compile Include="EfsML_Business_Shared_SEC.cs" />
+    <Compile Include="EfsML_Event.cs" />
+    <Compile Include="EventMatrix\EfsML_EventMatrix.cs" />
+    <Compile Include="EventMatrix\EfsML_EventMatrix_ETD.cs" />
+    <Compile Include="EventMatrix\EfsML_EventMatrix_OTC.cs" />
+    <Compile Include="EventMatrix\EfsML_EventMatrix_RISK.cs" />
+    <Compile Include="EventMatrix\EfsML_EventMatrix_SEC.cs" />
+    <Compile Include="EventMatrix\EfsML_EventMatrix_ADM.cs" />
+    <Compile Include="EfsML_PosKeepingTools.cs" />
+    <Compile Include="EfsML_Trade.cs" />
+    <Compile Include="TradeAction\EfsML_TradeAction.cs" />
+    <Compile Include="Settlement\EfsML_Settlement_Shared.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Settlement\EfsML_SettlementMessage_Shared.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Settlement\EfsML_SettlementMessage_Shared_ext.cs" />
+    <Compile Include="Settlement\EfsML_Settlement_Shared_ext.cs" />
+    <Compile Include="TradeAction\EfsML_TradeActionFxOption.cs" />
+    <Compile Include="TradeAction\EfsML_TradeActionProvision.cs" />
+    <Compile Include="TradeAction\EfsML_TradeAdminAction.cs" />
+    <Compile Include="TradeAction\EfsML_TradeCommonAction.cs" />
+    <Compile Include="HolidayResult\HolidayResultTools.cs" />
+    <Compile Include="Import\Import.cs" />
+    <Compile Include="Notification\NotificationBuilder.cs" />
+    <Compile Include="Notification\NotificationDocument.cs" />
+    <Compile Include="Notification\NotificationDocumentContainer.cs" />
+    <Compile Include="Notification\Enum.cs" />
+    <Compile Include="Notification\NotificationDocument_ext.cs" />
+    <Compile Include="Notification\NotificationShared.cs" />
+    <Compile Include="PosCollateral.cs" />
+    <Compile Include="Repository\RepositoryTools.cs" />
+    <Compile Include="SQL_Quote.cs" />
+    <Compile Include="StrategySetter.cs" />
+    <Compile Include="StringDynamicData\DataSQL.cs" />
+    <Compile Include="StringDynamicData\DataSpheresLib.cs" />
+    <Compile Include="StringDynamicData\ParamData.cs" />
+    <Compile Include="StringDynamicData\StringDynamicDatas.cs" />
+    <Compile Include="StringDynamicData\StringDynamicData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CorporateActions\Templates\Additionals\ORA_Template.sql" />
+    <Content Include="CorporateActions\Templates\All_FairValue_All_Base.xml" />
+    <Content Include="CorporateActions\Templates\Reorganization_FairValue_TenderOffer_Regular.xml" />
+    <Content Include="List\TEST-landscape-pdf.xslt" />
+    <Content Include="List\Trade_BO_VALID.xsl" />
+    <Content Include="Message\Report_v2\ETDOrderConfirmation.xsl" />
+    <None Include="app.config" />
+    <None Include="List\default-landscape-pdf.xsl" />
+    <None Include="List\default-letterpage-pdf.xsl" />
+    <None Include="List\FinFlows-pdf.xsl" />
+    <None Include="List\FinFlowsByActor-pdf.xsl" />
+    <None Include="List\FinStatMember-pdf.xsl" />
+    <None Include="List\FlowsByCurrency_Alloc-pdf.xsl" />
+    <None Include="List\Shared\List_Common-pdf.xslt" />
+    <None Include="Message\Report_v2\COMS\CommoditySpot_Report_v2_Tools.xslt" />
+    <None Include="Message\Report_v2\COMS\CommoditySpot_Report_v2_Business.xslt" />
+    <None Include="BulletPayment.cd" />
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-Com-3-0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="BusinessSchemas\FpML44\fpml-loan-4-4.xsd">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="CA.cd" />
+    <None Include="CorporateActions\Schemas\EfsML-CorporateActions-3-0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="EfsML_Business_Shared_BO.cd" />
+    <None Include="TradeAction\EfsML_TradeAction.cd" />
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-CashBalance-3-0.xsd" />
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-CashBalanceInterest-3-0.xsd" />
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-IMRLog.xsd" />
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-MarginRequirement-3-0.xsd" />
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-Repository-3-0.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-Security-3-0.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-Security-Shared-3-0.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="EfsMLv30\EfsML\Invoice.cd" />
+    <None Include="EFS_Payment.cd" />
+    <None Include="EventMatrix\EventMatrix.cd" />
+    <None Include="Events_Result.cd" />
+    <None Include="Events_Results_Details.cd" />
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-Asset-3-0.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-Fixed-Income-3-0.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-FixML-3-0.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-FuturesAndOptions-3-0.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-Invoice-3-0.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-Ird-3-0.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-LoanDeposit-3-0.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-Options-Shared-3-0.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-SettlementInstruction-3-0.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-Shared-3-0.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-Fx-3-0.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FIXML44\fixml-components-base-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FIXML44\fixml-components-impl-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FIXML44\fixml-datatypes-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FIXML44\fixml-fields-base-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FIXML44\fixml-fields-impl-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FIXML44\fixml-order-base-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FIXML44\fixml-order-impl-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FIXML50SP1\fixml-components-base-5-0-SP1.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FIXML50SP1\fixml-components-impl-5-0-SP1.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FIXML50SP1\fixml-datatypes-5-0-SP1.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FIXML50SP1\fixml-fields-base-5-0-SP1.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FIXML50SP1\fixml-fields-impl-5-0-SP1.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FIXML50SP1\fixml-positions-base-5-0-SP1.xsd" />
+    <None Include="BusinessSchemas\FIXML50SP1\fixml-positions-impl-5-0-SP1.xsd" />
+    <None Include="BusinessSchemas\FIXML50SP1\fixml-tradecapture-base-5-0-SP1.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FIXML50SP1\fixml-tradecapture-impl-5-0-SP1.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-3-0.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\EfsMLv30\EfsML-Enum-3-0.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\EfsExtend\fpml-enum-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\EfsExtend\fpml-ird-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\EfsExtend\fpml-shared-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\EfsExtend\fpml-shared-4-4.xsx">
+      <DependentUpon>fpml-shared-4-4.xsd</DependentUpon>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-allocation-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-allocation-4-4.xsx">
+      <DependentUpon>fpml-allocation-4-4.xsd</DependentUpon>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-asset-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-bond-option-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-cd-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-confirmation-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-contract-notification-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-correlation-swaps-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-credit-event-notification-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-dividend-swaps-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-doc-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-doc-4-4.xsx">
+      <DependentUpon>fpml-doc-4-4.xsd</DependentUpon>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-enum-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-eq-shared-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-eqd-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-eqd-4-4.xsx">
+      <DependentUpon>fpml-eqd-4-4.xsd</DependentUpon>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-fx-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-ird-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-ird-4-4.xsx">
+      <DependentUpon>fpml-ird-4-4.xsd</DependentUpon>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-main-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-matching-status-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-mktenv-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-msg-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-option-shared-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-posttrade-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-posttrade-confirmation-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-posttrade-execution-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-posttrade-negotiation-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-pretrade-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-reconciliation-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-reporting-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-return-swaps-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-riskdef-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-riskdef-4-4.xsx">
+      <DependentUpon>fpml-riskdef-4-4.xsd</DependentUpon>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-shared-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-trade-notification-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-tradeexec-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-valuation-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\fpml-variance-swaps-4-4.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="BusinessSchemas\FpML44\xmldsig-core-schema.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="StringDynamicData\StringDynamicData.xsd">
+      <SubType>
+      </SubType>
+    </None>
+    <None Include="StringDynamicData\StringDynamicData.xsx">
+      <DependentUpon>StringDynamicData.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CorporateActions\Templates\Additionals\AI_Regular.xml" />
+    <None Include="CorporateActions\Templates\Additionals\CT_Ratio.xml" />
+    <None Include="CorporateActions\Templates\Additionals\MSSQL_Template.sql" />
+    <None Include="CorporateActions\Templates\All_None_All_Base.xml" />
+    <None Include="CorporateActions\Templates\All_Ratio_All_RatioCertified.xml" />
+    <None Include="CorporateActions\Templates\Combination_Ratio_KRepayment_Together_ReverseSplit_Regular.xml" />
+    <None Include="CorporateActions\Templates\Combination_Ratio_KRepayment_Together_Split_Regular.xml" />
+    <None Include="CorporateActions\Templates\Combination_Ratio_RightsIssue_FollowedBy_Split_Regular.xml" />
+    <None Include="CorporateActions\Templates\Combination_Ratio_SpecialDividend_Together_BonusIssue_Regular.xml" />
+    <None Include="CorporateActions\Templates\Combination_Ratio_SpecialDividend_Together_ReverseSplit_Regular.xml" />
+    <None Include="CorporateActions\Templates\Combination_Ratio_SpecialDividend_Together_Split_Regular.xml" />
+    <None Include="CorporateActions\Templates\Combination_Ratio_Split_FollowedBy_RightsIssue_Regular.xml" />
+    <None Include="CorporateActions\Templates\Combination_Ratio_Split_Together_RightsIssue_Regular.xml" />
+    <None Include="CorporateActions\Templates\Distribution_Ratio_BonusIssue_DividendDisadvantage.xml" />
+    <None Include="CorporateActions\Templates\Distribution_Ratio_BonusIssue_Regular.xml" />
+    <None Include="CorporateActions\Templates\Distribution_Ratio_BonusIssue_TwoShares.xml" />
+    <None Include="CorporateActions\Templates\Distribution_Ratio_ExtraDividend_Regular.xml" />
+    <None Include="CorporateActions\Templates\Distribution_Ratio_KRepayment_Regular.xml" />
+    <None Include="CorporateActions\Templates\Distribution_Ratio_RightsIssue_CashDistrib.xml" />
+    <None Include="CorporateActions\Templates\Distribution_Ratio_RightsIssue_Conversion.xml" />
+    <None Include="CorporateActions\Templates\Distribution_Ratio_RightsIssue_PackageViaValueSubscriptionRights.xml" />
+    <None Include="CorporateActions\Templates\Distribution_Ratio_RightsIssue_Regular.xml" />
+    <None Include="CorporateActions\Templates\Distribution_Ratio_RightsIssue_ReverseViaValueSubscriptionRights.xml" />
+    <None Include="CorporateActions\Templates\Distribution_Ratio_RightsIssue_ViaValueSubscriptionRights.xml" />
+    <None Include="CorporateActions\Templates\Distribution_Ratio_SpecialDividend_Conversion.xml" />
+    <None Include="CorporateActions\Templates\Distribution_Ratio_SpecialDividend_Regular.xml" />
+    <None Include="CorporateActions\Templates\Distribution_Ratio_StockDividend_Regular.xml" />
+    <None Include="CorporateActions\Templates\Reorganization_FairValue_TakeOver_Regular.xml" />
+    <None Include="CorporateActions\Templates\Reorganization_Ratio_DeMerger_Regular.xml" />
+    <None Include="CorporateActions\Templates\Reorganization_Ratio_Merger_Regular.xml" />
+    <None Include="CorporateActions\Templates\Reorganization_Ratio_ReverseSplit_Regular.xml" />
+    <None Include="CorporateActions\Templates\Reorganization_Ratio_SpinOff_Regular.xml" />
+    <None Include="CorporateActions\Templates\Reorganization_Ratio_SpinOff_withVWAP.xml" />
+    <None Include="CorporateActions\Templates\Reorganization_Ratio_Split_Regular.xml" />
+    <None Include="CorporateActions\Templates\Reorganization_Ratio_TakeOver_Regular.xml" />
+    <None Include="CorporateActions\Templates\Reorganization_Ratio_TenderOffer_Regular.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MessageSWIFT\Category2\MT202_SWIFT.xslt" />
+    <None Include="MessageSWIFT\Category2\MT210_SWIFT.xslt" />
+    <None Include="MessageSWIFT\Category3\MT300_SWIFT.xslt" />
+    <None Include="MessageSWIFT\Category3\MT305_SWIFT.xslt" />
+    <None Include="MessageSWIFT\Category3\MT360_SWIFT.xslt" />
+    <None Include="MessageSWIFT\Lib_SWIFT.xslt" />
+    <None Include="Message\Custom\Custom_Message_HTML.xslt" />
+    <None Include="Message\Custom\Custom_Message_PDF.xslt" />
+    <None Include="Message\ICMA\SEC\DebtSecurityTransaction_ICMA_Business.xslt" />
+    <None Include="Message\ICMA\SEC\DebtSecurityTransaction_ICMA_HTML.xslt" />
+    <None Include="Message\ICMA\SEC\Repo_ICMA_Business.xslt" />
+    <None Include="Message\ICMA\SEC\Repo_ICMA_HTML.xslt" />
+    <None Include="Message\ISDA\BO\BondOption_ISDA_Business.xslt" />
+    <None Include="Message\ISDA\BO\BondOption_ISDA_PDF.xslt" />
+    <None Include="Message\ISDA\EQD\EquityOption_FULL_PDF.xslt" />
+    <None Include="Message\ISDA\EQD\EquityOption_ISDA_Business.xslt" />
+    <None Include="Message\ISDA\EQD\EquityOption_ISDA_HTML_DEPRECATED.xslt" />
+    <None Include="Message\ISDA\EQD\EquityOption_ISDA_PDF.xslt" />
+    <None Include="Message\ISDA\EQD\EquitySecurityTransaction_ISDA_PDF.xslt" />
+    <None Include="Message\ISDA\FX\FxBarrierOption_FULL_PDF.xslt" />
+    <None Include="Message\ISDA\FX\FxBarrierOption_ISDA_Business.xslt" />
+    <None Include="Message\ISDA\FX\FxBarrierOption_ISDA_HTML_DEPRECATED.xslt" />
+    <None Include="Message\ISDA\FX\FxBarrierOption_ISDA_PDF.xslt" />
+    <None Include="Message\ISDA\FX\FxDigitalOption_FULL_PDF.xslt" />
+    <None Include="Message\ISDA\FX\FxDigitalOption_ISDA_Business.xslt" />
+    <None Include="Message\ISDA\FX\FxDigitalOption_ISDA_HTML_DEPRECATED.xslt" />
+    <None Include="Message\ISDA\FX\FxDigitalOption_ISDA_PDF.xslt" />
+    <None Include="Message\ISDA\FX\FxLeg_FULL_PDF.xslt" />
+    <None Include="Message\ISDA\FX\FxLeg_ISDA_Business.xslt" />
+    <None Include="Message\ISDA\FX\FxLeg_ISDA_HTML_DEPRECATED.xslt" />
+    <None Include="Message\ISDA\FX\FxLeg_ISDA_PDF.xslt" />
+    <None Include="Message\ISDA\FX\FxOptionLeg_FULL_PDF.xslt">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Message\ISDA\FX\FxOptionLeg_ISDA_Business.xslt" />
+    <None Include="Message\ISDA\FX\FxOptionLeg_ISDA_HTML_DEPRECATED.xslt" />
+    <None Include="Message\ISDA\FX\FxOptionLeg_ISDA_PDF.xslt" />
+    <None Include="Message\ISDA\FX\FxSwap_FULL_PDF.xslt" />
+    <None Include="Message\ISDA\FX\FxSwap_ISDA_Business.xslt" />
+    <None Include="Message\ISDA\FX\FxSwap_ISDA_HTML_DEPRECATED.xslt" />
+    <None Include="Message\ISDA\FX\FxSwap_ISDA_PDF.xslt" />
+    <None Include="Message\ISDA\IRD\CapFloor_FULL_PDF.xslt" />
+    <None Include="Message\ISDA\IRD\CapFloor_ISDA_Business.xslt" />
+    <None Include="Message\ISDA\IRD\CapFloor_ISDA_PDF.xslt" />
+    <None Include="Message\ISDA\IRD\Fra_FULL_PDF.xslt" />
+    <None Include="Message\ISDA\IRD\Fra_ISDA_Business.xslt" />
+    <None Include="Message\ISDA\IRD\Fra_ISDA_HTML_DEPRECATED.xslt" />
+    <None Include="Message\ISDA\IRD\Fra_ISDA_PDF.xslt" />
+    <None Include="Message\ISDA\IRD\LoanDeposit_FULL_PDF.xslt" />
+    <None Include="Message\ISDA\IRD\LoanDeposit_ISDA_Business.xslt" />
+    <None Include="Message\ISDA\IRD\LoanDeposit_ISDA_HTML_DEPRECATED.xslt" />
+    <None Include="Message\ISDA\IRD\LoanDeposit_ISDA_PDF.xslt" />
+    <None Include="Message\ISDA\IRD\Swaption_FULL_PDF.xslt" />
+    <None Include="Message\ISDA\IRD\Swaption_ISDA_Business.xslt" />
+    <None Include="Message\ISDA\IRD\Swaption_ISDA_HTML_DEPRECATED.xslt" />
+    <None Include="Message\ISDA\IRD\Swaption_ISDA_PDF.xslt" />
+    <None Include="Message\ISDA\IRD\Swap_FULL_PDF.xslt" />
+    <None Include="Message\ISDA\IRD\Swap_ISDA_Business.xslt" />
+    <None Include="Message\ISDA\IRD\Swap_ISDA_HTML_DEPRECATED.xslt" />
+    <None Include="Message\ISDA\IRD\Swap_ISDA_PDF.xslt" />
+    <None Include="Message\ISDA\Shared\Shared_ISDA_Business.xslt" />
+    <None Include="Message\ISDA\Shared\Shared_ISDA_HTML.xslt" />
+    <None Include="Message\ISDA\Shared\Shared_ISDA_PDF.xslt" />
+    <None Include="Message\ISDA\Shared\Shared_Variables.xslt" />
+    <None Include="Message\Report\AccountStatementReport.xsl" />
+    <None Include="Message\Report\DetailedFinancialReport.xsl" />
+    <None Include="Message\Report\FinancialReport.xsl" />
+    <None Include="Message\Report\InterestStatementReport.xsl" />
+    <None Include="Message\Report\InvoiceReport.xsl" />
+    <None Include="Message\Report\Invoice\Invoice.xslt" />
+    <None Include="Message\Report\Invoice\InvoiceCommon.xslt" />
+    <None Include="Message\Report\PosActionReport.xsl" />
+    <None Include="Message\Report\PositionReport.xsl" />
+    <None Include="Message\Report\PosSyntheticReport.xsl" />
+    <None Include="Message\Report\Shared\Shared_Report_BusinessCB.xslt" />
+    <None Include="Message\Report\Shared\Shared_Report_BusinessCommon.xslt" />
+    <None Include="Message\Report\Shared\Shared_Report_BusinessETD.xslt" />
+    <None Include="Message\Report\Shared\Shared_Report_Main.xslt" />
+    <None Include="Message\Report\Shared\Shared_Report_PDFCB.xslt" />
+    <None Include="Message\Report\Shared\Shared_Report_PDFCommon.xslt" />
+    <None Include="Message\Report\Shared\Shared_Report_PDFCommon_Page.xslt" />
+    <None Include="Message\Report\Shared\Shared_Report_PDFETD.xslt" />
+    <None Include="Message\Report\Shared\Shared_Report_VariablesCB.xslt" />
+    <None Include="Message\Report\Shared\Shared_Report_VariablesCommon.xslt" />
+    <None Include="Message\Report\Shared\Shared_Report_VariablesETD.xslt" />
+    <None Include="Message\Report\TransactReport.xsl" />
+    <None Include="Message\Report_v2\Deprecated_CFDSynthesisReport.xsl" />
+    <None Include="Message\Report_v2\Deprecated_ETDSynthesisReport.xsl" />
+    <None Include="Message\Report_v2\DSE\DST_Report_v2_Business.xslt" />
+    <None Include="Message\Report_v2\DSE\DST_Report_v2_Tools.xslt" />
+    <None Include="Message\Report_v2\ESE\EST_Report_v2_Business.xslt" />
+    <None Include="Message\Report_v2\ESE\EST_Report_v2_Tools.xslt" />
+    <None Include="Message\Report_v2\FX\FxLeg_Report_v2_Business.xslt" />
+    <None Include="Message\Report_v2\FX\FxLeg_Report_v2_Tools.xslt" />
+    <None Include="Message\Report_v2\FX\FxOptionLeg_Report_v2_Business.xslt" />
+    <None Include="Message\Report_v2\FX\FxOptionLeg_Report_v2_Tools.xslt" />
+    <None Include="Message\Report_v2\LSD\ETD_Report_v2_Business.xslt" />
+    <None Include="Message\Report_v2\LSD\ETD_Report_v2_Tools.xslt" />
+    <None Include="Message\Report_v2\RTS\RTS_Report_v2_Business.xslt" />
+    <None Include="Message\Report_v2\RTS\RTS_Report_v2_Tools.xslt" />
+    <None Include="Message\Report_v2\Shared\Shared_Report_v2_A4Vertical.xslt" />
+    <None Include="Message\Report_v2\Shared\Shared_Report_v2_Business.xslt" />
+    <None Include="Message\Report_v2\Shared\Shared_Report_v2_FixmlTools.xslt">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Message\Report_v2\Shared\Shared_Report_v2_Tools.xslt" />
+    <None Include="Message\Report_v2\Shared\Shared_Report_v2_UK.xslt" />
+    <None Include="Message\Report_v2\Shared\Shared_Report_v2_Variables.xslt" />
+    <None Include="Message\Report_v2\SynthesisReport.xsl" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

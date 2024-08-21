@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Screens>
+  <!-- EG 20171113 [23509] Upd Gestion Objets Facility / Dates et Marché -->
+	<!-- ShareEquityOptionEuropean-Broker -->
+	<Screen name="ShareEquityOptionEuropean-Broker" caption="Share Vanilla Equity Option European (Screen Broker)" product="equityOption">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSales-DRV-Block/>
+		<ShareEquityOptionEuropeanBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+    <ComplianceBlock/>
+	</Screen>
+	
+  <!-- IndexEquityOptionEuropean-Broker -->
+	<Screen name="IndexEquityOptionEuropean-Broker" caption="Index Vanilla Equity Option European (Screen Broker)" product="equityOption">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+		<PartyBrokerSales-DRV-Block/>
+		<IndexEquityOptionEuropeanBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+    <ComplianceBlock/>
+	</Screen>
+  
+	<!-- BondEquityOptionEuropean-Broker -->
+	<Screen name="BondEquityOptionEuropean-Broker" caption="Bond Vanilla Equity Option European (Screen Broker)" product="equityOption">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+		<PartyBrokerSales-DRV-Block/>
+		<BondEquityOptionEuropeanBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+    <ComplianceBlock/>
+	</Screen>
+</Screens>
+
+

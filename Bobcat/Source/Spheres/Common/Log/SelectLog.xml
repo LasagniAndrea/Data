@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Retourne la commande select qui retourne les logs accessibles pour un user non admin (TRACKER_L et PROCESS_L)
+    Cette commande est une requête paramétrée, il existe les paramètres @SR_SESSIONID et @SR_IDA_ENTITY 
+    Ils sont générés par les mots clefs %%SR:XXXXX%%
+    {0} est remplacé par PROCESS_L si consultation des logs de traitements
+    {0} est remplacé par TRACKER_L si consultation du tracker
+-->
+<!-- FI 20111214 Modif pour affichage des trades accessibles-->
+<!-- FI 20111221 Modif utilisation des mots clefs SR:-->
+<!-- FI 20111229 Modif des restrictions concernant les debtsecurities et les tradeAdmin usage des mots clefs SR:TRADEADMIN et SR:TRADEDEBTSEC -->
+<!-- FI 20120104 Ajout des logs sur traitements qui s'appliquent sur des acteurs accessibles -->
+<!-- FI 20120113 Ajout du mot clef %%SR:IOTASK_JOIN%% -->
+<!-- FI 20120113 Ajout du mot clef %%SR:ACTOR_JOIN%% -->
+<!-- FI 20120210 Ajout des log sur POSCOLLATERAL -->
+<!-- EG 20200226 [25077] RDBMS : New version of Trades tables architecture (TRADEINSTRUMENT (INSTRUMENTNO=1) to TRADE) -->
+
+<SelectLog>
+  <Software name="Vision">
+  <Command rdbms="all">
+    <![CDATA[
+select p.* 
+from 
+(
+  select p.* 
+  from dbo.{0} p
+  inner join dbo.IOTASK ioTask on ioTask.IDIOTASK = p.IDDATA 
+  %%SR:IOTASK_JOIN%%(ioTask.IDIOTASK)
+  where (p.IDDATAIDENT='IOTASK')
+)p
+]]>
+  </Command>
+  </Software>
+  <Software name="Spheres">
+    <Command rdbms="all">
+      <![CDATA[
+select p.* 
+from 
+(
+  /* Selection des logs des traitements qui s'appliquent à des trades de marché ou des trades risk accessibles */
+  select p.*
+  from dbo.{0} p
+  inner join dbo.TRADE t on t.IDT = p.IDDATA
+  /* SR:TRADE_JOIN (Start) ------------------------- */
+  %%SR:TRADE_JOIN%%(t.IDT, t)
+  /* SR:TRADE_JOIN (End) --------------------------- */
+  where 
+  (
+    (p.IDDATAIDENT in ('TRADE', 'TRADERISK')) 
+    and
+    /* SR:TRADE_WHERE_PREDICATE (Start) -------------- */
+    (%%SR:TRADE_WHERE_PREDICATE%%) 
+    /* SR:TRADE_WHERE_PREDICATE (End) ---------------- */
+  )
+  
+  /* =============================================== */
+  union all /* ===================================== */
+  /* =============================================== */
+  /* Selection des logs des traitements qui s'appliquent à des factures,avoirs,etc accessibles */
+  select p.* 
+  from dbo.{0} p
+  inner join dbo.TRADE t            on t.IDT = p.IDDATA
+  /* SR:TRADEADMIN_JOIN (Start) ------------------------- */
+  %%SR:TRADEADMIN_JOIN%%(t.IDT, t)
+  /* SR:TRADEADMIN_JOIN (End) --------------------------- */
+  where 
+  (
+    (p.IDDATAIDENT='TRADEADMIN')
+    and
+    /* SR:TRADEADMIN_WHERE_PREDICATE (Start) -------------- */
+    (%%SR:TRADEADMIN_WHERE_PREDICATE%%) 
+    /* SR:TRADEADMIN_WHERE_PREDICATE (End) ---------------- */
+  )
+
+  /* =============================================== */
+  union all /* ===================================== */
+  /* =============================================== */
+  /* Selection des logs des traitements qui s'appliquent à des titres de créances accessibles */
+  select p.* 
+  from dbo.{0} p
+  inner join dbo.TRADE t on t.IDT = p.IDDATA
+  /* SR:TRADEDEBTSEC_JOIN (Start) ------------------------- */
+  %%SR:TRADEDEBTSEC_JOIN%%(t.IDT, t)
+  /* SR:TRADEDEBTSEC_JOIN (End) --------------------------- */
+  where 
+  (
+    (p.IDDATAIDENT='TRADEDEBTSEC')
+    and
+    /* SR:TRADEDEBTSEC_WHERE_PREDICATE (Start) -------------- */
+    (%%SR:TRADEDEBTSEC_WHERE_PREDICATE%%) 
+    /* SR:TRADEDEBTSEC_WHERE_PREDICATE (End) ---------------- */
+  )
+  
+  /* =============================================== */
+  union all /* ===================================== */
+  /* =============================================== */
+  /* Selection des logs générés par des tâches IO accessibles */
+  select p.* 
+  from dbo.{0} p
+  inner join dbo.IOTASK ioTask on ioTask.IDIOTASK = p.IDDATA 
+  %%SR:IOTASK_JOIN%%(ioTask.IDIOTASK)
+  where p.IDDATAIDENT='IOTASK'
+  
+  /* =============================================== */
+  union all /* ===================================== */
+  /* =============================================== */
+  /* Selection des logs sur des traitements qui s'appliquent sur des acteurs accessibles */
+  select p.* 
+  from dbo.{0} p
+  inner join dbo.ACTOR a on a.IDA = p.IDDATA 
+  %%SR:ACTOR_JOIN%%(a.IDA)
+  where p.IDDATAIDENT ='ACTOR'
+
+  /* =============================================== */
+  union all /* ===================================== */
+  /* =============================================== */
+  /* Selection des Logs générés par QuotationHandling (toute modification de prix est visible de tous)*/
+  select p.* 
+  from dbo.{0} p
+  where (p.IDDATAIDENT like 'QUOTE%')
+  
+  /* =============================================== */
+  union all /* ===================================== */
+  /* =============================================== */
+  /* Selection des POSREQUEST */
+  select p.* 
+  from dbo.{0} p
+  inner join (%%SR:POSREQUEST_SELECT%%) pr on pr.IDPR = p.IDDATA
+  where (p.IDDATAIDENT='POSREQUEST') 
+
+  /* =============================================== */
+  union all /* ===================================== */
+  /* =============================================== */
+  /* Selection des Logs sur des traitements qui s'appliquent sur des MCO*/
+  select p.* 
+  from dbo.{0} p
+  where (p.IDDATAIDENT='MCO') 
+  
+  /* =============================================== */
+  union all /* ===================================== */
+  /* =============================================== */
+  /* Selection des Logs sur des traitements qui s'appliquent sur des dépôts de garantie*/
+  select p.* 
+  from dbo.{0} p
+  inner join dbo.POSCOLLATERAL col on col.IDPOSCOLLATERAL = p.IDDATA
+  /* SR:POSCOLLATERAL_JOIN (Start) ------------------------- */
+  %%SR:POSCOLLATERAL_JOIN%%(col)
+  /* SR:POSCOLLATERAL_JOIN (End) --------------------------- */
+  where 
+  (
+    (p.IDDATAIDENT='POSCOLLATERAL')  
+    and
+    /* SR:POSCOLLATERAL_WHERE_PREDICATE (Start) -------------- */
+    (%%SR:POSCOLLATERAL_WHERE_PREDICATE%%) 
+    /* SR:POSCOLLATERAL_WHERE_PREDICATE (End) ---------------- */
+  )
+)p
+]]>
+    </Command>
+  </Software>
+</SelectLog>

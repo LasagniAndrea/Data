@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Objects>
+
+	<!-- *************************** -->
+	<!-- ***   BLOC EVENTCLASS   *** -->
+	<!-- *************************** -->
+	
+	<!--EventClassBlock-->	
+	<Object name="EventClassBlock">
+    <table verticalAlign="Top" rowspan="2">
+      <Banner caption="DatesEvent" level="3" />
+      <EventClassItem clientid="eventClass" required="true" occurs="1" addsuboperator="true" />
+    </table>
+	</Object>
+
+  <!--EventClassNoBannerBlock-->
+  <Object name="EventClassNoBannerBlock">
+    <table verticalAlign="Top">
+      <EventClassItem clientid="eventClass" required="true" occurs="1" addsuboperator="true" />
+    </table>
+  </Object>
+
+  <!--EventClassChildBlock-->
+	<Object name="EventClassChildBlock">
+		<table colspan="-1" verticalAlign="Top">
+			<EventClassChildItem clientid="eventClass" required="true" occurs="1"  />
+		</table>
+	</Object>		
+			
+	<!-- *************************** -->
+	<!-- ***   ITEM EVENTCLASS   *** -->
+	<!-- *************************** -->
+	
+	<!--EventClassItem-->
+	<Object name="EventClassItem">
+		<table colspan="-1">
+			<EventClass clientid="eventClass" required="false" postback="true"/>
+			<Space/>
+			<Date      clientid="dtEvent" required="false"/>
+			<IsPayment clientid="isPayment" required="false"/>
+		</table>
+	</Object>	
+	
+	<!--EventClassChildItem-->
+	<Object name="EventClassChildItem">
+		<EventClassOnly_RO clientid="eventClass"/>
+		<Date_RO           clientid="dtEvent" required="false"/>
+	</Object>				
+	
+
+	<!-- ************************** -->
+	<!-- ***   SIMPLE OBJECTS   *** -->
+	<!-- ************************** -->
+
+	<!--EventClass-->
+	<Object name="EventClass">
+		<DropDown datatype="string" listretrieval="predef:enum.EventClass"  style="width:200px;" />		
+	</Object>	
+	
+	<!--IsPayment-->
+	<Object name="IsPayment">
+		<table>
+			<space />
+			<Check />
+		</table>
+	</Object>
+	
+</Objects>

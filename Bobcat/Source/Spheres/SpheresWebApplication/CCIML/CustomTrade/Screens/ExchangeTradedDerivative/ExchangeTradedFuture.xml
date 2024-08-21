@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<Screens>
+  <!-- ExchangeTradedFutureFOml -->
+  <Screen name="FutureF&amp;Oml" caption="Future (F&amp;Oml)" product="exchangeTradedDerivative">
+    <RemoveAllocationBlock/>
+    <PositionTransferBlock/>
+    <CorrectionOfQuantityBlock/>
+    <ETDMarketBlock />
+    <UnderlyingDeliveryBlock/>
+    <PartyETDBlock/>
+    <FutureExchangeTradedDerivativeBlock clientid="exchangeTradedDerivative"/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentBlock/>
+    <ComplianceBlock/>
+  </Screen>
+</Screens>

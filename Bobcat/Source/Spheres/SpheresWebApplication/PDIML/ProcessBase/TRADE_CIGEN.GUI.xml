@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- FI 20120905 default value true for ISTOEND checkbox-->
+<!-- RD 20190718 Add DDL Notification type-->
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+  
+  <customObject control="label"   clientid="DATE1" caption = "lblDtProcess" xsi:type="CustomObjectLabel"/>
+  <customObject control="textbox" clientid="DATE1" 
+                datatype = "date" required="true" 
+                postback="true" postbackargument ="SELFRELOAD_"  xsi:type="CustomObjectTextBox"/>
+  
+ <customObject control="label"     clientid="ENTITY"  
+                caption = "Entity_Title" xsi:type="CustomObjectLabel"/>
+  
+  <customObject control="dropdown"  clientid="ENTITY"  width="250px"   
+                datatype="integer" listretrieval="predef:ActorEntity" 
+                required="true" 
+                postback="true"  postbackargument ="SELFRELOAD_" 
+                xsi:type="CustomObjectDropDown" 
+                misc="isAddAll:true;isUseSessionRestrict:true;isClear:false"/>
+
+  <customObject control="space" width="2" />
+
+  <customObject control="label" clientid="CNFTYPE" caption="cnftype" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="CNFTYPE"
+                width="220px"   datatype="string"
+                listretrieval="delimlist:ISDA;SWIFT;ORDERALLOC;"
+                required="true"
+                postback="true"  postbackargument ="SELFCLEAR_"
+                xsi:type="CustomObjectDropDown"  misc="isAddAll:true;isClear:true;isResource:true;"/>
+  
+  <customObject control="space"   width="30"/>
+  
+  <customObject control="checkbox"  clientid="ISTOEND" 
+                datatype="bool" 
+                postback="true" postbackargument ="SELFRELOAD_"
+                caption="lblCIProcess_IsToEnd" width="200" required="true" defaultvalue="true"/>
+</customObjects>

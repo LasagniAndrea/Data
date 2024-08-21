@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Screens>
+  <!-- EG 20171113 [23509] Upd Gestion Objets Facility / Dates et Marché -->
+	<!-- DebtSecurityTransaction -->
+	<Screen name="DebtSecurityTransaction-Order" caption="Debt Security Transaction Order" product="DebtSecurityTransaction">
+		<TradeRemoveBlock />
+    <FacilityHeaderBlock/>
+    <PartyBrokerSales-NDRV-Block/>
+		<DebtSecurityTransactionBlock clientid="debtSecurityTransaction"/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentBlock/>
+		<Settlement3InputBlock/>
+    <ComplianceBlock/>
+	</Screen>
+
+  <Screen name="DebtSecurityTransaction" caption="Debt Security Transaction" product="DebtSecurityTransaction">
+    <!-- EG 20150624 [21151] RemoveAllocationBlock instead TradeRemoveBlock -->
+    <RemoveAllocationBlock/>
+    <FacilityHeaderBlock/>
+    <!-- EG 20150624 [21151] Add PositionTransferBlock|CorrectionOfQuantityBlock -->
+    <PositionTransferBlock/>
+    <CorrectionOfQuantityBlock/>
+    <PartyETDBlock-Bank/>
+    <DebtSecurityTransactionBlock clientid="debtSecurityTransaction"/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentBlock/>
+    <Settlement3InputBlock/>
+    <ComplianceBlock/>
+  </Screen>
+
+</Screens>

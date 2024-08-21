@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!--
+EG 20211217 [XXXXX] Gestion icon (Font Awesome) ouverture/Fermeture
+- Suppression de l'instruction : tblH-startdisplay:expand; (inutile valeur par défaut)
+- Suppression de l'instruction : tblH-linkid:xxxx; (inutile gestion via ajax quand nécessaire)
+-->
+
+<Objects>
+	<!-- Complex_FxAverageRateOption -->
+	<Object name="FxAverageRateOption" helpschema="efsml" helpelement="FxAverageRateOption">
+		<FxOptionBlock1 />
+		<FxOptionBlock2_WithSpotRate/>
+		<FxOptionPremiumBlock />
+		<FxAverageRateOptionPayoutBlock />
+		<FxAverageRateBlockAssetFxRate />
+	</Object>
+	<!-- FxAverageRateOptionPremiumSettltCur -->
+	<Object name="FxAverageRateOptionPremiumSettltCur" helpschema="efsml" helpelement="FxAverageRateOption">
+		<FxOptionBlock1 />
+		<FxOptionBlock2_WithSpotRate/>
+		<FxOptionPremiumCustomerBlock />
+		<FxAverageRateOptionPayoutBlock />
+		<FxAverageRateBlockAssetFxRate />
+	</Object>
+	<!--FxAverageStrikeOption-->
+	<Object name="FxAverageStrikeOption" helpschema="efsml" helpelement="FxAverageRateOption">
+		<FxOptionBlock1 />
+		<FxAverageStrikeOptionBlock2 />
+		<FxOptionPremiumBlock />
+		<FxAverageRateOptionPayoutBlock />
+		<FxAverageRateBlock />
+	</Object>
+	<!--FxAverageStrikeOptionPremiumSettltCur-->
+	<Object name="FxAverageStrikeOptionPremiumSettltCur" helpschema="efsml" helpelement="FxAverageRateOption">
+		<FxOptionBlock1 />
+		<FxAverageStrikeOptionBlock2 />
+		<FxOptionPremiumCustomerBlock />
+		<FxAverageRateOptionPayoutBlock />
+		<FxAverageRateBlock />
+	</Object>
+	<!-- FxAverageRateOptionPayoutBlock -->
+	<Object name="FxAverageRateOptionPayoutBlock">
+		<Table colspan="-1" controlalignleft="true">
+			<Banner caption="Cash Settlement" level="3" helpschema="efsml" helpelement="FxAverageRateOption" />
+			<Currency_L clientid="payoutCurrency" required="true" postback="false" />
+			<PayoutFormula clientid="payoutFormula" required="false" postback="false" />
+			<Fill/>
+		</Table>
+	</Object>
+	<!-- FxAverageRateBlockAssetFxRate -->
+	<Object name="FxAverageRateBlockAssetFxRate">
+		<Table colspan="-1">
+			<Banner caption="Moyennes" level="3" />
+			<Table colspan="-1" controlalignleft="true" id="tblAssetFxRate">
+				<Check_L clientid="geometricAverageSpecified" required="false" postback="false" />
+				<AssetFxRate_L clientid="assetFxRate" postback="true" required="true" />
+				<BusinessCenterTime clientid="fixingTime" required="true" postback="false" helpschema="fpml" helpelement="BusinessCenterTime" />
+				<StrikeQuoteBasis_L clientid="averageRateQuoteBasis" required="true" postback="false" helpschema="fpml" helpelement="StrikeQuoteBasisEnum" />
+				<Fill/>
+			</Table>
+			<Banner caption="Observations" level="3" helpschema="fpml" helpelement="FxAverageRateObservationSchedule" />
+			<Table colspan="-1" controlalignleft="true" id="tblaverageRateObservation">
+				<CheckMid clientid="averageRateObservationScheduleSpecified" required="true" postback="true" />
+				<FxAverageRateObservationSchedule clientid="averageRateObservationSchedule" required="false" helpschema="fpml" helpelement="FxAverageRateObservationSchedule" />
+				<Fill/>
+				<br/>
+				<CheckMid clientid="averageRateObservationDateSpecified" required="true" postback="true" />
+				<space/>
+				<Button clientid="averageRateObservationDate" type="Submit" imageurl="far fa-calendar-alt" caption="Dates" />
+			</Table>
+		</Table>
+
+	</Object>
+	<!-- FxAverageRateBlock -->
+	<Object name="FxAverageRateBlock">
+		<Table colspan="-1">
+			<banner caption="Moyenne" level="3" />
+			<Table controlalignleft="true" colspan="-1">
+        <Check_L clientid="geometricAverageSpecified" required="false" postback="false" />
+        <AssetFxRate_L clientid="assetFxRate" postback="true" required="true" />
+        <BusinessCenterTime clientid="fixingTime" required="true" postback="false" helpschema="fpml" helpelement="BusinessCenterTime" />
+        <StrikeQuoteBasis_L clientid="averageRateQuoteBasis" required="true" postback="false" helpschema="fpml" helpelement="StrikeQuoteBasisEnum" />
+        <!--<StrikeQuoteBasis_L clientid="averageRateQuoteBasis" required="true" postback="false" helpschema="fpml" helpelement="StrikeQuoteBasisEnum" />
+				<BusinessCenterTime clientid="fixingTime" required="true" postback="false" helpschema="fpml" helpelement="BusinessCenterTime" />
+				<InformationSource_Provider clientid="informationSource" required="true" postback="false" helpschema="efsml" helpelement="InformationSource" />-->
+				<Fill/>
+			</Table>
+			<Table controlalignleft="true" colspan="-1">
+				<Banner caption="Observations" level="3" helpschema="fpml" helpelement="FxAverageRateObservationSchedule" />
+				<CheckMid clientid="averageRateObservationScheduleSpecified" required="true" postback="true" />
+				<FxAverageRateObservationSchedule clientid="averageRateObservationSchedule" required="false" helpschema="fpml" helpelement="FxAverageRateObservationSchedule" />
+				<Fill/>
+				<br/>
+				<CheckMid clientid="averageRateObservationDateSpecified" required="true" postback="true" />
+				<space/>
+				<Button clientid="averageRateObservationDate" type="Submit" imageurl="far fa-calendar-alt" caption="Dates" />
+			</Table>
+		</Table>
+	</Object>
+	<Object name="FxAverageStrikeOptionBlock2">
+		<Table colspan="-1">
+			<Table colspan="-1" controlalignleft="true" >
+				<hr style="margin-top:5px;margin-bottom:5px;"/>
+				<Date_L clientid="valueDate" required="true" postback="false" />
+				<SettlementType_L clientid="averageStrikeOption_settlementType" required="false" postback="false" />
+				<Table >
+					<Money_L clientid="callCurrencyAmount" required="true" postback="true" helpschema="fpml-shared" helpelement="Money" />
+					<br />
+					<Money_L clientid="putCurrencyAmount" required="true" postback="true" helpschema="fpml-shared" helpelement="Money" />
+				</Table>
+				<FxStrikePrice2 clientid="fxStrikePrice" required="true" postback="true"  helpschema="fpml-fx" helpelement="FxStrikePrice" />
+				<Fill/>
+			</Table>
+			<Table colspan="-1" controlalignleft="true">
+				<FxRate_L clientid="spotRate" required="false" postback="false" />
+				<space />
+				<Check_L clientid="procedureSpecified" required="true" postback="true" />
+				<space />
+				<Button clientid="procedureSpecified" type="Submit" imageurl="fas fa-external-link-square-alt" caption="Detail"/>
+			</Table>
+		</Table>
+	</Object>
+
+	<!-- Complex_FxBarrierOption -->
+	<Object name="FxBarrierOption" helpschema="efsml" helpelement="FxBarrierOption">
+		<FxOptionBlock1 />
+		<FxOptionBlock3_WithSpotRateMandatory/>
+		<FxOptionPremiumBlock />
+		<!-- 20070725 PL Ticket:n°15600 -->
+		<Table colspan="-1">
+			<banner caption="Cash Settlement" level="3" helpschema="efsml" helpelement="FxCashSettlement" />
+			<FxCashSettlement clientid="cashSettlementTerms" required="false" helpschema="efsml" helpelement="FxCashSettlement" />
+		</Table>
+		<!--  -->
+		<FxBarrierAssetFxRateBlock/>
+		<FxBarrierOptionRebate/>
+	</Object>
+	<Object name="FxBarrierOptionPremiumSettltCur" helpschema="efsml" helpelement="FxBarrierOption">
+		<FxOptionBlock1 />
+		<FxOptionBlock3_WithSpotRateMandatory/>
+		<FxOptionPremiumCustomerBlock />
+		<!-- 20070725 PL Ticket:n°15600 -->
+		<Table colspan="-1">
+			<banner caption="Cash Settlement" level="3" helpschema="efsml" helpelement="FxCashSettlement" />
+			<FxCashSettlement clientid="cashSettlementTerms" required="false" helpschema="efsml" helpelement="FxCashSettlement" />
+		</Table>
+		<!--  -->
+		<FxBarrierAssetFxRateBlock/>
+		<FxBarrierOptionRebate/>
+	</Object>
+	<Object name="FxBarrierOptionRebate" helpschema="efsml" helpelement="FxBarrierOption">
+		<table id="tblRebateH" colspan="-1"
+				style="istableH:true;tblH-titleR:Rebate;tblH-css:size5;tblH-reverse:1;tblH-startdisplay:collapse;">
+			<table id="tblRebate" >
+				<FxOptionPayout clientid="triggerPayout" required="false" helpschema="fpml" helpelement="FxOptionPayout"  />
+				<Check_L clientid="fxRebateBarrierSpecified" required="true" postback="true" />
+				<space/>
+				<Button clientid="fxRebateBarrier" type="Submit" imageurl="fas fa-external-link-square-alt" caption="Detail" />
+				<Fill/>
+			</table>
+		</table>
+	</Object>
+	<!-- Complex_FxDigitalOption  -->
+	<Object name="FxDigitalOptionCommonBase" helpschema="efsml" helpelement="FxDigitalOption">
+		<Table style="margin-top:2px;" colspan="-1" >
+			<Table colspan="-1" controlalignleft="true">
+				<ExpiryDateTime clientid="expiryDateTime" required="true" helpschema="fpml" helpelement="ExpiryDateTime" />
+			</Table>
+			<Table colspan="-1" controlalignleft="true">
+				<hr style="margin-top:5px;margin-bottom:5px;"/>
+				<QuotedCurrencyPair clientid="quotedCurrencyPair" postback="true" required="true" helpschema="fpml" helpelement="QuotedCurrencyPair" />
+				<FxRate_L clientid="spotRate" required="true" />
+				<Fill/>
+			</Table>
+			<Table colspan="-1" controlalignleft="true">
+				<banner caption="Payout" level="3" helpschema="fpml" helpelement="FxOptionPayout" />
+				<Date_L clientid="valueDate" required="true" postback="true"/>
+				<FxOptionPayout clientid="triggerPayout" />
+				<Fill/>
+			</Table>
+		</Table>
+	</Object>
+	<Object name="FxDigitalOptionCommon" helpschema="efsml" helpelement="FxDigitalOption">
+		<Table colspan="-1">
+			<FxDigitalOptionCommonBase/>
+			<FxOptionPremium_NoPremiumQuoteBlock />
+		</Table>
+	</Object>
+	<Object name="FxDigitalOptionCommonPremiumSettltCur" helpschema="efsml" helpelement="FxDigitalOption">
+		<Table colspan="-1" controlalignleft="true">
+			<FxDigitalOptionCommonBase />
+			<FxOptionPremiumCustomer_NoPremiumQuoteBlock />
+		</Table>
+	</Object>
+	<!-- ******************************************************************************************** -->
+	<Object name="FxDigitalOptionEuropeanTrigger">
+		<FxDigitalOptionCommon />
+		<Table style="istableH:true;tblH-title:Triggers;tblH-css:size5;tblH-reverse:1;helpschema:fpml;helpelement:FxEuropeanTrigger;" colspan="-1" >
+			<Table id="tblTriggers" style="margin-top:2px;" colspan="-1">
+				<FxEuropeanTriggerAssetFxRate clientid="fxEuropeanTrigger" required="false" occurs="1" addsuboperator="true" helpschema="fpml" helpelement="FxEuropeanTrigger" />
+			</Table>
+		</Table>
+	</Object>
+	<Object name="FxDigitalOptionAmericanTrigger">
+		<FxDigitalOptionCommon />
+		<Table style="istableH:true;tblH-title:Triggers;tblH-css:size5;tblH-reverse:1;helpschema:fpml;helpelement:FxAmericanTrigger;" colspan="-1" >
+			<Table id="tblTriggers" style="margin-top:2px;" colspan="-1">
+				<FxAmericanTriggerAssetFxRate clientid="fxAmericanTrigger" required="false" occurs="1" addsuboperator="true" helpschema="fpml" helpelement="FxAmericanTrigger" />
+			</Table>
+		</Table>
+	</Object>
+	<Object name="FxDigitalOptionAmericanEuropeanTrigger">
+		<FxDigitalOptionCommon helpschema="efsml" helpelement="FxDigitalOption" />
+		<Table colspan="-1">
+			<banner caption="Triggers" level="3" />
+			<Check_L clientid="fxEuropeanTriggerSpecified" required="true" postback="true" helpschema="efsml" helpelement="FxEuropeanTrigger" />
+			<Check_L clientid="fxAmericanTriggerSpecified" required="true" postback="true" helpschema="efsml" helpelement="FxAmericanTrigger" />
+			<space />
+			<Button clientid="fxTrigger" type="Submit" imageurl="fas fa-external-link-square-alt" caption="Detail" />
+		</Table>
+	</Object>
+	<!-- ******************************************************************************************** -->
+	<Object name="FxDigitalOptionPremiumSettltCurEuropeanTrigger">
+		<FxDigitalOptionCommonPremiumSettltCur />
+		<Table style="istableH:true;tblH-title:Triggers;tblH-css:size5;tblH-reverse:1;helpschema:fpml;helpelement:FxEuropeanTrigger;" colspan="-1" >
+			<Table id="tblTriggers" style="margin-top:2px;" colspan="-1">
+				<FxEuropeanTriggerAssetFxRate clientid="fxEuropeanTrigger" required="false" occurs="1" addsuboperator="true" helpschema="fpml" helpelement="FxEuropeanTrigger" />
+			</Table>
+		</Table>
+	</Object>
+	<Object name="FxDigitalOptionPremiumSettltCurAmericanTrigger">
+		<FxDigitalOptionCommonPremiumSettltCur />
+		<Table style="istableH:true;tblH-title:Triggers;tblH-css:size5;tblH-reverse:1;helpschema:fpml;helpelement:FxAmericanTrigger;" colspan="-1" >
+			<Table id="tblTriggers" style="margin-top:2px;" colspan="-1">
+				<FxAmericanTriggerAssetFxRate clientid="fxAmericanTrigger" required="false" occurs="1" addsuboperator="true" helpschema="fpml" helpelement="FxEuropeanTrigger" />
+			</Table>
+		</Table>
+	</Object>
+	<Object name="FxDigitalOptionPremiumSettltCurAmericanEuropeanTrigger">
+		<FxDigitalOptionCommonPremiumSettltCur />
+		<Table colspan="-1">
+			<banner caption="Triggers" level="3" />
+			<Check_L clientid="fxEuropeanTriggerSpecified" required="true" postback="true" helpschema="fpml" helpelement="FxEuropeanTrigger" />
+			<Check_L clientid="fxAmericanTriggerSpecified" required="true" postback="true" helpschema="fpml" helpelement="FxAmericanTrigger" />
+			<space />
+			<Button clientid="fxTrigger" type="Submit" imageurl="fas fa-external-link-square-alt" caption="Detail" />
+		</Table>
+	</Object>
+	<!-- ******************************************************************************************** -->
+	<!--Complex_ExchangeRate -->
+	<Object name="ExchangeRateLightBlock" helpschema="fpml-fx" helpelement="ExchangeRate">
+		<Table colspan="-1" controlalignleft="true">
+			<QuotedCurrencyPair_QuoteBasis clientid="quotedCurrencyPair" required="true"/>
+			<FxRate_L clientid="rate" required="true" />
+			<Space />
+			<sideRates />
+		</Table>
+	</Object>
+	<Object name="ExchangeRateBlock" helpschema="efsml" helpelement="ExchangeRate">
+		<Table colspan="-1"  controlalignleft="true">
+			<QuotedCurrencyPair_QuoteBasis clientid="quotedCurrencyPair" required="true" />
+			<FxRate_L clientid="spotRate" required="false" />
+			<Decimal_L clientid="forwardPoints" required="false" />
+			<FxRate_L clientid="rate" required="true" />
+			<Space />
+			<sideRates />
+		</Table>
+	</Object>
+	<Object name="ExchangeRateLightNoSideRates" helpschema="efsml" helpelement="ExchangeRate">
+		<QuotedCurrencyPair_QuoteBasis clientid="quotedCurrencyPair" required="true"/>
+		<FxRate_L clientid="rate" required="true" />
+	</Object>
+	<Object name="ExchangeRateNoSideRatesBlock" helpschema="efsml" helpelement="ExchangeRate">
+		<Table colspan="-1" controlalignleft="true">
+			<QuotedCurrencyPair_QuoteBasis clientid="quotedCurrencyPair" required="true" />
+			<FxRate_L clientid="spotRate" required="false" />
+			<Decimal_L clientid="forwardPoints" required="false" />
+			<FxRate_L clientid="rate" required="true" />
+		</Table>
+	</Object>
+	<Object name="ExchangeRateFxFixingAssetFxRate" helpschema="efsml" helpelement="ExchangeRate">
+		<Table colspan="-1" controlalignleft="true">
+			<FxFixingAssetFxRate clientid="fixing" required="true" postback="true" />
+		</Table>
+	</Object>
+	<!--Complex_FxAmericanTrigger-->
+	<Object name="FxAmericanTrigger" helpschema="fpml" helpelement="FxAmericanTrigger">
+		<Table colspan="-1" controlalignleft="true">
+			<TouchCondition_L clientid="touchCondition" required="true" postback="true" helpschema="fpml" helpelement="TouchConditionEnum" />
+			<FxRate_L clientid="triggerRate" required="true" postback="true" />
+			<InformationSource_Provider clientid="informationSource" required="true" helpschema="efsml" helpelement="InformationSource" />
+			<Date_L clientid="observationStartDate" required="false" />
+			<Date clientid="observationEndDate" required="false" />
+			<Fill/>
+		</Table>
+	</Object>
+	<Object name="FxAmericanTriggerAssetFxRate" helpschema="fpml" helpelement="FxAmericanTrigger">
+		<Table colspan="-1" controlalignleft="true">
+			<TouchCondition_L clientid="touchCondition" required="true" postback="true" helpschema="fpml" helpelement="TouchConditionEnum" />
+			<FxRate_L clientid="triggerRate" required="true" postback="true" />
+			<AssetFxRate_L clientid="assetFxRate" postback="true" required="true" />
+			<Date_L clientid="observationStartDate" required="false" />
+			<Date clientid="observationEndDate" required="false" />
+			<Fill/>
+		</Table>
+	</Object>
+
+	<!-- Complex_FxAverageRateObservationSchedule -->
+	<Object name="FxAverageRateObservationSchedule" helpschema="fpml" helpelement="FxAverageRateObservationSchedule">
+		<Date_L clientid="observationStartDate" required="true" postback="true" />
+		<Date_L clientid="observationEndDate" required="true" postback="false" />
+		<CalculationPeriodFrequency_L clientid="calculationPeriodFrequency" required="true" helpschema="fpml" helpelement="CalculationPeriodFrequency" />
+		<Fill/>
+	</Object>
+	<!-- Complex_FxBarrier-->
+	<Object name="FxBarrier" helpschema="fpml" helpelement="FxBarrier">
+		<Table colspan="-1" controlalignleft="true">
+			<FxBarrierType_L clientid="fxBarrierType" required="false" postback="true" helpschema="fpml" helpelement="FxBarrierTypeEnum" />
+			<QuotedCurrencyPair_QuoteBasis clientid="quotedCurrencyPair" postback="true" required="true" helpschema="fpml" helpelement="QuotedCurrencyPair" />
+			<FxRate_L clientid="triggerRate" required="true" postback="true" />
+			<InformationSource_Provider clientid="informationSource" required="true" helpschema="efsml" helpelement="InformationSource" />
+			<Date_L clientid="observationStartDate" required="false" />
+			<Date clientid="observationEndDate" required="false" />
+			<Fill/>
+		</Table>
+	</Object>
+	<Object name="FxBarrierAssetFxRate" helpschema="fpml" helpelement="FxBarrier">
+		<Table colspan="-1" controlalignleft="true">
+			<FxBarrierType_L clientid="fxBarrierType" required="false" postback="true" helpschema="fpml" helpelement="FxBarrierTypeEnum" />
+			<FxRate_L clientid="triggerRate" required="true" postback="true" />
+			<AssetFxRate_L clientid="assetFxRate" postback="true" required="true" />
+			<Date_L clientid="observationStartDate" required="false" />
+			<Date clientid="observationEndDate" required="false" />
+			<Fill/>
+		</Table>
+	</Object>
+	<Object name="FxBarrierAssetFxRateBlock" helpschema="fpml" helpelement="FxBarrier">
+		<Table style="istableH:true;tblH-title:Barriers;tblH-css:size5;tblH-reverse:1;helpschema:fpml;helpelement:FxBarrier;" colspan="-1" >
+			<Table id="FxBarrierAssetFxRate" style="margin-top:2px;" colspan="-1">
+				<FxBarrierAssetFxRate clientid="fxBarrier" required="false" occurs="1" addsuboperator="true" helpschema="fpml" helpelement="FxBarrier" />
+			</Table>
+		</Table>
+	</Object>
+	<!--Complex_FxEuropeanTrigger-->
+	<Object name="FxEuropeanTriggerAssetFxRate" helpschema="fpml" helpelement="FxEuropeanTrigger">
+		<Table colspan="-1" controlalignleft="true">
+			<TriggerCondition_L clientid="triggerCondition" required="true" postback="true" helpschema="fpml" helpelement="TriggerConditionEnum" />
+			<FxRate_L clientid="triggerRate" required="true" postback="true" />
+			<AssetFxRate_L clientid="assetFxRate" postback="true" required="true" />
+		</Table>
+	</Object>
+	<!--Complex_FxLeg-->
+	<Object name="FxLegLight" helpschema="fpml" helpelement="FxLeg">
+		<Table colspan="-1" style="margin-top:2px;" controlalignleft="true">
+			<Date_L clientid="valueDate" />
+		</Table>
+		<ExchangedCur1ExchangedCur2Block />
+		<hr style="margin-top:5px;margin-bottom:5px;"/>
+		<ExchangeRateLightBlock clientid="exchangeRate" postback="true" helpschema="efsml" helpelement="ExchangeRate" />
+	</Object>
+
+  <Object name="FxLegLightInTable" helpschema="fpml" helpelement="FxLeg">
+    <table style="istableH:true;tblH-title:;tblH-css:size5;tblH-reverse:1;helpschema:efsml;helpelement:FxLeg;" colspan="-1" >
+      <Table colspan="-1" style="margin-top:2px;" controlalignleft="true">
+        <Date_L clientid="valueDate" />
+      </Table>
+      <ExchangedCur1ExchangedCur2Block />
+      <hr style="margin-top:5px;margin-bottom:5px;"/>
+      <ExchangeRateLightBlock clientid="exchangeRate" postback="true" helpschema="efsml" helpelement="ExchangeRate" />
+    </table>
+    
+  </Object>
+
+
+  <!--FxLegRich-->
+  <Object name="FxLegRich" helpschema="fpml" helpelement="FxLeg">
+		<Table style="margin-top:2px;" colspan="-1" controlalignleft="true">
+			<Date_L clientid="valueDate" />
+		</Table>
+		<ExchangedCur1ExchangedCur2Block />
+		<hr style="margin-top:5px;margin-bottom:5px;"/>
+		<ExchangeRateBlock clientid="exchangeRate" postback="true" helpschema="efsml" helpelement="ExchangeRate" />
+	</Object>
+	<Object name="FxLegNDF" helpschema="fpml" helpelement="FxLeg">
+		<Table style="margin-top:2px;" colspan="-1" controlalignleft="true">
+			<Date_L clientid="valueDate" />
+		</Table>
+		<ExchangedCur1ExchangedCur2Block />
+		<hr style="margin-top:5px;margin-bottom:5px;"/>
+		<ExchangeRateBlock clientid="exchangeRate" postback="true" />
+		<Table colspan="-1">
+			<Banner caption="Cash Settlement" level="3" helpschema="efsml" helpelement="FxCashSettlement" />
+      <!-- PL 20100625 -->
+      <FxCashSettlementCalculationAgentRate clientid="nonDeliverableForward" required="true" helpschema="efsml" helpelement="FxCashSettlement" />
+		</Table>
+	</Object>
+	<Object name="FxLegDCS" helpschema="fpml" helpelement="FxLeg">
+		<Table style="margin-top:2px;" colspan="-1" controlalignleft="true">
+			<Date_L clientid="valueDate" />
+		</Table>
+		<ExchangedCur1ExchangedCur2Block />
+    <hr style="margin-top:5px;margin-bottom:5px;"/>
+		<ExchangeRateNoSideRatesBlock clientid="exchangeRate" postback="1" helpschema="efsml" helpelement="ExchangeRate" />
+		<Table colspan="-1">
+			<Banner caption="Cash Settlement" level="3" helpschema="efsml" helpelement="FxCashSettlement" />
+			<FxCashSettlementCalculationAgentRate clientid="nonDeliverableForward" required="true" helpschema="efsml" helpelement="FxCashSettlement" />
+		</Table>
+	</Object>
+	<Object name="FxLegFixing" helpschema="fpml" helpelement="FxLeg">
+		<Table style="margin-top:2px;" colspan="-1" controlalignleft="true">
+			<Date_L clientid="valueDate" />
+		</Table>
+		<ExchangedCur1ExchangedCur2Block />
+		<Table colspan="-1">
+			<Banner caption="Fixing" level="3" helpschema="fpml" helpelement="FxLeg" />
+			<ExchangeRateFxFixingAssetFxRate clientid="exchangeRate" required="true" postback="true" />
+		</Table>
+	</Object>
+	<Object name="ExchangedCur1ExchangedCur2Block">
+		<Table colspan="-1">
+			<Banner caption="IDC1" level="3" helpschema="fpml" helpelement="FxLeg" />
+			<ExchangedCurrencyBlock clientid="exchangedCurrency1" postback="true" />
+			<Banner caption="IDC2" level="3" helpschema="fpml" helpelement="FxLeg" />
+			<ExchangedCurrencyBlock clientid="exchangedCurrency2" postback="true" />
+		</Table>
+	</Object>
+
+	<!-- Complex_FxOptionLeg -->
+	<Object name="FxOptionLeg" helpschema="efsml" helpelement="FxOptionLeg">
+		<FxOptionBlock1 />
+		<FxOptionBlock2 />
+		<FxOptionPremiumBlock/>
+		<Table colspan="-1">
+			<banner caption="Cash Settlement" level="3" helpschema="efsml" helpelement="FxCashSettlement" />
+			<FxCashSettlement clientid="cashSettlementTerms" required="false" helpschema="efsml" helpelement="FxCashSettlement" />
+		</Table>
+	</Object>
+	<Object name="FxOptionLegPremiumCustomer" helpschema="efsml" helpelement="FxOptionLeg">
+		<FxOptionBlock1 />
+		<FxOptionBlock2 />
+		<FxOptionPremiumCustomerBlock/>
+		<Table colspan="-1">
+			<banner caption="Cash Settlement" level="3" helpschema="efsml" helpelement="FxCashSettlement" />
+			<FxCashSettlement clientid="cashSettlementTerms" required="false" helpschema="efsml" helpelement="FxCashSettlement" />
+		</Table>
+	</Object>
+	<Object name="FxOptionBlock1">
+		<Table style="margin-top:2px;"  colspan="-1" controlalignleft="true">
+      <CallPutEnum_L clientid="optionType" required="false" postback="false" helpschema="fpml" helpelement="OptionTypeEnum" />
+			<ExerciseStyle_L clientid="exerciseStyle" required="true" postback="true" helpschema="fpml" helpelement="ExerciseStyleEnum" />
+			<space />
+			<Button clientid="exerciseStyle" type="Submit" imageurl="far fa-calendar-alt" caption="Dates" />
+			<ExpiryDateTime clientid="expiryDateTime" required="true" helpschema="fpml" helpelement="ExpiryDateTime" />
+		</Table>
+	</Object>
+	<Object name="FxOptionBlock2">
+		<Table colspan="-1">
+			<hr style="margin-top:5px;margin-bottom:5px;"/>
+			<Table colspan="-1" controlalignleft="true">
+				<Date_L clientid="valueDate" required="true" postback="false" />
+				<Table>
+					<Money_L clientid="callCurrencyAmount" required="true" postback="true" helpschema="fpml" helpelement="Money"/>
+					<br />
+					<Money_L clientid="putCurrencyAmount" required="true" postback="true" helpschema="fpml" helpelement="Money"/>
+				</Table>
+				<FxStrikePrice2 clientid="fxStrikePrice" required="true" postback="true" helpschema="fpml-fx" helpelement="FxStrikePrice"/>
+			</Table>
+			<Table colspan="-1" controlalignleft="true">
+				<Check_L clientid="procedureSpecified" required="true" postback="true" />
+				<space />
+				<Button clientid="procedureSpecified" type="Submit" imageurl="fas fa-external-link-square-alt" caption="Detail" />
+			</Table>
+		</Table>
+	</Object>
+	<Object name="FxOptionBlock2_WithSpotRate">
+		<Table colspan="-1">
+			<hr style="margin-top:5px;margin-bottom:5px;"/>
+			<Table colspan="-1" controlalignleft="true">
+				<Date_L clientid="valueDate" required="true" postback="false" />
+				<Table>
+					<Money_L clientid="callCurrencyAmount" required="true" postback="true" helpschema="fpml" helpelement="Money"/>
+					<br />
+					<Money_L clientid="putCurrencyAmount" required="true" postback="true" helpschema="fpml" helpelement="Money"/>
+				</Table>
+				<FxStrikePrice2 clientid="fxStrikePrice" required="true" postback="true" helpschema="fpml" helpelement="FxStrikePrice" />
+			</Table>
+			<Table colspan="-1" controlalignleft="true">
+				<FxRate_L clientid="spotRate" required="false" postback="false" />
+				<space />
+				<Check_L clientid="procedureSpecified" required="true" postback="true" />
+				<space />
+				<Button clientid="procedureSpecified" type="Submit" imageurl="fas fa-external-link-square-alt" caption="Detail" />
+			</Table>
+		</Table>
+	</Object>
+	<Object name="FxOptionBlock3_WithSpotRateMandatory">
+		<Table colspan="-1">
+			<hr style="margin-top:5px;margin-bottom:5px;"/>
+			<Table colspan="-1" controlalignleft="true">
+				<Date_L clientid="valueDate" required="true" postback="false" />
+				<Table>
+					<Money_L clientid="callCurrencyAmount" required="true" postback="true" helpschema="fpml" helpelement="Money" />
+					<br />
+					<Money_L clientid="putCurrencyAmount" required="true" postback="true" helpschema="fpml" helpelement="Money" />
+				</Table>
+				<FxStrikePrice2 clientid="fxStrikePrice" required="true" postback="true"  helpschema="fpml" helpelement="FxStrikePrice" />
+			</Table>
+			<Table colspan="-1" controlalignleft="true">
+				<FxRate_L clientid="spotRate" required="true" postback="false" />
+				<space />
+				<Check_L clientid="procedureSpecified" required="true" postback="true" />
+				<space />
+				<Button clientid="procedureSpecified" type="Submit" imageurl="fas fa-external-link-square-alt" caption="Detail" />
+			</Table>
+		</Table>
+	</Object>
+
+	<!-- FxOptionPremiumBlock -->
+	<Object name="FxOptionPremiumBlock">
+		<Table style="istableH:true;tblH-title:Premium;tblH-css:size5;tblH-reverse:1;helpschema:efsml;helpelement:FxOptionPremium;" colspan="-1" >
+			<Table colspan="-1" id="tblFxOptionPremium" style="margin-top:2px;" controlalignleft="true">
+				<FxOptionPremium clientid="fxOptionPremium" required="true" occurs="1" addsuboperator="true"  tablecolspan="-1" helpschema="efsml" helpelement="FxOptionPremium" />
+			</Table>				
+		</Table>			
+	</Object>
+	<!-- FxOptionPremium_NoPremiumQuoteBlock -->
+	<Object name="FxOptionPremium_NoPremiumQuoteBlock">
+		<Table style="istableH:true;tblH-title:Premium;tblH-css:size5;tblH-reverse:1;helpschema:efsml;helpelement:FxOptionPremium;" colspan="-1" >
+			<Table colspan="-1" id="tblFxOptionPremium" style="margin-top:2px;" controlalignleft="true">
+				<FxOptionPremium_NoPremiumQuote clientid="fxOptionPremium" required="true" occurs="1" addsuboperator="true" tablecolspan="-1" helpschema="efsml" helpelement="FxOptionPremium" />
+			</Table>
+		</Table>
+	</Object>
+	<!-- FxOptionPremiumCustomerBlock -->
+	<Object name="FxOptionPremiumCustomerBlock">
+		<Table style="istableH:true;tblH-title:Premium;tblH-css:size5;tblH-reverse:1;helpschema:efsml;helpelement:FxOptionPremium;" colspan="-1" >
+			<Table colspan="-1" id="tblFxOptionPremium" style="margin-top:2px;" controlalignleft="true">
+				<FxOptionPremiumCustomer clientid="fxOptionPremium" required="true" occurs="1" addsuboperator="true" tablecolspan="-1" helpschema="efsml" helpelement="FxOptionPremium" />
+			</Table>
+		</Table>
+	</Object>
+	<!-- FxOptionPremiumCustomer_NoPremiumQuoteBlock -->
+	<Object name="FxOptionPremiumCustomer_NoPremiumQuoteBlock">
+		<Table style="istableH:true;tblH-title:Premium;tblH-css:size5;tblH-reverse:1;helpschema:efsml;helpelement:FxOptionPremium;" colspan="-1" >
+			<Table colspan="-1" id="tblFxOptionPremium" style="margin-top:2px;" controlalignleft="true">
+				<FxOptionPremiumCustomer_NoPremiumQuote clientid="fxOptionPremium" required="true" occurs="1" addsuboperator="true" tablecolspan="-1" helpschema="efsml" helpelement="FxOptionPremium" />
+			</Table>
+		</Table>
+	</Object>
+
+	<!--Complex_FxOptionPayout-->
+	<Object name="FxOptionPayout" helpschema="fpml" helpelement="FxOptionPayout">
+		<Payout_L clientid="payoutStyle" required="true" helpschema="fpml" helpelement="PayoutEnum" />
+		<Label clientid="amount" helpschema="fpml" helpelement="FxOptionPayout" />
+		<Table>
+			<Amount postback="true" clientid="amount" required="true" />
+			<Space />
+			<Currency postback="true" clientid="currency" required="true" />
+		</Table>
+		<Space />
+		<SettlementInformation_L clientid="settlementInformation" postback="true" helpschema="fpml" helpelement="FxOptionPayout" />
+	</Object>
+
+	<!-- Complex_FxOptionPremium -->
+	<Object name="FxOptionPremium" helpschema="efsml" helpelement="FxOptionPremium">
+		<Table colspan="-1" controlalignleft="true">
+			<Table>
+				<PartyReference_L clientid="payer" postback="true" required="true" />
+				<br />
+				<PartyReference_L clientid="receiver" postback="1" required="true" />
+			</Table>
+			<Table>
+				<Date_L clientid="premiumSettlementDate" required="1" helpschema="fpml" helpelement="AdjustableDate" />
+			</Table>
+			<Table>
+				<PremiumQuote clientid="premiumQuote" required="false" helpschema="fpml" helpelement="PremiumQuote" postback="true"/>
+				<br/>
+				<Table colspan="-1">
+					<Money_L clientid="premiumAmount" required="1" postback="true" helpschema="fpml" helpelement="Money"/>
+					<SettlementInformation_L clientid="settlementInformation" postback="true" />
+				</Table>
+			</Table>
+		</Table>
+	</Object>
+
+	<Object name="FxOptionPremium_NoPremiumQuote" helpschema="efsml" helpelement="FxOptionPremium">
+		<Table colspan="-1"  >
+			<!--<banner caption="Prime" level="3" helpschema="efsml" helpelement="FxOptionPremium" />-->
+			<Table colspan="-1" id="tblFxOptionPremium_NoPremiumQuote" controlalignleft="true">
+				<Table >
+					<PartyReference_L clientid="payer" postback="true" required="true" />
+					<br />
+					<PartyReference_L clientid="receiver" postback="1" required="true" />
+				</Table>
+				<Table>
+					<Date_L clientid="premiumSettlementDate" required="false" helpschema="fpml" helpelement="AdjustableDate" />
+					<br />
+					<Money_L clientid="premiumAmount" required="true" postback="true" />
+					<SettlementInformation_L clientid="settlementInformation" postback="true" />
+				</Table>
+			</Table>
+		</Table>
+	</Object>
+
+	<Object name="FxOptionPremiumCustomer" helpschema="efsml" helpelement="FxOptionPremium">
+		<Table colspan="-1"  >
+			<Table colspan="-1"  controlalignleft="true" >
+				<Table>
+					<PartyReference_L clientid="payer" postback="true" required="true" />
+					<br />
+					<PartyReference_L clientid="receiver" postback="1" required="true" />
+				</Table>
+				<Table>
+					<Date_L clientid="premiumSettlementDate" required="1" helpschema="fpml" helpelement="AdjusTableDate" />
+				</Table>
+				<Table>
+					<PremiumQuote clientid="premiumQuote" required="false" helpschema="fpml" helpelement="PremiumQuote" postback="true"/>
+					<br/>
+					<Table colspan="-1">
+						<Money_L clientid="premiumAmount" required="1" postback="true" />
+						<SettlementInformation_L clientid="settlementInformation" postback="true" />
+					</Table>
+				</Table>
+			</Table>
+			<Table colspan= "-1" style="margin-top:5px;" controlalignleft="true" >
+				<CustomerSettlementPayment clientid="customerSettlementPremium"  required="false" />
+			</Table>
+		</Table>
+	</Object>
+	<Object name="FxOptionPremiumCustomer_NoPremiumQuote" helpschema="efsml" helpelement="FxOptionPremium">
+		<Table colspan="-1" >
+			<!--<banner caption="Prime" level="3" helpschema="efsml" helpelement="FxOptionPremium" />-->
+			<Table colspan="-1" id ="tblFxOptionPremiumCustomer_NoPremiumQuote" controlalignleft="true">
+				<Table>
+					<PartyReference_L clientid="payer" postback="true" required="true" />
+					<br />
+					<PartyReference_L clientid="receiver" postback="1" required="true" />
+				</Table>
+				<Table>
+					<Table colspan ="-1">
+						<Date_L clientid="premiumSettlementDate" required="1" helpschema="fpml" helpelement="AdjustableDate" />
+						<br />
+						<Money_L clientid="premiumAmount" required="1" postback="true" />
+						<SettlementInformation_L clientid="settlementInformation" postback="true" />
+					</Table>
+				</Table>
+			</Table>
+			<Table colspan= "-1" style="margin-top:5px;" controlalignleft="true">
+				<CustomerSettlementPayment clientid="customerSettlementPremium"  required="false" />
+			</Table>
+		</Table>
+	</Object>
+	<!-- Complex_FxStrikePrice-->
+	<Object name="FxStrikePrice" helpschema="fpml" helpelement="FxStrikePrice">
+		<StrikeQuoteBasis_L clientid="strikeQuoteBasis" postback="true" required="true" />
+		<Table>
+			<FxRate_L clientid="rate" postback="true" required="true" />
+		</Table>
+	</Object>
+	<Object name="FxStrikePrice2" helpschema="fpml" helpelement="FxStrikePrice">
+		<Table>
+			<StrikeQuoteBasis_L clientid="strikeQuoteBasis" postback="true" required="true" />
+			<br />
+			<FxRate_L clientid="rate" postback="true" required="true" />
+		</Table>
+	</Object>
+	<!-- Complex_ExpiryDateTime -->
+	<Object name="ExpiryDateTime" helpschema="fpml" helpelement="ExpiryDateTime">
+		<Date_L clientid="expiryDate" required="true" postback="false" />
+		<BusinessCenterTime clientid="expiryTime" required="true" postback="false" />
+	</Object>
+	<!-- Complex_PremiumQuote -->
+	<Object name="PremiumQuote" helpschema="fpml" helpelement="PremiumQuote">
+		<Label clientid="premiumValue" />
+		<DecimalPercent clientid="premiumValue" />
+		<PremiumQuotedBasis clientid="premiumQuoteBasis" />
+	</Object>
+	<!-- Complex_SideRates -->
+	<Object name="sideRates" helpschema="fpml" helpelement="SideRates">
+		<Check_L clientid="sideRatesSpecified" required="true" postback="true" helpschema="fpml" helpelement="SideRates" />
+		<Space />
+		<Button clientid="rate" type="Submit" imageurl="fas fa-external-link-square-alt" caption="Detail" />
+	</Object>
+	<!-- TermDeposit -->
+	<Object name="TermDeposit" helpschema="fpml" helpelement="TermDeposit">
+		<Table colspan="-1" controlalignleft="true" style="margin-top:2px;">
+			<Date_L clientid="startDate" required="true" postback="true" />
+			<Date_L clientid="maturityDate" required="true" postback="true" />
+		</Table>
+		<Table colspan="-1" controlalignleft="true" style="margin-top:2px;">
+			<Money_L clientid="principal" required="true" postback="true" helpschema="fpml" helpelement="Money" />
+			<FixedRate_L clientid="fixedRate" required="true" postback="true" />
+			<DayCountFraction_L clientid="dayCountFraction" postback="true" required="true" />
+			<Money_L clientid="interest" required="false" helpschema="fpml" helpelement="Money" />
+		</Table>
+	</Object>
+</Objects>

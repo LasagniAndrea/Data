@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<QueryCacheDelCascading xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="QueryCacheDelCascading.xsd" >
+  <table id="ACCINSTRENV" >
+    <obj>VW_ACCMODINSTR</obj>
+    <obj>VW_ACCDAYBOOK</obj>
+  </table>
+  <table id="ACCINSTRENVDET" >
+    <obj>VW_ACCDAYBOOK</obj>
+  </table>
+  <table id="ACCKEY" >
+    <obj>ACCKEYENUM</obj>
+  </table>
+  <table id="ACCMODEL" >
+    <obj>VW_ACCMODINSTR</obj>
+    <obj>VW_ACCDAYBOOK</obj>
+  </table>
+  <table id="ACTOR" >
+    <obj>VW_BOOK_VIEWER</obj>
+    <obj>VW_BOOK_ENTITY</obj>
+    <obj>VW_INCI_NCS</obj>
+    <obj>VW_ACCCONDITIONDATA</obj>
+  </table>
+  <table id="ACTORROLE" >
+    <obj>VW_ACTOR_ACCESS</obj>
+  </table>
+  <table id="ADDRESSCOMPL" >
+    <obj>VW_ADDRESSCOMPL</obj>
+  </table>
+  <table id="ASSET">
+    <obj>VW_ASSET</obj>
+    <obj>VW_ASSET_CONSULT</obj>
+    <obj>VW_ASSET_FORCURVE</obj>
+  </table>
+  <table id="ASSET_BOND" >
+    <tableReference href="ASSET"/>
+  </table>
+  <table id="ASSET_CASH" >
+    <tableReference href="ASSET"/>
+  </table>
+  <table id="ASSET_CONVBOND" >
+    <tableReference href="ASSET"/>
+  </table>
+  <table id="ASSET_DEPOSIT" >
+    <tableReference href="ASSET"/>
+  </table>
+  <table id="ASSET_EQUITY" >
+    <tableReference href="ASSET"/>
+  </table>
+  <table id="ASSET_ETD" >
+    <tableReference href="ASSET"/>
+    <!-- FI 20180920 [24183] add VW_ASSET_ETD_DRVATTRIB, VW_ASSET_ETD_EXPANDED -->
+    <obj>VW_ASSET_ETD_DRVATTRIB</obj>
+    <obj>VW_ASSET_ETD_EXPANDED</obj>
+  </table>
+  <table id="ASSET_EXTRDCTR" >
+    <tableReference href="ASSET"/>
+  </table>
+  <table id="ASSET_INDEX" >
+    <tableReference href="ASSET"/>
+  </table>
+  <table id="ASSET_RATEINDEX" >
+    <tableReference href="ASSET"/>
+  </table>
+  <table id="ASSET_SCDEFSWAP" >
+    <tableReference href="ASSET"/>
+  </table>
+  <table id="ASSET_SIMPLEFRA" >
+    <tableReference href="ASSET"/>
+  </table>
+  <table id="ASSET_SIMPLEIRS" >
+    <tableReference href="ASSET"/>
+  </table>
+  <table id="BOOK" >
+    <obj>VW_ACCCONDITIONDATA</obj>
+    <obj>VW_EAR_BOOK</obj>
+  </table>
+  <table id="DERIVATIVEATTRIB" >
+    <obj>VW_ASSET_ETD_DRVATTRIB</obj>
+    <obj>VW_ASSET_ETD_EXPANDED</obj>
+  </table>
+  <table id="DERIVATIVECONTRACT" >
+    <obj>VW_ASSET_ETD_DRVATTRIB</obj>
+    <obj>VW_ASSET_ETD_EXPANDED</obj>
+    <obj>VW_FEEMATRIXCONTRACT</obj>
+  </table>
+  <table id="ENTITY" >
+    <obj>VW_BOOK_ENTITY</obj>
+  </table>
+  <table id="ENUM" >
+    <obj>VW_ALL_ENUM</obj>
+    <obj>VW_AMOUNTTYPE</obj>
+    <obj>VW_EVENTTYPEENUM</obj>
+    <obj>VW_ALL_VW_ENUM</obj>
+  </table>
+  <table id="ENUMS" >
+    <obj>VW_ALL_ENUMS</obj>
+  </table>
+  <table id="EVENTENUM" >
+    <obj>VW_EVENTTYPEENUM</obj>
+  </table>
+  <table id="IMPRISMA_H" >
+    <obj>IMPRISMACES_H</obj>
+    <obj>IMPRISMAE_H</obj>
+    <obj>IMPRISMAFX_H</obj>
+    <obj>IMPRISMAFXRMS_H</obj>
+    <obj>IMPRISMALG_H</obj>
+    <obj>IMPRISMALGS_H</obj>
+    <obj>IMPRISMALGSS_H</obj>
+    <obj>IMPRISMALIQCLASS_H</obj>
+    <obj>IMPRISMALIQFACT_H</obj>
+    <obj>IMPRISMAMKTCAPA_H</obj>
+    <obj>IMPRISMAP_H</obj>
+    <obj>IMPRISMARMS_H</obj>
+    <obj>IMPRISMARMSLGS_H</obj>
+    <obj>IMPRISMARMSLGSS_H</obj>
+    <obj>IMPRISMAS_H</obj>
+    <obj>IMPRISMASPS_H</obj>
+    <obj>IMPRISMAVARS_H</obj>
+  </table>
+  <table id="INSTRG" >
+    <tableReference href="INSTRUMENT"/>
+    <obj>VW_GINSTRROLE</obj>
+  </table>
+  <table id="INSTRUMENT" >
+    <obj>VW_INSTR_PRODUCT</obj>
+    <obj>VW_INCIINSTR</obj>
+    <obj>VW_ISSIINSTR</obj>
+    <obj>VW_CNFMSGDETINSTR</obj>
+    <obj>VW_EXTENDINSTR</obj>
+    <obj>VW_FEEMATRIXINSTR</obj>
+    <obj>VW_FEESCHEDINSTR</obj>
+    <obj>VW_INVRULESINSTR</obj>
+  </table>
+  <table id="MARKET" >
+    <obj>VW_ISSIMARKET</obj>
+  </table>
+  <table id="MATURITY" >
+    <obj>VW_ASSET_ETD_DRVATTRIB</obj>
+    <obj>VW_ASSET_ETD_EXPANDED</obj>
+  </table>
+  <table id="MATURITYRULE" >
+    <obj>VW_ASSET_ETD_EXPANDED</obj>
+  </table>
+  <table id="PRODUCT" >
+    <obj>VW_INSTR_PRODUCT</obj>
+    <obj>VW_INCIINSTR</obj>
+  </table>
+  <table id="POSUTI" >
+    <obj>POSUTIDET</obj>
+  </table>
+  <table id="ROLEACTOR" >
+    <obj>VW_ACTORROLE</obj>
+    <tableReference href="ACTOR"/>
+  </table>
+  <table id="RATEINDEX" >
+    <obj>VW_ASSET_RATEINDEX</obj>
+    <tableReference href="ASSET"/>
+  </table>
+  <table id="YIELDCURVEDEF" >
+    <obj>VW_YIELDCURVE</obj>
+  </table>
+  <table id="VW_TRADEDEBTSEC">
+    <obj>VW_ASSET_DEBTSECURITY</obj>
+    <tableReference href="ASSET"/>
+    <obj>TRADE</obj>
+  </table>
+</QueryCacheDelCascading>

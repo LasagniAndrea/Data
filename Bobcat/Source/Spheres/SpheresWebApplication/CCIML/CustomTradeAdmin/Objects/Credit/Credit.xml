@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+	<!-- START : MASTER BLOCKS -->
+
+	<!-- CreditNoteBlock -->
+	<Object name="CreditNoteBlock">
+		<Table>
+			<CorrectionAmountAndRebateConditionsBlock helpschema="efsml" helpelement="CreditNote"/>
+			<Space />
+      <TextBox clientid="invoiceDetails" datatype="string" style="display:none;" />
+			<InvoiceDetailsBlock  helpschema="efsml" helpelement="InvoiceDetails"/>
+		</Table>
+	</Object>
+
+	<!-- CreditNoteEnhancedBlock -->
+	<Object name="CreditNoteEnhancedBlock">
+		<Table>
+			<GridInvoiceDatesAndCorrectionAmountBlock helpschema="efsml" helpelement="CreditNote"/>
+			<space/>
+      <TextBox clientid="invoiceDetails" datatype="string" style="display:none;" />
+			<InvoiceRebateConditionsBlock clientid="rebateConditions" helpschema="efsml" helpelement="RebateConditions"/>
+			<br/>
+			<GridInvoiceDetailsBlock />
+		</Table>
+		<br/>
+	</Object>
+
+  <!-- CreditNoteLightBlock -->
+  <Object name="CreditNoteLightBlock">
+    <Table>
+      <GridInvoiceDatesAndCorrectionAmountBlock helpschema="efsml" helpelement="CreditNote"/>
+    </Table>
+    <br/>
+  </Object>
+
+
+  <!-- CreditNoteHeaderBlock -->
+  <!-- EG 20150116 [20700] Change EntityBlock to BeneficiaryBlock -->
+	<Object name="CreditNoteHeaderBlock">
+		<Table>
+			<Table style="istableH:true;tblH-bkgH-color:#036AB5;tblH-titleR:Beneficiary;">
+				<Table verticalAlign="Top" style="width:10px;">
+					<ClientBlock clientid="party" occurs="1" firstindex="2" required="true" />
+					<InvoicingScope_L clientid="scope" required="true" keepinquickinput="false" />
+				</Table>
+			</Table>
+			<Table style="istableH:true;tblH-bkgH-color:#C00303;tblH-titleR:Payer;">						 
+				<Table verticalAlign="Top" rowspan="2" style="width:10px;">
+					<BeneficiaryBlock clientid="party" occurs="1" firstindex="1" required="true" />
+				</Table>
+			</Table>
+			<br/>
+			<Table colspan="2" style="istableB:true;tblB-border-color:lightgray;">
+				<TradeAdminHeader helpschema="fpml" helpelement="TradeHeader" />
+			</Table>
+		</Table>
+	</Object>
+
+	<!-- END : MASTER BLOCKS -->
+
+</Objects>

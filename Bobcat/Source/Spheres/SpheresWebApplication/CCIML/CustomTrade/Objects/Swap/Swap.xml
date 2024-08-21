@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!--
+EG 20211217 [XXXXX] Gestion icon (Font Awesome) ouverture/Fermeture
+- Suppression de l'instruction : tblH-startdisplay:expand; (inutile valeur par défaut)
+- Suppression de l'instruction : tblH-linkid:xxxx; (inutile gestion via ajax quand nécessaire)
+-->
+
+<Objects>
+  <!--AssetSwapBlock-->
+  <Object name="AssetSwapBlock">
+    <Table colspan="-1" style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:Swap;">
+      <Table style="margin-top:2px" colspan="-1"  controlalignleft="true" >
+        <AssetSwapStreamCommon clientid="swapStream"         helpschema="efsml" helpelement="InterestRateStream" />
+        <Check_L clientid="isSynchronous" required="true" postback="true"/>
+      </Table>
+      <Table colspan="-1" style="istableH:true;tblH-title:Streams;tblH-css:size4;tblH-reverse:1;helpschema:efsml;helpelement:InterestRateStream;">
+        <Table id="tblStream">
+          <AssetSwapStream clientid="swapStream" occurs="2" helpschema="efsml" helpelement="InterestRateStream" />
+        </Table>
+      </Table>
+      <SwapAdditionalPaymentBlock/>
+    </Table>
+  </Object>
+  <!--CurrencySwapBlock-->
+  <Object name="CurrencySwapBlock">
+    <Table colspan="-1" style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:Swap;">
+      <CurrencySwapStreamCommon clientid="swapStream"      helpschema="efsml" helpelement="InterestRateStream" />
+      <Table colspan="-1" style="istableH:true;tblH-title:Streams;tblH-css:size4;tblH-reverse:1;helpschema:efsml;helpelement:InterestRateStream;">
+        <Table id="tblStream">
+          <CurrencySwapStream clientid="swapStream" occurs="2" helpschema="efsml" helpelement="InterestRateStream" />
+        </Table>
+      </Table>
+      <SwapAdditionalPaymentBlock/>
+    </Table>
+  </Object>
+  <!--VanillaSwapBlock-->
+  <Object name="VanillaSwapBlock">
+    <Table colspan="-1" style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:Swap;">
+      <Table style="margin-top:2px" colspan="-1"  controlalignleft="true" >
+        <VanillaSwapStreamCommon2 clientid="swapStream" helpschema="efsml" helpelement="InterestRateStream" />
+        <Check_L clientid="isSynchronous" required="true" postback="true"/>
+      </Table>
+      <Table colspan="-1"
+             style="istableH:true;tblH-title:Streams;tblH-css:size4;tblH-reverse:1;helpschema:efsml;helpelement:InterestRateStream;">
+        <Table id="tblStream">
+          <VanillaSwapStream clientid="swapStream" occurs="2"  helpschema="efsml" helpelement="InterestRateStream" />
+        </Table>
+      </Table>
+      <SwapAdditionalPaymentBlock/>
+    </Table>
+  </Object>
+
+  <!--VanillaSwapBlockWithoutAdditionalPayment-->
+  <Object name="VanillaSwapBlockWithoutAdditionalPayment">
+    <Table colspan="-1" style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:Swap;">
+      <Table style="margin-top:2px" colspan="-1"  controlalignleft="true" >
+        <VanillaSwapStreamCommon2 clientid="swapStream" helpschema="efsml" helpelement="InterestRateStream" />
+        <Check_L clientid="isSynchronous" required="true" postback="true"/>
+      </Table>
+      <Table colspan="-1" style="istableH:true;tblH-title:Streams;tblH-css:size4;tblH-reverse:1;helpschema:efsml;helpelement:InterestRateStream;">
+        <Table id="tblStream">
+          <VanillaSwapStream clientid="swapStream" occurs="2"  helpschema="efsml" helpelement="InterestRateStream" />
+        </Table>
+      </Table>
+    </Table>
+  </Object>
+
+  <!--VanillaSwapStubBlock-->
+  <Object name="VanillaSwapStubBlock">
+    <Table colspan="-1" style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:Swap;">
+      <Table style="margin-top:2px" colspan="-1"  controlalignleft="true" >
+        <VanillaSwapStreamCommon clientid="swapStream" helpschema="efsml" helpelement="InterestRateStream" />
+        <Check_L clientid="isSynchronous" required="true" postback="true"/>
+      </Table>
+      <Table colspan="-1" style="istableH:true;tblH-title:Streams;tblH-css:size4;tblH-reverse:1;helpschema:efsml;helpelement:InterestRateStream;">
+        <Table id="tblStream">
+          <VanillaSwapStubStream  clientid="swapStream" occurs="2" helpschema="efsml" helpelement="InterestRateStream" />
+        </Table>
+      </Table>
+      <SwapAdditionalPaymentBlock/>
+    </Table>
+  </Object>
+  <!--VanillaSwapStubAsynchBlock-->
+  <Object name="VanillaSwapStubAsynchBlock">
+    <Table colspan="-1" style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:Swap;">
+      <Table style="margin-top:2px" colspan="-1"  controlalignleft="true" >
+        <VanillaSwapStreamCommon clientid="swapStream" helpschema="efsml" helpelement="InterestRateStream" />
+        <Check_L clientid="isSynchronous" required="true" postback="true"/>
+      </Table>
+      <Table colspan="-1" style="istableH:true;tblH-title:Streams;tblH-css:size4;tblH-reverse:1;helpschema:efsml;helpelement:InterestRateStream;">
+        <Table id="tblStream">
+          <StubSwapStream2 clientid="swapStream" occurs="2" helpschema="efsml" helpelement="InterestRateStream" />
+        </Table>
+      </Table>
+      <SwapAdditionalPaymentBlock/>
+    </Table>
+  </Object>
+  <!--MultiStreamSwapBlock-->
+  <!-- FI 20161130 [RATP] 1 leg only possible-->
+  <Object name="MultiStreamSwapBlock">
+    <Table colspan="-1" style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:Swap;">
+      <Table style="margin-top:2px" colspan="-1"  controlalignleft="true" >
+        <MultiStreamSwapStreamCommon helpschema="efsml" helpelement="InterestRateStream" />
+        <Check_L clientid="isSynchronous" required="true" postback="true"/>
+      </Table>
+      <Table colspan="-1" style="istableH:true;tblH-title:Streams;tblH-css:size4;tblH-reverse:1;helpschema:efsml;helpelement:InterestRateStream;">
+        <Table colspan="-1" id="tblStream">
+          <MultiStreamSwapStream clientid="swapStream" occurs="1" minoccurs="1" addsuboperator="true" tablecolspan="-1"	helpschema="efsml" helpelement="InterestRateStream" />
+        </Table>
+      </Table>
+      <SwapAdditionalPaymentBlock/>
+    </Table>
+  </Object>
+  <!--MultiStreamSwapStubBlock-->
+  <!-- FI 20161130 [RATP] 1 leg only possible-->
+  <Object name="MultiStreamSwapStubBlock">
+    <Table colspan="-1" style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:Swap;">
+      <MultiStreamSwapStreamCommon helpschema="efsml" helpelement="InterestRateStream" />
+      <Table colspan="-1" style="istableH:true;tblH-title:Streams;tblH-css:size4;tblH-reverse:1;helpschema:efsml;helpelement:InterestRateStream;">
+        <Table colspan="-1" id="tblStream">
+          <MultiStreamSwapStreamStub clientid="swapStream" occurs="1" minoccurs="1" addsuboperator="true"  tablecolspan="-1" helpschema="efsml" helpelement="InterestRateStream" />
+        </Table>
+      </Table>
+      <SwapAdditionalPaymentBlock/>
+    </Table>
+  </Object>
+  <!--ZeroCouponSwapBlock-->
+  <Object name="ZeroCouponSwapBlock">
+    <Table colspan="-1" style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:Swap;">
+      <Table style="margin-top:2px;" colspan="-1">
+        <CalculationPeriodDatesEffectiveDateTerminationDate clientid="swapStream_calculationPeriodDates" helpschema="fpml" helpelement="CalculationPeriodDates" />
+      </Table>
+      <KnownAmountStream clientid="swapStream" occurs="1" firstindex="1" helpschema="efsml" helpelement="InterestRateStream" />
+      <Table colspan="-1" style="istableH:true;tblH-title:Streams;tblH-css:size4;tblH-reverse:1;helpschema:efsml;helpelement:InterestRateStream;">
+        <Table colspan="-1" id="tblStream">
+          <StubSwapStream clientid="swapStream" occurs="1" firstindex="2" helpschema="efsml" helpelement="InterestRateStream" />
+        </Table>
+      </Table>
+      <SwapAdditionalPaymentBlock/>
+    </Table>
+  </Object>
+
+  <!--FxLinkedCurrencySwapBlock-->
+  <Object name="FxLinkedCurrencySwapBlock">
+    <Table colspan="-1" style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:Swap;">
+      <FxLinkedSwapStreamCommon clientid="swapStream"                           helpschema="efsml" helpelement="InterestRateStream" />
+      <Table colspan="-1" style="istableH:true;tblH-title:Streams;tblH-css:size4;tblH-reverse:1;helpschema:efsml;helpelement:InterestRateStream;">
+        <Table id="tblStream">
+          <FxUnLinkedSwapStream     clientid="swapStream" occurs="1" firstindex="1" helpschema="efsml" helpelement="InterestRateStream" />
+          <FxLinkedSwapStream       clientid="swapStream" occurs="1" firstindex="2" helpschema="efsml" helpelement="InterestRateStream" />
+        </Table>
+      </Table>
+      <SwapAdditionalPaymentBlock/>
+    </Table>
+  </Object>
+
+  <Object name="SwapAdditionalPaymentBlock">
+    <!--additionalPayment-->
+    <table id="tblAdditionalPaymentH" colspan="-1"
+       style="istableH:true;tblH-titleR:AdditionalPayment;tblH-css:size4;tblH-reverse:1;tblH-startdisplay:collapse;">
+      <table id ="tblAdditionalPayment">
+        <PaymentADP clientid="additionalPayment" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment" keepinquickinput="false"/>
+      </table>
+    </table>
+  </Object>
+</Objects>

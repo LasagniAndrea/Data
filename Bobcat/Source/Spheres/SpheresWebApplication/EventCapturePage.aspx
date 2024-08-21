@@ -1,0 +1,1 @@
+﻿<%@ Page language="C#" Inherits="EFS.Spheres.EventCapturePage"  Codebehind="EventCapturePage.aspx.cs" %>

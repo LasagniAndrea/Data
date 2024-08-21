@@ -1,0 +1,176 @@
+﻿/*EG 20210902 [XXXXX] Cookies consent CSS style*/
+#pg-policy-box {
+    width: 80%;
+    min-width: 400px;
+    margin: 20px;
+    margin-left: auto;
+}
+
+#pg-policy-box #pg-box-content {
+    width: 80%;
+    min-width: 400px;
+    padding: 20px 40px;
+    padding-bottom: 20px;
+    background-color: #fff;
+    color: #036ab5;
+    box-shadow: 0 1px 6px rgba(3, 106, 181, .3);
+}
+
+#pg-policy-box #pg-box-content > div:first-child {
+    display: flex;
+    border-bottom: 5pt solid #ff6a00;
+}
+
+#pg-policy-box #pg-box-content > div > div {
+    margin: auto;
+}
+
+#pg-policy-box #pg-box-content > div > div:last-child {
+    width: 100%;
+    text-align: end;
+}
+
+#pg-policy-box #pg-box-content > div h1 {
+    font-size: 30px;
+}
+
+#pg-policy-box #pg-box-content > div small:first-child {
+    font-size: 15px;
+    font-weight: normal;
+}
+    #pg-policy-box #pg-box-content > div small:last-child {
+        font-size: xx-small;
+        font-weight:normal;
+    }
+
+#pg-policy-box #pg-box-content h1 {
+    font-size: 30px;
+    line-height: 28px;
+}
+
+#pg-policy-box #pg-box-content h3 {
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+#pg-policy-box #pg-box-content p {
+    color: #666;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+#pg-policy-box #pg-box-content ul {
+    color: #666;
+    padding-left: 50px;
+    font-size: smaller;
+}
+
+#pg-policy-box #pg-box-content a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #036ab5;
+    padding: 6px;
+    border-radius: 15px;
+    font-size: x-small;
+}
+
+#pg-policy-box #pg-box-content a:before {
+    font-family: 'Font Awesome 5 Free';
+    content: "\f0a4";
+    padding-right: 5px;
+}
+
+#pg-policy-box #pg-box-content a:hover {
+    text-decoration: none;
+}
+
+/*CookiesConsent overrides*/
+
+.cookieconsent-com---palette-dark button.cc-nb-okagree {
+    color: #fff;
+    background-color: inherit;
+}
+
+.cookieconsent-com---palette-dark button.cc-nb-okagree:before {
+    font-family: 'Font Awesome 5 Free';
+    content: "\f00c";
+    padding-right: 10px;
+}
+
+.cookieconsent-com---palette-dark button.cc-nb-reject {
+    color: #fff;
+    background-color: inherit;
+}
+
+.cookieconsent-com---palette-dark button.cc-nb-reject:before {
+    font-family: 'Font Awesome 5 Free';
+    content: "\f00d";
+    padding-right: 10px;
+}
+
+.cookieconsent-com---palette-dark button.cc-nb-changep {
+    color: #fff;
+    background-color: inherit;
+}
+
+.cookieconsent-com---palette-dark button.cc-nb-changep:before {
+    font-family: 'Font Awesome 5 Free';
+    content: "\f304";
+    padding-right: 10px;
+}
+
+.cookieconsent-com---palette-dark button.cc-cp-foot-save {
+    color: #fff;
+    background-color: inherit;
+    float: right;
+}
+
+.cookieconsent-com---palette-dark button.cc-cp-foot-save:before {
+    font-family: 'Font Awesome 5 Free';
+    content: "\f0c7";
+    padding-right: 10px;
+}
+
+.cookieconsent-com---palette-dark button:hover {
+    border: 1pt #036AB5 solid;
+    background-color: #036AB5;
+}
+
+.cookieconsent-com---pc-dialog .cc-pc-head-lang-select {
+    display: none !important;
+}
+
+.cookieconsent-com---palette-dark .cc-cp-body-content-entry a:focus {
+    box-shadow: none!important;
+}
+
+.cookieconsent-com---palette-dark .cc-cp-body-content-entry a:hover {
+    color: #036ab5;
+}
+
+.cookieconsent-com---palette-dark .cc-cp-body-content-entry a {
+    color: #cce5ff;
+}
+
+
+.cookieconsent-com---palette-dark .cc-cp-body-content-entry a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #036ab5;
+    padding: 6px;
+    border-radius: 15px;
+    font-size: x-small;
+}
+
+.cookieconsent-com---palette-dark .cc-cp-body-content-entry a:before {
+    font-family: 'Font Awesome 5 Free';
+    content: "\f0a4";
+    padding-right: 5px;
+}
+
+.cookieconsent-com---palette-dark .cc-cp-body-content-entry a:hover {
+    text-decoration: none;
+    color: #fff;
+}

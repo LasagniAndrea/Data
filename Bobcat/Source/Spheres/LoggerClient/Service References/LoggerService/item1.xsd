@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/EFS.LoggerService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/EFS.LoggerService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:8736/SpheresLogger/SpheresLoggerService/?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="LogScope">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ConnectionString" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DtProcessEnd" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DtStProcess" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="IdPROCESS_L" type="xs:int" />
+      <xs:element minOccurs="0" name="IdStProcess" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdTRK_L" type="xs:int" />
+      <xs:element minOccurs="0" name="InitialProcessType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LogScopeId" type="ser:guid" />
+      <xs:element minOccurs="0" name="ProcessType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SubLogScopeId" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LogScope" nillable="true" type="tns:LogScope" />
+  <xs:complexType name="LoggerData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CallingClassType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CallingMethod" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DtUtcLog" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="GroupSequenceNumber" type="xs:int" />
+      <xs:element minOccurs="0" name="HostName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InstanceIda" type="xs:int" />
+      <xs:element minOccurs="0" name="InstanceName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InstanceVersion" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LogCategory" type="tns:LogCategoryEnum" />
+      <xs:element minOccurs="0" name="LogLevel" type="tns:LogLevelEnum" />
+      <xs:element minOccurs="0" name="LogScope" nillable="true" type="tns:LogScope" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OS_PID" type="xs:int" />
+      <xs:element minOccurs="0" name="Parameters" nillable="true" type="tns:ArrayOfLogParam" />
+      <xs:element minOccurs="0" name="ProcessName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProcessType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RankOrder" type="xs:int" />
+      <xs:element minOccurs="0" name="SQL_SPID" type="xs:int" />
+      <xs:element minOccurs="0" name="SequenceNumber" type="xs:int" />
+      <xs:element minOccurs="0" name="SysMsg" nillable="true" type="tns:SysMsgCode" />
+      <xs:element minOccurs="0" name="ThreadID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LoggerData" nillable="true" type="tns:LoggerData" />
+  <xs:simpleType name="LogCategoryEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NA" />
+      <xs:enumeration value="MissingPrice" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="LogCategoryEnum" nillable="true" type="tns:LogCategoryEnum" />
+  <xs:simpleType name="LogLevelEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Trace" />
+      <xs:enumeration value="Debug" />
+      <xs:enumeration value="Info" />
+      <xs:enumeration value="Warning" />
+      <xs:enumeration value="Error" />
+      <xs:enumeration value="Critical" />
+      <xs:enumeration value="None" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="LogLevelEnum" nillable="true" type="tns:LogLevelEnum" />
+  <xs:complexType name="ArrayOfLogParam">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LogParam" nillable="true" type="tns:LogParam" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLogParam" nillable="true" type="tns:ArrayOfLogParam" />
+  <xs:complexType name="LogParam">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Data" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DataSpecified" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Identifier" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InternalId" type="xs:int" />
+      <xs:element minOccurs="0" name="IsReferentialIdentifier" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Link" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Referential" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LogParam" nillable="true" type="tns:LogParam" />
+  <xs:complexType name="SysMsgCode">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SysCode" type="tns:SysCodeEnum" />
+      <xs:element minOccurs="0" name="SysNumber" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SysMsgCode" nillable="true" type="tns:SysMsgCode" />
+  <xs:simpleType name="SysCodeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="LOG" />
+      <xs:enumeration value="RES" />
+      <xs:enumeration value="SYS" />
+      <xs:enumeration value="TRK" />
+      <xs:enumeration value="CME" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SysCodeEnum" nillable="true" type="tns:SysCodeEnum" />
+  <xs:complexType name="ResultLoggerData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Log" nillable="true" type="tns:ArrayOfLoggerData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResultLoggerData" nillable="true" type="tns:ResultLoggerData" />
+  <xs:complexType name="ArrayOfLoggerData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LoggerData" nillable="true" type="tns:LoggerData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLoggerData" nillable="true" type="tns:ArrayOfLoggerData" />
+  <xs:complexType name="LoggerRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DtUtcLogEnd" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DtUtcLogStart" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="HostName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LogLevel" type="tns:LogLevelEnum" />
+      <xs:element minOccurs="0" name="ProcessName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProcessType" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LoggerRequest" nillable="true" type="tns:LoggerRequest" />
+</xs:schema>

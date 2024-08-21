@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Referentials>
+<Referential>
+	<TableName>COMMUNIQUE</TableName>
+	<Ressource>Communiqué</Ressource>
+	<ColumnByRow>1</ColumnByRow>
+	<Create>false</Create>
+	<Modify>false</Modify>
+	<Remove>false</Remove>
+	<Duplicate>false</Duplicate>
+	<Image>gif/Product.gif</Image>
+	
+	<ToolBar>top</ToolBar>
+	<Notepad>false</Notepad>
+	<AttachedDoc>false</AttachedDoc>
+	<HelpUrl></HelpUrl>
+
+	<Column>
+		<ColumnName>ROWVERSION</ColumnName>
+		<Ressource>ROWVERSION</Ressource>
+		<DataType>string</DataType>
+		<Colspan>0</Colspan>
+		<Length>15</Length>
+		<Scale>0</Scale> 
+		<IsMandatory>true</IsMandatory> 
+		<RegularExpression>([\d]*)</RegularExpression>
+		<Default></Default>
+		<IsHide>true</IsHide>
+		<IsHideInDataGrid>true</IsHideInDataGrid>
+		<IsDataKeyField>true</IsDataKeyField>
+		<IsKeyField>true</IsKeyField>
+		<IsForeignKeyField>false</IsForeignKeyField>
+		<IsIdentity>true</IsIdentity>
+		<IsUpdatable>false</IsUpdatable>
+		<Relation></Relation>		
+		<html_BLOCK title="Information_Title" columnbyrow="1"></html_BLOCK>
+	</Column>
+	<Column>
+		<ColumnName>COM_DATE</ColumnName>
+		<Ressource>DTMISC</Ressource>
+		<DataType>datetime</DataType>
+		<Colspan>0</Colspan>
+		<Length>20</Length>
+		<Scale>0</Scale> 
+		<IsMandatory>true</IsMandatory> 
+		<RegularExpression>([\d]*)</RegularExpression>
+		<Default></Default>
+		<IsHide>false</IsHide>
+		<IsHideInDataGrid>false</IsHideInDataGrid>
+		<IsDataKeyField>false</IsDataKeyField>
+		<IsKeyField>false</IsKeyField>
+		<IsForeignKeyField>false</IsForeignKeyField>
+		<IsIdentity>false</IsIdentity>
+		<IsUpdatable>true</IsUpdatable>
+		<Relation></Relation>
+	</Column>
+	<Column>
+		<ColumnName>COM_LIB</ColumnName>
+		<Ressource>Communiqué</Ressource>
+		<DataType>text</DataType>
+		<InputHeight>300</InputHeight>
+		<Colspan>0</Colspan>
+		<Length>1000</Length>
+		<Scale>0</Scale> 
+		<IsMandatory>true</IsMandatory> 
+		<RegularExpression>([\d]*)</RegularExpression>
+		<Default></Default>
+		<IsHide>false</IsHide>
+		<IsHideInDataGrid>false</IsHideInDataGrid>
+		<IsDataKeyField>false</IsDataKeyField>
+		<IsKeyField>false</IsKeyField>
+		<IsForeignKeyField>false</IsForeignKeyField>
+		<IsIdentity>false</IsIdentity>
+		<IsUpdatable>true</IsUpdatable>
+		<Relation></Relation>
+	</Column>
+</Referential>
+</Referentials>

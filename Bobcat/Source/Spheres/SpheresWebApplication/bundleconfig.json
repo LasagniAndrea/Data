@@ -1,0 +1,298 @@
+[
+  {
+    "outputFileName": "Javascript/Monitoring.min.js",
+    "inputFiles": [
+      "Javascript/Monitoring.js"
+    ]
+  },
+  {
+    "outputFileName": "Includes/Banner.min.css",
+    "inputFiles": [
+      "Includes/Banner.css"
+    ]
+  },
+  {
+    "outputFileName": "Includes/ClosingReopeningPosition.min.css",
+    "inputFiles": [
+      "Includes/ClosingReopeningPosition.css"
+    ]
+  },
+  {
+    "outputFileName": "Includes/CorporateActions.min.css",
+    "inputFiles": [
+      "Includes/CorporateActions.css"
+    ]
+  },
+  {
+    "outputFileName": "Includes/DerivateContractUpdateMaturityRule.min.css",
+    "inputFiles": [
+      "Includes/DerivateContractUpdateMaturityRule.css"
+    ]
+  },
+  {
+    "outputFileName": "Includes/EFSTheme-vdark.min.css",
+    "inputFiles": [
+      "Includes/EFSTheme-vdark.css"
+    ]
+  },
+  {
+    "outputFileName": "Includes/EFSTheme-vlight.min.css",
+    "inputFiles": [
+      "Includes/EFSTheme-vlight.css"
+    ]
+  },
+  {
+    "outputFileName": "Includes/EFSThemeCommon.min.css",
+    "inputFiles": [
+      "Includes/EFSThemeCommon.css"
+    ]
+  },
+  {
+    "outputFileName": "Includes/EFSUISprites.min.css",
+    "inputFiles": [
+      "Includes/EFSUISprites.css"
+    ]
+  },
+  {
+    "outputFileName": "Includes/EntityMarket.min.css",
+    "inputFiles": [
+      "Includes/EntityMarket.css"
+    ]
+  },
+  {
+    "outputFileName": "Includes/fontawesome-all.min.css",
+    "inputFiles": [
+      "Includes/fontawesome-all.css"
+    ]
+  },
+  {
+    "outputFileName": "Includes/fontawesome.min.css",
+    "inputFiles": [
+      "Includes/fontawesome.css"
+    ]
+  },
+  {
+    "outputFileName": "Includes/Monitoring.min.css",
+    "inputFiles": [
+      "Includes/Monitoring.css"
+    ]
+  },
+  {
+    "outputFileName": "Includes/Summary.min.css",
+    "inputFiles": [
+      "Includes/Summary.css"
+    ]
+  },
+  {
+    "outputFileName": "Includes/Tracker.min.css",
+    "inputFiles": [
+      "Includes/Tracker.css"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/Tracker.min.js",
+    "inputFiles": [
+      "Javascript/Tracker.js"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/ReferentialCommon.js",
+    "inputFiles": [
+      "Javascript/PageReferential.js",
+      "Javascript/Referential.js"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/Trade.min.js",
+    "inputFiles": [
+      "Javascript/Trade.js"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/PageBase.min.js",
+    "inputFiles": [
+      "Javascript/PageBase.js"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/ReferentialCommon.min.js",
+    "inputFiles": [
+      "Javascript/ReferentialCommon.js"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/JQuery/jquery-ui-timepicker.min.css",
+    "inputFiles": [
+      "Javascript/JQuery/jquery-ui-timepicker.css"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/JQuery/jquery-ui-timepicker.min.js",
+    "inputFiles": [
+      "Javascript/JQuery/jquery-ui-timepicker.js"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/JQuery/jquery.dialogwrapper.min.js",
+    "inputFiles": [
+      "Javascript/JQuery/jquery.dialogwrapper.js"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/JQuery/jquery.nicefileinput.min.js",
+    "inputFiles": [
+      "Javascript/JQuery/jquery.nicefileinput.js"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/JQuery/jquery.freezegrid.min.js",
+    "inputFiles": [
+      "Javascript/JQuery/jquery.freezegrid.js"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/JQuery/jquery.infiniteslidev2.min.js",
+    "inputFiles": [
+      "Javascript/JQuery/jquery.infiniteslidev2.js"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/Summary.min.js",
+    "inputFiles": [
+      "Javascript/Summary.js"
+    ]
+  },
+  {
+    "outputFileName": "CustomerPortal/Content/Common.min.css",
+    "inputFiles": [
+      "CustomerPortal/Content/Common.css"
+    ]
+  },
+  {
+    "outputFileName": "CustomerPortal/Content/CustomerPortal.min.css",
+    "inputFiles": [
+      "CustomerPortal/Content/CustomerPortal.css"
+    ]
+  },
+  {
+    "outputFileName": "CustomerPortal/Content/Error.min.css",
+    "inputFiles": [
+      "CustomerPortal/Content/Error.css"
+    ]
+  },
+  {
+    "outputFileName": "CustomerPortal/Content/Login.min.css",
+    "inputFiles": [
+      "CustomerPortal/Content/Login.css"
+    ]
+  },
+  {
+    "outputFileName": "CustomerPortal/Content/Welcome.min.css",
+    "inputFiles": [
+      "CustomerPortal/Content/Welcome.css"
+    ]
+  },
+  {
+    "outputFileName": "CustomerPortal/Scripts/plugin/cooltext.animation.min.js",
+    "inputFiles": [
+      "CustomerPortal/Scripts/plugin/cooltext.animation.js"
+    ]
+  },
+  {
+    "outputFileName": "CustomerPortal/Scripts/plugin/cooltext.min.js",
+    "inputFiles": [
+      "CustomerPortal/Scripts/plugin/cooltext.js"
+    ]
+  },
+  {
+    "outputFileName": "CustomerPortal/Scripts/plugin/tweenmax.min.js",
+    "inputFiles": [
+      "CustomerPortal/Scripts/plugin/tweenmax.js"
+    ]
+  },
+  {
+    "outputFileName": "CustomerPortal/Content/policy.min.css",
+    "inputFiles": [
+      "CustomerPortal/Content/policy.css"
+    ]
+  },
+  {
+    "outputFileName": "Includes/FedAuth.min.css",
+    "inputFiles": [
+      "Includes/FedAuth.css"
+    ]
+  },
+  {
+    "outputFileName": "Includes/default.min.css",
+    "inputFiles": [
+      "Includes/default.css"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/Default.min.js",
+    "inputFiles": [
+      "Javascript/Default.js"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/List.min.js",
+    "inputFiles": [
+      "Javascript/ListFilter.js",
+      "Javascript/ListSearchAutocomplete.js"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/LstCriteria.min.js",
+    "inputFiles": [
+      "Javascript/LstCriteria.js"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/JQuery/jquery-3.7.1.min.js",
+    "inputFiles": [
+      "Javascript/JQuery/jquery-3.7.1.js"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/JQuery/jquery-ui-1.13.3.min.css",
+    "inputFiles": [
+      "Javascript/JQuery/jquery-ui-1.13.3.css"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/JQuery/jquery-ui-1.13.3.min.js",
+    "inputFiles": [
+      "Javascript/JQuery/jquery-ui-1.13.3.js"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/JQuery/jquery-ui-1.13.3.culture.min.js",
+    "inputFiles": [
+      "Javascript/JQuery/jquery-ui-1.13.3.culture.js"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/JQuery/jquery.blockUI-2.70.0.min.js",
+    "inputFiles": [
+      "Javascript/JQuery/jquery.blockUI-2.70.0.js"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/JQuery/jquery.cookie-3.0.5.min.js",
+    "inputFiles": [
+      "Javascript/JQuery/jquery.cookie-3.0.5.js"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/JQuery/jquery.qtip2.min.js",
+    "inputFiles": [
+      "Javascript/JQuery/jquery.qtip2.js"
+    ]
+  },
+  {
+    "outputFileName": "Javascript/JQuery/jquery.qtip2.min.css",
+    "inputFiles": [
+      "Javascript/JQuery/jquery.qtip2.css"
+    ]
+  }
+]

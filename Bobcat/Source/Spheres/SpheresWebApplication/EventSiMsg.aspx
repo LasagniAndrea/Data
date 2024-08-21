@@ -1,0 +1,1 @@
+<%@ Page language="c#" Inherits="EFS.Spheres.EventSiMsgPage" Codebehind="EventSiMsg.aspx.cs" %>

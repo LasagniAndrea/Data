@@ -1,0 +1,859 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+CC/FI 20170926 [23446] 
+CC 20160218 Columns IDI_UNL, IDM, IDDC - Set IsMandatory=false (lié à modification dans ReferentielData.cs - Search PL 20151127)
+FI 20120105 [] mise en place des mots clefs %%SR SESSIONRESTRICT 
+FI 20120625 [17942] 
+  add restriction sur les 2 derniers mois pour éviter le time out 
+  add use of IsUseSQLParameters = true
+EG 20141020 [20442] Introduction IDDC, IDGCONTRACT 
+RD 20150819 [21261] Bug TYPEMARKETCONTRACT: use ir.IDM and ir.IDDC 
+EG 20191115 [25077] RDBMS : New version of Trades tables architecture (TRADESTSYS merge to TRADE, NEW TABLE TRADEXML)
+EG 20200226 [25077] RDBMS : New version of Trades tables architecture (TRADEINSTRUMENT (INSTRUMENTNO=1) to TRADE)
+-->
+<Referentials>
+	<Referential>
+    <!--<CmptLevel>2.5</CmptLevel>-->
+    <IsUseSQLParameters>true</IsUseSQLParameters>
+		<TableName>EVENT</TableName>
+		<AliasTableName>tblresult</AliasTableName>
+		<ColumnByRow>3</ColumnByRow>
+		<Create>false</Create>
+		<Modify>false</Modify>
+		<Remove>false</Remove>
+		<Notepad>false</Notepad>
+    <LoadOnStart>false</LoadOnStart>
+    <Timeout>200</Timeout>
+    <freezeColumn>5</freezeColumn>
+
+    <SQLSelect>
+      <Command rdbms = "oracle">
+        <![CDATA[
+        select distinct
+        nvl(ir.IDENTIFIER,'*** Not found ***') as INVOICINGRULES_IDENTIFIER,
+        ar.IDA as IDA_INVOICED, e.IDA_PAY, e.IDB_PAY, e.UNIT,
+        tr.IDI, ig.IDGINSTR,
+        tr_unl.IDI as IDI_UNL , ig_unl.IDGINSTR as IDGINSTR_UNL,
+        tr.IDM, ci.CONTRACT_IDENTIFIER, cg.IDGCONTRACT, mg.IDGMARKET, bg.IDGBOOK,
+        e.EVENTTYPE,
+        ta.IDA as IDA_TRADER, nvl(ts.IDC2, ts.IDC) as IDC_TRADE,
+        case when ir.IDENTIFIER is null then 1 else 0 end as CSS_ERRORLINE
+        from dbo.EVENT e
+        inner join dbo.EVENTCLASS ec on (ec.IDE = e.IDE) and (ec.EVENTCLASS = 'INV')
+        and ec.DTEVENT between Add_months(@DATE1, -2) and @DATE1
+        
+        /* ActorRole Recherche acteur facturé */
+        
+        inner join dbo.BOOK bkpayer on (bkpayer.IDB = e.IDB_PAY)
+        inner join dbo.ACTORROLE ar on (ar.IDA = bkpayer.IDA_INVOICEDOFFICE) And (ar.IDROLEACTOR = 'INVOICINGOFFICE')
+
+        /* Trade (Contrôle Entity on OPP Receiver) */
+        
+        inner join  dbo.TRADE tr on (tr.IDT = e.IDT)
+        %%SR:TRADE_JOIN%%(tr.IDT, tr)
+        inner join dbo.INSTRUMENT ns on (ns.IDI=tr.IDI)
+        inner join dbo.PRODUCT pr on (pr.IDP=ns.IDP)
+        inner join dbo.TRADESTREAM ts on (ts.IDT = tr.IDT) and (ts.STREAMNO = 1) and
+        (ts.INSTRUMENTNO >= (case pr.IDENTIFIER when 'swaption' then 2 when 'STGexchangeTradedDerivative' then 2 else 1 end))
+        left outer join dbo.BOOK bkreceiver on (bkreceiver.IDB = e.IDB_REC) and (bkreceiver.IDA_ENTITY = @ENTITY)
+
+        /* Trader */
+        left outer join dbo.TRADEACTOR ta on (ta.IDT = tr.IDT) and (ta.IDROLEACTOR = 'TRADER') and (ta.IDA_ACTOR = e.IDA_PAY)
+        
+        /* Groupe Instruments */
+        left outer join dbo.VW_GINSTRROLE ig on (ig.IDI = tr.IDI) and (ig.IDROLEGINSTR = 'INVOICING')	and (ig.IDA = ar.IDA)
+        
+				/* Groupe Contract */
+		    left outer join dbo.VW_CONTRACT_INVOICE ci on (ci.IDASSET = tr.IDASSET) and (ci.ASSETCATEGORY = tr.ASSETCATEGORY)
+		    left outer join dbo.VW_CONTRACTG_INVOICE cg on (cg.IDASSET = tr.IDASSET) and (cg.ASSETCATEGORY = tr.ASSETCATEGORY) and (cg.IDA = ar.IDA)
+        
+        /* Groupe Instruments Underlyer */        
+        left outer join dbo.VW_TRADEREPO_UNL tr_unl on (tr_unl.IDT = tr.IDT)
+        left outer join dbo.VW_GINSTRROLE ig_unl On (ig_unl.IDI = tr_unl.IDI) and (ig_unl.IDROLEGINSTR = 'INVOICING') and (ig_unl.IDA = ar.IDA)
+        
+        /* Groupe Market */        
+        left outer join dbo.VW_GMARKETROLE mg on (mg.IDM = tr.IDM) and (mg.IDROLEGMARKET = 'INVOICING') and (mg.IDA = ar.IDA)
+        
+        left outer join
+        (
+          select distinct ev.IDE_SOURCE as IDE,
+          case when ev.IDE_SOURCE > 0 then tr.IDSTENVIRONMENT else 'REGULAR' end as IDSTENVIRONMENT_INVOICE
+          from dbo.TRADELINK tl
+          inner join dbo.TRADE tr on (tr.IDT = tl.IDT_A)
+          inner join dbo.INSTRUMENT ns on (ns.IDI = tr.IDI)
+          inner join dbo.PRODUCT pr on (pr.IDP = ns.IDP) and (pr.GPRODUCT = 'ADM')
+          inner join dbo.EVENT ev on (ev.IDT = tr.IDT)
+          inner join dbo.EVENTCLASS evc on (evc.IDE = ev.IDE_SOURCE) and (evc.EVENTCLASS = 'INV')
+          and evc.DTEVENT between Add_months(@DATE1, -2) and @DATE1
+        ) evs on (nvl(evs.IDE,e.IDE) = e.IDE)
+
+        /* EG 20150520 */
+        /* left outer join dbo.BOOKG bg On (bg.IDB = e.IDB_PAY) */
+        left outer join dbo.VW_GBOOKROLE bg on (bg.IDB = e.IDB_PAY) and (bg.IDROLEGBOOK = 'INVOICING') and (bg.IDA = ar.IDA)
+        
+
+        left Outer join
+        (
+          select ir.IDINVOICINGRULES, ir.IDENTIFIER, ir.IDA, ir.IDC_FEE, ir.IDA_INVOICED, ir.TYPEINSTR, ir.TYPEINSTR_UNL, ir.IDC_TRADE, ir.IDA_TRADER,        
+          case ir.TYPEINSTR
+          when 'Product'  then nvl(ns1.IDI,-1)
+          when 'GrpInstr' then nvl(ig.IDI,-1)
+          when 'Instr'    then ns2.IDI
+          else null end as IDI,
+
+          case ir.TYPEBOOK
+          when 'GrpBook' then nvl(bk1.IDB,-1)
+          when 'Book'  then bk2.IDB
+          else null end as IDB,
+
+          case ir.TYPEINSTR_UNL
+          when 'GrpInstr' then nvl(ig_unl.IDI,-1)
+          when 'Instr'    then ns3.IDI
+          else null end as IDI_UNL,
+
+          case ir.TYPEMARKETCONTRACT
+          when 'GrpMarket'   then nvl(mg.IDM,-1)
+          when 'Market'      then nvl(mk.IDM,-1)
+          else null end as IDM,
+
+          case ir.TYPEMARKETCONTRACT
+          when 'GrpContract'          then     -1
+          when 'DerivativeContract'   then ci.IDASSET
+          when 'CommodityContract'    then ci.IDASSET
+          else null end as IDASSET,
+          
+          case ir.TYPEMARKETCONTRACT
+          when 'GrpContract'          then cg.GCONTRACT_IDENTIFIER
+          when 'DerivativeContract'   then ci.CONTRACT_IDENTIFIER
+          when 'CommodityContract'    then ci.CONTRACT_IDENTIFIER
+          else null end as CONTRACT_IDENTIFIER
+
+          from dbo.INVOICINGRULES ir
+          left outer join dbo.PRODUCT pr on (pr.IDP = ir.IDINSTR)
+          left outer join dbo.INSTRUMENT ns1 on (ns1.IDP = pr.IDP)
+          left outer join dbo.VW_GINSTRROLE ig on (ig.IDGINSTR = ir.IDINSTR) and (ig.IDROLEGINSTR = 'INVOICING') and (ig.IDA = ir.IDA_INVOICED)
+          
+          left outer join dbo.VW_CONTRACT_INVOICE ci on (ci.IDXC = ir.IDMARKETCONTRACT) and (ci.CONTRACTCATEGORY = ir.TYPEMARKETCONTRACT)
+          left outer join dbo.VW_CONTRACTG_INVOICE cg on (cg.IDASSET = ci.IDASSET) and (cg.ASSETCATEGORY = ci.ASSETCATEGORY) and (cg.IDA = ir.IDA_INVOICED)
+          
+          left outer join dbo.MARKET mk on (mk.IDM = ir.IDMARKETCONTRACT)
+          left outer join dbo.VW_GMARKETROLE mg on (mg.IDGMARKET = ir.IDMARKETCONTRACT) and (mg.IDROLEGMARKET = 'INVOICING') and (mg.IDA = ir.IDA_INVOICED)
+          
+          left outer join dbo.INSTRUMENT ns2 on (ns2.IDI = ir.IDINSTR)
+          left outer join dbo.VW_GINSTRROLE ig_unl on (ig_unl.IDGINSTR = ir.IDINSTR_UNL) and (ig_unl.IDROLEGINSTR = 'INVOICING') and (ig_unl.IDA = ir.IDA_INVOICED)
+          
+          left outer join dbo.INSTRUMENT ns3 on (ns3.IDI = ir.IDINSTR_UNL)
+          left outer join dbo.GBOOK gb on (gb.IDGBOOK = ir.IDBOOK)
+          left outer join dbo.BOOK bk1 on (bk1.IDB = gb.IDGBOOK)
+          left outer join dbo.BOOK bk2 on (bk2.IDB = ir.IDBOOK)
+          where (ir.DTENABLED<=@DATE1 and (ir.DTDISABLED is null or ir.DTDISABLED>@DATE1))
+        ) ir on (ir.IDA = e.IDA_PAY) and (ir.IDA_INVOICED = ar.IDA) and (ir.IDC_FEE = e.UNIT)
+        and (nvl(ir.IDI,tr.IDI) = tr.IDI)
+        and (nvl(ir.IDI_UNL,nvl(tr_unl.IDI,0)) = nvl(tr_unl.IDI,0))
+        
+        and (nvl(ir.IDM,nvl(tr.IDM,0)) = nvl(tr.IDM,0))
+        and (nvl(ir.IDASSET,nvl(tr.IDASSET,0)) = nvl(tr.IDASSET,0))
+        
+        and (nvl(ir.IDB,nvl(e.IDB_PAY,0)) = nvl(e.IDB_PAY,0))
+        and (nvl(ir.IDC_TRADE,nvl(ts.IDC2, nvl(ts.IDC,0))) = nvl(ts.IDC2, nvl(ts.IDC,0)))
+        and (nvl(ir.IDA_TRADER,nvl(ta.IDA,0)) = nvl(ta.IDA,0))
+
+        where Add_months(@DATE1, 1)-To_Number(To_Char(Add_months(@DATE1, 1), 'DD'))=@DATE1
+        and (evs.IDSTENVIRONMENT_INVOICE is null)
+        and (e.IDSTACTIVATION = 'REGULAR')
+        and ( (nvl(bkreceiver.IDA_ENTITY,e.IDA_REC)=@ENTITY) or (nvl(bkpayer.IDA_ENTITY,e.IDA_PAY)=@ENTITY))
+        and (%%SR:TRADE_WHERE_PREDICATE%%)
+        ]]>
+      </Command>
+      
+			<Command rdbms = "sqlserver">
+        <![CDATA[
+        select distinct
+        isnull(ir.IDENTIFIER,'*** Not found ***') as INVOICINGRULES_IDENTIFIER,
+        ar.IDA as IDA_INVOICED, e.IDA_PAY, e.IDB_PAY, e.UNIT,
+        tr.IDI, ig.IDGINSTR,
+        tr_unl.IDI as IDI_UNL , ig_unl.IDGINSTR as IDGINSTR_UNL,
+        tr.IDM, ci.CONTRACT_IDENTIFIER, cg.IDGCONTRACT, mg.IDGMARKET, bg.IDGBOOK,
+        e.EVENTTYPE,
+        ta.IDA as IDA_TRADER, isnull(ts.IDC2, ts.IDC) as IDC_TRADE,
+        case when ir.IDENTIFIER is null then 1 else 0 end as CSS_ERRORLINE
+        from dbo.EVENT e
+        inner join dbo.EVENTCLASS ec on (ec.IDE = e.IDE) and (ec.EVENTCLASS = 'INV')
+        and (ec.DTEVENT between DateAdd(MONTH, -2, @DATE1) and  @DATE1)
+        
+        /* ActorRole Recherche acteur facturé */
+        
+        inner join dbo.BOOK bkpayer on (bkpayer.IDB = e.IDB_PAY)
+        inner join dbo.ACTORROLE ar on (ar.IDA = bkpayer.IDA_INVOICEDOFFICE) And (ar.IDROLEACTOR = 'INVOICINGOFFICE')
+
+        /* Trade (Contrôle Entity on OPP Receiver) */
+        
+        inner join  dbo.TRADE tr on (tr.IDT = e.IDT)
+        %%SR:TRADE_JOIN%%(tr.IDT, tr)
+        inner join dbo.INSTRUMENT ns on (ns.IDI=tr.IDI)
+        inner join dbo.PRODUCT pr on (pr.IDP=ns.IDP)
+        inner join dbo.TRADESTREAM ts on (ts.IDT = tr.IDT) and (ts.STREAMNO = 1) and
+        (ts.INSTRUMENTNO >= (case pr.IDENTIFIER when 'swaption' then 2 when 'STGexchangeTradedDerivative' then 2 else 1 end))
+        left outer join dbo.BOOK bkreceiver on (bkreceiver.IDB = e.IDB_REC) and (bkreceiver.IDA_ENTITY = @ENTITY)
+
+        /* Trader */
+        Left outer join dbo.TRADEACTOR ta on (ta.IDT = tr.IDT) and (ta.IDROLEACTOR = 'TRADER') and (ta.IDA_ACTOR = e.IDA_PAY)
+        
+        /* Groupe Instruments */
+        left outer join	dbo.VW_GINSTRROLE ig on (ig.IDI = tr.IDI) And (ig.IDROLEGINSTR = 'INVOICING')	And (ig.IDA = ar.IDA)
+        
+				/* Groupe Contract */
+		    left outer join dbo.VW_CONTRACT_INVOICE ci on (ci.IDASSET = tr.IDASSET) and (ci.ASSETCATEGORY = tr.ASSETCATEGORY)
+		    left outer join dbo.VW_CONTRACTG_INVOICE cg on (cg.IDASSET = tr.IDASSET) and (cg.ASSETCATEGORY = tr.ASSETCATEGORY) and (cg.IDA = ar.IDA)
+        
+        /* Groupe Instruments Underlyer */
+        left outer join  dbo.VW_TRADEREPO_UNL tr_unl on (tr_unl.IDT = tr.IDT)
+        left outer join dbo.VW_GINSTRROLE ig_unl On (ig_unl.IDI = tr_unl.IDI) And (ig_unl.IDROLEGINSTR = 'INVOICING') and (ig_unl.IDA = ar.IDA)
+        
+        /* Groupe Market */
+        left outer join dbo.VW_GMARKETROLE mg on (mg.IDM = tr.IDM) and (mg.IDROLEGMARKET = 'INVOICING') and (mg.IDA = ar.IDA)
+        
+        /* EventSource (Si IDSTENVIRONMENT_INVOICE = REGULAR alors la ligne de frais sera rejetée) */
+        left outer join
+        (
+          select ev.IDE_SOURCE as IDE,
+          case when ev.IDE_SOURCE > 0 then tr.IDSTENVIRONMENT else 'REGULAR' end as IDSTENVIRONMENT_INVOICE
+          from dbo.TRADELINK tl
+          inner join dbo.TRADE tr on (tr.IDT = tl.IDT_A)
+          inner join dbo.INSTRUMENT ns on (ns.IDI = tr.IDI)
+          inner join dbo.PRODUCT pr on (pr.IDP = ns.IDP) and (pr.GPRODUCT = 'ADM')
+          inner join dbo.EVENT ev on (ev.IDT = tr.IDT)
+          inner join dbo.EVENTCLASS evc on (evc.IDE = ev.IDE_SOURCE) and (evc.EVENTCLASS = 'INV')
+          and (evc.DTEVENT between DateAdd(MONTH, -2, @DATE1) and  @DATE1)
+        ) evs On (Isnull(evs.IDE,e.IDE) = e.IDE)
+
+        /* Group Book */
+        left outer join dbo.VW_GBOOKROLE bg on (bg.IDB = e.IDB_PAY) and (bg.IDROLEGBOOK = 'INVOICING') and (bg.IDA = ar.IDA)
+        
+
+        left Outer join
+        (
+          select ir.IDINVOICINGRULES,ir.IDENTIFIER,ir.IDA,ir.IDC_FEE,ir.IDA_INVOICED,ir.TYPEINSTR,ir.TYPEINSTR_UNL,ir.IDC_TRADE,ir.IDA_TRADER,
+          case ir.TYPEINSTR
+          when 'Product'  then isnull(ns1.IDI,-1)
+          when 'GrpInstr' then isnull(ig.IDI,-1)
+          when 'Instr'    then ns2.IDI
+          else null end as IDI,
+
+          case ir.TYPEBOOK
+          when 'GrpBook' then isnull(bk1.IDB,-1)
+          when 'Book'  then bk2.IDB
+          else null end as IDB,
+
+          case ir.TYPEINSTR_UNL
+          when 'GrpInstr' then isnull(ig_unl.IDI,-1)
+          when 'Instr'    then ns3.IDI
+          else null end as IDI_UNL,
+
+          case ir.TYPEMARKETCONTRACT
+          when 'GrpMarket'   then isnull(mg.IDM,-1)
+          when 'Market'      then isnull(mk.IDM,-1)
+          else null end as IDM,
+
+         case ir.TYPEMARKETCONTRACT
+          when 'GrpContract'          then -1
+          when 'DerivativeContract'   then ci.IDASSET
+          when 'CommodityContract'    then ci.IDASSET
+          else null end as IDASSET,
+
+         case ir.TYPEMARKETCONTRACT
+          when 'GrpContract'          then cg.GCONTRACT_IDENTIFIER
+          when 'DerivativeContract'   then ci.CONTRACT_IDENTIFIER
+          when 'CommodityContract'    then ci.CONTRACT_IDENTIFIER
+          else null end as CONTRACT_IDENTIFIER
+
+          from dbo.INVOICINGRULES ir
+          left outer join dbo.PRODUCT pr on (pr.IDP = ir.IDINSTR)
+          left outer join dbo.INSTRUMENT ns1 on (ns1.IDP = pr.IDP)
+          left outer join dbo.VW_GINSTRROLE ig on (ig.IDGINSTR = ir.IDINSTR) and (ig.IDROLEGINSTR = 'INVOICING') and (ig.IDA = ir.IDA_INVOICED)
+          
+          --left outer join dbo.DERIVATIVECONTRACT dc on (dc.IDDC = ir.IDMARKETCONTRACT)
+          left outer join dbo.VW_CONTRACT_INVOICE ci on (ci.IDXC = ir.IDMARKETCONTRACT) and (ci.CONTRACTCATEGORY = ir.TYPEMARKETCONTRACT)
+          
+          
+          --left outer join dbo.VW_GCONTRACTROLE cg on (cg.IDDC = ir.IDMARKETCONTRACT) and (cg.IDROLEGCONTRACT = 'INVOICING') and (cg.IDA = ir.IDA_INVOICED)
+          left outer join dbo.VW_CONTRACTG_INVOICE cg on (cg.IDASSET = ci.IDASSET) and (cg.ASSETCATEGORY = ci.ASSETCATEGORY) and (cg.IDA = ir.IDA_INVOICED)
+          
+          left outer join dbo.MARKET mk on (mk.IDM = ir.IDMARKETCONTRACT)
+          left outer join dbo.VW_GMARKETROLE mg on (mg.IDGMARKET = ir.IDMARKETCONTRACT) and (mg.IDROLEGMARKET = 'INVOICING') and (mg.IDA = ir.IDA_INVOICED)
+          
+          left outer join dbo.INSTRUMENT ns2 on (ns2.IDI = ir.IDINSTR)
+          left outer join dbo.VW_GINSTRROLE ig_unl on (ig_unl.IDGINSTR = ir.IDINSTR_UNL) and (ig_unl.IDROLEGINSTR = 'INVOICING') and (ig_unl.IDA = ir.IDA_INVOICED)
+          
+          left outer join dbo.INSTRUMENT ns3 on (ns3.IDI = ir.IDINSTR_UNL)
+          left outer join dbo.GBOOK gb on (gb.IDGBOOK = ir.IDBOOK)
+          left outer join dbo.BOOK bk1 on (bk1.IDB = gb.IDGBOOK)
+          left outer join dbo.BOOK bk2 on (bk2.IDB = ir.IDBOOK)
+          where (ir.DTENABLED<=@DATE1 and (ir.DTDISABLED is null or ir.DTDISABLED>@DATE1))
+        ) ir on (ir.IDA = e.IDA_PAY) and (ir.IDA_INVOICED = ar.IDA) and (ir.IDC_FEE = e.UNIT)
+        and (isnull(ir.IDI,tr.IDI) = tr.IDI)
+        and (isnull(ir.IDI_UNL,isnull(tr_unl.IDI,0)) = isnull(tr_unl.IDI,0))
+        and (isnull(ir.IDM,isnull(tr.IDM,0)) = isnull(tr.IDM,0))
+        and (isnull(ir.IDASSET,isnull(tr.IDASSET,0)) = isnull(tr.IDASSET,0))
+        
+        and (isnull(ir.IDB,isnull(e.IDB_PAY,0)) = isnull(e.IDB_PAY,0))
+        and (isnull(ir.IDC_TRADE,isnull(ts.IDC2, isnull(ts.IDC,0))) = isnull(ts.IDC2, isnull(ts.IDC,0)))
+        and (isnull(ir.IDA_TRADER,isnull(ta.IDA,0)) = isnull(ta.IDA,0))
+
+        where DateAdd(DAY, -DAY(DateAdd(MONTH, 1 , @DATE1)), DateAdd(MONTH, 1 , @DATE1))=@DATE1
+        and (evs.IDSTENVIRONMENT_INVOICE is null)
+        and (e.IDSTACTIVATION = 'REGULAR')
+        and ( (isnull(bkreceiver.IDA_ENTITY,e.IDA_REC)=@ENTITY) or (isnull(bkpayer.IDA_ENTITY,e.IDA_PAY)=@ENTITY))
+        and (%%SR:TRADE_WHERE_PREDICATE%%)
+        ]]>
+      </Command>
+		</SQLSelect>
+
+
+		<Column>
+			<ColumnName>INVOICINGRULES_IDENTIFIER</ColumnName>
+			<Ressource>InvoicingRules_Title2</Ressource>
+			<DataType>string</DataType>
+			<Length>64</Length>
+			<GridWidth>30</GridWidth>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>true</IsOrderBy>
+			<Relation>
+			</Relation>
+		</Column>
+		<Column>
+			<ColumnName>IDA_INVOICED</ColumnName>
+			<Ressource>IDA_INVOICED</Ressource>
+			<DataType>int</DataType>
+			<Nowrap>true</Nowrap>
+			<GridWidth>-30</GridWidth>
+			<Length>10</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsHideInCriteria>false</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>true</IsUpdatable>
+			<IsOrderBy>true</IsOrderBy>
+			<Relation>
+				<TableName>ACTOR</TableName>
+				<AliasTableName>acinvoiced</AliasTableName>
+				<ColumnRelation>
+					<ColumnName>IDA</ColumnName>
+					<DataType>int</DataType>
+				</ColumnRelation>
+				<ColumnSelect>
+					<ColumnName>IDENTIFIER</ColumnName>
+					<Ressource>IDA_INVOICED</Ressource>
+					<DataType>string</DataType>
+				</ColumnSelect>
+				<ColumnLabel>
+					<ColumnName>DISPLAYNAME</ColumnName>
+					<Ressource>DISPLAYNAME</Ressource>
+					<DataType>string</DataType>
+				</ColumnLabel>
+			</Relation>
+		</Column>
+		<Column>
+			<ColumnName>IDA_PAY</ColumnName>
+			<Ressource>EventPayer</Ressource>
+			<DataType>int</DataType>
+			<GridWidth>-30</GridWidth>
+			<Nowrap>true</Nowrap>
+			<Length>10</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>true</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation>
+				<TableName>ACTOR</TableName>
+				<AliasTableName>acpayer</AliasTableName>
+				<ColumnRelation>
+					<ColumnName>IDA</ColumnName>
+					<DataType>int</DataType>
+				</ColumnRelation>
+				<ColumnSelect>
+					<ColumnName>IDENTIFIER</ColumnName>
+					<Ressource>EventPayer</Ressource>
+					<DataType>string</DataType>
+				</ColumnSelect>
+				<ColumnLabel>
+					<ColumnName>DISPLAYNAME</ColumnName>
+					<Ressource>DISPLAYNAME</Ressource>
+					<DataType>string</DataType>
+				</ColumnLabel>
+			</Relation>
+		</Column>
+		<Column>
+			<ColumnName>IDB_PAY</ColumnName>
+			<Ressource></Ressource>
+			<DataType>int</DataType>
+			<Nowrap>true</Nowrap>
+			<Length>10</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsHideInCriteria>true</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>true</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation>
+				<TableName>BOOK</TableName>
+				<AliasTableName>bkPayer</AliasTableName>
+				<ColumnRelation>
+					<ColumnName>IDB</ColumnName>
+					<DataType>int</DataType>
+				</ColumnRelation>
+				<ColumnSelect>
+					<ColumnName>IDENTIFIER</ColumnName>
+					<Ressource></Ressource>
+					<DataType>string</DataType>
+				</ColumnSelect>
+				<ColumnLabel>
+					<ColumnName>DISPLAYNAME</ColumnName>
+					<Ressource></Ressource>
+					<DataType>string</DataType>
+				</ColumnLabel>
+			</Relation>
+		</Column>
+    <Column>
+      <ColumnName>UNIT</ColumnName>
+      <Ressource>IDC_FEE</Ressource>
+      <DataType>string</DataType>
+      <Length>3</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDC_TRADE</ColumnName>
+      <Ressource>IDC_TRADE</Ressource>
+      <DataType>string</DataType>
+      <Length>3</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>EVENTTYPE</ColumnName>
+      <Ressource>EVENTTYPE</Ressource>
+      <DataType>string</DataType>
+      <Length>3</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>IDGBOOK</ColumnName>
+      <Ressource>IDGBOOK</Ressource>
+      <DataType>int</DataType>
+      <Colspan>0</Colspan>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>GBOOK</TableName>
+        <ColumnRelation>
+          <ColumnName>IDGBOOK</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>IDGBOOK</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <ColumnLabel>
+          <ColumnName>DISPLAYNAME</ColumnName>
+          <Ressource>DISPLAYNAME</Ressource>
+          <DataType>string</DataType>
+        </ColumnLabel>
+      </Relation>
+    </Column>
+    <Column>
+			<ColumnName>IDI</ColumnName>
+			<Ressource>IDI</Ressource>
+			<DataType>int</DataType>
+			<Length>10</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsHideInCriteria>false</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>true</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>true</IsUpdatable>
+			<IsOrderBy>true</IsOrderBy>
+			<Relation>
+				<TableName>INSTRUMENT</TableName>
+				<AliasTableName>ti</AliasTableName>
+				<ColumnRelation>
+					<ColumnName>IDI</ColumnName>
+					<DataType>int</DataType>
+				</ColumnRelation>
+				<ColumnSelect>
+					<ColumnName>IDENTIFIER</ColumnName>
+					<Ressource>IDI</Ressource>
+					<DataType>string</DataType>
+				</ColumnSelect>
+				<ColumnLabel>
+					<ColumnName>DISPLAYNAME</ColumnName>
+					<Ressource>DISPLAYNAME</Ressource>
+					<DataType>string</DataType>
+				</ColumnLabel>
+			</Relation>
+		</Column>
+		<Column>
+			<ColumnName>IDI_UNL</ColumnName>
+			<Ressource>UNDERLYER_INSTRUMENT</Ressource>
+			<DataType>int</DataType>
+			<Length>10</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsHideInCriteria>false</IsHideInCriteria>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>true</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>true</IsUpdatable>
+			<IsOrderBy>true</IsOrderBy>
+			<Relation>
+				<TableName>INSTRUMENT</TableName>
+				<AliasTableName>ti_unl</AliasTableName>
+				<ColumnRelation>
+					<ColumnName>IDI</ColumnName>
+					<DataType>int</DataType>
+				</ColumnRelation>
+				<ColumnSelect>
+					<ColumnName>IDENTIFIER</ColumnName>
+					<Ressource>UNDERLYER_INSTRUMENT</Ressource>
+					<DataType>string</DataType>
+				</ColumnSelect>
+				<ColumnLabel>
+					<ColumnName>DISPLAYNAME</ColumnName>
+					<Ressource>DISPLAYNAME</Ressource>
+					<DataType>string</DataType>
+				</ColumnLabel>
+			</Relation>
+		</Column>
+    <Column>
+      <ColumnName>IDM</ColumnName>
+      <Ressource>IDM</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>true</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>true</IsOrderBy>
+      <Relation>
+        <!--<TableName>MARKET</TableName>
+        <AliasTableName>mk</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDM</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>IDM</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <ColumnLabel>
+          <ColumnName>DISPLAYNAME</ColumnName>
+          <Ressource>DISPLAYNAME</Ressource>
+          <DataType>string</DataType>
+        </ColumnLabel>-->
+        <!-- CC 20130506 Harmonization of  display of market-->
+        <TableName>VW_MARKET_IDENTIFIER</TableName>
+        <AliasTableName>mk</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDM</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>SHORT_ACRONYM</ColumnName>
+          <Ressource>IDM_SHORT_ACRONYM</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>CONTRACT_IDENTIFIER</ColumnName>
+      <Ressource>Contract_Title</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <GridWidth>30</GridWidth>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+
+    <Column>
+			<ColumnName>IDGINSTR</ColumnName>
+			<Ressource>IDGINSTR</Ressource>
+			<DataType>int</DataType>
+			<Colspan>0</Colspan>
+			<Length>10</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation>
+				<TableName>GINSTR</TableName>
+				<ColumnRelation>
+					<ColumnName>IDGINSTR</ColumnName>
+					<DataType>int</DataType>
+				</ColumnRelation>
+				<ColumnSelect>
+					<ColumnName>IDENTIFIER</ColumnName>
+					<Ressource>IDGINSTR</Ressource>
+					<DataType>string</DataType>
+				</ColumnSelect>
+				<ColumnLabel>
+					<ColumnName>DISPLAYNAME</ColumnName>
+					<Ressource>DISPLAYNAME</Ressource>
+					<DataType>string</DataType>
+				</ColumnLabel>
+			</Relation>
+		</Column>
+		<Column>
+			<ColumnName>IDGINSTR_UNL</ColumnName>
+			<Ressource>IDGINSTR_UNL</Ressource>
+			<DataType>int</DataType>
+			<Colspan>0</Colspan>
+			<Length>10</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation>
+				<TableName>GINSTR</TableName>
+				<ColumnRelation>
+					<ColumnName>IDGINSTR</ColumnName>
+					<DataType>int</DataType>
+				</ColumnRelation>
+				<ColumnSelect>
+					<ColumnName>IDENTIFIER</ColumnName>
+					<Ressource>IDGINSTR_UNL</Ressource>
+					<DataType>string</DataType>
+				</ColumnSelect>
+				<ColumnLabel>
+					<ColumnName>DISPLAYNAME</ColumnName>
+					<Ressource>DISPLAYNAME</Ressource>
+					<DataType>string</DataType>
+				</ColumnLabel>
+			</Relation>
+		</Column>
+    <Column>
+      <ColumnName>IDGMARKET</ColumnName>
+      <Ressource>IDGMARKET</Ressource>
+      <DataType>int</DataType>
+      <Colspan>0</Colspan>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>GMARKET</TableName>
+        <ColumnRelation>
+          <ColumnName>IDGMARKET</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>IDGMARKET</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <ColumnLabel>
+          <ColumnName>DISPLAYNAME</ColumnName>
+          <Ressource>DISPLAYNAME</Ressource>
+          <DataType>string</DataType>
+        </ColumnLabel>
+      </Relation>
+    </Column>
+
+    <Column>
+			<ColumnName>IDA_TRADER</ColumnName>
+			<Ressource>Trader</Ressource>
+			<DataType>int</DataType>
+			<GridWidth>-30</GridWidth>
+			<Nowrap>true</Nowrap>
+			<Length>10</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>false</IsForeignKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>true</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation>
+				<TableName>ACTOR</TableName>
+				<AliasTableName>actrader</AliasTableName>
+				<ColumnRelation>
+					<ColumnName>IDA</ColumnName>
+					<DataType>int</DataType>
+				</ColumnRelation>
+				<ColumnSelect>
+					<ColumnName>IDENTIFIER</ColumnName>
+					<Ressource>Trader</Ressource>
+					<DataType>string</DataType>
+				</ColumnSelect>
+				<ColumnLabel>
+					<ColumnName>DISPLAYNAME</ColumnName>
+					<Ressource>DISPLAYNAME</Ressource>
+					<DataType>string</DataType>
+				</ColumnLabel>
+			</Relation>
+		</Column>
+    <Column>
+      <ColumnName>CSS_ERRORLINE</ColumnName>
+      <DataType>bool</DataType>
+      <Colspan>0</Colspan>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression>
+      </RegularExpression>
+      <Default>
+        <Value>false</Value>
+      </Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+    </Column>
+  </Referential>
+</Referentials>
+

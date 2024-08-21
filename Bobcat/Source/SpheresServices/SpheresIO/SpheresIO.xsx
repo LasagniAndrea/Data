@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Ce fichier est automatiquement généré par le Concepteur de schémas XML. Il contient des informations de disposition pour les composants dans l'aire du concepteur.-->
+<XSDDesignerLayout Style="TopDown" layoutVersion="2" viewPortLeft="0" viewPortTop="0" zoom="100">
+    <StandardAttributes.atts_XmlAttributeGroup left="317" top="254" width="5292" height="2805" selected="0" zOrder="1" index="0" expanded="1">
+        <EfsMLIOversion_XmlAttribute left="317" top="3725" width="5292" height="900" selected="0" zOrder="2" index="0" expanded="1">
+            <_x0028_EfsMLIOversion_x0029__XmlSimpleType left="317" top="5080" width="5292" height="2805" selected="0" zOrder="5" index="0" expanded="1" />
+        </EfsMLIOversion_XmlAttribute>
+    </StandardAttributes.atts_XmlAttributeGroup>
+    <ioTask_XmlElement left="6243" top="254" width="5292" height="2805" selected="0" zOrder="8" index="1" expanded="0" />
+    <DataSpheresLib_XmlComplexType left="12169" top="254" width="5292" height="2805" selected="0" zOrder="10" index="2" expanded="1">
+        <Param_XmlElement left="12169" top="3725" width="5292" height="3281" selected="0" zOrder="12" index="0" expanded="0" />
+    </DataSpheresLib_XmlComplexType>
+    <DataSQL_XmlComplexType left="18095" top="254" width="5292" height="2963" selected="0" zOrder="15" index="3" expanded="1">
+        <Param_XmlElement left="18095" top="3725" width="5292" height="3281" selected="0" zOrder="16" index="0" expanded="0" />
+    </DataSQL_XmlComplexType>
+    <DynamicPathBase_XmlComplexType left="24021" top="254" width="5292" height="2963" selected="0" zOrder="18" index="4" expanded="1" />
+    <DynamicPathData_XmlComplexType left="29947" top="254" width="5292" height="2963" selected="0" zOrder="19" index="5" expanded="1" />
+    <DynamicPathRow_XmlComplexType left="35873" top="254" width="5292" height="2963" selected="0" zOrder="20" index="6" expanded="1" />
+    <DynamicPathSpheresLib_XmlComplexType left="41799" top="254" width="5292" height="2963" selected="0" zOrder="21" index="7" expanded="1" />
+    <DynamicPathSQL_XmlComplexType left="47725" top="254" width="5292" height="2963" selected="0" zOrder="22" index="8" expanded="1" />
+    <IOData_XmlComplexType left="53651" top="254" width="5292" height="2963" selected="0" zOrder="23" index="9" expanded="1" />
+    <IODetLogInfo_XmlComplexType left="59577" top="254" width="5292" height="2963" selected="0" zOrder="24" index="10" expanded="1" />
+    <IOMappedData_XmlComplexType left="68466" top="254" width="5292" height="2963" selected="0" zOrder="25" index="11" expanded="1">
+        <default_XmlElement left="65503" top="3725" width="5292" height="2963" selected="0" zOrder="26" index="0" expanded="0" />
+        <controls_XmlElement left="71429" top="3725" width="5292" height="2963" selected="0" zOrder="28" index="1" expanded="0" />
+    </IOMappedData_XmlComplexType>
+    <IOMappedDataControl_XmlComplexType left="77355" top="254" width="5292" height="2963" selected="0" zOrder="30" index="12" expanded="1">
+        <logInfo_XmlElement left="77355" top="3725" width="5292" height="2963" selected="0" zOrder="31" index="0" expanded="0" />
+    </IOMappedDataControl_XmlComplexType>
+    <IOMappedDataControls_XmlComplexType left="83281" top="254" width="5292" height="2963" selected="0" zOrder="33" index="13" expanded="1">
+        <control_XmlElement left="83281" top="3725" width="5292" height="2963" selected="0" zOrder="34" index="0" expanded="0" />
+    </IOMappedDataControls_XmlComplexType>
+    <IOMappedDataDefault_XmlComplexType left="89207" top="254" width="5292" height="2963" selected="0" zOrder="36" index="14" expanded="1" />
+    <IOTask_XmlComplexType left="98096" top="254" width="5292" height="2963" selected="0" zOrder="37" index="15" expanded="1">
+        <parameters_XmlElement left="95133" top="3725" width="5292" height="2963" selected="0" zOrder="38" index="0" expanded="0" />
+        <taskDet_XmlElement left="101059" top="3725" width="5292" height="2963" selected="0" zOrder="40" index="1" expanded="0" />
+    </IOTask_XmlComplexType>
+    <IOTaskDet_XmlComplexType left="109948" top="254" width="5292" height="2963" selected="0" zOrder="42" index="16" expanded="1">
+        <ioinput_XmlElement left="106985" top="3725" width="5292" height="2963" selected="0" zOrder="43" index="0" expanded="0" />
+        <iooutput_XmlElement left="112911" top="3725" width="5292" height="2963" selected="0" zOrder="45" index="1" expanded="0" />
+    </IOTaskDet_XmlComplexType>
+    <IOTaskDetInOut_XmlComplexType left="118837" top="254" width="5292" height="2963" selected="0" zOrder="47" index="17" expanded="1">
+        <file_XmlElement left="118837" top="3725" width="5292" height="2963" selected="0" zOrder="48" index="0" expanded="0" />
+    </IOTaskDetInOut_XmlComplexType>
+    <IOTaskDetInOutFile_XmlComplexType left="124763" top="254" width="5292" height="2963" selected="0" zOrder="50" index="18" expanded="1">
+        <row_XmlElement left="124763" top="3725" width="5292" height="2963" selected="0" zOrder="51" index="0" expanded="0" />
+    </IOTaskDetInOutFile_XmlComplexType>
+    <IOTaskDetInOutFileRow_XmlComplexType left="136615" top="254" width="5292" height="2963" selected="0" zOrder="53" index="19" expanded="1">
+        <SQL_XmlElement left="130689" top="3725" width="5292" height="2963" selected="0" zOrder="54" index="0" expanded="0" />
+        <data_XmlElement left="136615" top="3725" width="5292" height="2963" selected="0" zOrder="56" index="1" expanded="0" />
+        <table_XmlElement left="142541" top="3725" width="5292" height="2963" selected="0" zOrder="58" index="2" expanded="0" />
+    </IOTaskDetInOutFileRow_XmlComplexType>
+    <IOTaskDetInOutFileRowData_XmlComplexType left="148467" top="254" width="5292" height="2963" selected="0" zOrder="60" index="20" expanded="1" />
+    <IOTaskDetInOutFileRowTable_XmlComplexType left="160319" top="254" width="5292" height="2963" selected="0" zOrder="61" index="21" expanded="1">
+        <mqueue_XmlElement left="154393" top="3725" width="5292" height="2963" selected="0" zOrder="62" index="0" expanded="0" />
+        <SpheresLib_XmlElement left="160319" top="3725" width="5292" height="2963" selected="0" zOrder="64" index="1" expanded="0" />
+        <column_XmlElement left="166245" top="3725" width="5292" height="2963" selected="0" zOrder="66" index="2" expanded="0" />
+    </IOTaskDetInOutFileRowTable_XmlComplexType>
+    <IOTaskDetInOutFileRowTableColumn_XmlComplexType left="172171" top="254" width="5292" height="2963" selected="0" zOrder="68" index="22" expanded="1" />
+    <IOTaskDetInOutFileRowTableMQueue_XmlComplexType left="178097" top="254" width="5292" height="2963" selected="0" zOrder="69" index="23" expanded="1" />
+    <IOTaskParams_XmlComplexType left="184023" top="254" width="5292" height="2963" selected="0" zOrder="70" index="24" expanded="1">
+        <param_XmlElement left="184023" top="3725" width="5292" height="2963" selected="0" zOrder="71" index="0" expanded="0" />
+    </IOTaskParams_XmlComplexType>
+    <IOTaskParamsParam_XmlComplexType left="189949" top="254" width="5292" height="2963" selected="0" zOrder="73" index="25" expanded="1" />
+    <ParamData_XmlComplexType left="195875" top="1254" width="5292" height="3281" selected="0" zOrder="74" index="26" expanded="1" />
+    <ParameterDirection_XmlSimpleType left="201801" top="1254" width="5292" height="3281" selected="0" zOrder="75" index="27" expanded="1" />
+    <StringDynamicData_XmlComplexType left="210690" top="1254" width="5292" height="3281" selected="0" zOrder="76" index="28" expanded="1">
+        <SQL_XmlElement left="207727" top="5043" width="5292" height="3281" selected="0" zOrder="77" index="1" expanded="0" />
+        <SpheresLib_XmlElement left="213653" top="5043" width="5292" height="3281" selected="0" zOrder="79" index="2" expanded="0" />
+    </StringDynamicData_XmlComplexType>
+</XSDDesignerLayout>

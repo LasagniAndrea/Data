@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+
+  <!-- *********************** -->
+  <!-- ***   BLOCS CHILD   *** -->
+  <!-- *********************** -->
+
+  <!-- EventsChildBlock -->
+  <Object name="EventsChildBlock">
+   
+    <table>
+      <EventsChild clientid="event" required="false"/>
+    </table>
+  </Object>
+
+  <!-- *************************** -->
+  <!-- ***   COMPLEX OBJECTS   *** -->
+  <!-- *************************** -->
+
+  <!-- EventsChild -->
+  <Object name="EventsChild">
+    <table verticalAlign="Top" colspan="-1">
+      <EventParentAttached/>
+      <EventChildBlock/>
+    </table>
+  </Object>
+
+  <Object name="EventChildBlock">
+    <table colspan="-1" verticalAlign="Top" style="istableH:true;tblH-titleR:Events;tblH-css:size4;" controlalignleft="true" >
+      <table>
+        <Label clientid="eventParent_codes_eventCode" width="50"/>
+        <Label clientid="eventParent_codes_eventType" width="50"/>
+        <Label clientid="eventParent_dates_startDate" width="90"/>
+        <Label clientid="eventParent_dates_endDate"   width="90"/>
+        <Label clientid="valorisationRates_valorisationRate_rate" width="100"/>
+        <Label clientid="eventClass_dtEvent" width="140"/>
+      </table>
+      <br/>
+      <hr/>
+      <table colspan="6" overflow="100" style="width:100%" controlalignleft="true">
+        <EventChildItem clientid="eventChild" required="false" occurs="1" />
+      </table>
+    </table>
+  </Object>
+  <!-- EventChildItem -->
+  <Object name="EventChildItem">
+    <EventCodeOnly_RO clientid="eventCode" />
+    <EventTypeOnly_RO clientid="eventType" />
+    <Date_RO          clientid="startDate" />
+    <Date_RO          clientid="endDate" />
+    <FixRate          clientid="rate" />
+    <EventClassChildBlock />
+  </Object>
+</Objects>

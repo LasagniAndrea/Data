@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Screens>
+  <!-- EG 20171113 [23509] Upd Gestion Objets Facility / Dates et Marché -->
+  <!-- Strategy -->
+  <Screen name="StrategyFxSimpleOption" caption="Strategy FX Option (OTCml)" product="Strategy_FxSimpleOption">
+    <TradeRemoveBlock />
+    <FacilityHeaderBlock/>
+    <PartyDerv2Broker1Block/>
+    <StrategyFxOptionLegBlock clientid="strategy"/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentBlock/>
+    <SettlementInputBlock/>
+    <ComplianceBlock/>
+  </Screen>
+</Screens>

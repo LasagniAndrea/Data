@@ -1,0 +1,542 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- FI 20120112 [] mise en place des mots clefs %%SR -->
+<!-- FI 20120123 [] usage de IsUseSQLParameters -->
+<!-- EG 20200226 [25077] RDBMS : New version of Trades tables architecture (TRADEINSTRUMENT (INSTRUMENTNO=1) to TRADE)
+      suite à Réécriture des scripts LST -->
+<Referentials>
+  <Referential>
+    <IsUseSQLParameters>true</IsUseSQLParameters>
+    <TableName>ACTIONDET</TableName>
+    <Ressource>TradeAuditAction</Ressource>
+    <AliasTableName>ad</AliasTableName>
+    <ColumnByRow>3</ColumnByRow>
+    <Create>false</Create>
+    <Modify>false</Modify>
+    <Remove>false</Remove>
+    <IsLoupe>false</IsLoupe>
+    <IsDblClick>false</IsDblClick>
+
+    <SQLWhere>
+      <ConditionSystem>SESSIONRESTRICT</ConditionSystem>
+      <SQLJoin>%%SR:TRADE_JOIN%%(ad.IDT, null)</SQLJoin>
+      <SQLWhere>%%SR:TRADE_WHERE_PREDICATE%%</SQLWhere>
+    </SQLWhere>
+
+    
+    <SQLSelect>
+      <Command rdbms = "sqlserver">
+        <![CDATA[
+        /* SQL: WITH */
+        with EVENT_CTE (IDT, IDE, IDE_EVENT, IDE_SOURCE, EVENTCODE, EVENTCLASS, DTEVENT, IDT_SOURCE, NIVEAU, COLSORT, IDEC) as
+        (
+	        select ev.IDT, ev.IDE, ev.IDE_EVENT, ev.IDE_SOURCE, ev.EVENTCODE, ec.EVENTCLASS, ec.DTEVENT,
+          ev.IDT as IDT_SOURCE, 0 as NIVEAU, ev.IDE as COLSORT, ec.IDEC
+	        from dbo.EVENT ev
+          inner join dbo.EVENTCLASS ec on (ec.IDE = ev.IDE)
+	        inner join dbo.EVENTENUM co on (co.CODE = 'EventCode') and (co.VALUE = ev.EVENTCODE) and (co.ISTRADEACTIONTRACKING = 1)
+          inner join dbo.EVENTENUM cl on (cl.CODE = 'EventClass') and (cl.VALUE = ec.EVENTCLASS) and (cl.ISTRADEACTIONTRACKING = 1)
+	        where 
+	        (ev.IDT = @IDT)
+        	
+	        union all
+
+	        select ev.IDT, ev.IDE, ev.IDE_EVENT, ev.IDE_SOURCE, ev.EVENTCODE, ec.EVENTCLASS, ec.DTEVENT, 
+          ev.IDT , NIVEAU + 1 , evcte.COLSORT, ec.IDEC
+	        from dbo.EVENT ev
+          inner join dbo.EVENTCLASS ec on (ec.IDE = ev.IDE)
+	        inner join EVENT_CTE evcte on (evcte.IDE = ev.IDE_EVENT)
+          where NIVEAU < case when 2 = @NIVEAU then 10 else @NIVEAU end
+          and (ev.IDSTACTIVATION = 'REGULAR')
+          
+	        union all
+
+	        select evcte.IDT, ev.IDE, ev.IDE_EVENT, ev.IDE_SOURCE, ev.EVENTCODE, ec.EVENTCLASS, ec.DTEVENT, 
+          ev.IDT, NIVEAU + 1, evcte.COLSORT, ec.IDEC
+	        from dbo.EVENT ev
+          inner join dbo.EVENTCLASS ec on (ec.IDE = ev.IDE)
+	        inner join EVENT_CTE evcte on (evcte.IDE_SOURCE = ev.IDE)
+          where NIVEAU < case when 2 = @NIVEAU then 1 else @NIVEAU end
+        )
+        /* SQL: ENDWITH */
+        
+        
+        select evcte.IDT, evcte.IDE, evcte.IDE_EVENT, evcte.IDE_SOURCE, evcte.IDT_SOURCE, 
+        evcte.EVENTCODE, ev.EVENTTYPE, evcte.EVENTCLASS, evcte.DTEVENT, evcte.NIVEAU,
+        co.EXTVALUE as CODEVALUE, ty.EXTVALUE as TYPEVALUE, cl.EXTVALUE as CLASSVALUE,
+        ev.STREAMNO, ev.VALORISATION as VALORISATION_FMT, 
+        isnull(ev.UNIT,ev.UNITTYPE) as VALORISATIONTYPE, 
+        case ev.IDSTTRIGGER when 'NA' then null else ev.IDSTTRIGGER end as IDSTTRIGGER, 
+        ev.IDSTACTIVATION, ed.RATE, ed.SETTLEMENTRATE, ed.NOTIONALREFERENCE, ed.NOTE, evcte.COLSORT, pr.GPRODUCT, evcte.IDEC
+        from EVENT_CTE evcte
+        inner join dbo.EVENT ev on (ev.IDE = evcte.IDE)
+        inner join dbo.TRADE tr on (tr.IDT = ev.IDT)
+        inner join dbo.INSTRUMENT ti on (ti.IDI = tr.IDI)
+        inner join dbo.PRODUCT pr on (pr.IDP = ti.IDP)
+        inner join dbo.EVENTENUM co on (co.CODE = 'EventCode' and co.VALUE = evcte.EVENTCODE)
+        inner join dbo.EVENTENUM ty on (ty.CODE = 'EventType' and ty.VALUE = ev.EVENTTYPE)
+        inner join dbo.EVENTENUM cl on (cl.CODE = 'EventClass' and cl.VALUE = evcte.EVENTCLASS)
+        left outer join dbo.EVENTDET ed on (ed.IDE = ev.IDE)
+      ]]>
+      </Command>
+      <Command rdbms = "oracle">
+        <![CDATA[
+        select ev.IDT, ev.IDE, ev.IDE_EVENT, ev.IDE_SOURCE, evcte.IDT_SOURCE, 
+        ev.EVENTCODE, ev.EVENTTYPE, evcte.EVENTCLASS, evcte.DTEVENT, evcte.NIVEAU,
+        co.EXTVALUE as CODEVALUE, ty.EXTVALUE as TYPEVALUE, cl.EXTVALUE as CLASSVALUE,
+        ev.STREAMNO, ev.VALORISATION as VALORISATION_FMT, 
+        nvl(ev.UNIT,ev.UNITTYPE) as VALORISATIONTYPE, 
+        case ev.IDSTTRIGGER when 'NA' then null else ev.IDSTTRIGGER end as IDSTTRIGGER, 
+        ev.IDSTACTIVATION, ed.RATE, ed.SETTLEMENTRATE, ed.NOTIONALREFERENCE, ed.NOTE, evcte.COLSORT, pr.GPRODUCT, evcte.IDEC
+        from dbo.EVENT ev
+        inner join 
+        (
+          select ev.IDT, ev.IDE, ev.IDE_EVENT, ev.IDE_SOURCE, ev.EVENTCODE, ec.EVENTCLASS, ec.DTEVENT, ev.IDT as IDT_SOURCE, LEVEL-1 as NIVEAU, ev.IDE as COLSORT
+          from dbo.EVENT ev
+          inner join dbo.EVENTCLASS ec on (ec.IDE = ev.IDE)
+          inner join dbo.EVENTENUM co on (co.CODE = 'EventCode') and (co.VALUE = ev.EVENTCODE) 
+          inner join dbo.EVENTENUM cl on (cl.CODE = 'EventClass') and (cl.VALUE = ec.EVENTCLASS)
+          where (ev.IDT = @IDT) and (ev.IDSTACTIVATION = 'REGULAR')
+          start with (co.ISTRADEACTIONTRACKING = 1) and (cl.ISTRADEACTIONTRACKING = 1) 
+          connect by nocycle prior ev.IDE = ev.IDE_EVENT  and
+          LEVEL <= case when 2 = @NIVEAU then 6 else @NIVEAU+1 end
+        ) evcte on (evcte.IDE = ev.IDE)
+        inner join dbo.TRADE tr on (tr.IDT = ev.IDT)
+        inner join dbo.INSTRUMENT ti on (ti.IDI = tr.IDI)
+        inner join dbo.PRODUCT pr on (pr.IDP = ti.IDP)
+        inner join dbo.EVENTENUM co on (co.CODE = 'EventCode' and co.VALUE = evcte.EVENTCODE)
+        inner join dbo.EVENTENUM ty on (ty.CODE = 'EventType' and ty.VALUE = ev.EVENTTYPE)
+        inner join dbo.EVENTENUM cl on (cl.CODE = 'EventClass' and cl.VALUE = evcte.EVENTCLASS)
+        left outer join dbo.EVENTDET ed on (ed.IDE = ev.IDE)
+      ]]>
+      </Command>
+    </SQLSelect>
+
+    <SQLRowState >
+      <![CDATA[
+      case when NIVEAU = 0 then 'lstaw=name:' || EVENTCODE ||';' else '' end
+      ]]>
+    </SQLRowState>                                                                                 
+
+    <SQLRowStyle type="class">
+      <![CDATA[
+      case when NIVEAU = 0 then 'DataGrid-SUCCESS_1' else 'DataGrid_ItemStyle' end
+      ]]>
+    </SQLRowStyle>
+
+    <Column>
+      <ColumnName>IDT</ColumnName>
+      <Ressource>IDT</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>true</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy order="COLSORT, NIVEAU, DTEVENT, IDEC">true</IsOrderBy>
+    </Column>
+    
+    <Column>
+      <ColumnName>STREAMNO</ColumnName>
+      <Ressource>COL_STREAMNO</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>IDE</ColumnName>
+      <Ressource>COL_IDE</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>IDE_EVENT</ColumnName>
+      <Ressource>COL_IDE</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>IDEC</ColumnName>
+      <Ressource>IDEC</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>true</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>true</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>true</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+
+
+    <Column>
+      <ColumnName>IDE_SOURCE</ColumnName>
+      <Ressource>COL_IDE_SOURCE</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>IDT_SOURCE</ColumnName>
+      <Ressource>IDENTIFIER</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>true</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <Relation>
+        <TableName>TRADE</TableName>
+        <AliasTableName>trs</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDT</ColumnName>
+          <DataType>string</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>IDENTIFIER</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+      </Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>COLSORT</ColumnName>
+      <DataType>int</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+
+    <Column>
+      <ColumnName>EVENTCODE</ColumnName>
+      <Ressource>Action</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>EVENTENUM</TableName>
+        <AliasTableName>co</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>VALUE</ColumnName>
+          <DataType>string</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>EXTVALUE</ColumnName>
+          <Ressource>Action</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <Condition apply="ALL">
+          <SQLWhere>(co.CODE = 'EventCode')</SQLWhere>
+        </Condition>
+
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>EVENTTYPE</ColumnName>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>EVENTENUM</TableName>
+        <AliasTableName>ty</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>VALUE</ColumnName>
+          <DataType>string</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>EXTVALUE</ColumnName>
+          <Ressource>EVENTTYPE</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <Condition apply="ALL">
+          <SQLWhere>(ty.CODE = 'EventType')</SQLWhere>
+        </Condition>
+
+      </Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>DTEVENT</ColumnName>
+      <Ressource>Date</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>EVENTCLASS</ColumnName>
+      <!--<Ressource>Date</Ressource>-->
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>EVENTENUM</TableName>
+        <AliasTableName>cl</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>VALUE</ColumnName>
+          <DataType>string</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>EXTVALUE</ColumnName>
+          <Ressource>Date</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <Condition apply="ALL">
+          <SQLWhere>(cl.CODE = 'EventClass')</SQLWhere>
+        </Condition>
+      </Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>VALORISATION_FMT</ColumnName>
+      <Ressource>COL_VALORISATION_FMT</Ressource>
+      <DataType>dec</DataType>
+      <Length>26</Length>
+      <Scale>2</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>VALORISATIONTYPE</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>IDSTTRIGGER</ColumnName>
+      <Ressource>StatutTrigger</Ressource>
+      <DataType>string</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>ENUM</TableName>
+        <AliasTableName>trg</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>VALUE</ColumnName>
+          <DataType>string</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>EXTVALUE</ColumnName>
+          <Ressource>StatutTrigger</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <Condition apply="ALL">
+          <SQLWhere>(trg.CODE = 'TriggerStatus')</SQLWhere>
+        </Condition>
+      </Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>NOTE</ColumnName>
+      <Ressource>NoteEvents</Ressource>
+      <DataType>string</DataType>
+      <Length>2000</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression>RegexStringAlphaNumUpperLight</RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>NIVEAU</ColumnName>
+      <Ressource>OrderId</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>GPRODUCT</ColumnName>
+      <Ressource>GPRODUCT</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+
+  </Referential>
+</Referentials>

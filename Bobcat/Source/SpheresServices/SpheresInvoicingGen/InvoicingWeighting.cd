@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="InvoicingContextWeight -Classe attribut utilisée pour affecter un poids à chaque élément du contexte environnermental">
+    <Position X="3.744" Y="0.979" Height="0.654" Width="2.495" />
+  </Comment>
+  <Comment CommentText="InvoicingContextEnum -Enumération des éléments du contexte environnemental ">
+    <Position X="0.5" Y="0.955" Height="0.654" Width="2.017" />
+  </Comment>
+  <Comment CommentText="Matching-Enumération des valeur de matching d'un élément du contexte environnemental">
+    <Position X="3.752" Y="4.177" Height="0.654" Width="2.487" />
+  </Comment>
+  <Comment CommentText="InvoicingContextEvent -Valeur des éléments d'un événement candidat répondant au contexte environnemental ">
+    <Position X="7.271" Y="0.991" Height="0.664" Width="2.705" />
+  </Comment>
+  <Class Name="EFS.Administrative.Invoicing.InvoicingContextWeight">
+    <Position X="3.75" Y="2" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAABAAAAAAQAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InvoicingTools.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Name" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EFS.Administrative.Invoicing.InvoicingContextEvent">
+    <Position X="7.25" Y="2" Width="2.75" />
+    <Members>
+      <Field Name="idA_TraderSpecified" Hidden="true" />
+      <Field Name="idBSpecified" Hidden="true" />
+      <Field Name="idGrpBookSpecified" Hidden="true" />
+      <Field Name="idGrpInstr_UnderlyerSpecified" Hidden="true" />
+      <Field Name="idGrpInstrSpecified" Hidden="true" />
+      <Field Name="idGrpMarketSpecified" Hidden="true" />
+      <Field Name="idI_UnderlyerSpecified" Hidden="true" />
+      <Field Name="idMSpecified" Hidden="true" />
+      <Method Name="InvoicingContextEvent" Hidden="true" />
+      <Property Name="IsRepoOrOption" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>ACAMIAAAEIAAgFAAgEQAAAEIGAAAABMAAAAAQgBABgY=</HashCode>
+      <FileName>InvoicingTools.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="EFS.Administrative.Invoicing.InvoicingContextEnum">
+    <Position X="0.5" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAGAAAAAACAAAAAAAgQAAAEAwAAABgCAEgAAgEACEA=</HashCode>
+      <FileName>InvoicingTools.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EfsML.Enum.MatchingEnum">
+    <Position X="3.75" Y="5" Width="2.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

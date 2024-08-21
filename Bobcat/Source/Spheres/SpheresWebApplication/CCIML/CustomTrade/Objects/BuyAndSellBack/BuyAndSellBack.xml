@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+	<!--//-->
+	<!--BuyAndSellBackBlock-->
+	<Object name="BuyAndSellBackBlock" >
+		<Table colspan="-1" style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:BuyAndSellBack;" controlalignleft="true">
+			<BSBCommonBlock/>
+			<BSBSpotLegBlock/>
+			<BSBForwardLegBlock/>
+		</Table>
+	</Object>
+	<!--//-->
+	<!--BSBCommonBlock-->
+	<Object name="BSBCommonBlock">
+		<Table style="margin-top:2px;" controlalignleft="true" colspan="-1">
+			<Table controlalignleft="true" verticalAlign="Top">
+				<Date_L clientid="effectiveMinDate" required="true" postback="true" helpschema="fpml" helpelement="AdjustableDate" />
+				<Space />
+				<Date_L clientid="terminationMaxDate" required="true" postback="true" helpschema="fpml" helpelement="AdjustableDate" />
+			</Table>
+			<Space />
+			<Table controlalignleft="true" verticalAlign="Top" >
+				<BSBCashStream occurs="1" clientid="cashStream" helpschema="efsml" helpelement="CashStream"/>
+			</Table>
+		</Table>
+	</Object>
+	<!--//-->
+	<!--CashStream-->
+	<Object name="BSBCashStream">
+		<Table controlalignleft="true" colspan="-1">
+			<PartyReference_L clientid="payer" required="true" postback="true" />
+			<Space />
+			<FixedRate_L clientid="calculationPeriodAmount_calculation_fixedRateSchedule_initialValue" required="true" postback="true" helpschema="fpml" helpelement="Schedule"/>
+			<Space />
+			<DayCountFraction_L clientid="calculationPeriodAmount_calculation_dayCountFraction" required="true"	postback="true" helpschema="fpml" helpelement="DayCountFraction"/>
+		</Table>
+	</Object>
+	<!--//-->
+	<!--BSBSpotLegBlock-->
+	<Object name="BSBSpotLegBlock">
+		<Table style="istableH:true;tblH-titleR:bsb_SpotLeg_Title;tblH-reverse:1;tblH-css:size5;helpschema:efsml;helpelement:SecurityLeg;" controlalignleft="true" colspan="-1">
+			<BSBSpotLeg  occurs="1" clientid="spotLeg" />
+		</Table>
+	</Object>
+	<!--BSBForwardLegBlock-->
+	<Object name="BSBForwardLegBlock">
+		<Table style="istableH:true;tblH-titleR:bsb_ForwardLeg_Title;tblH-reverse:1;tblH-css:size5;helpschema:efsml;helpelement:SecurityLeg;" controlalignleft="true" colspan="-1">
+			<BSBForwardLeg  occurs="1" clientid="forwardLeg" />
+		</Table>
+	</Object>
+	<!--//-->
+	<!--BSBSpotLeg-->
+	<Object name="BSBSpotLeg">
+		<!--<Table style="margin-top:2px;" controlalignleft="true" colspan="-1">-->
+			<SecurityAssetId_L clientid="debtSecurityTransaction_securityAsset_securityId"  required="true" postback="true"   />
+			<br/>
+			<BSBSecurityLegBlock/>
+		<!--</Table>-->
+	</Object>
+	<!--//-->
+	<!--BSBSecurityLeg-->
+	<Object name="BSBForwardLeg">
+		<Table style="margin-top:2px;" controlalignleft="true" colspan="-1">
+			<BSBSecurityLegBlock/>
+		</Table>
+	</Object>
+	<!--//-->
+	<!--BSBSecurityLegBlock-->
+	<Object name="BSBSecurityLegBlock">
+    <table controlalignleft="true" colspan="-1">
+			<SecurityOrderQuantity clientid="debtSecurityTransaction_orderQuantity"/>
+			<SecurityPrice clientid="debtSecurityTransaction_orderPrice"/>
+      <SecurityCoupon clientid="debtSecurityTransaction_orderPrice"/>
+		</table>
+    <br/>
+    <BSBSecurityLegGrossAmountBlock />
+  </Object>
+	<!--//-->
+	<!--BSBSecurityLegGrossAmountBlock-->
+	<Object name="BSBSecurityLegGrossAmountBlock">
+    <Table controlalignleft="true" colspan="-1">
+      <Banner caption="bsb_DebtSecurityTransaction_grossAmountTitle" level="3"/>
+      <BSBSecurityPayment clientid="debtSecurityTransaction_grossAmount" helpschema="fpml" helpelement="Payment" />
+    </Table>
+	</Object>
+	<!--//-->
+	<!--BSBSecurityPayment-->
+	<Object name="BSBSecurityPayment">
+		<Table colspan="-1" controlalignleft="true" >
+			<DLLBannerFeeBlock/>
+			<Table>
+				<PartyReference_L clientid="payer" postback="true" required="true" />
+				<Space />
+				<Date_L clientid="paymentDate_unadjustedDate" required="false" helpschema="fpml" helpelement="AdjustableDate" />
+				<Space />
+				<Money_L clientid="paymentAmount" required="true" postback="true" />
+				<Space />
+				<SettlementInformation_L clientid="settlementInformation" postback="true" />
+				<Fill/>
+			</Table>
+			<Fill/>
+		</Table>
+	</Object>
+</Objects>

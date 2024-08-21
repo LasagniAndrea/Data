@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Screens>
+  <!-- EG 20171113 [23509] Upd Gestion Objets Facility / Dates et Marché -->
+	<!-- LoanDeposit-Bank -->
+	<Screen name="LoanDeposit-Bank" caption="LoanDeposit (Screen Bank)" product="LoanDeposit">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+		<PartyBroker-LD-Block/>
+		<LoanDepositBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+		<ProvisionsBlock/>
+		<FullProvisionsBlock/>
+    <ComplianceBlock/>
+	</Screen>
+	<!-- LoanDepositStub-Bank -->
+	<Screen name="LoanDepositStub-Bank" caption="LoanDeposit with Stub (Screen Bank)" product="LoanDeposit">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-LD-Block/>
+		<LoanDepositStubBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+		<FullProvisionsBlock/>
+    <ComplianceBlock/>
+	</Screen>
+
+	<!-- LoanDepositMultiStream-Bank -->
+	<Screen name="LoanDepositMultiStream-Bank" caption="LoanDeposit Multi Stream (Screen Bank)" product="LoanDeposit">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-LD-Block/>
+		<MultiStreamLoanDepositBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+		<xProvisionsBlock/>
+		<FullProvisionsBlock/>
+    <ComplianceBlock/>
+	</Screen>
+
+	<!-- LoanDepositMultiStreamStub-Bank -->
+	<Screen name="LoanDepositMultiStreamStub-Bank" caption="LoanDeposit Multi Stream with Stub (Screen Bank)" product="LoanDeposit">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-LD-Block/>
+		<MultiStreamLoanDepositStubBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+		<xProvisionsBlock/>
+		<FullProvisionsBlock/>
+    <ComplianceBlock/>
+	</Screen>
+</Screens>

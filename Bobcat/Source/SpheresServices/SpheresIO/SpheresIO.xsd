@@ -1,0 +1,363 @@
+<xsd:schema targetNamespace="http://www.efs.org/2007/EFSmlIO-2-0" xmlns="http://www.efs.org/2007/EFSmlIO-2-0"
+	    xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+
+<!-- ****************************** -->
+<!-- AttributeGroup                 -->
+<!-- ****************************** -->
+<xsd:attributeGroup name="StandardAttributes.atts">
+	<xsd:attribute name="EfsMLIOversion" use="required">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:token">
+				<xsd:enumeration value="2-0" />
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:attribute>
+</xsd:attributeGroup>
+
+<!-- ****************************** -->
+<!-- Elements                       -->
+<!-- ****************************** -->
+<xsd:element name="ioTask" type="IOTask" />
+
+<!-- ****************************** -->
+<!-- DataSpheresLib                 -->
+<!-- ****************************** -->
+<xsd:complexType name="DataSpheresLib">
+	<xsd:sequence>
+		<xsd:element name="Param"  type="ParamData" minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+	<xsd:attribute name="function" type="xsd:string" use="required"/>
+</xsd:complexType>
+
+<!-- ****************************** -->
+<!-- DataSQL                        -->
+<!-- ****************************** -->
+<xsd:complexType name="DataSQL">
+	<xsd:complexContent>
+		<xsd:extension base="xsd:normalizedString">
+			<xsd:sequence>
+				<xsd:element name="Param"  type="ParamData" minOccurs="0" maxOccurs="unbounded"/>
+			</xsd:sequence>
+			<xsd:attribute name="command"  type="xsd:string" use="required"/>
+			<xsd:attribute name="name"     type="xsd:string" use="required"/>
+			<xsd:attribute name="result"   type="xsd:string" use="required"/>
+		</xsd:extension>
+	</xsd:complexContent>	
+</xsd:complexType>
+
+<!-- ******************************** -->
+<!-- DynamicPathBase                  -->
+<!-- ******************************** -->
+<xsd:complexType name="DynamicPathBase">
+	<xsd:attribute name="property" type="xsd:string" use="required"/>
+	<xsd:attribute name="format"   type="xsd:string" use="required"/>	
+</xsd:complexType>
+
+<!-- ******************************** -->
+<!-- DynamicPathData                  -->
+<!-- ******************************** -->
+<xsd:complexType name="DynamicPathData">
+	<xsd:complexContent>
+		<xsd:extension base="DynamicPathBase">
+			<xsd:attribute name="name" type="xsd:string" use="required"/>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<!-- ******************************** -->
+<!-- DynamicPathRow                   -->
+<!-- ******************************** -->
+<xsd:complexType name="DynamicPathRow">
+	<xsd:complexContent>
+		<xsd:extension base="DynamicPathBase" />
+	</xsd:complexContent>
+</xsd:complexType>
+
+<!-- ******************************** -->
+<!-- DynamicPathSpheresLib            -->
+<!-- ******************************** -->
+<xsd:complexType name="DynamicPathSpheresLib">
+	<xsd:complexContent>
+		<xsd:extension base="DataSpheresLib">
+			<xsd:attribute name="format" type="xsd:string" use="required"/>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<!-- ******************************** -->
+<!-- DynamicPathSQL                   -->
+<!-- ******************************** -->
+<xsd:complexType name="DynamicPathSQL">
+	<xsd:complexContent>
+		<xsd:extension base="DataSQL">
+			<xsd:attribute name="format" type="xsd:string" use="required"/>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<!-- ******************************** -->
+<!-- IOData                           -->
+<!-- ******************************** -->
+<xsd:complexType name="IOData">
+	<xsd:complexContent>
+		<xsd:extension base="StringDynamicData" />
+	</xsd:complexContent>
+</xsd:complexType>
+
+<!-- ******************************** -->
+<!-- IODetLogInfo                     -->
+<!-- ******************************** -->
+<xsd:complexType name="IODetLogInfo">
+	<xsd:complexContent>
+		<xsd:extension base="ProcessLogInfo">
+			<xsd:attribute name="isexception" type="xsd:boolean" use="required"/>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<!-- ******************************** -->
+<!-- IOMappedData                     -->
+<!-- ******************************** -->
+<xsd:complexType name="IOMappedData">
+	<xsd:complexContent>
+		<xsd:extension base="IOData">
+			<xsd:sequence>
+				<xsd:element name="default"  type="IOMappedDataDefault" />
+				<xsd:element name="controls" type="IOMappedDataControls" />
+			</xsd:sequence>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<!-- ******************************** -->
+<!-- IOMappedDataParameters           -->
+<!-- ******************************** -->
+<xsd:complexType name="IOMappedDataParameters">
+  <xsd:sequence>
+    <xsd:element name="parameter" type="IOMappedData" maxOccurs="unbounded"/>
+  </xsd:sequence>
+</xsd:complexType>
+
+<!-- ******************************** -->
+<!-- IOMappedDataControl              -->
+<!-- ******************************** -->
+<xsd:complexType name="IOMappedDataControl">
+	<xsd:complexContent>
+		<xsd:extension base="IOData">
+			<xsd:sequence>
+				<xsd:element name="logInfo" type="IODetLogInfo" />
+			</xsd:sequence>
+			<xsd:attribute name="action"    type="xsd:string" use="required"/>
+			<xsd:attribute name="return"    type="xsd:string" use="required"/>
+			<xsd:attribute name="logtype"   type="xsd:string" use="required"/>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<!-- ******************************** -->
+<!-- IOMappedDataControls             -->
+<!-- ******************************** -->
+<xsd:complexType name="IOMappedDataControls">
+	<xsd:sequence>
+		<xsd:element name="control" type="IOMappedDataControl" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+<!-- ******************************** -->
+<!-- IOMappedDataDefault              -->
+<!-- ******************************** -->
+<xsd:complexType name="IOMappedDataDefault">
+	<xsd:complexContent>
+		<xsd:extension base="IOData" />
+	</xsd:complexContent>
+</xsd:complexType>
+
+<!-- ****************************** -->
+<!-- IOTask                         -->
+<!-- ****************************** -->
+<xsd:complexType name="IOTask">
+	<xsd:sequence>
+		<xsd:element name="parameters" type="IOTaskParams" />
+		<xsd:element name="taskDet"    type="IOTaskDet" />
+	</xsd:sequence>
+	<xsd:attribute name="id"          type="xsd:ID"     use="required"/>
+	<xsd:attribute name="name"        type="xsd:string" use="required"/>
+	<xsd:attribute name="displayname" type="xsd:string" use="required"/>
+	<xsd:attribute name="loglevel"    type="xsd:string" use="required"/>
+	<xsd:attribute name="commitmode"  type="xsd:string" use="required"/>
+</xsd:complexType>
+
+<!-- ****************************** -->
+<!-- IOTaskDet                      -->
+<!-- ****************************** -->
+<xsd:complexType name="IOTaskDet">
+	<xsd:sequence>
+		<xsd:element name="ioinput"   type="IOTaskDetInOut" />
+		<xsd:element name="iooutput"  type="IOTaskDetInOut" />
+	</xsd:sequence>
+	<xsd:attribute name="id"          type="xsd:ID"     use="required"/>
+	<xsd:attribute name="loglevel"    type="xsd:string" use="required"/>
+	<xsd:attribute name="commitmode"  type="xsd:string" use="required"/>
+</xsd:complexType>
+
+<!-- ****************************** -->
+<!-- IOTaskDetInOut                 -->
+<!-- ****************************** -->
+<xsd:complexType name="IOTaskDetInOut">
+	<xsd:sequence>
+		<xsd:element name="file"      type="IOTaskDetInOutFile" />
+	</xsd:sequence>
+	<xsd:attribute name="id"          type="xsd:ID"     use="required"/>
+	<xsd:attribute name="name"        type="xsd:string" use="required"/>
+	<xsd:attribute name="displayname" type="xsd:string" use="required"/>
+	<xsd:attribute name="loglevel"    type="xsd:string" use="required"/>
+	<xsd:attribute name="commitmode"  type="xsd:string" use="required"/>
+</xsd:complexType>
+
+<!-- ****************************** -->
+<!-- IOTaskDetInOutFile             -->
+<!-- ****************************** -->
+<xsd:complexType name="IOTaskDetInOutFile">
+	<xsd:sequence>
+		<xsd:element name="row"       type="IOTaskDetInOutFileRow" />
+	</xsd:sequence>
+	<xsd:attribute name="name"        type="xsd:string" use="optional"  />
+	<xsd:attribute name="folder"      type="xsd:string" use="optional" />
+  <xsd:attribute name="date"        type="xsd:string" use="optional" />
+  <xsd:attribute name="size"        type="xsd:string" use="optional" />
+  <xsd:attribute name="status"      type="xsd:string" use="optional" />
+</xsd:complexType>
+
+<!-- ****************************** -->
+<!-- IOTaskDetInOutFileRow          -->
+<!-- ****************************** -->
+<xsd:complexType name="IOTaskDetInOutFileRow">
+	<xsd:sequence>
+    <xsd:element name="parameters" type="IOMappedDataParameters" />
+		<xsd:element name="SQL"        type="DataSQL" />
+		<xsd:element name="data"       type="IOTaskDetInOutFileRowData"  maxOccurs="unbounded"/>
+		<xsd:element name="table"      type="IOTaskDetInOutFileRowTable" maxOccurs="unbounded"/>
+	</xsd:sequence>
+	<xsd:attribute name="id"          type="xsd:ID"     use="required"/>
+	<xsd:attribute name="src"         type="xsd:string" use="required"/>
+	<xsd:attribute name="status"      type="xsd:string" use="required"/>
+</xsd:complexType>
+
+<!-- ****************************** -->
+<!-- IOTaskDetInOutFileRowData      -->
+<!-- ****************************** -->
+<xsd:complexType name="IOTaskDetInOutFileRowData">
+	<xsd:complexContent>
+		<xsd:extension base="IOMappedData">
+			<xsd:attribute name="status" type="xsd:string" use="required"/>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<!-- ****************************** -->
+<!-- IOTaskDetInOutFileRowTable     -->
+<!-- ****************************** -->
+<xsd:complexType name="IOTaskDetInOutFileRowTable">
+	<xsd:sequence>
+		<xsd:element name="mqueue"      type="IOTaskDetInOutFileRowTableMQueue" />
+		<xsd:element name="SpheresLib"  type="DataSpheresLib"                      maxOccurs="unbounded"/>
+		<xsd:element name="column"      type="IOTaskDetInOutFileRowTableColumn"    maxOccurs="unbounded"/>
+	</xsd:sequence>
+	<xsd:attribute name="name"          type="xsd:string" use="required"/>
+	<xsd:attribute name="action"        type="xsd:string" use="required"/>
+	<xsd:attribute name="sequenceno"    type="xsd:string" use="required"/>
+</xsd:complexType>
+
+<!-- ******************************** -->
+<!-- IOTaskDetInOutFileRowTableColumn -->
+<!-- ******************************** -->
+<xsd:complexType name="IOTaskDetInOutFileRowTableColumn">
+	<xsd:complexContent>
+		<xsd:extension base="IOMappedData">
+      <xsd:sequence>
+        <xsd:element name="parameters" type="IOMappedDataParameters" />
+      </xsd:sequence>
+			<xsd:attribute name="datakey"    type="xsd:string" use="required"/>
+			<xsd:attribute name="datakeyupd" type="xsd:string" use="required"/>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+<!-- ******************************** -->
+<!-- IOTaskDetInOutFileRowTableMQueue -->
+<!-- ******************************** -->
+<xsd:complexType name="IOTaskDetInOutFileRowTableMQueue">
+	<xsd:attribute name="name"   type="xsd:string" use="required"/>
+	<xsd:attribute name="action" type="xsd:string" use="required"/>
+</xsd:complexType>
+
+<!-- ****************************** -->
+<!-- IOTaskParams                   -->
+<!-- ****************************** -->
+<xsd:complexType name="IOTaskParams">
+	<xsd:sequence>
+		<xsd:element name="param" type="IOTaskParamsParam" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+<!-- ****************************** -->
+<!-- IOTaskParamsParam              -->
+<!-- ****************************** -->
+<xsd:complexType name="IOTaskParamsParam">
+	<xsd:simpleContent>
+		<xsd:extension base="xsd:normalizedString">
+			<xsd:attribute name="id"          type="xsd:ID"               use="required"/>
+			<xsd:attribute name="name"        type="xsd:string" use="required"/>
+			<xsd:attribute name="displayname" type="xsd:string" use="required"/>
+			<xsd:attribute name="direction"   type="xsd:string" use="required"/>
+			<xsd:attribute name="datatype"    type="xsd:string" use="required"/>
+			<xsd:attribute name="returntype"  type="xsd:string" use="required"/>
+		</xsd:extension>
+	</xsd:simpleContent>
+</xsd:complexType>
+
+<!-- ******************************** -->
+<!-- ParamData                        -->
+<!-- ******************************** -->
+<xsd:complexType name="ParamData">
+	<xsd:complexContent>
+		<xsd:extension base="StringDynamicData">
+			<xsd:attribute name="direction" type="ParameterDirection" use="required"/>
+			<xsd:attribute name="size"      type="xsd:integer"        use="required"/>
+		</xsd:extension>
+	</xsd:complexContent>
+</xsd:complexType>
+
+
+<!-- ******************************** -->
+<!-- ParameterDirection               -->
+<!-- ******************************** -->
+<xsd:simpleType name="ParameterDirection">
+	<xsd:restriction base="xsd:token">
+		<xsd:enumeration value="Input" />
+		<xsd:enumeration value="InputOutput" />
+		<xsd:enumeration value="Output" />
+		<xsd:enumeration value="ReturnValue" />						
+	</xsd:restriction>
+</xsd:simpleType>
+
+<!-- ****************************** -->
+<!-- StringDynamicData              -->
+<!-- ****************************** -->
+<xsd:complexType name="StringDynamicData">
+	<xsd:complexContent>
+		<xsd:extension base="xsd:normalizedString">
+			<xsd:sequence>
+				<xsd:element name="ValueXML"   type="xsd:string" />
+				<xsd:element name="SQL"        type="DataSQL" />
+				<xsd:element name="SpheresLib" type="DataSpheresLib" />
+			</xsd:sequence>
+			<xsd:attribute name="name"         type="xsd:string" use="required"/>
+			<xsd:attribute name="datatype"     type="xsd:string" use="required"/>
+			<xsd:attribute name="dataformat"   type="xsd:string" use="required"/>
+		</xsd:extension>
+	</xsd:complexContent>	
+</xsd:complexType>
+
+</xsd:schema>

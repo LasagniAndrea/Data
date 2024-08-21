@@ -1,0 +1,241 @@
+﻿.DataGrid_Official
+{
+	font-weight: bold !important;
+}
+.DataGrid_Official2
+{
+	font-weight: bold !important;
+}
+.DataGrid_Seller
+{
+	font-weight: bold !important;
+}
+.DataGrid_Buyer
+{
+	font-weight: bold !important;
+}
+.DataGrid_Receiver
+{
+	font-weight: bold !important;
+}
+.DataGrid_Payer
+{
+	font-weight: bold !important;
+}
+
+/*CUSTOMER PORTAL*/
+span.incaw:before {
+	font-family: 'Font Awesome 5 Free';
+	font-style: normal;
+	padding-right: 2px;
+	font-weight: 900;
+	font-size: 12px;
+}
+
+/*LEGEND : STATUT*/
+
+span.closed:before {
+	content: "\f058";
+	color: #51AD26;
+}
+span.consulting:before {
+	content: "\f328";
+	color: #1CBCF0;
+}
+span.customer:before {
+	content: "\f328";
+	color: #EA5A00;
+}
+span.open:before {
+	content: "\f328";
+	color: #036AB5;
+	font-weight: 300;
+}
+span.rd:before {
+	content: "\f328";
+	color: #8B569F;
+}
+span.resolved:before {
+	content: "\f058";
+	color: #51AD26;
+	font-weight: 300;
+}
+span.sales:before {
+	content: "\f328";
+	color: #673406;
+}
+span.support:before {
+	content: "\f328";
+	color: #C00303;
+}
+
+
+/*LEGEND : PRIORITY*/
+span.critical:before {
+	content: "\f02e";
+	color: #C00303;
+}
+span.minor:before {
+	content: "\f02e";
+	color: #036AB5;
+}
+span.serious:before {
+	content: "\f02e";
+	color: #EA5A00;
+}
+
+
+/*LEGEND : CATEGORY*/
+span.business:before {
+	content: "\f059";
+	color: #51AD26;
+}
+span.changerequest:before {
+	content: "\f06a";
+	color: #036AB5;
+}
+span.defect:before {
+	content: "\f188";
+	color: #EA5A00;
+}
+span.enhancement:before {
+	content: "\f360";
+	color: #51AD26;
+}
+span.failure:before {
+	content: "\f188";
+	color: #C00303;
+}
+span.improvement:before {
+	content: "\f360";
+	color: #036AB5;
+}
+span.knownissue:before {
+	content: "\f071";
+	color: #EA5A00;
+}
+span.miscellaneous:before {
+	content: "\f466";
+	color: #673406;
+}
+span.newfeature:before {
+	content: "\f055";
+	color: #D8C825;
+}
+span.system:before {
+	content: "\f085";
+	color: #8B569F;
+}
+span.usage:before {
+	content: "\f059";
+	color: #036AB5;
+}
+
+/*LEGEND : SOURCE*/
+span.callid:before {
+	content: "\f2f6";
+	color: #036AB5;
+}
+span.faq:before {
+	content: "\f02c";
+	color: #036AB5;
+}
+span.followup:before {
+	content: "\f542";
+	color: #036AB5;
+}
+span.kb:before {
+	content: "\f02c";
+	color: #51AD26;
+}
+span.license:before {
+	content: "\f502";
+	color: #C00303;
+}
+span.notice:before {
+	content: "\f46d";
+	color: #036AB5;
+}
+span.entityInfo > span::after {
+	content: "\f1AD";
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 900;
+}
+span.deptInfo > span::after {
+	content: "\f482";
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 900;
+}
+span.userInfo > span::after {
+	content: "\f007";
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 900;
+}
+span.adminInfo > span::after {
+	content: "\f508";
+	font-family: 'Font Awesome 5 Free';
+	font-weight: 900;
+} 
+
+
+/*****************************************************/
+/* Customization Toggle Instrument on Trade Input    */
+/*****************************************************/
+
+/* Color for Toggle Header*/
+div.vlight.input div.vlight.toggleinstr div.headhR span {
+	color: #fff !important;
+}
+
+/* Background Color for Toggle Header reverse */
+div.vlight.input div.vlight.blue.toggleinstr div.headhR {
+	background: RGB(3,106,181,0.6) !important; /* Bleu à 60% */
+}
+div.vlight.input div.vlight.marron.toggleinstr div.headhR {
+	background: RGB(103,52,6,0.6) !important; /* Marron à 60% */
+}
+div.vlight.input div.vlight.gray.toggleinstr div.headhR {
+	background: RGB(84,84,84,0.6) !important; /* Gris à 60% */
+}
+div.vlight.input div.vlight.violet.toggleinstr div.headhR {
+	background: RGB(139,86,159,0.6) !important; /* Violet à 60% */
+}
+div.vlight.input div.vlight.cyan.toggleinstr div.headhR {
+	background: RGB(28,188,240,0.6) !important; /* Cyan à 60% */
+}
+div.vlight.input div.vlight.green.toggleinstr div.headhR {
+	background: RGB(81,173,38,0.6) !important; /* Vert à 60% */
+}
+div.vlight.input div.vlight.orange.toggleinstr div.headhR {
+	background: RGB(234,90,0,0.6) !important; /* Orange à 60% */
+}
+div.vlight.input div.vlight.red.toggleinstr div.headhR {
+	background: RGB(192,3,3,0.6) !important; /* Rouge à 60% */
+}
+
+
+/* Background Color for Toggle Body */
+div.vlight.input div.vlight.blue.toggleinstr > div.contenth {
+	background: RGB(3,106,181,0.2) !important; /* Bleu à 20% */
+}
+div.vlight.input div.vlight.marron.toggleinstr > div.contenth {
+	background: RGB(103,52,6,0.3) !important; /* Marron à 30% */
+}
+div.vlight.input div.vlight.gray.toggleinstr > div.contenth {
+	background: RGB(84,84,84,0.2) !important; /* Gris à 20% */
+}
+div.vlight.input div.vlight.violet.toggleinstr > div.contenth {
+	background: RGB(139,86,159,0.2) !important; /* Violet à 20% */
+}
+div.vlight.input div.vlight.cyan.toggleinstr > div.contenth {
+	background: RGB(28,188,240,0.2) !important; /* Cyan à 20% */
+}
+div.vlight.input div.vlight.green.toggleinstr > div.contenth {
+	background: RGB(81,173,38,0.2) !important; /* Vert à 20% */
+}
+div.vlight.input div.vlight.orange.toggleinstr > div.contenth {
+	background: RGB(234,90,0,0.2) !important; /* Orange à 20% */
+}
+div.vlight.input div.vlight.red.toggleinstr > div.contenth {
+	background: RGB(192,3,3,0.2) !important; /* Rouge à 20% */
+}

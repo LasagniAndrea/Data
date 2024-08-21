@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+
+  <!--********************************-->
+  <!-- Complex_TradingCapacity        -->
+  <!--********************************-->
+  <Object name="TradingCapacityEnum">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:TradingCapacity;isresource:false]" width="100px" />
+  </Object>
+  <Object name="TradingCapacityEnum_L">
+    <Label />
+    <TradingCapacityEnum />
+  </Object>
+
+  <!--********************************-->
+  <!-- Complex_TradingWaiver        -->
+  <!--********************************-->
+  <Object name="TradingWaiverEnum">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:TradingWaiver;isresource:false]" width="150px" />
+  </Object>
+  <Object name="TradingWaiverEnum_L">
+    <Label />
+    <TradingWaiverEnum />
+  </Object>
+
+  <!--********************************-->
+  <!-- Complex_ShortSaleEnum          -->
+  <!--********************************-->
+  <Object name="ShortSaleEnum">
+    <!-- Remarques : 
+      - Ajout de la condition lower(CODE)='shortsale' sinon Spheres® charge les valeurs de l'enum ShortSaleReasonEnum 
+      - Il faut tout en lower puisque l'automate chargé du desing de la pagede saisie applique un lower sur la lecture des attributs   
+      -->
+    <DropDown datatype="string" listretrieval="predef:enum.[code:ShortSale;isresource:false;condition:lower(CODE)='shortsale']" width="100px" />
+    <!---->
+  </Object>
+  <Object name="ShortSaleEnum_L">
+    <Label />
+    <ShortSaleEnum />
+  </Object>
+
+  <!--********************************-->
+  <!-- Complex_OtcClassificationEnum          -->
+  <!--********************************-->
+  <Object name="OtcClassificationEnum">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:OtcClassification;isresource:false]" width="210px" />
+  </Object>
+  <Object name="OtcClassificationEnum_L">
+    <Label />
+    <OtcClassificationEnum />
+  </Object>
+
+  <!--********************************-->
+  <!-- Complex_IsCommodityHedgeEnum   -->
+  <!--********************************-->
+  <Object name="IsCommodityHedgeEnum">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:BooleanEnum;isresource:true;resourceprefix:BooleanEnum]" width="50px" />
+  </Object>
+  <Object name="IsCommodityHedgeEnum_L">
+    <Label />
+    <IsCommodityHedgeEnum />
+  </Object>
+
+  <!--*************************************-->
+  <!-- Complex_IsSecuritiesFinancingEnum   -->
+  <!--*************************************-->
+  <Object name="IsSecuritiesFinancingEnum">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:BooleanEnum;isresource:true;resourceprefix:BooleanEnum]" width="50px" />
+  </Object>
+  <Object name="IsSecuritiesFinancingEnum_L">
+    <Label />
+    <IsSecuritiesFinancingEnum />
+  </Object>
+</Objects>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+	<!--BDC_BC-->	
+	<Object name="BDC_BC" helpschema="fpml" helpelement="BusinessDayConventionEnum">
+		<Table>
+			<DropDown datatype="string" listretrieval="predef:BUSINESSDAYCONVENTION" width="95px" />
+			<Display />
+		</Table>
+	</Object>
+	<!--BDC_BC_L-->
+	<Object name="BDC_BC_L" helpschema="fpml" helpelement="BusinessDayConventionEnum">
+		<Label helpschema="fpml" helpelement="BusinessDayAdjustments" />
+		<BDC_BC />
+	</Object>
+	<!--BusinessCenter-->
+	<Object name="BusinessCenter" helpschema="fpml" helpelement="BusinessCenter">
+		<DropDown datatype="string" listretrieval="predef:BUSINESSCENTER" xwidth="180px" />
+	</Object>
+	<Object name="BusinessCenter_L" helpschema="fpml" helpelement="BusinessCenter">
+		<Label />
+		<BusinessCenter/>
+	</Object>
+
+	<!--DayTypeEnum-->
+	<Object name="DayType" helpschema="fpml" helpelement="DayTypeEnum">
+		<DropDown datatype="string" listretrieval="predef:DAYTYPE" />
+	</Object>
+	<Object name="DayType_L" helpschema="fpml" helpelement="DayTypeEnum">
+		<Label  helpschema="fpml" helpelement="DayTypeEnum"/>
+		<DayType/>
+	</Object>
+
+	<!--ManagementTypeEnum-->
+	<Object name="ManagementType" helpschema="efsml" helpelement="BracketApplicationEnum">
+		<DropDown datatype="string" required="false" listretrieval="predef:enum.bracketapplicationenum" />
+	</Object>
+	<Object name="ManagementType_RO" helpschema="efsml" helpelement="BracketApplicationEnum">
+		<DropDown datatype="string" required="false" listretrieval="predef:enum.bracketapplicationenum" misc="IsReadOnly:true"/>
+	</Object>
+	<Object name="ManagementType_L" helpschema="efsml" helpelement="BracketApplicationEnum">
+		<Label  helpschema="efsml" required="false" helpelement="BracketApplicationEnum"/>
+		<ManagementType/>
+	</Object>
+	<Object name="ManagementTypeRO_L" helpschema="efsml" helpelement="BracketApplicationEnum">
+		<Label  helpschema="efsml" required="false" helpelement="BracketApplicationEnum"/>
+		<ManagementType_RO/>
+	</Object>
+
+	<!--PeriodEnum-->
+	<Object name="Period" helpschema="fpml" helpelement="PeriodEnum">
+		<DropDown datatype="string" listretrieval="predef:PERIOD" width="100px" />
+	</Object>
+	<Object name="Period_RO" helpschema="fpml" helpelement="PeriodEnum">
+		<DropDown datatype="string" listretrieval="predef:PERIOD" width="100px" misc="IsReadOnly:true"/>
+	</Object>
+	<Object name="Period_L" helpschema="fpml" helpelement="PeriodEnum">
+		<label helpschema="fpml" helpelement="PeriodEnum" />
+		<Period />
+	</Object>
+</Objects>

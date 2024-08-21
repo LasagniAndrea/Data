@@ -1,0 +1,231 @@
+@import (reference) "../bootstrap/bootstrap.less";
+@import (reference) "spheres-variables.less";
+/*@import (reference) "grid-overrides.less";
+@import (reference) "responsive-utilities-overrides.less";*/
+
+/******************************************************************************/
+/* START : MENU                                                               */
+/******************************************************************************/
+.sph-menu {
+    position: static !important;
+}
+
+@media (max-width: @screen-xs-max) {
+    .sph-menu.open .dropdown-menu {
+        opacity: 1;
+        background-color: #fff;
+    }
+
+    #navbartop ul[idmenuparent="OTC"] {
+        border-bottom: 0.1pt solid rgba(255, 255, 255, 0.1);
+    }
+}
+
+@media (min-width: @screen-xs-max) {
+    .sph-menu.open .dropdown-menu {
+        /*opacity: 0.96;*/
+        margin-top:10px;
+    }
+}
+
+.sph-menu-item {
+    /*opacity: 0.96;*/
+    margin-left: 20px;
+    margin-right: 20px;
+    height: auto;
+    max-height: 800px;
+    overflow-y: auto;
+    width: calc(~'100% - 40px');
+
+    > li > ul {
+        margin: 0;
+        padding: 0px 10px;
+    }
+
+    li {
+        list-style-type: none;
+
+        a {
+            display: block;
+            padding: 3px 0px;
+            clear: both;
+            font-weight: normal;
+            line-height: 1.428571429;
+            font-size: 110%;
+            color: #9d9d9d;
+            white-space: normal;
+
+            .external {
+                color: @sph-external-color;
+            }
+        }
+    }
+
+    li[class^="dropdown-header"] {
+        padding: 0;
+    }
+
+    li[class*=sph-menu-lvl-] > ul {
+        list-style-type: none;
+        padding: 0px;
+    }
+
+    ul {
+        padding-left: 0px;
+    }
+
+    .external {
+        color: @sph-external-color;
+    }
+}
+
+/* COLOR for Glyphicon on menu */
+.generate-hover-menu (@idmenu, @color: @sph-main-color) {
+
+    ul[idmenu="@{idmenu}"] > li[class*="open"] > a {
+
+        & {
+            border-bottom: 10px solid @color!important;
+            margin-bottom: -10px;
+        }
+    }
+
+    ul[idmenu="@{idmenu}"] .sph-menu-item a {
+        &:hover{
+        text-decoration: none;
+        margin-left: -10px;
+        padding-left: 5px;
+        border-left: 4pt solid @color;
+        color: @color;
+        }
+    }
+
+    ul[idmenu="@{idmenu}"] .sph-menu-item.row {
+        & {
+            margin-top: 0;
+            border-top: 7pt solid @color;
+            color: @color;
+        }
+    }
+
+    ul[idmenu="@{idmenu}"] .sph-menu-item  a[class$="external"] {
+        &:hover{
+            text-decoration: none;
+            margin-left: -10px;
+            padding-left: 5px;
+            border-left: 4pt solid @sph-external-color;
+            color: @sph-external-color;
+        }
+    }
+}
+
+.generate-hover-menu("OTC_PROCESS", @sph-process-color);
+.generate-hover-menu("OTC_INP", @sph-input-color);
+.generate-hover-menu("OTC_VIEW", @sph-view-color);
+.generate-hover-menu("OTC_PROCESS", @sph-process-color);
+.generate-hover-menu("OTC_REF", @sph-repository-color);
+.generate-hover-menu("OTC_ADM", @sph-admin-color);
+.generate-hover-menu("OTC_INV", @sph-invoicing-color);
+.generate-hover-menu("OTC_ABOUT", @sph-about-color);
+
+
+
+
+/* COLOR for Glyphicon on menu */
+.generate-color-menu-glyph (@idmenu, @color: @sph-main-color) {
+    ul[idmenu="@{idmenu}"] li[class$="sph-menu-lvl-2"] span[class^=glyphicon] {
+        color: @color;
+    }
+
+    ul[idmenu="@{idmenu}"] li[class$="external"] span[class^=glyphicon] {
+        color: @sph-external-color;
+    }
+}
+
+.generate-color-menu-glyph("OTC_INP", @sph-input-color);
+.generate-color-menu-glyph("OTC_VIEW", @sph-view-color);
+.generate-color-menu-glyph("OTC_PROCESS", @sph-process-color);
+.generate-color-menu-glyph("OTC_REF", @sph-repository-color);
+.generate-color-menu-glyph("OTC_ADM", @sph-admin-color);
+.generate-color-menu-glyph("OTC_INV", @sph-invoicing-color);
+.generate-color-menu-glyph("OTC_ABOUT", @sph-about-color);
+
+
+.item-menu-lbl(@color: #545454,@font-weight: bolder,@font-size: 120%) {
+    color: @color;
+    font-weight: @font-weight;
+    font-size: @font-size;
+}
+
+
+.sph-menu-lvl-2 {
+    > span {
+        .item-menu-lbl(@sph-main-color, 900, 140%);
+    }
+
+    > a {
+        .item-menu-lbl(@sph-main-color, 900, 140%);
+    }
+
+    > span + ul {
+        margin-top: 0.5em;
+        line-height: normal;
+        border-top: 1pt solid #cecbcb;
+    }
+}
+
+
+.sph-menu-lvl-3 > span {
+    .item-menu-lbl(@sph-main-color, bolder, 125%);
+}
+
+.sph-menu-lvl-3 > a {
+    .item-menu-lbl(@sph-main-color, bolder, 125%);
+}
+
+.generate-item-menu-lbl(4);
+
+.generate-item-menu-lbl(@n, @i: 6) when (@i >= @n) {
+    .sph-menu-lvl-@{n} {
+        > span {
+            .item-menu-lbl();
+        }
+
+        > a {
+            .item-menu-lbl();
+        }
+    }
+
+    .generate-item-menu-lbl((@n+1), @i);
+}
+
+li[class*=sph-menu-lvl-] {
+    padding-left: 0px;
+}
+
+li[class*=sph-menu-lvl-3] ~ li[class*=sph-menu-lvl-4]:before,
+li[class*=sph-menu-lvl-4] ~ li[class*=sph-menu-lvl-5]:before,
+li[class*=sph-menu-lvl-5] ~ li[class*=sph-menu-lvl-6]:before {
+    content: '';
+    padding-left: 0%;
+}
+
+li[class*=sph-menu-lvl-3] ~ li > a:before,
+li[class*=sph-menu-lvl-4] ~ li > a:before,
+li[class*=sph-menu-lvl-5] ~ li > a:before {
+    content: '';
+    padding-left: 50%;
+}
+
+.dropdown-submenu.pull-left > .dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}
+
+/******************************************************************************/
+/* END : MENU                                                                 */
+/******************************************************************************/
+

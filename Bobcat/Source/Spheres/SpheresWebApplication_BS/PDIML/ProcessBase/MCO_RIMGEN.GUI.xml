@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--
+CC/FI 20150513 [XXXXX] Intégration des Extrait de compte 
+CC/FI 20150513 [20987]
+FI 20130625 [18745] add value SYNTHESIS 
+RD 20131218 [19386] load CNFTYPE only if it exists enabled message with this CNFTYPE
+-->
+
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+
+  <customObject control="label"    clientid="PERIODREPORTTYPE" caption = "lblPeriodReportType" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown" clientid="PERIODREPORTTYPE"
+                datatype="integer" listretrieval="Predef:periodreporttype" width="150" required="true" postback="true"
+                postbackargument ="SELFCLEAR_" xsi:type="CustomObjectDropDown" misc="isClear:true" defaultvalue="1" />
+
+  <customObject control="space" width="2" />
+
+  <!--DATE1-->
+  <customObject control="label" clientid="DATE1"  caption="lblDtFrom" xsi:type="CustomObjectLabel"/>
+  <customObject control="textbox" clientid="DATE1"
+                datatype="date" required="true" postback="true"
+                postbackargument="SELFCLEAR_" xsi:type="CustomObjectTextBox" defaultvalue="BUSINESS"/>
+
+  <!--DATE2-->
+  <customObject control="label" clientid="DATE2"  caption="lblDtTo" xsi:type="CustomObjectLabel"/>
+  <customObject control="textbox" clientid="DATE2"
+                datatype="date" required="true" postback="true"
+                postbackargument="SELFRELOAD_" xsi:type="CustomObjectTextBox" defaultvalue="BUSINESS"/>
+
+  <customObject control="space" width="5" />
+
+  <!--ENTITY-->
+  <customObject control="label" clientid="ENTITY" caption="Entity_Title" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="ENTITY"
+                width="250px"   datatype="integer" listretrieval="predef:ActorEntity"
+                required="true" postback="true"
+                postbackargument="SELFCLEAR_" xsi:type="CustomObjectDropDown"
+                misc="isAddAll:false;isUseSessionRestrict:true;isClear:false"/>
+
+  <customObject control="space" width="2" />
+
+  <!--CNFTYPE-->
+  <customObject control="label" clientid="CNFTYPE" caption="cnftype" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="CNFTYPE"
+                width="220px"   datatype="string"
+                listretrieval="sql:select distinct enum.VALUE as Value, enum.VALUE as Text 
+                from ENUM enum
+                inner join CNFMESSAGE cnfMsg on cnfMsg.CNFTYPE = enum.VALUE
+                and getdate() >= cnfMsg.DTENABLED
+                and ((cnfMsg.DTDISABLED is null) or (cnfMsg.DTDISABLED > getdate()))
+                where enum.CODE = 'NotificationTypeScheme'
+                and enum.VALUE in ('ALLOCATION','POSITION','POSACTION','POSSYNTHETIC','FINANCIAL','FINANCIALPERIODIC','SYNTHESIS')"
+                required="true" postback="true"  postbackargument ="SELFCLEAR_"
+                xsi:type="CustomObjectDropDown"  misc="isAddAll:true;isClear:true;isResource:true;"/>
+
+  <customObject control="hr"  xsi:type="CustomObject" colspan="-1"/>
+
+  <!--MARKET-->
+  <customObject control="space" colspan="8"/>
+
+  <!--MARKET-->
+  <customObject control="label"  clientid="MARKET" caption="Market_Title" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="MARKET"
+                width="200px"   datatype="integer"
+                listretrieval="predef:market_etd" required="true"
+                postback="true"  postbackargument="SELFCLEAR_" xsi:type="CustomObjectDropDown"
+                misc="isAddAll:true;isUseSessionRestrict:true;isClear:true"/>
+
+  <customObject control="space" width="2" />
+
+  <!--GRPMARKET-->
+  <customObject control="label"     clientid="GMARKET" caption="IDGMARKET" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="GMARKET"
+                width="220px"   datatype="integer"
+                listretrieval="predef:grpmarket_cnf" required="false" postback="true"
+                postbackargument ="SELFCLEAR_" xsi:type="CustomObjectDropDown"
+                misc="isAddAll:false;isUseSessionRestrict:true;isClear:true"/>
+
+  <customObject control="space" width="1" />
+
+  <customObject control="panel" clientid="MARKETINFO" cssclass="ui-main ui-main-tooltipinfo" xsi:type="CustomObjectPanel" tooltip="TooltipReportGen" />
+
+</customObjects>

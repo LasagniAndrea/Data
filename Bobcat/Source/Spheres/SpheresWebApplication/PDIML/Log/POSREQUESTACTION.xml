@@ -1,0 +1,824 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+CC/PL 20151029 [21494] Modify length of column QTY
+FI 20120228 new expression for columns IDT and IDT_OFFSETBY
+FI 20200820 [25468] dates systemes en UTC
+-->
+<Referentials>
+  <Referential>
+    <TableName>POSREQUESTACTION</TableName>
+    <AliasTableName>pr</AliasTableName>
+    <ColumnByRow>4</ColumnByRow>
+    <Create>false</Create>
+    <Modify>false</Modify>
+    <Remove>false</Remove>
+    <SQLSelect>
+      <Command rdbms = "oracle">
+        <![CDATA[
+          select result.IDPA, result.IDPR, result.IDPR_POSREQUEST, result.IDM, result.MARKET, result.IDI, result.IDASSET, 
+            result.IDA_DEALER, result.IDB_DEALER, result.IDA_CLEARER, result.IDB_CLEARER, result.DTBUSINESS,
+            result.IDT, result.IDT_OFFSETBY, result.QTY, result.DEACTIV,
+            result.IDA_ENTITYDEALER, result.CSSCUSTODIAN, 
+            result.IDAINS, result.DTINS, result.DTUPD, result.EXTLLINK, result.ROWATTRIBUT, result.ROWVERSION, 
+            result.REQUESTTYPE_VALUE, result.REQUESTTYPE_EXTVALUE, 
+          /*--DEALER--*/
+          dealer.IDENTIFIER as DEALER_IDENTIFIER,dealer.DISPLAYNAME as DEALER_DISPLAYNAME,
+          bdealer.IDENTIFIER as DEALER_BOOKIDENTIFIER,
+          /*--CLEARER--*/
+          clearer.IDENTIFIER as CLEARER_IDENTIFIER, clearer.DISPLAYNAME as CLEARER_DISPLAYNAME,
+          bclearer.IDENTIFIER as CLEARER_BOOKIDENTIFIER,
+          /*--ENTITY DEALER--*/
+          etydealer.IDENTIFIER as ENTITYDEALER_IDENTIFIER,
+          /*--CATEGORY--*/
+          case asset.CATEGORY when 'F' then 'Future' else 'Option' end as CATEGORY,
+          /*--ASSET IDENTIFIER--*/
+          asset.IDENTIFIER as ASSET_IDENTIFIER,
+          /*--DERIVATIVECONTRACT--*/
+          asset.CONTRACTIDENTIFIER, asset.CONTRACTDISPLAYNAME,
+          /*--PUTCALL--*/
+          case asset.PUTCALL when '0' then 'Put' when '1' then 'Call' else '' end as PUTCALL,
+          /*--STRIKE--*/
+          asset.STRIKEPRICE as STRIKE,
+          /*--MATURITY--*/
+          asset.MATFMT_MMMYY,
+          result.IDPRORDER
+          from
+          (
+	          select pr.IDPR, pr.IDPR_POSREQUEST, NIVEAU , to_char(NIVEAU) as SuffixClass,
+            pa.IDPA, pr.REQUESTTYPE as REQUESTTYPE_VALUE, en.EXTVALUE as REQUESTTYPE_EXTVALUE, pa.DTBUSINESS,
+                 
+            case  when pad.IDT_CLOSING = pad.IDT_BUY then isnull(pad.IDT_SELL,pad.IDT_BUY) 
+                  else nvl(pad.IDT_BUY,pad.IDT_SELL) end as IDT, 
+            case  when (pad.IDT_BUY is null or pad.IDT_SELL is null) then null
+                  else pad.IDT_CLOSING end as IDT_OFFSETBY, 
+                 
+            pa.IDAINS, pa.DTINS, pr.DTUPD, pa.EXTLLINK, pa.ROWATTRIBUT, pa.ROWVERSION, pad.QTY,
+                  
+            /* Clôture annulées */
+            case when pad.DTCAN is null then 0 else 1 end as DEACTIV,
+                        
+	          nvl(tr.IDI,pr.IDI) as IDI, isnull(tr.IDASSET,pr.IDASSET) as IDASSET, 
+	          nvl(tr.IDA_DEALER,pr.IDA_DEALER) as IDA_DEALER, isnull(tr.IDB_DEALER,pr.IDB_DEALER) as IDB_DEALER, 
+	          nvl(tr.IDA_CLEARER,pr.IDA_CLEARER) as IDA_CLEARER, nvl(tr.IDB_CLEARER,pr.IDB_CLEARER) as IDB_CLEARER, 
+	          nvl(tr.IDENTIFIER,'-') as TRADE_IDENTIFIER,
+            m.SHORT_ACRONYM as MARKET, m.IDM, a_csscust.IDENTIFIER as CSSCUSTODIAN,  
+	          nvl(tr.IDA_ENTITYDEALER,em.IDA) as IDA_ENTITYDEALER,
+            case when pr.IDPR > nvl(pr.IDPR_POSREQUEST,0) then pr.IDPR else pr.IDPR_POSREQUEST end as IDPRORDER                
+	          from dbo.POSREQUEST pr
+            inner join 
+            (
+	            select pr.IDPR, pr.IDA_CSSCUSTODIAN, pr.IDA_ENTITY, LEVEL-1 as NIVEAU  
+	            from dbo.POSREQUEST pr
+	            start with 
+              /* SQL: WITHWHERE */
+              pr.IDPR = pr.IDPR
+              /* SQL: ENDWITHWHERE */
+	            connect by nocycle prior pr.IDPR = pr.IDPR_POSREQUEST
+            ) prcte on (prcte.IDPR = pr.IDPR)
+                
+            inner join dbo.POSACTION pa on (pa.IDPR = pr.IDPR)
+            inner join dbo.POSACTIONDET pad on (pad.IDPA = pa.IDPA)
+	          left  join dbo.PROCESS_L pl on (pl.IDPROCESS_L = pr.IDPROCESS_L)
+	          inner join dbo.ENTITYMARKET em  on (em.IDEM = pr.IDEM)
+            inner join dbo.VW_MARKET_IDENTIFIER m on (m.IDM=em.IDM)
+            inner join dbo.ACTOR a_csscust on (a_csscust.IDA=nvl(em.IDA_CUSTODIAN,em.IDA))
+            inner join dbo.ENUM en on (en.CODE = 'PosRequestTypeEnum') and (en.VALUE = pr.REQUESTTYPE)
+	          left  join dbo.VW_TRADE_FUNGIBLE_LIGHT_ETD tr on (tr.IDT = pr.IDT)
+          ) result
+          inner join dbo.ACTOR dealer     on dealer.IDA = result.IDA_DEALER
+          inner join dbo.BOOK  bdealer    on bdealer.IDB = result.IDB_DEALER
+          inner join dbo.ACTOR clearer    on clearer.IDA = result.IDA_CLEARER
+          inner join dbo.BOOK  bclearer   on bclearer.IDB = result.IDB_CLEARER
+          inner join dbo.ACTOR etydealer  on etydealer.IDA = result.IDA_ENTITYDEALER
+          inner join dbo.VW_ASSET_ETD_EXPANDED asset on asset.IDASSET = result.IDASSET
+          inner join dbo.MARKET market on market.IDM = asset.IDM
+      ]]>
+      </Command>
+
+      <Command rdbms = "sqlserver">
+        <![CDATA[
+          /* SQL: WITH */
+          with POSREQUEST_CTE (IDPR_POSREQUEST, IDPR, DTBUSINESS, LEVEL) as
+          (
+	          select isnull(pr.IDPR_POSREQUEST,pr.IDPR) as IDPR_POSREQUEST, pr.IDPR, pr.DTBUSINESS, 0 as LEVEL
+	          from dbo.POSREQUEST pr
+            inner join dbo.VW_ENTITYMARKET_ACTIVITY etycsscust  on (etycsscust.IDA = pr.IDA_ENTITY) and 
+                                                   (etycsscust.IDA_CSSCUSTODIAN = isnull(pr.IDA_CSSCUSTODIAN, etycsscust.IDA_CSSCUSTODIAN)) and 
+                                                   (etycsscust.IDEM = isnull(pr.IDEM,etycsscust.IDEM))
+            where 
+            /* SQL: WITHWHERE */
+	          pr.IDPR_POSREQUEST is null
+            /* SQL: ENDWITHWHERE */
+
+            union all
+
+            select pr.IDPR_POSREQUEST, pr.IDPR, pr.DTBUSINESS, LEVEL + 1
+	          from dbo.POSREQUEST pr
+	          inner join POSREQUEST_CTE prcte on (pr.IDPR_POSREQUEST = prcte.IDPR) 
+          )
+          /* SQL: ENDWITH */
+          select result.IDPA, result.IDPR, result.IDPR_POSREQUEST, result.IDM, result.MARKET, result.IDI, result.IDASSET, 
+            result.IDA_DEALER, result.IDB_DEALER, result.IDA_CLEARER, result.IDB_CLEARER, result.DTBUSINESS,
+            result.IDT, result.IDT_OFFSETBY, result.QTY, result.DEACTIV,
+            result.IDA_ENTITYDEALER, result.CSSCUSTODIAN, 
+            result.IDAINS, result.DTINS, result.DTUPD, result.EXTLLINK, result.ROWATTRIBUT, result.ROWVERSION, 
+            result.REQUESTTYPE_VALUE, result.REQUESTTYPE_EXTVALUE,
+          /*--DEALER--*/
+          dealer.IDENTIFIER as DEALER_IDENTIFIER,dealer.DISPLAYNAME as DEALER_DISPLAYNAME,
+          bdealer.IDENTIFIER as DEALER_BOOKIDENTIFIER,
+          /*--CLEARER--*/
+          clearer.IDENTIFIER as CLEARER_IDENTIFIER, clearer.DISPLAYNAME as CLEARER_DISPLAYNAME,
+          bclearer.IDENTIFIER as CLEARER_BOOKIDENTIFIER,
+          /*--ENTITY DEALER--*/
+          etydealer.IDENTIFIER as ENTITYDEALER_IDENTIFIER,
+          /*--CATEGORY--*/
+          case asset.CATEGORY when 'F' then 'Future' else 'Option' end as CATEGORY,
+          /*--ASSET IDENTIFIER--*/
+          asset.IDENTIFIER as ASSET_IDENTIFIER,
+          /*--DERIVATIVECONTRACT--*/
+          asset.CONTRACTIDENTIFIER, asset.CONTRACTDISPLAYNAME,
+          /*--PUTCALL--*/
+          case asset.PUTCALL when '0' then 'Put' when '1' then 'Call' else '' end as PUTCALL,
+          /*--STRIKE--*/
+          asset.STRIKEPRICE as STRIKE,
+          /*--MATURITY--*/
+          asset.MATFMT_MMMYY,
+          result.IDPRORDER
+          from
+          (
+	          select prcte.IDPR, prcte.IDPR_POSREQUEST,prcte.LEVEL, convert(varchar,LEVEL) as SuffixClass,
+            pa.IDPA, pr.REQUESTTYPE as REQUESTTYPE_VALUE, en.EXTVALUE as REQUESTTYPE_EXTVALUE, pa.DTBUSINESS,
+            
+            case  when pad.IDT_CLOSING = pad.IDT_BUY then isnull(pad.IDT_SELL,pad.IDT_BUY) 
+                  else isnull(pad.IDT_BUY,pad.IDT_SELL) end as IDT, 
+            case  when (pad.IDT_BUY is null or pad.IDT_SELL is null) then null
+                  else pad.IDT_CLOSING end as IDT_OFFSETBY, 
+            
+            pa.IDAINS, pa.DTINS, pr.DTUPD, pa.EXTLLINK, pa.ROWATTRIBUT, pa.ROWVERSION, pad.QTY,
+            
+            /* Clôture annulées */
+            case when pad.DTCAN is null then 0 else 1 end as DEACTIV,
+            
+	          isnull(tr.IDI,pr.IDI) as IDI, isnull(tr.IDASSET,pr.IDASSET) as IDASSET, 
+	          isnull(tr.IDA_DEALER,pr.IDA_DEALER) as IDA_DEALER, isnull(tr.IDB_DEALER,pr.IDB_DEALER) as IDB_DEALER, 
+	          isnull(tr.IDA_CLEARER,pr.IDA_CLEARER) as IDA_CLEARER, isnull(tr.IDB_CLEARER,pr.IDB_CLEARER) as IDB_CLEARER, 
+	          isnull(tr.IDENTIFIER,'-') as TRADE_IDENTIFIER,
+            m.SHORT_ACRONYM as MARKET, m.IDM, a_csscust.IDENTIFIER as CSSCUSTODIAN,  
+	          isnull(tr.IDA_ENTITYDEALER,em.IDA) as IDA_ENTITYDEALER,
+            case when pr.IDPR > isnull(pr.IDPR_POSREQUEST,0) then pr.IDPR else pr.IDPR_POSREQUEST end as IDPRORDER                    
+	          from POSREQUEST_CTE prcte
+            inner join dbo.POSACTION pa on (pa.IDPR = prcte.IDPR)
+            inner join dbo.POSACTIONDET pad on (pad.IDPA = pa.IDPA)
+	          inner join dbo.POSREQUEST pr on (pr.IDPR = prcte.IDPR)
+	          left  join dbo.PROCESS_L pl on (pl.IDPROCESS_L = pr.IDPROCESS_L)
+	          inner join dbo.ENTITYMARKET em  on (em.IDEM = pr.IDEM)
+            inner join dbo.VW_MARKET_IDENTIFIER m on (m.IDM=em.IDM)
+            inner join dbo.ACTOR a_csscust on (a_csscust.IDA=isnull(em.IDA_CUSTODIAN,em.IDA))
+	          inner join dbo.ENUM en on (en.CODE = 'PosRequestTypeEnum') and (en.VALUE = pr.REQUESTTYPE)
+	          left  join dbo.VW_TRADE_FUNGIBLE_LIGHT_ETD tr on (tr.IDT = pr.IDT)
+          ) result
+          inner join dbo.ACTOR dealer     on dealer.IDA = result.IDA_DEALER
+          inner join dbo.BOOK  bdealer    on bdealer.IDB = result.IDB_DEALER
+          inner join dbo.ACTOR clearer    on clearer.IDA = result.IDA_CLEARER
+          inner join dbo.BOOK  bclearer   on bclearer.IDB = result.IDB_CLEARER
+          inner join dbo.ACTOR etydealer  on etydealer.IDA = result.IDA_ENTITYDEALER
+          inner join dbo.VW_ASSET_ETD_EXPANDED asset on asset.IDASSET = result.IDASSET
+          inner join dbo.MARKET market on market.IDM = asset.IDM
+      ]]>
+      </Command>
+    </SQLSelect>
+
+    <SQLRowStyle type="class">
+      case DEACTIV when 1 then 'DataGrid-DEACTIV event-deactiv' else 'DataGrid_ItemStyle' end
+    </SQLRowStyle>
+
+    <!-- CLOTURE ANNULEE -->
+    <Column>
+      <ColumnName>DEACTIV</ColumnName>
+      <Ressource>DEACTIV</Ressource>
+      <DataType>bool</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <html_BLOCK title="Status" blockbyrow="1" width="50%" columnbyrow="1"></html_BLOCK>
+    </Column>
+
+    <!-- POSACTION -->
+    <Column>
+      <ColumnName>IDPR</ColumnName>
+      <Ressource>ID2</Ressource>
+      <Align>left</Align>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>true</IsForeignKeyField>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <IsOrderBy order="ENTITYDEALER_IDENTIFIER, MARKET, DTINS, IDPR">true</IsOrderBy>
+      <html_BLOCK title="Request" blockbyrow="2" width="50%" columnbyrow="1"></html_BLOCK>
+    </Column>
+
+    <Column>
+      <ColumnName>REQUESTTYPE_VALUE</ColumnName>
+      <Ressource>VALUE_REQUESTTYPE</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>REQUESTTYPE_EXTVALUE</ColumnName>
+      <Ressource>EXTVALUE_REQUESTTYPE_</Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <CellStyle complexModel="posRequestType" version="h"/>
+    </Column>
+
+    <Column>
+      <ColumnName>ENTITYDEALER_IDENTIFIER</ColumnName>
+      <Ressource>COL_EntityDealer</Ressource>
+      <DataType>string</DataType>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>MARKET</ColumnName>
+      <Ressource>COL_Market</Ressource>
+      <DataType>string</DataType>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>CSSCUSTODIAN</ColumnName>
+      <Ressource>CssCustodian2</Ressource>
+      <DataType>string</DataType>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>DTBUSINESS</ColumnName>
+      <Ressource>DTBUSINESS_</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>IDAINS</ColumnName>
+      <Ressource>IDA_OPERATEDBY</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>ACTOR</TableName>
+        <AliasTableName>acReq</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDA</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>REQUESTER</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <ColumnLabel>
+          <ColumnName>DISPLAYNAME</ColumnName>
+          <Ressource>DISPLAYNAME</Ressource>
+          <DataType>string</DataType>
+        </ColumnLabel>
+      </Relation>
+      <html_HR size="1"></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>DTINS</ColumnName>
+      <Ressource>DTINS</Ressource>
+      <DataType datakind='Timestamp' tzdbid='Etc/UTC' display='Audit'>datetime</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <!-- CLE DE POSITION -->
+    <Column>
+      <ColumnName>IDI</ColumnName>
+      <Ressource>IDI</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>INSTRUMENT</TableName>
+        <ColumnRelation>
+          <ColumnName>IDI</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>Instrument</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <ColumnLabel>
+          <ColumnName>DISPLAYNAME</ColumnName>
+          <Ressource>DISPLAYNAME</Ressource>
+          <DataType>string</DataType>
+        </ColumnLabel>
+      </Relation>
+      <html_BLOCK title="PosKeepingKey" blockbyrow="2" width="50%" columnbyrow="1"></html_BLOCK>
+    </Column>
+    
+    <Column>
+      <ColumnName>ASSET_IDENTIFIER</ColumnName>
+      <Ressource>IdAsset</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <html_HR size="1"></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>CONTRACTIDENTIFIER</ColumnName>
+      <Ressource>COL_ContractSymbol_</Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>CONTRACTDISPLAYNAME</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>MATFMT_MMMYY</ColumnName>
+      <Ressource>COL_Maturity_</Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <IsResource>true</IsResource>
+    </Column>
+    <Column>
+      <ColumnName>PUTCALL</ColumnName>
+      <Ressource>COL_PutCall</Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>STRIKE</ColumnName>
+      <Ressource>COL_Strike</Ressource>
+      <Align>left</Align>
+      <DataType>decimal</DataType>
+      <!--<Scale>4</Scale>-->
+      <Scale>5</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>IDT</ColumnName>
+      <Ressource>ConcernedTrade</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>TRADE</TableName>
+        <AliasTableName>trb</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDT</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>ConcernedTrade</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <ColumnLabel>
+          <ColumnName>DISPLAYNAME</ColumnName>
+          <Ressource>DISPLAYNAME</Ressource>
+          <DataType>string</DataType>
+        </ColumnLabel>
+      </Relation>
+      <html_HR size="2"></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>IDT_OFFSETBY</ColumnName>
+      <Ressource>OFFSETBY</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>TRADE</TableName>
+        <AliasTableName>trs</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDT</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>OFFSETBY</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <ColumnLabel>
+          <ColumnName>DISPLAYNAME</ColumnName>
+          <Ressource>DISPLAYNAME</Ressource>
+          <DataType>string</DataType>
+        </ColumnLabel>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>QTY</ColumnName>
+      <Ressource>ConcernedQuantity</Ressource>
+      <Align>left</Align>
+      <DataType>decimal</DataType>
+      <Length>20</Length>
+      <Scale>3</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <CellStyle model="quantity"/>
+    </Column>
+
+    <!-- DEALER -->
+    <Column>
+      <ColumnName>DEALER_IDENTIFIER</ColumnName>
+      <Ressource>COL_Dealer</Ressource>
+      <DataType>string</DataType>
+      <Nowrap>true</Nowrap>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>DEALER_BOOKIDENTIFIER</ColumnName>
+      <Ressource>COL_BookDealer</Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <html_HR size="1"></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>DEALER_DISPLAYNAME</ColumnName>
+      <Ressource>COL_ActorDealer</Ressource>
+      <DataType>string</DataType>
+      <Nowrap>true</Nowrap>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <!-- CLEARER -->
+    <Column>
+      <ColumnName>CLEARER_IDENTIFIER</ColumnName>
+      <Ressource>COL_Clearer</Ressource>
+      <DataType>string</DataType>
+      <Nowrap>true</Nowrap>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>CLEARER_BOOKIDENTIFIER</ColumnName>
+      <Ressource>COL_BookClearer</Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>CLEARER_DISPLAYNAME</ColumnName>
+      <Ressource>COL_ActorClearer</Ressource>
+      <DataType>string</DataType>
+      <Nowrap>true</Nowrap>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    
+
+    <!-- LIEN EXTERNE -->
+    <Column>
+      <ColumnName>EXTLLINK</ColumnName>
+      <Ressource>EXTLLINK</Ressource>
+      <DataType>string</DataType>
+      <Colspan>3</Colspan>
+      <LabelWidth>10%</LabelWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+      <html_BLOCK title="ExtlLink_" columnbyrow="3"></html_BLOCK>
+    </Column>
+    <Column>
+      <ColumnName>ROWATTRIBUT</ColumnName>
+      <Ressource>ROWATTRIBUT</Ressource>
+      <DataType>string</DataType>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>ROWVERSION</ColumnName>
+      <Ressource>ROWVERSION</Ressource>
+      <DataType>string</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+
+    <!-- Autres -->
+    <Column>
+      <ColumnName>IDPR_POSREQUEST</ColumnName>
+      <Ressource>ID</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>IDPRORDER</ColumnName>
+      <Ressource>Order</Ressource>
+      <DataType>string</DataType>
+      <Nowrap>true</Nowrap>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+  </Referential>
+  
+</Referentials>

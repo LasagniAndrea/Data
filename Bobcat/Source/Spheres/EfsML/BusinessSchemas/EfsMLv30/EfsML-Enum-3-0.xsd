@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.efs.org/2007/EFSmL-3-0" 
+            xmlns:fpml="http://www.fpml.org/2007/FpML-4-4"
+            targetNamespace="http://www.efs.org/2007/EFSmL-3-0" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xsd:import namespace="http://www.fpml.org/2007/FpML-4-4" schemaLocation="../FpML44/fpml-enum-4-4.xsd" />
+	<!-- AccruedInterestCalculationMethodEnum -->
+	<xsd:simpleType name="AccruedInterestCalculationMethodEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Native" />
+			<xsd:enumeration value="Prorata" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- AveragingTypeEnum -->
+	<xsd:simpleType name="AveragingTypeEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="ArithmeticAverage" />
+			<xsd:enumeration value="FirstLast" />
+			<xsd:enumeration value="GeometricAverage" />
+			<xsd:enumeration value="Highest" />
+			<xsd:enumeration value="HighestLowest" />
+			<xsd:enumeration value="Lowest" />
+			<xsd:enumeration value="WeightedArithmeticAverage" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- BasketTypeEnum -->
+	<xsd:simpleType name="BasketTypeEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Average" />
+			<xsd:enumeration value="BetterOf" />
+			<xsd:enumeration value="Max" />
+			<xsd:enumeration value="Min" />
+			<xsd:enumeration value="OutPerformance" />
+			<xsd:enumeration value="Spread" />
+			<xsd:enumeration value="WorseOf" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- BracketApplicationEnum -->
+	<xsd:simpleType name="BracketApplicationEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Unit" />
+			<xsd:enumeration value="Cumulative" />
+		</xsd:restriction>
+	</xsd:simpleType>
+  <!-- CashSecuritiesEnum -->
+  <xsd:simpleType name="CashSecuritiesEnum">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="CASH" />
+      <xsd:enumeration value="SECURITIES" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- CashAndCollateralLocalizationEnum -->
+  <xsd:simpleType name="CashAndCollateralLocalizationEnum">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="CBO" />
+      <xsd:enumeration value="CBOChild" />
+      <xsd:enumeration value="MROChild" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- CfiCodeCategoryEnum -->
+	<xsd:simpleType name="CfiCodeCategoryEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Listed derivatives product category (from CFICode).
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="F">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Future</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="O">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Option</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- CorridorTypeEnum -->
+	<xsd:simpleType name="CorridorTypeEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="ValuesCapFloored" />
+			<xsd:enumeration value="ValuesExcluded" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- CPProgramEnum -->
+	<xsd:simpleType name="CPProgramEnum">
+		<xsd:annotation>
+			<xsd:documentation source="FIX" xml:lang="en">
+				(Source:FIX, Tag:875, FieldName:CPProgram, FIXML Abbr:@CPPgm, DataType:int)
+				The program under which a commercial paper is issued.
+			</xsd:documentation>
+			<xsd:documentation source="ISO20022" xml:lang="en">
+				(Source:ISO20022, FieldName:CPProgram)
+				The program under which a commercial paper is issued.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="0">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">N/A</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="1">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">3(a)3</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="2">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">4(2)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="3">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">3(a)4</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="4">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">3(c)7</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="5">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">144A</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="6">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">3(a)2</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="99">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Other</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+  <!-- CreditDebitEnum -->
+  <xsd:simpleType name="CrDrEnum">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="CR" />
+      <xsd:enumeration value="DR" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <!-- DeliveryMethodEnum -->
+	<xsd:simpleType name="DeliveryMethodEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">This enumeration defines the possible delivery methods for securities.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="DeliveryVersusPayment">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Indicates that a securities delivery must be made against payment in a single transaction</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="FreeOfPayment">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Indicates that a securities delivery can be made without a simultaneous cash payment in exchange.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- FeatureFormulaEnum -->
+	<xsd:simpleType name="FeatureFormulaEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Formula1" />
+			<xsd:enumeration value="Formula2" />
+			<xsd:enumeration value="Formula3" />
+			<xsd:enumeration value="Formula4" />
+			<xsd:enumeration value="Formula5" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- FinancialInstrumentProductTypeCodeEnum -->
+	<xsd:simpleType name="FinancialInstrumentProductTypeCodeEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en" source="ISO20022">
+				(Source:ISO20022)
+				Specifies the type of product or financial instrument
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="ABBO" />
+			<xsd:enumeration value="AMEN" />
+			<xsd:enumeration value="ANNO" />
+			<xsd:enumeration value="APOL" />
+			<xsd:enumeration value="BAAP" />
+			<xsd:enumeration value="BANT" />
+			<xsd:enumeration value="BIOX" />
+			<xsd:enumeration value="BRAD" />
+			<xsd:enumeration value="BRID" />
+			<xsd:enumeration value="CALN" />
+			<xsd:enumeration value="CEOD" />
+			<xsd:enumeration value="CMBS" />
+			<xsd:enumeration value="CMOS" />
+			<xsd:enumeration value="COFO" />
+			<xsd:enumeration value="COFP" />
+			<xsd:enumeration value="COMM" />
+			<xsd:enumeration value="CONV" />
+			<xsd:enumeration value="COPR" />
+			<xsd:enumeration value="CPPE" />
+			<xsd:enumeration value="DENT" />
+			<xsd:enumeration value="DFLT" />
+			<xsd:enumeration value="DINP" />
+			<xsd:enumeration value="DUAL" />
+			<xsd:enumeration value="EXCN" />
+			<xsd:enumeration value="FEAC" />
+			<xsd:enumeration value="FEAD" />
+			<xsd:enumeration value="FXCO" />
+			<xsd:enumeration value="GOBO" />
+			<xsd:enumeration value="IETM" />
+			<xsd:enumeration value="LINT" />
+			<xsd:enumeration value="LOFC" />
+			<xsd:enumeration value="MATU" />
+			<xsd:enumeration value="METN" />
+			<xsd:enumeration value="MFUN" />
+			<xsd:enumeration value="MIPT" />
+			<xsd:enumeration value="MLEG" />
+			<xsd:enumeration value="MOBS" />
+			<xsd:enumeration value="MOIO" />
+			<xsd:enumeration value="MOPO" />
+			<xsd:enumeration value="MPRP" />
+			<xsd:enumeration value="MTEN" />
+			<xsd:enumeration value="NONE" />
+			<xsd:enumeration value="OVNT" />
+			<xsd:enumeration value="PREF" />
+			<xsd:enumeration value="PRIV" />
+			<xsd:enumeration value="PRNT" />
+			<xsd:enumeration value="RANO" />
+			<xsd:enumeration value="REAM" />
+			<xsd:enumeration value="REPL" />
+			<xsd:enumeration value="RERA" />
+			<xsd:enumeration value="RETR" />
+			<xsd:enumeration value="REVB" />
+			<xsd:enumeration value="RTLV" />
+			<xsd:enumeration value="RVLV" />
+			<xsd:enumeration value="SHTN" />
+			<xsd:enumeration value="SPCA" />
+			<xsd:enumeration value="SPCO" />
+			<xsd:enumeration value="SPCT" />
+			<xsd:enumeration value="STRU" />
+			<xsd:enumeration value="SWIN" />
+			<xsd:enumeration value="TANO" />
+			<xsd:enumeration value="TAXA" />
+			<xsd:enumeration value="TBON" />
+			<xsd:enumeration value="TCAL" />
+			<xsd:enumeration value="TECP" />
+			<xsd:enumeration value="TERM" />
+			<xsd:enumeration value="TIDE" />
+			<xsd:enumeration value="TINT" />
+			<xsd:enumeration value="TIPS" />
+			<xsd:enumeration value="TOBA" />
+			<xsd:enumeration value="TPRN" />
+			<xsd:enumeration value="TRAN" />
+			<xsd:enumeration value="USTB" />
+			<xsd:enumeration value="USTN" />
+			<xsd:enumeration value="VRDN" />
+			<xsd:enumeration value="WARR" />
+			<xsd:enumeration value="WITH" />
+			<xsd:enumeration value="XLIN" />
+			<xsd:enumeration value="YANK" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- FullCouponCalculationMethodEnum -->
+	<xsd:simpleType name="FullCouponCalculationMethodEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="CapitalPosition" />
+			<xsd:enumeration value="UnitCoupon" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+  <!-- GlobalElementaryEnum -->
+  <xsd:simpleType name="GlobalElementaryEnum">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="Elementary" />
+      <xsd:enumeration value="Global" />
+      <xsd:enumeration value="Full" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <!-- IndexationFormulaEnum -->
+	<xsd:simpleType name="IndexationFormulaEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Barrier" />
+			<xsd:enumeration value="BestOf" />
+			<xsd:enumeration value="BestOfWithProtectedAverage" />
+			<xsd:enumeration value="Binary" />
+			<xsd:enumeration value="Capped" />
+			<xsd:enumeration value="Corridor" />
+			<xsd:enumeration value="FxBarrier" />
+			<xsd:enumeration value="FxCorridor" />
+			<xsd:enumeration value="FxSimple" />
+			<xsd:enumeration value="InFine" />
+			<xsd:enumeration value="Landing" />
+			<xsd:enumeration value="LookBack" />
+			<xsd:enumeration value="Pawls" />
+			<xsd:enumeration value="ProtectedAverage" />
+			<xsd:enumeration value="Reverse" />
+			<xsd:enumeration value="SimpleAverage" />
+			<xsd:enumeration value="SuperAverage" />
+		</xsd:restriction>
+	</xsd:simpleType>
+  <!-- InterestAmountTypeEnum   -->
+  <xsd:simpleType name="InterestAmountTypeEnum">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="CashBalance" />
+      <xsd:enumeration value="CreditCashBalance" />
+      <xsd:enumeration value="DebitCashBalance" />
+      <xsd:enumeration value="CashCoveredInitialMargin" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <!-- InvoiceApplicationPeriodEnum   -->
+	<xsd:simpleType name="InvoiceApplicationPeriodEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Invoice" />
+			<xsd:enumeration value="CurrentMonth" />
+			<xsd:enumeration value="CurrentQuarter" />
+			<xsd:enumeration value="CurrentHalfYear" />
+			<xsd:enumeration value="CurrentYear" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- FxFeatureTypeEnum -->
+	<xsd:simpleType name="FxFeatureTypeEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="AssetFxLinked" />
+			<xsd:enumeration value="Composite" />
+			<xsd:enumeration value="Cross" />
+			<xsd:enumeration value="Differential" />
+			<xsd:enumeration value="FlexiQuanto" />
+			<xsd:enumeration value="Flexo" />
+			<xsd:enumeration value="JointQuanto" />
+			<xsd:enumeration value="QuantityAdjusting" />
+			<xsd:enumeration value="Quanto" />
+			<xsd:enumeration value="RateDifferential" />
+			<xsd:enumeration value="SecondaryCurrency" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- KnockConditionEnum -->
+	<xsd:simpleType name="KnockConditionEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="UpAndIn" />
+			<xsd:enumeration value="UpAndOut" />
+			<xsd:enumeration value="DownAndIn" />
+			<xsd:enumeration value="DownAndOut" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- KnockEffectTypeEnum -->
+	<xsd:simpleType name="KnockEffectTypeEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="CalculationPeriod" />
+			<xsd:enumeration value="PaymentPeriod" />
+			<xsd:enumeration value="InterestRateStream" />
+			<xsd:enumeration value="FullTrade" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- KnockObservationTypeEnum -->
+	<xsd:simpleType name="KnockObservationTypeEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="CalculationPeriod" />
+			<xsd:enumeration value="CalculationPeriodEndDate" />
+			<xsd:enumeration value="PaymentPeriod" />
+			<xsd:enumeration value="PaymentPeriodEndDate" />
+			<xsd:enumeration value="PreviousCalculationPeriod" />
+			<xsd:enumeration value="PreviousCalculationPeriodEndDate" />
+			<xsd:enumeration value="PreviousPaymentPeriod" />
+			<xsd:enumeration value="PreviousPaymentPeriodEndDate" />
+			<xsd:enumeration value="SpecifiedPeriods" />
+			<xsd:enumeration value="SpecifiedDates" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- MarketDisruptionEnum -->
+	<xsd:simpleType name="MarketDisruptionEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="FailureToOpen" />
+			<xsd:enumeration value="TradingDisruption" />
+			<xsd:enumeration value="ExchangeDisruption" />
+			<xsd:enumeration value="EarlyClosing" />
+		</xsd:restriction>
+	</xsd:simpleType>
+  <!-- CashAndCollateralLocalizationEnum -->
+  <xsd:simpleType name="MarginCallCalculationMethodEnum">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="MGCCOLLATCUR" />
+      <xsd:enumeration value="MGCCTRVAL" />
+      <xsd:enumeration value="MGCCOLLATCTRVAL" />
+    </xsd:restriction>
+  </xsd:simpleType>  
+	<!-- MarginTypeEnum -->
+	<xsd:simpleType name="MarginTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">This indicator defines if a margin (also called haircut in repo and sec lending litterature) applies to cash or to the financial instrument being exchanged.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Cash">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">When the margin type is Cash, the margin factor is applied to the cash value of the transaction.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Instrument">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">When the margin type is Instrument, the margin factor is applied to the instrument value for the transaction.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- NettingMethodEnum -->
+	<xsd:simpleType name="NettingMethodEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Standard" />
+			<xsd:enumeration value="Convention" />
+			<xsd:enumeration value="Designation" />
+			<xsd:enumeration value="None" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- NbMaxValuesTypeEnum -->
+	<xsd:simpleType name="NbMaxValuesTypeEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Crescent" />
+			<xsd:enumeration value="CrescentAndSequential" />
+			<xsd:enumeration value="DeCrescent" />
+			<xsd:enumeration value="DeCrescentAndSequential" />
+			<xsd:enumeration value="Sequential" />
+			<xsd:enumeration value="NonSequential" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- OrderQuantityType3CodeEnum -->
+	<xsd:simpleType name="OrderQuantityType3CodeEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en" source="ISO20022">
+				(Source:ISO20022)
+				Specifies how the order is placed, eg by quantity of units or by amount of money.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="CASH" />
+			<xsd:enumeration value="UMPU" />
+			<xsd:enumeration value="UNIT" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- PriceRateType3CodeEnum -->
+	<xsd:simpleType name="PriceRateType3CodeEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en" source="ISO20022">
+				(Source:ISO20022)
+				Specifies the type of price rate
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="DISC" />
+			<xsd:enumeration value="PRCT" />
+			<xsd:enumeration value="PREM" />
+			<xsd:enumeration value="YIEL" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- PrincipalExchangeEnum -->
+	<xsd:simpleType name="PrincipalExchangeEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Intermediate" />
+			<xsd:enumeration value="Final" />
+			<xsd:enumeration value="IntermediateAndFinal" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- PrincipalExchangeTypeEnum -->
+	<xsd:simpleType name="PrincipalExchangeTypeEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Balloon" />
+			<xsd:enumeration value="CleanIPS" />
+			<xsd:enumeration value="DualCurrency" />
+			<xsd:enumeration value="IAS" />
+			<xsd:enumeration value="ReverseIAS" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- ProductTypeCodeEnum -->
+	<xsd:simpleType name="ProductTypeCodeEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en" source="ISO20022">
+				(Source:ISO20022)
+				Specifies the type of product or financial instrument
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="AGEN" />
+			<xsd:enumeration value="COMM" />
+			<xsd:enumeration value="CORP" />
+			<xsd:enumeration value="CURR" />
+			<xsd:enumeration value="EQUI" />
+			<xsd:enumeration value="FINA" />
+			<xsd:enumeration value="GOVE" />
+			<xsd:enumeration value="LOAN" />
+			<xsd:enumeration value="MOMA" />
+			<xsd:enumeration value="MORT" />
+			<xsd:enumeration value="MUNI" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- RepoDurationEnum -->
+	<xsd:simpleType name="RepoDurationEnum">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A duration code for a Repo (or Securities Lending) transaction. There are many business and market rules that are derived from the duration of the transaction.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Overnight">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Indicates that a contract is classified as overnight, meaning that there is one business day difference between the start and end date of the contract. Business rule: When the repo is overnight, the number of business days between the spot and forward value dates must be one. Forward leg must be specified.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Term">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Indicates that a contract is a regular term contract, with a start date and an end date. Business rule: When the repo is 'Term', both spot and forward legs must be specified.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="Open">
+				<xsd:annotation>
+					<xsd:documentation xml:lang="en">Indicates that a contract is open ended; this means that the end date is unspecified, and will be agreed by the two parties at a later date. Business rule: When the repo is Open, the forward transaction leg must not be present.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- SpheresSourceStatusEnum -->
+  <!-- FI 20140926 [20381] Add Corrected -->
+  <!-- FI 20180502 [23926] Add ScheduleForced -->
+	<xsd:simpleType name="SpheresSourceStatusEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="Default" />
+			<xsd:enumeration value="Forced" />
+      <xsd:enumeration value="Corrected" />
+      <xsd:enumeration value="ScheduleForced" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- TradeSideEnum -->
+	<xsd:simpleType name="TradeSideEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="All" />
+			<xsd:enumeration value="Buyer" />
+			<xsd:enumeration value="Seller" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- TriggerHitOperatorEnum -->
+	<xsd:simpleType name="TriggerHitOperatorEnum">
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="TriggerIsReached" />
+			<xsd:enumeration value="TriggerIsExceeded" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!-- YieldTypeEnum -->
+	<xsd:simpleType name="YieldTypeEnum">
+		<xsd:annotation>
+			<xsd:documentation source="FIX" xml:lang="en">
+				(Source:FIX, Tag:235, FieldName:YieldType, FIXML Abbr:@Typ, DataType:String)
+				Type of yield. (Note tag # was reserved in FIX 4.1, added in FIX 4.3)
+			</xsd:documentation>
+			<xsd:documentation source="ISO20022" xml:lang="en">
+				(Source:ISO20022)
+				Yield computation method.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:enumeration value="COMPOUND" />
+			<xsd:enumeration value="SIMPLE" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+  <!-- FI 20161027 [22151] Add -->
+  <xsd:simpleType name="PerformedSatusEnum">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="Performed" />
+      <xsd:enumeration value="Unperformed" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  
+  <!-- New for MiFID II    -->
+  <!-- EG 20170918 [23342] -->
+  <xsd:simpleType name="SettlementTypeExtendedEnum">
+    <xsd:annotation>
+      <xsd:documentation source="http://www.FpML.org" xml:lang="en">Shows how the transaction is to be settled when it is exercised.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:union memberTypes="fpml:SettlementTypeEnum">
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:token">
+          <xsd:enumeration value="T">
+            <xsd:annotation>
+              <xsd:documentation source="http://www.FpML.org" xml:lang="en">
+                Term. The period commencing on the effective date and ending on the termination date. The T period always appears in association with periodMultiplier = 1, and the notation is intended for use in contexts where the interval thus qualified (e.g. accrual period, payment period, reset period, ...) spans the entire term of the trade.
+              </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:union>
+  </xsd:simpleType>
+
+  <!-- New for MiFID II    -->
+  <!-- EG 20170918 [23342] -->
+  <xsd:simpleType name="TelephoneTypeEnum">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="Work"/>
+      <xsd:enumeration value="Mobile"/>
+      <xsd:enumeration value="Fax"/>
+      <xsd:enumeration value="Personal"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <!-- EG 20190823 [FIXEDINCOME] -->
+  <xsd:simpleType name="DebtSecurityTypeEnum">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="Ordinary" />
+      <xsd:enumeration value="Perpetual" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <!-- ElectricityTechnologyTypeEnum -->
+  <!-- EG 20221101 [25639][WI482] New -->
+  <xsd:simpleType name="CommodityTechnologyTypeEnum">
+    <xsd:restriction base="xsd:token">
+      <xsd:enumeration value="Hydro" />
+      <xsd:enumeration value="OffShoreWind" />
+      <xsd:enumeration value="OnShoreWind" />
+      <xsd:enumeration value="Solar" />
+      <xsd:enumeration value="Thermal" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

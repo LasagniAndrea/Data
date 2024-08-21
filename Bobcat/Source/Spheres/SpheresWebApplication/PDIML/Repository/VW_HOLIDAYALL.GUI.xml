@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:false;tblH-css:size4">
+  <customObject control="label"     clientid="DATE1"   caption = "lblDtConsult" xsi:type="CustomObjectLabel"/>
+  <customObject control="textbox"   clientid="DTREF"   datatype = "date" required="true"  
+                postback="true"  postbackargument ="SELFCLEAR_" xsi:type="CustomObjectTextBox"/>
+</customObjects>

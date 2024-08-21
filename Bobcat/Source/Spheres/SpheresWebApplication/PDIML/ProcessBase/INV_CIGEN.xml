@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- FI 20151015 [21262] Reecriture de la requête et usage de choose -->
+<!-- FI 20120926 [] usage of data attribute for HyperLink column-->
+<!-- FI 20120531 [] usage de DTEVENTFORCED à la place de DTEVENT 
+     Pour être en phase avec les service qui s'appuient sur DTEVENTFORCED (voir méthode EfsML.Confirmation.CnfMessage.GetEventDate)
+     L'utilisation de DTEVENTFORCED est cependant à revoir....
+     Il faut se souvenir de la date génération de la facture (ce n'est pas géniale)
+-->
+<!-- FI 20120119 [] mise de IsUseSQLParameters -->
+<!-- FI 20120102 [] mise en place des mots clefs %%SR -->
+<!-- FI 20100729 [17103] mise à jour jointures sur SESSIONRESTRICT-->
+<!-- EG 20191115 [25077] RDBMS : New version of Trades tables architecture (TRADESTSYS merge to TRADE, NEW TABLE TRADEXML)-->
+<!-- EG 20200226 [25077] RDBMS : New version of Trades tables architecture (TRADEINSTRUMENT (INSTRUMENTNO=1) to TRADE)-->
+<!-- FI 20200820 [25468] dates systemes en UTC -->
+<!-- EG 20220523 [WI639] Refactoring Query -->
+<Referentials>
+  <Referential>
+    <IsUseSQLParameters>true</IsUseSQLParameters>
+    <TableName>VW_TRADEADMIN</TableName>
+    <Ressource>TRADE</Ressource>
+    <ColumnByRow>3</ColumnByRow>
+    <Create>false</Create>
+    <Modify>false</Modify>
+    <Remove>false</Remove>
+    <Notepad>false</Notepad>
+
+    
+    <SQLSelect>
+      <Command rdbms="all">
+        <![CDATA[
+        
+        /* SQL: WITHTOMOVE */
+        
+        with TRADECANDIDAT as (
+	        select tr.IDT,tr.IDENTIFIER, tr.IDI, tr.DTTRADE,tr.DTSYS,
+	        tr.IDSTENVIRONMENT,tr.IDSTBUSINESS, tr.IDSTACTIVATION, tr.IDSTPRIORITY,tr .SOURCE,
+	        tr.EXTLLINK, bbuyer.IDA_ENTITY as IDA_ENTITYBUYER , bseller.IDA_ENTITY as IDA_ENTITYSELLER, 
+	        tr.DTOUTADJ as TERMINATIONDATE, tr.IDA_ENTITY,
+	        pr.IDP, pr.GPRODUCT
+	        from dbo.TRADE tr
+          %%SR:TRADEADMIN_JOIN%%(tr.IDT, tr)
+	        inner join dbo.VW_INSTR_PRODUCT pr on (pr.IDI = tr.IDI) and (pr.GPRODUCT = 'ADM')
+	        left outer join dbo.BOOK bbuyer on (bbuyer.IDB=tr.IDB_BUYER)
+	        left outer join dbo.BOOK bseller on (bseller.IDB=tr.IDB_SELLER)
+	        where (tr.IDSTENVIRONMENT in ('REGULAR','SIMUL')) and (tr.DTTRADE >= DATEADD(month,-3,@DATE1) - DAY( DATEADD(month,-3,@DATE1) ) + 1)
+        )
+        
+        /* SQL: ENDWITHTOMOVE */      
+        
+        select tr.IDT,tr.IDENTIFIER, tr.IDI, tr.DTTRADE,tr.DTSYS,
+	      tr.IDSTENVIRONMENT,tr.IDSTBUSINESS, tr.IDSTACTIVATION, tr.IDSTPRIORITY,tr .SOURCE,
+	      tr.EXTLLINK, tr.IDA_ENTITYBUYER , tr.IDA_ENTITYSELLER, 
+	      tr.TERMINATIONDATE, tr.IDP, tr.GPRODUCT
+        from TRADECANDIDAT tr
+        where exists (
+		        select 1    
+		        from TRADECANDIDAT tr2
+		        inner join dbo.EVENT ev on (ev.IDT = tr2.IDT)
+		        inner join dbo.EVENTCLASS ec on (ec.IDE = ev.IDE)
+		        inner join
+		        (
+			        select cnf.MSGTYPE, cnf.EVENTCODE, cnf.EVENTTYPE, cnf.EVENTCLASS, cnf.GPRODUCT, cnf.IDP, cnf.IDI, cnf.IDGINSTR, ig.IDI as IDI_GROUP, cnf.DTENABLED, cnf.DTDISABLED  
+			        from CNFMESSAGE cnf
+			        left outer join GINSTR gi on (gi.IDGINSTR = cnf.IDGINSTR)
+			        left outer join INSTRG ig on (ig.IDGINSTR = gi.IDGINSTR)
+			        where ((cnf.DTENABLED <= getdate()) and ((cnf.DTDISABLED is null) or (cnf.DTDISABLED > getdate())))
+		        ) cnf on (cnf.MSGTYPE='MONO-TRADE') and (cnf.EVENTCODE=ev.EVENTCODE) and (isnull(cnf.EVENTTYPE, ev.EVENTTYPE)=ev.EVENTTYPE) and
+				         (isnull(cnf.GPRODUCT, tr2.GPRODUCT) = tr2.GPRODUCT) and (isnull(cnf.IDP, tr2.IDP) = tr2.IDP) and (isnull(cnf.IDI, tr2.IDI) = tr2.IDI) and (cnf.EVENTCLASS=ec.EVENTCLASS) and
+			             (isnull(cnf.IDI_GROUP, tr2.IDI) = tr2.IDI)
+                   
+            <choose>                                    
+                <when test="{ISTOEND}=true">
+                  where (tr2.IDT=tr.IDT) and (ec.DTEVENTFORCED &gt;= @DATE1)
+                </when>
+                <when test="{ISTOEND}=false">
+                  where (tr2.IDT=t.IDT) and (ec.DTEVENTFORCED = @DATE1)
+                </when>
+            </choose>                                    
+        )
+        
+        and (%%SR:TRADEADMIN_WHERE_PREDICATE%%)
+        <choose>                                    
+          <when test="{ENTITY}>0">
+              and (tr.IDA_ENTITY = @ENTITY)
+          </when>
+        </choose> 
+        ]]>
+      </Command>
+    </SQLSelect>
+
+    <Column>
+      <ColumnName>IDT</ColumnName>
+      <Ressource>IDT</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>true</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>true</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>true</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDENTIFIER</ColumnName>
+      <Ressource>IDENTIFIER_INVOICE</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>true</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>true</IsOrderBy>
+      <IsHyperLink linktype="column" type="IDT_ADMIN" data="IDT">true</IsHyperLink>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDI</ColumnName>
+      <Ressource>IDI</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>true</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>INSTRUMENT</TableName>
+        <ColumnRelation>
+          <ColumnName>IDI</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>Instrument</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <ColumnLabel>
+          <ColumnName>DISPLAYNAME</ColumnName>
+          <Ressource>DISPLAYNAME</Ressource>
+          <DataType>string</DataType>
+        </ColumnLabel>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DTTRADE</ColumnName>
+      <Ressource>DTTRADE2</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>TERMINATIONDATE</ColumnName>
+      <Ressource>InvoiceDate2</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDSTENVIRONMENT</ColumnName>
+      <Ressource>IDSTENVIRONMENT</Ressource>
+      <DataType>string</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression>RegexStringAlphaNumUpperLight</RegularExpression>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <IsResource>true</IsResource>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDSTBUSINESS</ColumnName>
+      <Ressource>IDSTBUSINESS</Ressource>
+      <DataType>string</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression>RegexStringAlphaNumUpperLight</RegularExpression>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <IsResource>true</IsResource>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDSTACTIVATION</ColumnName>
+      <Ressource>IDSTACTIVATION</Ressource>
+      <DataType>string</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression>RegexStringAlphaNumUpperLight</RegularExpression>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <IsResource>true</IsResource>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDSTPRIORITY</ColumnName>
+      <Ressource>IDSTPRIORITY</Ressource>
+      <DataType>string</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression>RegexStringAlphaNumUpperLight</RegularExpression>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <IsResource>true</IsResource>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DTSYS</ColumnName>
+      <Ressource>DTSYS</Ressource>
+      <DataType datakind='Timestamp' tzdbid='Etc/UTC' display='Audit'>datetime</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>SOURCE</ColumnName>
+      <Ressource>SOURCE</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <DDLType>source</DDLType>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>EXTLLINK</ColumnName>
+      <Ressource>EXTLLINK</Ressource>
+      <DataType>string</DataType>
+      <Length>128</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>GPRODUCT</ColumnName>
+      <Ressource>GPRODUCT</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+    </Column>
+  </Referential>
+</Referentials>
+

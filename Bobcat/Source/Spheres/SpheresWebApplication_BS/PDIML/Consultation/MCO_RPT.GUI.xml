@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+
+  <customObject bs-grid="col-sm-2" bs-row="1" control="label" clientid="PERIODREPORTTYPE" xsi:type="CustomObjectLabel"     />
+
+  <customObject control="dropdown" clientid="PERIODREPORTTYPE" xsi:type="CustomObjectDropDown" defaultvalue="1" datatype="integer"
+                caption="lblPeriodReportType" listretrieval="Predef:periodreporttype"
+                required="true" postback="true" postbackargument ="SELFCLEAR_" misc="isClear:true"  />
+
+  <customObject control="textbox" clientid="DATE1" xsi:type="CustomObjectTextBox" defaultvalue="BUSINESS" datatype="date"
+                caption="lblDtBusiness_" required="true" postback="true" postbackargument="SELFCLEAR_"/>
+
+</customObjects>

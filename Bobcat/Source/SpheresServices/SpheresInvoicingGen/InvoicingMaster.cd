@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="EFS.Administrative.Invoicing.Invoicing">
+    <Position X="0.5" Y="2.25" Width="2" />
+    <Members>
+      <Method Name="AddEvent" Hidden="true" />
+      <Method Name="Compare" Hidden="true" />
+      <Property Name="EntityIdentifier" Hidden="true" />
+      <Method Name="Invoicing" Hidden="true" />
+      <Field Name="m_InvoicingGenProcess" Hidden="true" />
+      <Property Name="ProcessBase" Hidden="true" />
+      <Method Name="Sort" Hidden="true" />
+      <Property Name="this" Hidden="true" />
+      <Method Name="WeightingScope" Hidden="true" />
+    </Members>
+    <AssociationLine Name="scopes" Type="EFS.Administrative.Invoicing.InvoicingScope" FixedToPoint="true">
+      <Path>
+        <Point X="2.5" Y="2.343" />
+        <Point X="5" Y="2.343" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="1.391" Y="0.081" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AgAAABAAAAACAABACAAwAAAJAAAAAAAAEABAAAAAAAA=</HashCode>
+      <FileName>InvoicingTools.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="parameter" />
+      <Field Name="entity" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="scopes" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EFS.Administrative.Invoicing.InvoicingEntity">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <Members>
+      <Field Name="actorEntity" Hidden="true" />
+      <Field Name="additionalInvoiceInstr" Hidden="true" />
+      <Field Name="additionalInvoiceInstrSpecified" Hidden="true" />
+      <Field Name="bookEntity" Hidden="true" />
+      <Field Name="creditNoteInstr" Hidden="true" />
+      <Field Name="creditNoteInstrSpecified" Hidden="true" />
+      <Property Name="CS" Hidden="true" />
+      <Property Name="CurrentInstrument" Hidden="true" />
+      <Field Name="defaultApplicationPeriodSpecified" Hidden="true" />
+      <Field Name="defaultInstrumentType" Hidden="true" />
+      <Field Name="defaultPeriod_Invoicing" Hidden="true" />
+      <Field Name="defaultPeriodMltp_Invoicing" Hidden="true" />
+      <Field Name="defaultRollConvention_Invoicing" Hidden="true" />
+      <Property Name="EntityIdentifier" Hidden="true" />
+      <Method Name="GetInvoicingIdIAttached" Hidden="true" />
+      <Field Name="invoiceInstr" Hidden="true" />
+      <Field Name="invoiceInstrSpecified" Hidden="true" />
+      <Field Name="invoiceStlInstr" Hidden="true" />
+      <Field Name="invoiceStlInstrSpecified" Hidden="true" />
+      <Method Name="InvoicingEntity" Hidden="true" />
+      <Method Name="LoadEntity" Hidden="true" />
+      <Field Name="m_InvoicingGenProcess" Hidden="true" />
+      <Property Name="Process" Hidden="true" />
+      <Property Name="ProcessBase" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AggAAAogQQAEAgEIAiAAAEQJAAAARAAAAAABAADAEAA=</HashCode>
+      <FileName>InvoicingTools.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.Administrative.Invoicing.InvoicingParameters">
+    <Position X="0.5" Y="5" Width="1.75" />
+    <Members>
+      <Field Name="criteria" Hidden="true" />
+      <Field Name="criteriaSpecified" Hidden="true" />
+      <Method Name="GetSQLWhere" Hidden="true" />
+      <Field Name="idA_Entity" Hidden="true" />
+      <Property Name="IdA_PayerSpecified" Hidden="true" />
+      <Property Name="IdC_FeeSpecified" Hidden="true" />
+      <Field Name="invoiceDate" Hidden="true" />
+      <Method Name="InvoicingParameters" Hidden="true" />
+      <Field Name="isSimul" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAACEAAAAAAAEAAIAAAAACAAAAACAAAIA=</HashCode>
+      <FileName>InvoicingTools.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.Administrative.Invoicing.InvoicingScope">
+    <Position X="5" Y="2.25" Width="1.5" />
+    <Members>
+      <Method Name="AddEvent" Hidden="true" />
+      <Method Name="AddTradeSimulToDelete" Hidden="true" />
+      <Method Name="CalculGrossTurnOverAmount" Hidden="true" />
+      <Method Name="CalculNetTurnOverIssueRate" Hidden="true" />
+      <Field Name="context" Hidden="true" />
+      <Property Name="CS" Hidden="true" />
+      <Property Name="DataDocument" Hidden="true" />
+      <Method Name="DeleteTradeSimul" Hidden="true" />
+      <Field Name="displayName" Hidden="true" />
+      <Method Name="GetPreviousInvoicingAmount" Hidden="true" />
+      <Field Name="identifier" Hidden="true" />
+      <Field Name="idInvoicingRules" Hidden="true" />
+      <Field Name="idT" Hidden="true" />
+      <Method Name="InvoiceAmountsCalculation" Hidden="true" />
+      <Property Name="InvoicedIdentifier" Hidden="true" />
+      <Method Name="InvoicingScope" Hidden="true" />
+      <Field Name="isInvoicingEventIsCorrected" Hidden="true" />
+      <Method Name="LockTrade" Hidden="true" />
+      <Field Name="m_DataDocument" Hidden="true" />
+      <Field Name="m_IdA_Entity" Hidden="true" />
+      <Field Name="m_IdB_Entity" Hidden="true" />
+      <Field Name="m_IdCAccount" Hidden="true" />
+      <Field Name="m_InvoicingGenProcess" Hidden="true" />
+      <Field Name="m_LockObject" Hidden="true" />
+      <Field Name="m_ProductContainer" Hidden="true" />
+      <Field Name="m_ResultMatching" Hidden="true" />
+      <Field Name="m_TradeLibrary" Hidden="true" />
+      <Method Name="MatchInvoicingScope" Hidden="true" />
+      <Property Name="ProcessBase" Hidden="true" />
+      <Property Name="ProductBase" Hidden="true" />
+      <Property Name="Queue" Hidden="true" />
+      <Property Name="ResultMatching" Hidden="true" />
+      <Method Name="SetDataDocument" Hidden="true" />
+      <Method Name="SetInvoice" Hidden="true" />
+      <Method Name="SetInvoiceDetails" Hidden="true" />
+      <Method Name="SetInvoiceRebateParameters" Hidden="true" />
+      <Method Name="SetParties" Hidden="true" />
+      <Method Name="SetPaymentDate" Hidden="true" />
+      <Method Name="SetTradeHeader" Hidden="true" />
+      <Field Name="tax" Hidden="true" />
+      <Property Name="this" Hidden="true" />
+      <Field Name="tradeIdentifier" Hidden="true" />
+      <Method Name="UnLockTrade" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="actorPayer" Type="EFS.Administrative.Invoicing.InvoicingActor" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.25" Y="2.25" />
+        <Point X="6.25" Y="1.938" />
+        <Point X="9.75" Y="1.938" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.592" Y="0.735" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="invoicingPeriodDates" Type="EFS.Administrative.Invoicing.InvoicingDates" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.75" Y="2.25" />
+        <Point X="5.75" Y="0.938" />
+        <Point X="4.25" Y="0.938" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.091" Y="0.089" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="actorInvoiced" Type="EFS.Administrative.Invoicing.InvoicingActor" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6" Y="2.25" />
+        <Point X="6" Y="0.938" />
+        <Point X="9.75" Y="0.938" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.277" Y="0.081" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="rules" Type="EFS.Administrative.Invoicing.InvoicingRules" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.5" Y="2.49" />
+        <Point X="9.562" Y="2.49" />
+        <Point X="9.562" Y="5" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.245" Y="2.144" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="conditions" Type="EFS.Administrative.Invoicing.InvoicingConditions">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-1.161" Y="0.57" Height="0.182" Width="1.066" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="tradeSimulToDelete" Type="EFS.Administrative.Invoicing.InvoicingTradeSimul" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.5" Y="2.708" />
+        <Point X="8.062" Y="2.708" />
+        <Point X="8.062" Y="5" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.068" Y="1.862" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>ApACCCIIABIBFAZAigEITIAMQgBQAgBQBERAACAAGgA=</HashCode>
+      <FileName>InvoicingTools.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="actorPayer" />
+      <Field Name="invoicingPeriodDates" />
+      <Field Name="actorInvoiced" />
+      <Field Name="rules" />
+      <Field Name="conditions" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="tradeSimulToDelete" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="EFS.Administrative.Invoicing.InvoicingActor">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <Members>
+      <Method Name="InvoicingActor" Hidden="true" />
+      <Method Name="LoadActor" Hidden="true" />
+      <Field Name="m_Cs" Hidden="true" />
+      <Field Name="m_SQLActor" Hidden="true" />
+      <Property Name="SQLActor" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAADEAAAChAIAAAAAAAEAAAAAAAIAAFAAAAAQAAAAiA=</HashCode>
+      <FileName>InvoicingTools.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.Administrative.Invoicing.InvoicingConditions">
+    <Position X="4.25" Y="5" Width="2.25" />
+    <Members>
+      <Field Name="bracketApplication" Hidden="true" />
+      <Field Name="bracketApplicationSpecified" Hidden="true" />
+      <Field Name="bracketPeriodDates" Hidden="true" />
+      <Field Name="brackets" Hidden="true" />
+      <Field Name="capPeriodDates" Hidden="true" />
+      <Method Name="Compare" Hidden="true" />
+      <Field Name="discountPeriod" Hidden="true" />
+      <Field Name="discountPeriodMltp" Hidden="true" />
+      <Field Name="discountPeriodMltpSpecified" Hidden="true" />
+      <Field Name="discountPeriodSpecified" Hidden="true" />
+      <Method Name="InvoicingConditions" Hidden="true" />
+      <Field Name="maxPeriod" Hidden="true" />
+      <Field Name="maxPeriodMltp" Hidden="true" />
+      <Field Name="maxPeriodMltpSpecified" Hidden="true" />
+      <Field Name="maxPeriodSpecified" Hidden="true" />
+      <Field Name="maxValue" Hidden="true" />
+      <Field Name="maxValueSpecified" Hidden="true" />
+      <Method Name="Sort" Hidden="true" />
+      <Property Name="this" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAwEBAABAAAAAEAACCAQCAAAAEAAACBIAABABAECAAA=</HashCode>
+      <FileName>InvoicingTools.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EFS.Administrative.Invoicing.InvoicingDates">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <Members>
+      <Field Name="applicationPeriod" Hidden="true" />
+      <Field Name="endPeriod" Hidden="true" />
+      <Field Name="invoiceDate" Hidden="true" />
+      <Method Name="InvoicingDates" Hidden="true" />
+      <Method Name="IsEqualToInvoicingApplicationPeriod" Hidden="true" />
+      <Property Name="IsInvoiceDateEqualToEndPeriod" Hidden="true" />
+      <Property Name="IsInvoicePeriodApplication" Hidden="true" />
+      <Field Name="startPeriod" Hidden="true" />
+      <Field Name="startPeriodPlusOneDay" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAQEAAQAAAAAAAEAgAAIAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>InvoicingTools.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.Administrative.Invoicing.InvoicingRules">
+    <Position X="8.75" Y="5" Width="1.5" />
+    <Members>
+      <Field Name="addressIdent" Hidden="true" />
+      <Field Name="addressIdentSpecified" Hidden="true" />
+      <Field Name="bdc_StlDelay" Hidden="true" />
+      <Field Name="dayType_StlDelay" Hidden="true" />
+      <Field Name="dayTypeOffset_Invoicing" Hidden="true" />
+      <Field Name="dayTypeOffset_InvoicingSpecified" Hidden="true" />
+      <Field Name="idAsset_Invoicing" Hidden="true" />
+      <Field Name="idAsset_InvoicingSpecified" Hidden="true" />
+      <Field Name="idC_Invoicing" Hidden="true" />
+      <Method Name="InvoicingRules" Hidden="true" />
+      <Field Name="period_Invoicing" Hidden="true" />
+      <Field Name="period_InvoicingSpecified" Hidden="true" />
+      <Field Name="period_StlDelay" Hidden="true" />
+      <Field Name="periodMltp_Invoicing" Hidden="true" />
+      <Field Name="periodMltp_InvoicingSpecified" Hidden="true" />
+      <Field Name="periodMltp_StlDelay" Hidden="true" />
+      <Field Name="periodMltpOffset_Invoicing" Hidden="true" />
+      <Field Name="periodMltpOffset_InvoicingSpecified" Hidden="true" />
+      <Field Name="periodOffset_Invoicing" Hidden="true" />
+      <Field Name="periodOffset_InvoicingSpecified" Hidden="true" />
+      <Field Name="relativeTo_StlDelay" Hidden="true" />
+      <Field Name="rollConvention_Invoicing" Hidden="true" />
+      <Field Name="rollConvention_InvoicingSpecified" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AQgCAAAwBAAAoAAAAEAAAAQIEBAAEgAAAAAAAgpAQAA=</HashCode>
+      <FileName>InvoicingTools.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.Administrative.Invoicing.InvoicingTrade">
+    <Position X="2.5" Y="3.5" Width="1.5" />
+    <Members>
+      <Field Name="actorCounterparty" Hidden="true" />
+      <Field Name="dataDocument" Hidden="true" />
+      <Field Name="dtIn" Hidden="true" />
+      <Field Name="dtOut" Hidden="true" />
+      <Field Name="dtTrade" Hidden="true" />
+      <Property Name="ErrLevel" Hidden="true" />
+      <Field Name="idC" Hidden="true" />
+      <Field Name="idI" Hidden="true" />
+      <Field Name="idT" Hidden="true" />
+      <Field Name="instrIdentifier" Hidden="true" />
+      <Method Name="InvoicingTrade" Hidden="true" />
+      <Field Name="isInvoicingEventIsCorrected" Hidden="true" />
+      <Field Name="lastError" Hidden="true" />
+      <Field Name="m_ErrLevel" Hidden="true" />
+      <Field Name="sales" Hidden="true" />
+      <Field Name="salesSpecified" Hidden="true" />
+      <Method Name="SetDataDocument" Hidden="true" />
+      <Method Name="SetInvoiceTrade" Hidden="true" />
+      <Method Name="SetInvoicingSales" Hidden="true" />
+      <Method Name="SetInvoicingTrader" Hidden="true" />
+      <Field Name="side" Hidden="true" />
+      <Property Name="this" Hidden="true" />
+      <Field Name="tradeIdentifier" Hidden="true" />
+      <Field Name="traders" Hidden="true" />
+      <Field Name="tradersSpecified" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="events" Type="EFS.Administrative.Invoicing.InvoicingEvent">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.11" Y="0.039" Height="0.182" Width="0.691" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AiAgASAIAIABAAgESICCAAAAAAAABAIAAgAAAAEAChI=</HashCode>
+      <FileName>InvoicingTools.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="events" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="EFS.Administrative.Invoicing.InvoicingEvent">
+    <Position X="2.5" Y="5" Width="1.5" />
+    <Members>
+      <Field Name="accountingAmount" Hidden="true" />
+      <Field Name="accountingCurrency" Hidden="true" />
+      <Field Name="amount" Hidden="true" />
+      <Field Name="baseAccountingAmount" Hidden="true" />
+      <Field Name="baseAmount" Hidden="true" />
+      <Field Name="currency" Hidden="true" />
+      <Field Name="eventCode" Hidden="true" />
+      <Field Name="eventDate" Hidden="true" />
+      <Field Name="eventType" Hidden="true" />
+      <Field Name="feeSchedule" Hidden="true" />
+      <Field Name="feeScheduleSpecified" Hidden="true" />
+      <Field Name="idA_Payer" Hidden="true" />
+      <Field Name="idA_Receiver" Hidden="true" />
+      <Field Name="idB_Payer" Hidden="true" />
+      <Field Name="idB_PayerSpecified" Hidden="true" />
+      <Field Name="idB_Receiver" Hidden="true" />
+      <Field Name="idB_ReceiverSpecified" Hidden="true" />
+      <Field Name="idE" Hidden="true" />
+      <Field Name="idT" Hidden="true" />
+      <Field Name="initialAccountingAmount" Hidden="true" />
+      <Field Name="initialAmount" Hidden="true" />
+      <Field Name="instrumentNo" Hidden="true" />
+      <Method Name="InvoicingEvent" Hidden="true" />
+      <Field Name="isAmountIsCorrected" Hidden="true" />
+      <Field Name="paymentType" Hidden="true" />
+      <Field Name="paymentTypeSpecified" Hidden="true" />
+      <Method Name="SetInvoiceFee" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAIABBoAAQJAAACIAAAhggJAEEQCAAQBgA=</HashCode>
+      <FileName>InvoicingTools.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.Administrative.Invoicing.InvoicingTradeSimul">
+    <Position X="6.75" Y="5" Width="1.75" />
+    <Members>
+      <Field Name="idC" Hidden="true" />
+      <Field Name="idI" Hidden="true" />
+      <Field Name="idT" Hidden="true" />
+      <Field Name="instrIdentifier" Hidden="true" />
+      <Method Name="InvoicingTradeSimul" Hidden="true" />
+      <Field Name="tradeIdentifier" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAACgA=</HashCode>
+      <FileName>InvoicingTools.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

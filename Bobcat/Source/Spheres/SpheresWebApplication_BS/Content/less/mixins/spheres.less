@@ -1,0 +1,306 @@
+@import (reference) "../spheres-variables.less";
+@import (reference) "../../bootstrap/mixins/buttons.less";
+
+
+/******************************************************************************/
+/* SPHERES : MIXIN                                                            */
+/******************************************************************************/
+
+/*--------------------------------------------------------*/
+/* Lignes Créée et Modifiée par ...                       */
+/*--------------------------------------------------------*/
+.created-modified-by(@align:right, @color: @sph-gray-medium-color) {
+    & > span {
+        font-size: 9px;
+        display: block;
+        text-align: @align;
+        margin: -5px 0px 0px 0px;
+        color: @color;
+
+        &::before {
+            font-family: 'Glyphicons Halflings';
+            content: "\e109";
+            padding-right: 2px;
+        }
+    }
+}
+
+
+// Apply the mixin to the panel headings only
+.sph-nav-tabs-styles {
+    padding: 5px 5px 0 5px;
+
+    .nav-tabs {
+        border-bottom: none;
+    }
+}
+
+
+.sph-nav-tabs-init (@suffix, @color: @btn-default-bg, @bgcolor: @btn-default-color, @border-color: #dddddd, @reverse-color: #fff) {
+    .sph-nav-tabs.panel-@{suffix} {
+        .sph-nav-tabs-init-complement (@color, @bgcolor, @border-color, @reverse-color);
+    }
+}
+
+.sph-nav-tabs-init-complement (@color: @btn-default-bg, @bgcolor: @btn-default-color, @border-color: #dddddd, @reverse-color: #fff) {
+    .nav-tabs {
+
+        > li {
+            > a {
+                padding: 2px 7px;
+                color: @color;
+                border-bottom-color: @border-color;
+
+                &:hover,
+                &:focus {
+                    color: #fff;
+                    background-color: darken(@bgcolor, 9%);
+                    border-color: transparent;
+                    border-bottom-color: @border-color;
+                }
+            }
+
+            &.active > a {
+                &,
+                &:hover,
+                &:focus {
+                    color: @bgcolor;
+                    background-color: @reverse-color;
+                    border-color: @border-color;
+                    border-bottom-color: @reverse-color;
+                }
+            }
+        }
+
+        .open > a {
+            &,
+            &:hover,
+            &:focus {
+                color: @bgcolor;
+                background-color: @reverse-color;
+                border-color: @border-color;
+                border-bottom-color: @reverse-color;
+            }
+        }
+
+        > li.dropdown .dropdown-menu {
+            background-color: @reverse-color;
+            border-color: @bgcolor;
+
+            > li > a {
+                color: @color;
+
+                &:hover,
+                &:focus {
+                    background-color: @bgcolor;
+                }
+            }
+
+            .active > a {
+                &,
+                &:hover,
+                &:focus {
+                    color: @reverse-color;
+                    background-color: @bgcolor;
+                }
+            }
+        }
+    }
+}
+
+
+
+.setsep(@color: @sph-gray-medium-color) {
+
+    .sep {
+        > div[class^="col-sm"] {
+            border-left: 0.5pt solid @color;
+            border-right: 0.5pt solid @color;
+        }
+    }
+}
+
+/* Gestion des titres de type banniere dans le formulaire référentiel */
+.setreptitle(@suffix: repository, @color: @sph-repository-color) {
+    &.@{suffix} {
+
+        span.reptitle {
+            color: @color;
+
+            & + div.panel {
+                border-top: 2pt solid @color;
+            }
+        }
+
+        span.reptitle.lvl2 {
+            color: lighten(@color,10%);
+
+            & + div.panel {
+                border-top: 1pt solid lighten(@color,10%);
+            }
+        }
+    }
+}
+
+/* Gestion des couleurs de panel dans le référentiel */
+.setpnlHeading(@suffix: repository, @bgcolor: @sph-repository-color, @color: #fff) {
+    &.sph-nav-tabs.@{suffix} {
+        border-color: @bgcolor;
+
+        & > .panel-heading {
+            .sph-nav-tabs-styles();
+        }
+
+        .sph-nav-tabs-init-complement(@color, @bgcolor, darken(@bgcolor, 9%));
+        .setsep(@bgcolor);
+    }
+
+
+    &.@{suffix} {
+        border-color: @bgcolor;
+
+        div.panel-heading {
+            background-color: @bgcolor;
+            color: @color;
+        }
+
+        div.panel.sph-nav-tabs > .panel-heading {
+            .sph-nav-tabs-styles();
+        }
+
+        .sph-nav-tabs {
+            .sph-nav-tabs-init-complement(@color, @bgcolor, darken(@bgcolor, 9%));
+        }
+
+        .setsep(@bgcolor);
+    }
+
+    .setreptitle(@suffix, @bgcolor);
+}
+
+.setglobalpnlHeading(@suffix: repository, @bgcolor: @sph-repository-color, @color: #fff) {
+    &.@{suffix} {
+
+        div.panel {
+            border-color: @bgcolor;
+        }
+
+        div.panel-heading {
+            background-color: @bgcolor;
+            color: @color;
+        }
+
+        div.panel.sph-nav-tabs > .panel-heading {
+            .sph-nav-tabs-styles();
+        }
+
+        .sph-nav-tabs {
+            .sph-nav-tabs-init-complement(@color, @bgcolor, darken(@bgcolor, 9%));
+        }
+
+        .setsep(@bgcolor);
+
+        .dsp-column {
+            &::after {
+                color: @bgcolor;
+            }
+        }
+    }
+
+    .setreptitle(@suffix, @bgcolor);
+}
+
+// Affectation du style pour les menus détail du formulaire Repository en fonction du type de menu (REP|ADM|INP...)
+.setcolormenudetail(@suffix: repository, @color: @sph-repository-color) {
+
+    &[data-menu="@{suffix}"] {
+
+        .dropdown-menu > li > a {
+            &:hover,
+            &:focus {
+                border-left: 4pt solid @color;
+                color: @color;
+            }
+        }
+
+        .dropdown-submenu:hover > a:after {
+            border-left-color: @color;
+        }
+
+        .navbar-collapse ul > li.detail {
+            color: @color;
+        }
+
+        .btn-details {
+            .button-variant(@color; @btn-default-bg; @btn-default-border);
+        }
+
+    }
+}
+.setviewertitle(@suffix: repository, @color: @sph-repository-color) {
+
+    &[data-menu="@{suffix}"] {
+
+        > span:first-of-type {
+            color: @color;
+            font-size:x-large;
+        }
+    }
+}
+
+.setrepositorytitle(@suffix: repository, @color: @sph-repository-color) {
+
+    &[data-menu="@{suffix}"] {
+
+        > span:first-of-type {
+            color: @color;
+        }
+
+        > span:nth-of-type(2) {
+            border-color: @color;
+
+            &::before {
+                background-color: @color;
+            }
+        }
+    }
+}
+
+.setmainmenu(@suffix: repository, @color: @sph-repository-color) {
+    #mc_nvb {
+        .setcolormenudetail(@suffix, @color);
+    }
+
+    #mc_rowtitle {
+        .setrepositorytitle(@suffix, @color);
+    }
+
+    .body-content {
+
+        div {
+            .setglobalpnlHeading(@suffix, @color);
+        }
+
+        div.panel {
+            .setpnlHeading(@suffix, @color);
+        }
+    }
+}
+
+/* Gestion des titres de type banniere dans le formulaire référentiel */
+.setcommontitle(@color: @sph-main-color) {
+    & {
+        color: @color;
+        font-weight:bold;
+
+        &::before{
+            font-family: 'Glyphicons Halflings';
+            content: "\e012";
+            padding-right: 4px;
+        }
+
+        & + div {
+            border-top: 1.5pt solid @color;
+        }
+    }
+}

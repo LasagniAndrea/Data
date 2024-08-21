@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Screens>
+  <!-- EG 20171113 [23509] Upd Gestion Objets Facility / Dates et Marché -->
+	<!-- FxBarrierOption-Bank -->
+	<Screen name="FxBarrierOption-Bank" caption="FX Barrier Option (Screen Bank)" product="FxBarrierOption">
+    <FxOptionEarlyTerminationBlock/>
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+		<FxBarrierOptionBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentBlock/>
+		<SettlementInputBlock/>
+    <EarlyTerminationProvisionBlock clientid = "fxBarOpt"/>
+    <ComplianceBlock/>
+	</Screen>
+	<!-- FxBarrierOptionPremiumSettltCur-Bank -->
+	<Screen name="FxBarrierOptionPremiumSettltCur-Bank" caption="FX Barrier Option Premium Settlement Currency (Screen Bank)" product="FxBarrierOption">
+    <FxOptionEarlyTerminationBlock/>
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+		<PartyBroker-DRV-Block/>
+		<FxBarrierOptionPremiumSettltCurBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentBlock/>
+		<SettlementInputBlock/>
+    <EarlyTerminationProvisionBlock clientid = "fxBarOpt"/>
+    <ComplianceBlock/>
+	</Screen>
+</Screens>
+

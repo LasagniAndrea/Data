@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema targetNamespace="http://www.efs.org/2007/EFSmL-3-0"
+            xmlns="http://www.efs.org/2007/EFSmL-3-0"
+            xmlns:fpml="http://www.fpml.org/2007/FpML-4-4"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+  <xsd:import namespace="http://www.fpml.org/2007/FpML-4-4" schemaLocation="../FpML44/fpml-main-4-4.xsd" />
+  <xsd:include schemaLocation="EfsML-Shared-3-0.xsd"/>
+
+  <!-- ****************************** -->
+  <!-- AssetOrNothing                 -->
+  <!-- ****************************** -->
+  <xsd:complexType name="AssetOrNothing">
+    <xsd:sequence>
+      <xsd:element name="currencyReference" type="fpml:Currency" minOccurs="0" />
+      <xsd:element name="gap"               type="xsd:decimal" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- AverageStrikeOption            -->
+  <!-- ****************************** -->
+  <xsd:complexType name="AverageStrikeOption">
+    <xsd:sequence>
+      <xsd:element name="settlementType" type="fpml:SettlementTypeEnum" />
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- CappedCallOrFlooredPut         -->
+  <!-- ****************************** -->
+  <xsd:complexType name="CappedCallOrFlooredPut">
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:element name="fxCapBarrier"    type="fpml:Empty" />
+        <xsd:element name="fxFloorBarrier"  type="fpml:Empty" />
+      </xsd:choice>
+      <xsd:element name="payoutStyle" type="fpml:PayoutEnum" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- FxAverageRateOption            -->
+  <!-- ****************************** -->
+  <!-- EG 20180514 [23812] Add extensions Provisions -->
+  <xsd:complexType name="FxAverageRateOption">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:FxAverageRateOption">
+        <xsd:sequence>
+          <xsd:group ref="FxCommonOptionExtension.model" />
+          <xsd:element name="cappedCallOrFlooredPut"  type="CappedCallOrFlooredPut" minOccurs="0" />
+          <xsd:element name="averageStrikeOption"     type="AverageStrikeOption" minOccurs="0" />
+          <xsd:element name="geometricAverage"        type="fpml:Empty" minOccurs="0" />
+          <xsd:element name="earlyTerminationProvision" type="fpml:EarlyTerminationProvision" minOccurs="0" />
+          <xsd:element name="implicitProvision" type="ImplicitProvision"  minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- FxBarrierOption                -->
+  <!-- ****************************** -->
+  <!-- EG 20180514 [23812] Add extensions Provisions -->
+  <xsd:complexType name="FxBarrierOption">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:FxBarrierOption">
+        <xsd:sequence>
+          <xsd:group ref="FxCommonOptionExtension.model" />
+          <xsd:element name="cappedCallOrFlooredPut"        type="CappedCallOrFlooredPut" minOccurs="0" />
+          <xsd:element name="fxBarrierParisianNumberOfDays" type="xsd:integer" minOccurs="0" />
+          <xsd:element name="fxRebateBarrier"               type="fpml:FxBarrier" minOccurs="0" />
+          <xsd:element name="earlyTerminationProvision"   type="fpml:EarlyTerminationProvision" minOccurs="0" />
+          <xsd:element name="implicitProvision" type="ImplicitProvision"  minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- FxDigitalOption                -->
+  <!-- ****************************** -->
+  <!-- EG 20180514 [23812] Add extensions Provisions -->
+  <xsd:complexType name="FxDigitalOption">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:FxDigitalOption">
+        <xsd:sequence>
+          <xsd:element name="limit"           type="fpml:Empty"     minOccurs="0" />
+          <xsd:element name="boundary"        type="fpml:Empty"     minOccurs="0" />
+          <xsd:element name="assetOrNothing"  type="AssetOrNothing" minOccurs="0" />
+          <xsd:element name="resurrecting"    type="PayoutPeriod"   minOccurs="0" />
+          <xsd:element name="extinguishing"   type="PayoutPeriod"   minOccurs="0" />
+          <xsd:element name="fxBarrier"       type="fpml:FxBarrier" minOccurs="0" maxOccurs="unbounded" />
+          <xsd:element name="earlyTerminationProvision"   type="fpml:EarlyTerminationProvision" minOccurs="0" />
+          <xsd:element name="implicitProvision" type="ImplicitProvision"  minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- FxLeg                          -->
+  <!-- ****************************** -->
+  <xsd:complexType name="FxLeg">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:FxLeg">
+        <xsd:sequence>
+          <xsd:element name="marginRatio" type="MarginRatio" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- FxOptionLeg                    -->
+  <!-- ****************************** -->
+  <!-- EG 20180514 [23812] Add extensions Provisions -->
+  <xsd:complexType name="FxOptionLeg">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:FxOptionLeg">
+        <xsd:sequence>
+          <xsd:group ref="FxCommonOptionExtension.model" />
+          <xsd:element name="marginRatio" type="MarginRatio" minOccurs="0" />
+          <xsd:element name="earlyTerminationProvision"   type="fpml:EarlyTerminationProvision" minOccurs="0" />
+          <xsd:element name="implicitProvision" type="ImplicitProvision"  minOccurs="0"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+	<!-- ****************************** -->
+	<!-- FxOptionPayout                 -->
+	<!-- ****************************** -->
+	<xsd:complexType name="FxOptionPayout">
+		<xsd:complexContent>
+			<xsd:extension base="fpml:FxOptionPayout">
+				<xsd:sequence>
+					<xsd:element name="customerSettlementPayout" type="CustomerSettlementPayment" minOccurs="0" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- FxOptionPremium                -->
+  <!-- ****************************** -->
+  <xsd:complexType name="FxOptionPremium">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:FxOptionPremium">
+        <xsd:sequence>
+          <xsd:element name="customerSettlementPremium" type="CustomerSettlementPayment" minOccurs="0" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <!-- ****************************** -->
+  <!-- PayoutPeriod                   -->
+  <!-- ****************************** -->
+  <xsd:complexType name="PayoutPeriod">
+    <xsd:complexContent>
+      <xsd:extension base="fpml:Interval">
+        <xsd:sequence>
+          <xsd:element name="percentage" type="xsd:decimal" />
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <!-- ****************************** -->
+  <!-- Models                         -->
+  <!-- ****************************** -->
+
+  <!-- FxCommonOptionExtension.model -->
+  <xsd:group name="FxCommonOptionExtension.model">
+    <xsd:sequence>
+      <xsd:element name="optionType"            type="fpml:OptionTypeEnum"    minOccurs="0" />
+      <xsd:element name="bermudanExerciseDates" type="fpml:DateList"          minOccurs="0" />
+      <xsd:element name="exerciseProcedure"     type="fpml:ExerciseProcedure" minOccurs="0" />
+    </xsd:sequence>
+  </xsd:group>
+
+</xsd:schema>

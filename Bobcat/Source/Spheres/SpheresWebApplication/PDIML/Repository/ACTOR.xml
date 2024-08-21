@@ -1,0 +1,2353 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- 
+PL 20240321 [WI868] Use DTENABLED/DTDISABLED on ACTORROLE
+EG 20171025 [23509] Change mapZone 
+EG 20170929 [22374][23450] Upd DDLType column TIMEZONE
+CC/PL 20171002 [23469] Replace resource 'ISO10383_ALPHA4_' by 'ISO10383_ALPHA4'
+CC/PL 20170926 [23450] Add column TIMEZONE
+CC/PL 20170918 UPD MPD [23429] Add SQLJoin to not display algorithm
+CC/PL 20170829 UPD MPD [23388]
+RD 20170529 [23188] Unlarge Columns EXTLLINK and EXTLLINK2: length from 64 to 128
+CC 20160812 [22190] Column INITIAL renamed to INITIALLETTER (INITIAL = reserved keyword Oracle)
+CC 20160523 [22190]
+EG 20150611 [21057] 
+FI 20150107 [XXXXX] * sur ConditionApplication de SQLPreSelect
+Pony/SI 20141128 unlarge ColumnName MAIL of ACTOR table: length from 256 to 1000 
+Pony/SI 20141128 add new tag LengthInDataGrid to ColumnName MAIL 
+FI 20140113 add hyperlink on IDBC 
+FI 20130424 [18620] add restriction sur ISTEMPLATE=0 dans les where où il existe ConditionApplication
+FI 20120904 Nouveau standard, les tables de travail(temporaires) se terminent par _W
+FI 20120719 add create index on SQLPreSelect for performance enhancement
+-->
+<Referentials>
+  <Referential>
+    <!-- CmptLevel>2.5</CmptLevel -->
+    <TableName>ACTOR</TableName>
+    <Ressource>ACTOR</Ressource>
+    <RoleTableName columnbyrow="2">ACTORROLE</RoleTableName>
+    <Items srctablename="GACTOR" tablename="ACTORG" columnname="IDGACTOR" datatype="int" mode="RW" addcolumns="DTENABLED,IDGACTOR_HREF">
+      <html_BLOCK title="Group_Title" columnbyrow="2">
+        <Information>
+          <Type>information</Type>
+          <LabelMessage>Msg_GroupForACTORGROUP</LabelMessage>
+        </Information>
+      </html_BLOCK>
+    </Items>
+    <ColumnByRow>3</ColumnByRow>
+    <Create>true</Create>
+    <Modify>true</Modify>
+    <Remove>true</Remove>
+    <LoadOnStart>false</LoadOnStart>
+    <Image></Image>
+    <UseStatistic>true</UseStatistic>
+    <AliasTableName>tblmain</AliasTableName>
+    <Logo columnname="LOLOGO">true</Logo>
+
+    <!-- 
+    CC 20120607 Toute modification (ajout, suppression,...) concernant une colonne visible depuis le datagrid du référentiel Acteurs 
+                doit faire l'objet d'un report dans les fichiers PARENTLST.xml et CHILDLST.xml                                                  
+    -->
+
+    <SQLJoin>inner join dbo.ACTOR algo on (algo.IDA = tblmain.IDA) and (algo.ALGOTYPE is null)</SQLJoin>
+    
+    <SQLPreSelect>
+      <ConditionApplication>*</ConditionApplication>
+      <Command rdbms = "sqlserver">
+        <![CDATA[
+            if exists ( select 1 from sysobjects where name='ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W' and xtype='U' )
+                drop table ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W;
+        
+            select a.IDA,STUFF((select distinct ';' +  RTRIM(ar.IDROLEACTOR)   
+                        from dbo.ACTOR a1 
+                        inner join dbo.ACTORROLE ar on (ar.IDA=a.IDA) and (ar.IDROLEACTOR in (select IDROLEACTOR from dbo.ROLEACTOR))
+                        where a1.IDA= a.IDA FOR XML PATH ('')),1,1,'') as ROLE  
+						into ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W
+            from dbo.ACTOR a
+            where a.IDA = case when -1=%%DA:PK.GetDataSQLValue()%% then a.IDA else %%DA:PK.GetDataSQLValue()%% end 
+						group by a.IDA;
+            
+            create index IX_ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W on ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W(IDA);
+        ]]>
+      </Command>
+      <Command rdbms = "Xsqlserver" step="1">
+        <![CDATA[
+            if exists ( select 1 from sysobjects where name='ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W' and xtype='V' )
+                drop view ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W;
+        ]]>
+      </Command>
+      <Command rdbms = "Xsqlserver" step="2">
+        <![CDATA[
+            create view ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W with schemabinding as
+            select a.IDA,stuff( (select distinct ';' +  rtrim(ar.IDROLEACTOR)   
+                        from dbo.ACTOR a1 
+                        inner join dbo.ACTORROLE ar on (ar.IDA=a.IDA) 
+                        where a1.IDA= a.IDA for XML PATH ('') ),1,1,'') as ROLE  
+            from dbo.ACTOR a
+            where a.IDA = case when -1=%%DA:PK.GetDataSQLValue()%% then a.IDA else %%DA:PK.GetDataSQLValue()%% end 
+						group by a.IDA;
+        ]]>
+      </Command>
+      <Command rdbms = "XXsqlserver" step="3">
+        <![CDATA[
+            create index IX_ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W on ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W(IDA,ROLE);
+        ]]>
+      </Command>
+      <Command rdbms = "oracle">
+        <![CDATA[
+  declare
+  lcount number;
+  query varchar2(2000);  
+  begin 
+	  select count(1) into lcount from USER_TABLES where TABLE_NAME = 'ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W';
+	  if (lcount > 0) then
+	  	  query:='drop table ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W purge';
+		    execute immediate query;
+	  end if;
+	  
+	  query:='create table ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W as	(
+	  			 select a.IDA, RTRIM(REPLACE(REPLACE(XMLAgg(XMLElement("x", RTRIM(ar.IDROLEACTOR))		
+					 order by ar.IDROLEACTOR ASC), ''<x>'', ''''), ''</x>'', '',''), '','') AS ROLE 
+					 from dbo.ACTOR a	
+					 inner join (select distinct IDA,IDROLEACTOR from dbo.ACTORROLE) ar on ar.IDA = a.IDA 
+           where a.IDA = case when -1=%%DA:PK.GetDataSQLValue()%% then a.IDA else %%DA:PK.GetDataSQLValue()%% end 
+           group by a.IDA)';
+	  execute immediate query;
+    
+    query:='create index IX_ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W on ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W(IDA)';
+    execute immediate query;
+   end; 
+   ]]>
+      </Command>
+      <Command rdbms = "Xoracle">
+        <![CDATA[
+  declare
+  lcount number;
+  query varchar2(2000);  
+  begin 
+	  select count(1) into lcount from USER_TABLES where TABLE_NAME = 'ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W';
+	  if (lcount > 0) then
+	  	  query:='drop materialized view ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W';
+		    execute immediate query;
+	  end if;
+	  
+	  query:='create materialized view ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W as	(
+	  			 select a.IDA, RTRIM(REPLACE(REPLACE(XMLAgg(XMLElement("x", RTRIM(ar.IDROLEACTOR))		
+					 order by ar.IDROLEACTOR ASC), ''<x>'', ''''), ''</x>'', '',''), '','') AS ROLE 
+					 from dbo.ACTOR a	
+					 inner join (select distinct IDA,IDROLEACTOR from dbo.ACTORROLE) ar on ar.IDA = a.IDA 
+           where a.IDA = case when -1=%%DA:PK.GetDataSQLValue()%% then a.IDA else %%DA:PK.GetDataSQLValue()%% end 
+           group by a.IDA)';
+	  execute immediate query;
+    
+    query:='create index IX_ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W on ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W(IDA)';
+    execute immediate query;
+   end; 
+   ]]>
+      </Command>
+    </SQLPreSelect>
+
+    <SQLWhere>
+      <!--USER non admin peut accéder aux acteurs :                             -->
+      <!--non affectés à un profil (ou model) crés ou modifiés par lui-même     -->
+      <!--accessibles par application des profils rattachés à lui ou à sa hierarchie (ISENABLED=true) -->
+      <!--dits publics ACTEUR.ISENABLED=true                            -->
+      <ConditionSystem>SESSIONRESTRICT</ConditionSystem>
+      <SQLJoin>left outer join dbo.SESSIONRESTRICT sr on sr.ID=tblmain.IDA and sr.CLASS='ACTOR' and sr.SESSIONID='%%SESSIONID%%'</SQLJoin>
+      <SQLWhere>
+        <![CDATA[
+        (
+          (sr.ID is not null) 
+          or
+          (
+            (not exists(select 1 from dbo.ACTORMODEL where IDA=tblmain.IDA)) 
+            and
+            ((tblmain.IDAINS=%%ID_USER%% And tblmain.IDAUPD is null) Or tblmain.IDAUPD=%%ID_USER%%)
+          )
+        )
+        ]]>
+      </SQLWhere>
+    </SQLWhere>
+
+    <SQLWhere>
+      <ConditionApplication>ENTITY</ConditionApplication>
+      <SQLWhere>tblmain.ISTEMPLATE=0</SQLWhere>
+      <SQLJoin>inner join dbo.ACTORROLE ar on ((ar.IDA=tblmain.IDA) and (ar.IDROLEACTOR = 'ENTITY'))</SQLJoin>
+    </SQLWhere>
+    <SQLWhere>
+      <ConditionApplication>BROKER</ConditionApplication>
+      <SQLWhere>tblmain.ISTEMPLATE=0</SQLWhere>
+      <SQLJoin>inner join dbo.ACTORROLE ar on ((ar.IDA=tblmain.IDA) and (ar.IDROLEACTOR = 'BROKER'))</SQLJoin>
+    </SQLWhere>
+    <SQLWhere>
+      <ConditionApplication>BROKER|ENTITY</ConditionApplication>
+      <SQLWhere>tblmain.ISTEMPLATE=0</SQLWhere>
+      <SQLJoin>
+        inner join dbo.ACTORROLE ar on ((ar.IDA=tblmain.IDA) and ((ar.IDROLEACTOR = 'BROKER') or (ar.IDROLEACTOR = 'ENTITY')))
+      </SQLJoin>
+    </SQLWhere>
+    <SQLWhere>
+      <ConditionApplication>COUNTERPARTY</ConditionApplication>
+      <SQLWhere>tblmain.ISTEMPLATE=0 </SQLWhere>
+      <SQLJoin>inner join dbo.ACTORROLE ar on ((ar.IDA=tblmain.IDA) and (ar.IDROLEACTOR = 'COUNTERPARTY'))</SQLJoin>
+    </SQLWhere>
+
+    <SQLWhere>
+      <ConditionApplication>CSS</ConditionApplication>
+      <SQLWhere>tblmain.ISTEMPLATE=0</SQLWhere>
+      <SQLJoin>inner join dbo.ACTORROLE ar on ((ar.IDA=tblmain.IDA) and (ar.IDROLEACTOR = 'CSS'))</SQLJoin>
+    </SQLWhere>
+
+    <SQLWhere>
+      <ConditionApplication>CSS|CLEARER</ConditionApplication>
+      <SQLWhere>tblmain.ISTEMPLATE=0</SQLWhere>
+      <SQLJoin>
+        inner join dbo.ACTORROLE ar on ((ar.IDA=tblmain.IDA) and ((ar.IDROLEACTOR = 'CSS') or (ar.IDROLEACTOR = 'CLEARER')))
+      </SQLJoin>
+    </SQLWhere>
+
+    <SQLWhere>
+      <ConditionApplication>ENTITY|MARGINREQOFFICE</ConditionApplication>
+      <SQLWhere>tblmain.ISTEMPLATE=0 </SQLWhere>
+      <SQLJoin>
+        inner join dbo.ACTORROLE ar on ((ar.IDA=tblmain.IDA) and ((ar.IDROLEACTOR = 'ENTITY') or (ar.IDROLEACTOR = 'MARGINREQOFFICE')))
+      </SQLJoin>
+    </SQLWhere>
+
+    <SQLWhere>
+      <ConditionApplication>ACCOUNTSERVICER</ConditionApplication>
+      <SQLWhere>tblmain.ISTEMPLATE=0</SQLWhere>
+      <SQLJoin>inner join dbo.ACTORROLE ar on ((ar.IDA=tblmain.IDA) and (ar.IDROLEACTOR = 'ACCOUNTSERVICER'))</SQLJoin>
+    </SQLWhere>
+
+    <SQLWhere>
+      <ConditionApplication>INVOICINGOFFICE</ConditionApplication>
+      <SQLWhere>tblmain.ISTEMPLATE=0</SQLWhere>
+      <SQLJoin>inner join dbo.ACTORROLE ar on ((ar.IDA=tblmain.IDA) and (ar.IDROLEACTOR = 'INVOICINGOFFICE'))</SQLJoin>
+    </SQLWhere>
+
+    <SQLWhere>
+      <ConditionApplication>ISSUER</ConditionApplication>
+      <SQLWhere>tblmain.ISTEMPLATE=0</SQLWhere>
+      <SQLJoin>inner join dbo.ACTORROLE ar on ((ar.IDA=tblmain.IDA) and (ar.IDROLEACTOR = 'ISSUER'))</SQLJoin>
+    </SQLWhere>
+
+    <SQLWhere>
+      <ConditionApplication>CSS|CUSTODIAN</ConditionApplication>
+      <SQLWhere>tblmain.ISTEMPLATE=0</SQLWhere>
+      <SQLJoin>
+        inner join dbo.ACTORROLE ar on ((ar.IDA=tblmain.IDA) and ((ar.IDROLEACTOR = 'CSS') or (ar.IDROLEACTOR = 'CUSTODIAN')))
+      </SQLJoin>
+    </SQLWhere>
+
+    <SQLWhere>
+      <SQLJoin>left outer join ACTOR_IDROLE_%%SHORTSESSIONID%%.ToUpper()_W aIdRole on (aIdRole.IDA=tblmain.IDA)</SQLJoin>
+    </SQLWhere>
+
+    <SQLJoin>
+      <![CDATA[
+      left outer join (select IDA from dbo.ACTOR where exists (select 1 from dbo.ACTORROLE where IDA=ACTOR.IDA and ACTORROLE.IDROLEACTOR='ENTITY'
+                      and ((ACTORROLE.DTENABLED <= getdate()) and ((ACTORROLE.DTDISABLED is null) or (ACTORROLE.DTDISABLED > getdate())))))            
+      arENTITY on arENTITY.IDA=tblmain.IDA
+      left outer join (select IDA from dbo.ACTOR where exists (select 1 from dbo.ACTORROLE where IDA=ACTOR.IDA and ACTORROLE.IDROLEACTOR='DESK'
+                      and ((ACTORROLE.DTENABLED <= getdate()) and ((ACTORROLE.DTDISABLED is null) or (ACTORROLE.DTDISABLED > getdate())))))            
+      arDESK on arDESK.IDA=tblmain.IDA
+      left outer join (select IDA from dbo.ACTOR where exists (select 1 from dbo.ACTORROLE where IDA=ACTOR.IDA and ACTORROLE.IDROLEACTOR='DEPARTMENT'
+                      and ((ACTORROLE.DTENABLED <= getdate()) and ((ACTORROLE.DTDISABLED is null) or (ACTORROLE.DTDISABLED > getdate())))))            
+      arDEPT on arDEPT.IDA=tblmain.IDA
+      left outer join (select IDA from dbo.ACTOR where exists (select 1 from dbo.ACTORROLE where IDA=ACTOR.IDA and ACTORROLE.IDROLEACTOR='CLIENT'
+                      and ((ACTORROLE.DTENABLED <= getdate()) and ((ACTORROLE.DTDISABLED is null) or (ACTORROLE.DTDISABLED > getdate())))))            
+      arCLIENT on arCLIENT.IDA=tblmain.IDA
+      left outer join (select IDA from dbo.ACTOR where exists (select 1 from dbo.ACTORROLE where IDA=ACTOR.IDA and ACTORROLE.IDROLEACTOR='CORRESPONDENT'
+                      and ((ACTORROLE.DTENABLED <= getdate()) and ((ACTORROLE.DTDISABLED is null) or (ACTORROLE.DTDISABLED > getdate())))))            
+      arCORR on arCORR.IDA=tblmain.IDA
+      left outer join (select IDA from dbo.ACTOR where exists (select 1 from dbo.ACTORROLE where IDA=ACTOR.IDA and ACTORROLE.IDROLEACTOR='BROKER'
+                      and ((ACTORROLE.DTENABLED <= getdate()) and ((ACTORROLE.DTDISABLED is null) or (ACTORROLE.DTDISABLED > getdate())))))            
+      arBROKER on arBROKER.IDA=tblmain.IDA
+      left outer join (select IDA from dbo.ACTOR where exists (select 1 from dbo.ACTORROLE where IDA=ACTOR.IDA and ACTORROLE.IDROLEACTOR='CSS'
+                      and ((ACTORROLE.DTENABLED <= getdate()) and ((ACTORROLE.DTDISABLED is null) or (ACTORROLE.DTDISABLED > getdate())))))            
+      arCSS on arCSS.IDA=tblmain.IDA
+      left outer join (select IDA from dbo.ACTOR where exists (select 1 from dbo.ACTORROLE where IDA=ACTOR.IDA and ACTORROLE.IDROLEACTOR in ('CLEARER','CCLEARINGCOMPART','HCLEARINGCOMPART','MCLEARINGCOMPART')
+                      and ((ACTORROLE.DTENABLED <= getdate()) and ((ACTORROLE.DTDISABLED is null) or (ACTORROLE.DTDISABLED > getdate())))))            
+      arCLR on arCLR.IDA=tblmain.IDA
+      left outer join (select IDA from dbo.ACTOR where exists (select 1 from dbo.ACTORROLE where IDA=ACTOR.IDA and ACTORROLE.IDROLEACTOR='CUSTODIAN'
+                      and ((ACTORROLE.DTENABLED <= getdate()) and ((ACTORROLE.DTDISABLED is null) or (ACTORROLE.DTDISABLED > getdate())))))            
+      arCUS on arCUS.IDA=tblmain.IDA
+      left outer join (select IDA from dbo.ACTOR where exists (select 1 from dbo.ACTORROLE where IDA=ACTOR.IDA and ACTORROLE.IDROLEACTOR='TRADER'
+                      and ((ACTORROLE.DTENABLED <= getdate()) and ((ACTORROLE.DTDISABLED is null) or (ACTORROLE.DTDISABLED > getdate())))))            
+      arTRADER on arTRADER.IDA=tblmain.IDA
+      left outer join (select IDA from dbo.ACTOR where exists (select 1 from dbo.ACTORROLE where IDA=ACTOR.IDA and ACTORROLE.IDROLEACTOR='SALES'
+                      and ((ACTORROLE.DTENABLED <= getdate()) and ((ACTORROLE.DTDISABLED is null) or (ACTORROLE.DTDISABLED > getdate())))))      
+      arSALE on arSALE.IDA=tblmain.IDA
+      left outer join (select IDA from dbo.ACTOR where exists (select 1 from dbo.ACTORROLE where IDA=ACTOR.IDA and ACTORROLE.IDROLEACTOR='SYSADMIN'
+                      and ((ACTORROLE.DTENABLED <= getdate()) and ((ACTORROLE.DTDISABLED is null) or (ACTORROLE.DTDISABLED > getdate())))))      
+      arSYSADMIN on arSYSADMIN.IDA=tblmain.IDA
+      left outer join (select IDA from dbo.ACTOR where exists (select 1 from dbo.ACTORROLE where IDA=ACTOR.IDA and ACTORROLE.IDROLEACTOR in ('USER','GUEST','SYSADMIN','SYSOPER')
+                      and ((ACTORROLE.DTENABLED <= getdate()) and ((ACTORROLE.DTDISABLED is null) or (ACTORROLE.DTDISABLED > getdate())))))
+      arUSER on arUSER.IDA=tblmain.IDA
+      ]]>
+    </SQLJoin>
+
+    <XSLFileName/>
+
+    <!-- PL 20110711 Tip: Add and Use sort:X for order by-->
+    <!-- EG 20200930 [XXXXX] Nouvelle interface GUI v10 (Mode Noir ou blanc) Correction et suppression de codes inutile-->
+    <!-- EG 20240513 [WI916] CSS customisation : Views (Roles - Disabled data) -->
+    <SQLRowStyle type="class">
+      case tblmain.IDA
+      when arENTITY.IDA   then 'ROLE_1_ENTITY'
+      when arCLIENT.IDA   then 'ROLE_4_CLIENT'
+      when arDESK.IDA     then 'ROLE_2_DESK'
+      when arDEPT.IDA     then 'ROLE_3_DEPT'
+      when arCSS.IDA      then 'ROLE_7_CSS'
+      when arCLR.IDA      then 'ROLE_5_CLEARER'
+      when arCUS.IDA      then 'ROLE_7_CUSTODIAN'
+      when arBROKER.IDA   then 'ROLE_6_BROKER'
+      when arCORR.IDA     then 'ROLE_8_CORRESPONDENT'
+      when arTRADER.IDA   then 'ROLE_9_TRADER'
+      when arSALE.IDA     then 'ROLE_A_SALE'
+      when arSYSADMIN.IDA then 'ROLE_B_SYSADMIN'
+      when arUSER.IDA     then 'ROLE_C_USER'
+      else 'ROLE_Z_OTHER' end
+    </SQLRowStyle>
+
+    <SQLRowState>
+      case tblmain.IDA    when arENTITY.IDA   then 'lstaw=name:entity;title:Entity' else '' end || '+' ||
+      case tblmain.IDA    when arDESK.IDA     then 'lstaw=name:desk;title:Desk' else '' end || '+' ||
+      case tblmain.IDA    when arDEPT.IDA     then 'lstaw=name:dept;title:Department' else '' end || '+' ||
+      case tblmain.IDA    when arCLIENT.IDA   then 'lstaw=name:client;title:Client' else '' end || '+' ||
+      case tblmain.IDA    when arCSS.IDA      then 'lstaw=name:css;title:Clearing or Settlement system' else '' end || '+' ||
+      case tblmain.IDA    when arCLR.IDA      then 'lstaw=name:clearer;title:Clearer (or Clearing compartment)' else '' end || '+' ||
+      case tblmain.IDA    when arCUS.IDA      then 'lstaw=name:custodian;title:Custodian' else '' end || '+' ||
+      case tblmain.IDA    when arBROKER.IDA   then 'lstaw=name:broker;title:Broker' else '' end || '+' ||
+      case tblmain.IDA    when arCORR.IDA     then 'lstaw=name:correspondant;title:Correspondent' else '' end || '+' ||
+      case tblmain.IDA    when arTRADER.IDA   then 'lstaw=name:trader;title:Trader' else '' end || '+' ||
+      case tblmain.IDA    when arSALE.IDA     then 'lstaw=name:sale;title:Sale' else '' end || '+' ||
+      case tblmain.IDA    when arSYSADMIN.IDA then 'lstaw=name:admin;title:Administrator system'
+      else case tblmain.IDA  when arUSER.IDA then 'lstaw=name:user;title:User' else '' end end
+    </SQLRowState>
+
+    <Column>
+      <ColumnName>IDA</ColumnName>
+      <Ressource>IDA</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>true</IsDataKeyField>
+      <IsIdentity>true</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <Relation></Relation>
+      <html_BLOCK title="Characteristics" columnbyrow="2" ></html_BLOCK>
+    </Column>
+
+    <Column>
+      <ColumnName>ROLE</ColumnName>
+      <AliasTableName>aIdRole</AliasTableName>
+      <Ressource>IDROLEACTOR</Ressource>
+      <DataType>string</DataType>
+      <Length>256</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsVirtualColumn>true</IsVirtualColumn>
+      <Relation></Relation>
+    </Column>
+    <!-- 
+    CC/PL 20170110 - Réservé à un usage ultérieur 
+    PL 20161124 - RATP 4Eyes - MakingChecking 
+    -->
+    <!--<Column>
+      <ColumnName>ISCHK</ColumnName>
+      <Ressource>ISCHK</Ressource>
+      <DataType>bool</DataType>
+      <Colspan>0</Colspan>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <Default>
+        <Value>true</Value>
+      </Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsUpdatable>false</IsUpdatable>
+      <Information>
+        <Type>information</Type>
+        <LabelMessage>Msg_ISCHKForACTOR</LabelMessage>
+      </Information>
+    </Column>-->
+    <Column>
+      <ColumnName>ISENABLED</ColumnName>
+      <Ressource>ISENABLEDPUBLIC</Ressource>
+      <DataType>bool</DataType>
+      <Colspan>0</Colspan>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation/>
+      <Information>
+        <Type>information</Type>
+        <LabelMessage>Msg_ISENABLEDPUBLICForACTOR</LabelMessage>
+      </Information>
+    </Column>
+    <Column>
+      <ColumnName>ISTEMPLATE</ColumnName>
+      <Ressource>ISTEMPLATE</Ressource>
+      <DataType>bool</DataType>
+      <Colspan>0</Colspan>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default>
+        <Value>false</Value>
+      </Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation/>
+      <Information>
+        <Type>information</Type>
+        <LabelMessage>Msg_ISTEMPLATEForACTOR</LabelMessage>
+      </Information>
+    </Column>
+
+    <Column>
+      <ColumnName>IDENTIFIER</ColumnName>
+      <Ressource>IDENTIFIER</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression>RegexStringAlphaNum</RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>true</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy order="ROWSTYLE, IDENTIFIER">true</IsOrderBy>
+      <Relation/>
+      <html_HR size="3"/>
+      <JavaScript>
+        <Script attribut="onblur" name="EFS_Copy" control="DISPLAYNAME" condition="new" ></Script>
+      </JavaScript>
+    </Column>
+    <Column>
+      <ColumnName>DISPLAYNAME</ColumnName>
+      <Ressource>DISPLAYNAME</Ressource>
+      <DataType>string</DataType>
+      <!--<Colspan>2</Colspan>-->
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation/>
+      <JavaScript>
+        <Script attribut="onblur" name="EFS_Copy" control="ADDRESS1" condition="new" ></Script>
+      </JavaScript>
+    </Column>
+    <Column>
+      <ColumnName>DESCRIPTION</ColumnName>
+      <Ressource>DESCRIPTION</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>128</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>EXTLATTRB</ColumnName>
+      <Ressource>EXTLATTRB</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+      <Information></Information>
+      <html_HR title="Empty" size="1"></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>ADDRESS1</ColumnName>
+      <Ressource>ADDRESS1</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+      <html_BLOCK title="Address" blockbyrow="2" width="60%" columnbyrow="2"></html_BLOCK>
+      <ContainerOverflow>true</ContainerOverflow>
+    </Column>
+    <Column>
+      <ColumnName>ADDRESS2</ColumnName>
+      <Ressource>ADDRESS2</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>ADDRESS3</ColumnName>
+      <Ressource>ADDRESS3</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default>
+      </Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>ADDRESS4</ColumnName>
+      <Ressource>ADDRESS4</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>ADDRESSPOSTALCODE</ColumnName>
+      <Ressource>ADDRESSPOSTALCODE</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>ADDRESSCITY</ColumnName>
+      <Ressource>ADDRESSCITY</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>ADDRESSSTATE</ColumnName>
+      <Ressource>ADDRESSSTATE</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>ADDRESSCOUNTRY</ColumnName>
+      <Ressource>ADDRESSCOUNTRY</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>WEB</ColumnName>
+      <Ressource>WEB</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>256</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression/>
+      <Default>
+      </Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+      <html_HR></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>LOLOGO</ColumnName>
+      <Ressource>LOLOGO</Ressource>
+      <DataType>image</DataType>
+      <Length>16</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression>
+      </RegularExpression>
+      <Default>
+      </Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>TELEPHONENUMBER</ColumnName>
+      <Ressource>TELEPHONENUMBER</Ressource>
+      <DataType>string</DataType>
+      <Length>20</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default>
+      </Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+      <html_BLOCK title="TelFaxTelexMail" blockbyrow="2" width="40%" columnbyrow="2"></html_BLOCK>
+    </Column>
+    <Column>
+      <ColumnName>MOBILEPHONENUMBER</ColumnName>
+      <Ressource>MOBILEPHONENUMBER</Ressource>
+      <DataType>string</DataType>
+      <Length>20</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default>
+      </Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>FAXNUMBER</ColumnName>
+      <Ressource>FAXNUMBER</Ressource>
+      <DataType>string</DataType>
+      <Length>20</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default>
+      </Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>TELEXNUMBER</ColumnName>
+      <Ressource>TELEXNUMBER</Ressource>
+      <DataType>string</DataType>
+      <Length>20</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default>
+      </Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>MAIL</ColumnName>
+      <Ressource>MAIL</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>1000</Length>
+      <LengthInDataGrid>35</LengthInDataGrid>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <!-- RegularExpression>\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)</RegularExpression -->
+      <Default>
+      </Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDCOUNTRYRESIDENCE</ColumnName>
+      <Ressource>IDCOUNTRYRESIDENCE_ACTOR</Ressource>
+      <DataType>string</DataType>
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsUpdatable>true</IsUpdatable>
+      <!-- PL 20191105 Passage à false, car l'auto-postback inhibe le JS qui alimente les 2 autres COUNTRY -->
+      <IsAutoPostBack>false</IsAutoPostBack>
+      <Relation>
+        <!-- FI 20140630 [XXXXX] De nombreux acteurs ont été initialisés avec un pays de résidence qui n'est pas un véritable pays (ex:SWIFT,ABE,TGT,CUSTODIAN etc...)  -->
+        <!--<DDLType>country_country</DDLType>-->
+        <DDLType>country</DDLType>
+      </Relation>
+      <html_HR title="Residence_Title" size="1"/>
+      <html_BLOCK title="Country_Title" blockbyrow="2" width="60%" columnbyrow="2" old_startdisplay="expand" />
+      <JavaScript>
+        <Script attribut="onblur" name="EFS_Copy" control="IDCOUNTRYTAX" condition="new" ></Script>
+        <Script attribut="onblur" name="EFS_Copy" control="IDCOUNTRYNATIONAL" condition="new" ></Script>
+      </JavaScript>
+    </Column>
+    <Column>
+      <ColumnName>REGIONRESIDENCE</ColumnName>
+      <Ressource>REGIONRESIDENCE</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+      <JavaScript>
+        <Script attribut="onblur" name="EFS_Copy" control="REGIONTAX" condition="new" ></Script>
+        <Script attribut="onblur" name="EFS_Copy" control="REGIONNATIONAL" condition="new" ></Script>
+      </JavaScript>
+    </Column>
+    <Column>
+      <ColumnName>IDCOUNTRYTAX</ColumnName>
+      <Ressource>IDCOUNTRYTAX_ACTOR</Ressource>
+      <DataType>string</DataType>
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+        <DDLType>country_country</DDLType>
+      </Relation>
+      <html_HR title="Tax_Title" size="1" />
+    </Column>
+    <Column>
+      <ColumnName>REGIONTAX</ColumnName>
+      <Ressource>REGIONTAX</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDCOUNTRYNATIONAL</ColumnName>
+      <Ressource>IDCOUNTRYNATIONAL_ACTOR</Ressource>
+      <DataType>string</DataType>
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+        <DDLType>country_country</DDLType>
+      </Relation>
+      <html_HR title="National_Title" size="1" />
+    </Column>
+    <Column>
+      <ColumnName>REGIONNATIONAL</ColumnName>
+      <Ressource>REGIONNATIONAL</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDBC</ColumnName>
+      <Ressource>IDBC</Ressource>
+      <DataType>string</DataType>
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsHyperLink linktype="column" type="IDBC" data="IDBC">true</IsHyperLink>
+      <Relation>
+        <DDLType>businesscenter</DDLType>
+      </Relation>
+      <html_HR title="Holiday" size="1" />
+      <html_BLOCK title="BCCulture_Title" blockbyrow="2" width="40%" columnbyrow="1" old_startdisplay="expand"/>
+    </Column>
+    <Column>
+      <ColumnName>TIMEZONE</ColumnName>
+      <Ressource>TIMEZONE</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+        <DDLType>mapzone.[code:tzdbId;]</DDLType>
+      </Relation>
+      <html_HR title="Timezone_Title" size="1" />
+    </Column>
+    <Column>
+      <ColumnName>CULTURE</ColumnName>
+      <Ressource>CULTURE</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>2</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+        <DDLType>culture</DDLType>
+      </Relation>
+      <Information>
+        <Type>information</Type>
+        <ToolTipMessage>Msg_CULTUREForACTOR</ToolTipMessage>
+      </Information>
+      <html_HR title="Culture_Title" size="1" />
+      <JavaScript>
+        <Script attribut="onblur" name="EFS_Copy" control="CULTURE_CNF" condition="new" ></Script>
+      </JavaScript>
+    </Column>
+
+    <Column>
+      <ColumnName>BIC</ColumnName>
+      <Ressource>BIC_Full</Ressource>
+      <DataType>string</DataType>
+      <Colspan>2</Colspan>
+      <Length>11</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+      <html_HR title="SwiftIdentification_Title"></html_HR>
+      <html_BLOCK title="Identification" columnbyrow="3" old_startdisplay="collapse"></html_BLOCK>
+    </Column>
+    <Column>
+      <ColumnName>LTCODE</ColumnName>
+      <Ressource>LTCODE_Full</Ressource>
+      <DataType>string</DataType>
+      <Colspan>1</Colspan>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>IBEI</ColumnName>
+      <Ressource>IBEI</Ressource>
+      <DataType>string</DataType>
+      <Colspan>2</Colspan>
+      <Length>20</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+      <Information>
+        <Type>information</Type>
+        <ToolTipMessage>Msg_IBEIForACTOR</ToolTipMessage>
+      </Information>
+    </Column>
+    <Column>
+      <ColumnName>ISO18773PART1</ColumnName>
+      <Ressource>ISO18773PART1</Ressource>
+      <InputWidth>50%</InputWidth>
+      <DataType>string</DataType>
+      <Colspan>1</Colspan>
+      <Length>15</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+      <Information>
+        <Type>information</Type>
+        <ToolTipMessage>Msg_ISO18773PART1ForACTOR</ToolTipMessage>
+      </Information>
+    </Column>
+    <Column>
+      <ColumnName>ISO10383_ALPHA4</ColumnName>
+      <Ressource>ISO10383_ALPHA4</Ressource>
+      <DataType>string</DataType>
+      <Colspan>2</Colspan>
+      <Length>4</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression>RegexStringAlphaNum</RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+      <Information>
+        <Type>information</Type>
+        <ToolTipMessage>Msg_ISO10383_ALPHA4ForACTOR</ToolTipMessage>
+      </Information>
+    </Column>
+    <Column>
+      <ColumnName>ISO17442</ColumnName>
+      <Ressource>ISO17442</Ressource>
+      <DataType>string</DataType>
+      <Colspan>2</Colspan>
+      <Length>20</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+      <Information>
+        <Type>information</Type>
+        <ToolTipMessage>Msg_ISO17442ForACTOR</ToolTipMessage>
+      </Information>
+      <html_HR title="LEIIdentification_Title"></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>ISPRELEI</ColumnName>
+      <Ressource>ISPRELEI</Ressource>
+      <DataType>bool2v</DataType>
+      <Colspan>1</Colspan>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default>
+        <Value>false</Value>
+      </Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>LEISTATUS</ColumnName>
+      <Ressource>LEISTATUS</Ressource>
+      <DataType>string</DataType>
+      <Colspan>2</Colspan>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsResource>true</IsResource>
+      <Relation>
+        <DDLType>enum.[code:EMIRLEIStatus;condition:ISENABLED=1]</DDLType>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DTLEINEXTCERTIF</ColumnName>
+      <Ressource>DTLEINEXTCERTIF</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression>
+      </RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>BUSINESSNUMBER</ColumnName>
+      <Ressource>BUSINESSNUMBER</Ressource>
+      <DataType>string</DataType>
+      <!--<Colspan>2</Colspan>-->
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+      <html_HR title="NationalIdentification_Title"></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>ECONOMICAGENTCODE</ColumnName>
+      <Ressource>ECONOMICAGENTCODE</Ressource>
+      <DataType>string</DataType>
+      <!--<Colspan>1</Colspan>-->
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>TAXNUMBER</ColumnName>
+      <Ressource>TAXNUMBER</Ressource>
+      <DataType>string</DataType>
+      <!--<Colspan>0</Colspan>-->
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+    </Column>
+    <Column>
+      <ColumnName>PERSONALNUMBERTYPE</ColumnName>
+      <Ressource>PERSONALNUMBERTYPE_IDENT</Ressource>
+      <DataType>string</DataType>
+      <Colspan>3</Colspan>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+        <DDLType>enum.ActorNumberSource</DDLType>
+      </Relation>
+      <html_HR title="Empty" size="1"></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>PERSONALNUMBER</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Colspan>2</Colspan>
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Information>
+        <Type>information</Type>
+        <URL>enum.ActorNumberSource</URL>
+      </Information>
+    </Column>
+    <Column>
+      <ColumnName>OTHER1NUMBERTYPE</ColumnName>
+      <Ressource>OTHER1NUMBERTYPE_IDENT</Ressource>
+      <DataType>string</DataType>
+      <Colspan>3</Colspan>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+        <DDLType>enum.ActorNumberSource</DDLType>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>OTHER1NUMBER</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Colspan>2</Colspan>
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Information>
+        <Type>information</Type>
+        <URL>enum.ActorNumberSource</URL>
+      </Information>
+    </Column>
+    <Column>
+      <ColumnName>OTHER2NUMBERTYPE</ColumnName>
+      <Ressource>OTHER2NUMBERTYPE_IDENT</Ressource>
+      <DataType>string</DataType>
+      <Colspan>3</Colspan>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+        <DDLType>enum.ActorNumberSource</DDLType>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>OTHER2NUMBER</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Colspan>2</Colspan>
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Information>
+        <Type>information</Type>
+        <URL>enum.ActorNumberSource</URL>
+      </Information>
+    </Column>
+    <Column>
+      <ColumnName>NCBNUMBER</ColumnName>
+      <Ressource>NCBNUMBER</Ressource>
+      <DataType>string</DataType>
+      <Colspan>1</Colspan>
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+      <html_HR title="Empty" size="1"></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>NCBRATING</ColumnName>
+      <Ressource>NCBRATING</Ressource>
+      <DataType>string</DataType>
+      <Colspan>1</Colspan>
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+        <DDLType>enum.NCBRatingEnum</DDLType>
+      </Relation>
+      <Information>
+        <Type>information</Type>
+        <ToolTipMessage>Msg_NCBRATINGForACTOR</ToolTipMessage>
+      </Information>
+    </Column>
+    <Column>
+      <ColumnName>HONORIFIC</ColumnName>
+      <Ressource>HONORIFIC</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+      <html_HR title="PersonalIdentification_Title"></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>SURNAME</ColumnName>
+      <Ressource>SURNAME</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>SUFFIXNAME</ColumnName>
+      <Ressource>SUFFIXNAME</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>FIRSTNAME</ColumnName>
+      <Ressource>FIRSTNAME</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>MIDDLENAME</ColumnName>
+      <Ressource>MIDDLENAME</Ressource>
+      <DataType>string</DataType>
+      <LabelWidth>65%</LabelWidth>
+      <InputWidth>35%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>INITIALLETTER</ColumnName>
+      <Ressource>INITIALLETTER</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>DTBIRTH</ColumnName>
+      <Ressource>DTBIRTH</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression>
+      </RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>BIRTHPLACE</ColumnName>
+      <Ressource>BIRTHPLACE</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>GENDER</ColumnName>
+      <Ressource>GENDER</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <!-- CC/PL 20171130 Suppression du isresource qui engendre la traduction de la valeur M en Mois (PeriodEnum)  -->
+      <Relation>
+        <!--<DDLType>enum.[code:Gender;condition:ISENABLED=1;isresource:true;]</DDLType>-->
+        <DDLType>enum.[code:Gender;condition:ISENABLED=1;]</DDLType>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DTDEATH</ColumnName>
+      <Ressource>DTDEATH</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression>
+      </RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <!-- Reserved for a later use -->
+      <ColumnName>SUBSIDIARYCODE</ColumnName>
+      <Ressource>SUBSIDIARYCODE</Ressource>
+      <DataType>string</DataType>
+      <Colspan>1</Colspan>
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+        <DDLType>enum.SubsidiaryCodeEnum</DDLType>
+      </Relation>
+      <Information>
+        <Type>information</Type>
+        <ToolTipMessage>Msg_SUBSIDIARYCODEForACTOR</ToolTipMessage>
+      </Information>
+      <html_HR title="InternalIdentification_Title"></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>ECONOMICAREACODE</ColumnName>
+      <Ressource>ECONOMICAREACODE</Ressource>
+      <DataType>string</DataType>
+      <Colspan>2</Colspan>
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+        <DDLType>enum.EconomicAreaCodeEnum</DDLType>
+      </Relation>
+      <Information>
+        <Type>information</Type>
+        <ToolTipMessage>Msg_ECONOMICAREACODEForACTOR</ToolTipMessage>
+      </Information>
+    </Column>
+    <Column>
+      <ColumnName>RESIDENCECODE</ColumnName>
+      <Ressource>RESIDENCECODE</Ressource>
+      <DataType>string</DataType>
+      <Colspan>2</Colspan>
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+        <DDLType>enum.ResidenceCodeEnum</DDLType>
+      </Relation>
+      <Information>
+        <Type>information</Type>
+        <ToolTipMessage>Msg_RESIDENCECODEForACTOR</ToolTipMessage>
+      </Information>
+    </Column>
+    <Column>
+      <ColumnName>INTERNALRATING</ColumnName>
+      <Ressource>INTERNALRATING</Ressource>
+      <DataType>string</DataType>
+      <Length>32</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+    <!-- PL 20120625 Replaced by new table ACTORAMOUNT 
+    <Column>
+      <ColumnName>IDCCAPITAL</ColumnName>
+      <Ressource>IDCCAPITAL_CAPITAL</Ressource>
+      <DataType>string</DataType>
+      <Length>3</Length>
+      <Scale>0</Scale>
+      <LabelWidth>30%</LabelWidth>
+      <InputWidth>40%</InputWidth>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+        <DDLType>currency</DDLType>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>CAPITAL</ColumnName>
+      <Ressource></Ressource>
+      <DataType>decimal</DataType>
+      <Length>20</Length>
+      <Scale>3</Scale>
+      <InputWidth>60%</InputWidth>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    -->
+
+    <Column>
+      <ColumnName>CORPORATESECTOR</ColumnName>
+      <Ressource>CORPORATESECTOR</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsResource>true</IsResource>
+      <Relation>
+        <DDLType>enum.[code:RegulatoryCorporateSector;resourceprefix:RegulatoryCorporateSector]</DDLType>
+      </Relation>
+      <Information>
+        <Type>information</Type>
+        <URL>enum.RegulatoryCorporateSector</URL>
+      </Information>
+      <html_BLOCK title="IdentificationSupervisor_Title" columnbyrow="1"></html_BLOCK>
+    </Column>
+    <Column>
+      <ColumnName>NATURE</ColumnName>
+      <Ressource>NATURE</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+        <DDLType>enum.[code:EntityClassification;condition:ISENABLED=1]</DDLType>
+      </Relation>
+      <Information>
+        <Type>information</Type>
+        <URL>enum.EntityClassification</URL>
+      </Information>
+      <html_HR title="ESMA_EMIRIdentification_Title"></html_HR>
+      <!--<JavaScript>
+        <Script attribut="onchange" name="EFS_Set" control="CORPORATESECTOR" condition="F" data="A;C;F;I;L;O;R;U;" />
+        <Script attribut="onchange" name="EFS_Set" control="CORPORATESECTOR" condition="N" data="X" />
+      </JavaScript>-->
+    </Column>
+    <Column>
+      <ColumnName>FCAREFNUMBER</ColumnName>
+      <Ressource>FCAREFNUMBER</Ressource>
+      <DataType>int</DataType>
+      <Align>Left</Align>
+      <Length>6</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+      <Information>
+        <Type>information</Type>
+        <LabelMessage>Msg_FCAREFNUMBERForACTOR</LabelMessage>
+      </Information>
+      <html_HR title="FCA_Identification_Title"></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>CFTCFIRMID</ColumnName>
+      <Ressource>CFTCFIRMID</Ressource>
+      <DataType>string</DataType>
+      <Length>3</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+      <Information>
+        <Type>information</Type>
+        <LabelMessage>Msg_CFTCFIRMIDForACTOR</LabelMessage>
+      </Information>
+      <html_HR title="CFTC_Identification_Title"></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>SECNATURE</ColumnName>
+      <Ressource>SECNATURE</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+        <DDLType>enum.TBD</DDLType>
+      </Relation>
+      <html_HR title="SEC_Identification_Title"></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>ISALL_CNF</ColumnName>
+      <Ressource>ISALL_CNF</Ressource>
+      <DataType>bool</DataType>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default>
+        <Value>false</Value>
+      </Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+      <html_BLOCK title="ConfirmationMsg" blockbyrow="1" columnbyrow="1" startdisplay="collapse">
+        <Information>
+          <Type>information</Type>
+          <LabelMessage>Msg_CharacteristicsNotificationsForACTOR</LabelMessage>
+        </Information>
+      </html_BLOCK>
+      <Information>
+        <Type>information</Type>
+        <LabelMessage>Msg_ISALL_CNFForACTOR</LabelMessage>
+      </Information>
+      <html_HR title="ReportsLevel_Title" size="1" />
+    </Column>
+    <Column>
+      <ColumnName>ISOWN_CNF</ColumnName>
+      <Ressource>ISOWN_CNF</Ressource>
+      <DataType>bool</DataType>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default>
+        <Value>false</Value>
+      </Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+      <Information>
+        <Type>information</Type>
+        <LabelMessage>Msg_ISOWN_CNFForACTOR</LabelMessage>
+      </Information>
+    </Column>
+    <Column>
+      <ColumnName>ISCHILD_CNF</ColumnName>
+      <Ressource>ISCHILD_CNF</Ressource>
+      <DataType>bool</DataType>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default>
+        <Value>false</Value>
+      </Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+      <Information>
+        <Type>information</Type>
+        <LabelMessage>Msg_ISCHILD_CNFForACTOR</LabelMessage>
+      </Information>
+    </Column>
+    <Column>
+      <ColumnName>CULTURE_CNF</ColumnName>
+      <Ressource>CULTURE_CNF_</Ressource>
+      <DataType>string</DataType>
+      <Length>2</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+        <DDLType>culture</DDLType>
+      </Relation>
+      <Information>
+        <Type>information</Type>
+        <LabelMessage>Msg_CULTURE_CNFForACTOR</LabelMessage>
+      </Information>
+      <html_HR title="Culture_Title" size="1" />
+    </Column>
+    <Column>
+      <ColumnName>IDC_CNF</ColumnName>
+      <Ressource>IDC_CNF_</Ressource>
+      <DataType>string</DataType>
+      <Length>3</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+        <DDLType>currency</DDLType>
+      </Relation>
+      <Information>
+        <Type>information</Type>
+        <LabelMessage>Msg_IDC_CNFForACTOR</LabelMessage>
+      </Information>
+    </Column>
+
+    <Column>
+      <ColumnName>CSSFILENAME</ColumnName>
+      <Ressource>CSSFILENAME</Ressource>
+      <DataType>string</DataType>
+      <Length>256</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+        <DDLType>CSSCOLOR</DDLType>
+      </Relation>
+      <html_BLOCK title="Display" columnbyrow="1" ></html_BLOCK>
+    </Column>
+    <Column>
+      <ColumnName>DTENABLED</ColumnName>
+      <Ressource>DTENABLED</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression>
+      </RegularExpression>
+      <Default>
+        <Value>today</Value>
+      </Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+      <html_BLOCK title="Status" blockbyrow="2" width="25%" columnbyrow="1"></html_BLOCK>
+    </Column>
+    <Column>
+      <ColumnName>DTDISABLED</ColumnName>
+      <Ressource>DTDISABLED</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression>
+      </RegularExpression>
+      <Default>
+      </Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDAINS</ColumnName>
+      <Ressource>IDAINS</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <Relation>
+        <TableName>ACTOR</TableName>
+        <AliasTableName>insa</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDA</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>DISPLAYNAME</ColumnName>
+          <Ressource>Display name</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DTINS</ColumnName>
+      <Ressource>DTINS</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDAUPD</ColumnName>
+      <Ressource>IDAUPD</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <Relation>
+        <TableName>ACTOR</TableName>
+        <AliasTableName>upda</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDA</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>DISPLAYNAME</ColumnName>
+          <Ressource>Display name</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DTUPD</ColumnName>
+      <Ressource>DTUPD</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>EXTLLINK</ColumnName>
+      <Ressource>EXTLLINK1</Ressource>
+      <DataType>string</DataType>
+      <Length>128</Length>
+      <LabelWidth>10%</LabelWidth>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default>
+      </Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+      <html_BLOCK title="ExtlLink2_" blockbyrow="2" width="75%" columnbyrow="1"></html_BLOCK>
+    </Column>
+    <Column>
+      <ColumnName>EXTLLINK2</ColumnName>
+      <Ressource>EXTLLINK2</Ressource>
+      <DataType>string</DataType>
+      <Length>128</Length>
+      <LabelWidth>10%</LabelWidth>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default>
+      </Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>FREE1</ColumnName>
+      <Ressource>FREE1</Ressource>
+      <DataType>string</DataType>
+      <Length>255</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+      <!-- html_BLOCK title="Free" columnbyrow="2"></html_BLOCK -->
+    </Column>
+    <Column>
+      <ColumnName>FREE2</ColumnName>
+      <Ressource>FREE2</Ressource>
+      <DataType>string</DataType>
+      <Length>255</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>FREE3</ColumnName>
+      <Ressource>FREE3</Ressource>
+      <DataType>string</DataType>
+      <Length>255</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>FREE4</ColumnName>
+      <Ressource>FREE4</Ressource>
+      <DataType>string</DataType>
+      <Length>255</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>FREE5</ColumnName>
+      <Ressource>FREE5</Ressource>
+      <DataType>string</DataType>
+      <Length>256</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>FREE6</ColumnName>
+      <Ressource>FREE6</Ressource>
+      <DataType>string</DataType>
+      <Length>256</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>ROWATTRIBUT</ColumnName>
+      <Ressource>ROWATTRIBUT</Ressource>
+      <DataType>string</DataType>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression>
+      </RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>ROWVERSION</ColumnName>
+      <Ressource>ROWVERSION</Ressource>
+      <DataType>string</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+
+    <!-- 
+    CC/PL 20170110 - Réservé à un usage ultérieur 
+    PL 20161124 - RATP 4Eyes - MakingChecking 
+    -->
+    <!--<Column>
+      <ColumnName>IDACHK</ColumnName>
+      <Ressource>IDACHK</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <Relation>
+        <TableName>ACTOR</TableName>
+        <AliasTableName>chka</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDA</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>DISPLAYNAME</ColumnName>
+          <Ressource>Display name</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DTCHK</ColumnName>
+      <Ressource>DTCHK</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDCHK</ColumnName>
+      <Ressource>IDCHK</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsUpdatable>false</IsUpdatable>
+      <Relation />
+    </Column>-->
+
+  </Referential>
+</Referentials>

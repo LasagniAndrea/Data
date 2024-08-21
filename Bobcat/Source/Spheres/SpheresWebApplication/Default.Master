@@ -1,0 +1,63 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Default.Master.cs" Inherits="EFS.Spheres.DefaultMaster" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link id="linkCssAwesome" rel="stylesheet" type="text/css" href="./Includes/fontawesome-all.min.css" />
+    <link id="linkCssCommon" rel="stylesheet" type="text/css" href="./Includes/EFSThemeCommon.min.css" />
+    <link id="linkCssCustomCommon" rel="stylesheet" type="text/css" href="Includes/CustomThemeCommon.css" />
+    <link id="linkCssUISprites" rel="stylesheet" type="text/css" href="Includes/EFSUISprites.min.css" />
+    <link id="linkCss" rel="stylesheet" type="text/css" href="Includes/EFSTheme-vlight.min.css" />
+    <link id="linkCssQTip2" rel="stylesheet" type="text/css" href="./Javascript/JQuery/jquery.qtip2.min.css" />
+    <link id="linkCssJQueryUI" rel="stylesheet" type="text/css" href="./Javascript/JQuery/jquery-ui-1.13.3.min.css" />
+    <link id="linkCssTimePicker" rel="stylesheet" type="text/css" href="./Javascript/JQuery/jquery-ui-timepicker.min.css" />
+    <link id="linkIcon" type="image/x-ico" rel="shortcut icon" href="./Images/ico/Spheres-Blue.ico" />
+    <link id="linkIcon2" type="image/x-png" rel="shortcut icon" href="./Images/png/Spheres-Blue.png" />
+
+    <title>Spheres</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="frmMainMaster" runat="server">
+
+        <script type="text/javascript" src="./Javascript/JQuery/jquery-3.7.1.min.js"></script>
+        <script type="text/javascript" src="./Javascript/JQuery/jquery.cookie-3.0.5.min.js"></script>
+        <script type="text/javascript" src="./Javascript/JQuery/jquery-ui-1.13.3.min.js"></script>
+        <script type="text/javascript" src="./Javascript/JQuery/jquery-ui-1.13.3.culture.min.js"></script>
+        <script type="text/javascript" src="./Javascript/JQuery/jquery-ui-timepicker.min.js"></script>
+        <script type="text/javascript" src="./Javascript/JQuery/jquery.dialogWrapper.min.js"></script>
+        <script type="text/javascript" src="./Javascript/JQuery/jquery.freezegrid.min.js"></script>
+        <script type="text/javascript" src="./Javascript/JQuery/jquery.qtip2.min.js"></script>
+        <script type="text/javascript" src="./Javascript/JQuery/jquery.blockUI-2.70.0.min.js"></script>
+        <script type="text/javascript" src="./Javascript/PageBase.min.js"></script>
+        <%--<asp:ScriptManager ID="ScriptManager" runat="server" />--%>
+        <div id="mastercontnr">
+            <header id="masterheader">
+                <section id="masterlogo">
+                    <asp:Image runat="server" id="imgLogoCompany" style="border-width:0px;cursor:pointer;" />
+                </section>
+                <section id="masterinfo">
+                    <asp:ContentPlaceHolder ID="cphContentInfo" runat="server">
+                    </asp:ContentPlaceHolder>
+                </section>
+                <section id="mastermenu">
+                    <asp:ContentPlaceHolder ID="cphContentMenu" runat="server">
+                    </asp:ContentPlaceHolder>
+                </section>
+            </header>
+            <section id="masterbody">
+                <asp:ContentPlaceHolder ID="cphContentPage" runat="server">
+                </asp:ContentPlaceHolder>
+            </section>
+            <footer id="masterfooter">
+                Powered by Euro Finance Systems | Copyright <i class="fas fa-copyright"></i>2024
+            </footer>
+
+        </div>
+    </form>
+</body>
+</html>

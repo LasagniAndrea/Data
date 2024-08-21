@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- ******************* -->
+<!-- ***   SCREENS   *** -->
+<!-- ******************* -->
+<Screens>
+  <!-- RootTradeEvent -->
+  <Screen name="RootTradeEvent" caption="GroupTradeEvent">
+    <RootEventHeaderBlock     clientid="event"/>
+    <GroupTradeEventBlock     clientid="event"/>
+    <EventFooterBlock         clientid="event"/>
+    <EventToolBarBlock        clientid="event"/>
+  </Screen>
+
+  <!-- AdministrationTradeEvent -->
+  <Screen name="AdministrationTradeEvent" caption="Administration Trade Event">
+    <EventHeaderBlock              clientid="event"/>
+    <AdministrationTradeEventBlock clientid="event"/>
+    <EventFooterBlock              clientid="event"/>
+    <EventToolBarBlock             clientid="event"/>
+  </Screen>
+
+  <!-- CalculationTradeEvent -->
+  <Screen name="CalculationTradeEvent" caption="Calculation Trade Event">
+    <EventHeaderBlock              clientid="event"/>
+    <CalculationTradeEventBlock    clientid="event"/>
+    <EventFooterBlock              clientid="event"/>
+    <EventToolBarBlock             clientid="event"/>
+  </Screen>
+
+  <!-- CalculationFxTradeEvent -->
+  <Screen name="CalculationFxTradeEvent" caption="Calculation Fx Trade Event">
+    <EventHeaderBlock              clientid="event"/>
+    <CalculationFxTradeEventBlock  clientid="event"/>
+    <EventFooterBlock              clientid="event"/>
+    <EventToolBarBlock             clientid="event"/>
+  </Screen>
+
+  <!-- CalculationPeriodTradeEvent -->
+  <Screen name="CalculationPeriodTradeEvent" caption="Calculation Trade Event">
+    <EventHeaderBlock                 clientid="event"/>
+    <CalculationPeriodTradeEventBlock clientid="event"/>
+    <EventFooterBlock                 clientid="event"/>
+    <EventToolBarBlock                clientid="event"/>
+  </Screen>
+
+  <!-- DescriptionTradeEvent -->
+  <Screen name="DescriptionTradeEvent" caption="Description Trade Event">
+    <EventHeaderBlock              clientid="event"/>
+    <DescriptionTradeEventBlock    clientid="event"/>
+    <EventFooterBlock              clientid="event"/>
+    <EventToolBarBlock             clientid="event"/>
+  </Screen>
+
+  <!-- DescriptionTriggerTradeEvent -->
+  <Screen name="DescriptionTriggerTradeEvent" caption="Description Trigger Trade Event">
+    <EventHeaderBlock                       clientid="event"/>
+    <DescriptionTriggerTradeEventBlock      clientid="event"/>
+    <EventFooterBlock                       clientid="event"/>
+    <EventToolBarBlock                      clientid="event"/>
+  </Screen>
+
+  <!-- GroupTradeEvent -->
+  <Screen name="GroupTradeEvent" caption="Group Trade Event">
+    <EventHeaderBlock              clientid="event"/>
+    <GroupTradeEventBlock          clientid="event"/>
+    <EventFooterBlock              clientid="event"/>
+    <EventToolBarBlock             clientid="event"/>
+  </Screen>
+
+  <!-- GroupNominalStepTradeEvent -->
+  <Screen name="GroupNominalStepTradeEvent" caption="Group Trade Event">
+    <EventHeaderBlock                clientid="event"/>
+    <GroupNominalStepTradeEventBlock clientid="event"/>
+    <EventFooterBlock                clientid="event"/>
+    <EventToolBarBlock               clientid="event"/>
+  </Screen>
+
+  <!-- DailyClosingTradeEvent -->
+  <Screen name="DailyClosingTradeEvent" caption="DailyClosing Trade Event">
+    <EventHeaderBlock              clientid="event"/>
+    <DailyClosingTradeEventBlock   clientid="event"/>
+    <EventFooterBlock              clientid="event"/>
+    <EventToolBarBlock             clientid="event"/>
+  </Screen>
+
+  <!-- StandardEvent -->
+  <Screen name="StandardEvent" caption="Standard Event">
+    <EventHeaderBlock              clientid="event"/>
+    <StandardTradeEventBlock       clientid="event"/>
+    <EventFooterBlock              clientid="event"/>
+    <EventToolBarBlock             clientid="event"/>
+  </Screen>
+
+  <!-- *********************** -->
+  <!-- ***   SUB-SCREENS   *** -->
+  <!-- *********************** -->
+
+  <!-- NotesEvent -->
+  <Screen name="NotesEvent" caption="Notes">
+    <NotesBlock />
+  </Screen>
+
+  <!-- PaymentQuoteEvent -->
+  <Screen name="PaymentQuoteEvent" caption="PaymentQuote">
+    <PaymentQuoteBlock />
+  </Screen>
+
+  <!-- PremiumQuoteEvent -->
+  <Screen name="PremiumQuoteEvent" caption="PremiumQuote">
+    <PremiumQuoteBlock />
+  </Screen>
+
+  <!-- DcfEvent -->
+  <Screen name="DayCountFractionEvent" caption="DayCountFractionEvent">
+    <DcfBlock />
+  </Screen>
+
+  <!-- ExchangeRateEvent -->
+  <Screen name="ExchangeRateEvent" caption="ExchangeRateEvent">
+    <ExchangeRateBlock />
+  </Screen>
+
+  <!-- ExchangeRatePremium -->
+  <Screen name="ExchangeRatePremiumEvent" caption="ExchangeRateEvent">
+    <ExchangeRatePremiumBlock />
+  </Screen>
+
+  <!-- StrikePriceEvent -->
+  <Screen name="StrikePriceEvent" caption="StrikePriceEvent">
+    <StrikePriceBlock />
+  </Screen>
+
+  <!-- TriggerRateEvent -->
+  <Screen name="TriggerRateEvent" caption="TriggerRateEvent">
+    <TriggerRateBlock />
+  </Screen>
+
+  <!-- SideRateEvent -->
+  <Screen name="SideRateEvent" caption="SideRateEvent">
+    <SideRateBlock />
+  </Screen>
+
+  <!-- FixingRateEvent -->
+  <Screen name="FixingRateEvent" caption="FixingRateEvent">
+    <FixingRateBlock />
+  </Screen>
+
+  <!-- SettlementRateEvent -->
+  <Screen name="SettlementRateEvent" caption="SettlementRateEvent">
+    <SettlementRateBlock />
+  </Screen>
+
+  <!-- CurrencyPairEvent -->
+  <Screen name="CurrencyPairEvent" caption="CurrencyPairEvent">
+    <CurrencyPairBlock />
+  </Screen>
+
+  <!-- FixedRateEvent -->
+  <Screen name="FixedRateEvent" caption="FixedRateEvent">
+    <FixedRateBlock />
+  </Screen>
+
+  <!-- CapFloorScheduleEvent -->
+  <Screen name="CapFloorScheduleEvent" caption="CapFloorScheduleEvent">
+    <CapFloorScheduleBlock />
+  </Screen>
+
+  <!-- PricingFxEvent -->
+  <Screen name="PricingFxEvent" caption="PricingFxEvent">
+    <PricingFxBlock />
+  </Screen>
+  <!-- PricingFxOptionEvent -->
+  <Screen name="PricingFxOptionEvent" caption="PricingFxOptionEvent">
+    <PricingFxOptionBlock />
+  </Screen>
+
+  <!-- Pricing2Event -->
+  <Screen name="Pricing2Event" caption="Pricing2Event">
+    <Pricing2Block />
+  </Screen>
+
+  <!-- AssetEvent -->
+  <Screen name="AssetEvent" caption="AssetEvent">
+    <EventsAssetBlock />
+  </Screen>
+
+  <!-- ClosingBtn -->
+  <Screen name="ClosingEvent" caption="ClosingEvent">
+    <EventsClosingBlock />
+  </Screen>
+
+  <!-- ProcessEvent -->
+  <Screen name="ProcessEvent" caption="ProcessEvent">
+    <EventsProcessBlock />
+  </Screen>
+
+  <!-- ChildsEvent -->
+  <Screen name="ChildsEvent" caption="ChildsEvent">
+    <EventsChildBlock />
+  </Screen>
+</Screens>

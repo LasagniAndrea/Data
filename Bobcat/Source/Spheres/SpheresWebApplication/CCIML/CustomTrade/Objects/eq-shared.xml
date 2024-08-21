@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+  <!-- Complex_equityPremium-->
+  <Object name="EquityPremiumPricePerOption" helpschema="fpml" helpelement="EquityPremium">
+    <table colspan="-1" controlalignleft="true" style="margin-top:4px;margin-bottom:4px;">      
+      <EquityPremiumParty/>
+      <table>
+        <Date_L clientid="paymentDate_unadjustedDate" required="false" helpschema="fpml" helpelement="AdjustableDate" />
+        <BDA_BC clientid="paymentDate_dateAdjustments" required="false" postback="true" />
+        <br/>
+        <Amount_L clientid="pricePerOption_amount" required="true" postback="true"/>
+        <Money_L clientid="paymentAmount" required="true" postback="true" />
+      </table>
+    </table>
+  </Object>
+  <Object name="EquityPremiumPricePerOptionPercent" helpschema="fpml" helpelement="EquityPremium">
+    <Table colspan="-1" controlalignleft="true">
+      <EquityPremiumParty/>
+      <Table>
+        <Date_L clientid="paymentDate_unadjustedDate" required="false" helpschema="fpml" helpelement="AdjustableDate" />
+        <BDA_BC clientid="paymentDate_dateAdjustments" required="false" postback="true" />
+        <br/>
+        <DecimalPercent_L clientid="pricePerOption_amount" required="true" postback="true"/>
+        <Money_L clientid="paymentAmount" required="true" postback="true" />
+      </Table>
+    </Table>
+  </Object>
+  <Object name="EquityPremiumPercentageOfNotional" helpschema="fpml" helpelement="EquityPremium">
+    <Table colspan="-1" controlalignleft="true">
+      <EquityPremiumParty/>
+      <Table>
+        <Date_L clientid="paymentDate_unadjustedDate" required="false" helpschema="fpml" helpelement="AdjustableDate" />
+        <BDA_BC clientid="paymentDate_dateAdjustments" required="false" postback="true" />
+        <br/>
+        <Amount_L clientid="percentageOfNotional" required="true" postback="true"/>
+        <Money_L clientid="paymentAmount" required="true" postback="true" />
+      </Table>
+    </Table>
+  </Object>
+  <Object name="EquityPremiumParty" >
+    <Table controlalignleft="true">
+      <PartyReference_L clientid="payer" postback="true" required="true" />
+      <br/>
+      <PartyReference_L clientid="receiver" postback="true" required="true" />
+    </Table>
+  </Object>
+
+  <!--Complex_Quanto-->
+  <Object name="FxFeature1Quanto">
+    <Table colspan="-1" controlalignleft="true">
+      <Currency clientid="referenceCurrency" postback="true" required="true" />
+      <QuotedCurrencyPair_QuoteBasis clientid="quanto_fxRate_quotedCurrencyPair" required="true" />
+      <FxRate_L clientid="quanto_fxRate_rate" required="true" />
+    </Table>
+  </Object>
+  <!--Complex_ExtraordinaryEvents-->
+  <Object name="ExtraordinaryEvents"  helpschema="fpml" helpelement="ExtraordinaryEvents">
+    <Table controlalignleft="true">
+      <Check_L required="false" postback="true"/>
+      <space/>
+      <Button type="Submit" imageurl="fas fa-external-link-square-alt" caption="Detail"/>
+    </Table>
+  </Object>
+
+  <!--Complex_EquityStrike-->
+  <Object name="EquityStrikeStrikePrice"  helpschema="fpml" helpelement="EquityStrike">
+    <Table controlalignleft="true">
+      <Amount_L clientid="strikePrice" postback="true" required="true" />
+      <Space />
+      <Currency clientid="currency" postback="true" required="false" />
+    </Table>
+  </Object>
+  <Object name="EquityStrikeStrikePricePercent"  helpschema="fpml" helpelement="EquityStrike">
+    <Table controlalignleft="true">
+      <DecimalPercent_L clientid="strikePrice" postback="true" required="true" />
+      <Space />
+      <Currency clientid="currency" postback="true" required="false" />
+    </Table>
+  </Object>
+</Objects>

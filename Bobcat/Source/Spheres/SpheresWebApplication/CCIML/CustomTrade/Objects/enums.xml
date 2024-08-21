@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+  <!--********************************-->
+  <!-- Complex_AssetMeasureEnum -->
+  <!--********************************-->
+  <Object name="AssetMeasureEnum" helpschema="efsml" helpelement="AssetMeasureType">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:AssetMeasure;isresource:false;forcedenum:CleanPrice|DirtyPrice]" width="210px" />
+  </Object>
+  <Object name="AssetMeasureEnum_L" helpschema="efsml" helpelement="AssetMeasureType">
+    <Label />
+    <AssetMeasureEnum />
+  </Object>
+  <!--********************************-->
+  <!--Simple_BusinessDayConventionEnum-->
+  <!--********************************-->
+  <Object name="BDC" helpschema="fpml" helpelement="BusinessDayConventionEnum">
+    <documentation>BusinessDayConvention</documentation>
+    <Table>
+      <DropDown datatype="string" listretrieval="predef:BUSINESSDAYCONVENTION" width="95px" />
+    </Table>
+  </Object>
+  <Object name="BDC_L" helpschema="fpml" helpelement="BusinessDayConventionEnum">
+    <documentation>BusinessDayConvention with Label</documentation>
+    <Label helpschema="fpml" helpelement="BusinessDayAdjustments" />
+    <BDC />
+  </Object>
+  <Object name="BDC_BC">
+    <Table>
+      <DropDown datatype="string" listretrieval="predef:BUSINESSDAYCONVENTION" width="95px" />
+      <Display />
+    </Table>
+  </Object>
+  <Object name="BDC_BC_L">
+    <Label helpschema="fpml" helpelement="BusinessDayConventionEnum" />
+    <BDC_BC />
+  </Object>
+  <!--********************************-->
+  <!--Simple_CallPutEnum-->
+  <!--********************************-->
+  <Object name="CallPutEnum" helpschema="fpml" helpelement="OptionTypeEnum">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:OptionTypeEnum;isresource:false;forcedenum:CALL|PUT]"  width="50px" />
+  </Object>
+  <Object name="CallPutEnum_RO" helpschema="fpml" helpelement="OptionTypeEnum">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:OptionTypeEnum;isresource:false;forcedenum:CALL|PUT]"  width="50px"  misc="IsReadOnly:true"/>
+  </Object>
+  <Object name="CallPutEnum_L" helpschema="fpml" helpelement="OptionTypeEnum">
+    <label helpschema="fpml" helpelement="OptionTypeEnum"/>
+    <CallPutEnum/>
+  </Object>
+  <Object name="CallPutEnum_RO_L" helpschema="fpml" helpelement="OptionTypeEnum">
+    <label helpschema="fpml" helpelement="OptionTypeEnum"/>
+    <CallPutEnum_RO/>
+  </Object>
+
+  <!--********************************-->
+  <!-- Complex_CashSecuritiesEnum -->
+  <!--********************************-->
+  <Object name="CashSecurities">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:CashSecuritiesEnum;isresource:false]" width="100px" />
+  </Object>
+  <Object name="CashSecurities_L">
+    <Label helpschema="efsml" helpelement="CashSecuritiesEnum" />
+    <CashSecurities />
+  </Object>
+  <!--********************************-->
+  <!--Simple_CommissionDenominationEnum-->
+  <!--********************************-->
+  <Object name="CommissionDenomination" helpschema="fpml" helpelement="CommissionDenominationEnum">
+    <DropDown datatype="string" listretrieval="predef:COMMISSIONDENOMINATION" />
+  </Object>
+
+  <!--********************************-->
+  <!--DayCountFractionEnum-->
+  <!--********************************-->
+  <Object name="DayCountFraction" helpschema="fpml" helpelement="DayCountFraction">
+    <documentation>DayCountFraction without Label</documentation>
+    <DropDown datatype="string" listretrieval="predef:DAYCOUNTFRACTION_STRING" width="130px"/>
+  </Object>
+  <Object name="DayCountFraction_L" helpschema="fpml" helpelement="DayCountFraction">
+    <documentation>DayCountFraction with Label</documentation>
+    <Label helpschema="fpml" helpelement="DayCountFraction" />
+    <DayCountFraction/>
+  </Object>
+
+  <!--********************************-->
+  <!--Simple_DayTypeEnum-->
+  <!--********************************-->
+  <Object name="DayType" helpschema="fpml" helpelement="DayTypeEnum">
+    <DropDown datatype="string" listretrieval="predef:DAYTYPE" />
+  </Object>
+  <Object name="DayType_L" helpschema="fpml" helpelement="DayTypeEnum">
+    <Label  helpschema="fpml" helpelement="DayTypeEnum"/>
+    <DayType/>
+  </Object>
+  <!--********************************-->
+  <!-- Complex_DebtSecurityClassEnum -->
+  <!--********************************-->
+  <Object name="DebtSecurityClass" helpschema="efsml" helpelement="Identification">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:DebtSecurityClass;isresource:false]" width="250px" />
+  </Object>
+  <Object name="DebtSecurityClass_L" helpschema="efsml" helpelement="Identification">
+    <Label />
+    <DebtSecurityClass/>
+  </Object>
+  <!--********************************-->
+  <!--Scheme_DeterminationMethodValuation_L-->
+  <!--********************************-->
+  <Object name="DeterminationMethodValuation_L">
+    <Label />
+    <DropDown datatype="string" listretrieval="predef:DETERMINATIONMETHODVALUATION" width="200px" />
+  </Object>
+  <!--*******************************************-->
+  <!--Scheme_DeterminationMethodValuationPrice_L -->
+  <!--*******************************************-->
+  <Object name="DeterminationMethodValuationPrice_L">
+    <Label />
+    <DropDown datatype="string" listretrieval="predef:enum.[code:DeterminationMethod;isresource:false;forcedenum:CalculationAgent|ClosingPrice|HedgeExecution|ValuationTime]" width="130px" />
+  </Object>
+  <!--********************************-->
+  <!--Simple_DividendAmountTypeEnum-->
+  <!--********************************-->
+  <Object name="DividendAmount" helpschema="fpml" helpelement="DividendAmountTypeEnum">
+    <DropDown datatype="string" listretrieval="predef:DIVIDENDAMOUNTTYPE" width="130px" />
+  </Object>
+  <!--********************************-->
+  <!--Simple_DividendDateReferenceEnum-->
+  <!--********************************-->
+  <Object name="DividendDateReference" helpschema="fpml" helpelement="DividendDateReferenceEnum">
+    <DropDown datatype="string" listretrieval="predef:DIVIDENDDATEREFERENCE" />
+  </Object>
+  <!--********************************-->
+  <!--Simple_DividendEntitlementEnum-->
+  <!--********************************-->
+  <Object name="DividendEntitlement" helpschema="fpml" helpelement="DividendEntitlementEnum">
+    <DropDown datatype="string" listretrieval="predef:DIVIDENDENTITLEMENT" width="100px" />
+  </Object>
+  <!--********************************-->
+  <!--Simple_DividendPeriodEnum-->
+  <!--********************************-->
+  <Object name="DividendPeriod" helpschema="fpml" helpelement="DividendPeriodEnum">
+    <DropDown datatype="string" listretrieval="predef:DIVIDENDPERIOD" />
+  </Object>
+  <!--********************************-->
+  <!--Simple_ExerciseStyleEnum-->
+  <!--********************************-->
+  <Object name="ExerciseStyle" helpschema="fpml" helpelement="ExerciseStyleEnum">
+    <!-- <DropDown datatype="string" listretrieval="predef:EXERCISESTYLE" />-->
+    <DropDown datatype="string" listretrieval="predef:enum.[code:ExerciseStyleEnum;isresource:false]"/>
+  </Object>
+  <Object name="ExerciseStyle_L" helpschema="fpml" helpelement="ExerciseStyleEnum">
+    <label helpschema="fpml-enum" helpelement="ExerciseStyleEnum"/>
+    <ExerciseStyle />
+  </Object>
+  <Object name="ExerciseStyleAmericanEuropean" helpschema="fpml" helpelement="ExerciseStyleEnum">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:ExerciseStyleEnum;isresource:false;forcedenum:American|European]"/>
+  </Object>
+  <Object name="ExerciseStyleAmericanEuropean_L" helpschema="fpml" helpelement="ExerciseStyleEnum">
+    <label helpschema="fpml-enum" helpelement="ExerciseStyleEnum"/>
+    <ExerciseStyleAmericanEuropean />
+  </Object>
+  <!--********************************-->
+  <!-- Complex_FinancialInstrumentProductTypeCodeEnum -->
+  <!--********************************-->
+  <Object name="FinancialInstrumentProductTypeCode" helpschema="efsml" helpelement="FinancialInstrumentProductTypeCodeEnum">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:FinancialInstrumentProductTypeCode;isresource:false]" width="250px" />
+  </Object>
+  <Object name="FinancialInstrumentProductTypeCode_L" helpschema="efsml" helpelement="FinancialInstrumentProductTypeCodeEnum">
+    <Label />
+    <FinancialInstrumentProductTypeCode />
+  </Object>
+  <!--********************************-->
+  <!--Simple_FxBarrierTypeEnum-->
+  <!--********************************-->
+  <Object name="FxBarrierType" helpschema="fpml" helpelement="FxBarrierTypeEnum">
+    <DropDown datatype="string" listretrieval="predef:FXBARRIERTYPE" />
+  </Object>
+  <Object name="FxBarrierType_L" helpschema="fpml" helpelement="FxBarrierTypeEnum">
+    <label  helpschema="fpml-enum" helpelement="FxBarrierTypeEnum"/>
+    <FxBarrierType />
+  </Object>
+  <!--********************************-->
+  <!--Simple_IntentionEnum-->
+  <!--********************************-->
+  <Object name="IntentionEnum" >
+    <DropDown datatype="string" listretrieval="predef:enum.[code:IntentionEnum;isresource:false]" style="width:80px" />
+  </Object>
+  <Object name="IntentionEnum_L" >
+    <label  />
+    <IntentionEnum />
+  </Object>
+
+  <!--********************************-->
+  <!--InformationProvider              -->
+  <!--********************************-->
+  <Object name="InformationProvider" helpschema="fpml" helpelement="InformationProvider">
+    <documentation>InformationProvider without Label</documentation>
+    <DropDown datatype="string" listretrieval="predef:INFORMATIONPROVIDER" style="width:200px;" />
+  </Object>
+  <Object name="InformationProvider_L" helpschema="fpml" helpelement="InformationProvider">
+    <documentation>InformationProvider with Label</documentation>
+    <label />
+    <InformationProvider />
+  </Object>
+
+  <!--********************************-->
+  <!--SettlSessIDEnum-->
+  <!--********************************-->
+  <Object name="SettlSessIDEnum_L">
+    <Label helpschema="fixml" helpelement="SettlSessID_t"/>
+    <DropDown datatype="string" listretrieval="predef:enum.SettlSessIDEnum" />
+  </Object>
+
+  <!--********************************-->
+  <!--Simple_NettingMethodEnum_L-->
+  <!--********************************-->
+  <Object name="NettingMethodEnum_L">
+    <Label helpschema="efsml" helpelement="NettingMethodEnum"/>
+    <DropDown datatype="string" listretrieval="predef:enum.NetMethod" />
+  </Object>
+  <!--********************************-->
+  <!-- Complex_OrderQuantityTypeEnum -->
+  <!--********************************-->
+  <Object name="OrderQuantityType3CodeEnum" helpschema="efsml" helpelement="OrderQuantityType3CodeEnum">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:OrderQuantityType3CodeEnum;isresource:true;forcedenum:CASH|UNIT]" width="100px" />
+  </Object>
+  <Object name="OrderQuantityTypeEnum_L" helpschema="efsml" helpelement="OrderQuantityType3CodeEnum">
+    <Label />
+    <OrderQuantityType3CodeEnum />
+  </Object>
+  <!--********************************-->
+  <!-- Complex_PriceQuoteUnitsEnum -->
+  <!--********************************-->
+  <Object name="PriceQuoteUnitsEnum" helpschema="fpml" helpelement="PriceQuoteUnits">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:PriceQuoteUnits;isresource:false;forcedenum:ParValueDecimal|Rate|Price]"  />
+  </Object>
+  <Object name="PriceQuoteUnitsEnum_L" helpschema="fpml" helpelement="PriceQuoteUnits">
+    <Label />
+    <PriceQuoteUnitsEnum />
+  </Object>
+  <!--********************************-->
+  <!--PaymentType                     -->
+  <!--********************************-->
+  <Object name="PaymentType" helpschema="fpml" helpelement="PaymentType">
+    <documentation>PaymentType without Label</documentation>
+    <DropDown datatype="string" listretrieval="predef:enum.paymentType" />
+  </Object>
+  <Object name="PaymentType_L" helpschema="fpml" helpelement="PaymentType">
+    <documentation>PaymentType with Label</documentation>
+    <Label helpschema="fpml-shared" helpelement="PaymentType" />
+    <PaymentType/>
+  </Object>
+  <Object name="PaymentTypeADP" helpschema="fpml" helpelement="PaymentType">
+    <documentation>PaymentTypeADP without Label</documentation>
+    <DropDown datatype="string" listretrieval="predef:enum.[code:paymentType;customvalue:ADP]" />
+  </Object>
+  <Object name="PaymentTypeADP_L" helpschema="fpml" helpelement="PaymentType">
+    <documentation>PaymentTypeADP with Label</documentation>
+    <Label helpschema="fpml-shared" helpelement="PaymentType" />
+    <PaymentTypeADP/>
+  </Object>
+  <Object name="PaymentTypeOPP" helpschema="fpml" helpelement="PaymentType">
+    <documentation>PaymentTypeOPP without Label</documentation>
+    <DropDown datatype="string" listretrieval="predef:enum.[code:paymentType;customvalue:OPP]" />
+  </Object>
+  <Object name="PaymentTypeOPP_L" helpschema="fpml-shared" helpelement="PaymentType">
+    <documentation>PaymentTypeOPP with Label</documentation>
+    <Label helpschema="fpml" helpelement="PaymentType" />
+    <PaymentTypeOPP/>
+  </Object>
+
+
+
+  <!--********************************-->
+  <!--Simple_PayoutEnum-->
+  <!--********************************-->
+  <Object name="Payout" helpschema="fpml" helpelement="PayoutEnum">
+    <DropDown datatype="string" listretrieval="predef:PAYOUT" />
+  </Object>
+  <Object name="Payout_L" helpschema="fpml" helpelement="PayoutEnum">
+    <label helpschema="fpml-enum" helpelement="PayoutEnum" />
+    <Payout />
+  </Object>
+  <!--********************************-->
+  <!--Simple_PeriodEnum-->
+  <!--********************************-->
+  <Object name="Period" helpschema="fpml" helpelement="PeriodEnum">
+    <DropDown datatype="string" listretrieval="predef:PERIOD" width="100px" />
+  </Object>
+  <Object name="Period_L" helpschema="fpml" helpelement="PeriodEnum">
+    <label helpschema="fpml-enum" helpelement="PeriodEnum" />
+    <Period />
+  </Object>
+  <!--********************************-->
+  <!--Simple_PeriodFrequency-->
+  <!--********************************-->
+  <Object name="PeriodFrequency" helpschema="fpml" helpelement="PeriodFrequency">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:Frequency;isresource:false]" width="120px" />
+  </Object>
+  <!--********************************-->
+  <!--Simple_PremiumQuoteBasisEnum-->
+  <!--********************************-->
+  <Object name="PremiumQuotedBasis" helpschema="fpml" helpelement="PremiumQuoteBasisEnum">
+    <DropDown datatype="string" listretrieval="predef:PREMIUMQUOTEBASIS" width="250px"/>
+  </Object>
+  <!--********************************-->
+  <!--QuoteBasisEnum                  -->
+  <!--********************************-->
+  <Object name="QuoteBasis" helpschema="fpml" helpelement="QuoteBasisEnum">
+    <DropDown datatype="string" listretrieval="predef:QUOTEBASIS"
+              attributes="useIsDaRepresentation:false"
+              readonlymode ="isload:false"/>
+  </Object>
+  <Object name="QuoteBasis_L" helpschema="fpml" helpelement="QuoteBasisEnum">
+    <label helpschema="fpml" helpelement="QuoteBasisEnum" />
+    <QuoteBasis />
+  </Object>
+  <!--********************************-->
+  <!--PriceExpressionEnum             -->
+  <!--********************************-->
+  <Object name="PriceExpression" helpschema="fpml" helpelement="PriceExpressionEnum">
+    <DropDown datatype="string" listretrieval="predef:PRICEEXPRESSION" width="180px" />
+  </Object>
+  <!--********************************-->
+  <!-- PriceRateType3CodeEnum         -->
+  <!--********************************-->
+  <Object name="PriceRateTypeCode" helpschema="efsml" helpelement="PriceRateType3CodeEnum">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:PriceRateType3CodeEnum;isresource:false;forcedenum:DISC|YIEL]" width="100px" />
+  </Object>
+  <Object name="PriceRateTypeCode_L" helpschema="efsml" helpelement="PriceRateType3CodeEnum">
+    <Label />
+    <PriceRateTypeCode />
+  </Object>
+  <!--********************************-->
+  <!-- ProductTypeCodeEnum            -->
+  <!--********************************-->
+  <Object name="ProductTypeCode" helpschema="efsml" helpelement="ProductTypeCodeEnum">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:ProductTypeCodeEnum;isresource:false]" width="250px" />
+  </Object>
+  <Object name="ProductTypeCode_L" helpschema="efsml" helpelement="ProductTypeCodeEnum">
+    <Label />
+    <ProductTypeCode />
+  </Object>
+  <!--********************************-->
+  <!-- ReferenceAmount                -->
+  <!--********************************-->
+  <Object name="ReferenceAmount" helpschema="fpml" helpelement="ReferenceAmount">
+    <documentation>ReferenceAmount without Label</documentation>
+    <DropDown datatype="string" listretrieval="predef:REFERENCEAMOUNT" />
+  </Object>
+  <Object name="ReferenceAmount_L" helpschema="fpml" helpelement="ReferenceAmount">
+    <documentation>ReferenceAmount with Label</documentation>
+    <label />
+    <ReferenceAmount />
+  </Object>
+
+  <!--********************************-->
+  <!--ReturnTypeEnum                  -->
+  <!--********************************-->
+  <Object name="ReturnType" helpschema="fpml" helpelement="ReturnTypeEnum">
+    <DropDown datatype="string" listretrieval="predef:RETURNTYPE" />
+  </Object>
+  <!--********************************-->
+  <!--RepoDuration-->
+  <!--********************************-->
+  <Object name="RepoDurationEnum_L" helpschema="efsml" helpelement="RepoDurationEnum">
+    <Label/>
+    <RepoDurationEnum/>
+  </Object>
+  <Object name="RepoDurationEnum" helpschema="efsml" helpelement="RepoDurationEnum">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:RepoDuration;isresource:false]" width="100px" />
+  </Object>
+  <!--********************************-->
+  <!--RollConventionEnum-->
+  <!--********************************-->
+  <Object name="RollConvention" helpschema="fpml" helpelement="RollConventionEnum">
+    <DropDown datatype="string" listretrieval="predef:ROLLCONVENTION_STRING" width="100px" />
+  </Object>
+  <Object name="RollConvention_L" helpschema="fpml" helpelement="RollConventionEnum">
+    <Label helpschema="fpml" helpelement="RollConventionEnum" />
+    <RollConvention/>
+  </Object>
+  <!--********************************-->
+  <!--SettlementTypeEnum-->
+  <!--********************************-->
+  <Object name="SettlementType" helpschema="fpml" helpelement="SettlementTypeEnum">
+    <DropDown datatype="string" listretrieval="predef:SETTLEMENTTYPE" style="width:100px;"  />
+  </Object>
+  <Object name="SettlementType_L" helpschema="fpml" helpelement="SettlementTypeEnum">
+    <Label  helpschema="fpml" helpelement="SettlementTypeEnum"/>
+    <SettlementType/>
+  </Object>
+  <!--********************************-->
+  <!--StrikeQuoteBasisEnum            -->
+  <!--********************************-->
+  <Object name="StrikeQuoteBasis" helpschema="fpml" helpelement="StrikeQuoteBasisEnum">
+    <DropDown datatype="string" listretrieval="predef:STRIKEQUOTEBASIS"
+              attributes="useIsDaRepresentation:false" width="100px"
+              readonlymode ="isload:false;"/>
+  </Object>
+  <Object name="StrikeQuoteBasis_L" helpschema="fpml" helpelement="StrikeQuoteBasisEnum">
+    <label helpschema="fpml" helpelement="StrikeQuoteBasisEnum" />
+    <StrikeQuoteBasis />
+  </Object>
+  <!--********************************-->
+  <!--TouchConditionEnum               -->
+  <!--********************************-->
+  <Object name="TouchCondition" helpschema="fpml" helpelement="TouchConditionEnum">
+    <DropDown datatype="string" listretrieval="predef:TOUCHCONDITION" />
+  </Object>
+  <Object name="TouchCondition_L" helpschema="fpml" helpelement="TouchConditionEnum">
+    <Label helpschema="fpml" helpelement="TouchConditionEnum"/>
+    <TouchCondition />
+  </Object>
+  <!--********************************-->
+  <!--TriggerConditionEnum            -->
+  <!--********************************-->
+  <Object name="TriggerCondition" helpschema="fpml" helpelement="TriggerConditionEnum" >
+    <DropDown datatype="string" listretrieval="predef:TRIGGERCONDITION" />
+  </Object>
+  <Object name="TriggerCondition_L" helpschema="fpml" helpelement="TriggerConditionEnum">
+    <Label helpschema="fpml" helpelement="TriggerConditionEnum" />
+    <TriggerCondition />
+  </Object>
+  <!--********************************-->
+  <!--ResetRelativeTo                 -->
+  <!--********************************-->
+  <Object name="ResetRelativeTo">
+    <Table>
+      <DropDown datatype="string" listretrieval="predef:enum.[code:ResetRelativeTo;isresource:true]" width="200px"/>
+      <Display />
+    </Table>
+  </Object>
+  <Object name="ResetRelativeTo_L">
+    <Label/>
+    <ResetRelativeTo/>
+  </Object>
+  <!--********************************-->
+  <!--PosRequestModeEnum              -->
+  <!--********************************-->
+  <Object name="RequestMode" helpschema="efsml" helpelement="SettlSessIDEnum">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:SettlSessIDEnum;isresource:false;forcedenum:ITD|EOD]" width="250px" />
+  </Object>
+  <Object name="RequestMode_L" helpschema="efsml" helpelement="SettlSessIDEnum">
+    <Label helpschema="efsml" helpelement="SettlSessIDEnum"/>
+    <RequestMode />
+  </Object>
+  <!--********************************-->
+  <!--UnderlyingDeliveryStepEnum      -->
+  <!--********************************-->
+  <Object name="DeliveryStep" helpschema="efsml" helpelement="UnderlyingDeliveryStepEnum">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:UnderlyingDeliveryStepEnum;isresource:false;forcedenum:Delivered|DeliveredWithInvoicingInTwoSteps]" width="270px" />
+  </Object>
+  <Object name="DeliveryStep_L" helpschema="efsml" helpelement="UnderlyingDeliveryStepEnum">
+    <Label helpschema="efsml" helpelement="UnderlyingDeliveryStepEnum"/>
+    <DeliveryStep />
+  </Object>
+  <!--********************************-->
+  <!--DenOptionActionType             -->
+  <!--********************************-->
+  <Object name="DenOptionActionType">
+    <DropDown datatype="string" listretrieval="predef:denoptionactiontype" width="300px" />
+  </Object>
+  <Object name="DenOptionActionType_L" >
+    <Label />
+    <DenOptionActionType />
+  </Object>
+
+  <!--********************************-->
+  <!--TimeZoneLocation             -->
+  <!--********************************-->
+  <Object name="TimeZoneLocation" helpschema="" helpelement="">
+    <!--EG 20171009 [23452]-->
+    <!--<DropDown datatype="string" listretrieval="predef:enum.[code:TimezoneLocation;isresource:false]" width="150px" />-->
+    <DropDown datatype="string" listretrieval="predef:mapzone.[code:tzdbId]" width="150px" />
+  </Object>
+  <Object name="TimeZoneLocation_L" helpschema="" helpelement="">
+    <Label helpschema="efsml" helpelement=""/>
+    <TimeZoneLocation />
+  </Object>
+
+
+  <!--********************************-->
+  <!-- StrategyType                   -->
+  <!--********************************-->
+  <Object name="StrategyTypeScheme_L" helpschema="" helpelement="">
+    <Label helpschema="efsml" helpelement=""/>
+    <StrategyTypeScheme />
+  </Object>
+  <Object name="StrategyTypeScheme" helpschema="EFS" helpelement="StrategyTypeScheme">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:StrategyTypeScheme;isresource:true;resourceprefix:strategytype]"  width="200px" headlinkinfo="lblStrategy"/>
+  </Object>
+
+  <!--******************************-->
+  <!-- Complex_DebtSecurityTypeEnum -->
+  <!--******************************-->
+  <!-- EG 20190819 [FIXEDINCOME] Perpetual|Ordinary -->  
+  <Object name="DebtSecurityTypeEnum" helpschema="fpml" helpelement="DebtSecurityTypeEnum">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:DebtSecurityTypeEnum;isresource:false;]"  />
+  </Object>
+  <Object name="DebtSecurityTypeEnum_L" helpschema="fpml" helpelement="DebtSecurityTypeEnum">
+    <Label />
+    <PriceQuoteUnitsEnum />
+  </Object>
+
+
+</Objects>

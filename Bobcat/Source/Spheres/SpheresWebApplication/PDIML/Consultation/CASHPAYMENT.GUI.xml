@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+
+  <customObject control="space"    width="30"/>
+
+  <customObject control="label"    clientid="POSITIONSIDE" caption = "lblActorSide"
+                xsi:type="CustomObjectLabel"/>
+  
+  <customObject control="dropdown" clientid="POSITIONSIDE" datatype="integer"
+                listretrieval="Predef:positionsideview" width="300"
+                required="true" postback="true"  postbackargument ="SELFCLEAR_"
+                xsi:type="CustomObjectDropDown" misc="isClear:true" defaultvalue="1"/>
+
+</customObjects>

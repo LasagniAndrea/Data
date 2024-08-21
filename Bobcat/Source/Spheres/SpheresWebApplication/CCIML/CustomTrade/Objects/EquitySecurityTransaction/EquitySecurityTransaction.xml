@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!--
+EG 20211217 [XXXXX] Gestion icon (Font Awesome) ouverture/Fermeture
+- Suppression de l'instruction : tblH-startdisplay:expand; (inutile valeur par défaut)
+- Suppression de l'instruction : tblH-linkid:xxxx; (inutile gestion via ajax quand nécessaire)
+-->
+
+<!-- 
+  CC 20180119 Ajout nouveaux objets pour limiter Facility par Instrument 
+  EG 20171113 [23509] Upd Gestion Objets Facility / Dates et Marché 
+  -->
+<Objects>
+
+  <!-- ********************************* -->
+  <!-- *** FACILITY AND MARKET BLOCK *** -->
+  <!-- ********************************* -->
+
+  <Object name="ESEMarketBlock">
+    <table id="tbl_market" style="istableB:true;tblB-mainclass:gray;" verticalAlign="top" colspan="-1" controlalignleft="1">
+      <ESEFacilityHeader/>
+      <br/>
+      <ESEMarketHeader/>
+    </table>
+  </Object>
+
+  <!-- ********************************* -->
+  <!-- *** PRODUCT BLOCK             *** -->
+  <!-- ********************************* -->
+  <Object name="EquitySecurityTransactionBlock">
+    <table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:EquitySecurityTransaction;">
+      <table colspan="-1" style="margin-top:2px;">
+        <EquitySecurityQtePricePositionBlock/>
+        <br/>
+        <EquitySecurityDescriptionBlock/>
+        <table controlalignleft="true">
+          <EquitySecurityGrossAmount clientid="grossAmount"/>
+        </table>
+      </table>
+      <TradeAndOrderBlock/>
+    </table>
+  </Object>
+
+  <!-- ********************************* -->
+  <!-- *** ASSET EQUITY DESCRIPTION  *** -->
+  <!-- ********************************* -->
+  <Object name="EquitySecurityDescriptionBlock">
+    <table id ="FIXML_TrdCapRpt_Instrmt_tblAssetEquityDescH" verticalAlign ="Top" colspan="-1"
+           style="istableH:true;tblH-titleR:lbl_AssetETDDescription;tblH-css:size5;tblH-reverse:1;tblH-startdisplay:collapse;helpschema:fixml;helpelement:Instrmt;" >
+      <table id="FIXML_TrdCapRpt_Instrmt_tblAssetEquityDesc" style="margin-top:2px;" controlalignleft="true" verticalAlign ="Top">
+        <table controlalignleft="true" verticalAlign ="Top">
+          <table verticalAlign ="Top">
+            <Banner caption="Ticker / Identification" level="3"  helpschema="fixml" helpelement="SecurityID_t"/>
+            <String100_RO_L clientid="FIXML_TrdCapRpt_Instrmt_ISINCode" required="false" helpschema="fixml" helpelement="SecurityID_t"/>
+            <br/>
+            <String100_RO_L clientid="FIXML_TrdCapRpt_Instrmt_NSINCode" required="false" helpschema="fixml" helpelement="SecurityID_t"/>
+            <space/>
+            <Display clientid="FIXML_TrdCapRpt_Instrmt_NSINCode" helpelement="none" style="white-space:nowrap"/>
+            <br/>
+            <String100_RO_L clientid="FIXML_TrdCapRpt_Instrmt_RICCode" required="false" helpschema="fixml" helpelement="SecurityID_t"/>
+            <br/>
+            <String100_RO_L clientid="FIXML_TrdCapRpt_Instrmt_BBGCode" required="false" helpschema="fixml" helpelement="SecurityID_t"/>
+          </table>
+          <space/>
+          <table verticalAlign ="Top">
+            <Banner caption="Classification" level="3" helpschema="fixml" helpelement="CFICode_t"/>
+            <String100_RO_L clientid="FIXML_TrdCapRpt_Instrmt_CFICode" required="false" helpschema="fixml" helpelement="CFICode_t"/>
+            <Display clientid="FIXML_TrdCapRpt_Instrmt_CFICode" helpelement="none"/>
+            <br/>
+            <Banner caption="Emission" level="3" helpschema="fixml" helpelement="Issuer_t"/>
+            <String250_RO_L clientid="FIXML_TrdCapRpt_Instrmt_Issuer" required="false" helpschema="fixml" helpelement="Issuer_t"/>
+            <Display clientid="FIXML_TrdCapRpt_Instrmt_Issuer" helpelement="none"/>
+            <br/>
+            <Date_RO_L clientid="FIXML_TrdCapRpt_Instrmt_IssueDate" required="false" helpschema="fixml" helpelement="IssueDate_t"/>
+          </table>
+          <space/>
+        </table>
+      </table>
+    </table>
+  </Object>
+
+  <!-- FI 20140902 [XXXXX] PositionEffect n'est plus présent dans l'écran, il est initialisé avec via INSTRUMENT.FUNGIBILITYMODE -->
+  <Object name ="EquitySecurityQtePricePositionBlock" >
+    <table controlalignleft="true">
+      <EquitySecurityID_L clientid="FIXML_TrdCapRpt_Instrmt_ID" required="true" postback="true" helpschema="fixml" helpelement="SecurityID_t" />
+      <table controlalignleft="true">
+        <space/>
+        <IntegerQte_w70_L clientid="FIXML_TrdCapRpt_LastQty" postback="true" required="true" helpschema="fixml" helpelement="LastQty"/>
+        <space/>
+        <FixLastPx_L clientid="FIXML_TrdCapRpt_LastPx" postback="true" required="true" helpschema="fixml" helpelement="LastPx"/>
+        <br/>
+        <space/>
+      </table>
+    </table>
+  </Object>
+
+  <!--SecurityID (48)-->
+  <Object name="EquitySecurityID_L" helpschema="fixml" helpelement="SecurityID_t">
+    <Table >
+      <table>
+        <Label helpschema="fixml" helpelement="SecurityID_t"/>
+        <br/>
+        <space/>
+      </table>
+      <table>
+        <TextBox datatype="string" style="width:400px;" autocomplete="true"/>
+        <Button type="Submit" consultation="ASSET_EQUITY" sqlspecifiedfield="IDENTIFIER" cssclass="fa-icon"  tooltip="search"/>
+        <br/>
+        <Display style="font-size:x-small;font-weight:normal;overflow:hidden;width:400px" helpschema="fixml" helpelement="SecurityID_t"/>
+      </table>
+    </Table>
+  </Object>
+
+  <!-- ********************************* -->
+  <!-- *** GROSS AMOUNT              *** -->
+  <!-- ********************************* -->
+  <Object name="EquitySecurityGrossAmount">
+    <Table colspan="-1">
+      <Banner caption="equitySecurityTransaction_grossAmountTitle" level="3"  helpschema="fpml" helpelement="Payment"/>
+      <SecurityPayment />
+    </Table>
+  </Object>
+
+</Objects>

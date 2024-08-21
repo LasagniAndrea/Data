@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="MARGINTRACK">
+  <DataContextMoniker Name="/MARGINTRACKDataContext" />
+  <nestedChildShapes>
+    <classShape Id="51258635-4430-4377-a4a8-5e06c43fc07a" absoluteBounds="0.5, 0.5, 2, 3.1170068359375">
+      <DataClassMoniker Name="/MARGINTRACKDataContext/MARGINTRACK" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e5abd1a0-23f0-466a-a6c7-312263b3a7c3" absoluteBounds="0.515, 0.96, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

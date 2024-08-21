@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+
+  <!-- *********************** -->
+  <!-- ***   BLOCS ASSET   *** -->
+  <!-- *********************** -->
+
+  <!-- EventsAssetBlock -->
+  <Object name="EventsAssetBlock">
+    <table>
+      <EventsAsset clientid="event" required="false"/>
+    </table>
+  </Object>
+
+  <!-- *************************** -->
+  <!-- ***   COMPLEX OBJECTS   *** -->
+  <!-- *************************** -->
+
+  <!--EventsAsset-->
+  <Object name="EventsAsset">
+    <table verticalAlign="Top" colspan="-1">
+      <EventParentAttached/>
+      <br/>
+      <table verticalAlign="Top" style="istableH:true;tblH-titleR:AssetEvent;tblH-css:size4;">
+        <table colspan="-1" verticalAlign="Top" overflow="330" controlalignleft="true">
+          <EventAssetItem clientid="eventAsset" required="false" occurs="1" addsuboperator="false" />
+        </table>
+      </table>
+    </table>
+  </Object>
+
+  <!-- EventAssetItem-->
+  <Object name="EventAssetItem">
+    <table verticalAlign="Top" >
+      <Text200_RO_L datatype="string" clientid="assetCategory"/>
+      <EventAsset_L clientid="idAsset" />
+    </table>
+    <br/>
+    <table verticalAlign="Top">
+      <Banner level="3" />
+      <Text200_RO_L style="width:50px"  datatype="string" clientid="category"/>
+      <br/>
+      <Text200_RO_L datatype="string" clientid="idM"/>
+      <br/>
+      <Text200_RO_L datatype="string" clientid="idC"/>
+      <br/>
+      <Text200_RO_L datatype="string" clientid="isinCode"/>
+      <br/>
+      <Text200_RO_L datatype="string" clientid="assetSymbol"/>
+      <br/>
+      <Banner level="3" />
+      <Text200_RO_L datatype="string" clientid="contractSymbol"/>
+      <br/>
+      <Text200_RO_L style="width:50px"  datatype="string" clientid="putCallValue"/>
+      <br/>
+      <Text200_RO_L style="width:100px" datatype="decimal" clientid="strikePrice"/>
+      <br/>
+      <Text200_RO_L datatype="decimal" clientid="contractMultiplier"/>
+      <br/>
+      <Date_RO_L datatype="date" clientid="maturityDate"/>
+      <br/>
+      <Date_RO_L datatype="date" clientid="maturityDateSys"/>
+      <br/>
+      <Date_RO_L datatype="date" clientid="deliveryDate"/>
+      <br/>
+      <Text200_RO_L datatype="decimal" clientid="nominalValue"/>
+      <br/>
+      <Banner caption="PRIMARYRATESRC" level="3" />
+      <Text200_RO_L datatype="string" clientid="src_primaryRateSrc"/>
+      <br/>
+      <Text200_RO_L datatype="string" clientid="src_primaryRateSrcPage"/>
+      <br/>
+      <Text200_RO_L datatype="string" clientid="src_primaryRateSrcHead"/>
+    </table>
+  </Object>
+
+
+  <Object name="EventAsset_L"  helpschema="efsml" helpelement="UnderlyingAsset">
+    <Label />
+    <Table>
+      <TextBox datatype="string" style="width:300px;" />
+      <Space />
+      <Button type="Submit" referential="ASSET_XXX" cssclass="fa-icon" tooltip="search"/>
+    </Table>
+  </Object>
+
+  <!--EventAssetItem-->
+  <Object name="EventAssetItem2">
+    <table verticalAlign="Top">
+      <Banner caption="Characteristics" level="3" />
+      <Text200_L datatype="string" clientid="idAsset" postback="true" />
+      <space/>
+      <Button type="Submit" referential="VW_ASSET" cssclass="fa-icon"   tooltip="search"/>
+      <br/>
+      <BusinessCenterTime clientid="fixingTime" />
+      <br/>
+      <Quote clientid="quote" />
+    </table>
+    <AssetSource clientid="src" />
+  </Object>
+
+  <!-- QuoteTiming-->
+  <Object name="Quote">
+    <QuoteSide_L   clientid="side"/>
+    <br/>
+    <QuoteTiming_L clientid="timing"/>
+  </Object>
+
+
+</Objects>

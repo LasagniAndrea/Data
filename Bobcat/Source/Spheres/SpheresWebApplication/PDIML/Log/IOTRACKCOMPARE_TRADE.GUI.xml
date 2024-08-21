@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- FI 20121106 postbackargument SELFCLEAR_ -->
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+  <customObject control="label"     clientid="MATCHSTATUS"         
+                caption = "matchstatus"  xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="MATCHSTATUS"
+                width="300px"   datatype="string" 
+                listretrieval="predef:matchstatusenum" required="true" postback="true"  
+                postbackargument ="SELFCLEAR_" xsi:type="CustomObjectDropDown"  
+                misc="isClear:true;isAddAll:true"/>
+</customObjects>

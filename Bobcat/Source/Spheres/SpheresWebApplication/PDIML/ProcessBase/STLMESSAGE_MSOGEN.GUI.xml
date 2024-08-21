@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+  <customObject control="label"   clientid="DTMSO"    caption = "lblDtProcess" xsi:type="CustomObjectLabel"/>
+  <customObject control="textbox" clientid="DTMSO"   datatype = "date" required="true"
+                postback="true" postbackargument ="SELFRELOAD_"  xsi:type="CustomObjectTextBox"
+                      />
+  <!--      
+        <customObject control="label"     clientid="IDA_SENDER"  caption = "settlement office"  xsi:type="CustomObjectLabel"/>
+        <customObject control="dropdown"  clientid="IDA_SENDER"  width="220px"   datatype="string" listretrieval="predef:ActorSettltOffice" required="true" postback="true"  postbackargument ="SELFRELOAD_" xsi:type="CustomObjectDropDown"  misc="isAddAll:true;isUseSessionRestrict:true;isClear:false"/>
+        -->
+</customObjects>

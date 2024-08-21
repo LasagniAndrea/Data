@@ -1,0 +1,924 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugDev|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugDev\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEBUGDEV</DefineConstants>
+    <DocumentationFile>bin\SpheresRiskPerformancev3.0.0.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseDev|AnyCPU' ">
+    <OutputPath>bin\ReleaseDev\</OutputPath>
+    <DefineConstants>TRACE;RELEASEDEV</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{83957C1A-0A37-4417-9DF8-E285BEA4A72E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EFS.SpheresRiskPerformance</RootNamespace>
+    <AssemblyName>SpheresRiskPerformance</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseSetup|AnyCPU'">
+    <OutputPath>bin\ReleaseSetup\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugDev|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\DebugDev\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEBUGDEV</DefineConstants>
+    <DocumentationFile>bin\SpheresRiskPerformancev3.0.0.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseDev|x64'">
+    <OutputPath>bin\x64\ReleaseDev\</OutputPath>
+    <DefineConstants>TRACE;RELEASEDEV</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseSetup|x64'">
+    <OutputPath>bin\x64\ReleaseSetup\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CalculationSheet\CalculationSheetCBOEMargin.cs" />
+    <Compile Include="CalculationSheet\CalculationSheetEuronextVar.cs" />
+    <Compile Include="CalculationSheet\CalculationSheetExternal.cs" />
+    <Compile Include="CalculationSheet\CalculationSheetIMSM.cs" />
+    <Compile Include="CalculationSheet\CalculationSheetMEFFCOM2.cs" />
+    <Compile Include="CalculationSheet\CalculationSheetNoMargin.cs" />
+    <Compile Include="CalculationSheet\CalculationSheetNOMXCFM.cs" />
+    <Compile Include="CalculationSheet\CalculationSheetOMXRCaR.cs" />
+    <Compile Include="CalculationSheet\CalculationSheetPRISMA.cs" />
+    <Compile Include="CalculationSheet\CalculationSheetSPAN2.cs" />
+    <Compile Include="CalculationSheet\CalculationSheetTIMSEUREX.cs" />
+    <Compile Include="CalculationSheet\CalculationSheetTIMSIDEM.cs" />
+    <Compile Include="CalculationSheet\CalculationSheetSPAN.cs" />
+    <Compile Include="CalculationSheet\CalculationSheetTIMS.cs" />
+    <Compile Include="CashBalanceInterest\CBInterestProcess.cs" />
+    <Compile Include="CashBalanceInterest\CBInterestCalculation.cs" />
+    <Compile Include="CashBalanceInterest\CBInterestDataContracts.cs" />
+    <Compile Include="CashBalance\CashBalanceComparer.cs" />
+    <Compile Include="CashBalance\CashBalanceProcess3.cs" />
+    <Compile Include="CashBalance\CashBalanceHierarchy.cs" />
+    <Compile Include="CashBalance\CashBalanceProcessAsync.cs" />
+    <Compile Include="CashBalance\CashBalanceCBRequestDiagnostics.cs" />
+    <Compile Include="CommunicationObjects\CommunicationObjectsIMSM.cs" />
+    <Compile Include="CommunicationObjects\CommunicationObjectsOMXRCaR.cs" />
+    <Compile Include="CommunicationObjects\CommunicationObjectsCBOEMargin.cs" />
+    <Compile Include="CalculationSheet\CalculationSheetCustom.cs" />
+    <Compile Include="CashBalance\CashBalanceProcess.cs" />
+    <Compile Include="CashBalance\CashBalanceCalculation.cs" />
+    <Compile Include="CashBalance\CashBalanceDataDocument.cs" />
+    <Compile Include="CommunicationObjects\CommunicationObjects.cs" />
+    <Compile Include="CommunicationObjects\CommunicationObjectsMEFFCOM2.cs" />
+    <Compile Include="CommunicationObjects\CommunicationObjectsPRISMA.cs" />
+    <Compile Include="CommunicationObjects\CommunicationObjectsSPAN.cs" />
+    <Compile Include="Interface\RiskPerformanceAPI.cs" />
+    <Compile Include="RiskMethods\RiskMethodDataContractsIMSM.cs" />
+    <Compile Include="RiskMethods\RiskMethodFactory.cs" />
+    <Compile Include="RiskMethods\RiskMethodFactoryAsync.cs" />
+    <Compile Include="RiskMethods\RiskMethodIMSM.cs" />
+    <Compile Include="RiskMethods\RiskMethodNOMXCFM.cs" />
+    <Compile Include="RiskMethods\RiskMethodSet.cs" />
+    <Compile Include="RiskMethods\RiskMethodCBOE.cs" />
+    <Compile Include="RiskMethods\RiskMethodDataContractsCBOE.cs" />
+    <Compile Include="RiskMethods\RiskMethodDataContractsMEFFCOM2.cs" />
+    <Compile Include="RiskMethods\RiskMethodDataContractsPRISMA.cs" />
+    <Compile Include="RiskMethods\RiskMethodDataContractsSPAN.cs" />
+    <Compile Include="RiskMethods\RiskMethodMEFFCOM2.cs" />
+    <Compile Include="RiskMethods\RiskMethodOMXRCaR.cs" />
+    <Compile Include="RiskMethods\RiskMethodPRISMA.cs" />
+    <Compile Include="RiskMethods\RiskMethodSetAsync.cs" />
+    <Compile Include="RiskMethods\RiskMethodTIMSEUREX.cs" />
+    <Compile Include="RiskMethods\RiskMethodSPAN.cs" />
+    <Compile Include="RiskMethods\RiskMethodTIMSIDEM.cs" />
+    <Compile Include="RiskMethods\RiskMethodTIMSIDEMAsync.cs" />
+    <Compile Include="RiskPerformanceExternal.cs" />
+    <Compile Include="RiskPerformanceProcessAsync.cs" />
+    <Compile Include="RiskPerformanceProcessBase.cs" />
+    <Compile Include="RiskPerformanceSerializationHelper.cs" />
+    <Compile Include="EntityMarket.cs" />
+    <Compile Include="CalculationSheet\CalculationSheetBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="RiskMethods\RiskMethodDataContracts.cs" />
+    <Compile Include="RiskMethods\RiskMethodCustom.cs" />
+    <Compile Include="RiskMethods\RiskMethodEnumsAndStructures.cs" />
+    <Compile Include="RiskPerformanceDataContracts.cs" />
+    <Compile Include="RiskPerformanceHierarchyFactory.cs" />
+    <Compile Include="RiskPerformanceInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RiskPerformanceProcess.cs" />
+    <Compile Include="RiskPerformanceRepository.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="SpheresObjects\MARGINTRACK.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MARGINTRACK.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="EnumsAndStructures.cs" />
+    <Compile Include="RiskPerformanceService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SpheresObjects\TRADEMARGINTRACK.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TRADEMARGINTRACK.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\RiskPerformanceTools.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\Spheres\SpheresWebApplication\GUIOutput\MarginRequirementReport\EUREX_Common.xslt">
+      <Link>GUIOutput\MarginRequirementReport\EUREX_Common.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\SpheresWebApplication\GUIOutput\MarginRequirementReport\PRISMA_EUREX_CP046.xslt">
+      <Link>GUIOutput\MarginRequirementReport\PRISMA_EUREX_CP046.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\SpheresWebApplication\Library\DtFunc.xslt">
+      <Link>Library\DtFunc.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\SpheresWebApplication\Library\NbrFunc.xslt">
+      <Link>Library\NbrFunc.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\SpheresWebApplication\Library\Resource.xslt">
+      <Link>Library\Resource.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\SpheresWebApplication\Library\StrFunc.xslt">
+      <Link>Library\StrFunc.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\SpheresWebApplication\Library\xsltsl\date-time.xsl">
+      <Link>Library\xsltsl\date-time.xsl</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\SpheresEventsGen\EventsGen\CashBalance.xslt">
+      <Link>EventsGen\CashBalance.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\SpheresEventsGen\EventsGen\CashBalanceInterest.xslt">
+      <Link>EventsGen\CashBalanceInterest.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\SpheresEventsGen\EventsGen\MarginRequirement.xslt">
+      <Link>EventsGen\MarginRequirement.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\SpheresEventsGen\EventsGen\RiskTrade.xslt">
+      <Link>EventsGen\RiskTrade.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\SpheresEventsGen\EventsGen\Shared.xslt">
+      <Link>EventsGen\Shared.xslt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App.ico" />
+    <None Include="..\..\Spheres\Common\Process\parallelCustomSettings.config">
+      <Link>parallelCustomSettings.config</Link>
+    </None>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-Asset-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-Asset-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-CashBalance-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-CashBalance-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-CashBalanceInterest-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-CashBalanceInterest-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-Enum-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-Enum-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-Fixed-Income-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-Fixed-Income-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-FixML-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-FixML-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-FuturesAndOptions-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-FuturesAndOptions-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-Fx-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-Fx-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-IMRLog.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-IMRLog.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-Invoice-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-Invoice-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-Ird-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-Ird-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-LoanDeposit-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-LoanDeposit-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-MarginRequirement-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-MarginRequirement-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-Options-Shared-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-Options-Shared-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-Repo-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-Repo-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-Repository-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-Repository-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-Security-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-Security-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-Security-Shared-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-Security-Shared-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-SettlementInstruction-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-SettlementInstruction-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-Shared-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-Shared-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML44\fixml-components-base-4-4.xsd">
+      <Link>BusinessSchemas\FIXML44\fixml-components-base-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML44\fixml-components-impl-4-4.xsd">
+      <Link>BusinessSchemas\FIXML44\fixml-components-impl-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML44\fixml-datatypes-4-4.xsd">
+      <Link>BusinessSchemas\FIXML44\fixml-datatypes-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML44\fixml-fields-base-4-4.xsd">
+      <Link>BusinessSchemas\FIXML44\fixml-fields-base-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML44\fixml-fields-impl-4-4.xsd">
+      <Link>BusinessSchemas\FIXML44\fixml-fields-impl-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML44\fixml-order-base-4-4.xsd">
+      <Link>BusinessSchemas\FIXML44\fixml-order-base-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML44\fixml-order-impl-4-4.xsd">
+      <Link>BusinessSchemas\FIXML44\fixml-order-impl-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML50SP1\fixml-components-base-5-0-SP1.xsd">
+      <Link>BusinessSchemas\FIXML50SP1\fixml-components-base-5-0-SP1.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML50SP1\fixml-components-impl-5-0-SP1.xsd">
+      <Link>BusinessSchemas\FIXML50SP1\fixml-components-impl-5-0-SP1.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML50SP1\fixml-datatypes-5-0-SP1.xsd">
+      <Link>BusinessSchemas\FIXML50SP1\fixml-datatypes-5-0-SP1.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML50SP1\fixml-fields-base-5-0-SP1.xsd">
+      <Link>BusinessSchemas\FIXML50SP1\fixml-fields-base-5-0-SP1.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML50SP1\fixml-fields-impl-5-0-SP1.xsd">
+      <Link>BusinessSchemas\FIXML50SP1\fixml-fields-impl-5-0-SP1.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML50SP1\fixml-metadata-5-0-SP1.xsd">
+      <Link>BusinessSchemas\FIXML50SP1\fixml-metadata-5-0-SP1.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML50SP1\fixml-positions-base-5-0-SP1.xsd">
+      <Link>BusinessSchemas\FIXML50SP1\fixml-positions-base-5-0-SP1.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML50SP1\fixml-positions-impl-5-0-SP1.xsd">
+      <Link>BusinessSchemas\FIXML50SP1\fixml-positions-impl-5-0-SP1.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML50SP1\fixml-tradecapture-base-5-0-SP1.xsd">
+      <Link>BusinessSchemas\FIXML50SP1\fixml-tradecapture-base-5-0-SP1.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML50SP1\fixml-tradecapture-impl-5-0-SP1.xsd">
+      <Link>BusinessSchemas\FIXML50SP1\fixml-tradecapture-impl-5-0-SP1.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\EfsExtend\fpml-enum-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\EfsExtend\fpml-enum-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\EfsExtend\fpml-ird-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\EfsExtend\fpml-ird-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\EfsExtend\fpml-shared-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\EfsExtend\fpml-shared-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-allocation-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-allocation-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-asset-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-asset-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-bond-option-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-bond-option-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-cd-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-cd-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-confirmation-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-confirmation-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-contract-notification-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-contract-notification-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-correlation-swaps-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-correlation-swaps-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-credit-event-notification-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-credit-event-notification-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-dividend-swaps-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-dividend-swaps-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-doc-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-doc-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-enum-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-enum-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-eq-shared-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-eq-shared-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-eqd-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-eqd-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-fx-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-fx-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-ird-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-ird-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-main-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-main-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-matching-status-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-matching-status-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-mktenv-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-mktenv-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-msg-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-msg-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-option-shared-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-option-shared-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-posttrade-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-posttrade-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-posttrade-confirmation-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-posttrade-confirmation-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-posttrade-execution-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-posttrade-execution-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-posttrade-negotiation-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-posttrade-negotiation-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-pretrade-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-pretrade-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-reconciliation-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-reconciliation-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-reporting-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-reporting-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-return-swaps-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-return-swaps-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-riskdef-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-riskdef-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-shared-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-shared-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-trade-notification-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-trade-notification-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-tradeexec-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-tradeexec-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-valuation-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-valuation-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\fpml-variance-swaps-4-4.xsd">
+      <Link>BusinessSchemas\FpML44\fpml-variance-swaps-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML\fixml-components-base-4-4.xsd">
+      <Link>BusinessSchemas\FIXML\fixml-components-base-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML\fixml-components-impl-4-4.xsd">
+      <Link>BusinessSchemas\FIXML\fixml-components-impl-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML\fixml-datatypes-4-4.xsd">
+      <Link>BusinessSchemas\FIXML\fixml-datatypes-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML\fixml-fields-base-4-4.xsd">
+      <Link>BusinessSchemas\FIXML\fixml-fields-base-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML\fixml-fields-impl-4-4.xsd">
+      <Link>BusinessSchemas\FIXML\fixml-fields-impl-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML\fixml-order-base-4-4.xsd">
+      <Link>BusinessSchemas\FIXML\fixml-order-base-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\FIXML\fixml-order-impl-4-4.xsd">
+      <Link>BusinessSchemas\FIXML\fixml-order-impl-4-4.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Spheres\EfsML\BusinessSchemas\EfsMLv30\EfsML-Com-3-0.xsd">
+      <Link>BusinessSchemas\EfsMLv30\EfsML-Com-3-0.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="..\..\Spheres\EfsML\BusinessSchemas\FpML44\xmldsig-core-schema.xsd">
+      <Link>BusinessSchemas\FpML44\xmldsig-core-schema.xsd</Link>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Spheres\ACommon\ACommon.csproj">
+      <Project>{9FF00E89-DA79-4F89-B3A6-9995F502F080}</Project>
+      <Name>ACommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Spheres\CommonCaptureGen\CommonCaptureGen.csproj">
+      <Project>{1E32262C-564A-4382-ACE7-22D47C934352}</Project>
+      <Name>CommonCaptureGen</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Spheres\CommonData\CommonData.csproj">
+      <Project>{A0323250-116A-43EF-9E7D-F3218B6246B1}</Project>
+      <Name>CommonData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Spheres\CommonIO\CommonIO.csproj">
+      <Project>{d79188dd-ef45-429a-859d-e00185ae5f6f}</Project>
+      <Name>CommonIO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Spheres\CommonLog\CommonLog.csproj">
+      <Project>{4bfe53c9-dbcf-494c-a29f-738fddb76d54}</Project>
+      <Name>CommonLog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Spheres\Common\Common.csproj">
+      <Project>{CDACCA1B-403B-47F5-9F1B-E1A1AC4A7FE3}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Spheres\DALOleDb\DALOleDb.csproj">
+      <Project>{B68C8188-99D4-4600-92A2-3AA8302E87B8}</Project>
+      <Name>DALOleDb</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Spheres\DALOracleManaged\DALOracleManaged.csproj">
+      <Project>{dafcddc0-fbec-4776-9fe9-61ceb806e9d4}</Project>
+      <Name>DALOracleManaged</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Spheres\DALOracle\DALOracle.csproj">
+      <Project>{7BB59F8C-6339-4613-BAAA-06FA589483F4}</Project>
+      <Name>DALOracle</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Spheres\DALSqlServer\DALSQLServer.csproj">
+      <Project>{B41A7061-0283-43A6-8007-F1F350E1C869}</Project>
+      <Name>DALSQLServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Spheres\Data\Data.csproj">
+      <Project>{1DCDE042-2496-46AE-A0B9-CE9C994D92E2}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Spheres\EfsMLEnum\Enums.csproj">
+      <Project>{4117F946-D2FD-4EAB-A4A0-F3FB8B1732CC}</Project>
+      <Name>Enums</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Spheres\EfsML\EfsML.csproj">
+      <Project>{A7E609D0-E67C-4997-B798-8974716D413C}</Project>
+      <Name>EfsML</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Spheres\FpMLGUI\EfsMLGUI.csproj">
+      <Project>{DE7F74E2-9431-44D4-8A38-3C0884D6719F}</Project>
+      <Name>EfsMLGUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Spheres\LoggerClient\LoggerClient.csproj">
+      <Project>{55e5d84a-1d98-4c76-99dd-fbc4a2d316bf}</Project>
+      <Name>LoggerClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Spheres\SpheresResource\SpheresResource.csproj">
+      <Project>{568a7d8f-7522-44ec-aeec-2e94c84250db}</Project>
+      <Name>SpheresResource</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Spheres\TimeZone\TimeZone.csproj">
+      <Project>{36a1ff15-5123-43b6-b05e-2da7091b0c76}</Project>
+      <Name>TimeZone</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Spheres\TradeCaptureGen\TradeCaptureGen.csproj">
+      <Project>{142B10A1-7781-4351-BACE-F6E773457D3F}</Project>
+      <Name>TradeCaptureGen</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RiskMethods\RiskMethods.csproj">
+      <Project>{2585ad64-195d-4c99-978a-d98c71ad3156}</Project>
+      <Name>RiskMethods</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpheresCommonEventsGen\SpheresCommonEventsGenBase.csproj">
+      <Project>{A560BABC-9028-48A9-8642-1563D9D3B4AD}</Project>
+      <Name>SpheresCommonEventsGenBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpheresEventsGen\SpheresEventsGen.csproj">
+      <Project>{9002C38A-A8BD-4932-9549-54A896BEF7D6}</Project>
+      <Name>SpheresEventsGen</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpheresEventsVal\SpheresEventsVal.csproj">
+      <Project>{0533D6B1-05D9-4782-99AC-A9FA612F8304}</Project>
+      <Name>SpheresEventsVal</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpheresIO\SpheresIO.csproj">
+      <Project>{7cc07ec2-ab16-4bc6-a3ea-0b8ef4b880b8}</Project>
+      <Name>SpheresIO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SpheresServiceBase\SpheresServiceBase.csproj">
+      <Project>{D8AF9FF5-71D6-4B16-9D07-9895E86E50CE}</Project>
+      <Name>SpheresServiceBase</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SpheresObjects\MARGINTRACK.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>MARGINTRACK.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SpheresObjects\MARGINTRACK.dbml.layout">
+      <DependentUpon>MARGINTRACK.dbml</DependentUpon>
+    </None>
+    <None Include="SpheresObjects\TRADEMARGINTRACK.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>TRADEMARGINTRACK.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SpheresObjects\TRADEMARGINTRACK.dbml.layout">
+      <DependentUpon>TRADEMARGINTRACK.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BuildIdentifier\" />
+    <Folder Include="Message\Identifier\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+
+  <!-- TradeRemoveBlock -->
+  <Object name="TradeRemoveBlock" context="remove">
+    <TradeRemove clientid="tradeRemove" />
+  </Object>
+ 
+
+  <!-- TradeRemove -->
+  <Object name="TradeRemove">
+    <table style="istableH:true;tblH-titleR:TradeRemove;tblH-bkgH-color:#C00303;tblH-css:size4;">
+      <TradeIdentifier />
+      <br/>
+      <TradeRemoveCharacteristics />
+      <TradeActionComments />
+      <Fill/>
+    </table>
+  </Object>
+
+  <!-- TradeRemoveCharacteristics -->
+  <Object name="TradeRemoveCharacteristics">
+    <table verticalAlign ="Top" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size5;tblH-reverse:1;">
+      <table style="margin-top:2px;" colspan="-1" controlalignleft="true" verticalAlign ="Top">
+        <Date_L clientid="date" required="true"  postback="false" />
+      </table>
+    </table>
+  </Object>
+
+</Objects>
+

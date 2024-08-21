@@ -1,0 +1,1 @@
+<%@ Page language="c#" Inherits="EFS.Spheres.NotepadPage" Codebehind="Notepad.aspx.cs" %>

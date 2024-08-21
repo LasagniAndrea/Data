@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+	<!--LoanDepositBlock-->
+	<Object name="LoanDepositBlock">
+		<Table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:LoanDeposit;" xcolspan="-1">
+			<LoanDepositStream clientid="loanDepositStream" occurs="1"  helpschema="efsml" helpelement="LoanDepositStream" />
+			<!--additionalPayment-->
+      <table id="tblAdditionalPaymentH" colspan="-1"
+         style="istableH:true;tblH-titleR:AdditionalPayment;tblH-css:size5;tblH-reverse:1;tblH-startdisplay:collapse;">
+        <table id ="tblAdditionalPayment">
+          <PaymentADP clientid="additionalPayment" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment" keepinquickinput="false"/>
+        </table>
+      </table>
+		</Table>
+	</Object>
+
+	<!--LoanDepositStubBlock-->
+	<Object name="LoanDepositStubBlock">
+		<Table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:LoanDeposit;">		   
+			<LoanDepositStubStream clientid="loanDepositStream" occurs="1"  helpschema="efsml" helpelement="LoanDepositStream" />
+			<!--additionalPayment-->
+      <table id="tblAdditionalPaymentH" colspan="-1"
+         style="istableH:true;tblH-titleR:AdditionalPayment;tblH-css:size5;tblH-reverse:1;tblH-startdisplay:collapse;">
+        <table id ="tblAdditionalPayment">
+          <PaymentADP clientid="additionalPayment" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment" keepinquickinput="false"/>
+        </table>
+      </table>
+		</Table>
+	</Object>
+
+	<!--MultiStreamLoanDepositBlock-->
+	<Object name="MultiStreamLoanDepositBlock">
+		<Table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:LoanDeposit;">
+			<LoanDepositMultiStreamCommon helpschema="efsml" helpelement="LoanDepositStream" />
+			<LoanDepositMultiStream clientid="loanDepositStream" occurs="2" minoccurs="2" addsuboperator="true" helpschema="efsml" helpelement="LoanDepositStream" tablecolspan="-1" />
+			<!--additionalPayment-->
+      <table id="tblAdditionalPaymentH" colspan="-1"
+         style="istableH:true;tblH-titleR:AdditionalPayment;tblH-css:size5;tblH-reverse:1;tblH-startdisplay:collapse;">
+        <table id ="tblAdditionalPayment">
+          <PaymentADP clientid="additionalPayment" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment" keepinquickinput="false"/>
+        </table>
+      </table>
+		</Table>
+	</Object>
+	<!--MultiStreamLoanDepositStubBlock-->
+	<Object name="MultiStreamLoanDepositStubBlock">
+		<Table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:LoanDeposit;">		   
+			<LoanDepositMultiStreamCommon helpschema="efsml" helpelement="LoanDepositStream" />
+			<LoanDepositMultiStreamStub clientid="loanDepositStream" occurs="2" minoccurs="2" addsuboperator="true" helpschema="efsml" helpelement="LoanDepositStream"  tablecolspan="-1"/>
+			<!--additionalPayment-->
+			<table id="tblAdditionalPaymentH" colspan="-1"
+				 style="istableH:true;tblH-titleR:AdditionalPayment;tblH-css:size5;tblH-reverse:1;tblH-startdisplay:collapse;">
+				<table id ="tblAdditionalPayment">
+					<PaymentADP clientid="additionalPayment" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment" keepinquickinput="false"/>
+				</table>
+			</table>
+		</Table>
+	</Object>
+
+	<!-- LoanDepositStream -->
+	<Object name="LoanDepositStream">
+		<table colspan="-1"  style="istableH:true;tblH-title:Stream;tblH-css:size5;tblH-reverse:1;helpschema:efsml;helpelement:LoanDepositStream;" controlalignleft="true">
+			<Table style="margin-top:2px;" colspan="-1" controlalignleft="true">
+				<CalculationPeriodDatesEffectiveDateTerminationDate clientid="calculationPeriodDates" helpschema="fpml" helpelement="CalculationPeriodDates" />
+			</Table>
+			<hr style="margin-top:5px;margin-bottom:5px;"/>
+			<Table colspan="-1" controlalignleft="true">
+				<CalculationNotional clientid="calculationPeriodAmount_calculation" required="true" helpschema="fpml" helpelement="Notional" />
+			</Table>
+			<hr style="margin-top:5px;margin-bottom:5px;"/>
+			<PartyAndAssetBlock/>
+			<Frequency_BDC_DCFBlock/>
+		</table>
+	</Object>
+
+	<!-- LoanDepositMultiStreamCommon -->
+	<Object name="LoanDepositMultiStreamCommon">
+		<Table style="margin-top:2px;" colspan="-1" controlalignleft="true">
+			<Date_L clientid="calculationPeriodDates_effectiveMinDate"  required="true" postback="true" />
+			<Date_L clientid="calculationPeriodDates_terminationMaxDate" required="true" postback="true" />
+		</Table>
+	</Object>
+
+	<!-- LoanDepositStubStream -->
+	<Object name="LoanDepositStubStream">
+		<table colspan="-1"  style="istableH:true;tblH-title:Stream;tblH-css:size5;tblH-reverse:1;helpschema:efsml;helpelement:LoanDepositStream;" controlalignleft="true">
+			<Table style="margin-top:2px;" colspan="-1">
+				<CalculationPeriodDatesStub2 clientid="calculationPeriodDates" helpschema="fpml" helpelement="CalculationPeriodDates" />
+			</Table>
+			<hr style="margin-top:5px;margin-bottom:5px;"/>
+			<Table colspan="-1" controlalignleft="true">
+				<CalculationNotional clientid="calculationPeriodAmount_calculation" required="true" helpschema="fpml" helpelement="Notional" />
+			</Table>
+			<hr style="margin-top:5px;margin-bottom:5px;"/>
+			<PartyAndAssetBlock/>
+			<Frequency_BDC_DCFBlock/>
+			<InitialAndFinalStubBlock/>
+		</table>
+	</Object>
+
+	<!-- LoanDepositMultiStream -->
+	<Object name="LoanDepositMultiStream">
+		<table colspan="-1"  style="istableH:true;tblH-title:Stream;tblH-css:size5;tblH-reverse:1;helpschema:efsml;helpelement:LoanDepositStream;" controlalignleft="true">
+			<Banner caption="Stream" level="3" helpschema="efsml" helpelement="LoanDepositStream" />
+			<Table colspan="-1" controlalignleft="true">
+				<Date_L clientid="calculationPeriodDates_effectiveDate"  required="true" postback="true" />
+				<Date_L clientid="calculationPeriodDates_terminationDate" required="true" postback="true" />
+				<Table controlalignleft="true">
+					<CalculationNotional clientid="calculationPeriodAmount_calculation" required="true" helpschema="fpml" helpelement="Notional" />
+				</Table>
+			</Table>
+			<Table colspan="-1">
+				<PartyAndAssetWithCapFloorScheduleBlock/>
+				<Frequency_BDC_DCFBlock/>
+			</Table>
+		</table>
+	</Object>
+
+	<!-- LoanDepositMultiStreamStub -->
+	<Object name="LoanDepositMultiStreamStub">
+		<table colspan="-1"  style="istableH:true;tblH-title:Stream;tblH-css:size5;tblH-reverse:1;helpschema:efsml;helpelement:LoanDepositStream;" controlalignleft="true">
+			<!--<Banner caption="Stream" level="3" helpschema="efsml" helpelement="LoanDepositStream" />-->
+			<Table colspan="-1"  controlalignleft="true">
+				<Date_L clientid="calculationPeriodDates_effectiveDate"  required="true" postback="true" />
+				<Date_L clientid="calculationPeriodDates_terminationDate" required="true" postback="true" />
+				<Date_L clientid="calculationPeriodDates_firstRegularPeriodStartDate" required="false" keepinquickinput="false" postback="true" />
+				<Date_L clientid="calculationPeriodDates_lastRegularPeriodEndDate" required="false" keepinquickinput="false" />
+			</Table>
+			<hr style="margin-top:5px;margin-bottom:5px;"/>
+			<Table colspan="-1"  controlalignleft="true">
+				<CalculationNotional clientid="calculationPeriodAmount_calculation" required="true" helpschema="fpml" helpelement="Notional" />
+			</Table>
+			<Table colspan="-1">
+				<PartyAndAssetWithCapFloorScheduleBlock/>
+				<Frequency_BDC_DCFBlock/>
+				<InitialAndFinalStubBlock/>
+			</Table>
+		</table>
+	</Object>
+
+</Objects>

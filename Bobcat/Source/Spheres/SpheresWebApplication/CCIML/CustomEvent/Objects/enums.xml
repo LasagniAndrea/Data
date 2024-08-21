@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+	<!--QuoteSide-->
+	<Object name="QuoteSide_L">
+		<Label/>
+		<DropDown datatype="string" listretrieval="predef:quotationside" style="width:200px;" />
+	</Object>
+
+	<!--QuoteTiming-->
+	<Object name="QuoteTiming_L">
+		<Label/>
+		<DropDown datatype="string" listretrieval="predef:enum.QuoteTiming" style="width:200px;" />
+	</Object>
+
+	<!--DayCountFraction_RO-->
+	<Object name="DayCountFraction_RO">
+		<DropDown datatype="string" listretrieval="predef:DAYCOUNTFRACTION_STRING" style="width:110px;" misc="IsReadOnly:true"/>
+	</Object>
+	<!--DayCountFraction_RO_L-->
+	<Object name="DayCountFraction_RO_L">
+		<Label/>
+		<DayCountFraction_RO/>
+	</Object>
+
+	<!--BusinessCenter-->
+	<Object name="BusinessCenter">
+		<DropDown datatype="string" listretrieval="predef:BUSINESSCENTER" style="width:200px;" />
+	</Object>
+	
+	<!--BusinessCenter_L-->
+	<Object name="BusinessCenter_L">
+		<Label />
+		<BusinessCenter/>
+	</Object>
+	
+	<!--BusinessCenter_RO-->
+	<Object name="BusinessCenter_RO">
+		<DropDown datatype="string" listretrieval="predef:BUSINESSCENTER" style="width:180px;" misc="IsReadOnly:true"/>
+	</Object>
+	
+	<!--BusinessCenter_RO_L-->
+	<Object name="BusinessCenter_RO_L">
+		<Label />
+		<BusinessCenter_RO/>
+	</Object>
+	
+	<!--EventCode_RO-->
+	<Object name="EventCodeOnly_RO">
+		<DropDown datatype="string" listretrieval="predef:enum.[code:EventCode;iswithoutextendvalue:true]" style="width:50px;" misc="IsReadOnly:true"/>
+	</Object>
+	
+	<Object name="EventCode_RO">
+		<DropDown datatype="string" listretrieval="predef:enum.EventCode" style="width:350px;" misc="IsReadOnly:true"/>
+	</Object>
+	<!--EventCode_L-->
+	<Object name="EventCode_L">
+		<Label/>
+		<DropDown datatype="string" listretrieval="predef:enum.EventCode"  style="width:350px;"/>
+	</Object>
+	<!--EventCode_RO_L-->
+	<Object name="EventCode_RO_L">
+		<Label/>
+		<EventCode_RO/>
+	</Object>
+	
+	<!--EventTypeOnly_RO-->
+	<Object name="EventTypeOnly_RO">
+		<DropDown datatype="string" listretrieval="predef:enumonly.EventType" style="width:50px;" misc="IsReadOnly:true"/>
+	</Object>
+	<!--EventType_RO-->
+	<Object name="EventType_RO">
+		<DropDown datatype="string" listretrieval="predef:enum.EventType" style="width:350px;" misc="IsReadOnly:true"/>
+	</Object>
+
+	<!--EventType_L-->
+	<Object name="EventType_L">
+		<Label/>
+		<DropDown datatype="string" listretrieval="predef:enum.EventType"  style="width:350px;"/>
+	</Object>
+	<!--EventType_RO_L-->
+	<Object name="EventType_RO_L">
+		<Label/>
+		<EventType_RO/>
+	</Object>
+
+
+	<!--EventClassOnly_RO-->
+	<Object name="EventClassOnly_RO">
+		<DropDown datatype="string" listretrieval="predef:enumonly.EventClass" style="width:50px;" misc="IsReadOnly:true"/>
+	</Object>
+	<!--EventClass_RO-->
+	<Object name="EventClass_RO">
+		<DropDown datatype="string" listretrieval="predef:enum.EventClass" style="width:200px;" misc="IsReadOnly:true"/>
+	</Object>
+	<!--EventClass_L-->
+	<Object name="EventClass_L">
+		<Label/>
+		<DropDown datatype="string" listretrieval="predef:enum.EventClass"  style="width:200px;"/>
+	</Object>
+
+	<!--EventClass_RO_L-->
+	<Object name="EventClass_RO_L">
+		<Label/>
+		<EventClass_RO/>
+	</Object>
+
+	<!--Simple_QuoteBasisEnum-->
+	<Object name="QuoteBasis">
+		<DropDown datatype="string" listretrieval="predef:QUOTEBASIS"  attributes="useIsDaRepresentation:false"/>
+	</Object>
+
+	<Object name="StrikeQuoteBasis">
+		<DropDown datatype="string" listretrieval="predef:STRIKEQUOTEBASIS"  attributes="useIsDaRepresentation:false" />
+	</Object>
+
+	<Object name="PremiumQuoteBasis">
+		<DropDown datatype="string" listretrieval="predef:PREMIUMQUOTEBASIS"  attributes="useIsDaRepresentation:false" />
+	</Object>
+	
+	<!--StatusTrigger_L-->
+	<Object name="StatusTrigger_L">
+		<Label />
+		<DropDown datatype="string" listretrieval="predef:STATUSTRIGGER" style="width:110px;"/>
+	</Object>
+
+	<!--StatusCalcul_L-->
+	<Object name="StatusCalcul_L">
+		<Label />
+		<DropDown datatype="string" listretrieval="predef:STATUSCALCUL" style="width:110px;"/>
+	</Object>
+
+	<!--Source_L-->
+	<Object name="Source_L">
+		<Label />
+		<DropDown datatype="string" listretrieval="predef:SOURCEANDSERVICES" style="width:200px;"/>
+	</Object>
+	
+	<Object name="Source_RO_L">
+		<Label />
+		<DropDown datatype="string" listretrieval="predef:SOURCEANDSERVICES" style="width:200px;" misc="IsReadOnly:true"/>
+	</Object>
+
+	<!--StatusProcess_L-->
+	<Object name="StatusProcess_L">
+		<Label />
+		<StatusProcess/>
+	</Object>
+	<Object name="StatusProcess">
+		<DropDown datatype="string" listretrieval="predef:statusprocess" style="width:90px;"/>
+	</Object>
+	
+	<Object name="StatusProcess_RO">
+		<DropDown datatype="string" listretrieval="predef:statusprocess" style="width:90px;" misc="IsReadOnly:true"/>
+	</Object>
+
+	<!--Process_L-->
+	<Object name="ProcessType">
+		<DropDown datatype="string" listretrieval="predef:processtype" style="width:300px;"/>
+	</Object>
+	
+	<Object name="ProcessType_L">
+		<Label />
+		<ProcessType/>
+	</Object>
+	
+	<Object name="ProcessType_RO">
+		<DropDown datatype="string" listretrieval="predef:processtype" style="width:300px;" misc="IsReadOnly:true"/>
+	</Object>
+	<Object name="ProcessType_RO_L">
+		<Label />	
+		<ProcessType_RO />
+	</Object>
+	
+	<!--QuoteBasis_L-->
+	<Object name="QuoteBasis_L">
+		<label />
+		<QuoteBasis/>
+	</Object>
+	<Object name="QuoteBasis_RO_L">
+		<label />
+		<DropDown datatype="string" listretrieval="predef:QUOTEBASIS" style="width:200px;" attributes="useIsDaRepresentation:false" misc="IsReadOnly:true"/>
+	</Object>
+
+	<!--StrikeQuoteBasis_L-->
+	<Object name="StrikeQuoteBasis_L">
+		<label />
+		<StrikeQuoteBasis/>
+	</Object>
+	<Object name="StrikeQuoteBasis_RO_L">
+		<label />
+		<DropDown datatype="string" listretrieval="predef:STRIKEQUOTEBASIS"  style="width:200px;" attributes="useIsDaRepresentation:false" misc="IsReadOnly:true"/>
+	</Object>
+
+	<!--PremiumQuoteBasis_L-->
+	<Object name="PremiumQuoteBasis_L">
+		<label />
+		<StrikeQuoteBasis/>
+	</Object>
+	<Object name="PremiumQuoteBasis_RO_L">
+		<label />
+		<DropDown datatype="string" listretrieval="predef:PREMIUMQUOTEBASIS"  style="width:200px;" attributes="useIsDaRepresentation:false" misc="IsReadOnly:true"/>
+	</Object>
+
+
+	<!--Simple_SideRateBasisEnum-->
+	<Object name="SideRateBasis">
+		<DropDown datatype="string" listretrieval="predef:SIDERATEBASIS"  attributes="useIsDaRepresentation:false"/>
+	</Object>
+	
+	<Object name="SideRateBasis_L">
+		<label />
+		<QuoteBasis/>
+	</Object>
+	<Object name="SideRateBasis_RO_L">
+		<label />
+		<DropDown datatype="string" listretrieval="predef:SIDERATEBASIS"  attributes="useIsDaRepresentation:false" misc="IsReadOnly:true"/>
+	</Object>
+
+</Objects>

@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--FI 201209425 usage of IsUseSQLParameters -->
+<Referentials>
+  <Referential>
+    <IsUseSQLParameters>true</IsUseSQLParameters>
+    <TableName>RMVCORPOACTION</TableName>
+    <AliasTableName>em</AliasTableName>
+    <Ressource></Ressource>
+    <ColumnByRow>2</ColumnByRow>
+    <Create>false</Create>
+    <Modify>false</Modify>
+    <Remove>false</Remove>
+    <AttachedDoc>false</AttachedDoc>
+    <Notepad>false</Notepad>
+
+    <SQLSelect>
+      <Command rdbms = "all">
+        <![CDATA[
+        select result.IDM, mk.SHORT_ACRONYM, result.IDCA, result.IDCE, result.EFFECTIVEDATE, ca.REFNOTICE, ca.IDENTIFIER as CA_IDENTIFIER,
+        ce.CEGROUP, ce.CETYPE, ce.CECOMBINEDOPER, ce.CECOMBINEDTYPE, ce.ADJMETHOD, 
+        /* mk.MARKETTYPE, */
+        mk.URLCANOTICE + ca.NOTICEFILENAME as URLNOTICEFILENAME, em.IDA_CSSCUSTODIAN, ac.IDENTIFIER as CSSCUSTODIAN_IDENTIFIER, ac.DISPLAYNAME as CSSCUSTODIAN_DISPLAYNAME
+        
+        from 
+        (
+	        select distinct ca.IDCA, ce.IDCE, ce.EFFECTIVEDATE, em.IDM, em.IDA_CSSCUSTODIAN
+	        from dbo.CORPOEVENTCONTRACT cec 
+	        inner join dbo.CORPOEVENT ce on (ce.IDCE = cec.IDCE)
+	        inner join dbo.CORPOACTION ca on (ca.IDCA = ce.IDCA) 
+	        inner join 
+	        (
+		        select IDM, IDA_CSSCUSTODIAN, MAX(DTENTITY) as DTENTITY 
+		        from dbo.VW_ENTITYMARKET_ACTIVITY em
+		        group by IDM, IDA_CSSCUSTODIAN 
+	        ) em on (em.IDM = ca.IDM) and (em.DTENTITY = ce.EFFECTIVEDATE) 
+        ) result
+        inner join dbo.CORPOACTION ca on (ca.IDCA=result.IDCA)
+        inner join dbo.CORPOEVENT ce on (ce.IDCA = ca.IDCA)
+        inner join dbo.VW_MARKET_IDENTIFIER mk on (mk.IDM = result.IDM)
+        inner join dbo.VW_ENTITYMARKET_ACTIVITY em on (em.IDM = result.IDM) and (em.IDA_CSSCUSTODIAN = result.IDA_CSSCUSTODIAN)
+        inner join dbo.ACTOR ac on (ac.IDA = em.IDA_CSSCUSTODIAN)
+		    where
+		    (
+			    (result.IDM=case when (@MARKET=-1) then result.IDM else @MARKET end) and 
+			    (em.CSSCUSTODIAN = case when (-2 < @CSSCUSTODIAN) then em.CSSCUSTODIAN else @CSSCUSTODIAN end) and
+			    (em.IDA_CSSCUSTODIAN = case when (-1 < @CSSCUSTODIAN) then @CSSCUSTODIAN else em.IDA_CSSCUSTODIAN end)
+		    )
+        ]]>
+      </Command>
+    </SQLSelect>
+
+    <SQLCheckSelectedDefaultValue>0</SQLCheckSelectedDefaultValue>
+
+    <Column>
+      <ColumnName>IDA_CSSCUSTODIAN</ColumnName>
+      <Ressource>IDA_CSSCUSTODIAN</Ressource>
+      <DataType>int</DataType>
+      <Nowrap>true</Nowrap>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>CSSCUSTODIAN_IDENTIFIER</ColumnName>
+      <Ressource>CssCustodian2</Ressource>
+      <DataType>string</DataType>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsOrderBy>false</IsOrderBy>
+      <IsHyperLink linktype="column" type="IDA" data="IDA_CSSCUSTODIAN" linktable="ACTOR" condition="CSS|CUSTODIAN" name="IDENTIFIER">true</IsHyperLink>
+    </Column>
+    <Column>
+      <ColumnName>CSSCUSTODIAN_DISPLAYNAME</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsOrderBy>false</IsOrderBy>
+      <IsHyperLink linktype="column" type="IDA" data="IDA_CSSCUSTODIAN" linktable="ACTOR" condition="CSS|CUSTODIAN" name="DISPLAYNAME">false</IsHyperLink>
+    </Column>
+
+    <Column>
+      <ColumnName>IDM</ColumnName>
+      <Ressource>Market_Title</Ressource>
+      <Colspan>0</Colspan>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>SHORT_ACRONYM</ColumnName>
+      <Ressource>IDM_SHORT_ACRONYM</Ressource>
+      <DataType>string</DataType>
+      <IsMandatory>false</IsMandatory>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsOrderBy>true</IsOrderBy>
+      <IsHyperLink linktype="column" type="IDM" data="IDM" linktable="VW_MARKET_IDENTIFIER" name="SHORT_ACRONYM">true</IsHyperLink>
+    </Column>
+
+    <!--<Column>
+      <ColumnName>MARKETTYPE</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default>
+        <Value>MARKET</Value>
+      </Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <IsResource>true</IsResource>
+      <Relation>
+        <DDLType>markettype</DDLType>
+      </Relation>
+    </Column>-->
+
+    <Column>
+      <ColumnName>IDCA</ColumnName>
+      <Ressource>ID</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>true</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>CA_IDENTIFIER</ColumnName>
+      <Ressource>lblCAIdentifier</Ressource>
+      <DataType>string</DataType>
+      <IsMandatory>false</IsMandatory>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsOrderBy>true</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>IDCE</ColumnName>
+      <Ressource>ID</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>REFNOTICE</ColumnName>
+      <Ressource>lblCARefNotice</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>true</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <IsHyperLink linktype="external" data="URLNOTICEFILENAME">true</IsHyperLink>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>EFFECTIVEDATE</ColumnName>
+      <Ressource>lblCEEffectiveDate</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>CEGROUP</ColumnName>
+      <Ressource>lblCEGroup</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>ENUM</TableName>
+        <AliasTableName>grp</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>VALUE</ColumnName>
+          <DataType>string</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>EXTVALUE</ColumnName>
+          <Ressource>lblCEGroup</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <Condition apply="ALL">
+          <SQLWhere>CODE='CorporateEventGroupEnum'</SQLWhere>
+        </Condition>
+      </Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>CETYPE</ColumnName>
+      <Ressource>CETYPE</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>ENUM</TableName>
+        <AliasTableName>cet</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>VALUE</ColumnName>
+          <DataType>string</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>EXTVALUE</ColumnName>
+          <Ressource>CETYPE</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <Condition apply="ALL">
+          <SQLWhere>CODE='CorporateEventTypeEnum'</SQLWhere>
+        </Condition>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>CECOMBINEDOPER</ColumnName>
+      <Ressource>lblCECombinedoperand</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>ENUM</TableName>
+        <AliasTableName>oper</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>VALUE</ColumnName>
+          <DataType>string</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>EXTVALUE</ColumnName>
+          <Ressource>lblCECombinedoperand</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <Condition apply="ALL">
+          <SQLWhere>CODE='CombinationOperandEnum'</SQLWhere>
+        </Condition>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>CECOMBINEDTYPE</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>ENUM</TableName>
+        <AliasTableName>cet2</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>VALUE</ColumnName>
+          <DataType>string</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>EXTVALUE</ColumnName>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <Condition apply="ALL">
+          <SQLWhere>CODE='CorporateEventTypeEnum'</SQLWhere>
+        </Condition>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>ADJMETHOD</ColumnName>
+      <Ressource>lblCEAdjMethod</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>ENUM</TableName>
+        <AliasTableName>adj</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>VALUE</ColumnName>
+          <DataType>string</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>EXTVALUE</ColumnName>
+          <Ressource>lblCEAdjMethod</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <Condition apply="ALL">
+          <SQLWhere>CODE='AdjustmentMethodOfDerivContractEnum'</SQLWhere>
+        </Condition>
+      </Relation>
+    </Column>
+  </Referential>
+</Referentials>

@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- EG 20200226 [25077] RDBMS : New version of Trades tables architecture (TRADEINSTRUMENT (INSTRUMENTNO=1) to TRADE)-->
+<!-- FI 20200820 [25468] dates systemes en UTC -->
+<Referentials>
+  <Referential>
+    <IsUseSQLParameters>true</IsUseSQLParameters>
+    <CmptLevel>2.5</CmptLevel>
+    <IsUseSQLParameters>true</IsUseSQLParameters>
+    <TableName>VW_TRADECASHINTEREST</TableName>
+    <Ressource>TRADE</Ressource>
+    <ColumnByRow>3</ColumnByRow>
+    <Create>false</Create>
+    <Modify>false</Modify>
+    <Remove>false</Remove>
+    <Notepad>false</Notepad>
+
+    <SQLSelect>
+      <Command rdbms="all">
+        <![CDATA[
+        select distinct 
+          tblresult.IDT,tblresult.IDENTIFIER,tblresult.IDI,
+          tblresult.DTSTARTPERIOD, 
+          tblresult.DTENDPERIOD,
+          tblresult.EFFECTIVEDATE,tblresult.TERMINATIONDATE,tblresult.DTSYS,
+          tblresult.IDSTENVIRONMENT,tblresult.SOURCE,
+          tblresult.EXTLLINK,tblresult.GPRODUCT
+        from
+        (
+          select distinct t.IDT,t.IDENTIFIER,t.IDI,
+          e_startper.DTSTARTUNADJ as DTSTARTPERIOD, 
+          t.DTTRADE as DTENDPERIOD,
+          t.EFFECTIVEDATE,t.TERMINATIONDATE,t.DTSYS,
+			    t.IDSTENVIRONMENT,t.SOURCE,
+			    t.ISNCMINI,t.ISNCMINT,t.ISNCMFIN,
+			    t.EXTLLINK,t.IDA_ENTITYBUYER, t.IDA_ENTITYSELLER,t.GPRODUCT,
+			    cnfMsg.STEPLIFE
+          from  dbo.VW_TRADECASHINTEREST t
+          %%SR:TRADE_JOIN%%(t.IDT, t)
+          inner join dbo.EVENT e on e.IDT=t.IDT
+          inner join dbo.EVENTCLASS ec on ec.IDE=e.IDE
+          inner join dbo.CNFMESSAGE cnfMsg on cnfMsg.EVENTCODE= e.EVENTCODE and cnfMsg.EVENTCLASS = ec.EVENTCLASS
+          -- lecture de la date de fin de période sur la colonne DTTRADE de la table TRADE
+          -- lecture de la date de début de période sur l''événement TRD/DAT
+          left outer join dbo.EVENT e_startper on e_startper.IDT=t.IDT and e_startper.EVENTCODE='TRD' and e_startper.EVENTTYPE='DAT'
+          where 
+          (ec.DTEVENTFORCED = @DATE1)
+          and (%%SR:TRADE_WHERE_PREDICATE%%)
+          union
+          select distinct t.IDT,t.IDENTIFIER,t.IDI,
+          e_startper.DTSTARTUNADJ as DTSTARTPERIOD, 
+          t.DTTRADE as DTENDPERIOD,
+          t.EFFECTIVEDATE,t.TERMINATIONDATE,t.DTSYS,
+			    t.IDSTENVIRONMENT,t.SOURCE,
+			    t.ISNCMINI,t.ISNCMINT,t.ISNCMFIN,
+			    t.EXTLLINK,t.IDA_ENTITYBUYER, t.IDA_ENTITYSELLER,t.GPRODUCT,
+			    cnfMsg.STEPLIFE
+          from  dbo.VW_TRADECASHINTEREST t
+          %%SR:TRADE_JOIN%%(t.IDT, t)
+          inner join dbo.EVENT e on e.IDT=t.IDT
+          inner join dbo.EVENTCLASS ec on ec.IDE=e.IDE
+          inner join dbo.CNFMESSAGE cnfMsg on cnfMsg.EVENTCODE= e.EVENTCODE and cnfMsg.EVENTCLASS = ec.EVENTCLASS
+          -- lecture de la date de fin de période sur la colonne DTTRADE de la table TRADE
+          -- lecture de la date de début de période sur l''événement TRD/DAT
+          left outer join dbo.EVENT e_startper on e_startper.IDT=t.IDT and e_startper.EVENTCODE='TRD' and e_startper.EVENTTYPE='DAT'
+          where ( ec.DTEVENTFORCED >= @DATE1 )
+          and ( 1 = @ISTOEND) 
+          and (%%SR:TRADE_WHERE_PREDICATE%%)
+        ) tblresult
+        where
+        (
+          (
+            (
+              tblresult.IDA_ENTITYBUYER = 
+              case when -1=@ENTITY Then tblresult.IDA_ENTITYBUYER
+              else @ENTITY
+              end
+            )
+          or
+            (
+              tblresult.IDA_ENTITYSELLER = 
+              case when -1=@ENTITY Then tblresult.IDA_ENTITYSELLER
+              else @ENTITY
+              end
+            )
+          )
+          and (tblresult.IDSTENVIRONMENT in ('REGULAR','SIMUL'))
+          and 
+          (
+            (tblresult.ISNCMINI = 1 and tblresult.STEPLIFE = 'INITIAL')
+            or 
+            (tblresult.ISNCMINT = 1 and tblresult.STEPLIFE = 'INTERMEDIARY')
+            or 
+            (tblresult.ISNCMFIN = 1 and tblresult.STEPLIFE = 'FINAL')
+          )
+        )]]>
+      </Command>
+    </SQLSelect>
+
+    <Column>
+      <ColumnName>IDT</ColumnName>
+      <Ressource>IDT</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>true</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>true</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>true</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDENTIFIER</ColumnName>
+      <Ressource>IDENTIFIER</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>true</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>true</IsOrderBy>
+      <IsHyperLink linktype="column" type="IDT" data="IDT">true</IsHyperLink>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DTSTARTPERIOD</ColumnName>
+      <Ressource>DTSTARTPERIOD</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DTENDPERIOD</ColumnName>
+      <Ressource>DTENDPERIOD</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>IDSTENVIRONMENT</ColumnName>
+      <Ressource>IDSTENVIRONMENT</Ressource>
+      <DataType>string</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression>RegexStringAlphaNumUpperLight</RegularExpression>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <IsResource>true</IsResource>
+      <Relation>
+      </Relation>
+    </Column>
+   <Column>
+      <ColumnName>DTSYS</ColumnName>
+      <Ressource>DTSYS</Ressource>
+     <DataType datakind='Timestamp' tzdbid='Etc/UTC' display='Audit'>datetime</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>SOURCE</ColumnName>
+      <Ressource>SOURCE</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <DDLType>source</DDLType>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>EXTLLINK</ColumnName>
+      <Ressource>EXTLLINK</Ressource>
+      <DataType>string</DataType>
+      <Length>128</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>GPRODUCT</ColumnName>
+      <Ressource>GPRODUCT</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+    </Column>
+    
+        
+  </Referential>
+</Referentials>

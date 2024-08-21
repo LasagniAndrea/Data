@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+  <customObject control="label"     clientid="ENTITY"  caption = "Entity_Title" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="ENTITY"  width="250px"   datatype="integer" required="true" listretrieval="predef:ActorEntity"
+                postback="true"  postbackargument ="SELFRELOAD_"
+                misc="isAddAll:true;isUseSessionRestrict:true;isClear:false"
+                xsi:type="CustomObjectDropDown"/>
+</customObjects>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Screens>
+  <!-- EG 20171113 [23509] Upd Gestion Objets Facility / Dates et Marché -->
+	<!-- DebtSecurityOptionEuropean-Broker -->
+	<Screen name="DebtSecurityOptionEuropean-Broker" caption="DebtSecurityOption European (Screen Broker)" product="equityOption">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBrokerSales-DRV-Block/>
+    <DebtSecurityOptionEuropeanBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+    <ComplianceBlock/>
+	</Screen>
+</Screens>
+
+

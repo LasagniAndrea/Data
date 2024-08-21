@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Screens>
+  <!-- EG 20171113 [23509] Upd Gestion Objets Facility / Dates et Marché -->
+	<!-- BuyAndSellBack -->
+	<Screen name="BuyAndSellBack" caption="BuyAndSellBack (OTCml)" product="BuyAndSellBack">
+		<TradeRemoveBlock />
+    <FacilityHeaderBlock/>
+		<PartyBrokerSales-NDRV-Block/>
+		<BuyAndSellBackBlock clientid="bsb"/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<Settlement3InputBlock/>
+    <ComplianceBlock/>
+	</Screen>
+</Screens>

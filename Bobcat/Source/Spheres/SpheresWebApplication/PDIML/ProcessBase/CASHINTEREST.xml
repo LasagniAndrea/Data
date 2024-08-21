@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Referentials>
+  <Referential>
+    <IsUseSQLParameters>true</IsUseSQLParameters>
+    <TableName>xxxxxxxxx</TableName>
+    <Ressource></Ressource>
+    <ColumnByRow>5</ColumnByRow>
+    <Create>false</Create>
+    <Modify>false</Modify>
+    <Remove>false</Remove>
+    <Image></Image>
+
+    <SQLSelect>
+      <Command rdbms = "all">
+        <![CDATA[
+        select distinct
+        a_cbo.IDA as CBO_IDA,a_cbo.IDENTIFIER as CBO_IDENTIFIER,a_cbo.DISPLAYNAME as CBO_DISPLAYNAME,
+        case when e.VALUE = 'CashCoveredInitialMargin' then e.VALUE else ecb.VALUE end as AMOUNTTYPE,
+        -- si on est sur un flux de type CashCoveredInitialMargin alors on l''affiche
+        -- sinon on affiche DebitCreditCashBalance
+        -- ainsi on utilise la même ressource que dans la consultation des trades CBI
+        case when e.VALUE = 'CashCoveredInitialMargin' then e.VALUE else 'DebitCreditCashBalance' end as AMOUNTTYPEDISPLAY,
+        ir.IDC as IDC, ir.PERIOD as PERIOD, ir.PERIODMLTP as PERIODMLTP
+        from dbo.CBINTERESTRULE ir
+        %%SR:ACTOR_JOIN%%(ir.IDA_CBO)
+        inner join dbo.ACTOR a_cbo on (a_cbo.IDA = ir.IDA_CBO)
+        inner join dbo.ENUM e on (e.CODE = 'InterestAmountTypeEnum') and (e.VALUE = ir.AMOUNTTYPE)
+        inner join dbo.ENUM ecb on (ecb.CODE = 'InterestAmountTypeEnum') and (ecb.VALUE = 'CashBalance')
+        where (ir.DTENABLED <= @DATE1) and ((ir.DTDISABLED is null) or (ir.DTDISABLED > @DATE1))
+        ]]>
+      </Command>
+    </SQLSelect>
+
+    <Column>
+      <ColumnName>CBO_IDA</ColumnName>
+      <Ressource>IDA_OFFICECBO</Ressource>
+      <DataType>int</DataType>
+      <Nowrap>true</Nowrap>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>ACTOR</TableName>
+        <AliasTableName>cbo</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDA</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>IDA_OFFICECBO</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <Condition>
+          <TableName>ACTORROLE</TableName>
+          <ColumnRelation>
+            <ColumnName>IDA</ColumnName>
+            <DataType>int</DataType>
+          </ColumnRelation>
+          <SQLWhere>
+            ACTORROLE.IDROLEACTOR = 'CSHBALANCEOFFICE'
+          </SQLWhere>
+        </Condition>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>CBO_DISPLAYNAME</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsResource>false</IsResource>
+      <IsOrderBy>false</IsOrderBy>
+      <IsHyperLink linktype="column" type="IDA" data="CBO_IDA" linktable="ACTOR" name="DISPLAYNAME">true</IsHyperLink>      
+    </Column>
+    <Column>
+      <ColumnName>IDC</ColumnName>
+      <Ressource>IDC</Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>true</IsDataKeyField>
+      <IsForeignKeyField>true</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsResource>false</IsResource>
+      <IsOrderBy>true</IsOrderBy>
+      <IsHyperLink linktype="column" type="IDC" data="IDC" linktable="CURRENCY" name="IDC">true</IsHyperLink>
+    </Column>
+    <Column>
+      <ColumnName>AMOUNTTYPE</ColumnName>
+      <Ressource>AMOUNTTYPE</Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsResource>false</IsResource>
+      <IsOrderBy>true</IsOrderBy>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>AMOUNTTYPEDISPLAY</ColumnName>
+      <Ressource>AMOUNTTYPE</Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsIdentity>false</IsIdentity>
+      <IsResource>true</IsResource>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>PERIODMLTP</ColumnName>
+      <Ressource>PERIODMLTP</Ressource>
+      <DataType>int</DataType>
+      <Length>5</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsResource>true</IsResource>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation></Relation>
+    </Column>
+    <Column>
+      <ColumnName>PERIOD</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>ENUM</TableName>
+        <AliasTableName>period</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>VALUE</ColumnName>
+          <DataType>string</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>EXTVALUE</ColumnName>
+          <Ressource></Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <Condition apply="ALL">
+          <SQLWhere>CODE='PeriodEnum'</SQLWhere>
+        </Condition>
+      </Relation>
+    </Column>
+  </Referential>
+</Referentials>

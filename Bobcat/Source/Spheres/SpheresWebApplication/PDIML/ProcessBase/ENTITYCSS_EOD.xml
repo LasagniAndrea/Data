@@ -1,0 +1,409 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--FI 201209425 usage of IsUseSQLParameters -->
+<!--PM 20150520 [20575] Replace em.DTMARKET with em.DTENTITY-->
+<Referentials>
+  <Referential>
+    <IsUseSQLParameters>true</IsUseSQLParameters>
+    <TableName>ENTITYMARKET</TableName>
+    <AliasTableName>em</AliasTableName>
+    <Ressource></Ressource>
+    <ColumnByRow>2</ColumnByRow>
+    <Create>false</Create>
+    <Modify>false</Modify>
+    <Remove>false</Remove>
+    <AttachedDoc>false</AttachedDoc>
+    <Notepad>false</Notepad>
+    <LoadOnStart>true</LoadOnStart>
+
+    <SQLSelect>
+      <Command rdbms = "all">
+        <![CDATA[
+        select distinct result.IDEM, 
+        result.IDA_ENTITY, a_entity.IDENTIFIER as ENTITY_IDENTIFIER, a_entity.DISPLAYNAME as ENTITY_DISPLAYNAME, 
+        result.IDA_CSSCUSTODIAN, a_csscust.IDENTIFIER as CSSCUSTODIAN_IDENTIFIER,  a_csscust.DISPLAYNAME as CSSCUSTODIAN_DISPLAYNAME, 
+        result.DTENTITY, result.EMKEY,
+        'EOD-' || isnull(EOD_CURRENTSTATUS,'NONE') || '-0' as REQUESTTYPE_DISPLAY, result.EOD_CURRENTSTATUS,
+        result.EOD_TOTAL  as EOD_TOTALCOUNT,
+        case when result.EOD_Success > 0 then 'SUCCESS'   else 'None' end as EOD_SUCCESSSTATUS, nullif(result.EOD_Success, 0) as EOD_SUCCESSCOUNT,
+        case when result.EOD_Error   > 0 then 'ERROR'     else 'None' end as EOD_ERRORSTATUS,   nullif(result.EOD_Error, 0)   as EOD_ERRORCOUNT,
+        result.GPRODUCT, result.SORTED
+        from 
+        (
+	        select em.EMKEY, em.IDA_ENTITY, em.IDA_CSSCUSTODIAN, em.DTENTITY,
+	            (select pr.STATUS from dbo.POSREQUEST pr 
+	             where (pr.IDA_ENTITY= em.IDA_ENTITY) and (pr.IDA_CSSCUSTODIAN = em.IDA_CSSCUSTODIAN) and 
+               (pr.DTBUSINESS=em.DTENTITY) and (pr.REQUESTTYPE = 'EOD') and (isnull(pr.IDEM,0)=isnull(em.IDEM,0)) and 
+                (isnull(pr.DTUPD,pr.DTINS) = (
+                        select max(isnull(prmax.DTUPD,prmax.DTINS)) 
+                        from dbo.POSREQUEST prmax 
+                        where (prmax.IDA_ENTITY=pr.IDA_ENTITY) and (prmax.IDA_CSSCUSTODIAN=em.IDA_CSSCUSTODIAN) and 
+                        (isnull(prmax.IDEM,0)=isnull(em.IDEM,0)) and (prmax.DTBUSINESS=pr.DTBUSINESS) and (prmax.REQUESTTYPE = 'EOD')))
+	            ) as EOD_CURRENTSTATUS,              
+	            (select count(*) from dbo.POSREQUEST pr 
+	              where (pr.IDA_ENTITY = em.IDA_ENTITY) and (pr.IDA_CSSCUSTODIAN = em.IDA_CSSCUSTODIAN) and (isnull(pr.IDEM,0)=isnull(em.IDEM,0)) 
+                and (pr.DTBUSINESS=em.DTENTITY) and (pr.REQUESTTYPE = 'EOD') 
+	            ) as EOD_TOTAL,
+	            (select count(*) from dbo.POSREQUEST pr 
+	              where (pr.IDA_ENTITY = em.IDA_ENTITY) and (pr.IDA_CSSCUSTODIAN = em.IDA_CSSCUSTODIAN) and (isnull(pr.IDEM,0)=isnull(em.IDEM,0)) 
+                and (pr.DTBUSINESS=em.DTENTITY) and (pr.REQUESTTYPE = 'EOD') 
+                and (pr.STATUS in ('SUCCESS','NA'))
+	            ) as EOD_SUCCESS,
+	            (select count(*) from dbo.POSREQUEST pr 
+	              where (pr.IDA_ENTITY = em.IDA_ENTITY) and (pr.IDA_CSSCUSTODIAN = em.IDA_CSSCUSTODIAN) and (isnull(pr.IDEM,0)=isnull(em.IDEM,0)) 
+                and (pr.DTBUSINESS=em.DTENTITY) and (pr.REQUESTTYPE = 'EOD') 
+                and (pr.STATUS = 'ERROR')
+	            ) as EOD_ERROR,
+          em.GPRODUCT, em.IDEM, case when em.IDA_CUSTODIAN is null then 0 else case when em.IDEM is null then 1 else 2 end end as SORTED  
+	        from dbo.VW_ENTITY_CSSCUSTODIAN em
+          where
+          (
+            (em.IDA_ENTITY=case when (@ENTITY=-1) then em.IDA_ENTITY else @ENTITY end) and 
+            (em.CSSCUSTODIAN = case when (-2 < @CSSCUSTODIAN) then em.CSSCUSTODIAN else @CSSCUSTODIAN end) and
+            (em.IDA_CSSCUSTODIAN = case when (-1 < @CSSCUSTODIAN) then @CSSCUSTODIAN else em.IDA_CSSCUSTODIAN end)
+          )
+          
+        ) result
+        inner join dbo.ACTOR a_entity on (a_entity.IDA = result.IDA_ENTITY)
+        inner join dbo.ACTOR a_csscust on (a_csscust.IDA = result.IDA_CSSCUSTODIAN)
+        ]]>
+      </Command>
+    </SQLSelect>
+
+    <SQLWhere>
+      <ConditionSystem>SESSIONRESTRICT</ConditionSystem>
+      <SQLJoin>left outer join dbo.SESSIONRESTRICT sra on sra.ID=em.IDA_ENTITY and sra.CLASS='ACTOR' and sra.SESSIONID='%%SESSIONID%%'</SQLJoin>
+      <SQLJoin>left outer join dbo.SESSIONRESTRICT srcsscus on srcsscus.ID=em.IDA_CSSCUSTODIAN and srcsscus.CLASS='ACTOR' and srcsscus.SESSIONID='%%SESSIONID%%'</SQLJoin>
+      <SQLWhere>
+        ((em.IDA_ENTITY is null) or (sra.ID is not null)) and
+        ((em.IDA_CSSCUSTODIAN is null) or (srcsscus.ID is not null))
+      </SQLWhere>
+    </SQLWhere>
+
+    <SQLRowStyle type="class">
+      case GPRODUCT when 'FUT' then 'em_css' 
+                    when 'MTM' then 'em_mtm'
+                    else 'em_custodian' end
+    </SQLRowStyle>
+
+    <SQLCheckSelectedDefaultValue>0</SQLCheckSelectedDefaultValue>
+
+    <Column>
+      <ColumnName>IDEM</ColumnName>
+      <Ressource>IDEM</Ressource>
+      <DataType>string</DataType>
+      <Nowrap>true</Nowrap>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>true</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>EMKEY</ColumnName>
+      <Ressource>EMKEY</Ressource>
+      <DataType>string</DataType>
+      <Nowrap>true</Nowrap>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>true</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>IDA_CSSCUSTODIAN</ColumnName>
+      <Ressource>IDA_CSSCUSTODIAN</Ressource>
+      <DataType>int</DataType>
+      <Nowrap>true</Nowrap>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <!-- ENTITY DEALER -->
+    <Column>
+      <ColumnName>IDA_ENTITY</ColumnName>
+      <Ressource>Entity</Ressource>
+      <DataType>int</DataType>
+      <Nowrap>true</Nowrap>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>REQUESTTYPE_DISPLAY</ColumnName>
+      <Ressource>EXTVALUE_REQUESTTYPE_</Ressource>
+      <DataType>string</DataType>
+      <GridWidth>200</GridWidth>
+      <Colspan>2</Colspan>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <CellStyle complexModel="logPosRequestType" version="h2"/>
+    </Column>
+    <Column>
+      <ColumnName>ENTITY_IDENTIFIER</ColumnName>
+      <Ressource>IDA_ENTITY_2</Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsOrderBy>true</IsOrderBy>
+      <IsHyperLink linktype="column" type="IDA" data="IDA_ENTITY" condition="ENTITY" linktable="ACTOR" name="IDENTIFIER">true</IsHyperLink>
+    </Column>
+    <Column>
+      <ColumnName>ENTITY_DISPLAYNAME</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsOrderBy>false</IsOrderBy>
+      <IsHyperLink linktype="column" type="IDA" data="IDA_ENTITY" condition="ENTITY" linktable="ACTOR" name="DISPLAYNAME">false</IsHyperLink>
+    </Column>
+
+    <Column>
+      <ColumnName>SORTED</ColumnName>
+      <Ressource>SORTED</Ressource>
+      <DataType>int</DataType>
+      <Nowrap>true</Nowrap>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>true</IsOrderBy>
+      <IsVirtualColumn>true</IsVirtualColumn>
+    </Column>
+
+    <!-- CLEARING HOUSE -->
+    <Column>
+      <ColumnName>CSSCUSTODIAN_IDENTIFIER</ColumnName>
+      <Ressource>CssCustodian2</Ressource>
+      <DataType>string</DataType>
+      <IsMandatory>false</IsMandatory>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsOrderBy>true</IsOrderBy>
+      <IsHyperLink linktype="column" type="IDA" data="IDA_CSSCUSTODIAN" linktable="ACTOR" condition="CSS|CUSTODIAN" name="IDENTIFIER">true</IsHyperLink>
+    </Column>
+
+    <Column>
+      <ColumnName>CSSCUSTODIAN_DISPLAYNAME</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsOrderBy>false</IsOrderBy>
+      <IsHyperLink linktype="column" type="IDA" data="IDA_CSSCUSTODIAN" linktable="ACTOR" condition="CSS|CUSTODIAN" name="DISPLAYNAME">false</IsHyperLink>
+    </Column>
+
+    <!-- DTMARKET --><!--
+    <Column>
+      <ColumnName>DTMARKET</ColumnName>
+      <Ressource>DTMARKET1</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>-->
+
+    <!-- DTENTITY -->
+    <Column>
+      <ColumnName>DTENTITY</ColumnName>
+      <Ressource>DTMARKET1</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <!-- EOD CURRENT STATUS -->
+    <Column>
+      <ColumnName>EOD_CURRENTSTATUS</ColumnName>
+      <Ressource>POSKEEPEOD_CurrentStatus</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <!-- TOTAL -->
+    <Column>
+      <ColumnName>EOD_TOTALCOUNT</ColumnName>
+      <Ressource>Total</Ressource>
+      <DataType>int</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+
+    <!-- EOD SUCCESS -->
+    <Column>
+      <ColumnName>EOD_SUCCESSCOUNT</ColumnName>
+      <Ressource>SUCCESS</Ressource>
+      <DataType>int</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <!-- POSKEEPEOD ERROR -->
+    <Column>
+      <ColumnName>EOD_ERRORCOUNT</ColumnName>
+      <Ressource>ERROR</Ressource>
+      <DataType>int</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>GPRODUCT</ColumnName>
+      <Ressource>GPRODUCT</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+    </Column>
+
+  </Referential>
+</Referentials>

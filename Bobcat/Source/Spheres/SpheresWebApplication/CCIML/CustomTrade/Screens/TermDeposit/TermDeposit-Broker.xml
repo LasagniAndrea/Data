@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Screens>
+  <!-- EG 20171113 [23509] Upd Gestion Objets Facility / Dates et Marché -->
+	<!-- TermDepositOTCml -->
+	<Screen name="TermDeposit-Broker" caption="TermDeposit (Screen Broker)" product="TermDeposit">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+		<PartyBrokerSales-NDRV-Block/>
+		<TermDepositBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+    <ComplianceBlock/>
+	</Screen>
+</Screens>

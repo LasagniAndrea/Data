@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+== Copyright (c) 2009. All rights reserved. 
+== Euro Finance Systems http://www.euro-finance-systems.com
+-->
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="SendSmtp" nillable="true" type="EfsSendSMTP">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Root element.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:complexType name="EfsSendSMTP">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A type defining the different informations.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="SmtpClient" type="EfsSendSMTPClient">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Informations to connect to the SMTP server</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="MailMessage" type="EfsSendSMTPMessage">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Message...</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EfsSendSMTPClient">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A type defining the SMTP informations.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="Host" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Hostname of the SMTP server.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="Port" type="xs:int">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Port of the SMTP server.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EfsSendSMTPMessage">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A type defining message.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="From" type="EfsSendSMTPContact">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Sender of the message.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="unbounded" form="unqualified" name="To" type="EfsSendSMTPContact">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Main recipient of the message.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Cc" type="EfsSendSMTPContact">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Recipient in carbon copy of the message.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Bcc" type="EfsSendSMTPContact">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Recipient in blind carbon copy of the message.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="Priority" type="EfsSendSMTPPriorityEnum">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Priority of the message.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="DeliveryNotificationOptions" type="EfsSendSMTPDeliveryNotificationEnum">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Delivery notification of the message.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="Subject" type="EfsSendSubject">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Subject of the message.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Body" type="EfsSendBody">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Body of the message.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Attachment" type="EfsSendStream">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Name of one or several files in attachment.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EfsSendSMTPContact">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A type defining a contact.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="DisplayName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Contact name.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="MailAddress" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="en">Contact addresse.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="EfsSendSMTPPriorityEnum">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Priority level.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Normal" />
+      <xs:enumeration value="High" />
+      <xs:enumeration value="Low" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="EfsSendSMTPDeliveryNotificationEnum">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Delivery notification.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="None" />
+      <xs:enumeration value="OnSuccess" />
+      <xs:enumeration value="OnFailure" />
+      <xs:enumeration value="Delay" />
+      <xs:enumeration value="Never" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="EfsSendSubject">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="encoding" type="xs:string" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="EfsSendBody">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A type defining the body of the message.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="format" type="EfsSendFormatEnum" use="required">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Text format.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="encoding" type="xs:string">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">Text encoding.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="EfsSendFormatEnum">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">Format of the text encoding.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Text" />
+      <xs:enumeration value="Html" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="EfsSendStream">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">A type defining a data filename.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="contenttype" type="xs:string">
+          <xs:annotation>
+            <xs:documentation xml:lang="en">MIME type of the document (eg. application/pdf).</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>

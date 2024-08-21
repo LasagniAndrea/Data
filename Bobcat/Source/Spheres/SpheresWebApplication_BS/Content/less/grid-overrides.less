@@ -1,0 +1,32 @@
+//
+// Override 
+// --------------------------------------------------
+
+.container {
+  .container-fixed();
+
+  @media (min-width: @screen-xl-min) {
+    width: @container-xl;
+  }
+
+  @media (min-width: @screen-xxl-min) {
+    width: @container-xxl;
+  }
+
+}
+
+// xLarge grid
+//
+// Columns, offsets, pushes, and pulls for the xlarge desktop device range.
+
+@media (min-width: @screen-xl-min) {
+  .make-grid(xl);
+}
+
+// xxLarge grid
+//
+// Columns, offsets, pushes, and pulls for the xxlarge desktop device range.
+
+@media (min-width: @screen-xxl-min) {
+  .make-grid(xxl);
+}

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Referentials>
+<Referential>
+	<TableName>LISTE_MAIL_P</TableName>
+	<Ressource>LISTE_MAIL_P</Ressource>
+	<ColumnByRow>2</ColumnByRow>
+	<Create>false</Create>
+	<Modify>false</Modify>
+	<Remove>false</Remove>
+	<Image>gif/Product.gif</Image>
+	
+	<ToolBar>top</ToolBar>
+	<Notepad>false</Notepad>
+	<AttachedDoc>false</AttachedDoc>
+	<HelpUrl></HelpUrl>
+	
+	<Column>
+		<ColumnName>CD_CLIENT</ColumnName>
+		<Ressource>CD_CLIENT</Ressource>
+		<DataType>int</DataType>
+		<Colspan>10</Colspan>
+		<Length>12</Length>
+		<Scale>0</Scale> 
+		<IsMandatory>true</IsMandatory> 
+		<RegularExpression></RegularExpression>
+		<IsHide>false</IsHide>
+		<IsHideInDataGrid>false</IsHideInDataGrid>
+		<IsDataKeyField>true</IsDataKeyField>
+		<IsKeyField>false</IsKeyField>
+		<IsForeignKeyField>true</IsForeignKeyField>
+		<IsIdentity>false</IsIdentity>
+		<IsUpdatable>false</IsUpdatable>
+		<IsOrderBy>true</IsOrderBy>		
+		<Relation>
+			<TableName>ACTOR</TableName>
+			<ColumnRelation>
+				<ColumnName>EXTLLINK</ColumnName>
+				<DataType>string</DataType>
+			</ColumnRelation>
+			<ColumnSelect>
+				<ColumnName>IDENTIFIER</ColumnName>
+				<Ressource>IDENTIFIER</Ressource>
+				<DataType>string</DataType>
+			</ColumnSelect>
+			<ColumnLabel>
+				<ColumnName>DISPLAYNAME</ColumnName>
+				<Ressource>DISPLAYNAME</Ressource>
+				<DataType>string</DataType>
+			</ColumnLabel>
+      <AutoComplete enabled="true"/>
+    </Relation>
+		<html_BLOCK title="USER" blockbyrow="1" columnbyrow="2" ></html_BLOCK>
+	</Column>
+	<Column>
+		<ColumnName>RECEIVER</ColumnName>
+		<Ressource>Nom</Ressource>
+		<DataType>string</DataType>
+		<Colspan>2</Colspan>
+		<Length>60</Length>
+		<Scale>0</Scale> 
+		<IsMandatory>true</IsMandatory> 
+		<RegularExpression>[\w|\W]</RegularExpression>
+		<Default></Default>
+		<IsHide>false</IsHide>
+		<IsHideInDataGrid>false</IsHideInDataGrid>
+		<IsDataKeyField>false</IsDataKeyField>
+		<IsKeyField>true</IsKeyField>
+		<IsForeignKeyField>false</IsForeignKeyField>
+		<IsIdentity>false</IsIdentity>
+		<IsUpdatable>true</IsUpdatable>				
+		<Relation></Relation>
+		<html_BLOCK title="Descriptif" blockbyrow="1" columnbyrow="2" width="100%"></html_BLOCK>
+	</Column>	
+	<Column>
+		<ColumnName>RECEIVER_EMAIL</ColumnName>
+		<Ressource>MAIL</Ressource>
+		<DataType>string</DataType>
+		<Colspan>2</Colspan>
+		<Length>60</Length>
+		<Scale>0</Scale> 
+		<IsMandatory>true</IsMandatory> 
+		<RegularExpression>[\w|\W]</RegularExpression>
+		<Default></Default>
+		<IsHide>false</IsHide>
+		<IsHideInDataGrid>false</IsHideInDataGrid>
+		<IsDataKeyField>false</IsDataKeyField>
+		<IsKeyField>true</IsKeyField>
+		<IsForeignKeyField>false</IsForeignKeyField>
+		<IsIdentity>false</IsIdentity>
+		<IsUpdatable>true</IsUpdatable>				
+		<Relation></Relation>
+	</Column>
+</Referential>
+</Referentials>

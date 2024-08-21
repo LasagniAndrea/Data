@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!--
+EG 20211217 [XXXXX] Gestion icon (Font Awesome) ouverture/Fermeture
+- Suppression de l'instruction : tblH-startdisplay:expand; (inutile valeur par défaut)
+- Suppression de l'instruction : tblH-linkid:xxxx; (inutile gestion via ajax quand nécessaire)
+-->
+
+<Objects>
+  <Object name="TradeDenOptionExerciseBlock" context="OptionExercise">
+    <ExerciseOption clientid="denOption"/>
+  </Object>
+
+  <Object name="TradeDenOptionAssignmentBlock" context="OptionAssignment">
+    <AssignmentOption clientid="denOption"/>
+  </Object>
+
+  <Object name="TradeDenOptionAbandonBlock" context="OptionAbandon">
+    <AbandonOption clientid="denOption"/>
+  </Object>
+
+  <!-- ExerciseOption -->
+  <Object name="ExerciseOption">
+    <table style="istableH:true;tblH-titleR:OptionExercise;tblH-bkgH-color:#036AB5;tblH-css:size4;">
+      <table style="margin-top:2px;" controlalignleft="true" verticalAlign ="Top">
+        <TradeDenOptionGeneralInformation/>
+      </table>
+      <br/>
+      <table>
+        <table verticalAlign ="Top" style="istableH:true;tblH-titleR:Quantity_Title;tblH-css:size5;tblH-reverse:1;">
+          <table style="margin-top:2px;" colspan="-1" controlalignleft="true" verticalAlign ="Top">
+            <TradeDenOptionInformationQuantity/>
+          </table>
+        </table>
+        <table verticalAlign ="Top">
+          <table verticalAlign ="Top" style="istableH:true;tblH-titleR:Underlyer;tblH-css:size5;tblH-reverse:1;">
+            <table style="margin-top:2px;" colspan="-1" controlalignleft="true" verticalAlign ="Top">
+              <TradeDenOptionInformationUnderlyer/>
+            </table>
+          </table>
+          <br/>
+          <table verticalAlign ="Top" style="istableH:true;tblH-titleR:NoteEvents;tblH-css:size5;tblH-reverse:1;">
+            <table controlalignleft="true" colspan="-1" verticalAlign="top">
+              <TradeDenOptionComments clientid="note" required="false"  />
+            </table>
+          </table>
+        </table>
+      </table>
+      <br/>
+      <table verticalAlign ="Top" 
+             style="istableH:true;tblH-titleR:otherPartyPayment;tblH-css:size5;
+             tblH-reverse:1;tblH-btn-id:btnFees2;tblH-btn-img:fas fa-calculator;tblH-btn-key:F;tblH-btn-click:OnFeesClick;tblH-btn-blockUI:btnFees2ToolTip;helpschema:efsml;helpelement:Payment">
+        <TradeDenOptionPaymentBlock />
+      </table>
+    </table>
+  </Object>
+
+  <!-- AssignmentOption -->
+  <Object name="AssignmentOption">
+    <table style="istableH:true;tblH-titleR:OptionAssignment;tblH-bkgH-color:#C00303;tblH-css:size4;">
+      <table style="margin-top:2px;" controlalignleft="true" verticalAlign ="Top">
+        <TradeDenOptionGeneralInformation/>
+      </table>
+      <br/>
+      <table>
+        <table verticalAlign ="Top" style="istableH:true;tblH-titleR:Quantity_Title;tblH-css:size5;tblH-reverse:1;">
+          <table style="margin-top:2px;" colspan="-1" controlalignleft="true" verticalAlign ="Top">
+            <TradeDenOptionInformationQuantity/>
+          </table>
+        </table>
+        <table verticalAlign ="Top">
+          <table verticalAlign ="Top" style="istableH:true;tblH-titleR:Underlyer;tblH-css:size5;tblH-reverse:1;">
+            <table style="margin-top:2px;" colspan="-1" controlalignleft="true" verticalAlign ="Top">
+              <TradeDenOptionInformationUnderlyer/>
+            </table>
+          </table>
+          <br/>
+          <table verticalAlign ="Top" style="istableH:true;tblH-titleR:NoteEvents;tblH-css:size5;tblH-reverse:1;">
+            <table controlalignleft="true" colspan="-1" verticalAlign="top">
+              <TradeDenOptionComments clientid="note" required="false"  />
+            </table>
+          </table>
+        </table>
+      </table>
+      <br/>
+      <table verticalAlign ="Top" style="istableH:true;tblH-titleR:otherPartyPayment;tblH-css:size5;
+             tblH-reverse:1;tblH-btn-id:btnFees2;tblH-btn-img:fas fa-calculator;tblH-btn-key:F;tblH-btn-click:OnFeesClick;tblH-btn-blockUI:btnFees2ToolTip;helpschema:efsml;helpelement:Payment">
+        <TradeDenOptionPaymentBlock />
+      </table>
+    </table>
+  </Object>
+
+  <!-- AbandonOption -->
+  <Object name="AbandonOption">
+    <table style="istableH:true;tblH-titleR:OptionAbandon;tblH-bkgH-color:#545454;tblH-css:size4;">
+      <table style="margin-top:2px;" controlalignleft="true" verticalAlign ="Top">
+        <TradeDenOptionGeneralInformation/>
+      </table>
+      <br/>
+      <table>
+        <table verticalAlign ="Top" style="istableH:true;tblH-titleR:Quantity_Title;tblH-css:size5;tblH-reverse:1;">
+          <table style="margin-top:2px;" colspan="-1" controlalignleft="true" verticalAlign ="Top">
+            <TradeDenOptionInformationQuantity/>
+          </table>
+        </table>
+        <table verticalAlign ="Top" style="istableH:true;tblH-titleR:NoteEvents;tblH-css:size5;tblH-reverse:1;">
+          <table controlalignleft="true" colspan="-1" verticalAlign="top">
+            <TextBox clientid="note" textMode="MultiLine" required="false" datatype="string" style="width:500px;height:42px;" />
+          </table>
+        </table>
+      </table>
+      <br/>
+      <table verticalAlign ="Top"
+             style="istableH:true;tblH-titleR:otherPartyPayment;tblH-css:size5;
+             tblH-reverse:1;tblH-btn-id:btnFees2;tblH-btn-img:fas fa-calculator;tblH-btn-key:F;tblH-btn-click:OnFeesClick;tblH-btn-blockUI:btnFees2ToolTip;helpschema:efsml;helpelement:Payment">
+        <TradeDenOptionPaymentBlock />
+      </table>
+    </table>
+  </Object>
+
+  <!-- Payment -->
+  <Object name="TradeDenOptionPaymentBlock">
+      <table style="margin-top:2px;" id="tblExeAssPartyPaymentBlock">
+        <PaymentOPPLight clientid="otherPartyPayment" occurs="1" addsuboperator="true" required="false" helpschema="efsml"	helpelement="Payment" />
+      </table>
+      <fill/>
+  </Object>
+
+  <!-- Caractéristiques générales -->
+  <Object name="TradeDenOptionGeneralInformation">
+    <table>
+      <hr style="margin-top:5px;margin-bottom:5px;"/>
+      <String70_RO_L clientid="exerciseType" required="false"/>
+      <String150_RO_L clientid="settlementMethod" required="false"/>
+      <String150_RO_L clientid="physicalFactor" required="false"/>
+      <br/>
+      <String70_RO_L  clientid="callPut" required="false"/>
+      <FixStrikePrice_RO_L  clientid="strikePrice" required="false"/>
+      <Date60_RO_L clientid="date" required="false"/>
+      <IntegerQte_w70_L_RO  clientid="daysToExpire" required="false"/><Label clientid="Days"/>
+    </table>
+  </Object>
+
+  <!-- Caractéristiques de l'exercice/assignation/abandon -->
+  <Object name="TradeDenOptionInformationQuantity">
+    <table controlalignleft="true" colspan="-1">
+      <table controlalignleft="true">
+        <RequestMode_L clientid="requestMode" postback="true" required="true" helpschema="fixml" helpelement="SettlSessIDEnum" />
+        <Fill/>
+        <br/>
+        <DenOptionActionType_L clientid="denOptionActionType" required="true" postback="true"/>
+        <Button imageurl="fas fa-info-circle blue" tooltiptitle="Information" tooltip="denOption_ToolTipReset"/>
+        <Fill/>
+      </table>
+      <br/>
+      <table controlalignleft="true">
+        <String150_RO clientid="moneyPosition" required="false" cssclass="BannerRed" attributes="class:BannerRed"/>
+        <hr style="margin-top:5px;margin-bottom:5px;"/>
+        <br/>
+        <IntegerQte_w100_L_RO clientid="initialQuantity" required="true"/>
+        <br/>
+        <IntegerQte_w100_L_RO clientid="positionQuantity" required="true"/>
+        <br/>
+        <IntegerQte_w100_L_RO clientid="availableQuantity" required="true"/>
+        <br/>
+        <NonNegativeIntegerQte_w100_L clientid="quantity" required="true" postback="true"/>
+        <Fill/>
+        <Check_L clientid="abandonRemaining" required="false"/>
+      </table>
+      <br/>
+      <br/>
+      <table>
+        <String150_RO clientid="actionTitle" required="false" />
+        <hr style="margin-top:5px;margin-bottom:5px;"/>
+      </table>
+      <br/>
+      <table controlalignleft="true" colspan="-1">
+        <DenOptionActionBlock clientid="action" occurs="0" addsuboperator="false" required="false"  />
+      </table>
+      
+    </table>
+  </Object>
+
+  <!-- Dénouements du jour -->
+  <Object name="DenOptionActionBlock">
+    <String100_RO_L clientid="denRequestMode" required="false"/>
+    <String70_RO_L clientid="denStatus" required="false"/>
+    <String150_RO clientid="denRequestType" required="false"/>
+    <IntegerQte_w70_L_RO clientid="denQuantity" required="true" />
+    <String150_RO_L clientid="denDate" required="false"/>
+    <Fill/>
+    <Check clientid="denIsRemove" required="false"  postback="true"/>
+    <br/>
+  </Object>
+
+  <!-- abandon quantité restante -->
+  <Object name="xTradeDenOptionRemainingQuantity">
+    <hr style="margin-top:5px;margin-bottom:5px;"/>
+    <table  controlalignleft="true">
+      <Check_L clientid="abandonRemaining" required="false"/>
+    </table>
+  </Object>
+  <Object name="TradeDenOptionRemainingQuantity">
+    <table controlalignleft="true">
+      <hr style="margin-top:5px;margin-bottom:5px;"/>
+      <Check_L clientid="abandonRemaining" required="false"/>
+      <Fill/>
+    </table>
+  </Object>
+
+
+  <!-- Caractéristiques de l'abandon-->
+  <Object name="TradeAbandonOptionInformationQuantity">
+    <table controlalignleft="true" colspan="-1">
+      <!--RD 20110601-->
+      <table>
+        <String150_RO clientid="moneyPosition" required="false" cssclass="BannerRed" attributes="class:BannerRed"/>
+      </table>
+      <br/>
+      <table>
+        <IntegerQte_w100_L_RO clientid="availableQuantity" required="true"/>
+      </table>
+      <br/>
+      <!--<ExeAssAbnPrevQuantity/>-->
+      <table>
+        <NonNegativeIntegerQte_w100_L clientid="quantity" required="true" postback="true"/>
+      </table>
+      <table>
+        <space/>
+        <Button imageurl="fas fa-info-circle blue" tooltiptitle="Information" tooltip="tradeDenOption_ToolTipReset"/>
+      </table>
+      <br/>
+      <Fill/>
+    </table>
+  </Object>
+
+  <!-- Informations du sous jacent -->
+  <Object name="TradeDenOptionInformationUnderlyer">
+    <table>
+      <String150_RO_L clientid="assetCategory" required="false"/>
+      <br/>
+      <String150_RO_L clientid="identifier" required="true" />
+      <br/>
+      <UnderlyerQuote/>
+      <br/>
+      <Date60_RO_L clientid="quoteTime" required="true"/>
+      <br/>
+      <String150_RO_L clientid="quoteSource" required="false"/>
+    </table>
+  </Object>
+
+  <Object name="UnderlyerQuote">
+    <Label clientid="quoteValue" style="width:70px"/>
+    <table>
+      <Decimal_w70_RO_AlignLeft clientid="quoteValue" required="true" postback="true"/>
+      <String80_RO clientid="quoteTiming" required="false"/>
+    </table>
+  </Object>
+  
+  <!-- Commentaires associés -->
+  <Object name="TradeDenOptionComments">
+    <TextBox textMode="MultiLine" datatype="string" style="width:450px;height:72px;" />
+  </Object>
+  
+</Objects>

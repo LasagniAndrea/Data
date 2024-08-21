@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+	<!-- START : BLOCKS GLOBAL AMOUNTS -->
+
+	<!-- InvoiceAmount -->
+	<Object name="InvoiceAmount">
+		<Label clientid="amount" helpschema="fpml" helpelement="Money" />
+		<Table style="width:140px;">
+			<TextBox clientid="amount" datatype="decimal" regex="RegexAmountExtend" style="width:100px" />
+			<Space />
+			<DropDown clientid="currency" datatype="string" width="30px" listretrieval="predef:CURRENCY" misc="IsReadOnly:true"/>
+		</Table>
+	</Object>
+
+	<!-- ReadOnlyInvoiceAmount -->
+	<Object name="ReadOnlyInvoiceAmount">
+		<Label clientid="amount" helpschema="fpml" helpelement="Money" />
+		<Table style="width:140px;">
+			<TextBox clientid="amount" datatype="decimal" regex="RegexAmountExtend" style="width:100px" misc="IsReadOnly:true"/>
+			<Space />
+			<DropDown clientid="currency" datatype="string" width="30px" listretrieval="predef:CURRENCY" misc="IsReadOnly:true"/>
+		</Table>
+	</Object>
+	<!-- InvoiceRateSourceBlock -->
+  <Object name="InvoiceRateSourceBlock">
+    <table id="tblInvoiceRateSourceH" style="istableH:true;tblH-titleR:InvoiceRateSource;tblH-css:size5;tblH-reverse:1;tblH-startdisplay:collapse;">
+      <table verticalAlign="Top" xcolspan="5" id="tblInvoiceRateSource">
+        <Banner caption="InvoiceIssueSource" level="4" helpschema="efsml" helpelement="InformationSource"/>
+        <AssetFxRate_L clientid="assetFxRate" required="true" postback="true" />
+        <br/>
+        <InformationSource />
+        <br/>
+        <BusinessCenterTime clientid="fixingTime" required="false" helpschema="fpml" helpelement="BusinessCenterTime"/>
+        <br/>
+        <Banner caption="InvoiceIssueFixingDate" level="4" helpschema="efsml" helpelement="InvoiceRateSource"/>
+        <Date_L clientid="fixingDate" required="true" />
+        <br/>
+        <DateRelativeTo_L clientid="fixingDate_dateRelativeTo" required="true" postback="true"/>
+        <br/>
+        <Offset_L clientid="fixingDate" required="false" postback="true" helpschema="fpml" helpelement="RelativeDateOffset" />
+      </table>
+    </table>
+  </Object>
+  <!--InformationProvider-->
+	<Object name="InformationProvider" helpschema="fpml" helpelement="InformationProvider">
+		<label />
+		<DropDown datatype="string" listretrieval="predef:INFORMATIONPROVIDER" width="200px" />
+	</Object>
+	<!--InformationSource-->
+	<Object name="InformationSource" helpschema="efsml" helpelement="InformationSource">
+		<InformationProvider clientid="rateSource" required="false" helpschema="fpml" helpelement="InformationProvider" />
+		<br/>
+		<RateSourceInfo />
+	</Object>
+	<!--RateSourcePage-->
+	<Object name="RateSourcePage">
+		<Label helpschema="fpml" helpelement="rateSourcePage" />
+		<TextBox datatype="string"/>
+	</Object>
+	<!--RateSourceInfo-->
+	<Object name="RateSourceInfo">
+		<RateSourcePage clientid="rateSourcePage" required="false"/>
+		<br/>
+		<RateSourcePageHeading clientid="rateSourcePageHeading" required="false" />
+	</Object>
+	<!--RateSourcePageHeading-->
+	<Object name="RateSourcePageHeading">
+		<Label helpschema="fpml" helpelement="rateSourcePageHeading" />
+		<TextBox datatype="string"/>
+	</Object>
+	<!-- NetTurnOverRateBlock -->
+	<Object name="NetTurnOverRateBlock">
+		<Table style="width:10px;">
+			<TextBox clientid="rate" datatype="decimal" regex="RegexFxRateExtend" style="width:150px" />
+			<TextBox clientid="rateRead" datatype="decimal" regex="RegexFxRateExtend" style="width:150px" />
+			<Label clientid="reverse" helpschema="efsml" helpelement="issueRateIsReverse"/>
+			<TextBox clientid="reverse" datatype="string" />
+		</Table>
+	</Object>
+  <!-- END : BLOCKS GLOBAL AMOUNTS -->
+</Objects>

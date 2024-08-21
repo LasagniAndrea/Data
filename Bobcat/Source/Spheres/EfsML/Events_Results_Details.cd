@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="EfsML.Business.EFS_EventDetail">
+    <Position X="10.5" Y="2.5" Width="3" />
+    <Members>
+      <Field Name="asset2Specified" Hidden="true" />
+      <Field Name="assetSpecified" Hidden="true" />
+      <Field Name="currencyPairSpecified" Hidden="true" />
+      <Field Name="dayCountFractionSpecified" Hidden="true" />
+      <Field Name="exchangeRateSpecified" Hidden="true" />
+      <Field Name="fixedRateSpecified" Hidden="true" />
+      <Field Name="fixingRateSpecified" Hidden="true" />
+      <Field Name="multiplierSpecified" Hidden="true" />
+      <Field Name="paymentQuoteSpecified" Hidden="true" />
+      <Field Name="paymentSourceSpecified" Hidden="true" />
+      <Field Name="premiumQuoteSpecified" Hidden="true" />
+      <Field Name="settlementRateSpecified" Hidden="true" />
+      <Field Name="sideRateSpecified" Hidden="true" />
+      <Field Name="spreadSpecified" Hidden="true" />
+      <Field Name="strikePriceSpecified" Hidden="true" />
+      <Field Name="strikeSpecified" Hidden="true" />
+      <Field Name="triggerRateSpecified" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="asset" Type="EfsML.Business.EFS_Asset" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.875" Y="2.5" />
+        <Point X="10.875" Y="0.971" />
+        <Point X="6.5" Y="0.971" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="asset2" Type="EfsML.Business.EFS_Asset" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="10.625" Y="2.5" />
+        <Point X="10.625" Y="1.357" />
+        <Point X="6.5" Y="1.357" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="paymentQuote" Type="EfsML.Business.EFS_PaymentQuote" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="13.5" Y="3.925" />
+        <Point X="20.125" Y="3.925" />
+        <Point X="20.125" Y="4.25" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="1.47" Y="-0.023" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="fixingRate" Type="EfsML.Business.EFS_FxFixing" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="13.5" Y="5.766" />
+        <Point X="17.375" Y="5.766" />
+        <Point X="17.375" Y="7.5" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.787" Y="1.424" Height="0.182" Width="0.868" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="settlementRate" Type="EfsML.Business.EFS_SettlementRate">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.087" Y="1.405" Height="0.182" Width="1.409" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="triggerRate" Type="EfsML.Business.EFS_TriggerRate">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.018" Y="0.297" Height="0.182" Width="0.91" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="premiumQuote" Type="EfsML.Business.EFS_FxPremiumQuote" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="13.5" Y="5.351" />
+        <Point X="18.938" Y="5.351" />
+        <Point X="18.938" Y="7.5" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.353" Y="1.872" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="paymentSource" Type="EfsML.Business.EFS_PaymentSource" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="13.5" Y="6.004" />
+        <Point X="14.438" Y="6.004" />
+        <Point X="14.438" Y="7.5" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.1" Y="0.445" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="exchangeRate" Type="EfsML.Business.EFS_ExchangeRate" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="13.5" Y="3.202" />
+        <Point X="17.25" Y="3.202" />
+        <Point X="17.25" Y="2.891" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.096" Y="0.108" Height="0.182" Width="1.072" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="invoicingAmountBase" Type="EfsML.Business.EFS_InvoicingAmountBase">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.661" Y="0.07" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="etdPremiumCalculation" Type="EfsML.Business.EFS_ETDPremiumCalculation" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="13.5" Y="3.569" />
+        <Point X="20.125" Y="3.569" />
+        <Point X="20.125" Y="3.44" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.07" Y="0.225" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>NAIQAQAACgAAgAEAQEAAEBAAEoEAVSwiBgCAAAJwgAA=</HashCode>
+      <FileName>EfsML_Business_Shared_Events.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="asset" />
+      <Field Name="asset2" />
+      <Field Name="paymentQuote" />
+      <Field Name="fixingRate" />
+      <Field Name="settlementRate" />
+      <Field Name="triggerRate" />
+      <Field Name="premiumQuote" />
+      <Field Name="paymentSource" />
+      <Field Name="exchangeRate" />
+      <Field Name="invoicingAmountBase" />
+      <Field Name="taxSource" />
+      <Field Name="etdPremiumCalculation" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EfsML.Business.EFS_Asset">
+    <Position X="3.5" Y="0.75" Width="3" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>oAAFCECIEAQAQAIEIAEI0AQAAMAABAAoAYAIwAAiIgg=</HashCode>
+      <FileName>EfsML_Business_Shared.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="category" />
+      <Field Name="unitTypeWeight" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EfsML.Business.EFS_FxFixing">
+    <Position X="16.25" Y="7.5" Width="2.25" />
+    <Members>
+      <Property Name="AssetFxRate" Hidden="true" />
+      <Method Name="EFS_FxFixing" Hidden="true" />
+      <Property Name="EventType" Hidden="true" />
+      <Property Name="FixingDate" Hidden="true" />
+      <Property Name="FixingRate" Hidden="true" />
+      <Field Name="notionalAmountSpecified" Hidden="true" />
+      <Field Name="referenceCurrencySpecified" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAEAAACQAAAAUAABAABAEAAAAAAAAABQ=</HashCode>
+      <FileName>EfsML_Business_Shared_FX.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EfsML.Business.EFS_PaymentQuote">
+    <Position X="19" Y="4.25" Width="2.25" />
+    <Members>
+      <Method Name="EFS_PaymentQuote" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAYAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EfsML_Business_Shared.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EfsML.Business.EFS_FxPremiumQuote">
+    <Position X="18.75" Y="7.5" Width="2.5" />
+    <Members>
+      <Field Name="amountReferenceSpecified" Hidden="true" />
+      <Method Name="EFS_FxPremiumQuote" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>BAAAABAAAAAAAAAAAAAAEAAAgAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>EfsML_Business_Shared_FX.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EfsML.Business.EFS_SettlementRate">
+    <Position X="10.75" Y="8.5" Width="2.25" />
+    <Members>
+      <Field Name="conversionRateSpecified" Hidden="true" />
+      <Method Name="EFS_SettlementRate" Hidden="true" />
+      <Field Name="settlementRateSpecified" Hidden="true" />
+      <Field Name="spotRateSpecified" Hidden="true" />
+    </Members>
+    <AssociationLine Name="fxType" Type="EfsML.Enum.FxTypeEnum" FixedFromPoint="true">
+      <Path>
+        <Point X="10.75" Y="9.562" />
+        <Point X="9.75" Y="9.562" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.178" Y="-0.348" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>IQAAAAAAACAAAAEAAAAACAAAAQBAAAQAAAAAAAAgAAQ=</HashCode>
+      <FileName>EfsML_Business_Shared_FX.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="fxType" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EfsML.Business.EFS_TriggerRate">
+    <Position X="6.75" Y="1.75" Width="2.5" />
+    <Members>
+      <Method Name="EFS_TriggerRate" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAgAAAAAAAAAAAAAAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>EfsML_Business_Shared_FX.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EfsML.Business.EFS_PaymentSource">
+    <Position X="13.25" Y="7.5" Width="2.75" />
+    <Members>
+      <Field Name="bracket1Specified" Hidden="true" />
+      <Field Name="bracket2Specified" Hidden="true" />
+      <Method Name="Calc" Hidden="true" />
+      <Method Name="EFS_PaymentSource" Hidden="true" />
+      <Property Name="ErrLevel" Hidden="true" />
+      <Field Name="feePaymentFrequencySpecified" Hidden="true" />
+      <Field Name="formulaDCFSpecified" Hidden="true" />
+      <Field Name="formulaMaxSpecified" Hidden="true" />
+      <Field Name="formulaMinSpecified" Hidden="true" />
+      <Field Name="formulaSpecified" Hidden="true" />
+      <Field Name="formulaValue1Specified" Hidden="true" />
+      <Field Name="formulaValue2Specified" Hidden="true" />
+      <Field Name="formulaValueBracketSpecified" Hidden="true" />
+      <Field Name="idFeeMatrixSpecified" Hidden="true" />
+      <Field Name="idFeeScheduleSpecified" Hidden="true" />
+      <Field Name="idFeeSpecified" Hidden="true" />
+      <Field Name="statusSpecified" Hidden="true" />
+    </Members>
+    <AssociationLine Name="status" Type="EfsML.Enum.SpheresSourceStatusEnum">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.331" Y="0.1" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AgQIIgAQAyCAABUIACSAECAEwAUQiAsBJAAAIIABAGE=</HashCode>
+      <FileName>EfsML_Business_Shared.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="status" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EfsML.Business.EFS_InvoicingAmountBase">
+    <Position X="11.25" Y="0.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>EfsML_Business_Shared_ADM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EfsML.Business.EFS_ExchangeRate">
+    <Position X="16" Y="0.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ABCAAAAAAggIAAAAACAAAAAAAABAAAAIABAAAAAAAAQ=</HashCode>
+      <FileName>EfsML_Business_Shared.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EfsML.Business.EFS_TaxSource">
+    <Position X="6.75" Y="3.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AQAABAAgAAAAAAAAAQTAAAAAAACgAAAAIIAAAAAAAJA=</HashCode>
+      <FileName>EfsML_Business_Shared.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="EfsML.Business.EFS_ETDPremiumCalculation">
+    <Position X="19" Y="1.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAEAAEAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>EfsML_Business_Shared_ETD.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="EfsML.Enum.FxTypeEnum">
+    <Position X="7.25" Y="8.5" Width="2.5" />
+    <Members>
+      <Field Name="Unknown" Hidden="true" />
+    </Members>
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="EfsML.Enum.SpheresSourceStatusEnum">
+    <Position X="10.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="EfsML.Enum.CfiCodeCategoryEnum">
+    <Position X="0.75" Y="4" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Enum Name="EfsML.Enum.UnitTypeEnum">
+    <Position X="0.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

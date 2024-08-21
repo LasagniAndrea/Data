@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customObjects bs-grid="col-sm-4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <customObject bs-grid="col-sm-5" control="label"     cssclass="control-label" clientid="ENTITY" caption = "Entity_Title!br" xsi:type="CustomObjectLabel"/>
+  <customObject bs-grid="col-sm-7" control="dropdown"  cssclass="input-xs"      clientid="ENTITY" width="100%" datatype="integer"
+                                   listretrieval="predef:ActorEntity" required="true" postback="true"
+                                   postbackargument ="SELFRELOAD_" xsi:type="CustomObjectDropDown"
+                                   misc="isAddAll:true;isUseSessionRestrict:true;isClear:false"/>
+  <customObject bs-grid="col-sm-5" control="label"     cssclass="control-label" clientid="CSSCUSTODIAN"  caption = "CssCustodian!br"  xsi:type="CustomObjectLabel"/>
+  <customObject bs-grid="col-sm-7" control="dropdown"  cssclass="input-xs"      clientid="CSSCUSTODIAN"  width="100%"   datatype="integer"
+                                   listretrieval="predef:csscustodian" required="true" postback="true"
+                                   postbackargument ="SELFRELOAD_" xsi:type="CustomObjectDropDown"
+                                   misc="isAddAll:true;isUseSessionRestrict:true;isClear:true"/>
+</customObjects>

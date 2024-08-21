@@ -1,0 +1,870 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- RD 20130114 [18349] Gérer la compatibilité avec Spheres Vision et Portal en utilisant %%DH:SQLIF%%-->
+<!-- EG 20180525 [23979] IRQ Processing -->
+<!-- PL 20210325 [XXXXX] Add CODE (SYSCODESYSNUMBER) -->
+<Referentials>
+  <Referential>
+    <IsUseSQLParameters>true</IsUseSQLParameters>
+    <TableName>PROCESS_L</TableName>
+    <ColumnByRow>3</ColumnByRow>
+    <Create>false</Create>
+    <Modify>false</Modify>
+    <Remove>false</Remove>
+    <AttachedDoc>true</AttachedDoc>
+    <XSLFileName/>
+
+    <Button title="btnErrorDetailedLog" url="List.aspx?Log=PROCESSDET_L&amp;InputMode=2&amp;IDMenu=OTC_VIEW_LOGPROCESS_DET&amp;OpenerSpecifiedSQLField=IDSTPROCESSDET&amp;ValueForFilter=CRITICAL;ERROR;;" tooltip="Msg_ErrorDetailedLog" color="bkgred"/>
+    <Button title="btnWarningDetailedLog" url="List.aspx?Log=PROCESSDET_L&amp;InputMode=2&amp;IDMenu=OTC_VIEW_LOGPROCESS_DET&amp;OpenerSpecifiedSQLField=IDSTPROCESSDET&amp;ValueForFilter=CRITICAL;ERROR;WARNING;;" tooltip="Msg_ErrorAndWarningDetailedLog" color="bkgorange"/>
+    <Button title="btnInterruptDetailedLog" url="List.aspx?Log=PROCESSDET_L&amp;InputMode=2&amp;IDMenu=OTC_VIEW_LOGPROCESS_DET&amp;OpenerSpecifiedSQLField=MESSAGE&amp;ValueForFilter=IRQ_EXECUTED" tooltip="Msg_InterruptDetailedLog" color="bkggray"/>
+    <Button title="btnFullDetailedLog" url="List.aspx?Log=PROCESSDET_L&amp;InputMode=2&amp;IDMenu=OTC_VIEW_LOGPROCESS_DET" tooltip="Msg_FullDetailedLog" color="bkgblue"/>    
+    
+    <SQLSelect>
+      <ConditionSystem>SESSIONRESTRICT</ConditionSystem>
+      <Command rdbms="sqlserver">
+        <![CDATA[select
+        p.IDPROCESS_L, p.PROCESS, p.IDSTPROCESS, p.DTSTPROCESS, 
+        case when p.LODATATXT is null or p.LODATATXT='' then '' else p.LODATATXT + char(13) + char(10) end
+        + 
+        case when nullif(p.LODATATXT,'') is null then '' else p.LODATATXT end
+        + 
+        case when nullif(p.DATA1,'') is null 
+             then '' 
+             else case when nullif(p.LODATATXT,'') is null then '' else char(13) + char(10) + char(13) + char(10) end
+                + case when nullif(p.DATA1,'') is null then '' else case when nullif(p.DATA1IDENT,'') is null then '' else p.DATA1IDENT + ': ' end + p.DATA1 + char(13) + char(10) end
+                + case when nullif(p.DATA2,'') is null then '' else case when nullif(p.DATA2IDENT,'') is null then '' else p.DATA2IDENT + ': ' end + p.DATA2 + char(13) + char(10) end 
+                + case when nullif(p.DATA3,'') is null then '' else case when nullif(p.DATA3IDENT,'') is null then '' else p.DATA3IDENT + ': ' end + p.DATA3 + char(13) + char(10) end                
+                + case when nullif(p.DATA4,'') is null then '' else case when nullif(p.DATA4IDENT,'') is null then '' else p.DATA4IDENT + ': ' end + p.DATA4 + char(13) + char(10) end                
+                + case when nullif(p.DATA5,'') is null then '' else case when nullif(p.DATA5IDENT,'') is null then '' else p.DATA5IDENT + ': ' end + p.DATA5 end                
+        end as LODATATXT,
+        t.READYSTATE, 
+        p.IDDATAIDENT, 
+        %%DH:SQLIF%%[%%PARAM1%%;COMMON;case when MATURITY.MATURITYMONTHYEAR is not null then MATURITY.MATURITYMONTHYEAR 
+ 			  	   when ASSET_FXRATE.IDENTIFIER is not null then ASSET_FXRATE.IDENTIFIER 
+				     when IOTASK.IDENTIFIER is not null then IOTASK.IDENTIFIER 
+				     when ACTOR.IDENTIFIER is not null then ACTOR.IDENTIFIER 
+				     when TRADE.IDENTIFIER is not null then TRADE.IDENTIFIER 
+				     else convert(varchar(32),p.IDDATA)
+				end as IDDATA,]
+        %%DH:SQLIF%%[%%PARAM1%%;ONLYSIO;case when IOTASK.IDENTIFIER is not null then IOTASK.IDENTIFIER 
+				     when ACTOR.IDENTIFIER is not null then ACTOR.IDENTIFIER 
+				     else convert(varchar(32),p.IDDATA)
+				end as IDDATA,]
+        p.IDA, p.HOSTNAME, p.APPNAME, p.APPVERSION,
+        case when smd.SYSCODE is null and smd_gb.SYSCODE is null 
+             then p.MESSAGE
+             else 
+             case when sm.SYSCODE in ('LOG' ,'TRK')
+                  then ''
+                  else sm.SYSCODE || '-' || right('00000' || convert(varchar,sm.SYSNUMBER),5) || ': '
+                  end
+             ||
+             replace(replace(replace(replace(replace(
+					        isnull(smd.MESSAGE,smd_gb.MESSAGE),
+					        '{1}',isnull(p.DATA1,'{1}')),
+					        '{2}',isnull(p.DATA2,'{2}')),
+					        '{3}',isnull(p.DATA3,'{3}')),
+					        '{4}',isnull(p.DATA4,'{4}')),
+					        '{5}',isnull(p.DATA5,'{5}')) 
+             end as MESSAGE,
+        isnull(p.SYSCODE || '-' || right('00000' || convert(varchar,p.SYSNUMBER),5), 'n/a') as CODE,
+        p.DATA1IDENT, p.DATA1, p.DATA2IDENT, p.DATA2, p.DATA3IDENT, p.DATA3, p.DATA4IDENT, p.DATA4, p.DATA5IDENT, p.DATA5,
+        p.EXTLLINK, p.IDTRK_L, p.ROWATTRIBUT, p.ROWVERSION
+        from
+        (
+        %%SELECT_LOGSESSION_PROCESS_L%%
+        )p
+        left outer join dbo.TRACKER_L t on t.IDTRK_L=p.IDTRK_L
+        left outer join dbo.SYSTEMMSG sm on sm.SYSCODE=p.SYSCODE and sm.SYSNUMBER=p.SYSNUMBER
+        left outer join dbo.SYSTEMMSGDET smd on smd.SYSCODE=sm.SYSCODE and smd.SYSNUMBER=sm.SYSNUMBER and smd.CULTURE='%%CULTURE_USER_ISO3166_ALPHA2%%'
+        left outer join dbo.SYSTEMMSGDET smd_gb on smd_gb.SYSCODE=sm.SYSCODE and smd_gb.SYSNUMBER=sm.SYSNUMBER and smd_gb.CULTURE='en'
+        left outer join dbo.ACTOR on ACTOR.IDA=p.IDDATA and p.IDDATAIDENT = 'ACTOR' 
+        %%DH:SQLIF%%[%%PARAM1%%;COMMON;left outer join dbo.TRADE on TRADE.IDT=p.IDDATA and p.IDDATAIDENT like 'TRADE%' 
+        left outer join dbo.IOTASK on IOTASK.IDIOTASK=p.IDDATA and p.IDDATAIDENT = 'IOTASK' 
+        left outer join dbo.QUOTE_FXRATE_H on QUOTE_FXRATE_H.IDQUOTE_H=p.IDDATA and p.IDDATAIDENT = 'QUOTE_FXRATE_H'
+        left outer join dbo.ASSET_FXRATE on ASSET_FXRATE.IDASSET=QUOTE_FXRATE_H.IDASSET
+        left outer join dbo.MATURITY on MATURITY.IDMATURITY=p.IDDATA and p.IDDATAIDENT = 'MATURITY']
+        %%DH:SQLIF%%[%%PARAM1%%;ONLYSIO;left outer join dbo.IOTASK on IOTASK.IDIOTASK=p.IDDATA and p.IDDATAIDENT = 'IOTASK']
+        where p.PROCESS != 'WEBSESSION']]>
+      </Command>
+      <Command rdbms = "oracle">
+        <![CDATA[select
+        p.IDPROCESS_L, p.PROCESS, p.IDSTPROCESS, p.DTSTPROCESS, 
+        case when nullif(p.LODATATXT,'') is null then '' else p.LODATATXT end
+        || 
+        case when nullif(p.DATA1,'') is null 
+             then '' 
+             else case when nullif(p.LODATATXT,'') is null then '' else chr(13) || chr(10) || chr(13) || chr(10) end
+                || case when nullif(p.DATA1,'') is null then '' else case when nullif(p.DATA1IDENT,'') is null then '' else p.DATA1IDENT || ': ' end || p.DATA1 || chr(13) || chr(10) end
+                || case when nullif(p.DATA2,'') is null then '' else case when nullif(p.DATA2IDENT,'') is null then '' else p.DATA2IDENT || ': ' end || p.DATA2 || chr(13) || chr(10) end 
+                || case when nullif(p.DATA3,'') is null then '' else case when nullif(p.DATA3IDENT,'') is null then '' else p.DATA3IDENT || ': ' end || p.DATA3 || chr(13) || chr(10) end                
+                || case when nullif(p.DATA4,'') is null then '' else case when nullif(p.DATA4IDENT,'') is null then '' else p.DATA4IDENT || ': ' end || p.DATA4 || chr(13) || chr(10) end                
+                || case when nullif(p.DATA5,'') is null then '' else case when nullif(p.DATA5IDENT,'') is null then '' else p.DATA5IDENT || ': ' end || p.DATA5 end                
+        end as LODATATXT,
+        t.READYSTATE,
+        p.IDDATAIDENT, 
+        %%DH:SQLIF%%[%%PARAM1%%;COMMON;case when MATURITY.MATURITYMONTHYEAR is not null then MATURITY.MATURITYMONTHYEAR 
+ 			  	   when ASSET_FXRATE.IDENTIFIER is not null then ASSET_FXRATE.IDENTIFIER 
+				     when IOTASK.IDENTIFIER is not null then IOTASK.IDENTIFIER 
+				     when ACTOR.IDENTIFIER is not null then ACTOR.IDENTIFIER 
+				     when TRADE.IDENTIFIER is not null then TRADE.IDENTIFIER 
+				     else to_char(p.IDDATA)
+				end as IDDATA,]
+        %%DH:SQLIF%%[%%PARAM1%%;ONLYSIO;case when IOTASK.IDENTIFIER is not null then IOTASK.IDENTIFIER 
+				     when ACTOR.IDENTIFIER is not null then ACTOR.IDENTIFIER
+				     else to_char(p.IDDATA)
+				end as IDDATA,]
+        p.IDA, p.HOSTNAME, p.APPNAME, p.APPVERSION,
+        case when smd.SYSCODE is null and smd_gb.SYSCODE is null 
+             then p.MESSAGE
+             else 
+             case when sm.SYSCODE in ('LOG' ,'TRK')
+                  then ''
+                  else sm.SYSCODE || '-' || substr('00000' || to_char(sm.SYSNUMBER),-5) || ': '
+                  end
+             ||
+             replace(replace(replace(replace(replace(
+					        nvl(smd.MESSAGE,smd_gb.MESSAGE),
+					        '{1}',nvl(p.DATA1,'{1}')),
+					        '{2}',nvl(p.DATA2,'{2}')),
+					        '{3}',nvl(p.DATA3,'{3}')),
+					        '{4}',nvl(p.DATA4,'{4}')),
+					        '{5}',nvl(p.DATA5,'{5}')) 
+             end as MESSAGE,
+        case when p.SYSCODE is null then 'n/a' else p.SYSCODE || '-' || substr('00000' || to_char(p.SYSNUMBER),-5) end as CODE,             
+        p.DATA1IDENT, p.DATA1, p.DATA2IDENT, p.DATA2, p.DATA3IDENT, p.DATA3, p.DATA4IDENT, p.DATA4, p.DATA5IDENT, p.DATA5,
+        p.EXTLLINK, p.IDTRK_L, p.ROWATTRIBUT, p.ROWVERSION
+        from
+        (
+        %%SELECT_LOGSESSION_PROCESS_L%%
+        )p
+        left outer join dbo.TRACKER_L t on t.IDTRK_L=p.IDTRK_L
+        left outer join dbo.SYSTEMMSG sm on sm.SYSCODE=p.SYSCODE and sm.SYSNUMBER=p.SYSNUMBER
+        left outer join dbo.SYSTEMMSGDET smd on smd.SYSCODE=sm.SYSCODE and smd.SYSNUMBER=sm.SYSNUMBER and smd.CULTURE='%%CULTURE_USER_ISO3166_ALPHA2%%'
+        left outer join dbo.SYSTEMMSGDET smd_gb on smd_gb.SYSCODE=sm.SYSCODE and smd_gb.SYSNUMBER=sm.SYSNUMBER and smd_gb.CULTURE='en'
+        left outer join dbo.ACTOR on ACTOR.IDA=p.IDDATA and p.IDDATAIDENT = 'ACTOR' 
+        %%DH:SQLIF%%[%%PARAM1%%;COMMON;left outer join dbo.TRADE on TRADE.IDT=p.IDDATA and p.IDDATAIDENT like 'TRADE%' 
+        left outer join dbo.IOTASK on IOTASK.IDIOTASK=p.IDDATA and p.IDDATAIDENT = 'IOTASK' 
+        left outer join dbo.QUOTE_FXRATE_H on QUOTE_FXRATE_H.IDQUOTE_H=p.IDDATA and p.IDDATAIDENT = 'QUOTE_FXRATE_H'
+        left outer join dbo.ASSET_FXRATE on ASSET_FXRATE.IDASSET=QUOTE_FXRATE_H.IDASSET
+        left outer join dbo.MATURITY on MATURITY.IDMATURITY=p.IDDATA and p.IDDATAIDENT = 'MATURITY']
+        %%DH:SQLIF%%[%%PARAM1%%;ONLYSIO;left outer join dbo.IOTASK on IOTASK.IDIOTASK=p.IDDATA and p.IDDATAIDENT = 'IOTASK']
+        where p.PROCESS != 'WEBSESSION'
+        ]]>
+      </Command>
+    </SQLSelect>
+    <SQLSelect>
+      <Command rdbms="sqlserver">
+        <![CDATA[select
+        p.IDPROCESS_L, p.PROCESS, p.IDSTPROCESS, p.DTSTPROCESS, 
+        case when nullif(p.LODATATXT,'') is null then '' else p.LODATATXT end
+        + 
+        case when nullif(p.DATA1,'') is null 
+             then '' 
+             else case when nullif(p.LODATATXT,'') is null then '' else char(13) + char(10) + char(13) + char(10) end
+                + case when nullif(p.DATA1,'') is null then '' else case when nullif(p.DATA1IDENT,'') is null then '' else p.DATA1IDENT + ': ' end + p.DATA1 + char(13) + char(10) end
+                + case when nullif(p.DATA2,'') is null then '' else case when nullif(p.DATA2IDENT,'') is null then '' else p.DATA2IDENT + ': ' end + p.DATA2 + char(13) + char(10) end 
+                + case when nullif(p.DATA3,'') is null then '' else case when nullif(p.DATA3IDENT,'') is null then '' else p.DATA3IDENT + ': ' end + p.DATA3 + char(13) + char(10) end                
+                + case when nullif(p.DATA4,'') is null then '' else case when nullif(p.DATA4IDENT,'') is null then '' else p.DATA4IDENT + ': ' end + p.DATA4 + char(13) + char(10) end                
+                + case when nullif(p.DATA5,'') is null then '' else case when nullif(p.DATA5IDENT,'') is null then '' else p.DATA5IDENT + ': ' end + p.DATA5 end                
+        end as LODATATXT,
+        t.READYSTATE,
+        p.IDDATAIDENT, 
+        %%DH:SQLIF%%[%%PARAM1%%;COMMON;case when MATURITY.MATURITYMONTHYEAR is not null then MATURITY.MATURITYMONTHYEAR 
+ 			  	   when ASSET_FXRATE.IDENTIFIER is not null then ASSET_FXRATE.IDENTIFIER 
+				     when IOTASK.IDENTIFIER is not null then IOTASK.IDENTIFIER 
+				     when ACTOR.IDENTIFIER is not null then ACTOR.IDENTIFIER 
+				     when TRADE.IDENTIFIER is not null then TRADE.IDENTIFIER 
+				     else convert(varchar(32),p.IDDATA)
+				end as IDDATA,]
+        %%DH:SQLIF%%[%%PARAM1%%;ONLYSIO;case when IOTASK.IDENTIFIER is not null then IOTASK.IDENTIFIER 
+				     when ACTOR.IDENTIFIER is not null then ACTOR.IDENTIFIER
+				     else convert(varchar(32),p.IDDATA)
+				end as IDDATA,]
+        p.IDA, p.HOSTNAME, p.APPNAME, p.APPVERSION,
+        case when smd.SYSCODE is null and smd_gb.SYSCODE is null 
+             then p.MESSAGE
+             else 
+             case when sm.SYSCODE in ('LOG' ,'TRK')
+                  then ''
+                  else sm.SYSCODE || '-' || right('00000' || convert(varchar,sm.SYSNUMBER),5) || ': '
+                  end
+             ||
+             replace(replace(replace(replace(replace(
+					        isnull(smd.MESSAGE,smd_gb.MESSAGE),
+					        '{1}',isnull(p.DATA1,'{1}')),
+					        '{2}',isnull(p.DATA2,'{2}')),
+					        '{3}',isnull(p.DATA3,'{3}')),
+					        '{4}',isnull(p.DATA4,'{4}')),
+					        '{5}',isnull(p.DATA5,'{5}')) 
+             end as MESSAGE,
+        isnull(p.SYSCODE || '-' || right('00000' || convert(varchar,p.SYSNUMBER),5), 'n/a') as CODE,
+        p.DATA1IDENT, p.DATA1, p.DATA2IDENT, p.DATA2, p.DATA3IDENT, p.DATA3, p.DATA4IDENT, p.DATA4, p.DATA5IDENT, p.DATA5,
+        p.EXTLLINK, p.IDTRK_L, p.ROWATTRIBUT, p.ROWVERSION
+        from dbo.PROCESS_L p
+        left outer join dbo.TRACKER_L t on t.IDTRK_L=p.IDTRK_L
+        left outer join dbo.SYSTEMMSG sm on sm.SYSCODE=p.SYSCODE and sm.SYSNUMBER=p.SYSNUMBER
+        left outer join dbo.SYSTEMMSGDET smd on smd.SYSCODE=sm.SYSCODE and smd.SYSNUMBER=sm.SYSNUMBER and smd.CULTURE='%%CULTURE_USER_ISO3166_ALPHA2%%'
+        left outer join dbo.SYSTEMMSGDET smd_gb on smd_gb.SYSCODE=sm.SYSCODE and smd_gb.SYSNUMBER=sm.SYSNUMBER and smd_gb.CULTURE='en'
+        left outer join dbo.ACTOR on ACTOR.IDA=p.IDDATA and p.IDDATAIDENT = 'ACTOR' 
+        %%DH:SQLIF%%[%%PARAM1%%;COMMON;left outer join dbo.TRADE on TRADE.IDT=p.IDDATA and p.IDDATAIDENT like 'TRADE%' 
+        left outer join dbo.IOTASK on IOTASK.IDIOTASK=p.IDDATA and p.IDDATAIDENT = 'IOTASK' 
+        left outer join dbo.QUOTE_FXRATE_H on QUOTE_FXRATE_H.IDQUOTE_H=p.IDDATA and p.IDDATAIDENT = 'QUOTE_FXRATE_H'
+        left outer join dbo.ASSET_FXRATE on ASSET_FXRATE.IDASSET=QUOTE_FXRATE_H.IDASSET
+        left outer join dbo.MATURITY on MATURITY.IDMATURITY=p.IDDATA and p.IDDATAIDENT = 'MATURITY']
+        %%DH:SQLIF%%[%%PARAM1%%;ONLYSIO;left outer join dbo.IOTASK on IOTASK.IDIOTASK=p.IDDATA and p.IDDATAIDENT = 'IOTASK']
+        where p.PROCESS != 'WEBSESSION']]>
+      </Command>
+      <Command rdbms = "oracle">
+        <![CDATA[select
+        p.IDPROCESS_L, p.PROCESS, p.IDSTPROCESS, p.DTSTPROCESS, 
+        case when nullif(p.LODATATXT,'') is null then '' else p.LODATATXT end
+        || 
+        case when nullif(p.DATA1,'') is null 
+             then '' 
+             else case when nullif(p.LODATATXT,'') is null then '' else chr(13) || chr(10) || chr(13) || chr(10) end
+                || case when nullif(p.DATA1,'') is null then '' else case when nullif(p.DATA1IDENT,'') is null then '' else p.DATA1IDENT || ': ' end || p.DATA1 || chr(13) || chr(10) end
+                || case when nullif(p.DATA2,'') is null then '' else case when nullif(p.DATA2IDENT,'') is null then '' else p.DATA2IDENT || ': ' end || p.DATA2 || chr(13) || chr(10) end 
+                || case when nullif(p.DATA3,'') is null then '' else case when nullif(p.DATA3IDENT,'') is null then '' else p.DATA3IDENT || ': ' end || p.DATA3 || chr(13) || chr(10) end                
+                || case when nullif(p.DATA4,'') is null then '' else case when nullif(p.DATA4IDENT,'') is null then '' else p.DATA4IDENT || ': ' end || p.DATA4 || chr(13) || chr(10) end                
+                || case when nullif(p.DATA5,'') is null then '' else case when nullif(p.DATA5IDENT,'') is null then '' else p.DATA5IDENT || ': ' end || p.DATA5 end                
+        end as LODATATXT,
+        t.READYSTATE,
+        p.IDDATAIDENT, 
+        %%DH:SQLIF%%[%%PARAM1%%;COMMON;case when MATURITY.MATURITYMONTHYEAR is not null then MATURITY.MATURITYMONTHYEAR 
+ 			  	   when ASSET_FXRATE.IDENTIFIER is not null then ASSET_FXRATE.IDENTIFIER 
+				     when IOTASK.IDENTIFIER is not null then IOTASK.IDENTIFIER 
+				     when ACTOR.IDENTIFIER is not null then ACTOR.IDENTIFIER 
+				     when TRADE.IDENTIFIER is not null then TRADE.IDENTIFIER 
+				     else to_char(p.IDDATA)
+				end as IDDATA,]
+        %%DH:SQLIF%%[%%PARAM1%%;ONLYSIO;case when IOTASK.IDENTIFIER is not null then IOTASK.IDENTIFIER 
+				     when ACTOR.IDENTIFIER is not null then ACTOR.IDENTIFIER
+				     else to_char(p.IDDATA)
+				end as IDDATA,]
+        p.IDA, p.HOSTNAME, p.APPNAME, p.APPVERSION,
+        case when smd.SYSCODE is null and smd_gb.SYSCODE is null 
+             then p.MESSAGE
+             else 
+             case when sm.SYSCODE in ('LOG' ,'TRK')
+                  then ''
+                  else sm.SYSCODE || '-' || substr('00000' || to_char(sm.SYSNUMBER),-5) || ': '
+                  end
+             ||
+             replace(replace(replace(replace(replace(
+					        nvl(smd.MESSAGE,smd_gb.MESSAGE),
+					        '{1}',nvl(p.DATA1,'{1}')),
+					        '{2}',nvl(p.DATA2,'{2}')),
+					        '{3}',nvl(p.DATA3,'{3}')),
+					        '{4}',nvl(p.DATA4,'{4}')),
+					        '{5}',nvl(p.DATA5,'{5}')) 
+             end as MESSAGE,
+        case when p.SYSCODE is null then 'n/a' else p.SYSCODE || '-' || substr('00000' || to_char(p.SYSNUMBER),-5) end as CODE,             
+        p.DATA1IDENT, p.DATA1, p.DATA2IDENT, p.DATA2, p.DATA3IDENT, p.DATA3, p.DATA4IDENT, p.DATA4, p.DATA5IDENT, p.DATA5,
+        p.EXTLLINK, p.IDTRK_L, p.ROWATTRIBUT, p.ROWVERSION
+        from dbo.PROCESS_L p
+        left outer join dbo.TRACKER_L t on t.IDTRK_L=p.IDTRK_L
+        left outer join dbo.SYSTEMMSG sm on sm.SYSCODE=p.SYSCODE and sm.SYSNUMBER=p.SYSNUMBER
+        left outer join dbo.SYSTEMMSGDET smd on smd.SYSCODE=sm.SYSCODE and smd.SYSNUMBER=sm.SYSNUMBER and smd.CULTURE='%%CULTURE_USER_ISO3166_ALPHA2%%'
+        left outer join dbo.SYSTEMMSGDET smd_gb on smd_gb.SYSCODE=sm.SYSCODE and smd_gb.SYSNUMBER=sm.SYSNUMBER and smd_gb.CULTURE='en'
+        left outer join dbo.ACTOR on ACTOR.IDA=p.IDDATA and p.IDDATAIDENT = 'ACTOR' 
+        %%DH:SQLIF%%[%%PARAM1%%;COMMON;left outer join dbo.TRADE on TRADE.IDT=p.IDDATA and p.IDDATAIDENT like 'TRADE%' 
+        left outer join dbo.IOTASK on IOTASK.IDIOTASK=p.IDDATA and p.IDDATAIDENT = 'IOTASK' 
+        left outer join dbo.QUOTE_FXRATE_H on QUOTE_FXRATE_H.IDQUOTE_H=p.IDDATA and p.IDDATAIDENT = 'QUOTE_FXRATE_H'
+        left outer join dbo.ASSET_FXRATE on ASSET_FXRATE.IDASSET=QUOTE_FXRATE_H.IDASSET
+        left outer join dbo.MATURITY on MATURITY.IDMATURITY=p.IDDATA and p.IDDATAIDENT = 'MATURITY']
+        %%DH:SQLIF%%[%%PARAM1%%;ONLYSIO;left outer join dbo.IOTASK on IOTASK.IDIOTASK=p.IDDATA and p.IDDATAIDENT = 'IOTASK']
+        where p.PROCESS != 'WEBSESSION']]>
+      </Command>
+    </SQLSelect>
+
+    <SQLRowStyle type="class">
+      <![CDATA[
+      case IDSTPROCESS
+      when 'ERROR' then 'DataGrid-ERROR_2'
+      when 'IRQ' then 'DataGrid-IRQ_2'
+      when 'WARNING' then 'DataGrid-WARNING_2'
+      when 'PENDING' then 'DataGrid-PENDING_2'
+      else 'DataGrid-NA'
+      end
+      ]]>
+    </SQLRowStyle>
+
+
+    <Column>
+      <ColumnName>PROCESS</ColumnName>
+      <Ressource>PROCESS</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <IsResource>true</IsResource>
+      <Relation/>
+      <html_BLOCK title="Process" columnbyrow="2" backcolorheader="status:IDSTPROCESS"></html_BLOCK>
+    </Column>
+    <Column>
+      <ColumnName>DTSTPROCESS</ColumnName>
+      <Ressource>DTSTPROCESS</Ressource>
+      <DataType datakind='Timestamp' tzdbid='Etc/UTC' display='Audit'>datetime</DataType>
+      <Colspan>0</Colspan>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>IDDATAIDENT</ColumnName>
+      <Ressource>IDENTIFIER</Ressource>
+      <DataType>string</DataType>
+      <InputWidth>20%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+      <html_HR title="Empty" size="1"></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>IDDATA</ColumnName>
+      <Ressource></Ressource>
+      <!-- string for left position -->
+      <DataType>string</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+    </Column>
+
+    <Column>
+      <ColumnName>READYSTATE</ColumnName>
+      <Ressource>ReadyState</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsResource>false</IsResource>
+      <Relation/>
+      <CellStyle model="readystate"/>
+      <html_HR title="Empty" size="2"></html_HR>
+    </Column>
+
+    <Column>
+      <ColumnName>IDSTPROCESS</ColumnName>
+      <Ressource>IDSTPROCESS</Ressource>
+      <DataType>string</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <IsResource>false</IsResource>
+      <CellStyle model="status"/>
+      <Relation/>
+    </Column>
+
+    <Column>
+      <ColumnName>LODATATXT</ColumnName>
+      <Ressource>MESSAGE</Ressource>
+      <DataType>string</DataType>
+      <Length>4000</Length>
+      <LengthInDataGrid>-1</LengthInDataGrid>
+      <Scale>0</Scale>
+      <Colspan>0</Colspan>
+      <InputHeight>120</InputHeight>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+      <html_BLOCK title="Information" columnbyrow="4"></html_BLOCK>
+    </Column>
+
+    <!-- 
+    <Column>
+      <ColumnName>DATA1IDENT</ColumnName>
+      <Ressource>DATA1_</Ressource>
+      <DataType>string</DataType>
+      <InputWidth>30%</InputWidth>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+      <html_HR></html_HR>
+    </Column>
+    <Column>
+      <ColumnName>DATA1</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <InputWidth>70%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DATA2IDENT</ColumnName>
+      <Ressource>DATA2_</Ressource>
+      <DataType>string</DataType>
+      <InputWidth>30%</InputWidth>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DATA2</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <InputWidth>70%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <Colspan>0</Colspan>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DATA3IDENT</ColumnName>
+      <Ressource>DATA3_</Ressource>
+      <DataType>string</DataType>
+      <InputWidth>30%</InputWidth>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DATA3</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <InputWidth>70%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <Colspan>0</Colspan>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DATA4IDENT</ColumnName>
+      <Ressource>DATA4_</Ressource>
+      <DataType>string</DataType>
+      <InputWidth>30%</InputWidth>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DATA4</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <InputWidth>70%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <Colspan>0</Colspan>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DATA5IDENT</ColumnName>
+      <Ressource>DATA5_</Ressource>
+      <DataType>string</DataType>
+      <InputWidth>30%</InputWidth>
+      <Length>16</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    <Column>
+      <ColumnName>DATA5</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <InputWidth>70%</InputWidth>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <Colspan>0</Colspan>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+    -->
+
+    <Column>
+      <ColumnName>MESSAGE</ColumnName>
+      <Ressource>MESSAGE</Ressource>
+      <DataType>string</DataType>
+      <Length>4000</Length>
+      <LengthInDataGrid>1000</LengthInDataGrid>
+      <Scale>0</Scale>
+      <Colspan>0</Colspan>
+      <InputHeight>120</InputHeight>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+      <html_BLOCK title="MESSAGE" blockbyrow="2" columnbyrow="2"></html_BLOCK>
+    </Column>
+
+    <Column>
+      <ColumnName>CODE</ColumnName>
+      <Ressource>CODE</Ressource>
+      <DataType>string</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <Colspan>0</Colspan>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsUpdatable>true</IsUpdatable>
+      <Relation/>
+    </Column>
+
+    <Column>
+      <ColumnName>IDPROCESS_L</ColumnName>
+      <Ressource>IDPROCESS_L</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>true</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>true</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>desc</IsOrderBy>
+      <Relation/>
+    </Column>
+
+    <Column>
+      <ColumnName>APPNAME</ColumnName>
+      <Ressource>APPNAME</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+      <html_BLOCK title="Environment_Title" blockbyrow="2" columnbyrow="2"></html_BLOCK>
+    </Column>
+    <Column>
+      <ColumnName>HOSTNAME</ColumnName>
+      <Ressource>HOSTNAME</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>APPVERSION</ColumnName>
+      <Ressource>APPVERSION</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>IDA</ColumnName>
+      <Ressource>IDA</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <!-- IDA=0 on WebSession Process -->
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>true</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>ACTOR</TableName>
+        <ColumnRelation>
+          <ColumnName>IDA</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>Actor</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <ColumnLabel>
+          <ColumnName>DISPLAYNAME</ColumnName>
+          <Ressource>DISPLAYNAME</Ressource>
+          <DataType>string</DataType>
+        </ColumnLabel>
+      </Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>IDTRK_L</ColumnName>
+      <Ressource>IDTRK_L</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>true</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>ROWATTRIBUT</ColumnName>
+      <Ressource>ROWATTRIBUT</Ressource>
+      <DataType>string</DataType>
+      <Length>1</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+    </Column>
+    <Column>
+      <ColumnName>ROWVERSION</ColumnName>
+      <Ressource>ROWVERSION</Ressource>
+      <DataType>string</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+    </Column>
+  </Referential>
+</Referentials>

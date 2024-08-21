@@ -1,0 +1,94 @@
+@import (reference) "../bootstrap/bootstrap.less";
+@import (reference) "spheres-variables.less";
+
+/******************************************************************************/
+/* START : NOTEPAD (MODAL)                                                    */
+/******************************************************************************/
+
+#frmNotePad {
+
+    .modal-header {
+        color: white;
+        background-color: @sph-blue-color;
+
+        > h3 > small {
+            color: inherit;
+        }
+    }
+
+    .modal-body {
+        height: 400px;
+
+        div > span {
+            font-size: 16px;
+
+            &::after {
+                content: attr(prt-data);
+                padding-left: 2px;
+                font-weight: bold;
+            }
+        }
+
+        div.lonote{
+            border-radius:4px;
+            margin-top:10px;
+            width: 100%;
+            height: calc(~'100% - 52px');
+            border: 2pt solid @sph-blue-color;
+            margin-bottom: 5px;
+            word-wrap: break-word;
+            overflow-y:auto;
+            resize: none;
+
+            em {
+                border-width:1pt;
+                border-style:solid;
+                border-radius:4px;
+                padding:0px 6px;
+                font-style:normal;
+                font-weight:bold;
+                color:#fff;
+
+                &.hlm-1{
+                    border-color: @sph-blue-color;
+                    background-color:@sph-blue-light-color;
+                }
+                &.hlm-2{
+                    border-color: @sph-gray-color;
+                    background-color:@sph-gray-light-color;
+                }
+                &.hlm-3{
+                    border-color: @sph-red-color;
+                    background-color:@sph-red-light-color;
+                }
+                &.hlm-4{
+                    border-color: @sph-violet-color;
+                    background-color:@sph-violet-light-color;
+                }
+                &.hlm-5{
+                    border-color: @sph-green-color;
+                    background-color:@sph-green-light-color;
+                    color:@sph-green-color;
+                }
+            }
+        }
+    }
+
+    .modal-footer {
+        padding:10px;
+
+        > span {
+            float:left;
+            font-size: 9px;
+            font-weight: normal;
+            color: @sph-gray-color;
+
+                &::before {
+                    content: '\e109';
+                }
+        }
+    }
+}
+/******************************************************************************/
+/* END : NOTEPAD (MODAL)                                                      */
+/******************************************************************************/

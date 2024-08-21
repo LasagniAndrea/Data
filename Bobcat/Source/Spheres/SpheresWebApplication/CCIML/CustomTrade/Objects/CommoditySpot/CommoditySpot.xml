@@ -1,0 +1,421 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<!-- 
+  EG 20221201 [25639][WI484] Gestion des commodity spot environmentaux (garanties d'origines)
+-->
+
+<!--
+EG 20211217 [XXXXX] Gestion icon (Font Awesome) ouverture/Fermeture
+- Suppression de l'instruction : tblH-startdisplay:expand; (inutile valeur par défaut)
+- Suppression de l'instruction : tblH-linkid:xxxx; (inutile gestion via ajax quand nécessaire)
+-->
+
+<!-- 
+  CC 20180119 Ajout nouveaux objets pour limiter Facility par Instrument 
+  EG 20171113 [23509] Upd Gestion Objets Facility / Dates et Marché 
+  -->
+<Objects>
+
+  <!-- ********************************* -->
+  <!-- *** FACILITY AND MARKET BLOCK *** -->
+  <!-- ********************************* -->
+
+  <Object name="COMSGasMarketBlock">
+    <table id="tbl_market" style="istableB:true;tblB-mainclass:gray;" verticalAlign="top" colspan="-1" controlalignleft="1">
+      <COMFacilityHeader/>
+      <br/>
+      <COMSGasMarketHeader/>
+    </table>
+  </Object>
+
+  <Object name="COMSElectricityMarketBlock">
+    <table id="tbl_market" style="istableB:true;tblB-mainclass:gray;" verticalAlign="top" colspan="-1" controlalignleft="1">
+      <COMFacilityHeader/>
+      <br/>
+      <COMSElectricityMarketHeader/>
+    </table>
+  </Object>
+
+  <!-- EG 20221201 [25639][WI484] New -->
+  <Object name="COMSEnvironmentalMarketBlock">
+  <table id="tbl_market" style="istableB:true;tblB-mainclass:gray;" verticalAlign="top" colspan="-1" controlalignleft="1">
+    <COMFacilityHeader/>
+    <br/>
+    <COMSEnvironmentalMarketHeader/>
+  </table>
+</Object>
+
+  <!--CommodityGasBlock (Qty et QtyTotal) -->
+  <!-- FI 20170116 [21916] Modify -->
+  <Object name="CommodityGasBlock">
+    <table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:CommoditySpot;">
+      <table colspan="-1" style="margin-top:4px;" controlalignleft="true" >
+        <AssetCommodityContract clientid="gasPhysicalLeg"/>
+        <PhysicalDeliveryQuantity clientid="gasPhysicalLeg_deliveryQuantity_physicalQuantity" />
+        <CommodityFixedPrice clientid="fixedLeg_fixedPrice"/>
+        <br/>
+        <table controlalignleft="true">
+          <Banner caption="Delivery" level="3" />
+          <Date_L  clientid="effectiveDate_adjustableDate_unadjustedDate" required="false" postback="true"	helpschema="fpml" helpelement="AdjustableDate" />
+          <Time clientid="gasPhysicalLeg_deliveryPeriods_supplyStartTime_hourMinuteTime"  postback="true" required="true" helpschema="efsml" helpelement=""/>
+          <TimeZoneLocation  clientid="gasPhysicalLeg_deliveryPeriods_supplyStartTime_location" required="true" />
+          <br/>
+          <Date_L clientid="terminationDate_adjustableDate_unadjustedDate" required="false" postback="true"	helpschema="fpml" helpelement="AdjustableDate" />
+          <Time clientid="gasPhysicalLeg_deliveryPeriods_supplyEndTime_hourMinuteTime"  postback="true" required="true" helpschema="efsml" helpelement=""/>
+          <TimeZoneLocation  clientid="gasPhysicalLeg_deliveryPeriods_supplyEndTime_location" required="true" />
+        </table>
+        <table  controlalignleft="true" >
+          <Banner caption="Total" level="3" />
+          <TotalQuantity clientid="gasPhysicalLeg_deliveryQuantity_totalPhysicalQuantity"></TotalQuantity>
+          <br/>
+          <space/>
+        </table>
+      </table>
+      <table  colspan="-1" controlalignleft="true"  >
+        <table  controlalignleft="true">
+          <Banner caption="Settlement_Title" level="3" />
+          <CommodityPayment clientid="fixedLeg_grossAmount" />
+        </table>
+        <Fill/>
+        <br/>
+        <CommoditySpotTradeAndOrderBlock />
+      </table>
+    </table>
+  </Object>
+
+  <!--CommodityGasBlock2 (only QtyTotal) -->
+  <Object name="CommodityGasBlock2">
+    <table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:CommoditySpot;">
+      <table colspan="-1" style="margin-top:4px;" controlalignleft="true" >
+        <table colspan="-1"  controlalignleft="true" >
+          <AssetCommodityContract clientid="gasPhysicalLeg"/>
+          <TotalQuantity2 clientid="gasPhysicalLeg_deliveryQuantity_totalPhysicalQuantity"/>
+          <CommodityFixedPrice clientid="fixedLeg_fixedPrice"/>
+        </table>
+        <table controlalignleft="true" >
+          <table controlalignleft="true">
+            <Banner caption="Delivery" level="3" />
+            <table controlalignleft="true" >
+              <Date_L  clientid="effectiveDate_adjustableDate_unadjustedDate" required="false" postback="true"	helpschema="fpml" helpelement="AdjustableDate" />
+              <Time clientid="gasPhysicalLeg_deliveryPeriods_supplyStartTime_hourMinuteTime"  postback="true" required="true" helpschema="efsml" helpelement=""/>
+            </table>
+            <table controlalignleft="true" >
+              <Date_L clientid="terminationDate_adjustableDate_unadjustedDate" required="false" postback="true"	helpschema="fpml" helpelement="AdjustableDate" />
+              <Time clientid="gasPhysicalLeg_deliveryPeriods_supplyEndTime_hourMinuteTime"  postback="true" required="true" helpschema="efsml" helpelement=""/>
+            </table>
+            <table controlalignleft="true" >
+              <TimeZoneLocation_L  clientid="gasPhysicalLeg_deliveryPeriods_supplyStartTime_location" required="true" />
+            </table>
+          </table>
+          <br/>
+          <table  controlalignleft="true">
+            <Banner caption="Settlement_Title" level="3" />
+            <table  controlalignleft="true">
+              <CommodityPayment clientid="fixedLeg_grossAmount" />
+            </table>
+          </table>
+        </table>
+      </table>
+      <CommoditySpotTradeAndOrderBlock />
+    </table>
+  </Object>
+
+  <!--CommodityElectricityBlock (Qty et QtyTotal) -->
+  <Object name="CommodityElectricityBlock">
+    <table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:CommoditySpot;">
+      <table colspan="-1" style="margin-top:4px;" controlalignleft="true" >
+        <AssetCommodityContract clientid="electricityPhysicalLeg"/>
+        <PhysicalDeliveryQuantity clientid="electricityPhysicalLeg_deliveryQuantity_physicalQuantity" />
+        <CommodityFixedPrice clientid="fixedLeg_fixedPrice"/>
+        <br/>
+        <table controlalignleft="true">
+          <Banner caption="Delivery" level="3" />
+          <Date_L  clientid="effectiveDate_adjustableDate_unadjustedDate" required="false" postback="true"	helpschema="fpml" helpelement="AdjustableDate" />
+          <Time clientid="electricityPhysicalLeg_settlementPeriods_startTime_hourMinuteTime"  postback="true" required="true" helpschema="efsml" helpelement=""/>
+          <TimeZoneLocation  clientid="electricityPhysicalLeg_settlementPeriods_startTime_location" required="true" />
+          <br/>
+          <Date_L clientid="terminationDate_adjustableDate_unadjustedDate" required="false" postback="true"	helpschema="fpml" helpelement="AdjustableDate" />
+          <Time clientid="electricityPhysicalLeg_settlementPeriods_endTime_hourMinuteTime"  postback="true" required="true" helpschema="efsml" helpelement=""/>
+          <TimeZoneLocation  clientid="electricityPhysicalLeg_settlementPeriods_endTime_location" required="true" />
+        </table>
+        <table  controlalignleft="true" >
+          <Banner caption="Total" level="3" />
+          <TotalQuantity clientid="electricityPhysicalLeg_deliveryQuantity_totalPhysicalQuantity"></TotalQuantity>
+          <br/>
+          <space/>
+        </table>
+      </table>
+      <table  colspan="-1" controlalignleft="true"  >
+        <table  controlalignleft="true">
+          <Banner caption="Settlement_Title" level="3" />
+          <CommodityPayment clientid="fixedLeg_grossAmount" />
+        </table>
+        <Fill/>
+        <br/>
+        <CommoditySpotTradeAndOrderBlock />
+      </table>
+    </table>
+  </Object>
+
+  <!--CommodityElectricityBlock (Qty et QtyTotal) -->
+  <Object name="CommodityElectricityBlock2">
+    <table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:CommoditySpot;">
+      <table colspan="-1" style="margin-top:4px;" controlalignleft="true" >
+        <table colspan="-1"  controlalignleft="true" >
+          <AssetCommodityContract clientid="electricityPhysicalLeg"/>
+          <TotalQuantity2 clientid="electricityPhysicalLeg_deliveryQuantity_totalPhysicalQuantity"/>
+          <CommodityFixedPrice clientid="fixedLeg_fixedPrice"/>
+        </table>
+        <table controlalignleft="true" >
+          <table controlalignleft="true">
+            <Banner caption="Delivery" level="3" />
+            <table controlalignleft="true" >
+              <Date_L  clientid="effectiveDate_adjustableDate_unadjustedDate" required="false" postback="true"	helpschema="fpml" helpelement="AdjustableDate" />
+              <Time clientid="electricityPhysicalLeg_settlementPeriods_startTime_hourMinuteTime"  postback="true" required="true" helpschema="efsml" helpelement=""/>
+            </table>
+            <table controlalignleft="true" >
+              <Date_L clientid="terminationDate_adjustableDate_unadjustedDate" required="false" postback="true"	helpschema="fpml" helpelement="AdjustableDate" />
+              <Time clientid="electricityPhysicalLeg_settlementPeriods_endTime_hourMinuteTime"  postback="true" required="true" helpschema="efsml" helpelement=""/>
+            </table>
+            <table controlalignleft="true" >
+              <TimeZoneLocation_L  clientid="electricityPhysicalLeg_settlementPeriods_startTime_location" required="true" />
+            </table>
+          </table>
+          <br/>
+          <table  controlalignleft="true">
+            <Banner caption="Settlement_Title" level="3" />
+            <table  controlalignleft="true">
+              <CommodityPayment clientid="fixedLeg_grossAmount" />
+            </table>
+          </table>
+        </table>
+      </table>
+      <CommoditySpotTradeAndOrderBlock />
+    </table>
+  </Object>
+
+  <!-- EG 20221201 [25639][WI484] New (Environmental physical leg)-->
+  <Object name="CommodityEnvironmentalBlock">
+    <table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:CommoditySpot;">
+      <table colspan="-1" style="margin-top:4px;" controlalignleft="true" >
+        <table colspan="-1"  controlalignleft="true" >
+          <AssetCommodityContract clientid="environmentalPhysicalLeg"/>
+          <EnvironmentalProductType clientid="environmentalPhysicalLeg_environmental"/>
+          <TotalQuantity2 clientid="environmentalPhysicalLeg_numberOfAllowances"/>
+          <CommodityFixedPrice clientid="fixedLeg_fixedPrice"/>
+        </table>
+        <table controlalignleft="true" >
+          <table  controlalignleft="true">
+            <Banner caption="Settlement_Title" level="3" />
+            <table  controlalignleft="true">
+              <CommodityPayment clientid="fixedLeg_grossAmount" />
+            </table>
+          </table>
+        </table>
+      </table>
+      <EnvironmentalProductionFeaturesBlock clientid="environmentalPhysicalLeg_productionFeatures"/>
+      <CommoditySpotTradeAndOrderBlock />
+    </table>
+  </Object>
+  
+  <!-- Commodity payment -->
+  <!-- FI 20170116 [21916] Modify-->
+  <Object name="CommodityPayment" helpschema="fpml" helpelement="Payment">
+    <!-- FI 20170116 [21916] add payer -->
+    <PartyReference_L clientid="payer" postback="true" required="true" />
+    <!--<PaymentPartyBlock/>-->
+    <Date_L clientid="paymentDate_unadjustedDate" required="true" helpschema="fpml" helpelement="AdjustableDate" postback="true" match="true"/>
+    <Space />
+    <MoneyMatchAmount_L clientid="paymentAmount" required="true" postback="true" helpschema="fpml" helpelement="Money" />
+    <Space />
+    <SettlementInformation_L clientid="settlementInformation" postback="true" helpschema="fpml" helpelement="SettlementInformation"/>
+  </Object>
+
+  <!--CommoditySpotTradeAndOrderBlock -->
+  <!-- FI 20170116 [21916] RptSide en majuscule -->
+  <Object name ="CommoditySpotTradeAndOrderBlock">
+    <table id="tblTradeH" cellstyle="vertical-align:top;width:50%" style="istableH:true;tblH-title:Electronic Trade;tblH-css:size5;tblH-reverse:1;tblH-startdisplay:collapse;">
+      <table id="tblTrade" style="margin-top:2px;" controlalignleft="true" verticalAlign ="Top">
+        <String200_L clientid="RptSide_ExecRefID" required="false" postback="true" helpschema="fixml" helpelement="ExecID_t"/>
+        <String200_L clientid="RptSide_Txt" required="false"  helpschema="fixml" helpelement="Txt"/>
+        <br/>
+        <String200_L clientid="RptSide_SesID" required="false" helpschema="fixml" helpelement="TradingSessionID_t"/>
+        <table colspan="2">
+          <String100_L clientid="RptSide_InptSrc" required="false" helpschema="fixml" helpelement="TradeInputSource_t"/>
+          <String100_L clientid="RptSide_InptDev" required="false" helpschema="fixml" helpelement="TradeInputDevice_t"/>
+        </table>
+      </table>
+    </table>
+    <table id="tblorderH" cellstyle="vertical-align:top;width:50%"  style="istableH:true;tblH-title:Electronic Order;tblH-css:size5;tblH-reverse:1;tblH-startdisplay:collapse;" >
+      <table id="tblorder" style="margin-top:2px;helpschema:efsml;helpelement:RptSide;" controlalignleft="true" verticalAlign ="Top" >
+        <Label clientid="RptSide_OrdID" helpschema="fixml" helpelement="OrderID_t"/>
+        <String200 clientid="RptSide_OrdID" required="false" postback="true" />
+        <FixOrdType_L clientid="RptSide_OrdTyp" required="false" helpschema="fixml" helpelement="OrdType_enum_t"/>
+        <br/>
+        <FixOrderInputDevice_L clientid="RptSide_OrdInptDev" required="false" helpschema="fixml" helpelement="OrderInputDevice_t"/>
+      </table>
+    </table>
+  </Object>
+
+  <!--AssetCommodityContract-->
+  <Object name ="AssetCommodityContract">
+    <CommodityAsset_L clientid="commodityAsset" required="true" postback="true"/>
+  </Object>
+
+  <!--PhysicalDeliveryQuantity (pour deliveryQuantity) -->
+  <Object name ="PhysicalDeliveryQuantity">
+    <table controlalignleft="true">
+      <DecimalQty_L clientid="quantity" required="true" postback="true"  />
+      <space/>
+      <TextBox datatype="string" clientid="quantityUnit" required="true" postback="true" style="width:80px;" helpschema="efsml" helpelement="QuantityUnit" misc="IsReadOnly:true"/>
+      <br/>
+      <space/>
+      <Display  clientid="quantityFrequency"  helpschema="efsml" helpelement="CommodityQuantityFrequency" style="font-size:x-small;font-weight:normal;overflow:hidden;width:140px"/>
+      <!-- FI 20161214 [21916] GLOP Il faut une DDL -->
+      <!--<DropDown datatype="string" clientid="quantityFrequency" required="true" postback="true" helpschema="efsml" helpelement="CommodityQuantityFrequency" 
+                listretrieval="predef:enum.[code:CommodityQuantityFrequency;isresource:false]"
+                style="font-size:x-small;font-weight:normal;overflow:hidden;width:140px;display:none" />-->
+
+      <TextBox datatype="string" clientid="quantityFrequency" required="true" postback="false" helpschema="efsml" helpelement="CommodityQuantityFrequency"
+               style="font-size:x-small;font-weight:normal;overflow:hidden;width:140px;display:none" />
+    </table>
+  </Object>
+
+  <!--FixedPrice -->
+  <Object name ="CommodityFixedPrice">
+    <table controlalignleft="true">
+      <FixedPrice_L clientid="price" required="true" postback="true"  />
+      <space/>
+      <Currency clientid="priceCurrency" required="true" postback="true" helpschema="efsml" helpelement="Currency" />
+      <space/>
+      <TextBox datatype="string" clientid="priceUnit" required="true" postback="true" helpschema="efsml" helpelement="QuantityUnit" misc="IsReadOnly:true"/>
+      <br/>
+      <space/>
+    </table>
+  </Object>
+
+  <!-- TotalQuantity -->
+  <Object name ="TotalQuantity">
+    <table  controlalignleft="true">
+      <DecimalQty_L clientid="quantity" required="true" postback="true"  />
+      <space/>
+      <TextBox datatype="string" clientid="quantityUnit" required="true" postback="true" style="width:80px;" helpschema="efsml" helpelement="QuantityUnit" misc="IsReadOnly:true"/>
+      <space/>
+    </table>
+  </Object>
+
+  <Object name ="TotalQuantity2">
+    <table  controlalignleft="true">
+      <DecimalQty_L clientid="quantity" required="true" postback="true"  />
+      <space/>
+      <TextBox datatype="string" clientid="quantityUnit" required="true" postback="true" style="width:80px;" helpschema="efsml" helpelement="QuantityUnit" misc="IsReadOnly:true"/>
+      <space/>
+      <br/>
+      <space/>
+    </table>
+  </Object>
+
+
+  <!-- CommodityAsset_L -->
+  <Object name="CommodityAsset_L" helpschema="efsml" helpelement="CommodityAsset">
+    <table controlalignleft="true">
+      <table>
+        <Label helpschema="efsml" helpelement="CommodityAsset"/>
+        <br/>
+        <space/>
+      </table>
+      <table>
+        <TextBox datatype="string" style="width:400px;" autocomplete="true"/>
+        <Button type="Submit" consultation="ASSET_COMMODITYCONTRACT" sqlspecifiedfield="IDENTIFIER" cssclass="fa-icon"  tooltip="search"/>
+        <br/>
+        <Display helpelement="none" style="font-size:x-small;font-weight:normal;overflow:hidden;width:400px"/>
+      </table>
+    </table>
+  </Object>
+
+  <!--CommodityQuantityFrequency-->
+  <Object name="CommodityQuantityFrequency" helpschema="efsml" helpelement="CommodityQuantityFrequency">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:CommodityQuantityFrequency;isresource:false]"  width="150px" misc="IsReadOnly:true"/>
+  </Object>
+
+  <!--CommodityQuantityUnit-->
+  <Object name="CommodityQuantityUnit" helpschema="efsml" helpelement="QuantityUnit">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:QuantityUnit;isresource:false;forcedenum:MWh|MW|KWh|KW|GWh|GW|GJ|Therm]"  width="80px" misc="IsReadOnly:true"/>
+  </Object>
+
+  <!--FixedPrice -->
+  <Object name="FixedPrice" helpschema="efsml" helpelement="FixedPrice">
+    <TextBox datatype="decimal" regex="RegexDecimalExtend" style="width:80px;" />
+  </Object>
+  <Object name="FixedPrice_L" helpschema="efsml" helpelement="FixedPrice">
+    <label/>
+    <FixedPrice/>
+  </Object>
+
+
+  <!-- EG 20221201 [25639][WI484] New Type de certificat environmental (garantie d'origine, permission, crédit ...)-->
+  <Object name ="EnvironmentalProductType">
+    <table  controlalignleft="true">
+      <ProductType_L clientid="productType" required="false" helpschema="efsml" helpelement="EnvironmentalProductTypeEnum"/>
+      <space/>
+      <br/>
+      <space/>
+    </table>
+  </Object>
+  <Object name="ProductType" helpschema="efsml" helpelement="Environmental">
+    <DropDown datatype="string" listretrieval="predef:enum.[code:EnvironmentalProductTypeEnum;isresource:true;]"  misc="IsReadOnly:true"/>
+  </Object>
+  <Object name="ProductType_L" helpschema="efsml" helpelement="Environmental">
+    <label/>
+    <ProductType/>
+  </Object>
+
+  <!-- EG 20221201 [25639][WI484] New : Caractéristiques de production pour la garantie d'origine-->
+  <Object name ="EnvironmentalProductionFeaturesBlock">
+    <table colspan="-1" controlalignleft="true" >
+      <table id="tblFeaturesH" cellstyle="vertical-align:top;width:100%" style="istableH:true;tblH-title:Producion features;tblH-css:size5;tblH-reverse:1;tblH-startdisplay:collapse;">
+        <table id="tblFeatures" style="margin-top:2px;" controlalignleft="true" verticalAlign ="Top">
+          <table  controlalignleft="true">
+            <CommondityTechnologyType_L clientid="technology" required="false" helpschema="efsml" helpelement="CommodityTechnologyTypeEnum"/>
+            <CommondityRegion_L clientid="region" required="false" helpschema="efsml" helpelement="EnvironmentalProductionRegion"/>
+          </table>
+          <!--<br/>-->
+          <!--<CommodityDeviceBlock required="false" helpschema="efsml" helpelement="EnvironmentalProductionDevice" />-->
+        </table>
+      </table>
+    </table>
+  </Object>
+
+  <!-- EG 20221201 [25639][WI484] New : Technology de production pour la garantie d'origine-->
+  <Object name="CommondityTechnologyType" helpschema="efsml" helpelement="CommodityTechnologyTypeEnum" >
+    <DropDown datatype="string" listretrieval="predef:enum.CommodityTechnologyTypeEnum" width="150px" />
+  </Object>
+  <Object name="CommondityTechnologyType_L" helpschema="efsml" helpelement="CommodityTechnologyTypeEnum">
+    <label/>
+    <CommondityTechnologyType/>
+  </Object>
+
+  <!-- EG 20221201 [25639][WI484] New : Région de production pour la garantie d'origine-->
+  <Object name="CommondityRegion" helpschema="efsml" helpelement="EnvironmentalProductionRegion" >
+    <DropDown datatype="string" listretrieval="predef:enum.[code:CommodityProductionRegion;isresource:false;]"  xwidth="80px" />
+  </Object>
+  <Object name="CommondityRegion_L" helpschema="efsml" helpelement="EnvironmentalProductionRegion">
+    <label/>
+    <CommondityRegion/>
+  </Object>
+
+  <!-- EG 20221201 [25639][WI484] New : Installation pour la garantie d'origine-->
+  <Object name="CommodityDeviceBlock" helpschema="efsml" helpelement="EnvironmentalProductionDevice" >
+    <table style="istableH:true;tblH-title:Devices;tblH-css:size5;tblH-reverse:1;" colspan="5" controlalignleft="true" >
+      <table id ="tblDevice">
+        <CommodityDevice clientid="device" required="false" helpschema="efsml"  occurs="1" addsuboperator="true" helpelement="EnvironmentalProductionDevice"/>
+      </table>
+    </table>
+  </Object>
+  <Object name="CommodityDevice" helpschema="fpml" helpelement="">
+    <CommodityDeviceScheme_L clientid="scheme" />
+    <space/>
+    <CommodityDeviceValue_L clientid="value" />
+    <br/>
+  </Object>
+</Objects>

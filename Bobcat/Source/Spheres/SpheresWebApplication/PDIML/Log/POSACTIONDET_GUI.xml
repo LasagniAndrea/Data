@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+  <customObject control="checkbox" clientid="ISWITHTODAYUNCLEARING" defaultvalue="false" datatype="bool" postback="true"  postbackargument ="SELFRELOAD_" caption="chkIsWithToDayUnclearing" required="true"/>
+</customObjects>

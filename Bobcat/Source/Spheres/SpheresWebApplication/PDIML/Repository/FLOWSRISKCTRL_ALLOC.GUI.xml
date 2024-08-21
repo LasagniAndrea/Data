@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- RD 20121121 Ajout de l'attribut misc="isResource:true;" sur la dropdown DISPLAYMODE-->
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+  <customObject control="label"     clientid="DATE1"   caption="lblDtFrom" xsi:type="CustomObjectLabel"/>
+  <customObject control="textbox"   clientid="DATE1"
+                datatype="date" required="true" postback="true"
+                postbackargument="SELFCLEAR_"  xsi:type="CustomObjectTextBox"
+                defaultvalue="BUSINESS"/>
+
+  <customObject control="label"     clientid="DATE2"   caption="lblDtTo" xsi:type="CustomObjectLabel"/>
+  <customObject control="textbox"   clientid="DATE2"
+                datatype="date" required="true" postback="true"
+                postbackargument="SELFCLEAR_"  xsi:type="CustomObjectTextBox"
+                defaultvalue="BUSINESS"/>
+
+  <customObject control="space"     width="30"/>
+  <customObject control="label"     clientid="ENTITY"  caption="Entity_Title" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="ENTITY"  width="250px"   datatype="integer" 
+                listretrieval="predef:ActorEntity" required="true" postback="true"  
+                postbackargument="SELFCLEAR_" xsi:type="CustomObjectDropDown"  
+                misc="isAddAll:true;isUseSessionRestrict:true;isClear:false"/>
+
+  <customObject control="space"     width="30"/>
+  <customObject control="label"     clientid="THRESHOLD"   caption="lblThreshold" xsi:type="CustomObjectLabel"/>
+  <!-- customObject control="textbox"   clientid="LIMIT"
+                datatype="integer" required="true" postback="true"
+                postbackargument="SELFCLEAR_"  xsi:type="CustomObjectTextBox"
+                defaultvalue="20" enabled="false"/ -->
+  <customObject control="dropdown"  clientid="THRESHOLD"  width="50px"   datatype="integer"
+                listretrieval="delimlist:10;20;30;40;50;60;70;80;90" required="true" postback="true"
+                postbackargument="SELFCLEAR_"  xsi:type="CustomObjectDropDown"
+                defaultvalue="20" xenabled="false"/>
+  <customObject control="label"     clientid="THRESHOLD2"   caption="%" xsi:type="CustomObjectLabel"/>
+
+  <!-- 
+  <customObject control="space"     width="30"/>
+  <customObject control="checkbox"  clientid="ISDISPLAYALLCAPITAL" datatype="bool" postback="true"
+                postbackargument ="SELFCLEAR_"
+                caption="lblDisplayAllCapital" xwidth="200" required="true" />
+  -->
+  <customObject control="space"     width="30"/>
+  <customObject control="label"     clientid="DISPLAYMODE"  caption="lblDisplayMode" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="DISPLAYMODE"  width="150px"   datatype="string"
+                listretrieval="delimlist:ALL;ALL+;ERROR;WARNING;NOTSUCCESS;" required="true" postback="true"
+                postbackargument="SELFCLEAR_"  xsi:type="CustomObjectDropDown"
+                defaultvalue="ALL" xenabled="false" misc="isResource:true;"/>
+
+  <customObject control="panel"    clientid="DISPLAYMODE" cssclass="fa-icon fas fa-info-circle blue" xsi:type="CustomObjectPanel" tooltip="DisplayModeDescription" />  
+
+</customObjects>

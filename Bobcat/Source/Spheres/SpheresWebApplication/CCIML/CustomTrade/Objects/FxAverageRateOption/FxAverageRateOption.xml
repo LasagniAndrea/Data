@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+	<!-- FxAverageRateOptionBlock -->
+	<Object name="FxAverageRateOptionBlock" >
+		<Table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:FxAverageRateOption;">
+			<FxAverageRateOption clientid="fxAveRateOpt"   helpschema="efsml" helpelement="FxAverageRateOption"  />
+		</Table>
+	</Object>
+	<!-- FxAverageStrikeOptionBlock -->
+	<Object name="FxAverageStrikeOptionBlock">
+		<Table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:FxAverageRateOption;">
+			<FxAverageStrikeOption clientid="fxAveRateOpt"  helpschema="efsml" helpelement="FxAverageRateOption" />
+		</Table>
+	</Object>
+
+	<Object name="FxAverageRateOptionPremiumSettltCurBlock" >
+		<Table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:FxAverageRateOption;">
+			<FxAverageRateOptionPremiumSettltCur clientid="fxAveRateOpt"  helpschema="efsml" helpelement="FxAverageRateOption"  />
+		</Table>
+	</Object>
+	<!-- FxAverageStrikeOptionPremiumSettltCurBlock -->
+	<Object name="FxAverageStrikeOptionPremiumSettltCurBlock">
+		<Table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:FxAverageRateOption;">
+			<FxAverageStrikeOptionPremiumSettltCur clientid="fxAveRateOpt"  helpschema="efsml" helpelement="FxAverageRateOption" />
+		</Table>
+	</Object>
+</Objects>

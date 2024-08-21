@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Referentials>
+	<Referential>
+    <TableName>ACTOR</TableName>
+		<Ressource>OTC_REF_ACT_ACTOR_TAX</Ressource>
+    <HideExtlId>true</HideExtlId>
+    <Items srctablename="TAX" tablename="ACTORTAX" columnname="IDTAX" datatype="int" mode="RW" addcolumns="DTENABLED">
+      <html_BLOCK title="IDTAX" columnbyrow="2">
+        <Information>
+          <Type>information</Type>
+          <LabelMessage>Msg_ITEMxForxITEMTAXCOLLECTED</LabelMessage>
+        </Information>
+      </html_BLOCK>
+    </Items>
+    <Create>false</Create>
+		<Modify>true</Modify>
+		<Remove>false</Remove>
+		<AliasTableName>tblmain</AliasTableName>
+		<Image></Image>
+
+		<SQLWhere>
+			<!--USER non admin peut accéder aux acteurs :                             -->
+			<!--non affectés à un profil(ou model) crés ou modifiés par lui-même      -->
+			<!--accessibles par application des profils rattachés à lui ou à sa hierarchie (ISENABLED=true) -->
+			<!--dits publics ACTEUR.ISENABLED=true                            -->
+			<ConditionSystem>SESSIONRESTRICT</ConditionSystem>
+			<SQLJoin>left outer join dbo.SESSIONRESTRICT sr on sr.ID=tblmain.IDA and sr.CLASS='ACTOR' And sr.SESSIONID='%%SESSIONID%%'</SQLJoin>
+			<SQLWhere>
+				(
+				(sr.ID is not null) or
+				(not exists(select 1 from dbo.ACTORMODEL where IDA=tblmain.IDA)) and
+				((tblmain.IDAINS=%%ID_USER%% And tblmain.IDAUPD is null) Or tblmain.IDAUPD=%%ID_USER%%)
+				)
+			</SQLWhere>
+		</SQLWhere>
+
+		<Column>
+			<ColumnName>IDA</ColumnName>
+			<Ressource>IDA</Ressource>
+			<DataType>int</DataType>
+			<Length>10</Length>
+      <GridWidth>-100</GridWidth>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>false</IsHideInDataGrid>
+			<IsDataKeyField>true</IsDataKeyField>
+			<IsKeyField>false</IsKeyField>
+			<IsForeignKeyField>true</IsForeignKeyField>
+			<IsIdentity>true</IsIdentity>
+			<IsUpdatable>true</IsUpdatable>
+			<IsOrderBy>false</IsOrderBy>
+			<Relation>
+				<TableName>ACTOR</TableName>
+				<AliasTableName>ac</AliasTableName>
+				<ColumnRelation>
+					<ColumnName>IDA</ColumnName>
+					<DataType>int</DataType>
+				</ColumnRelation>
+				<ColumnSelect>
+					<ColumnName>IDENTIFIER</ColumnName>
+					<Ressource>IDA</Ressource>
+					<DataType>string</DataType>
+				</ColumnSelect>
+        <AutoComplete enabled="true"/>
+			</Relation>
+			<html_BLOCK title="Characteristics" columnbyrow="1" ></html_BLOCK>
+		</Column>
+    
+    <!-- PL 20121115 Colonne DTENABLED nécessaire à l'automate -->
+    <Column>
+			<ColumnName>DTENABLED</ColumnName>
+			<Ressource>DTENABLED</Ressource>
+			<DataType>date</DataType>
+			<Length>8</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression>
+			</RegularExpression>
+			<Default>
+				<Value>today</Value>
+			</Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsKeyField>false</IsKeyField>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<Relation>
+			</Relation>
+			<html_BLOCK title="Status" blockbyrow="2" width="25%" columnbyrow="1"></html_BLOCK>
+		</Column>
+		<Column>
+			<ColumnName>DTDISABLED</ColumnName>
+			<Ressource>DTDISABLED</Ressource>
+			<DataType>date</DataType>
+			<Length>8</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression>
+			</RegularExpression>
+			<Default>
+			</Default>
+			<IsHide>false</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsKeyField>false</IsKeyField>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<Relation>
+			</Relation>
+		</Column>
+    
+		<Column>
+			<ColumnName>IDAINS</ColumnName>
+			<Ressource>IDAINS</Ressource>
+			<DataType>int</DataType>
+			<Length>10</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>true</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsKeyField>false</IsKeyField>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<Relation>
+				<TableName>ACTOR</TableName>
+				<AliasTableName>insa</AliasTableName>
+				<ColumnRelation>
+					<ColumnName>IDA</ColumnName>
+					<DataType>int</DataType>
+				</ColumnRelation>
+				<ColumnSelect>
+					<ColumnName>DISPLAYNAME</ColumnName>
+					<Ressource>Display name</Ressource>
+					<DataType>string</DataType>
+				</ColumnSelect>
+			</Relation>
+		</Column>
+		<Column>
+			<ColumnName>DTINS</ColumnName>
+			<Ressource>DTINS</Ressource>
+			<DataType>date</DataType>
+			<Length>8</Length>
+			<Scale>0</Scale>
+			<IsMandatory>true</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>true</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsKeyField>false</IsKeyField>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>true</IsUpdatable>
+			<Relation></Relation>
+		</Column>
+		<Column>
+			<ColumnName>IDAUPD</ColumnName>
+			<Ressource>IDAUPD</Ressource>
+			<DataType>int</DataType>
+			<Length>10</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>true</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsKeyField>false</IsKeyField>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>false</IsUpdatable>
+			<Relation>
+				<TableName>ACTOR</TableName>
+				<AliasTableName>upda</AliasTableName>
+				<ColumnRelation>
+					<ColumnName>IDA</ColumnName>
+					<DataType>int</DataType>
+				</ColumnRelation>
+				<ColumnSelect>
+					<ColumnName>DISPLAYNAME</ColumnName>
+					<Ressource>Display name</Ressource>
+					<DataType>string</DataType>
+				</ColumnSelect>
+			</Relation>
+		</Column>
+		<Column>
+			<ColumnName>DTUPD</ColumnName>
+			<Ressource>DTUPD</Ressource>
+			<DataType>date</DataType>
+			<Length>8</Length>
+			<Scale>0</Scale>
+			<IsMandatory>false</IsMandatory>
+			<RegularExpression></RegularExpression>
+			<Default></Default>
+			<IsHide>true</IsHide>
+			<IsHideInDataGrid>true</IsHideInDataGrid>
+			<IsKeyField>false</IsKeyField>
+			<IsDataKeyField>false</IsDataKeyField>
+			<IsIdentity>false</IsIdentity>
+			<IsUpdatable>true</IsUpdatable>
+			<Relation></Relation>
+		</Column>
+	</Referential>
+</Referentials>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-16" />
+  <title>Repository: Parsing - Spheres v14.0 © EFS|BDX. - SQL Export</title>
+  </head>
+  <body>
+    <div align="center" style="color: blue; background-color: gray; font-weight:bold; font-family: arial; font-size: 12pt; font-weight: bold; border: 2px black solid">
+/* ==================================================================================================== */<br/>
+/* Repository: Parsing - Spheres v14.0 © EFS|BDX.                                                       */<br/>
+/* ---------------------------------------------------------------------------------------------------- */<br/>
+/* Source: Application Name=Spheres v14.0 - Web Data Source=BDX088N\LOCALSQLEXPRESS Initial Catalog=RD_QUALITY_Z22_V14 Persist Security Info=False User Id=sa Password=######## Workstation Id=127.0.0.1 Packet Size=4096 */<br/>
+/* ==================================================================================================== */<br/>
+    </div>
+<br/>
+    <div style="color: black; background-color: silver; font-family: courier new; font-size: 10pt; border: 1px black solid">
+<center><span style="color: red; font-size: 12pt; font-family:arial; font-weight: bold;"><br/>
+ <br/>
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */<br/>
+/* MS SQLserver® - Transact-SQL                                                                         */<br/>
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */<br/>
+</span></center><br/>
+declare @DtEnabled UT_DATETIME, @DtIns UT_DATETIME, @IdaIns UT_ID, @Ida UT_ID<br/>
+begin<br/>
+  begin tran<br/>
+  set @DtEnabled=convert(datetime, convert(varchar(4), datepart(year, getdate())) + '0101');<br/>
+  set @DtIns=getutcdate();<br/>
+  select @IdaIns=IDA from dbo.ACTOR where IDENTIFIER='SYSTEM';<br/>
+ <br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'IDA', 'IDA', null, 1, null, null, '\x09', null, null, 'integer', 0, 'RIGHT', null, null, null, null, null, null, null, null, @IdaIns, @DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'IDMODELSAFETY', 'IDMODELSAFETY', '2', 2, null, null, '\x09', null, null, 'integer', 0, 'RIGHT', null, null, null, null, null, null, null, null, @IdaIns, @DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'IDBC', 'IDBC', null, 3, null, null, '\x09', null, null, 'string', 0, null, null, null, null, null, null, null, null, null, @IdaIns, @DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'IDENTIFIER', 'IDENTIFIER', null, 4, null, null, '\x09', null, null, 'string', 0, null, null, null, null, null, null, null, null, null, @IdaIns, @DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'DISPLAYNAME', 'DISPLAYNAME', null, 5, null, null, '\x09', null, null, 'string', 0, null, null, null, null, null, null, null, null, null, @IdaIns, @DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'DESCRIPTION', 'DESCRIPTION', null, 6, null, null, '\x09', null, null, 'string', 0, null, null, null, null, null, null, null, null, null, @IdaIns, @DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'TELEPHONENUMBER', 'TELEPHONENUMBER', null, 7, null, null, '\x09', null, null, 'string', 0, null, null, null, null, null, null, null, null, null, @IdaIns, @DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'MAIL', 'MAIL', null, 8, null, null, '\x09', null, null, 'string', 0, null, null, null, null, null, null, null, null, null, @IdaIns, @DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'CULTURE', 'CULTURE', null, 9, null, null, '\x09', null, null, 'string', 0, null, null, null, null, null, null, null, null, null, @IdaIns, @DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'DTENABLED', 'DTENABLED', null, 10, null, null, '\x09', null, null, 'date', 0, null, null, null, null, 'dd/MM/yyyy', null, null, null, null, @IdaIns, @DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'DTINS', 'DTINS', null, 11, null, null, '\x09', null, null, 'date', 0, null, null, null, null, 'dd/MM/yyyy', null, null, null, null, @IdaIns, @DtIns, null, null);<br/>
+/* **************************************************************************************************** */<br/>
+/* WARNING: Replace rollback by commit                                                                  */<br/>
+/* **************************************************************************************************** */<br/>
+  rollback;<br/>
+/* **************************************************************************************************** */<br/>
+end;<br/>
+/<br/>
+<center><span style="color: red; font-size: 12pt; font-family:arial; font-weight: bold;"><br/>
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */<br/>
+/* Oracle® - PL/SQL                                                                                     */<br/>
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */<br/>
+</center><br/>
+declare<br/>
+  DtEnabled DATE;<br/>
+  DtIns DATE;<br/>
+  IdaIns NUMBER(5);<br/>
+  Ida NUMBER(5);<br/>
+begin<br/>
+  DtEnabled := TO_DATE(TO_CHAR(SYSDATE, 'YYYY') || '0101', 'YYYYMMDD');<br/>
+  DtIns := CAST(SYS_EXTRACT_UTC(SYSTIMESTAMP) as DATE);<br/>
+  select IDA into IdaIns from dbo.ACTOR where IDENTIFIER='SYSTEM';<br/>
+ <br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'IDA', 'IDA', null, 1, null, null, '\x09', null, null, 'integer', 0, 'RIGHT', null, null, null, null, null, null, null, null, IdaIns, DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'IDMODELSAFETY', 'IDMODELSAFETY', '2', 2, null, null, '\x09', null, null, 'integer', 0, 'RIGHT', null, null, null, null, null, null, null, null, IdaIns, DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'IDBC', 'IDBC', null, 3, null, null, '\x09', null, null, 'string', 0, null, null, null, null, null, null, null, null, null, IdaIns, DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'IDENTIFIER', 'IDENTIFIER', null, 4, null, null, '\x09', null, null, 'string', 0, null, null, null, null, null, null, null, null, null, IdaIns, DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'DISPLAYNAME', 'DISPLAYNAME', null, 5, null, null, '\x09', null, null, 'string', 0, null, null, null, null, null, null, null, null, null, IdaIns, DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'DESCRIPTION', 'DESCRIPTION', null, 6, null, null, '\x09', null, null, 'string', 0, null, null, null, null, null, null, null, null, null, IdaIns, DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'TELEPHONENUMBER', 'TELEPHONENUMBER', null, 7, null, null, '\x09', null, null, 'string', 0, null, null, null, null, null, null, null, null, null, IdaIns, DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'MAIL', 'MAIL', null, 8, null, null, '\x09', null, null, 'string', 0, null, null, null, null, null, null, null, null, null, IdaIns, DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'CULTURE', 'CULTURE', null, 9, null, null, '\x09', null, null, 'string', 0, null, null, null, null, null, null, null, null, null, IdaIns, DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'DTENABLED', 'DTENABLED', null, 10, null, null, '\x09', null, null, 'date', 0, null, null, null, null, 'dd/MM/yyyy', null, null, null, null, IdaIns, DtIns, null, null);<br/>
+insert into dbo.IOPARSINGDET( IDIOPARSING, IDIOPARSINGDET, DISPLAYNAME, DESCRIPTION, SEQUENCENO, DATASTART, DATALENGTH, DATASEPARATOR, CHARDELIMITER, DATAKEY, DATATYPE, ISOPTIONAL, ALIGNMENT, FILLCHAR, GRPSEPARATOR, DECSEPARATOR, FORMAT, ROUNDDIR, ROUNDPREC, DEFAULTVALUE, DEFAULTRULE, IDAINS, DTINS, EXTLLINK, ROWATTRIBUT)<br/>
+values ('Actor', 'DTINS', 'DTINS', null, 11, null, null, '\x09', null, null, 'date', 0, null, null, null, null, 'dd/MM/yyyy', null, null, null, null, IdaIns, DtIns, null, null);<br/>
+/* **************************************************************************************************** */<br/>
+/* WARNING: Replace rollback by commit                                                                  */<br/>
+/* **************************************************************************************************** */<br/>
+  rollback;<br/>
+/* **************************************************************************************************** */<br/>
+end;<br/>
+/<br/>
+    </div>
+  </body>
+</html>

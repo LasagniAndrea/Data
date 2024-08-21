@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+	<!-- START : MASTER BLOCKS -->
+
+	<!-- InvoiceBlock -->
+	<Object name="InvoiceBlock">
+		<Table style="class:PnlRoundedColor1;">
+			<Table>
+				<InvoiceAmountAndRebateConditionsBlock />
+				<Space />
+        <TextBox clientid="invoiceDetails" datatype="string" style="display:none;" />
+				<InvoiceDetailsBlock />
+			</Table>
+		</Table>
+	</Object>
+
+	<!-- InvoiceEnhancedBlock -->
+  <Object name="InvoiceEnhancedBlock">
+    <Table>
+      <TextBox clientid="invoiceDetails" datatype="string" style="display:none;" />
+      <GridInvoiceDatesAndAmountBlock />
+      <space/>
+      <InvoiceRebateConditionsBlock clientid="rebateConditions" />
+      <br/>
+      <GridInvoiceDetailsBlock />
+    </Table>
+    <br/>
+  </Object>
+
+  <!-- InvoiceLightBlock -->
+  <Object name="InvoiceLightBlock">
+    <Table>
+      <Table verticalAlign="Top">
+        <Table style="istableH:true;tblH-titleR:InvoiceDates;">
+          <InvoiceDatesBlock/>
+        </Table>
+        <br/>
+        <InvoiceMasterAmountLightBlock/>
+      </Table>
+    </Table>
+    <br/>
+  </Object>
+
+  
+  <!-- GridInvoiceDatesAndAmountBlock -->
+	<Object name="GridInvoiceDatesAndAmountBlock">
+		<Table verticalAlign="Top">
+			<Table style="istableH:true;tblH-titleR:InvoiceDates;">
+				<InvoiceDatesBlock/>
+			</Table>
+			<br/>
+			<InvoiceMasterAmountBlock/>
+		</Table>
+	</Object>
+
+	<!-- InvoiceAmountAndRebateConditionsBlock -->
+	<Object name="InvoiceAmountAndRebateConditionsBlock">
+		<Table verticalAlign="Top">
+			<InvoiceMasterAmountBlock/>
+			<br/>
+			<InvoiceRebateConditionsBlock clientid="rebateConditions" />
+		</Table>
+	</Object>
+
+	<!-- InvoiceMasterAmountBlock -->
+	<Object name="InvoiceMasterAmountBlock">
+		<Table style="istableH:true;tblH-titleR:InvoiceAmounts;">
+			<InvoiceAmountsBlock/>
+		</Table>			
+		<br/>
+	</Object>
+  <!-- InvoiceMasterAmountLightBlock -->
+  <Object name="InvoiceMasterAmountLightBlock">
+    <Table style="istableH:true;tblH-titleR:InvoiceAmounts;">
+      <InvoiceAmountsLightBlock/>
+    </Table>
+    <br/>
+  </Object>
+
+  <!-- InvoiceAmountsBlock -->
+  <Object name="InvoiceAmountsBlock">
+		<table controlalignleft="true" colspan="-1">
+			<ReadOnlyInvoiceAmount clientid="grossTurnOverAmount" postback="true" />
+			<br/>
+			<ReadOnlyInvoiceAmount clientid="totalRebateAmount" required="false"/>
+			<br/>
+			<hr style="margin-top:5px;margin-bottom:5px;" />
+			<ReadOnlyInvoiceAmount clientid="netTurnOverAmount" />
+			<ReadOnlyInvoiceAmount clientid="taxAmount" required="false" />
+			<br/>
+			<InvoiceAmount clientid="netTurnOverIssueAmount" />
+			<InvoiceAmount clientid="taxIssueAmount" required="false" />
+			<br/>
+			<ReadOnlyInvoiceAmount clientid="netTurnOverAccountingAmount" required="false"/>
+			<ReadOnlyInvoiceAmount clientid="taxAccountingAmount"         required="false"/>
+      <!--<Fill/>-->
+    </table>
+		<table controlalignleft="true" colspan="-1">
+			<hr style="margin-top:5px;margin-bottom:5px;" />
+      <Label clientid="netTurnOverIssueRate_rate" helpschema="efsml" helpelement="netTurnOverIssueRate"/>
+      <NetTurnOverRateBlock clientid="netTurnOverIssueRate" required="false"/>
+			<!--<Fill/>-->
+    </table>
+    <table xcontrolalignleft="true" colspan="-1">
+			<InvoiceRateSourceBlock clientid="invoiceRateSource" required="false"/>
+		</table>
+    <table controlalignleft="true" colspan="-1">
+      <Label clientid="netTurnOverAccountingRate_rate" helpschema="efsml" helpelement="netTurnOverAccountingRate"/>
+			<NetTurnOverRateBlock clientid="netTurnOverAccountingRate" required="false"/>
+		</table>
+	</Object>
+
+  <!-- InvoiceAmountsLightBlock -->
+  <Object name="InvoiceAmountsLightBlock">
+    <Table>
+      <Label clientid="grossTurnOverAmount_amount" helpschema="fpml" helpelement="Money" />
+      <Table style="width:140px;">
+        <TextBox clientid="grossTurnOverAmount_amount" datatype="decimal" regex="RegexAmountExtend" style="width:100px" misc="IsReadOnly:true"/>
+        <Space />
+        <DropDown clientid="grossTurnOverAmount_currency" datatype="string" width="30px" listretrieval="predef:CURRENCY" misc="IsReadOnly:true"/>
+        <TextBox clientid="feesDetail" datatype="string" style="display:none;width:100px" required="false" misc="IsReadOnly:true"/>
+        <Button type="Submit" clientid="feesDetail" invoicing="INVOICEFEESDETAIL" cssclass="fa-icon"  tooltip="ViewEvent" displaymode="Consult" />
+        <Space />
+      </Table>
+      <br/>
+      <Label clientid="totalRebateAmount_amount" helpschema="fpml" helpelement="Money" />
+      <Table style="width:140px;">
+        <TextBox clientid="totalRebateAmount_amount" datatype="decimal" regex="RegexAmountExtend" style="width:100px" required="false" misc="IsReadOnly:true"/>
+        <Space />
+        <DropDown clientid="totalRebateAmount_currency" datatype="string" width="30px" listretrieval="predef:CURRENCY" required="false" misc="IsReadOnly:true"/>
+        <Space />
+      </Table>
+      <br/>
+      <hr style="margin-top:5px;margin-bottom:5px;" />
+      <ReadOnlyInvoiceAmount clientid="netTurnOverAmount" />
+      <ReadOnlyInvoiceAmount clientid="taxAmount" required="false" />
+      <br/>
+      <InvoiceAmount clientid="netTurnOverIssueAmount" />
+      <InvoiceAmount clientid="taxIssueAmount" required="false" />
+      <br/>
+      <ReadOnlyInvoiceAmount clientid="netTurnOverAccountingAmount" required="false"/>
+      <ReadOnlyInvoiceAmount clientid="taxAccountingAmount"         required="false"/>
+    </Table>
+    <br/>
+    <Table>
+      <hr style="margin-top:5px;margin-bottom:5px;" />
+      <Label clientid="netTurnOverIssueRate_rate" helpschema="efsml" helpelement="netTurnOverIssueRate"/>
+      <NetTurnOverRateBlock clientid="netTurnOverIssueRate" required="false"/>
+      <Fill/>
+      <br/>
+      <InvoiceRateSourceBlock clientid="invoiceRateSource" required="false"/>
+      <br/>
+      <Label clientid="netTurnOverAccountingRate_rate" helpschema="efsml" helpelement="netTurnOverAccountingRate"/>
+      <NetTurnOverRateBlock clientid="netTurnOverAccountingRate" required="false"/>
+    </Table>
+  </Object>
+  <!-- END : MASTER BLOCKS -->
+</Objects>

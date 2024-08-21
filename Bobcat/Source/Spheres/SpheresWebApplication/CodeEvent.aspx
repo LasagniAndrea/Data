@@ -1,0 +1,1 @@
+<%@ Page Language="c#" Inherits="EFS.Spheres.CodeEventPage" Codebehind="CodeEvent.aspx.cs" %>

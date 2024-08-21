@@ -1,0 +1,130 @@
+﻿body{font-family: Arial, Segoe UI, sans-serif;}
+a {font-family: Arial, Segoe UI, sans-serif;}
+
+td {white-space:nowrap;}
+
+@media screen
+{
+    body.Monitoring {background-color:#B4B4B4;}
+    
+    h2>span
+    {
+        font-style:normal;
+        font-variant:normal;
+        font-weight:normal;
+        text-transform:none;
+    }
+    
+    div[class='contenth'] >div>div
+    {
+        margin-top: 3px;
+        margin-left: 2px;
+        margin-right: 2px;
+        display:block;
+	    min-height:50px !important;
+    }
+    
+    .withovf div[class='contenth'] >div>div
+    {
+	    overflow-y:auto !important;
+	    overflow-x:hidden !important;
+    }
+
+    #pnlBMResults.withovf div[class='contenth'] >div>div {max-height:620px !important;}
+    #pnlBMEntityMarket.withovf div[class='contenth'] >div>div {max-height:80px !important;}
+    #pnlBMIO.withovf div[class='contenth'] >div>div {max-height:100px !important;}
+    #pnlBMQuote.withovf div[class='contenth'] >div>div {max-height:140px !important;}
+    #pnlBMEOD.withovf div[class='contenth'] >div>div {max-height:120px !important;}
+    #pnlBMCashBalance.withovf div[class='contenth'] >div>div {max-height:100px !important;}
+
+
+    #pnlBMResults
+    {
+        margin-top: 3px;
+        margin-left: 2px;
+        margin-right: 2px;
+	    overflow-y:auto !important;
+	    overflow-x:hidden !important;
+	    min-height:400px !important;
+	    max-height:600px !important;
+    }
+    
+    input[id^="chkovf_"], label[for^="chkovf_"]
+    {
+        float:right;
+        font-size:10pt;
+        color:#fff;
+    }
+}
+
+.dtMarketPrev
+{
+    color:#737373;
+}
+
+@page  
+{ 
+    size: auto;
+    margin: 15mm 15mm 15mm 15mm;  
+} 
+@media print 
+{
+    body {margin:0;}
+    table{empty-cells:show;}
+
+    #pnlBMIO div[class='contenth'] >div>div,
+    #pnlBMQuote div[class='contenth'] >div>div,
+    #pnlBMEOD div[class='contenth'] >div>div,
+    #pnlBMCashBalance div[class='contenth'] >div>div
+    {
+        margin-top: 3px;
+        margin-left: 2px;
+        margin-right: 2px;
+        display:inherit;
+    }
+    
+    #tblHeader_btnPrint {visibility:hidden;}
+    #tblHeader_btnHelp {visibility:hidden;}
+    #btntbrefresh {visibility:hidden;}
+    #btntbautorefresh.stoptimer {visibility:hidden;}
+    #btntbautorefresh.starttimer {visibility:hidden;}
+    #btntbparam {visibility:hidden;}
+    #pnlBMResults {border:none;}
+    
+    td
+    {
+	    white-space:nowrap;
+    }
+}
+
+.led_status_success, .led_status_error, .led_status_warning
+{
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-color: transparent;
+}
+
+.txt_status_success {color:#51AD26!important;}
+.txt_status_error{color:#C00303!important;}
+.txt_status_warning{color:#EA5A00!important;}
+
+#lblLastUpdate
+{
+    float:right;
+    text-align:right;
+    font-size:6pt;
+    font-weight:bolder;
+    font-style:italic;
+    padding-right:10px;
+}
+
+/* ------------------------ */
+/* Boutons                  */
+/* ------------------------ */
+
+.fa-icon
+{
+    font-size:15px;
+    vertical-align:inherit;
+}
+

@@ -1,0 +1,35 @@
+//
+// Override Variables
+// --------------------------------------------------
+@import (reference) "../bootstrap/variables.less";
+@import (reference) "../bootstrap/mixins/reset-filter.less";
+@import (reference) "spheres-variables.less";
+
+//
+// Carousel
+// --------------------------------------------------
+
+.carousel-inner {
+    padding-left: 10px;
+    padding-right: 10px;
+    /*overflow:visible;*/
+}
+
+// Left/right controls for nav
+// ---------------------------
+
+.carousel-control {
+    margin-left:-30px;
+    margin-right:-30px;
+    // No gradients for backgrounds
+    &.left, &.right {
+        background-image: none;
+        .reset-filter();
+    }
+}
+
+.carousel-indicators {
+    top:0%;
+    bottom:99%;
+}
+

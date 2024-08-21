@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<procedures xmlns="http://www.efs.org/2007/EFSmL-3-0"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xmlns:ecoreB="http://www.eclipse.org/emf/2002/Ecore"
+                xsi:schemaLocation="http://www.efs.org/2007/EFSmL-3-0 ../Schemas/EfsML-CorporateActions-3-0.xsd">
+  <underlyers>
+    <underlyer>
+      <componentMethod id="cumVWAP1">
+        <description>Volume weighted average price 1</description>
+        <method>
+          <name>VWAP</name>
+        </method>
+      </componentMethod>
+      <componentMethod id="cumVWAP2">
+        <description>Volume weighted average price 2</description>
+        <method>
+          <name>VWAP2</name>
+        </method>
+      </componentMethod>
+    </underlyer>
+  </underlyers>
+  <ratio>
+    <description>Spin-off</description>
+    <methodType>Ratio</methodType>
+    <rFactor>
+      <componentFormula id="ratioFactor" name="R">
+        <description>Adjustment ratio</description>
+        <formula>
+          <mathExpression>((h*VWAP1)-(r*VWAP2))/(h*VWAP1)</mathExpression>
+          <componentReference href="cumVWAP1" name="VWAP1" id="cumVWAP1_r1"/>
+          <componentReference href="cumVWAP2" name="VWAP2" id="cumVWAP2_r1"/>
+          <component id="nbEligibleShares" name="h">
+            <description>Shares as eligible for the entitlement</description>
+            <result>
+              <unit>0</unit>
+            </result>
+          </component>
+          <component id="nbEntitlementShares" name="r">
+            <description>New shares as the entitlement</description>
+            <result>
+              <unit>0</unit>
+            </result>
+          </component>
+        </formula>
+      </componentFormula>
+    </rFactor>
+    <contract>
+      <!-- Add Ratio XML -->
+    </contract>
+  </ratio>
+</procedures>

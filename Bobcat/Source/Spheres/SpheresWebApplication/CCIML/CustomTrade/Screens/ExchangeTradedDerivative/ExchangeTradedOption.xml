@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Screens>
+  <!-- ExchangeTradedOptionFOml -->
+  <Screen name="OptionF&amp;Oml" caption="Option (F&amp;Oml)" product="exchangeTradedDerivative">
+    <RemoveAllocationBlock/>
+    <TradeDenOptionExerciseBlock/>
+    <TradeDenOptionAssignmentBlock/>
+    <TradeDenOptionAbandonBlock/>
+    <PositionTransferBlock/>
+    <CorrectionOfQuantityBlock/>
+    <ETDMarketBlock />
+    <PartyETDBlock/>
+    <OptionExchangeTradedDerivativeBlock clientid="exchangeTradedDerivative"/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentBlock/>
+    <ComplianceBlock/>
+  </Screen>
+</Screens>

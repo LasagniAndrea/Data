@@ -1,0 +1,63 @@
+<PUBLIC:HTC>
+	<PUBLIC:PROPERTY name="ForeColor" />
+	<PUBLIC:PROPERTY name="BackColor" />
+
+	<PUBLIC:ATTACH event="oncontentready" handler="fnInit"/>
+	<PUBLIC:ATTACH event="onmouseover"    handler="fnOver"/>
+	<PUBLIC:ATTACH event="onmouseout"     handler="fnOut"/>
+
+<SCRIPT language="jscript">
+
+	///////////////////////////////////////////////////////
+	// Globals
+	var g_curColor = "";
+	var g_curBgColor = "";
+
+
+	///////////////////////////////////////////////////////
+	// Initializing the component (also via URL from CSS)
+
+	function fnInit()	{
+		if (ForeColor == null)
+			ForeColor = "green";
+		if (BackColor == null)
+			BackColor = element.style.backgroundColor;		// current color
+
+
+		// Values received over the URL take the precedence
+		var strComponentURL = this.document.URL;
+		var nPos = strComponentURL.lastIndexOf("?");
+		if (nPos != -1)
+		{
+			var s = strComponentURL.substring(nPos+1);
+			eval(s);
+		} 
+	
+	}
+
+
+	///////////////////////////////////////////////////////
+	// When the mouse is over the component...
+
+	function fnOver() {
+		g_curBgColor = element.style.backgroundColor;
+		g_curColor = element.style.color;
+
+		element.style.color = ForeColor;
+		element.style.backgroundColor = BackColor;
+		element.style.cursor = "hand";
+	}
+
+
+	///////////////////////////////////////////////////////
+	// When the mouse moves out of the component...
+
+	function fnOut() {
+		element.style.color = g_curColor;
+		element.style.backgroundColor = g_curBgColor;
+		element.style.cursor = "";
+	}
+
+</SCRIPT>
+
+</PUBLIC:HTC>

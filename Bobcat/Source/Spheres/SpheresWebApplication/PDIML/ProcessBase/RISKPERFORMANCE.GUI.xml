@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+  <customObject control="label"    clientid="ENTITY"  caption = "Entity_Title" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown" clientid="ENTITY"  width="250px"   datatype="integer" 
+                listretrieval="predef:ActorEntity" required="true" postback="true"  
+                postbackargument ="SELFRELOAD_" xsi:type="CustomObjectDropDown"  
+                misc="isAddAll:true;isUseSessionRestrict:true;isClear:false"/>
+  
+  <customObject control="label"    clientid="TIMING"  caption = "Mode" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown" clientid="TIMING"  width="220px"   datatype="string" 
+                listretrieval="predef:enum.[code:SettlSessIDEnum;isResource:true;forcedenum:EOD|ITD]" 
+                required="true"
+                postback="true"  postbackargument ="SELFNOLOAD_"
+                xsi:type="CustomObjectDropDown"  
+                misc="isClear:true;"/>
+
+  <!--PM 20140212 [19493] Add of POSITIONTIME and RISKDATATIME for Intra-Day margin-->
+  <customObject control="space"   width="50"/>
+  <customObject control="label"    clientid="POSITIONTIME"  caption = "lblPositionTime" xsi:type="CustomObjectLabel"/>
+  <customObject control="textbox"  clientid="POSITIONTIME"
+                datatype = "time" required="false" 
+                postback="true"  postbackargument ="SELFNOLOAD_"
+                xsi:type="CustomObjectTextBox"/>
+
+  <customObject control="label"    clientid="RISKDATATIME"  caption = "lblRiskDataTime" xsi:type="CustomObjectLabel"/>
+  <customObject control="textbox"   clientid="RISKDATATIME"
+                datatype = "time" required="false" 
+                postback="true"  postbackargument ="SELFNOLOAD_"
+                xsi:type="CustomObjectTextBox"/>
+
+  <customObject control="space"   width="50"/>
+  <customObject control="checkbox" clientid="ISSIMUL" defaultvalue="false" datatype="bool"
+                postback="true"  postbackargument ="SELFNOLOAD_"
+                caption="lblSimulation" required="true" />
+  <customObject control="checkbox" clientid="ISRESET" defaultvalue="true" datatype="bool" postback="true" caption="Modification" required="true"  tooltip="RiskPerformanceReset"/>
+  <!-- CC 20111116 mise en commentaire du customObject ci-dessous car non géré pour le moment -->
+  <!--customObject control="label"     clientid="MRO"  caption = "MarginReqOffice_Title" xsi:type="CustomObjectLabel" tooltip="MarginReqOffice_Title"/>
+  <customObject control="dropdown"  clientid="MRO"  width="220px"   datatype="integer" listretrieval="predef:actorMarginRequirementOffice" required="false" postback="true"  postbackargument ="SELFRELOAD_" xsi:type="CustomObjectDropDown"  enabled="false" misc="isUseSessionRestrict:true;isClear:true" /-->
+</customObjects>  

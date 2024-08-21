@@ -1,0 +1,104 @@
+@import (reference) "../bootstrap/variables.less";
+
+//== New Media queries breakpoints
+// XLarge screen / wide desktop
+@screen-xl-min:           1600px;
+@screen-xxl-min:          1900px;
+
+@screen-xl-max:          (@screen-xl-min - 1);
+@screen-xxl-max:         (@screen-xxl-min - 1);
+
+// XLarge screen / wide desktop
+@container-xlarge-desktop:      (1540px + @grid-gutter-width);
+@container-xxlarge-desktop:     (1840px + @grid-gutter-width);
+//** For `@screen-lg-min` and up.
+@container-xl:                 @container-xlarge-desktop;
+@container-xxl:                @container-xxlarge-desktop;
+
+@input-height-xs:             (floor(@font-size-small * @line-height-small) + (@padding-xs-vertical * 2) + 2);
+//
+// Spheres Variables
+// --------------------------------------------------
+@sph-orange-color:        #EA5A00;
+@sph-orange-medium-color: #EF7A27;
+@sph-orange-light-color:  #F7BD77;
+
+@sph-green-color:         #3d881c; //#51AD26;
+@sph-green-medium-color:  #77BC51;
+@sph-green-light-color:   #C9DDAD;
+
+@sph-violet-color:        #8B569F;
+@sph-violet-medium-color: #9E75B0;
+@sph-violet-light-color:  #C6B5D3;
+
+@sph-brown-color:         #673406;
+@sph-brown-medium-color:  #835324;
+@sph-brown-light-color:   #C19863;
+
+@sph-red-color:           #a70000; //#C00303;
+@sph-red-medium-color:    #D23838;
+@sph-red-light-color:     #F9ACAC;
+
+@sph-rose-color:          #EA71A8;
+@sph-rose-medium-color:   #ED82AE;
+@sph-rose-light-color:    #F4BBC6;
+
+@sph-gray-color:          #545454;
+@sph-gray-medium-color:   #737373;
+@sph-gray-light-color:    #B4B4B4;
+
+@sph-blue-color:          #036AB5;
+@sph-blue-medium-color:   #3483C1;
+@sph-blue-light-color:    #84B6DB;
+
+@sph-yellow-color:        #dbcc24; //#D8C825;
+@sph-yellow-medium-color: #F8EB66;
+@sph-yellow-light-color:  #F4EAAF;
+
+@sph-cyan-color:          #0ea5d8; //#1CBCF0;
+@sph-cyan-medium-color:   #50C9F0;
+@sph-cyan-light-color:    #BBE4EF;
+
+//== Colors for Spheres menus
+//
+@sph-main-color:             @sph-blue-color;
+@sph-input-color:            @sph-orange-color;  
+@sph-view-color:             @sph-green-color;
+@sph-process-color:          @sph-violet-color;
+@sph-repository-color:       @sph-brown-color;
+@sph-admin-color:            @sph-red-color;
+@sph-invoicing-color:        @sph-rose-color;
+@sph-external-color:         @sph-cyan-color;
+@sph-about-color:            @sph-blue-color;
+
+
+@sph-na-color:               darken(@sph-gray-color, 20%);
+@sph-error-color:            @sph-red-color;
+@sph-pending-color:          @sph-brown-color;
+@sph-progress-color:         @sph-violet-color;
+@sph-success-color:          @sph-green-color;
+@sph-warning-color:          @sph-orange-color;
+@sph-none-color:             @sph-gray-color;
+
+/* Filtered criteria List */
+
+@sph-lstfilter-color:        @sph-blue-color;
+@sph-lstfilter-color-bg:     #d2e5f3;
+@sph-lstfilter-color-border: @sph-blue-light-color;
+
+/* Available columns List */
+@sph-lstavailable-color:        darken(@gray-dark, 5%);
+@sph-lstavailable-color-bg:     #f5f5f5;
+@sph-lstavailable-color-border: @sph-gray-light-color;
+
+/* Sorted|Grouped columns List */
+@sph-lstsort-color:             @sph-green-color;
+@sph-lstsort-color-bg:          #e5f1df;
+@sph-lstsort-color-border:      @sph-green-light-color;
+
+/* Displayed columns List */
+@sph-lstdisplayed-color:        @sph-blue-color;
+@sph-lstdisplayed-color-bg:     #d2e5f3;
+@sph-lstdisplayed-color-border: @sph-blue-light-color;
+
+

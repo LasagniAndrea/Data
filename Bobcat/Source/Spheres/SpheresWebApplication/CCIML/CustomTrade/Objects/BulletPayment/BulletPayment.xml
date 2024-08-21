@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+	<!--BulletPaymentBlock-->
+	<Object name="BulletPaymentBlock">
+		<Table colspan="-1" style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:BulletPayment;" controlalignleft="true">
+			<Payment clientid="bulletPayment" helpschema="efsml" helpelement="Payment" />
+		</Table>
+	</Object>
+
+  <!--CashPaymentBlock-->
+  <Object name="CashPaymentBlock">
+    <Table colspan="-1" style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:BulletPayment;" controlalignleft="true">
+      <Payment_ValueDate clientid="bulletPayment" helpschema="efsml" helpelement="Payment" />
+    </Table>
+  </Object>
+  
+  <!--CollateralPaymentBlock-->
+  <Object name="CollateralPaymentBlock">
+    <Table colspan="-1" style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:BulletPayment;" controlalignleft="true">
+      <CollateralPayment clientid="bulletPayment" helpschema="efsml" helpelement="Payment" />
+    </Table>
+  </Object>
+
+  <Object name="CollateralPayment" helpschema="efsml" helpelement="Payment">
+    <Table colspan="-1" controlalignleft="true">
+      <CollateralPaymentPartyHorizontalBlock/>
+      <Table>
+        <PaymentTypeCSH_L clientid="paymentType" required="false"  postback="true" helpschema="fpml" helpelement="PaymentType" />
+        <Money_L clientid="paymentAmount" required="true" postback="true" />
+        <Fill/>
+      </Table>
+      <Fill/>
+    </Table>
+  </Object>
+
+  <Object name="CollateralPaymentPartyHorizontalBlock">
+    <Table>
+      <!-- PartyReference_L clientid="payer" postback="true" required="true" / -->
+      <!-- PartyReference_L clientid="receiver" postback="true" required="true" / -->
+    </Table>
+  </Object>
+
+  <Object name="PaymentTypeCSH_L" helpschema="fpml-shared" helpelement="PaymentType">
+    <documentation>PaymentTypeCSH with Label</documentation>
+    <Label helpschema="fpml" helpelement="PaymentType" />
+    <PaymentTypeCSH/>
+  </Object>
+
+  <Object name="PaymentTypeCSH" helpschema="fpml" helpelement="PaymentType">
+    <documentation>PaymentTypeCSH without Label</documentation>
+    <DropDown datatype="string" listretrieval="predef:enum.[code:paymentType;condition:(VALUE in('Cash'))]" />
+  </Object>
+
+</Objects>

@@ -1,0 +1,607 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xml:lang="en" xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">News &amp; Events</title>
+  <subtitle type="text">News &amp; Events</subtitle>
+  <id>uuid:cf824ee0-62cf-44a3-ad1e-3ef3923a942f;id=7</id>
+  <rights type="text">© 2024 Euro Finance Systems</rights>
+  <updated>2021-09-17T13:02:05Z</updated>
+  <logo>http://www.euro-finance-systems.com/SpheresWebSite/CustomerPortal/Images/EFS.png</logo>
+  <author>
+    <email>info@euro-finance-systems.fr</email>
+  </author>
+  <generator>EFS Communication service</generator>
+  <link rel="alternate" href="http://www.euro-finance-systems.com/" />
+  <entry>
+    <id>154</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2021-09-10T00:00:00+02:00</published>
+    <updated>2021-09-10T00:00:00+02:00</updated>
+    <link rel="alternate" href="https://www.fpml.org/spec/fpml-4-2-13-tr-6/" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 4.2 Trial Recommendation (Build 13)</content>
+  </entry>
+  <entry>
+    <id>153</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2021-08-16T00:00:00+02:00</published>
+    <updated>2021-08-16T00:00:00+02:00</updated>
+    <link rel="alternate" href="https://www.fpml.org/spec/fpml-4-2-11-tr-5/" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 4.2 Trial Recommendation (Build 11)</content>
+  </entry>
+  <entry>
+    <id>152</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2021-07-15T00:00:00+02:00</published>
+    <updated>2021-07-15T00:00:00+02:00</updated>
+    <link rel="alternate" href="https://www.fpml.org/spec/fpml-4-2-10-tr-4/" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 4.2 Trial Recommendation (Build 10)</content>
+  </entry>
+  <entry>
+    <id>150</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2021-05-17T00:00:00+02:00</published>
+    <updated>2021-05-17T00:00:00+02:00</updated>
+    <link rel="alternate" href="https://www.fpml.org/spec/fpml-5-12-2-lcwd-1/" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 5.12 Last Call Working Draft (Build 2)</content>
+  </entry>
+  <entry>
+    <id>151</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2021-05-17T00:00:00+02:00</published>
+    <updated>2021-05-17T00:00:00+02:00</updated>
+    <link rel="alternate" href="https://www.fpml.org/spec/fpml-4-2-9-lcwd-2/" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 4.2 Last Call Working Draft (Build 9)</content>
+  </entry>
+  <entry>
+    <id>141</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2019-12-17T00:00:00+01:00</published>
+    <updated>2019-12-17T00:00:00+01:00</updated>
+    <link rel="alternate" href="https://www.fpml.org/spec/fpml-5-11-8-rec-1/" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 5.11 Recommendation (Build 8)</content>
+  </entry>
+  <entry>
+    <id>134</id>
+    <title type="text">Generation of SWIFT messages MT54x (MT 540 Receive Free, MT 541 Receive Against Payment, MT 542 Deliver Free, MT 543 Deliver..)</title>
+    <published>2018-05-02T00:00:00+02:00</published>
+    <updated>2018-05-02T00:00:00+02:00</updated>
+    <link rel="alternate" href="https://www.iso20022.org/15022/uhb/finmt540.htm" />
+    <link rel="enclosure" length="3039" href="https://www.unifiedpost.com/-/media/project/unifiedpost/public/corporate/unifiedpostcom/news/imagenews/unifiedpostgroup_6.png?h=500" />
+    <category term="Sales" />
+    <content type="text">The SWIFT messages MT 54x have been implemented for standardizing the settlement instructions between our client HPC (OTCeX) and its the Custodian (CACEIS).
+The following settlement instruction messages have been implemented:
+MT 540 Receive Free
+MT 541 Receive Against Payment
+MT 542 Deliver Free
+MT 543 Deliver Against Payment
+
+
+</content>
+  </entry>
+  <entry>
+    <id>132</id>
+    <title type="text">New maturity rules available for the CCP LCH.CLEARNET-SA</title>
+    <published>2018-04-01T00:00:00+02:00</published>
+    <updated>2018-04-01T00:00:00+02:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/" />
+    <link rel="enclosure" length="3039" href="https://www.lch.com/themes/lchtheme/logo.svg" />
+    <category term="Sales" />
+    <content type="text">By implementing new maturity rules Spheres offers automatic calculation of expiry dates for all derivative contracts listed on the markets cleared by LCH.CLEARNET-SA
+
+</content>
+  </entry>
+  <entry>
+    <id>124</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2018-02-12T00:00:00+01:00</published>
+    <updated>2018-02-12T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.fpml.org/spec/fpml-5-10-5-rec-1/" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 5.10 Recommendation (Build 5)</content>
+  </entry>
+  <entry>
+    <id>126</id>
+    <title type="text">FINECO BANK chooses to switch to Spheres©</title>
+    <published>2017-12-31T00:00:00+01:00</published>
+    <updated>2017-12-31T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/Pages/culture/Spheres" />
+    <link rel="enclosure" href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/FinecoBank_logo.svg/133px-FinecoBank_logo.svg.png" />
+    <category term="Sales" />
+    <content type="text">FINECO BANK offers banking, brokerage and investment services to retail clients and has over 1.1 million customers. FINECO BANK has been using the Eurosys software solution for many years. After a market survey, in the sector of the software solutions specialized in the back-office of listed derivatves and OTC, FINECO BANK has decided to renew his long-dated relationship with EFS and has chosen Spheres©. 
+Eurosys will be migrated toward Spheres© in the second half of 2018 and some specific tools specifically developed by EFS to facilitate the migration form Eurosys will be used.
+</content>
+  </entry>
+  <entry>
+    <id>131</id>
+    <title type="text">New market available in our offer MPRS</title>
+    <published>2017-12-01T00:00:00+01:00</published>
+    <updated>2017-12-01T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/Pages/culture/Services.html" />
+    <link rel="enclosure" href="https://www.bolsasymercados.es/images/Base/Logo.svg?v=Six" />
+    <category term="Sales" />
+    <content type="text">Within our service MPRS (Market &amp; Product Repository Service), the offer is extended to the new following market: BME (Bolsas y Mercados Espanoles)
+</content>
+  </entry>
+  <entry>
+    <id>136</id>
+    <title type="text">Spheres© is Full compliance MIFID 2</title>
+    <published>2017-12-01T00:00:00+01:00</published>
+    <updated>2017-12-01T00:00:00+01:00</updated>
+    <link rel="alternate" href="https://www.esma.europa.eu/policy-rules/mifid-ii-and-mifir" />
+    <link rel="enclosure" length="3039" href="https://www.esma.europa.eu/themes/custom/esma_webst_theme/assets/images/ESMALogo.png" />
+    <category term="Sales" />
+    <content type="text">Spheres© is now Full compliance MIFID 2:
+
+- Timestamps in UTC up to 100 microseconds
+- ISIN codes available 
+- Trading venue transaction identification code (TVTIC)
+- Trading venue MIC
+- Trading capacity: DEAL, MTCH, AOTC
+- Waiver indicator 
+- Short selling indicator
+- OTC post-trade indicator
+- Commodity derivative indicator
+- Securities financing Transaction indicator</content>
+  </entry>
+  <entry>
+    <id>135</id>
+    <title type="text">Gateway Eurex FIXML: Futures and Options trades for EEX/ECC imported.</title>
+    <published>2017-07-01T00:00:00+02:00</published>
+    <updated>2017-07-01T00:00:00+02:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/Pages/culture/Gateways.html" />
+    <link rel="enclosure" length="3039" href="https://www.eex-group.com/typo3conf/ext/uo_template/Resources/Public/assets_group/img/logo-eex-group.svg" />
+    <category term="Sales" />
+    <content type="text">Members of EUREX and EEX exchanges can now subscribe to receive trades executed on the EEX Exchange using our Gateway Eurex FIXML.
+
+</content>
+  </entry>
+  <entry>
+    <id>118</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2017-03-20T00:00:00+01:00</published>
+    <updated>2017-03-20T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.fpml.org/spec/fpml-5-9-7-rec-2/" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML 5.9 Recommendation 2 (build 7)</content>
+  </entry>
+  <entry>
+    <id>130</id>
+    <title type="text">Spheres© is compliant to Eurex Clearing Prisma Release 5.0</title>
+    <published>2016-11-28T00:00:00+01:00</published>
+    <updated>2016-11-28T00:00:00+01:00</updated>
+    <link rel="alternate" href="https://www.eurex.com/ec-en/technology/prisma" />
+    <category term="Sales" />
+    <content type="text">Spheres© is fully compliant to Eurex Clearing Prisma Release 5.0, the innovative way to maintain reliable margin levels, while in parallel provides considerable capital efficiencies to the Members. 
+From this date onwards, the Prisma margin methodology will be used exclusively for all Eurex exchange traded derivatives. The former Risk Based Margining (RBM) method will no longer be used to calculate margins for any Eurex exchange traded derivatives. 
+
+
+</content>
+  </entry>
+  <entry>
+    <id>116</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2016-07-26T00:00:00+02:00</published>
+    <updated>2016-07-26T00:00:00+02:00</updated>
+    <link rel="alternate" href="http://www.fpml.org/spec/fpml-5-8-9-rec-2/" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 5.8 Recommendation 2 (build 9)</content>
+  </entry>
+  <entry>
+    <id>133</id>
+    <title type="text">Go live of BANCA AKROS on Futures, Options and Energy Spot Contracts on ECC (EEX, POWERNEXT PEGAS...)</title>
+    <published>2016-06-01T00:00:00+02:00</published>
+    <updated>2016-06-01T00:00:00+02:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/Pages/culture/Spheres.html" />
+    <link rel="enclosure" length="3039" href="https://thebanks.eu/img/logos/Banca_Akros.png" />
+    <category term="Sales" />
+    <content type="text">BANCA AKROS is our first client to use Spheres for the management of the back-office of its activities on Futures, Options and Energy Spot contracts on ECC (EEX, POWERNEXT PEGAS...). At BANCA AKROS, Spheres covers the entire life-cycle of its back-office activity, from trades capture from the market network to invoicing and accounting. 
+
+</content>
+  </entry>
+  <entry>
+    <id>128</id>
+    <title type="text">BANCA SELLA is in production with  Spheres©</title>
+    <published>2015-11-05T00:00:00+01:00</published>
+    <updated>2015-11-05T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/Pages/culture/Spheres.html" />
+    <link rel="enclosure" length="3039" href="https://sellagroup.eu/o/sella-group-theme/images/sellagroup-2021-quick/logos/logo-sella-blue.svg" />
+    <category term="Sales" />
+    <content type="text">Spheres© is in production at BANCA SELLA  (Italy).
+
+</content>
+  </entry>
+  <entry>
+    <id>129</id>
+    <title type="text">Spheres© covers the back-office activity on ETD and Spot energy markets</title>
+    <published>2015-09-20T00:00:00+02:00</published>
+    <updated>2015-09-20T00:00:00+02:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/Pages/culture/Spheres.html" />
+    <link rel="enclosure" length="3039" href="https://www.eex-group.com/typo3conf/ext/uo_template/Resources/Public/assets_group/img/logo-eex-group.svg" />
+    <category term="Sales" />
+    <content type="text">Spheres© offers extended management of Futures &amp; Options contracts listed on European energy exchanges (EEX/POWERNEXT/PEGAS...) cleared by ECC.
+Spheres© offers extended management of Spot contracts listed on the European energy exchanges (EPEXSPOT / GASPOINT NORDIC/HUPX/ POWERNEXT PEGAS/ SEEPEX...) cleared by ECC. 
+All aspects related to the management of the activity of the back-office are covered: repositories of contracts and underlying assets, expiry dates calculation, Initial Margin calculation (ECC/IMSM method), cash flows, etc. 
+
+</content>
+  </entry>
+  <entry>
+    <id>111</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2015-09-11T00:00:00+02:00</published>
+    <updated>2015-09-11T00:00:00+02:00</updated>
+    <link rel="alternate" href="http://www.fpml.org/spec/fpml-4-10-2-rec-1/" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 4.10 Recommendation for Loans</content>
+  </entry>
+  <entry>
+    <id>127</id>
+    <title type="text">BANCA LEONARDO chooses to switch to Spheres©</title>
+    <published>2015-09-01T00:00:00+02:00</published>
+    <updated>2015-09-01T00:00:00+02:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/Pages/culture/Spheres.html" />
+    <category term="Sales" />
+    <content type="text">BANCA LEONARDO, a part of Indosuez Wealth Management, the global wealth management brand of Crédit Agricole Group, has been using the Eurosys software solution for many years. After a market survey, in the sector of the software solutions specialized in the back-office of listed derivatves, BANCA LEONARDO has decided to renew his long-dated relationship with EFS and has chosen Spheres©. 
+Eurosys will be migrated toward Spheres in the second half of 2015 and some specific tools specifically developed by EFS to facilitate the migration form Eurosys will be used
+
+</content>
+  </entry>
+  <entry>
+    <id>102</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2014-07-08T00:00:00+02:00</published>
+    <updated>2014-07-08T00:00:00+02:00</updated>
+    <link rel="alternate" href="http://www.fpml.org/spec/fpml-5-7-5-rec-1/" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 5.7 Recommendation (build 5)</content>
+  </entry>
+  <entry>
+    <id>100</id>
+    <title type="text">Valbury has chosen Spheres© for its Middle &amp; Back-Office based in London. </title>
+    <published>2014-05-26T00:00:00+02:00</published>
+    <updated>2014-05-26T00:00:00+02:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/Pages/culture/Spheres.html" />
+    <link rel="enclosure" length="3039" href="https://mytrade.valburyecapital.com/vec-area/assets/logo.png" />
+    <category term="Sales" />
+    <content type="text">Valbury Capital Limited (www.valbury.co.uk) is part of the Asian based Valbury Group (www.valbury.com). Valbury Capital was established in 2011 in London in order to extend its brokerage activity to a wider range of financial instruments, such as listed derivatives, OTC and Securities. Valbury Capital was searching for a software solution able to cover the entire life-cycle of its activity, from trades capture to invoicing and accounting. At the end of an intensive review process, Valbury Capital has judged that Spheres© was the best solution to cover its needs, among various other solutions from local and non-local providers. With the support of its partner Enovea (www.enovea.net), this new contract represents for EFS the first Spheres© client based in the United Kingdom for the management of an extended range of financial instruments.
+</content>
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">http://www.valburycapital.com</string>
+  </entry>
+  <entry>
+    <id>95</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2014-01-17T00:00:00+01:00</published>
+    <updated>2014-01-17T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.fpml.org/spec/fpml-5-6-5-rec-1/" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 5.6 Recommendation (build 5)</content>
+  </entry>
+  <entry>
+    <id>94</id>
+    <title type="text">EFS quadruple the speed of his internet portal </title>
+    <published>2013-11-14T00:00:00+01:00</published>
+    <updated>2013-11-14T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/" />
+    <category term="Sales" />
+    <content type="text">EFS has enhanced the technical insfrustructure by quadruplicating the upload and download speed of his internet portal. </content>
+  </entry>
+  <entry>
+    <id>93</id>
+    <title type="text">Banca Sella chooses to switch to Spheres©</title>
+    <published>2013-11-08T00:00:00+01:00</published>
+    <updated>2013-11-08T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/Pages/culture/Spheres.html" />
+    <link rel="enclosure" length="3039" href="https://sellagroup.eu/o/sella-group-theme/images/sellagroup-2021-quick/logos/logo-sella-blue.svg" />
+    <category term="Sales" />
+    <content type="text">Banca Sella group represents 300 subsidiaries and 19 companies which intervene at an international level to provide banking products and services to his clients. 
+Banca Sella has been using the Eurosys software solution for many years. After a market survey, in the sector of the software solutions specialized in the back-office of listed derivatves and OTC, Banca Sella has decided to renew his long-dated relationship with EFS and has chosen Spheres F&amp;Oml©. Eurosys will be migrated toward Spheres during 2014 and some specific tools specifically developed by EFS to facilitate the migration form Eurosys will be used. 
+</content>
+  </entry>
+  <entry>
+    <id>92</id>
+    <title type="text">Objectway Financial Software chooses Spheres©</title>
+    <published>2013-08-09T00:00:00+02:00</published>
+    <updated>2013-08-09T00:00:00+02:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/Pages/culture/Spheres.html" />
+    <link rel="enclosure" href="https://www.objectway.com/wp-content/uploads/2020/10/LogoOwSite_animated-h24.gif" />
+    <category term="Sales" />
+    <content type="text">Objectway is a European group and provides software solutions and business excellence services to financial institutions. Objectway ha chosen Spheres© for the management of his clients back-office operations, on listed derivatives and OTC.  Spheres© will be integrated with the software application Smit2, developed by Objectway, that manages the back-office operations on securities. This integration will allow Objectway to provide to his clients a fully integrated « front to back » platform for the management of any financial instruments. </content>
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">http://www.objectway.it/</string>
+  </entry>
+  <entry>
+    <id>88</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2013-05-28T00:00:00+02:00</published>
+    <updated>2013-05-28T00:00:00+02:00</updated>
+    <link rel="alternate" href="http://www.fpml.org/spec/fpml-5-5-7-rec-1/" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 5.5 Recommendation (build 7)</content>
+  </entry>
+  <entry>
+    <id>87</id>
+    <title type="text">Xchanging Italy (ex. Kedrios) chooses Spheres© </title>
+    <published>2013-02-19T00:00:00+01:00</published>
+    <updated>2013-02-19T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/Pages/culture/Spheres.html" />
+    <category term="Sales" />
+    <content type="text">At the end of an extensive review process, Spheres F&amp;Oml® has been chosen by Xchanging Italy for the management of their outsourced BOD (Back-Office Derivati) service for 23 institutional clients.
+The software package of one of our competitors based in the United Kingdom, that Xchanging Italy has being using for many years, will be replaced during 2013.
+With this new major business step, Euro Finance Systems software packages are now the most used in Italy in the back-office management of listed derivatives operations.
+Xchanging Italy is the leading name in the market of services provided to financial market participants.
+Xchanging Italy is a company of Xchanging www.xchanging.com, a global player in the field of services delivery in general.
+</content>
+  </entry>
+  <entry>
+    <id>85</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2012-12-10T00:00:00+01:00</published>
+    <updated>2012-12-10T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.fpml.org/spec/fpml-5-4-5-rec-1/" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 5.4 Recommendation (build 5)</content>
+  </entry>
+  <entry>
+    <id>84</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2012-11-19T00:00:00+01:00</published>
+    <updated>2012-11-19T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.fpml.org/spec/fpml-5-3-8-rec-2/" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 5.3 Recommendation (build 8)</content>
+  </entry>
+  <entry>
+    <id>77</id>
+    <title type="text">The Banque Wormser Frères purchases additional components </title>
+    <published>2012-03-01T00:00:00+01:00</published>
+    <updated>2012-03-01T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/" />
+    <category term="Sales" />
+    <content type="text">The Banque Wormser Frères purchases additional components and extend its offer to other exchanges. </content>
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">http://www.banquewormser.com/</string>
+  </entry>
+  <entry>
+    <id>74</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2012-02-28T00:00:00+01:00</published>
+    <updated>2012-02-28T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.fpml.org/spec/fpml-5-1-9-rec-3/" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 5.1 Recommendation (build 9)</content>
+  </entry>
+  <entry>
+    <id>75</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2012-02-28T00:00:00+01:00</published>
+    <updated>2012-02-28T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.fpml.org/spec/fpml-5-2-6-rec-2/" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 5.2 Recommendation (build 6)</content>
+  </entry>
+  <entry>
+    <id>66</id>
+    <title type="text">Partnership with the company Crystal Stream</title>
+    <published>2011-12-24T00:00:00+01:00</published>
+    <updated>2011-12-24T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/" />
+    <link rel="enclosure" type="image/png" length="17350" href="https://crystalstream.net/wp-content/uploads/2018/10/logo-enovea-custom-software-development-web-mobile-desktop-application-rouen-paris-londres.png" />
+    <category term="Sales" />
+    <content type="text">A commercial and technical partnership has been established with Crystal Stream.
+Crystal Stream launches its new software solutions for the middle-office, Crystal Order Book &amp; Crystal Clear.
+This partnership will allow the perfect integration of Spheres with these software solutions</content>
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">http://crystalstream.net/index.php</string>
+  </entry>
+  <entry>
+    <id>44</id>
+    <title type="text">The company Sigma Terme (Invivo group) chooses Spheres©</title>
+    <published>2011-12-23T00:00:00+01:00</published>
+    <updated>2011-12-23T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/Pages/culture/Spheres.html" />
+    <category term="Sales" />
+    <content type="text">At the end of a sale process, in which its main competitors were involved, Spheres© has been chosen by Sigma Terme (Invivo group), for the management of its operations on the main international markets of agricultural products (grain and cereals). Counting more then 250 cooperative companies, Invivo is the first French grroup of cooperative companies and one of the most important in Europe. Sigma Terme provides trading and clearing services for agricultural products of Euronext, Liffe and CBOT. Sigma Terme is member of Euronext. 
+
+  
+
+</content>
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">http://www.invivo-group.com/activite/21/marches-des-grains</string>
+  </entry>
+  <entry>
+    <id>72</id>
+    <title type="text">Spheres range marketed to replace the range Eurosys</title>
+    <published>2011-10-18T00:00:00+02:00</published>
+    <updated>2011-10-18T00:00:00+02:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/Pages/culture/Spheres.html" />
+    <link rel="enclosure" type="image/png" href="http://localhost/EFSPortal/Image/Spheres.png" />
+    <category term="Sales" />
+    <content type="text">The software solution of the range Eurosys© is no longer commercialized; EFS offers now an integrated platform for the management of all types of financial instruments and in particular listed derivative (ETD) and OTC.</content>
+  </entry>
+  <entry>
+    <id>69</id>
+    <title type="text">New markets available in our offer MDFS</title>
+    <published>2011-05-18T00:00:00+02:00</published>
+    <updated>2011-05-18T00:00:00+02:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/Pages/culture/Services.html" />
+    <category term="Sales" />
+    <content type="text">Within our service MDFS (Market Data Feed Service ), the offer is extended to the new following markets : WCE (Winnipeg Commodity Exchange) MGEX (Minneapolis Grain Exchange, Inc.) ICE US (ICE Future US)</content>
+  </entry>
+  <entry>
+    <id>68</id>
+    <title type="text">Spheres© in production at our client OTCex group</title>
+    <published>2011-05-14T00:00:00+02:00</published>
+    <updated>2011-05-14T00:00:00+02:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/Pages/culture/Spheres.html" />
+    <link rel="enclosure" href="https://otcexgroup.com/wp-content/uploads/2017/08/HPC-Logo-TypeOriginal.png" />
+    <category term="Sales" />
+    <content type="text">OTCex group has implemented into the production environment Spheres©, for the management of the middle and back-office of its activities on Futures &amp; Options on organized exchanges (ETD).
+Since october 2009, OTCex group has been using Spheres© for the management of its activities on OTC derivatives. 
+Spheres© replaces Eurosys© that has been used by HPC for many years. 
+HPC benefits from a complete platform Spheres© for the manegement of all of its activities on financial instrments and for all subsidiaries of the group: Paris, London, Genève, Hong Kong, etc
+</content>
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">http://www.otcexgroup.com</string>
+  </entry>
+  <entry>
+    <id>70</id>
+    <title type="text">Eurosys futures©  and Eurex Release 13.1</title>
+    <published>2011-04-02T00:00:00+02:00</published>
+    <updated>2011-04-02T00:00:00+02:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/" />
+    <link rel="enclosure" href="https://www.thetradenews.com/wp-content/uploads/2020/10/EUREX-EX_Logo_Green-Blue_sRGB.png" />
+    <category term="Sales" />
+    <content type="text">Eurosys Futures©  integrates Eurex 13.1 enhancements</content>
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">http://www.eurexchange.com</string>
+  </entry>
+  <entry>
+    <id>71</id>
+    <title type="text">Eurosys Futures© in production at our client Banca Leonardo (Milan)</title>
+    <published>2011-02-18T00:00:00+01:00</published>
+    <updated>2011-02-18T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/" />
+    <category term="Sales" />
+    <content type="text">Eurosys Futures© is in production at Banca Leonardo (Milan) </content>
+  </entry>
+  <entry>
+    <id>48</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2011-02-17T00:00:00+01:00</published>
+    <updated>2011-02-17T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.fpml.org/news/4.9_rec_5.1_rec_announcement.htm" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 4.9 Recommendation</content>
+  </entry>
+  <entry>
+    <id>67</id>
+    <title type="text">New modules of Eurosys Futures in Banque Palatine</title>
+    <published>2011-01-15T00:00:00+01:00</published>
+    <updated>2011-01-15T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/" />
+    <link rel="enclosure" href="https://upload.wikimedia.org/wikipedia/commons/3/3a/Logo_Palatine_Noirok.png" />
+    <category term="Sales" />
+    <content type="text">Banque Palatine purchases new modules of Eurosys Futures for the management of new markets</content>
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">https://www.palatine.fr</string>
+  </entry>
+  <entry>
+    <id>58</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2010-07-20T00:00:00+02:00</published>
+    <updated>2010-07-20T00:00:00+02:00</updated>
+    <link rel="alternate" href="http://www.isda.org/media/press/2010/press080310fpml.html" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 4.8 Recommendation</content>
+  </entry>
+  <entry>
+    <id>59</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2010-07-07T00:00:00+02:00</published>
+    <updated>2010-07-07T00:00:00+02:00</updated>
+    <link rel="alternate" href="http://www.isda.org/media/press/2010/press072010fpml.html" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 5.0 Recommendation</content>
+  </entry>
+  <entry>
+    <id>2</id>
+    <title type="text">Third license Spheres©  in Bankadati </title>
+    <published>2010-04-27T00:00:00+02:00</published>
+    <updated>2010-04-27T00:00:00+02:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/Pages/culture/Spheres.html" />
+    <category term="Sales" />
+    <content type="text">Bankadati purchases a third license of Spheres©   in order to manage the activities of Istituto Centrale delle Banche Popolari Italiane and replaces their current software distributed by Ra Computer. </content>
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">http://www.icbpi.it</string>
+  </entry>
+  <entry>
+    <id>3</id>
+    <title type="text">New components of Spheres© in OTCex group</title>
+    <published>2010-02-28T00:00:00+01:00</published>
+    <updated>2010-02-28T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/Pages/culture/Spheres.html" />
+    <link rel="enclosure" href="https://otcexgroup.com/wp-content/uploads/2017/08/HPC-Logo-TypeOriginal.png" />
+    <category term="Sales" />
+    <content type="text">In order to expand the software to new instruments, OTCex group purchases new components of Spheres© . </content>
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">http://www.otcexgroup.com</string>
+  </entry>
+  <entry>
+    <id>65</id>
+    <title type="text">FpML new version announced by ISDA</title>
+    <published>2010-02-02T00:00:00+01:00</published>
+    <updated>2010-02-02T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.fpml.org/spec/fpml-4-7-6-rec-1/" />
+    <link rel="enclosure" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8RQFpPONevOjW_p7VksfECa7oeFYZ7QrBZPX414reqQVGFLCqu-qNb2TduvHnp5li6jA" />
+    <category term="FpML" />
+    <category term="ISDA" />
+    <content type="text">ISDA Releases FpML Version 4.7 Recommendation</content>
+  </entry>
+  <entry>
+    <id>4</id>
+    <title type="text">New components of Eurosys Futures© in Banca Sella</title>
+    <published>2009-11-28T00:00:00+01:00</published>
+    <updated>2009-11-28T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/" />
+    <link rel="enclosure" href="https://sellagroup.eu/o/sella-group-theme/images/sellagroup-2021-quick/logos/logo-sella-blue.svg" />
+    <category term="Sales" />
+    <content type="text">Banca Sella (Biella, Italy) that has been using our products &amp; services for many years, purchases additional components of Eurosys Futures©  in order to manage the Spanish market (MEFF). </content>
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">https://www.sella.it/ita/index.jsp</string>
+  </entry>
+  <entry>
+    <id>5</id>
+    <title type="text">Spheres©  in production at our client OTCex group</title>
+    <published>2009-10-27T00:00:00+01:00</published>
+    <updated>2009-10-27T00:00:00+01:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com//Pages/culture/Spheres.html" />
+    <link rel="enclosure" href="https://otcexgroup.com/wp-content/uploads/2017/08/HPC-Logo-TypeOriginal.png" />
+    <category term="Sales" />
+    <content type="text">On 01/10/2009, OTCex group begins to use Spheres©  in production environment with a wide perimeter of instruments. </content>
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">http://www.otcexgroup.com/</string>
+  </entry>
+  <entry>
+    <id>6</id>
+    <title type="text">Banca Leonardo buys Eurosys Futures© </title>
+    <published>2009-09-26T00:00:00+02:00</published>
+    <updated>2009-09-26T00:00:00+02:00</updated>
+    <link rel="alternate" href="http://www.euro-finance-systems.com/" />
+    <category term="Sales" />
+    <content type="text">Banca Leonardo (Milan) decides to use Eurosys Futures©  to manage the back office of all its activities on Futures &amp; Options on organized exchanges. The production start for Eurosys Futures©  has been scheduled for 01/01/2010. </content>
+    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/">http://www.bancaleonardo.com</string>
+  </entry>
+</feed>

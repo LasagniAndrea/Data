@@ -1,0 +1,932 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+PL 20190614 [24701] Refactoring de la section "SYNTHESIS Mono book": suppression du "where exists" qui est remplacé par des Inner Join (associé au Select distinct")
+PL 20190614 [XXXXX] Optimisation du where final sur la table ENTITY 
+FI 20190523 [XXXXX] Gestion du paramètre {ISMULTIPARTIES} pour diminuer la requête s'il n'existe pas de message MULTI-PARTIES valide  
+FI 20181002 [24219] Performance improvement of the Grid Loading (Add filter on TRADE.DTTRADE)
+RD 20160912 [22447] Gestion des reports SYNTHESIS MULTI-PARTIES
+FI 20150907 [21312] Mise en place de Choose Expression (Requête dynamique en fonction des paramètres de lancement du process) 
+CC/FI 20150513 [XXXXX] Intégration des Extrait de compte 
+CC/FI 20150513 [20987]
+FI 20150416 [XXXXX] SESSIONRESTRICT Usage des mots clés SR:TRADEALLOC et SR:TRADERISK  
+FI 20150416 [XXXXX] reecriture de la requête pour  FINANCIAL et SYNTHESIS 
+FI 20141230 [20616] Corrections diverses 
+FI 20140813 [20275] la requête s'applique aux alloc de tout type (product.FAMILY in ('ESE','LSD','RTS'))
+FI 20140730 [XXXXX] Tuning: Utilisation de la colonne TRADEINSTRUMENT.IDA_DEALER, TRADEINSTRUMENT.IDB_DEALER 
+RD 20131218 [19386] Add condition: 
+cnfMsg.DTENABLED <= getdate() and ((cnfMsg.DTDISABLED is null) or (cnfMsg.DTDISABLED > getdate()))
+CC 20130912 [18949] - Ajout critère ISPOSKEEPING=1 dans les blocs suivants pour exclure les books sans gestion de position      
+ - POSITION Mono book et POSITION Multi books                                                                                    
+ - POSSYNTHETIC Mono book et POSSYNTHETIC Multi books                                                                            
+ - POSACTION Mono book et POSACTION Multi books                                                                                  
+PL 20130717 Tuning POSACTION 
+FI 20130625 [18745] add query for SYNTHESIS 
+RD 20130506 / Add "where ISPARTYCONSO=1" 
+FI 20130419 [18602] Simplification des requêtes POSACTION (amélioration des perfs)
+FI 20130418 [18602] Correction dans l'écriture des requêtes POSACTION 
+FI 20120420 [17752] prise en compte des paramétrages existants dans la référentiel ENTITY (colonnes ISSENDNCMSG_XXXX)  
+FI 20120420 Spheres® exclue les situations financières Chambre (entité vs chambre)
+    Pour cela Spheres® ne considère que les cashBalance pour l'entité est buyer (equivalent à payer du deposit)
+    Spheres® ne considère que les CashBalance associés aux activités "Client" et "Maison"
+FI 20120426 [17703] Add query for POSACTION 
+FI 20120430 Les décompensations effectuées en même jour que la compensation sont prises en compte
+FI 20120803 add query for FINANCIALPERIODIC 
+  Retourne la liste des trades cashBalance entre le 1er du mois et @DTBUSINESS
+FI 20120830 remove query for FINANCIALPERIODIC 
+  Il existe un autre fichier spécifique à ce nouveau nenu
+FI 20120925 
+   Modification du tri et de l'ordre d'affichage des colonnes 
+RD 20120926 [18147] 
+Ne plus inclure dans les Avis d'opéré, les Trades "Position Opening" résultants d'une initialisation du progiciel Spheres®
+Ajout du critère "and ((ti.TRDTYPE is null) or (ti.TRDTYPE <> '1000') or (ti.TRDTYPE = '1000' and ti.TRDSUBTYPE is not null)))", au chargement des trades pour 'ALLOCATION'
+RD 20121108 / Ne plus inclure dans les Avis d'opéré, les Trades annulés
+Ajout du critère:  "and ts.IDSTACTIVATION='REGULAR'"
+EG 20191115 [25077] RDBMS : New version of Trades tables architecture (TRADESTSYS merge to TRADE, NEW TABLE TRADEXML)
+EG 20200226 [25077] RDBMS : New version of Trades tables architecture (TRADEINSTRUMENT (INSTRUMENTNO=1) to TRADE)
+-->
+
+<Referentials>
+  <Referential>
+    <IsUseSQLParameters>true</IsUseSQLParameters>
+    <TableName>REPORT</TableName>
+    <AliasTableName>tblMain</AliasTableName>
+    <Ressource>REPORT</Ressource>
+    <Create>false</Create>
+    <Modify>false</Modify>
+    <Remove>false</Remove>
+    <Notepad>false</Notepad>
+    <Timeout>200</Timeout>
+
+    <SQLRowState>
+      <![CDATA[
+      case when tblMain.CULTURE='fr-FR' then 'img=src:fr;title:French'
+      when      tblMain.CULTURE='it-IT' then 'img=src:it;title:Italian'
+      else 'img=src:gb;title:English' end
+      ]]>
+    </SQLRowState>
+
+    <SQLSelect>
+      <Command rdbms="all">
+        <![CDATA[
+/* Spheres:Hint ARITHABORT_ON NOPARAMS */
+select CNFTYPE, CNFCLASS, 
+       ACTOR_IDA as IDA, ACTOR_IDA as IDA2, ACTOR_IDENTIFIER, ACTOR_CULTURE as CULTURE,
+       BOOK_IDB as IDB, BOOK_IDB as IDB2, BOOK_IDENTIFIER
+from
+(
+    <choose>
+    <when test ="({CNFTYPE} ='ALL') or ({CNFTYPE}='ALLOCATION')">
+    
+    /****************************************************************************/
+    /* ALLOCATION Mono book                                                     */ 
+    /****************************************************************************/
+    select distinct 'ALLOCATION' as CNFTYPE, 'MULTI-TRADES' as CNFCLASS, 
+                                  a.IDA as ACTOR_IDA, a.IDENTIFIER as ACTOR_IDENTIFIER, isnull(a.CULTURE_CNF,a.CULTURE) as ACTOR_CULTURE,
+                                  b.IDB as BOOK_IDB, b.IDENTIFIER as BOOK_IDENTIFIER     
+    from dbo.TRADE t
+    inner join dbo.ACTOR a on a.IDA=t.IDA_DEALER
+    inner join dbo.BOOK b on b.IDB=t.IDB_DEALER  and b.ISRECEIVENCMSG=1  and (b.IDA_ENTITY=@ENTITY)         
+    %%SR:TRADEALLOC_JOIN%%(t.IDT,t,b)
+    where (t.IDSTBUSINESS='ALLOC') and (t.IDSTENVIRONMENT='REGULAR') and (t.IDSTACTIVATION='REGULAR') and
+    ((t.TRDTYPE is null) or (t.TRDTYPE != '1000') or (t.TRDTYPE = '1000' and t.TRDSUBTYPE is not null)) and 
+    exists (select 1    from dbo.EVENT e
+                              inner join dbo.EVENTCLASS ec on ec.IDE=e.IDE
+                              inner join dbo.CNFMESSAGE cnfMsg on cnfMsg.EVENTCODE=e.EVENTCODE and 
+                                                                  isnull(cnfMsg.EVENTTYPE, e.EVENTTYPE)=e.EVENTTYPE and
+                                                                  cnfMsg.EVENTCLASS=ec.EVENTCLASS and
+                                                                  cnfMsg.CNFTYPE='ALLOCATION' and 
+                                                                  cnfMsg.MSGTYPE='MULTI-TRADES' and
+                                                                  cnfMsg.DTENABLED &lt;= getdate() and 
+                                                                  ((cnfMsg.DTDISABLED is null) or (cnfMsg.DTDISABLED &gt; getdate()))
+                              where e.IDT=t.IDT and ec.DTEVENT=@DATE1)
+   and t.DTTRADE >= @DATE1
+   <choose>
+    <when test ="{MARKET}>-1">
+      and (t.IDM = @MARKET)
+    </when>
+   </choose>
+   <choose>
+    <when test ="{GMARKET} != null">
+   and exists (select 1  from dbo.MARKET m
+		                      inner join dbo.MARKETG mg on mg.IDM = m.IDM
+		                      inner join dbo.GMARKET gm on  gm.IDGMARKET = mg.IDGMARKET 
+		                      inner join dbo.GMARKETROLE gmr on gmr.IDGMARKET=gm.IDGMARKET and gmr.IDROLEGMARKET = 'CNF'
+		                      where m.IDM = t.IDM  and gm.IDGMARKET = @GMARKET
+		            union all
+		            select 1 from DUAL where @GMARKET is null) 
+    </when>
+   </choose>
+   and (%%SR:TRADEALLOC_WHERE_PREDICATE%%)
+   
+   <choose>
+    <when test ="{ISMULTIPARTIES}=1">
+    union all
+   /************************************************************************************************/
+   /* ALLOCATION Multi books                                                                       */ 
+   /************************************************************************************************/
+   select distinct 'ALLOCATION' as CNFTYPE, 'MULTI-PARTIES' as CNFCLASS, 
+                                  a.IDA as ACTOR_IDA, a.IDENTIFIER as ACTOR_IDENTIFIER, isnull(a.CULTURE_CNF,a.CULTURE) as ACTOR_CULTURE,
+                                  null as BOOK_IDB, null as BOOK_IDENTIFIER     
+    from dbo.ACTOR a
+    inner join (select distinct IDA,IDA_ACTOR,LEVELACTOR from dbo.BOOKACTOR_R where ISPARTYCONSO=1) link on link.IDA_ACTOR = a.IDA
+    inner join
+    ( 
+      select distinct b.IDA    
+      from dbo.TRADE t
+      inner join dbo.ACTOR a on a.IDA=t.IDA_DEALER
+      inner join dbo.BOOK b on b.IDB=t.IDB_DEALER and (b.IDA_ENTITY=@ENTITY)            
+      %%SR:TRADEALLOC_JOIN%%(t.IDT,t,b)
+      where (t.IDSTBUSINESS='ALLOC') and (t.IDSTENVIRONMENT='REGULAR') and (t.IDSTACTIVATION='REGULAR') and
+      ((t.TRDTYPE is null) or (t.TRDTYPE != '1000') or (t.TRDTYPE = '1000' and t.TRDSUBTYPE is not null)) and 
+      exists (select 1    from dbo.EVENT e
+                                inner join dbo.EVENTCLASS ec on ec.IDE=e.IDE
+                                inner join dbo.CNFMESSAGE cnfMsg on cnfMsg.EVENTCODE=e.EVENTCODE and 
+                                                                    isnull(cnfMsg.EVENTTYPE, e.EVENTTYPE)=e.EVENTTYPE and
+                                                                    cnfMsg.EVENTCLASS=ec.EVENTCLASS and
+                                                                    cnfMsg.CNFTYPE='ALLOCATION' and 
+                                                                    cnfMsg.MSGTYPE='MULTI-PARTIES' and
+                                                                    cnfMsg.DTENABLED &lt;= getdate() and 
+                                                                    ((cnfMsg.DTDISABLED is null) or (cnfMsg.DTDISABLED &gt; getdate()))
+                                where e.IDT=t.IDT and ec.DTEVENT=@DATE1)
+     and t.DTTRADE >= @DATE1
+     <choose>
+      <when test ="{MARKET}>-1">
+        and (t.IDM = @MARKET)
+      </when>
+     </choose>
+     
+     <choose>
+      <when test ="{GMARKET} != null">
+     and exists (select 1  from dbo.MARKET m
+		                      inner join dbo.MARKETG mg on mg.IDM = m.IDM
+		                      inner join dbo.GMARKET gm on  gm.IDGMARKET = mg.IDGMARKET 
+		                      inner join dbo.GMARKETROLE gmr on gmr.IDGMARKET=gm.IDGMARKET and gmr.IDROLEGMARKET = 'CNF'
+		                      where m.IDM = t.IDM  and gm.IDGMARKET = @GMARKET
+		            union all
+		            select 1 from DUAL where @GMARKET is null) 
+      </when>
+     </choose>
+                
+     and (%%SR:TRADEALLOC_WHERE_PREDICATE%%)                                          
+    )at on at.IDA = link.IDA
+    where 
+    ((a.ISALL_CNF=1) or (a.ISOWN_CNF=1)or (a.ISCHILD_CNF=1))
+    and
+    (link.LEVELACTOR>= case when (a.ISOWN_CNF=1) or (a.ISALL_CNF=1) then 1 else 2 end)
+    </when>
+    </choose>
+    </when>
+   </choose>
+   
+    
+    <choose>
+      <when test ="{CNFTYPE} ='ALL'">
+    union all
+      </when>
+    </choose>
+    
+    <choose>
+    <when test ="({CNFTYPE} ='ALL') or ({CNFTYPE}='POSITION')">
+    /****************************************************************************/
+    /* POSITION Mono book                                                       */ 
+    /****************************************************************************/
+    select distinct 'POSITION' as CNFTYPE, 'MULTI-TRADES' as CNFCLASS, 
+                                  a.IDA as ACTOR_IDA, a.IDENTIFIER as ACTOR_IDENTIFIER, isnull(a.CULTURE_CNF,a.CULTURE) as ACTOR_CULTURE,
+                                  b.IDB as BOOK_IDB, b.IDENTIFIER as BOOK_IDENTIFIER     
+    from dbo.TRADE t
+    inner join dbo.ACTOR a on a.IDA=t.IDA_DEALER
+    inner join dbo.BOOK b on b.IDB=t.IDB_DEALER and b.ISPOSKEEPING=1 and b.ISRECEIVENCMSG=1 and (b.IDA_ENTITY=@ENTITY)              
+    %%SR:TRADEALLOC_JOIN%%(t.IDT,t,b)
+    where (t.IDSTBUSINESS='ALLOC') and (t.IDSTENVIRONMENT='REGULAR') and 
+    exists (select 1    from dbo.EVENT e
+                              inner join dbo.EVENTCLASS ec on ec.IDE=e.IDE
+                              inner join dbo.CNFMESSAGE cnfMsg on cnfMsg.EVENTCODE=e.EVENTCODE and 
+                                                                  isnull(cnfMsg.EVENTTYPE, e.EVENTTYPE)=e.EVENTTYPE and
+                                                                  cnfMsg.EVENTCLASS=ec.EVENTCLASS and
+                                                                  cnfMsg.CNFTYPE='POSITION' and 
+                                                                  cnfMsg.MSGTYPE='MULTI-TRADES' and
+                                                                  cnfMsg.DTENABLED &lt;= getdate() and 
+                                                                  ((cnfMsg.DTDISABLED is null) or (cnfMsg.DTDISABLED &gt; getdate()))
+                              where e.IDT=t.IDT and ec.DTEVENT=@DATE1)
+   
+   <choose>
+      <when test ="{MARKET}>-1">
+        and (t.IDM = @MARKET)
+      </when>
+  </choose>
+     
+  <choose>
+    <when test ="{GMARKET} != null">
+  and exists (select 1  from dbo.MARKET m
+		                      inner join dbo.MARKETG mg on mg.IDM = m.IDM
+		                      inner join dbo.GMARKET gm on  gm.IDGMARKET = mg.IDGMARKET 
+		                      inner join dbo.GMARKETROLE gmr on gmr.IDGMARKET=gm.IDGMARKET and gmr.IDROLEGMARKET = 'CNF'
+		                      where m.IDM = t.IDM  and gm.IDGMARKET = @GMARKET
+		            union all
+		            select 1 from DUAL where @GMARKET is null) 
+    </when>
+  </choose>
+  and (%%SR:TRADEALLOC_WHERE_PREDICATE%%)
+  
+  
+    union all
+   /****************************************************************************/
+   /* POSITION Multi books                                                     */ 
+   /****************************************************************************/
+   select distinct 'POSITION' as CNFTYPE, 'MULTI-PARTIES' as CNFCLASS, 
+                                  a.IDA as ACTOR_IDA, a.IDENTIFIER as ACTOR_IDENTIFIER, isnull(a.CULTURE_CNF,a.CULTURE) as ACTOR_CULTURE,
+                                  null as BOOK_IDB, null as BOOK_IDENTIFIER     
+   from dbo.ACTOR a
+   inner join (select distinct IDA,IDA_ACTOR,LEVELACTOR from dbo.BOOKACTOR_R where ISPARTYCONSO=1) link on link.IDA_ACTOR = a.IDA
+   inner join 
+   (
+      select distinct b.IDA    
+      from dbo.TRADE t
+      inner join dbo.ACTOR a on a.IDA=t.IDA_DEALER
+      inner join dbo.BOOK b on b.IDB=t.IDB_DEALER and b.ISPOSKEEPING=1 and (b.IDA_ENTITY=@ENTITY) 
+      %%SR:TRADEALLOC_JOIN%%(t.IDT,t,b)
+      where (t.IDSTBUSINESS='ALLOC') and (t.IDSTENVIRONMENT='REGULAR') and 
+      exists (select 1    from dbo.EVENT e
+                                inner join dbo.EVENTCLASS ec on ec.IDE=e.IDE
+                                inner join dbo.CNFMESSAGE cnfMsg on cnfMsg.EVENTCODE=e.EVENTCODE and 
+                                                                    isnull(cnfMsg.EVENTTYPE, e.EVENTTYPE)=e.EVENTTYPE and
+                                                                    cnfMsg.EVENTCLASS=ec.EVENTCLASS and
+                                                                    cnfMsg.CNFTYPE='POSITION' and 
+                                                                    cnfMsg.MSGTYPE='MULTI-PARTIES' and
+                                                                    cnfMsg.DTENABLED &lt;= getdate() and
+                                                                    ((cnfMsg.DTDISABLED is null) or (cnfMsg.DTDISABLED &gt; getdate()))
+                                where e.IDT=t.IDT and ec.DTEVENT=@DATE1)
+     
+     <choose>
+      <when test ="{MARKET}>-1">
+        and (t.IDM = @MARKET)
+      </when>
+     </choose>
+     <choose>
+      <when test ="{GMARKET} != null">
+     and exists (select 1 from dbo.MARKET m
+		                      inner join dbo.MARKETG mg on mg.IDM = m.IDM
+		                      inner join dbo.GMARKET gm on  gm.IDGMARKET = mg.IDGMARKET 
+		                      inner join dbo.GMARKETROLE gmr on gmr.IDGMARKET=gm.IDGMARKET and gmr.IDROLEGMARKET = 'CNF'
+		                      where m.IDM = ti.IDM  and gm.IDGMARKET = @GMARKET
+		            union all
+		            select 1 from DUAL where @GMARKET is null) 
+      </when>
+     </choose>
+     and (%%SR:TRADEALLOC_WHERE_PREDICATE%%)                                          
+    )at on at.IDA = link.IDA
+    where 
+    ((a.ISALL_CNF=1) or (a.ISOWN_CNF=1) or (a.ISCHILD_CNF=1))
+    and
+    (link.LEVELACTOR>= case when (a.ISOWN_CNF=1) or (a.ISALL_CNF=1) then 1 else 2 end)
+    
+    </when>
+    </choose>
+    
+    
+    <choose>
+      <when test ="{CNFTYPE} ='ALL'">
+    union all
+      </when>
+    </choose>
+    
+    
+    <choose>
+    <when test ="({CNFTYPE} ='ALL') or ({CNFTYPE}='POSSYNTHETIC')">
+    /****************************************************************************/
+    /* POSSYNTHETIC Mono book                                                       */ 
+    /****************************************************************************/
+    select distinct 'POSSYNTHETIC' as CNFTYPE, 'MULTI-TRADES' as CNFCLASS, 
+                                  a.IDA as ACTOR_IDA, a.IDENTIFIER as ACTOR_IDENTIFIER, isnull(a.CULTURE_CNF,a.CULTURE) as ACTOR_CULTURE,
+                                  b.IDB as BOOK_IDB, b.IDENTIFIER as BOOK_IDENTIFIER     
+    from dbo.TRADE t
+    inner join dbo.ACTOR a on a.IDA=t.IDA_DEALER
+    inner join dbo.BOOK b on b.IDB=t.IDB_DEALER and b.ISPOSKEEPING=1 and b.ISRECEIVENCMSG=1 and (b.IDA_ENTITY=@ENTITY)              
+    %%SR:TRADEALLOC_JOIN%%(t.IDT,t,b)
+    where (t.IDSTBUSINESS='ALLOC') and (t.IDSTENVIRONMENT='REGULAR') and 
+    exists (select 1    from dbo.EVENT e
+                              inner join dbo.EVENTCLASS ec on ec.IDE=e.IDE
+                              inner join dbo.CNFMESSAGE cnfMsg on cnfMsg.EVENTCODE=e.EVENTCODE and 
+                                                                  isnull(cnfMsg.EVENTTYPE, e.EVENTTYPE)=e.EVENTTYPE and
+                                                                  cnfMsg.EVENTCLASS=ec.EVENTCLASS and
+                                                                  cnfMsg.CNFTYPE='POSSYNTHETIC' and 
+                                                                  cnfMsg.MSGTYPE='MULTI-TRADES' and
+                                                                  cnfMsg.DTENABLED &lt;= getdate() and 
+                                                                  ((cnfMsg.DTDISABLED is null) or (cnfMsg.DTDISABLED &gt; getdate()))
+                              where e.IDT=t.IDT and ec.DTEVENT=@DATE1)
+   
+    <choose>
+      <when test ="{MARKET}>-1">
+        and (t.IDM = @MARKET)
+      </when>
+    </choose>
+    <choose>
+      <when test ="{GMARKET} != null">
+    and exists (select 1  from dbo.MARKET m
+		                      inner join dbo.MARKETG mg on mg.IDM = m.IDM
+		                      inner join dbo.GMARKET gm on  gm.IDGMARKET = mg.IDGMARKET 
+		                      inner join dbo.GMARKETROLE gmr on gmr.IDGMARKET=gm.IDGMARKET and gmr.IDROLEGMARKET = 'CNF'
+		                      where m.IDM = t.IDM  and gm.IDGMARKET = @GMARKET
+		            union all
+		            select 1 from DUAL where @GMARKET is null) 
+      </when>
+   </choose>
+   and (%%SR:TRADEALLOC_WHERE_PREDICATE%%)
+   
+    union all
+   /****************************************************************************/
+   /* POSSYNTHETIC Multi books                                                     */ 
+   /****************************************************************************/
+   select distinct 'POSSYNTHETIC' as CNFTYPE, 'MULTI-PARTIES' as CNFCLASS, 
+                                  a.IDA as ACTOR_IDA, a.IDENTIFIER as ACTOR_IDENTIFIER, isnull(a.CULTURE_CNF,a.CULTURE) as ACTOR_CULTURE,
+                                  null as BOOK_IDB, null as BOOK_IDENTIFIER     
+   from dbo.ACTOR a
+   inner join (select distinct IDA,IDA_ACTOR,LEVELACTOR from dbo.BOOKACTOR_R where ISPARTYCONSO=1) link on link.IDA_ACTOR = a.IDA
+   inner join 
+   (
+      select distinct b.IDA    
+      from dbo.TRADE t
+      inner join dbo.ACTOR a on a.IDA=t.IDA_DEALER
+      inner join dbo.BOOK b on b.IDB=t.IDB_DEALER and b.ISPOSKEEPING=1 and (b.IDA_ENTITY=@ENTITY) 
+      %%SR:TRADEALLOC_JOIN%%(t.IDT,t,b)
+      where (t.IDSTBUSINESS='ALLOC') and (t.IDSTENVIRONMENT='REGULAR') and 
+      exists (select 1    from dbo.EVENT e
+                                inner join dbo.EVENTCLASS ec on ec.IDE=e.IDE
+                                inner join dbo.CNFMESSAGE cnfMsg on cnfMsg.EVENTCODE=e.EVENTCODE and 
+                                                                    isnull(cnfMsg.EVENTTYPE, e.EVENTTYPE)=e.EVENTTYPE and
+                                                                    cnfMsg.EVENTCLASS=ec.EVENTCLASS and
+                                                                    cnfMsg.CNFTYPE='POSSYNTHETIC' and 
+                                                                    cnfMsg.MSGTYPE='MULTI-PARTIES' and
+                                                                    cnfMsg.DTENABLED &lt;= getdate() and 
+                                                                    ((cnfMsg.DTDISABLED is null) or (cnfMsg.DTDISABLED &gt; getdate()))
+                                                                    
+                                where e.IDT=t.IDT and ec.DTEVENT=@DATE1)
+     
+     <choose>
+      <when test ="{MARKET}>-1">
+        and (t.IDM = @MARKET)
+      </when>
+     </choose>
+     <choose>
+      <when test ="{GMARKET} != null">
+     and exists (select 1 from dbo.MARKET m
+		                      inner join dbo.MARKETG mg on mg.IDM = m.IDM
+		                      inner join dbo.GMARKET gm on  gm.IDGMARKET = mg.IDGMARKET 
+		                      inner join dbo.GMARKETROLE gmr on gmr.IDGMARKET=gm.IDGMARKET and gmr.IDROLEGMARKET = 'CNF'
+		                      where m.IDM = t.IDM  and gm.IDGMARKET = @GMARKET
+		            union all
+		            select 1 from DUAL where @GMARKET is null) 
+      </when>                 
+     </choose>
+     and (%%SR:TRADEALLOC_WHERE_PREDICATE%%)                                          
+    )at on at.IDA = link.IDA
+    where 
+    ((a.ISALL_CNF=1) or (a.ISOWN_CNF=1) or (a.ISCHILD_CNF=1))
+    and
+    (link.LEVELACTOR>= case when (a.ISOWN_CNF=1) or (a.ISALL_CNF=1) then 1 else 2 end)
+    
+    </when>
+    </choose>
+    
+    <choose>
+      <when test ="{CNFTYPE} ='ALL'">
+    union all
+      </when>
+    </choose>
+    
+    <choose>
+    <when test ="({CNFTYPE} ='ALL') or ({CNFTYPE}='POSACTION')">
+    /****************************************************************************/
+    /* POSACTION Mono book                                                       */ 
+    /****************************************************************************/
+    select distinct 'POSACTION' as CNFTYPE, 'MULTI-TRADES' as CNFCLASS, 
+                                  a.IDA as ACTOR_IDA, a.IDENTIFIER as ACTOR_IDENTIFIER, isnull(a.CULTURE_CNF,a.CULTURE) as ACTOR_CULTURE,
+                                  b.IDB as BOOK_IDB, b.IDENTIFIER as BOOK_IDENTIFIER     
+    from dbo.TRADE t
+    inner join dbo.ACTOR a on a.IDA=t.IDA_DEALER 
+    inner join dbo.BOOK b on b.IDB=t.IDB_DEALER and b.ISPOSKEEPING=1 and b.ISRECEIVENCMSG=1 and (b.IDA_ENTITY=@ENTITY)              
+    %%SR:TRADEALLOC_JOIN%%(t.IDT,t,b)
+    where (t.IDSTBUSINESS='ALLOC') and (t.IDSTENVIRONMENT='REGULAR') and 
+    exists (select 1  from dbo.CNFMESSAGE cnfMsg 
+                      where cnfMsg.CNFTYPE='POSACTION' and  
+                      cnfMsg.MSGTYPE='MULTI-TRADES' and
+                      cnfMsg.DTENABLED &lt;= getdate() and 
+                      ((cnfMsg.DTDISABLED is null) or (cnfMsg.DTDISABLED &gt; getdate())))
+    
+    
+     <choose>
+      <when test ="{MARKET}>-1">
+        and (t.IDM = @MARKET)
+      </when>
+    </choose>
+    <choose>
+      <when test ="{GMARKET} != null">
+    and exists (select 1  from dbo.MARKET m
+		                      inner join dbo.MARKETG mg on mg.IDM = m.IDM
+		                      inner join dbo.GMARKET gm on  gm.IDGMARKET = mg.IDGMARKET 
+		                      inner join dbo.GMARKETROLE gmr on gmr.IDGMARKET=gm.IDGMARKET and gmr.IDROLEGMARKET = 'CNF'
+		                      where m.IDM = t.IDM  and gm.IDGMARKET = @GMARKET
+		            union all
+		            select 1 from DUAL where @GMARKET is null) 
+      </when>                 
+    </choose>          
+    and exists
+    (
+        select 1
+        from dbo.POSACTIONDET pad 
+        inner join dbo.POSACTION pa on pa.IDPA=pad.IDPA 
+        where 
+        ( 
+          (pa.DTBUSINESS=@DATE1 and ((pad.DTCAN is null) or (pad.DTCAN &gt; @DATE1)))
+          or
+          (pad.DTCAN=@DATE1 and pad.DTCAN &gt; pa.DTBUSINESS and pad.CANDESCRIPTION='UnClearing')
+        )
+        and 
+        (
+          (t.IDT=pad.IDT_BUY or t.IDT=pad.IDT_SELL)         
+        )
+    )
+    and (%%SR:TRADEALLOC_WHERE_PREDICATE%%)
+    
+    
+    <choose>
+    <when test ="{ISMULTIPARTIES}=1">
+    union all
+    /****************************************************************************/
+    /* POSACTION Multi books                                                      */ 
+    /****************************************************************************/
+    select distinct 'POSACTION' as CNFTYPE, 'MULTI-PARTIES' as CNFCLASS, 
+                                  a.IDA as ACTOR_IDA, a.IDENTIFIER as ACTOR_IDENTIFIER, isnull(a.CULTURE_CNF,a.CULTURE) as ACTOR_CULTURE,
+                                  null as BOOK_IDB, null as BOOK_IDENTIFIER     
+    from dbo.ACTOR a
+    inner join (select distinct IDA,IDA_ACTOR,LEVELACTOR from dbo.BOOKACTOR_R where ISPARTYCONSO=1) link on link.IDA_ACTOR = a.IDA
+    inner join
+    ( 
+      select distinct b.IDA    
+      from dbo.TRADE t
+      inner join dbo.ACTOR a on a.IDA=t.IDA_DEALER
+      inner join dbo.BOOK b on b.IDB=t.IDB_DEALER and b.ISPOSKEEPING=1 and b.ISRECEIVENCMSG=1 and (b.IDA_ENTITY=@ENTITY)              
+      %%SR:TRADEALLOC_JOIN%%(t.IDT,t,b)
+      where (t.IDSTBUSINESS='ALLOC') and (t.IDSTENVIRONMENT='REGULAR') and 
+      exists (select 1  from dbo.CNFMESSAGE cnfMsg  
+                        where cnfMsg.CNFTYPE='POSACTION' and 
+                        cnfMsg.MSGTYPE='MULTI-PARTIES' and
+                        cnfMsg.DTENABLED &lt;= getdate() and 
+                        ((cnfMsg.DTDISABLED is null) or (cnfMsg.DTDISABLED &gt; getdate())))
+      
+      <choose>
+        <when test ="{MARKET}>-1">
+          and (t.IDM = @MARKET)
+        </when>
+      </choose>
+      <choose>
+        <when test ="{GMARKET} != null">
+      and exists (select 1  from dbo.MARKET m
+		                        inner join dbo.MARKETG mg on mg.IDM = m.IDM
+		                        inner join dbo.GMARKET gm on  gm.IDGMARKET = mg.IDGMARKET 
+		                        inner join dbo.GMARKETROLE gmr on gmr.IDGMARKET=gm.IDGMARKET and gmr.IDROLEGMARKET = 'CNF'
+		                        where m.IDM = t.IDM  and gm.IDGMARKET = @GMARKET
+		              union all
+		              select 1 from DUAL where @GMARKET is null) 
+        </when>
+      </choose>
+      and exists
+      (
+        select 1
+        from dbo.POSACTIONDET pad 
+        inner join dbo.POSACTION pa on pa.IDPA=pad.IDPA 
+        where 
+        ( 
+          (pa.DTBUSINESS=@DATE1 and ((pad.DTCAN is null) or (pad.DTCAN &gt; @DATE1)))
+          or
+          (pad.DTCAN=@DATE1 and pad.DTCAN &gt; pa.DTBUSINESS and pad.CANDESCRIPTION='UnClearing')
+        )
+        and 
+        (
+          (t.IDT=pad.IDT_BUY or t.IDT=pad.IDT_SELL)         
+        )
+      )
+      and (%%SR:TRADEALLOC_WHERE_PREDICATE%%)
+    )at on at.IDA = link.IDA 
+    where 
+    ((a.ISALL_CNF=1) or (a.ISOWN_CNF=1) or (a.ISCHILD_CNF=1))
+    and
+    (link.LEVELACTOR &gt;= case when (a.ISOWN_CNF=1) or (a.ISALL_CNF=1) then 1 else 2 end)
+    </when>
+    </choose>
+    </when>
+    </choose>
+    
+    
+    <choose>
+      <when test ="{CNFTYPE} ='ALL'">
+    union all
+      </when>
+    </choose>
+    
+    <choose>
+    <when test ="({CNFTYPE} ='ALL') or ({CNFTYPE}='FINANCIAL')">
+    
+    /****************************************************************************/
+    /* FINANCIAL Mono book                                                      */ 
+    /****************************************************************************/
+    select distinct 'FINANCIAL' as CNFTYPE, 'MULTI-TRADES' as CNFCLASS, 
+                          a.IDA as ACTOR_IDA, a.IDENTIFIER as ACTOR_IDENTIFIER, isnull(a.CULTURE_CNF,a.CULTURE) as ACTOR_CULTURE,
+                          b.IDB as BOOK_IDB, b.IDENTIFIER as BOOK_IDENTIFIER     
+    from dbo.TRADE t
+    %%SR:TRADERISK_JOIN%%(t.IDT, t)
+    inner join dbo.INSTRUMENT i on i.IDI=t.IDI 
+    inner join dbo.PRODUCT p on p.IDP=i.IDP and p.IDENTIFIER='cashBalance'
+    inner join dbo.ACTOR a on a.IDA=t.IDA_RISK
+    inner join dbo.BOOK b on b.IDB=t.IDB_RISK and b.ISRECEIVENCMSG=1 and (b.IDA_ENTITY=@ENTITY)             
+    where (t.IDSTENVIRONMENT='REGULAR') and (t.IDA_BUYER=t.IDA_ENTITY) and     
+    exists (select 1    from dbo.EVENT e
+                              inner join dbo.EVENTCLASS ec on ec.IDE=e.IDE
+                              inner join dbo.CNFMESSAGE cnfMsg on cnfMsg.EVENTCODE=e.EVENTCODE and 
+                                                                  isnull(cnfMsg.EVENTTYPE, e.EVENTTYPE)=e.EVENTTYPE and
+                                                                  cnfMsg.EVENTCLASS=ec.EVENTCLASS and
+                                                                  cnfMsg.CNFTYPE='FINANCIAL' and 
+                                                                  cnfMsg.MSGTYPE='MULTI-TRADES' and
+                                                                  cnfMsg.DTENABLED &lt;= getdate() and 
+                                                                  ((cnfMsg.DTDISABLED is null) or (cnfMsg.DTDISABLED &gt; getdate()))
+                              where e.IDT=t.IDT and ec.DTEVENT=@DATE1)
+    and t.DTTRADE &gt;= @DATE1
+    and (%%SR:TRADERISK_WHERE_PREDICATE%%)
+    </when>
+    </choose>
+    
+    <choose>
+      <when test ="{CNFTYPE} ='ALL'">
+    union all
+      </when>
+    </choose>
+    
+    <choose>
+      <when test ="({CNFTYPE} ='ALL') or ({CNFTYPE}='FINANCIALPERIODIC')">
+    /****************************************************************************/
+    /* FINANCIALPERIODIC Mono book                                              */ 
+    /****************************************************************************/
+    select distinct 'FINANCIALPERIODIC' as CNFTYPE, 'MULTI-TRADES' as CNFCLASS, 
+                          a.IDA as ACTOR_IDA, a.IDENTIFIER as ACTOR_IDENTIFIER, isnull(a.CULTURE_CNF,a.CULTURE) as ACTOR_CULTURE,
+                          b.IDB as BOOK_IDB, b.IDENTIFIER as BOOK_IDENTIFIER     
+    from dbo.TRADE t
+    %%SR:TRADERISK_JOIN%%(t.IDT, t)
+    inner join dbo.INSTRUMENT i on i.IDI=t.IDI 
+    inner join dbo.PRODUCT p on p.IDP=i.IDP and p.IDENTIFIER='cashBalance'
+    inner join dbo.ACTOR a on a.IDA=t.IDA_RISK
+    inner join dbo.BOOK b on b.IDB=t.IDB_RISK and b.ISRECEIVENCMSG=1 and (b.IDA_ENTITY=@ENTITY)             
+    where (t.IDSTENVIRONMENT='REGULAR') and (t.IDA_BUYER=t.IDA_ENTITY) and   
+    exists (select 1    from dbo.EVENT e
+                              inner join dbo.EVENTCLASS ec on ec.IDE=e.IDE
+                              inner join dbo.CNFMESSAGE cnfMsg on cnfMsg.EVENTCODE=e.EVENTCODE and 
+                                                                  isnull(cnfMsg.EVENTTYPE, e.EVENTTYPE)=e.EVENTTYPE and
+                                                                  cnfMsg.EVENTCLASS=ec.EVENTCLASS and
+                                                                  cnfMsg.CNFTYPE='FINANCIALPERIODIC' and 
+                                                                  cnfMsg.MSGTYPE='MULTI-TRADES' and
+                                                                  cnfMsg.DTENABLED &lt;= getdate() and 
+                                                                  ((cnfMsg.DTDISABLED is null) or (cnfMsg.DTDISABLED &gt; getdate()))
+                              where e.IDT=t.IDT and ec.DTEVENT between @DATE1 and @DATE2)
+    and t.DTTRADE &gt;= @DATE1
+    and (%%SR:TRADERISK_WHERE_PREDICATE%%)
+    </when>
+    </choose>
+    
+    <choose>
+      <when test ="{CNFTYPE} ='ALL'">
+    union all
+      </when>
+    </choose>
+    
+    <choose>
+      <when test ="({CNFTYPE} ='ALL') or ({CNFTYPE}='SYNTHESIS')">
+    /****************************************************************************/
+    /* SYNTHESIS Mono book                                                      */ 
+    /****************************************************************************/
+    select distinct 'SYNTHESIS' as CNFTYPE, 'MULTI-TRADES' as CNFCLASS, 
+                          a.IDA as ACTOR_IDA, a.IDENTIFIER as ACTOR_IDENTIFIER, isnull(a.CULTURE_CNF,a.CULTURE) as ACTOR_CULTURE,
+                          b.IDB as BOOK_IDB, b.IDENTIFIER as BOOK_IDENTIFIER     
+    from dbo.TRADE t
+    inner join dbo.INSTRUMENT i on i.IDI=t.IDI 
+    inner join dbo.PRODUCT p on p.IDP=i.IDP and p.IDENTIFIER='cashBalance'
+    %%SR:TRADERISK_JOIN%%(t.IDT, t)
+    inner join dbo.ACTOR a on a.IDA=t.IDA_RISK
+    inner join dbo.BOOK b on b.IDB=t.IDB_RISK and b.ISRECEIVENCMSG=1 and (b.IDA_ENTITY=@ENTITY)             
+	  -- +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+	  -- PL 20190614 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+	  -- +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+	  inner join dbo.EVENT e on e.IDT=t.IDT
+	  inner join dbo.EVENTCLASS ec on ec.IDE=e.IDE and ec.DTEVENT between @DATE1 and @DATE2
+	  inner join dbo.CNFMESSAGE cnfMsg on cnfMsg.EVENTCODE=e.EVENTCODE and 
+										(cnfMsg.EVENTTYPE is null or cnfMsg.EVENTTYPE=e.EVENTTYPE) and
+										cnfMsg.EVENTCLASS=ec.EVENTCLASS and
+										cnfMsg.CNFTYPE='SYNTHESIS' and cnfMsg.MSGTYPE='MULTI-TRADES' and
+										cnfMsg.DTENABLED &lt;= getdate() and ((cnfMsg.DTDISABLED is null) or (cnfMsg.DTDISABLED &gt; getdate()))
+	  where (t.DTTRADE &gt;= @DATE1) and (t.IDSTENVIRONMENT='REGULAR')  and (t.IDA_BUYER=t.IDA_ENTITY)
+	  -- +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+    and (%%SR:TRADERISK_WHERE_PREDICATE%%)
+    <choose>
+    <when test ="{ISMULTIPARTIES}=1">
+    union all
+    /****************************************************************************/
+    /* SYNTHESIS Multi books                                                    */ 
+    /****************************************************************************/
+    select distinct 'SYNTHESIS' as CNFTYPE, 'MULTI-PARTIES' as CNFCLASS, 
+                                  a.IDA as ACTOR_IDA, a.IDENTIFIER as ACTOR_IDENTIFIER, isnull(a.CULTURE_CNF,a.CULTURE) as ACTOR_CULTURE,
+                                  null as BOOK_IDB, null as BOOK_IDENTIFIER     
+    from dbo.ACTOR a
+    inner join (select distinct IDA,IDA_ACTOR,LEVELACTOR from dbo.BOOKACTOR_R where ISPARTYCONSO=1) link on link.IDA_ACTOR = a.IDA
+    inner join
+    ( 
+      select distinct b.IDA 
+      from dbo.TRADE t
+      %%SR:TRADERISK_JOIN%%(t.IDT, t)
+      inner join dbo.INSTRUMENT i on i.IDI=t.IDI 
+      inner join dbo.PRODUCT p on p.IDP=i.IDP and p.IDENTIFIER='cashBalance'
+      inner join dbo.ACTOR a on a.IDA=t.IDA_RISK
+      inner join dbo.BOOK b on b.IDB=t.IDB_RISK and b.ISRECEIVENCMSG=1 and (b.IDA_ENTITY=@ENTITY)             
+      where (t.IDSTENVIRONMENT='REGULAR') and (t.IDA_BUYER=t.IDA_ENTITY) and
+      exists (select 1    from dbo.EVENT e
+                                inner join dbo.EVENTCLASS ec on ec.IDE=e.IDE
+                                inner join dbo.CNFMESSAGE cnfMsg on cnfMsg.EVENTCODE=e.EVENTCODE and 
+                                                                    isnull(cnfMsg.EVENTTYPE, e.EVENTTYPE)=e.EVENTTYPE and
+                                                                    cnfMsg.EVENTCLASS=ec.EVENTCLASS and
+                                                                    cnfMsg.CNFTYPE='SYNTHESIS' and 
+                                                                    cnfMsg.MSGTYPE='MULTI-PARTIES' and
+                                                                    cnfMsg.DTENABLED &lt;= getdate() and 
+                                                                    ((cnfMsg.DTDISABLED is null) or (cnfMsg.DTDISABLED &gt; getdate()))
+                                where e.IDT=t.IDT and ec.DTEVENT between @DATE1 and @DATE2)
+      and t.DTTRADE &gt;= @DATE1
+      and (%%SR:TRADERISK_WHERE_PREDICATE%%)
+    )at on at.IDA = link.IDA 
+    where 
+    ((a.ISALL_CNF=1) or (a.ISOWN_CNF=1) or (a.ISCHILD_CNF=1))
+    and
+    (link.LEVELACTOR &gt;= case when (a.ISOWN_CNF=1) or (a.ISALL_CNF=1) then 1 else 2 end)
+    </when>
+    </choose>
+    </when>
+    </choose>
+)tblResult
+inner join dbo.ENTITY ent on ent.IDA= @ENTITY
+where
+<choose>
+    <when test="{CNFTYPE}='ALL'">
+    (1=1)
+    </when>
+    <otherwise>
+      tblResult.CNFTYPE=@CNFTYPE
+    </otherwise>
+</choose>
+and (
+		-- +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+		-- PL 20190614 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+		-- +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+		(ent.ISSENDNCMSG_ENTITY=1 and ent.ISSENDNCMSG_CLIENT=1) 
+		or
+		-- +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+		exists 
+			( 
+			  select 1 from DUAL
+			   where ent.ISSENDNCMSG_ENTITY=1 
+				 and not exists(select 1 from dbo.ACTORROLE ar where ar.IDROLEACTOR = 'CLIENT' and ar.IDA = tblResult.ACTOR_IDA) 
+			  union			 
+			  select 1 from DUAL
+			   where ent.ISSENDNCMSG_CLIENT=1
+				 and exists(select 1 from dbo.ACTORROLE ar where ar.IDROLEACTOR = 'CLIENT' and ar.IDA = tblResult.ACTOR_IDA) 
+			)
+    )
+]]>
+      </Command>
+    </SQLSelect>
+
+    <Column>
+      <ColumnName>CNFTYPE</ColumnName>
+      <Ressource>CONFIRMATIONTYPE</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsResource prefix="CNFTYPE">true</IsResource>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy order="ACTOR_IDENTIFIER, 
+                        case CNFTYPE
+			                  when 'ALLOCATION'           then 1 
+			                  when 'POSACTION'            then 2
+			                  when 'POSITION'             then 3 
+			                  when 'POSSYNTHETIC'         then 4
+                        when 'FINANCIAL'            then 5
+                        when 'FINANCIALPERIODIC'    then 6
+                        when 'SYNTHESIS'            then 7
+			                  else 999 end, case when BOOK_IDENTIFIER is null then 'zzzzz' else BOOK_IDENTIFIER end">true</IsOrderBy>
+      <Relation/>
+    </Column>
+
+    <Column>
+      <ColumnName>CNFCLASS</ColumnName>
+      <Ressource>REPORTCLASS</Ressource>
+      <DataType>string</DataType>
+      <Colspan>0</Colspan>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsResource prefix="CNFCLASS">true</IsResource>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation/>
+    </Column>
+
+    <!--Colonne Book Identifier-->
+    <Column>
+      <ColumnName>IDB</ColumnName>
+      <Ressource>BOOK_IDENTIFIER_SENDTO</Ressource>
+      <DataType>int</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>true</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <Relation>
+        <TableName>BOOK</TableName>
+        <AliasTableName>bsendto</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDB</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>BOOK_IDENTIFIER_SENDTO</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+      </Relation>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <!--Colonne Book DisplayName-->
+    <Column>
+      <ColumnName>IDB2</ColumnName>
+      <Ressource></Ressource>
+      <DataType>int</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>true</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <Relation>
+        <TableName>BOOK</TableName>
+        <AliasTableName>bsendto2</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDB</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>DISPLAYNAME</ColumnName>
+          <Ressource>BOOK_DISPLAYNAME_SENDTO</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+      </Relation>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <!-- colonne technique utilisée pour le tri-->
+    <Column>
+      <ColumnName>BOOK_IDENTIFIER</ColumnName>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <Relation>
+      </Relation>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <!--Colonne Actor Identifier-->
+    <Column>
+      <ColumnName>IDA</ColumnName>
+      <Ressource>ACTOR_IDENTIFIER_SENDTO</Ressource>
+      <DataType>int</DataType>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsKeyField>true</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+        <TableName>ACTOR</TableName>
+        <AliasTableName>acsendto</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDA</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>IDENTIFIER</ColumnName>
+          <Ressource>ACTOR_IDENTIFIER_SENDTO</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <AutoComplete enabled="true"/>
+      </Relation>
+    </Column>
+    <!--Colonne Acteur DisplayName-->
+    <Column>
+      <ColumnName>IDA2</ColumnName>
+      <Ressource></Ressource>
+      <DataType>int</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>true</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <Relation>
+        <TableName>ACTOR</TableName>
+        <AliasTableName>asendto2</AliasTableName>
+        <ColumnRelation>
+          <ColumnName>IDA</ColumnName>
+          <DataType>int</DataType>
+        </ColumnRelation>
+        <ColumnSelect>
+          <ColumnName>DISPLAYNAME</ColumnName>
+          <Ressource>ACTOR_DISPLAYNAME_SENDTO</Ressource>
+          <DataType>string</DataType>
+        </ColumnSelect>
+        <AutoComplete enabled="true"/>
+      </Relation>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <!-- colonne technique utilisée pour le tri-->
+    <Column>
+      <ColumnName>ACTOR_IDENTIFIER</ColumnName>
+      <Ressource>ACTOR_IDENTIFIER_SENDTO</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression/>
+      <Default/>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <Relation>
+      </Relation>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+  </Referential>
+</Referentials>

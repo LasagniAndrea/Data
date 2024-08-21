@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Screens>
+  <!-- EG 20171113 [23509] Upd Gestion Objets Facility / Dates et Marché -->
+	<!-- Fra-Bank -->
+	<Screen name="Fra-Bank" caption="Fra (Screen Bank)" product="fra">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+		<FraBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentBlock/>
+		<SettlementInputBlock/>
+    <ComplianceBlock/>
+	</Screen>
+
+	<!-- FraQuick-Bank -->
+	<Screen name="FraQuick-Bank" caption="Fra Quick (Screen Bank)" product="fra">
+		<TradeRemoveBlock/>
+		<FraBlockQuick/>
+    <FacilityHeaderBlock/>
+		<PartyBroker-DRV-Block/>
+		<FraBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentBlock/>
+		<SettlementInputBlock/>
+    <ComplianceBlock/>
+	</Screen>
+</Screens>

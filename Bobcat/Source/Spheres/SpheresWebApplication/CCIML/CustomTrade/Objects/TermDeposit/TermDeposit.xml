@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+	<!--TermDepositBlock-->
+	<Object name="TermDepositBlock">
+		<Table colspan="-1" style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:fpml;helpelement:TermDeposit;">
+			<TermDeposit clientid="termDeposit" helpschema="fpml" helpelement="TermDeposit" />
+		</Table>
+	</Object>
+</Objects>

@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!--PM 20150602 [20575] Replace em.DTMARKET with em.DTENTITY and em.DTMARKETPREV with em.DTENTITYPREV-->
+<Referentials>
+  <Referential>
+    <IsUseSQLParameters>true</IsUseSQLParameters>
+    <TableName>MONITORING</TableName>
+    <Ressource>MONITORING</Ressource>
+    <ColumnByRow>4</ColumnByRow>
+    <Create>false</Create>
+    <Modify>false</Modify>
+    <Remove>false</Remove>
+
+    <SQLSelect>
+      <Command rdbms = "all">
+        <![CDATA[
+        
+        select result.IDA_ENTITY, a_entity.IDENTIFIER as ENTITY_IDENTIFIER, a_entity.DISPLAYNAME as ENTITY_DISPLAYNAME, 
+               a_csscust.IDA as IDA_CSSCUSTODIAN, a_csscust.IDENTIFIER as CSSCUSTODIAN_IDENTIFIER,  a_csscust.DISPLAYNAME as CSSCUSTODIAN_DISPLAYNAME, 
+               result.DTENTITY, result.DTBUSINESS, 
+               result.TOTAL_QUOTE, case when result.TOTAL_QUOTE > 0 then 'SUCCESS' else 'N/A' end as STATUS, DTSTATUS 
+        from
+        (
+          select count(qu.IDQUOTE_H) as TOTAL_QUOTE, em.IDA as IDA_ENTITY, mk.IDA as IDA_CSS, em.IDA_CUSTODIAN, em.DTENTITY, 
+          isnull(qu.TIME,em.DTENTITY) as DTBUSINESS, min(isnull(qu.DTUPD,qu.DTINS)) as DTSTATUS
+          from dbo.ENTITYMARKET em
+          left outer join dbo.MARKET mk  on  (mk.IDM = em.IDM)
+          left join dbo.VW_MONITORING_QUOTE_H qu on (qu.IDM = em.IDM) and (qu.TIME = em.DTENTITY) 
+          group by  em.IDA, mk.IDA, em.IDA_CUSTODIAN, em.DTENTITY, isnull(qu.TIME,em.DTENTITY)
+          union all
+          select count(qu.IDQUOTE_H) as TOTAL_QUOTE, em.IDA as IDA_ENTITY, mk.IDA as IDA_CSS, em.IDA_CUSTODIAN, em.DTENTITY, 
+          isnull(qu.TIME,em.DTENTITYPREV) as DTBUSINESS, min(isnull(qu.DTUPD,qu.DTINS)) as DTSTATUS
+          from dbo.ENTITYMARKET em
+          left outer join dbo.MARKET mk  on  (mk.IDM = em.IDM)
+          left join dbo.VW_MONITORING_QUOTE_H qu on (qu.IDM = em.IDM) and (qu.TIME = em.DTENTITYPREV) 
+          group by  em.IDA, mk.IDA, em.IDA_CUSTODIAN, em.DTENTITY, isnull(qu.TIME,em.DTENTITYPREV)
+        ) result
+        inner join dbo.ACTOR a_entity  on  (a_entity.IDA = result.IDA_ENTITY) 
+        inner join dbo.ACTOR a_csscust  on  (a_csscust.IDA = isnull(result.IDA_CUSTODIAN, result.IDA_CSS)) 
+        where (result.IDA_ENTITY = case when -1= @ENTITY then result.IDA_ENTITY else @ENTITY end) and
+              /*(result.IDA_CSSCUSTODIAN = case when -1=@CSSCUSTODIAN then result.IDA_CSS else @CSSCUSTODIAN end)*/
+              (isnull(result.IDA_CUSTODIAN,result.IDA_CSS) = case when -1=@CSSCUSTODIAN then isnull(result.IDA_CUSTODIAN,result.IDA_CSS)
+                                                                  when -2=@CSSCUSTODIAN then result.IDA_CSS            
+                                                                  when -3=@CSSCUSTODIAN then result.IDA_CUSTODIAN else @CSSCUSTODIAN end)            
+              
+      ]]>
+      </Command>
+    </SQLSelect>
+
+    <!-- ENTITY -->
+    <Column>
+      <ColumnName>IDA_ENTITY</ColumnName>
+      <Ressource>Entity</Ressource>
+      <DataType>int</DataType>
+      <Nowrap>true</Nowrap>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>true</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>ENTITY_IDENTIFIER</ColumnName>
+      <Ressource>IDA_ENTITY_2</Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>false</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <Column>
+      <ColumnName>ENTITY_DISPLAYNAME</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+    <!-- CLEARING HOUSE -->
+    <Column>
+      <ColumnName>IDA_CSSCUSTODIAN</ColumnName>
+      <Ressource>IDA_CSSCUSTODIAN</Ressource>
+      <DataType>int</DataType>
+      <Nowrap>true</Nowrap>
+      <Length>10</Length>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>true</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>CSSCUSTODIAN_IDENTIFIER</ColumnName>
+      <Ressource>CssCustodian2</Ressource>
+      <DataType>string</DataType>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>CSSCUSTODIAN_DISPLAYNAME</ColumnName>
+      <Ressource></Ressource>
+      <DataType>string</DataType>
+      <GridWidth>-100</GridWidth>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>DTENTITY</ColumnName>
+      <Ressource>DTMARKET_</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>DTBUSINESS</ColumnName>
+      <Ressource>DTBUSINESS_</Ressource>
+      <DataType>date</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <!-- TOTAL -->
+    <Column>
+      <ColumnName>TOTAL_QUOTE</ColumnName>
+      <Ressource>Total</Ressource>
+      <DataType>int</DataType>
+      <Scale>0</Scale>
+      <IsMandatory>false</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsHideInCriteria>true</IsHideInCriteria>
+      <IsKeyField>false</IsKeyField>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+    <Column>
+      <ColumnName>STATUS</ColumnName>
+      <Ressource>Statut</Ressource>
+      <DataType>string</DataType>
+      <Length>64</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>true</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+      <Relation>
+      </Relation>
+    </Column>
+
+    <Column>
+      <ColumnName>DTSTATUS</ColumnName>
+      <Ressource></Ressource>
+      <DataType datakind='Timestamp' tzdbid='Etc/UTC' display='Audit'>datetime</DataType>
+      <Length>8</Length>
+      <Scale>0</Scale>
+      <IsMandatory>true</IsMandatory>
+      <RegularExpression></RegularExpression>
+      <Default></Default>
+      <IsHide>false</IsHide>
+      <IsHideInDataGrid>false</IsHideInDataGrid>
+      <IsDataKeyField>false</IsDataKeyField>
+      <IsKeyField>false</IsKeyField>
+      <IsForeignKeyField>false</IsForeignKeyField>
+      <IsIdentity>false</IsIdentity>
+      <IsUpdatable>false</IsUpdatable>
+      <IsOrderBy>false</IsOrderBy>
+    </Column>
+
+  </Referential>
+</Referentials>
+

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+  <customObject control="textbox" clientid="DATE1" datatype = "date" caption = "lblDtBusiness"
+                required="true" postback="true" postbackargument ="SELFCLEAR_"  xsi:type="CustomObjectTextBox"  defaultvalue="BUSINESS"/>
+
+  <customObject control="dropdown" clientid="NIVEAU"  datatype="integer" caption = "PosRequestLevel_Title" listretrieval="predef:posrequestlevel" 
+                required="true" postback="true" postbackargument ="SELFCLEAR_" xsi:type="CustomObjectDropDown"  misc="isClear:true"/>
+
+  <customObject control="dropdown"  clientid="ENTITY" datatype="integer"
+                listretrieval="predef:ActorEntity" caption = "Entity_Title!br"
+                required="true" postback="true"  postbackargument ="SELFCLEAR_" xsi:type="CustomObjectDropDown"
+                misc="isAddAll:true;isUseSessionRestrict:true;isClear:false"/>
+  
+  <customObject control="dropdown" clientid="CSSCUSTODIAN"  datatype="integer" 
+                listretrieval="predef:csscustodian" caption = "CssCustodian!br"
+                required="true" postback="true"  postbackargument ="SELFCLEAR_" xsi:type="CustomObjectDropDown"
+                misc="isAddAll:true;isUseSessionRestrict:true;isClear:true"/>
+</customObjects>

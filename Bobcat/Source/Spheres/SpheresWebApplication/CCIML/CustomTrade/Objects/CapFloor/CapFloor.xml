@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!--
+EG 20211217 [XXXXX] Gestion icon (Font Awesome) ouverture/Fermeture
+- Suppression de l'instruction : tblH-startdisplay:expand; (inutile valeur par défaut)
+- Suppression de l'instruction : tblH-linkid:xxxx; (inutile gestion via ajax quand nécessaire)
+-->
+
+<Objects>
+	<!--CapStreamBlock-->
+	<Object name="CapStreamBlock">
+		<Table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:CapFloor;">
+			<!--capFloorStream-->
+			<CapStream  clientid="capFloorStream"  helpschema="efsml" helpelement="InterestRateStream"/>
+			<!--premium-->
+			<table style="istableH:true;tblH-title:Premium;tblH-css:size5;tblH-reverse:1;helpschema:efsml;helpelement:Payment;" controlalignleft="true" >
+				<table id ="tblPaymentWithPaymentQuote" colspan="-1">
+					<PaymentWithPaymentQuote clientid="premium" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment"/>
+				</table>
+			</table>
+			<br/>
+			<!--additionalPayment-->
+      <table style="istableH:true;tblH-title:AdditionalPayment;tblH-css:size5;tblH-reverse:1;" controlalignleft="true" >
+				<table id ="tblPaymentADP" colspan="-1">
+					<PaymentADP clientid="additionalPayment" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment" />
+				</table>
+      </table>
+		</Table>
+	</Object>
+  <!--CapStreamStubBlock-->
+  <Object name="CapStreamStubBlock">
+    <table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:CapFloor;">
+      <!--CapStreamStub-->
+      <CapStreamStub  clientid="capFloorStream"  helpschema="efsml" helpelement="InterestRateStream"/>
+      <!--premium-->
+      <table style="istableH:true;tblH-title:Premium;tblH-css:size5;tblH-reverse:1;helpschema:efsml;helpelement:Payment;" controlalignleft="true" >
+        <table id ="tblPaymentWithPaymentQuote" colspan="-1">
+          <PaymentWithPaymentQuote clientid="premium" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment"/>
+        </table>
+      </table>
+      <br/>
+      <!--additionalPayment-->
+      <table style="istableH:true;tblH-title:AdditionalPayment;tblH-css:size5;tblH-reverse:1;" controlalignleft="true" >
+        <table id ="tblPaymentADP" colspan="-1">
+          <PaymentADP clientid="additionalPayment" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment" />
+        </table>
+      </table>
+    </table>
+  </Object>
+	<!--FloorStreamBlock-->
+	<Object name="FloorStreamBlock">
+		<table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:CapFloor;">
+			<!--capFloorStream-->
+			<FloorStream clientid="capFloorStream"  helpschema="efsml" helpelement="InterestRateStream" />
+			<!--premium-->
+			<table style="istableH:true;tblH-title:Premium;tblH-css:size5;tblH-reverse:1;helpschema:efsml;helpelement:Payment;" controlalignleft="true" >
+				<table id ="tblPaymentWithPaymentQuote" colspan="-1">
+					<PaymentWithPaymentQuote clientid="premium" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment"/>
+				</table>
+			</table>
+			<br/>
+			<!--additionalPayment-->
+      <table style="istableH:true;tblH-title:AdditionalPayment;tblH-css:size5;tblH-reverse:1;" controlalignleft="true" >
+        <table id ="tblPaymentADP" colspan="-1">
+          <PaymentADP clientid="additionalPayment" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment" />
+        </table>
+      </table>
+		</table>
+	</Object>
+  <!--FloorStreamStubBlock-->
+  <Object name="FloorStreamStubBlock">
+    <table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:CapFloor;">
+      <!--FloorStreamStub-->
+      <FloorStreamStub clientid="capFloorStream"  helpschema="efsml" helpelement="InterestRateStream" />
+      <!--premium-->
+      <table style="istableH:true;tblH-title:Premium;tblH-css:size5;tblH-reverse:1;helpschema:efsml;helpelement:Payment;" controlalignleft="true" >
+        <table id ="tblPaymentWithPaymentQuote" colspan="-1">
+          <PaymentWithPaymentQuote clientid="premium" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment"/>
+        </table>
+      </table>
+      <br/>
+      <!--additionalPayment-->
+      <table style="istableH:true;tblH-title:AdditionalPayment;tblH-css:size5;tblH-reverse:1;" controlalignleft="true" >
+        <table id ="tblPaymentADP" colspan="-1">
+          <PaymentADP clientid="additionalPayment" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment" />
+        </table>
+      </table>
+    </table>
+  </Object>
+	<!--CollarStreamBlock-->
+	<Object name="CollarStreamBlock">
+		<table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:CapFloor;">
+			<!--capFloorStream-->
+			<CollarStream clientid="capFloorStream"  helpschema="efsml" helpelement="InterestRateStream" />
+			<!--premium-->
+			<table style="istableH:true;tblH-title:Premium;tblH-css:size5;tblH-reverse:1;helpschema:efsml;helpelement:Payment;" controlalignleft="true" >
+				<table id ="tblPaymentWithPaymentQuote" colspan="-1" controlalignleft="true" >
+					<PaymentWithPaymentQuote clientid="premium" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment" />
+				</table>
+			</table>
+			<br/>
+			<!--additionalPayment-->
+      <table style="istableH:true;tblH-title:AdditionalPayment;tblH-css:size5;tblH-reverse:1;" controlalignleft="true" >
+        <table id ="tblPaymentADP" colspan="-1">
+          <PaymentADP clientid="additionalPayment" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment" />
+        </table>
+      </table>
+		</table>
+	</Object>
+  <!--CollarStreamStubBlock-->
+  <Object name="CollarStreamStubBlock">
+    <table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:CapFloor;">
+      <!--CollarStreamStub-->
+      <CollarStreamStub clientid="capFloorStream"  helpschema="efsml" helpelement="InterestRateStream" />
+      <!--premium-->
+      <table style="istableH:true;tblH-title:Premium;tblH-css:size5;tblH-reverse:1;helpschema:efsml;helpelement:Payment;" controlalignleft="true" >
+        <table id ="tblPaymentWithPaymentQuote" colspan="-1" controlalignleft="true" >
+          <PaymentWithPaymentQuote clientid="premium" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment" />
+        </table>
+      </table>
+      <br/>
+      <!--additionalPayment-->
+      <table style="istableH:true;tblH-title:AdditionalPayment;tblH-css:size5;tblH-reverse:1;" controlalignleft="true" >
+        <table id ="tblPaymentADP" colspan="-1">
+          <PaymentADP clientid="additionalPayment" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment" />
+        </table>
+      </table>
+    </table>
+  </Object>
+	<!--StraddleStreamBlock-->
+	<Object name="StraddleStreamBlock">
+		<table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:CapFloor;">
+			<!--capFloorStream-->
+			<StraddleStream clientid="capFloorStream"  helpschema="efsml" helpelement="InterestRateStream" />
+			<!--premium-->
+			<table style="istableH:true;tblH-title:Premium;tblH-css:size5;tblH-reverse:1;helpschema:efsml;helpelement:Payment;" controlalignleft="true" >
+			<table id ="tblPaymentWithPaymentQuote" colspan="-1" >
+				<PaymentWithPaymentQuote clientid="premium" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment" />
+			</table>
+			</table>
+			<br/>
+			<!--additionalPayment-->
+      <table style="istableH:true;tblH-title:AdditionalPayment;tblH-css:size5;tblH-reverse:1;" controlalignleft="true" >
+          <table id ="tblPaymentADP" colspan="-1" controlalignleft="true">
+            <PaymentADP clientid="additionalPayment" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment" />
+          </table>
+      </table>
+		</table>
+	</Object>
+	<!--CorridorStreamBlock-->
+	<Object name="CorridorStreamBlock">
+		<Table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:CapFloor;">
+			<!--capFloorStream-->
+			<CorridorStream clientid="capFloorStream"  helpschema="efsml" helpelement="InterestRateStream" />
+			<!--premium-->
+			<table style="istableH:true;tblH-title:Premium;tblH-css:size5;tblH-reverse:1;helpschema:efsml;helpelement:Payment;" controlalignleft="true" >
+				<table id ="tblPaymentWithPaymentQuote" colspan="-1" >
+					<PaymentWithPaymentQuote clientid="premium" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment" />
+				</table>
+			</table>
+			<br/>
+			<!--additionalPayment-->
+      <table style="istableH:true;tblH-title:AdditionalPayment;tblH-css:size5;tblH-reverse:1;" controlalignleft="true" >
+        <table id ="tblPaymentADP" colspan="-1">
+          <PaymentADP clientid="additionalPayment" occurs="1" addsuboperator="true" required="false" helpschema="efsml" helpelement="Payment" />
+        </table>
+      </table>
+		</Table>
+	</Object>
+
+</Objects>

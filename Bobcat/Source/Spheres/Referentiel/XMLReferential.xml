@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<OTCmL>
+	<Referentials>
+		<Referential>
+			<TableName>COLLABORATOR</TableName>
+			<Ressource>Collaborator</Ressource>
+			<Columns>
+				<Column>
+					<ColumnName>NICKNAME</ColumnName>
+					<Ressource>Nick name</Ressource>
+					<DataType>string</DataType>
+					<MaxLenght>16</MaxLenght>
+					<IsMandatory>true</IsMandatory>
+					<RegularExpression></RegularExpression>
+					<IsHide>false</IsHide>
+					<IsKeyField>true</IsKeyField>
+					<IsDataKeyField>false</IsDataKeyField>
+					<IsIdentity>false</IsIdentity>
+					<IsUpdatable>true</IsUpdatable>
+				</Column>
+				<Column>
+					<ColumnName>COMMONNAME</ColumnName>
+					<Ressource>Common name</Ressource>
+					<DataType>string</DataType>
+					<MaxLenght>64</MaxLenght>
+					<IsMandatory>true</IsMandatory>
+					<RegularExpression></RegularExpression>
+					<IsHide>false</IsHide>
+					<IsKeyField>false</IsKeyField>
+					<IsDataKeyField>false</IsDataKeyField>
+					<IsIdentity>false</IsIdentity>
+					<IsUpdatable>true</IsUpdatable>
+				</Column>
+				<Column>
+					<ColumnName>IDC</ColumnName>
+					<Ressource>IDC</Ressource>
+					<DataType>int</DataType>
+					<MaxLenght></MaxLenght>
+					<IsMandatory>true</IsMandatory>
+					<RegularExpression></RegularExpression>
+					<IsHide>true</IsHide>
+					<IsKeyField>false</IsKeyField>
+					<IsDataKeyField>true</IsDataKeyField>
+					<IsIdentity>true</IsIdentity>
+					<IsUpdatable>false</IsUpdatable>
+				</Column>
+				<Column>
+					<ColumnName>DESCRIPTION</ColumnName>
+					<Ressource>Description</Ressource>
+					<DataType>string</DataType>
+					<MaxLenght>128</MaxLenght>
+					<IsMandatory>false</IsMandatory>
+					<RegularExpression></RegularExpression>
+					<IsHide>false</IsHide>
+					<IsKeyField>false</IsKeyField>
+					<IsDataKeyField>false</IsDataKeyField>
+					<IsIdentity>false</IsIdentity>
+					<IsUpdatable>true</IsUpdatable>
+				</Column>
+				<Column>
+					<ColumnName>IDMODELSECURITY</ColumnName>
+					<Ressource>Nickname</Ressource>
+					<DataType>int</DataType>
+					<MaxLenght></MaxLenght>
+					<IsMandatory>true</IsMandatory>
+					<RegularExpression></RegularExpression>
+					<IsHide>false</IsHide>
+					<IsKeyField>true</IsKeyField>
+					<IsDataKeyField>false</IsDataKeyField>
+					<IsIdentity>false</IsIdentity>
+					<IsUpdatable>true</IsUpdatable>
+					<Relation>
+						<TableName>MODELSECURITY</TableName>
+						<ColumnRelation>
+							<ColumnName>IDMODELSECURITY</ColumnName>
+							<DataType>int</DataType>
+						</ColumnRelation>
+						<ColumSelect>
+							<ColumnName>MODELNAME</ColumnName>
+							<Ressource>Model security</Ressource>
+							<DataType>string</DataType>
+						</ColumnSelect>
+						<ColumLabel>
+							<ColumnName>DESCRIPTION</ColumnName>
+							<Ressource>Description</Ressource>
+							<DataType>string</DataType>
+						</ColumLabel>
+					</Relation>
+				</Column>
+				<Column>
+					<ColumnName>PWDMODNEXTLOGON</ColumnName>
+					<Ressource>Modify password at next logon</Ressource>
+					<DataType>bool</DataType>
+					<MaxLenght>1</MaxLenght>
+					<IsMandatory>true</IsMandatory>
+					<RegularExpression></RegularExpression>
+					<IsHide>false</IsHide>
+					<IsKeyField>false</IsKeyField>
+					<IsDataKeyField>false</IsDataKeyField>
+					<IsIdentity>false</IsIdentity>
+					<IsUpdatable>true</IsUpdatable>
+				</Column>
+				<Column>
+					<ColumnName>ISERASED</ColumnName>
+					<Ressource>User erased</Ressource>
+					<DataType>bool</DataType>
+					<MaxLenght>1</MaxLenght>
+					<IsMandatory>true</IsMandatory>
+					<RegularExpression></RegularExpression>
+					<IsHide>false</IsHide>
+					<IsKeyField>false</IsKeyField>
+					<IsDataKeyField>false</IsDataKeyField>
+					<IsIdentity>false</IsIdentity>
+					<IsUpdatable>false</IsUpdatable>
+				</Column>
+			</Columns>
+		</Referential>
+		<Referential>
+			etc....
+		</Referential>
+		
+		
+		OU
+		
+		
+		<Referential TableName="COLLABORATOR" Ressource="Collaborator">
+			<Columns>
+				<Column ColumnName="NICKNAME"   Ressource="Nick name"   DataType="string" MaxLenght="16" IsMandatory="true" RegularExpression="" IsHide="false" IsKeyField="true"  IsDataKeyField="false" IsIdentity="false" IsUpdatable="true" />
+				<Column ColumnName="COMMONNAME" Ressource="Common name" DataType="string" MaxLenght="64" IsMandatory="true" RegularExpression="" IsHide="false" IsKeyField="false" IsDataKeyField="false" IsIdentity="false" IsUpdatable="true" />
+				etc ......
+			</Columns>
+		</Referential>		
+		<Referential>
+			etc....
+		</Referential>
+	</Referentials>
+</OTCmL>

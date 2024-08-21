@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Screens>
+  <!-- Share Broker -->
+  <Screen name="Share-Broker" caption="Share-Broker" product="equitySecurityTransaction">
+    <!-- EG 20150624 [21151] RemoveAllocationBlock instead TradeRemoveBlock -->
+    <RemoveAllocationBlock/>
+    <PositionTransferBlock/>
+    <CorrectionOfQuantityBlock/>
+    <ESEMarketBlock/>
+    <PartyETDBlock/>
+    <EquitySecurityTransactionBlock clientid="equitySecurityTransaction"/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentBlock/>
+    <ComplianceBlock/>
+  </Screen>
+  <!-- Share -->
+  <Screen name="Share" caption="Share" product="equitySecurityTransaction">
+    <!-- EG 20150624 [21151] RemoveAllocationBlock instead TradeRemoveBlock -->
+    <RemoveAllocationBlock/>
+    <PositionTransferBlock/>
+    <CorrectionOfQuantityBlock/>
+    <ESEMarketBlock/>
+    <PartyETDBlock-Bank/>
+    <EquitySecurityTransactionBlock clientid="equitySecurityTransaction"/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentBlock/>
+    <ComplianceBlock/>
+  </Screen>
+</Screens>

@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Access">
+  <Class Name="FpML.v44.BondOption.BondOption" Collapsed="true">
+    <Position X="7" Y="6.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="efs_BondOption" Type="EfsML.Business.EFS_BondOption" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7" Y="6.75" />
+        <Point X="5.094" Y="6.75" />
+        <Point X="5.094" Y="6.191" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.567" Y="0.289" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="efs_BondOptionPremium" Type="EfsML.Business.EFS_BondOptionPremium" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7" Y="7.125" />
+        <Point X="6" Y="7.125" />
+        <Point X="6" Y="7.125" />
+        <Point X="2.75" Y="7.125" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="securityAsset" Type="EfsML.v30.Security.Shared.SecurityAsset" FixedToPoint="true">
+      <Path>
+        <Point X="8.5" Y="6.875" />
+        <Point X="9.5" Y="6.875" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.131" Y="0.122" Height="0.182" Width="1.003" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="strike" Type="FpML.v44.BondOption.BondOptionStrike" FixedFromPoint="true">
+      <Path>
+        <Point X="7.75" Y="7.191" />
+        <Point X="7.75" Y="7.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAIAUgACAIEARIAAMgAAA0AAAACBYBAAGzCAgIAAEAA=</HashCode>
+      <FileName>EfsMLv30\extFpML\FpML_Bond_Option_ext.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="efs_BondOption" />
+      <Field Name="efs_BondOptionPremium" />
+      <Field Name="securityAsset" />
+      <Field Name="strike" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FpML.v44.Option.Shared.OptionBaseExtended" Collapsed="true">
+    <Position X="7" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAnEBCQKwOAAREUkaDKAOAABIzBIESCKIVAICQyBSiY=</HashCode>
+      <FileName>EfsMLv30\extFpML\FpML_Option_Shared_ext.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FpML.v44.Option.Shared.OptionBase" Collapsed="true">
+    <Position X="7" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAFAAQAAAAAAAAAAAAAAAAEBCAAAAAAgA=</HashCode>
+      <FileName>EfsMLv30\extFpML\FpML_Option_Shared_ext.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EfsML.Business.EFS_BondOption" Collapsed="true">
+    <Position X="3.75" Y="5.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EfsML_Business_Shared_BO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EfsML.Business.EFS_BondOptionPremium" Collapsed="true">
+    <Position X="0.75" Y="6.75" Width="2" />
+    <InheritanceLine Type="EfsML.Business.EFS_OptionPremiumBase" FixedFromPoint="true">
+      <Path>
+        <Point X="1.75" Y="7.75" />
+        <Point X="1.75" Y="7.441" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EfsML_Business_Shared_BO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EfsML.v30.Security.Shared.SecurityAsset" Collapsed="true">
+    <Position X="9.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ECAQEAIAACIARAUABAAQACEEEkAEEBQgEQACQAAhEoE=</HashCode>
+      <FileName>EfsMLv30\EfsML\EfsML_Security_Shared.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="debtSecurity" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FpML.v44.BondOption.BondOptionStrike" Collapsed="true">
+    <Position X="7" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAACACEAAAkQAAAAAAAAAAAAAAAAAAAgAAABAA=</HashCode>
+      <FileName>EfsMLv30\extFpML\FpML_Bond_Option_ext.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EfsML.Business.EFS_BondOptionBase" Collapsed="true">
+    <Position X="3.75" Y="4.5" Width="1.75" />
+    <AssociationLine Name="exercise" Type="EfsML.Business.EFS_BondOptionExercise" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.5" Y="4.846" />
+        <Point X="6.562" Y="4.846" />
+        <Point X="6.562" Y="3.941" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.193" Y="0.57" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAQAQACAACAAFAYAABAAAQAAAAAAAAAA=</HashCode>
+      <FileName>EfsML_Business_Shared_BO.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="exercise" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EfsML.Business.EFS_OptionBase" Collapsed="true">
+    <Position X="3.75" Y="3.5" Width="1.75" />
+    <AssociationLine Name="underlyer" Type="EfsML.Business.EFS_Underlyer" FixedFromPoint="true">
+      <Path>
+        <Point X="4.75" Y="3.5" />
+        <Point X="4.75" Y="2.941" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.877" Y="0.172" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="marketScheduleTradingDay" Type="EfsML.Business.EFS_MarketScheduleTradingDayBase" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.125" Y="3.5" />
+        <Point X="4.125" Y="3.191" />
+        <Point X="1.812" Y="3.191" />
+        <Point X="1.812" Y="2.812" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.93" Y="0.183" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>CCEEhAAiAAEAAgFCMAAEAEEEFwAAJBSQAhWTAgEkFgE=</HashCode>
+      <FileName>EfsML_Business_Shared.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="underlyer" />
+      <Field Name="notional" />
+      <Field Name="marketScheduleTradingDay" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EfsML.Business.EFS_OptionPremiumBase" Collapsed="true">
+    <Position X="1" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AACEAAYAgACAAEAAAAAAAAMQBIABAAQAABQFAgAAAAA=</HashCode>
+      <FileName>EfsML_Business_Shared.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EfsML.v30.Security.Shared.DebtSecurity" Collapsed="true">
+    <Position X="9.5" Y="4.5" Width="1.5" />
+    <AssociationLine Name="debtSecurityStream" Type="EfsML.v30.Security.Shared.DebtSecurityStream">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.17" Y="0.152" Height="0.182" Width="1.566" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="security" Type="EfsML.v30.Security.Shared.Security">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.12" Y="0.125" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgBAAAAAAAAAAAAAAICEAAABAEABAABAA=</HashCode>
+      <FileName>EfsMLv30\EfsML\EfsML_Security_Shared.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="security" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="debtSecurityStream" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EfsML.v30.Security.Shared.DebtSecurityStream" Collapsed="true">
+    <Position X="9.5" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAECAAEBBAEACAgACAAAAAAAAAAAACAAAA=</HashCode>
+      <FileName>EfsMLv30\EfsML\EfsML_Security_Shared.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EfsML.v30.Security.Shared.Security" Collapsed="true">
+    <Position X="12" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CKgBCAAKDqisBgoBRYAxuNBk0wSOAAFQAIBwjqhQRAM=</HashCode>
+      <FileName>EfsMLv30\EfsML\EfsML_Security_Shared.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FpML.v44.Assetdef.ExchangeTraded" Collapsed="true">
+    <Position X="12" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAgAAABSAAgAAAAAAAAgAAAEAAACA=</HashCode>
+      <FileName>EfsMLv30\extFpML\FpML_Asset_ext.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="FpML.v44.Assetdef.UnderlyingAsset" Collapsed="true">
+    <Position X="12" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAUwAACIAACARABgIAAIAAIkEgAAEAAAgBACwAIBIkA=</HashCode>
+      <FileName>EfsMLv30\extFpML\FpML_Asset_ext.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="EfsML.Business.EFS_Underlyer" Collapsed="true">
+    <Position X="4" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAACgAIAAKAAAAAIAAJAAJAEAAAQAAgAAAAA=</HashCode>
+      <FileName>EfsML_Business_Shared.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EfsML.Business.EFS_UnderlyingAsset" Collapsed="true">
+    <Position X="4" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAASAAAgAgAAAAAQCGAQERAAAAAEAAA=</HashCode>
+      <FileName>EfsML_Business_Shared.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EfsML.Business.EFS_BondUnderlyer" Collapsed="true">
+    <Position X="2" Y="1.25" Width="1.75" />
+    <InheritanceLine Type="EfsML.Business.EFS_Underlyer" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.5" Y="2.25" />
+        <Point X="4.5" Y="1.688" />
+        <Point X="3.75" Y="1.688" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAIAAAAAAAEAAAAAA=</HashCode>
+      <FileName>EfsML_Business_Shared_BO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EfsML.Business.EFS_BondOptionNotional" Collapsed="true">
+    <Position X="0.75" Y="4.75" Width="2" />
+    <InheritanceLine Type="EfsML.Business.EFS_OptionNotionalBase" FixedToPoint="true">
+      <Path>
+        <Point X="1.875" Y="4.062" />
+        <Point X="1.875" Y="4.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EfsML_Business_Shared_BO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EfsML.Business.EFS_OptionNotionalBase" Collapsed="true">
+    <Position X="1" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAACAAAAAAAAAAEIAAIBAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>EfsML_Business_Shared.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EfsML.Business.EFS_BondOptionExercise" Collapsed="true">
+    <Position X="6.25" Y="3.25" Width="2" />
+    <AssociationLine Name="exerciseDatesEvents" Type="EfsML.Business.EFS_ExerciseDatesEvent" FixedFromPoint="true">
+      <Path>
+        <Point X="7.125" Y="3.25" />
+        <Point X="7.125" Y="2.562" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.081" Y="0.245" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAIAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>EfsML_Business_Shared_BO.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="exerciseDatesEvents" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EfsML.Business.EFS_ExerciseDatesEvent" Collapsed="true">
+    <Position X="6.25" Y="2" Width="2" />
+    <AssociationLine Name="exerciseStyle" Type="FpML.Enum.ExerciseStyleEnum" FixedFromPoint="true">
+      <Path>
+        <Point X="7.125" Y="2" />
+        <Point X="7.125" Y="1.312" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.102" Y="0.287" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAQABAEAEAAFAAAAEAICgAAgUAAAAAAIiAAA=</HashCode>
+      <FileName>EfsML_Business_Shared_IRD.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="exerciseStyle" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EfsML.Business.EFS_MarketScheduleTradingDayBase" Collapsed="true">
+    <Position X="1" Y="2.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAIAQAgAgAAgAAAAAAIAACAAAAAAAAAAAA=</HashCode>
+      <FileName>EfsML_Business_Shared.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="FpML.Enum.ExerciseStyleEnum" Collapsed="true">
+    <Position X="6.25" Y="0.75" Width="1.75" />
+    <TypeIdentifier />
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

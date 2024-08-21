@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+  <customObject control="label" clientid="DATE1"
+                caption="DTENDPERIOD" xsi:type="CustomObjectLabel"/>
+  <customObject control="textbox" clientid="DATE1" datatype="date" required="true"
+                defaultvalue="TODAY-1EOM"
+                postback="true" postbackargument="SELFRELOAD_"
+                xsi:type="CustomObjectTextBox"/>
+  <customObject control="space" width="30"/>
+  <customObject control="checkbox"
+                clientid="ISMODEREGENERATE" datatype="bool" required="true"
+                postback="true" postbackargument="SELFRELOAD_"
+                caption="lblRegenerate_Inv"
+                width="200"/>
+</customObjects>

@@ -1,0 +1,660 @@
+﻿#trackerContainer.float div > ul.content > li > div {
+    display: contents;
+}
+
+body{
+    min-width:260px;
+}
+
+/* ------------------------ */
+/* Widgets                  */
+/* ------------------------ */
+body{font-family: Segoe UI, sans-serif;}
+a {font-family: Segoe UI, sans-serif;}
+
+div.ui-helper-reset {font-size: 8pt!important;}
+ul.ui-helper-reset { font-size: 7.5pt!important; }
+
+.ui-widget-header {
+    border: none;
+    background: #dddada;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.ui-widget.ui-widget-content,
+.ui-tabs-panel.ui-widget-content {
+    border: none;
+    background: #dddada!important;
+    color: #000000;
+}
+
+
+/* Interaction states */
+
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    text-transform:uppercase;
+}
+
+#tabs *:focus {
+    outline-offset: 0px;
+    outline-style: solid;
+    outline-width: 1pt;
+    outline: none;
+    border:none;
+}
+
+
+/* ------------------------ */
+/* Accordion                */
+/* ------------------------ */
+.ui-accordion .ui-accordion-header {
+    margin-top:5px;
+    height:21px;
+    padding:0px;
+}
+.ui-accordion .ui-accordion-header a {
+    display: inline-block;
+    font-size: 1em;
+    padding:0px 4px 0px 2px;
+}
+.ui-accordion .ui-accordion-content
+{
+	background-color: #ffffff!important;
+	background-image:none!important;
+    padding: 0.2em!important;
+    min-height:110px;
+    height:100px;
+    margin-top:-2px;
+    position:relative;
+    top:1px;
+    margin-bottom:2px;
+}
+
+div[id^="group_"][id$="_ALL"] > div.ui-accordion-content {
+    min-height: 300px;
+}
+
+.ui-accordion-content-active {
+    overflow: hidden auto !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+}
+
+/* ------------------------ */
+/* Tabs                     */
+/* ------------------------ */
+#tabs 
+{ 
+	height: 360px; 
+} 
+
+.tabs-top {
+    position: relative;
+}
+
+.tabs-top .ui-tabs-panel {
+    height: 360px;
+    overflow: auto;
+    padding: 0px !important;
+}
+
+.tabs-top .ui-tabs-nav li:nth-of-type(1) {
+    min-width: 61px;
+    max-width: 61px;
+}
+.tabs-top .ui-tabs-nav li:nth-of-type(2) {
+    min-width: 67px;
+    max-width: 81px;
+}
+.tabs-top .ui-tabs-nav li:nth-of-type(3) {
+    min-width: 67px;
+    max-width: 76px;
+}
+.tabs-top .ui-tabs-nav li:nth-of-type(4) {
+    width: 10px;
+}
+
+.ui-tabs-selected {
+    margin-top: 0px !important;
+}
+
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected {
+    padding-bottom: 0px;
+}
+
+
+#toolsbar.summarytitle
+{
+    height:20px;
+    padding:5px 5px 0px 5px;
+}
+#toolsbar.summarytitle > a {
+    padding:0px 4px;
+}
+#toolsbar.blue {
+    background-color: #036ab5;
+}
+#toolsbar.cyan {
+    background-color: #1CBCF0;
+}
+#toolsbar.green {
+    background-color:#51AD26;
+}
+#toolsbar.red {
+    background-color: #C00303;
+}
+#toolsbar.marron {
+    background-color: #673406;
+}
+#toolsbar.violet {
+    background-color: #8B569F;
+}
+#toolsbar.gray {
+    background-color: #545454;
+}
+#toolsbar.orange {
+    background-color: #EA5A00;
+}
+#toolsbar.rose {
+    background-color: #EA71A8;
+}
+#toolsbar.yellow {
+    background-color: #D8C825;
+}
+/* ------------------------ */
+/* Compteurs des accordéons */
+/* ------------------------ */
+/*div[id^="group_"] {zoom: 1;}*/
+
+div[id^="group_"] span[id^="lblgroup_"] {
+    display: inline-block;
+    font: normal 9.5pt Segoe UI, sans-serif;
+    padding: 2.5pt 0px 2pt 0px;
+    text-indent: 5px;
+}
+
+div[id^="group_"] div[class*="ui-accordion-content-active"] {
+    border: 1px solid #036ab5;
+    border-top: none;
+    background-color:#fff;
+    opacity:1;
+}
+
+.ui-tracker 
+{
+    background-repeat: no-repeat;
+    background-color: transparent;
+    cursor: pointer;
+    text-align: center;
+	border-style: none;
+	display:inline-block;
+   
+}
+.ui-tracker-groupcontent { float:right;margin-top:4px;margin-right:4px; }
+.ui-tracker-groupcontent i:after {
+    color: #FFF;
+    content: "\f144";
+}
+
+a[id^="content_"]
+{
+    float:right;
+    margin-top:3px;
+    margin-left:-18px;
+}
+.ui-tracker-detail {
+    background-position: -75px -25px;
+    height: 15px;
+    width: 16px;
+}
+
+span[id^="cpt_"] {
+    text-align: center;
+    width: 25px;
+    color: #fff;
+    padding: 4pt 0px 0pt 0px;
+    font-size: 9pt;
+}
+span[id^="xcpt_"] {
+    text-align: center;
+    width: 25px;
+    color: #fff;
+    padding: 4pt 0px 0pt 0px;
+    font-size: 9pt;
+    margin-left: -3px;
+}
+/* ------------------------ */
+/* Compteurs des onglets    */
+/* ------------------------ */
+.tabs-bottom .ui-tabs-nav li a[id^="readystate_"],
+.tabs-bottom .ui-tabs-nav li a[id^="tracker_"]
+{
+	font-family: Segoe UI, sans-serif!important;
+	font-weight:bold;
+	padding: 0.25em;
+}
+
+.tabs-top .ui-tabs-nav li a[id^="readystate_"],
+.tabs-top .ui-tabs-nav li a[id^="tracker_"] {
+    font-family: Segoe UI, sans-serif !important;
+    font-weight: bold;
+    padding: 0.25em;
+    float:right;
+}
+
+
+span[id^="readystate_"] {
+    text-align: center;
+    vertical-align: text-bottom;
+    font-weight: bold;
+    color: #FFFFFF !important;
+    padding-left: 0px;
+    padding-right: 0px;
+    min-width: 17px;
+    max-height: 16px;
+    font-size: 7pt;
+}
+
+span[id^="readystate_cpt_"] {
+    height: 20px;
+    width: 21px;
+    margin-top: 0px;
+    padding-top: 2px;
+}
+
+.ui-tracker-cpterror {
+    background-color: #C00303;
+}
+
+.ui-tracker-cptna {
+    background-color: #545454;
+}
+
+.ui-tracker-cptirq {
+    background-color: #000000;
+}
+
+.ui-tracker-cptnone {
+    background-color: #545454;
+}
+
+.ui-tracker-cptpending {
+    background-color: #673406;
+}
+
+.ui-tracker-cptprogress {
+    background-color: #8B569F;
+}
+
+.ui-tracker-cptsuccess {
+    background-color: #51AD26;
+}
+
+.ui-tracker-cptwarning {
+    background-color: #EA5A00;
+}
+
+/* ------------------------ */
+/* Boutons                  */
+/* ------------------------ */
+#trackerContainer 
+{
+	overflow:hidden;
+}
+#trackerContainer input[type=image]
+{
+    width: 16px; 
+    height: 16px; 
+    cursor: pointer;
+}
+
+/* ------------------------ */
+/* Tooltip                  */
+/* ------------------------ */
+.qtip-content {
+    font-family: Segoe UI, sans-serif;
+    font-size: 8pt !important;
+    font-variant: normal;
+    font-weight: normal;
+    overflow: hidden auto !important;
+    overflow-x: hidden;
+    overflow-y: auto !important;
+    max-height: 150px;
+    background-color: transparent !important;
+}
+
+.qtip-content b
+{
+    font-weight:bold!important;
+}
+
+.qtip-content span.cpt
+{
+    font-size:8pt!important;
+    overflow:hidden;
+	line-height:1;
+	cursor:pointer!important;
+	background-image:none;
+}
+.qtip-content span.subtitle
+{
+    font-weight:bolder;
+	color:#000000;
+}
+span.ERROR {color: #c00303;}
+span.IRQ {color: #000;}
+span.NA {color: #848484;}
+span.NONE {color: #036ab5;}
+span.PENDING{color: #673406;}
+span.PROGRESS {color: #8B569F;}
+span.SUCCESS {color: #51ad26;}
+span.WARNING{color: #ea5a00;}
+
+/*ul.newsticker span {white-space: nowrap;padding: 0;font-weight:bold;font-size:10px;} 
+
+ul.newsticker span[id^="all-"]{color:#000;cursor:pointer;vertical-align:top;display:inline-block;}
+ul.newsticker span[id^="all-"][class$="REQUESTED"]{color: #000;}
+ul.newsticker span[id^="all-"][class$="ACTIVE"]{color: #8B569F;}
+ul.newsticker span[id^="all-"][class$="TERMINATED"]{color: #036AB5;}
+ul.newsticker span[id^="all-"][class$="NA"]{color: #848484;}
+ul.newsticker span[id^="all-"][class$="NONE"]{color: #036AB5;}
+ul.newsticker span[id^="all-"][class$="ERROR"]{color: #c00303;}
+ul.newsticker span[id^="all-"][class$="IRQ"]{color: #000;}
+ul.newsticker span[id^="all-"][class$="SUCCESS"]{color: #51ad26;}
+ul.newsticker span[id^="all-"][class$="PROGRESS"]{color: #8B569F;}
+ul.newsticker span[id^="all-"][class$="PENDING"]{color: #673406;}
+ul.newsticker span[id^="all-"][class$="WARNING"]{color: #ea5a00;}
+
+ul.newsticker li span.counter_SPACE
+{
+	padding-right:15px;
+}
+
+ul.newsticker span.REQUESTED,
+ul.newsticker span.ACTIVE,
+ul.newsticker span.TERMINATED
+{
+    margin: 0px;
+    padding-left:10px;
+    padding-right:10px;
+    text-decoration:underline;
+    cursor:pointer;
+} 
+*/
+
+ul.groupcontent
+{
+    background-color:#ffffff;
+    display:inline;
+}
+
+ul.TrackerRed {color: #c00303;}
+ul.TrackerOrange {color: #ea5a00;}
+ul.TrackerGreen {color: #51ad26;}
+ul.TrackerBlue {color: #036ab5;}
+ul.TrackerMarron {color: #673406;}
+ul.TrackerBlack {color: #000000;}
+ul.TrackerGray {color: #848484;}
+ul.TrackerViolet {color: #8B569F;}
+
+ul li.statuserror {color: #c00303;}
+ul li.statusirq {color: #000;}
+ul li.statuswarning {color: #ea5a00;}
+ul li.statussuccess {color: #51ad26;}
+ul li.statusnone {color: #036ab5;}
+ul li.statuspending {color: #673406;}
+ul li.statusna {color: #000000;}
+ul li.statusprogress {color: #8B569F;}
+
+ul.content 
+{
+    padding-left:0px;
+    margin-top:0px;
+}
+ul.content li 
+{
+	float: left; 
+	margin: 0;
+	padding: 0;
+	position: relative;
+	font-family: Segoe UI, sans-serif;
+	font-weight:normal;
+	font-size:7.5pt!important;
+	list-style-type: none;
+	width:100%;
+}
+
+ul li.today {
+    font-weight: bold;
+    font-size: 7.5pt !important;
+}
+ul li.light 
+{
+	font-weight:normal;
+	font-size:7.5pt!important;
+}
+ul li.statusirq.light span.message::before
+{
+    font-weight:900;
+}
+
+ul.content li span
+{
+	/*margin-right:2px;*/
+	display:inline;
+    text-transform:none;
+}
+ul.content li div:not(:last-child) >span {
+    margin-right: 2px;
+}
+ul.content li div
+{
+    display:inline-flex;
+}
+ul.content li span.message
+{
+	cursor:pointer;
+	width:100px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+
+ul.content li.statusirq span.message::before
+{
+    font-family: 'Font Awesome 5 Free';
+    font-size: 0.9em;
+    content: "\f714";
+    background-color: #fff;
+    color: #000;
+    margin-right: 2px;
+}
+
+ul.content li span.iddata 
+{
+	float:right;
+	cursor:pointer;
+	width:88px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	text-align:right;
+}
+ul.content li span.message:hover, ul.content li span.iddata:hover{text-decoration:underline;cursor:pointer;}
+
+/* EG 20191127 [25036] */
+div[id$='_CLO'] ul.content li span.iddata,
+div[id$='_IO'] ul.content li span.iddata,
+div[id$='_MSG'] ul.content li span.iddata,
+div[id$='_EXT'] ul.content li span.iddata,
+div[id$='_ALL'] ul.content li span.iddata
+{
+    width: 30px;
+}
+
+/* EG 20191127 [25036] */
+div[id$='_CLO'] ul.content li span.message,
+div[id$='_IO'] ul.content li span.message,
+div[id$='_MSG'] ul.content li span.message,
+div[id$='_EXT'] ul.content li span.message,
+div[id$='_ALL'] ul.content li span.message 
+{
+    width: 160px;
+}
+
+#menuFrame.ui-layout-pane,
+#viewTrackerFrame.ui-layout-pane
+{
+	padding:0px;
+	background-color:#8c8c8c;
+}
+
+#bannerFrame.ui-layout-pane
+{
+	padding:0px;
+	background-color:#ffffff;
+}
+
+
+.tickercontainer 
+{ 
+    height: 27px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; 
+}
+.tickercontainer .mask 
+{ 
+    position: relative;
+    left: 0px;
+    top: 0px;
+    overflow: hidden;
+}
+
+.tickercontainer .masktop
+{
+    position: relative;
+    left: 0px;
+    -ms-top: 10px;
+    top:0px;
+    overflow: hidden;
+}
+
+ul.newsticker  
+{
+    position: relative;
+    left: 450px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+ul.newsticker li 
+{
+    float: left; 
+    margin: 0;
+    padding: 0;
+}
+ul.newsticker a 
+{
+    white-space: nowrap;
+    padding: 0;
+    margin: 0 10px 0 0;
+} 
+
+h3.blockUI
+{
+	font-size:smaller;
+	padding-left:10px;
+}
+
+#toolsbar input
+{
+	cursor: pointer;
+	color: #4169e1;
+	background-color: transparent;
+	text-align: center;
+	border-style: none;
+}	
+
+span[id^="imggroup_"]
+{
+    position: absolute;
+	background-repeat:no-repeat;
+	background-position:left center;
+    text-align:center;
+    width:25px;
+    height:25px;
+    vertical-align:text-bottom;
+    font-weight:bold;
+    line-height:2.4;     
+    color: #FFFFFF!important;
+}
+
+/* ------------------------ */
+/* Aide en ligne            */
+/* ------------------------ */
+
+#detgroup_HELP_GROUP,
+#detgroup_HELP_READYSTATE,
+#detgroup_HELP_STATUS
+{
+    min-height:255px;
+    height:255px;
+}
+
+div[id^=detgroup] .preamble {
+    font: bold 12px Segoe UI, sans-serif;
+    padding-left: 5px;
+    text-align: justify;
+    hyphens: auto;
+    word-wrap: break-word;
+    color: #000;
+    text-transform: none;
+}
+
+div[id^=detgroup] .title,
+div[id^=detgroup] .REQUESTED, div[id^=detgroup] .ACTIVE, div[id^=detgroup] .TERMINATED,
+div[id^=detgroup] .ERROR, div[id^=detgroup] .IRQ, div[id^=detgroup] .NA, div[id^=detgroup] .NONE,
+div[id^=detgroup] .PENDING, div[id^=detgroup] .PROGRESS, div[id^=detgroup] .SUCCESS, div[id^=detgroup] .WARNING
+{
+	vertical-align:text-top;
+	font: bold 12px Segoe UI, sans-serif;
+	text-align:justify;
+	font-variant:small-caps;
+	padding-left:4px;
+}
+
+div[id^=detgroup] .title {color: #000;}
+div[id^=detgroup] .REQUESTED {color: #545454;}
+div[id^=detgroup] .ACTIVE {color: #8B569F;}
+div[id^=detgroup] .TERMINATED {color: #036ab5;}
+div[id^=detgroup] .ERROR {color: #c00303;}
+div[id^=detgroup] .IRQ {color: #000;}
+div[id^=detgroup] .NA {color: #000;}
+div[id^=detgroup] .NONE {color: #036ab5;}
+div[id^=detgroup] .PENDING {color: #673406;}
+div[id^=detgroup] .PROGRESS {color: #8B569F;}
+div[id^=detgroup] .SUCCESS {color: #51ad26;}
+div[id^=detgroup] .WARNING {color: #ea5a00;}
+
+div[id^=detgroup] .body
+{
+	color: #505050;
+	font: normal 12px Segoe UI, sans-serif;
+	text-align:justify;
+	padding:0px 5px 5px 5px;
+	hyphens:auto;
+	word-wrap:break-word;
+    text-transform:none;
+}
+.fa-icon i
+{
+    font-size:12px;
+}
+.fa-search
+{
+    margin-left:5px;
+}
+

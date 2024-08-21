@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- FI 20180221 [23803] Add objects -->
+
+<Objects>
+  <Object name="FxOptionEarlyTerminationBlock" context="FxOptionEarlyTermination">
+    <FxOptionEarlyTermination clientid="FxOptionEarlyTermination" />
+  </Object>
+
+  <!-- FxOptionEarlyTermination -->
+  <Object name="FxOptionEarlyTermination">
+    <table style="istableH:true;tblH-title:Optional early termination exercise;tblH-bkgH-color:#EA5A00;tblH-css:size4">
+      <table controlalignleft="true" >
+        <table verticalAlign ="Top" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size5;tblH-reverse:0;">
+          <table style="margin-top:2px;" colspan="-1" controlalignleft="true" verticalAlign ="Top">
+            <FxOptionEarlyTerminationCharacteristics/>
+          </table>
+        </table>
+        <table verticalAlign ="Top" style="istableH:true;tblH-titleR:NoteEvents;tblH-css:size5;tblH-reverse:0;">
+          <table controlalignleft="true" colspan="-1" verticalAlign="top">
+            <TextBox clientid="note" textMode="MultiLine" required="false" datatype="string" style="width:500px;height:94px;" />
+          </table>
+        </table>
+      </table>
+    </table>
+  </Object>
+
+  <!-- FxOptionEarlyTerminationCharacteristics -->
+  <Object name="FxOptionEarlyTerminationCharacteristics">
+    <table controlalignleft="true" >
+      <table controlalignleft="true">
+        <banner caption="Action" level="3" />
+        <table controlalignleft="true">
+          <Date_L caption ="Date" clientid="actionDate" required="false"  postback="true" />
+          <Time_L caption ="Heure" clientid="actionTime" required="false"  postback="true" />
+        </table>
+      </table>
+      <table controlalignleft="true" >
+        <banner caption="Valeur" level="3" />
+        <table controlalignleft="true">
+          <Date_L caption ="Date" clientid="valueDate" required="false"  postback="true" />
+        </table>
+      </table>
+      <br/>
+      <table controlalignleft="true" colspan="-1" >
+        <banner caption="Cash Settlement" level="3"  />
+        <Table >
+          <PartyReference_L caption ="payer" clientid="payer" postback="true" required="true" />
+          <br />
+          <PartyReference_L caption ="receiver" clientid="receiver" postback="true" required="true" />
+        </Table>
+        <Date_L caption ="Date" clientid="settlementDate" required="false"  postback="true" />
+        <Money_L clientid="cashSettlementAmount" required="true" postback="true" />
+      </table>
+    </table>
+  </Object>
+</Objects>

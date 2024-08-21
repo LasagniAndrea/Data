@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+	<!-- START : MASTER BLOCKS -->
+	
+	<!-- AdditionalInvoiceBlock -->
+	<Object name="AdditionalInvoiceBlock">
+		<Table>
+			<CorrectionAmountAndRebateConditionsBlock helpschema="efsml" helpelement="AdditionalInvoice"/>
+			<Space />
+      <TextBox clientid="invoiceDetails" datatype="string" required="false" style="display:none;" />
+			<InvoiceDetailsBlock  helpschema="efsml" helpelement="InvoiceDetails"/>
+		</Table>
+	</Object>
+
+	<!-- AdditionalInvoiceEnhancedBlock -->
+	<Object name="AdditionalInvoiceEnhancedBlock">
+		<Table>
+			<GridInvoiceDatesAndCorrectionAmountBlock helpschema="efsml" helpelement="AdditionalInvoice"/>
+			<space/>
+      <TextBox clientid="invoiceDetails" datatype="string" required="false" style="display:none;" />
+			<InvoiceRebateConditionsBlock clientid="rebateConditions" helpschema="efsml" helpelement="RebateConditions"/>
+			<br/>
+			<GridInvoiceDetailsBlock />
+		</Table>
+		<br/>
+	</Object>
+
+  <!-- AdditionalInvoiceLightBlock -->
+  <Object name="AdditionalInvoiceLightBlock">
+    <Table>
+      <GridInvoiceDatesAndCorrectionAmountLightBlock helpschema="efsml" helpelement="AdditionalInvoice"/>
+    </Table>
+    <br/>
+  </Object>
+
+  <!-- END : MASTER BLOCKS -->
+</Objects>

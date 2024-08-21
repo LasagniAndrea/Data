@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+
+  <customObject control="textbox"  clientid="DATE1" xsi:type="CustomObjectTextBox" defaultvalue="BUSINESS" datatype="date"
+                caption="lblDtBusiness" required="true" postback="true" postbackargument ="SELFCLEAR_" />
+
+</customObjects>

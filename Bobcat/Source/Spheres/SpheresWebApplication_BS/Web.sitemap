@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="~/Portal/Home.aspx" title="Home"  description="Page principale">
+    <siteMapNode url="~/Portal/Solutions/Solutions.aspx" title="Solutions"  description="Solutions">
+      <siteMapNode url="~/Portal/Solutions/Spheres.aspx" title="Spheres"  description="Spheres" />
+      <siteMapNode url="~/Portal/Solutions/MDFS.aspx" title="MDFS"  description="Market Data Feed Service" />
+      <siteMapNode url="~/Portal/Solutions/MPRS.aspx" title="MPRS"  description="Market +%26+ Product Repository Service" />
+      <siteMapNode url="~/Portal/Solutions/Gateways.aspx" title="Gateways"  description="Spheres" />
+    </siteMapNode>
+    <siteMapNode url="~/Portal/Services/Services.aspx" title="Services"  description="Services">
+      <siteMapNode url="~/Portal/Services/Consulting.aspx" title="Consulting"  description="Consulting" />
+      <siteMapNode url="~/Portal/Services/HelpDesk.aspx" title="HelpDesk"  description="HelpDesk" />
+      <siteMapNode url="~/Portal/Services/SaaS.aspx" title="SaaS"  description="SaaS" />
+      <siteMapNode url="~/Portal/Services/Maintenance.aspx" title="Maintenance"  description="Maintenance" />
+    </siteMapNode>
+    <siteMapNode url="~/Portal/Resources/Resources.aspx" title="Resources"  description="Resources" />
+    <siteMapNode url="~/Portal/News/News.aspx" title="News"  description="News" />
+    <siteMapNode url="~/Portal/Partners/Partners.aspx" title="Partners"  description="Partners" />
+    <siteMapNode url="~/Portal/Company/Company.aspx" title="Company"  description="Company">
+      <siteMapNode url="~/Portal/Company/History.aspx" title="History"  description="History" />
+      <siteMapNode url="~/Portal/Company/Organisation.aspx" title="Organisation"  description="Organisation" />
+      <siteMapNode url="~/Portal/Company/Career.aspx" title="Career"  description="Career" />
+    </siteMapNode>
+    <siteMapNode url="~/Portal/ContactUs.aspx" title="ContactUs"  description="Contact us" />
+  </siteMapNode>
+</siteMap>

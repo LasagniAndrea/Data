@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+  <customObject control="label"     clientid="ENTITY"         caption = "Entity_Title" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="ENTITY"         width="250px"   datatype="integer" 
+                listretrieval="predef:ActorEntity" required="true" postback="true"  
+                postbackargument ="SELFCLEAR_" xsi:type="CustomObjectDropDown"  
+                misc="isAddAll:true;isUseSessionRestrict:true;isClear:false"/>
+  <customObject control="label"     clientid="CSSCUSTODIAN"  caption = "CssCustodian"  xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="CSSCUSTODIAN"  width="270px"   datatype="integer" listretrieval="predef:csscustodian" required="true" postback="true"  postbackargument ="SELFRELOAD_" xsi:type="CustomObjectDropDown"  misc="isAddAll:true;isUseSessionRestrict:true;isClear:true"/>
+  <customObject control="label"     clientid="MISSINGUTI"  caption = "UTI"  xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="MISSINGUTI"  width="275px"   datatype="string" listretrieval="predef:missinguti" required="true" postback="true"  postbackargument ="SELFCLEAR_" xsi:type="CustomObjectDropDown"  misc="isAddAll:true;isUseSessionRestrict:true;isClear:true"/>
+</customObjects>

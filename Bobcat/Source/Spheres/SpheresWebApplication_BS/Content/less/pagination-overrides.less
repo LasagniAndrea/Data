@@ -1,0 +1,17 @@
+﻿@import (reference) "../bootstrap/variables.less";
+@import (reference) "../bootstrap/mixins/pagination.less";
+
+.pagination {
+
+  > li {
+    > a,
+    > span {
+      padding: @padding-xs-vertical @padding-xs-horizontal;
+    }
+  }
+}
+
+// Small
+.pagination-xs {
+  .pagination-size(@padding-xs-vertical; @padding-xs-horizontal; @font-size-small; @line-height-small; @border-radius-small);
+}

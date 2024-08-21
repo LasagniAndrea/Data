@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="Lecture dans le fichier de configuration (web.cong ou webCustom.config">
+    <Position X="6.354" Y="1.51" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Gestion des verrouillages côté utilisateur">
+    <Position X="6.823" Y="5.604" Height="0.469" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Gestion des verrouillages côté terminal">
+    <Position X="1.344" Y="5.573" Height="0.5" Width="1.617" />
+  </Comment>
+  <Comment CommentText="Statut de verrouillage">
+    <Position X="2.167" Y="3.25" Height="0.292" Width="1.44" />
+  </Comment>
+  <Comment CommentText="Code retour de contrôle de verrouillage">
+    <Position X="2.094" Y="1.594" Height="0.49" Width="1.575" />
+  </Comment>
+  <Comment CommentText="Classe principale de gestion initialisée à chaque tentative de connexion">
+    <Position X="3.938" Y="8.833" Height="0.75" Width="1.7" />
+  </Comment>
+  <Class Name="EFS.Common.Web.HostLockout">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <Members>
+      <Property Name="FailureConnect_Lockout" Hidden="true" />
+      <Property Name="FailureConnect_Locktime" Hidden="true" />
+      <Method Name="GetQueryInsert" Hidden="true" />
+      <Method Name="GetQueryReset" Hidden="true" />
+      <Method Name="GetQueryResetDenial" Hidden="true" />
+      <Method Name="GetQuerySelect" Hidden="true" />
+      <Method Name="GetQueryUpdate" Hidden="true" />
+      <Method Name="HostLockout" Hidden="true" />
+      <Property Name="LockName" Hidden="true" />
+      <Property Name="LoginNameList" Hidden="true" />
+      <Property Name="LoginNameToWrite" Hidden="true" />
+      <Method Name="SetLockout" Hidden="true" />
+      <Property Name="WarningConnect_BeforeLockOut" Hidden="true" />
+      <Property Name="WarningConnect_BeforeLockTime" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAEGAAAIAAAAAAACAAAEiAAkAAAAAAQAAg=</HashCode>
+      <FileName>Connection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.Common.Web.UserLockout">
+    <Position X="8" Y="4.5" Width="1.5" />
+    <Members>
+      <Property Name="FailureConnect_Lockout" Hidden="true" />
+      <Property Name="FailureConnect_Locktime" Hidden="true" />
+      <Method Name="GetQueryInsert" Hidden="true" />
+      <Method Name="GetQueryReset" Hidden="true" />
+      <Method Name="GetQueryResetDenial" Hidden="true" />
+      <Method Name="GetQuerySelect" Hidden="true" />
+      <Method Name="GetQueryUpdate" Hidden="true" />
+      <Property Name="IdA" Hidden="true" />
+      <Method Name="IsCurrentHostName" Hidden="true" />
+      <Property Name="LockName" Hidden="true" />
+      <Method Name="SelectLock" Hidden="true" />
+      <Method Name="SetAllowOnLockout" Hidden="true" />
+      <Method Name="SetLockout" Hidden="true" />
+      <Method Name="UserLockout" Hidden="true" />
+      <Property Name="WarningConnect_BeforeLockOut" Hidden="true" />
+      <Property Name="WarningConnect_BeforeLockTime" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAACBAAAAAAEGAAAIAAAAAAAAAAAEiABEAABAAAwAAg=</HashCode>
+      <FileName>Connection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.Common.Web.Lockout">
+    <Position X="3.75" Y="0.5" Width="2.5" />
+    <Members>
+      <Method Name="AddMessage" Hidden="true" />
+      <Method Name="CommonParameters" Hidden="true" />
+      <Method Name="CommonParameters2" Hidden="true" />
+      <Property Name="CS" Hidden="true" />
+      <Property Name="dbTransaction" Hidden="true" />
+      <Property Name="ExtlLink" Hidden="true" />
+      <Method Name="GetMessage" Hidden="true" />
+      <Method Name="GetQueryInsert" Hidden="true" />
+      <Method Name="GetQueryReset" Hidden="true" />
+      <Method Name="GetQueryResetDenial" Hidden="true" />
+      <Method Name="GetQuerySelect" Hidden="true" />
+      <Method Name="GetQueryUpdate" Hidden="true" />
+      <Method Name="GetRemainedTime" Hidden="true" />
+      <Method Name="SetLockout" Hidden="true" />
+    </Members>
+    <AssociationLine Name="Status" Type="EFS.Common.Web.LockoutStatus">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.412" Y="0.112" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>gGEEBAAEAACVGUAAIBAgAAAACAABEyAAEgQFAAAQGQk=</HashCode>
+      <FileName>Connection.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="hackAttemptSafety" />
+      <Field Name="lockoutReturn" />
+      <Property Name="Status" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EFS.Common.Web.HackAttemptSafety">
+    <Position X="8.25" Y="0.5" Width="2.75" />
+    <Members>
+      <Field Name="appSettingPrefix" Hidden="true" />
+      <Method Name="HackAttemptSafety" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAQAAAAAAAAAAABAAQAAAAQAAEAAAAAA=</HashCode>
+      <FileName>Connection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EFS.Common.Web.LockSafety">
+    <Position X="4" Y="7.25" Width="1.5" />
+    <AssociationLine Name="host" Type="EFS.Common.Web.HostLockout">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.692" Y="1.747" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="user" Type="EFS.Common.Web.UserLockout">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.162" Y="1.675" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAIAAAAAAAAAAAAAgAAAAAAQA=</HashCode>
+      <FileName>Connection.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="host" />
+      <Property Name="user" />
+    </ShowAsAssociation>
+  </Class>
+  <Enum Name="EFS.Common.Web.LockoutReturn">
+    <Position X="0.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAACAAAAAAEAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EFS.Common.Web.LockoutStatus">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAACAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

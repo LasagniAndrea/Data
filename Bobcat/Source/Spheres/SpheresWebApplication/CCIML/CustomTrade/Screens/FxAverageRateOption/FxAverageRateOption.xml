@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Screens>
+  <!-- EG 20171113 [23509] Upd Gestion Objets Facility / Dates et Marché -->
+	<!-- FxAvgRateOption-Bank -->
+	<Screen name="FxAvgRateOption-Bank" caption="FX Average Rate Option (Screen Bank)" product="fxAverageRateOption">
+    <FxOptionEarlyTerminationBlock/>
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+		<FxAverageRateOptionBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentBlock/>
+		<SettlementInputBlock/>
+    <EarlyTerminationProvisionBlock clientid="fxAveRateOpt"/>
+    <ComplianceBlock/>
+	</Screen>
+	<!-- FxAverageStrikeOption-Bank -->
+	<Screen name="FxAvgStrikeOption-Bank" caption="FX Average Strike Option (Screen Bank)" product="fxAverageRateOption">
+    <FxOptionEarlyTerminationBlock/>
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+		<PartyBroker-DRV-Block/>
+		<FxAverageStrikeOptionBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentBlock/>
+		<SettlementInputBlock/>
+    <EarlyTerminationProvisionBlock clientid="fxAveRateOpt"/>
+    <ComplianceBlock/>
+	</Screen>
+	<!-- FxAvgRateOptionPremiumSettltCur-Bank -->
+	<Screen name="FxAvgRateOptionPremiumSettltCur-Bank" caption="FX Average Rate Option Premium Settlement Currency (Screen Bank)" product="fxAverageRateOption">
+    <FxOptionEarlyTerminationBlock/>
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+		<PartyBroker-DRV-Block/>
+		<FxAverageRateOptionPremiumSettltCurBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentBlock/>
+		<SettlementInputBlock/>
+    <EarlyTerminationProvisionBlock clientid="fxAveRateOpt" />
+    <ComplianceBlock/>
+	</Screen>
+	<!-- FxAverageStrikeOptionPremiumSettltCur-Bank -->
+	<Screen name="FxAvgStrikeOptionPremiumSettltCur-Bank" caption="FX Average Strike Option Premium Settlement Currency (Screen Bank)" product="fxAverageRateOption">
+    <FxOptionEarlyTerminationBlock/>
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+		<PartyBroker-DRV-Block/>
+		<FxAverageStrikeOptionPremiumSettltCurBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentBlock/>
+		<SettlementInputBlock/>
+    <EarlyTerminationProvisionBlock clientid="fxAveRateOpt"/>
+    <ComplianceBlock/>
+	</Screen>
+</Screens>

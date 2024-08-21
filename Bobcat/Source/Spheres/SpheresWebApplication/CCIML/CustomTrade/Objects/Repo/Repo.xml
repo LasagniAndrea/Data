@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Objects>
+  <!--RepoBlock-->
+	<Object name="RepoBlock" >
+		<Table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:Repo;" controlalignleft="true" colspan="-1">
+			<RepoCommonBlock/>
+			<!---->
+			<Table style="istableH:true;tblH-titleR:repo_SpotLeg_Title;tblH-reverse:1;tblH-css:size5" controlalignleft="true" colspan="-1">
+				<SecurityLeg occurs="1" clientid="spotLeg" />
+			</Table>
+			<!---->
+			<Table style="istableH:true;tblH-titleR:repo_CashStream_Title;tblH-reverse:1;tblH-css:size5" controlalignleft="true" colspan="-1">			
+				<CashStream occurs="1" clientid="cashStream" />
+			</Table>
+		</Table>
+	</Object>
+	<Object name="RepoBlockMini" >
+		<Table style="istableH:true;tblH-titleF:DisplayKey_Instrument;tblH-css:size4;helpschema:efsml;helpelement:Repo;" controlalignleft="true" colspan="-1">		   
+			<RepoCommonBlock/>
+			<Table style="istableH:true;tblH-titleR:repo_SpotLeg_Title;tblH-reverse:1;tblH-css:size5" controlalignleft="true" colspan="-1">			
+				<SecurityLegv2 occurs="1" clientid="spotLeg" />
+			</Table>
+			<Table style="istableH:true;tblH-titleR:repo_CashStream_Title;tblH-reverse:1;tblH-css:size5" controlalignleft="true" colspan="-1">
+				<CashStreamMini occurs="1" clientid="cashStream" />
+			</Table>
+		</Table>
+	</Object>
+	<!--RepoCommonBlock-->
+  <Object name="RepoCommonBlock">
+    <Table style="class:PnlRoundedColor2;" controlalignleft="true" colspan="-1">
+      <Table controlalignleft="true" colspan="-1">
+        <RepoDurationEnum_L clientid="duration" required="true" postback="true" helpschema="efsml" helpelement="RepoDurationEnum"/>
+        <Space />
+        <Date_L clientid="effectiveMinDate" required="true" postback="true"	 helpschema="fpml" helpelement="AdjustableDate" />
+        <Space />
+        <Date_L clientid="terminationMaxDate" required="false" helpschema="fpml" helpelement="AdjustableDate" />
+        <Space />
+        <Offset_L clientid="noticePeriod" required="false" helpschema="efsml" helpelement="AdjustableOffset" />
+      </Table>
+    </Table>
+  </Object>
+  <!--CashStream-->
+  <Object name="CashStream">
+    <Table controlalignleft="true" colspan="-1">
+      <Table controlalignleft="true" colspan="-1">
+        <Table controlalignleft="true" colspan="-1">
+          <PartyReference_L clientid="payer" required="true" postback="true" keepinquickinput="false" />
+          <CalculationNotional clientid="calculationPeriodAmount_calculation" required="true" helpschema="fpml" helpelement="Notional" />
+        </Table>
+      </Table>
+      <hr style="margin-top:5px;margin-bottom:5px;"/>
+      <AssetRateInfoBlock/>
+      <Frequency_BDC_DCFBlock/>
+    </Table>
+  </Object>
+  <Object name="CashStreamMini">
+    <Table controlalignleft="true" colspan="-1">
+      <Table controlalignleft="true" colspan="-1">
+        <Table controlalignleft="true" colspan="-1">
+          <PartyReference_L clientid="payer" required="true" postback="true" keepinquickinput="false" />
+          <CalculationNotional clientid="calculationPeriodAmount_calculation" required="true" helpschema="fpml" helpelement="Notional" />
+          <AssetRateInfoMini/>
+        </Table>
+      </Table>
+      <Frequency_BDC_DCFBlock/>
+    </Table>
+  </Object>
+  <!--ForwardSpotLegBlock-->
+  <Object name="UNUSED-ForwardSpotLegBlock">
+    <Table style="class:PnlRoundedColor4;" controlalignleft="true" colspan="-1">
+      <Banner caption="Security Forward" level="2" helpschema="efsml" helpelement="SecurityLeg" />
+      <SecurityLeg occurs="1" clientid="forwardLeg" />
+    </Table>
+  </Object>
+  <!--SecurityLeg-->
+  <Object name="SecurityLeg">
+    <table controlalignleft="true" colspan="-1">
+      <PartyReference_L caption ="repo_spotLeg_debtSecurityTransaction_buyer" clientid="debtSecurityTransaction_grossAmount_payer" required="true" postback="true" keepinquickinput="false" />
+      <Space />
+      <SecurityAssetId_L clientid="debtSecurityTransaction_securityAsset_securityId"  required="true" postback="true"   />
+    </table>
+    <table controlalignleft="true" colspan="-1">
+      <SecurityOrderQuantity clientid="debtSecurityTransaction_orderQuantity"/>
+      <SecurityPrice clientid="debtSecurityTransaction_orderPrice"/>
+      <SecurityCoupon clientid="debtSecurityTransaction_orderPrice"/>
+    </table>
+    <SecurityLegGrossAmountBlock clientid="debtSecurityTransaction_grossAmount"/>
+  </Object>
+  
+  <Object name="SecurityLegv2">
+    <Table controlalignleft="true" colspan="-1">
+      <table controlalignleft="true" colspan="-1">
+        <PartyReference_L caption ="repo_spotLeg_debtSecurityTransaction_buyer" clientid="debtSecurityTransaction_grossAmount_payer" required="true" postback="true" keepinquickinput="false" />
+        <space/>
+        <SecurityAssetId_Lv2 clientid="debtSecurityTransaction_securityAsset_securityId"  required="true" postback="true" />
+        <SecurityOrderQuantity_L clientid="debtSecurityTransaction_orderQuantity"/>
+      </table>
+      <table controlalignleft="true" colspan="-1">
+        <SecurityPrice clientid="debtSecurityTransaction_orderPrice"/>
+        <SecurityCoupon clientid="debtSecurityTransaction_orderPrice"/>
+      </table>
+      <SecurityLegGrossAmountBlock2 clientid="debtSecurityTransaction_grossAmount"/>
+    </Table>
+  </Object>
+
+  <!--SecurityLegGrossAmountBlock-->
+  <Object name="SecurityLegGrossAmountBlock">
+    <Table controlalignleft="true" colspan="-1">
+      <Banner caption="repo_SpotLeg_DebtSecurityTransaction_grossAmountTitle" level="3"  helpschema="efsml" helpelement="DebtSecurityTransaction"/>
+      <SecurityLegPayment helpschema="fpml" helpelement="Payment" />
+    </Table>
+  </Object>
+  <Object name="SecurityLegGrossAmountBlock2">
+    <table id="tblSecurityLegPaymentH" verticalAlign="Top" style="istableH:true;tblH-titleR:repo_SpotLeg_DebtSecurityTransaction_grossAmountTitle;tblH-css:size5;tblH-reverse:1;tblH-startdisplay:expand;">
+      <Table controlalignleft="true">
+        <SecurityLegPayment helpschema="fpml" helpelement="Payment" />
+      </Table>
+    </table>
+  </Object>
+  <!--SecurityLegPayment-->
+  <Object name="SecurityLegPayment" helpschema="fpm" helpelement="Payment">
+    <Table id="tblSecurityLegGrossAmount" colspan="-1" controlalignleft="true" >
+      <DLLBannerFeeBlock/>
+      <Table controlalignleft="true" colspan="-1">
+        <Money_L clientid="paymentAmount" required="true" postback="true" />
+      </Table>
+    </Table>
+  </Object>
+</Objects>

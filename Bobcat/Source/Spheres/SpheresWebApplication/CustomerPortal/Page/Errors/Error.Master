@@ -1,0 +1,66 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Error.master.cs" Inherits="EFS.Spheres.Errors.MasterError" %>
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <title>Euro Finance Systems</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,400,300,700,100italic,300italic|Oswald:200,300,400,500,600,700|Raleway:100,200,300,400,500,600,700,100italic,300italic" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Josefin+Sans:wght@600&family=Nova+Square&family=Zen+Dots&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../../Includes/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="../../content/Common.min.css" />
+    <link rel="stylesheet" href="../../Content/Error.min.css" />
+</head>
+
+<body>
+    <form id="masterError" runat="server">
+        <asp:ScriptManager ID="ScriptManager" runat="server" />
+        <section id="pg-error">
+            <div id="pg-error-box">
+                <div id="title-error">
+                    <h1 ct-sequence="cool16" id="content">Une erreur s'est produite</h1>
+                </div>
+                <div id="pg-error-content">
+
+                    <div><h1 ID="lblErrorMessage" runat="server"></h1></div>
+                    <br />
+                    <asp:ContentPlaceHolder ID="cphContentErrorPage" runat="server">
+
+                    </asp:ContentPlaceHolder>
+                    <br />
+                    <div class="additionalinfo">
+                        <b>Additional informations</b>
+                        <ul>
+                            <li>
+                                <div><i class="fas"></i><b>Application</b> : <asp:Label ID="lblErrorApplication" runat="server"></asp:Label></div>
+                            </li>
+                            <li>
+                                <div><i class="fas"></i><b>User</b> : <asp:Label ID="lblErrorUser" runat="server"></asp:Label></div>
+                            </li>
+                            <li>
+                                <div><i class="fas"></i><b>Culture</b> : <asp:Label ID="lblErrorCulture" runat="server"></asp:Label></div>
+                            </li>
+                            <li>
+                                <div><i class="fas"></i><b>Browser</b> : <asp:Label ID="lblErrorBrowser" runat="server"></asp:Label></div>
+                            </li>
+                            <li>
+                                <div><i class="fas"></i><b>Date</b> : <asp:Label ID="lblErrorDate" runat="server"></asp:Label></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="footer-error">For more information, please contact the editor <a class="linkButton" href="MAILTO:support@euro-finance-systems.com">Euro Finance Systems</a></div>
+            </div>
+        </section>
+    </form>
+
+    <script type="text/javascript" src="../../scripts/plugin/tweenmax.min.js"></script>
+    <script type="text/javascript" src="../../scripts/plugin/cooltext.animation.min.js"></script>
+    <script type="text/javascript" src="../../scripts/plugin/cooltext.min.js"></script>
+</body>
+</html>
+
+

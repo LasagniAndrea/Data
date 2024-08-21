@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Screens>
+  <!-- EG 20171113 [23509] Upd Gestion Objets Facility / Dates et Marché -->
+	<!-- Cap-Bank -->
+	<Screen name="Cap-Bank" caption="Cap (Screen Bank)" product="capFloor">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+		<CapStreamBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+		<EarlyTerminationProvisionBlock/>
+    <ComplianceBlock/>
+	</Screen>
+  
+  <!-- CapStub-Bank -->
+  <Screen name="CapStub-Bank" caption="Cap With Stubs (Screen Bank)" product="capFloor">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+    <CapStreamStubBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+    <SettlementInputBlock/>
+    <EarlyTerminationProvisionBlock/>
+    <ComplianceBlock/>
+  </Screen>
+  
+	<!-- Floor-Bank -->
+	<Screen name="Floor-Bank" caption="Floor (Screen Bank)" product="capFloor">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+		<FloorStreamBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+		<EarlyTerminationProvisionBlock/>
+    <ComplianceBlock/>
+	</Screen>
+  <!-- FloorStub-Bank -->
+  <Screen name="FloorStub-Bank" caption="Floor With Stubs (Screen Bank)" product="capFloor">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+    <FloorStreamStubBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+    <SettlementInputBlock/>
+    <EarlyTerminationProvisionBlock/>
+    <ComplianceBlock/>
+  </Screen>
+    
+	<!-- Collar-Bank -->
+	<Screen name="Collar-Bank" caption="Collar (Screen Bank)" product="capFloor">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+		<CollarStreamBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+		<EarlyTerminationProvisionBlock/>
+    <ComplianceBlock/>
+	</Screen>
+  
+  <!-- CollarStub-Bank -->
+  <Screen name="CollarStub-Bank" caption="Collar With Stubs (Screen Bank)" product="capFloor">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+    <CollarStreamStubBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+    <SettlementInputBlock/>
+    <EarlyTerminationProvisionBlock/>
+    <ComplianceBlock/>
+  </Screen>
+
+	<!-- Corridor-Bank -->
+	<Screen name="Corridor-Bank" caption="Corridor (Screen Bank)" product="capFloor">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+		<CorridorStreamBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+		<EarlyTerminationProvisionBlock/>
+    <ComplianceBlock/>
+	</Screen>
+  
+	<!-- CapFloorStraddle-Bank -->
+	<Screen name="CapFloorStraddle-Bank" caption="CapFloor Straddle (Screen Bank)" product="capFloor">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+		<StraddleStreamBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+		<EarlyTerminationProvisionBlock/>
+    <ComplianceBlock/>
+	</Screen>
+  
+	<!-- CapFloorStrangle-Bank -->
+	<Screen name="CapFloorStrangle-Bank" caption="CapFloor Strangle (Screen Bank)" product="capFloor">
+		<TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+		<CollarStreamBlock/>
+		<TradeExtendsBlock/>
+		<OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+		<SettlementInputBlock/>
+		<EarlyTerminationProvisionBlock/>
+    <ComplianceBlock/>
+	</Screen>
+</Screens>
+
+

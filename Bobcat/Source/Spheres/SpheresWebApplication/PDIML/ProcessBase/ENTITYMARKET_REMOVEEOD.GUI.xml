@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+  <customObject control="label" clientid="ENTITY" caption = "Entity_Title" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="ENTITY" datatype="integer" required="true" listretrieval="predef:ActorEntity"
+                postback="true" postbackargument ="SELFRELOAD_"
+                width="250px" misc="isAddAll:true;isUseSessionRestrict:true;isClear:false"
+                xsi:type="CustomObjectDropDown"/>
+
+  <customObject control="label" clientid="CSSCUSTODIAN"  caption = "CssCustodian!br"  width="150px" xsi:type="CustomObjectLabel"/>
+  <customObject control="dropdown"  clientid="CSSCUSTODIAN" datatype="integer" required="true"  listretrieval="predef:csscustodian"
+                postback="true" postbackargument ="SELFRELOAD_"
+                width="270px" misc="isAddAll:true;isUseSessionRestrict:true;isClear:true;displayNameMaxLen:50"
+                xsi:type="CustomObjectDropDown"/>
+
+  <customObject control="checkbox"  clientid="ISSIMUL" defaultvalue="true" datatype="bool" caption="SIMUL" required="true"
+                postback="true" postbackargument ="SELFNOLOAD_"/>
+  <customObject control="checkbox"  clientid="ISKEEPHISTORY"  datatype="bool" required="true" defaultvalue="true"
+                postback="true" postbackargument ="SELFNOLOAD_"
+                caption="KEEPHISTORY"/>
+</customObjects>

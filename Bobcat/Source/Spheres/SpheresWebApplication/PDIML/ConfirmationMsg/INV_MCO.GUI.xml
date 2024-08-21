@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- EG 20230706 [WI624] New -->
+<customObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size4;">
+  <customObject control="label"     clientid="DATE1"   caption = "DTINV" xsi:type="CustomObjectLabel"/>
+  <customObject control="textbox"   clientid="DATE1"   defaultvalue="TODAY-1EOM" datatype = "date" required="true"
+                postback="true" postbackargument ="SELFRELOAD_"
+                xsi:type="CustomObjectTextBox"/>
+</customObjects>
+

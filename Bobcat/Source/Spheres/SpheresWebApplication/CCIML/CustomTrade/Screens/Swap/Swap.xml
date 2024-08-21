@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Screens>
+  <!-- EG 20171113 [23509] Upd Gestion Objets Facility / Dates et Marché -->
+  <!-- Swap-Bank -->
+  <Screen name="Swap-Bank" caption="Swap (Screen Bank)" product="Swap">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+    <VanillaSwapBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+    <SettlementInputBlock/>
+    <ProvisionsBlock/>
+    <FullProvisionsBlock/>
+    <ComplianceBlock/>
+  </Screen>
+  <!-- SwapStub-Bank -->
+  <Screen name="SwapStub-Bank" caption="Swap With Stubs (Screen Bank)" product="Swap">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+    <VanillaSwapStubBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+    <SettlementInputBlock/>
+    <ProvisionsBlock/>
+    <FullProvisionsBlock/>
+    <ComplianceBlock/>
+  </Screen>
+  <!-- SwapStubAsynch-Bank -->
+  <Screen name="SwapStubAsynch-Bank" caption="Swap With Asynchronous Stubs (Screen Bank)" product="Swap">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+    <VanillaSwapStubAsynchBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+    <SettlementInputBlock/>
+    <ProvisionsBlock/>
+    <FullProvisionsBlock/>
+    <ComplianceBlock/>
+  </Screen>
+  <!-- CurrencySwap-Bank -->
+  <Screen name="CurrencySwap-Bank" caption="Currency Swap (Screen Bank)"  product="Swap">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+    <CurrencySwapBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentBlock/>
+    <SettlementInputBlock/>
+    <ProvisionsBlock/>
+    <FullProvisionsBlock/>
+    <ComplianceBlock/>
+  </Screen>
+  <!-- AssetSwap-Bank -->
+  <Screen name="AssetSwap-Bank" caption="Asset Swap (Screen Bank)"  product="Swap">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+    <AssetSwapBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+    <SettlementInputBlock/>
+    <FullProvisionsBlock/>
+    <ComplianceBlock/>
+  </Screen>
+  <!-- SwapMultiStream-Bank -->
+  <Screen name="SwapMultiStream-Bank" caption="Swap Multi Stream (Screen Bank)"  product="Swap">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+    <MultiStreamSwapBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentBlock/>
+    <SettlementInputBlock/>
+    <ProvisionsBlock/>
+    <FullProvisionsBlock/>
+    <ComplianceBlock/>
+  </Screen>
+  <!-- SwapMultiStreamStub-Bank -->
+  <Screen name="SwapMultiStreamStub-Bank" caption="Swap Multi Stream With Stubs (Screen Bank)"  product="Swap">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+    <MultiStreamSwapStubBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentBlock/>
+    <SettlementInputBlock/>
+    <ProvisionsBlock/>
+    <FullProvisionsBlock/>
+    <ComplianceBlock/>
+  </Screen>
+  <!-- ZeroCouponSwap-Bank -->
+  <Screen name="ZeroCouponSwap-Bank" caption="Zero Coupon Swap (Screen Bank)" product="Swap">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+    <ZeroCouponSwapBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+    <SettlementInputBlock/>
+    <ProvisionsBlock/>
+    <FullProvisionsBlock/>
+    <ComplianceBlock/>
+  </Screen>
+  <!-- SwapQuick-Bank -->
+  <Screen name="SwapQuick-Bank" caption="Swap Quick (Screen Bank)"  product="Swap">
+    <Table style="BACKGROUND-COLOR:lemonchiffon;BORDER-COLOR:LightCoral">
+      <Banner caption="Quick Input" level="2" helpurl="fpml-ird-4-2.html#Complex_Swap"/>
+      <ScreenQuickInput  screen="SwapOTCml" separator="·" format="OTCml" />
+    </Table>
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+    <VanillaSwapBlockWithoutAdditionalPayment/>
+    <OtherPartyPaymentWithPaymentQuoteRateOnlyBlock/>
+    <ComplianceBlock/>
+  </Screen>
+
+  <!-- MTMCrossCurrencySwap-Bank -->
+  <Screen name="MTMCrossCurrencySwap-Bank" caption="MTM Cross Currency Swap (Screen Bank)"  product="Swap">
+    <TradeRemoveBlock/>
+    <FacilityHeaderBlock/>
+    <PartyBroker-DRV-Block/>
+    <FxLinkedCurrencySwapBlock/>
+    <TradeExtendsBlock/>
+    <OtherPartyPaymentBlock/>
+    <SettlementInputBlock/>
+    <ProvisionsBlock/>
+    <FullProvisionsBlock/>
+    <ComplianceBlock/>
+  </Screen>
+
+  <!-- ******************** -->
+  <!-- SUB-SCREEN PROVISION -->
+  <!-- ******************** -->
+  <!-- CancelableProvision -->
+  <Screen name="CancelableProvision" caption="CancelableProvision">
+    <CancelableProvisionBlock clientid="cancelable"/>
+  </Screen>
+
+  <!-- EarlyTerminationProvision -->
+  <Screen name="EarlyTerminationProvision" caption="EarlyTerminationProvision">
+    <EarlyTerminationProvisionBlock clientid="earlyTermination"/>
+  </Screen>
+
+  <!-- ExtendibleProvision -->
+  <Screen name="ExtendibleProvision" caption="ExtendibleProvision">
+    <ExtendibleProvisionBlock clientid="extendible"/>
+  </Screen>
+
+</Screens>

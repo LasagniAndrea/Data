@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<Objects>
+
+  <Object name="PositionTransferBlock" context="PositionTransfer">
+    <PositionTransfer clientid="positionTransfer" />
+  </Object>
+
+  <!-- PositionTransfer -->
+  <Object name="PositionTransfer">
+    <table style="istableH:true;tblH-titleR:PositionTransfer;tblH-bkgH-color:#C00303;tblH-css:size4;">
+      <table>
+        <table verticalAlign ="Top" style="istableH:true;tblH-titleR:Characteristics;tblH-css:size5;tblH-reverse:1;">
+          <table style="margin-top:2px;" colspan="-1" controlalignleft="true" verticalAlign ="Top">
+            <PositionTransferCharacteristics/>
+          </table>
+        </table>
+        <table verticalAlign ="Top" style="istableH:true;tblH-titleR:NoteEvents;tblH-css:size5;tblH-reverse:1;">
+          <table controlalignleft="true" colspan="-1" verticalAlign="top">
+            <TextBox clientid="note" textMode="MultiLine" required="false" datatype="string" style="width:700px;height:85px;" />
+          </table>
+        </table>
+      </table>
+    </table>
+  </Object>
+
+  <!-- PositionTransferCharacteristics -->
+  <Object name="PositionTransferCharacteristics">
+    <table >
+      <table controlalignleft="true" colspan="-1">
+        <Date_RO_L caption ="Date" clientid="date" required="false"  postback="false" />
+        <br/>
+        <IntegerQte_w100_L_RO clientid="initialQuantity" required="false"  postback="false" />
+        <br/>
+        <IntegerQte_w100_L_RO clientid="availableQuantity" required="false"  postback="false" />
+        <br/>
+        <IntegerQte_w100_L clientid="quantity" required="true"  postback="true"/>
+        <space/>
+        <Button imageurl="fas fa-info-circle blue" tooltiptitle="Information" tooltip="positionTransfer_ToolTipQuantity"/>
+      </table>
+      <PositionTransferFees/>
+    </table>
+  </Object>
+
+  <!-- PositionTransferFees -->
+  <Object name="PositionTransferFees" >
+    <table controlalignleft="true" colspan="-1">
+      <CheckMid clientid="isFeeRestitution" required="true"  postback="false"/>
+      <Button clientid="isFeeRestitution" imageurl="fas fa-info-circle blue" tooltiptitle="Information" tooltip="positionTransfer_isFeeRestitution_ToolTip"/>
+    </table>
+  </Object>
+  <!-- EG 20150716 [21103] New : Safekeeping context-->
+  <Object name="PositionTransferFees" context="_Safekeeping">
+    <table controlalignleft="true" colspan="-1">
+      <CheckMid clientid="isFeeRestitution" required="true"  postback="false"/>
+      <Button clientid="isFeeRestitution" imageurl="fas fa-info-circle blue" tooltiptitle="Information" tooltip="positionTransfer_isFeeRestitution_ToolTip"/>
+      <CheckMid clientid="isSafekeepingRestitution" required="true"  postback="false"/>
+      <Button clientid="isSafekeepingRestitution" imageurl="fas fa-info-circle blue" tooltiptitle="Information" tooltip="positionTransfer_isSafekeepingRestitution_ToolTip"/>
+    </table>
+  </Object>
+
+  <!-- Payment -->
+  <Object name="PositionTransferPaymentBlock">
+    <table style="margin-top:2px;" id="tblPositionTransferPartyPaymentBlock">
+      <PaymentOPPLight clientid="otherPartyPayment" occurs="1" addsuboperator="true" required="false" helpschema="efsml"	helpelement="Payment" />
+    </table>
+    <fill/>
+  </Object>
+
+
+
+
+</Objects>
