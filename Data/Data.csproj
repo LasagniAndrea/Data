@@ -145,9 +145,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EFS.ACommon">
-      <HintPath>..\lib\EFS.ACommon.dll</HintPath>
-    </Reference>
     <Reference Include="EFS.CommonData">
       <HintPath>..\lib\EFS.CommonData.dll</HintPath>
     </Reference>
@@ -207,6 +204,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ACommon\ACommon\ACommon.csproj">
+      <Project>{9ff00e89-da79-4f89-b3a6-9995f502f080}</Project>
+      <Name>ACommon</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

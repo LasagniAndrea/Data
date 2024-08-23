@@ -132,8 +132,7 @@ namespace EFS.ACommon
             /// <param name="sysNumber"></param>
             /// <param name="pMsgtypeEnum"></param>
             /// <param name="pCulture"></param>
-            /// <returns></returns>
-            [HttpGet]
+            /// <returns></returns>            
             public string GetText(string sysCode, string sysNumber, MsgtypeEnum pMsgtypeEnum)
             {
                 string ret = string.Empty;
