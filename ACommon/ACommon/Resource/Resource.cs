@@ -133,7 +133,8 @@ namespace EFS.ACommon
             /// <param name="pMsgtypeEnum"></param>
             /// <param name="pCulture"></param>
             /// <returns></returns>
-            private string GetText(string sysCode, string sysNumber, MsgtypeEnum pMsgtypeEnum)
+            [HttpGet]
+            public string GetText(string sysCode, string sysNumber, MsgtypeEnum pMsgtypeEnum)
             {
                 string ret = string.Empty;
                 XmlNode node = GetNodeData(sysCode, sysNumber);
