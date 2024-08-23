@@ -139,9 +139,9 @@ namespace EFS.ACommon
                 XmlNode node = GetNodeData(sysCode, sysNumber);
                 if (null != node)
                 {
-                    string cultureName = pCulture;
-                    if (StrFunc.IsEmpty(cultureName))
-                        _ = GetCurrentCultureName();
+                    //string cultureName = pCulture;
+                    //if (StrFunc.IsEmpty(cultureName))
+                    //    _ = GetCurrentCultureName();
 
                     string expression = StrFunc.AppendFormat("./{0}/{1}/text()", pMsgtypeEnum.ToString(), GetCurrentCultureName());
                     node = node.SelectSingleNode(expression);

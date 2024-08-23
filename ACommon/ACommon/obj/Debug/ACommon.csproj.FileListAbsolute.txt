@@ -12,9 +12,3 @@ C:\SpheresProject\Main\Source\Spheres\ACommon\obj\Debug\ACommon.csproj.CoreCompi
 C:\SpheresProject\Main\Source\Spheres\ACommon\obj\Debug\ACommon.csproj.CopyComplete
 C:\SpheresProject\Main\Source\Spheres\ACommon\obj\Debug\EFS.ACommon.dll
 C:\SpheresProject\Main\Source\Spheres\ACommon\obj\Debug\EFS.ACommon.pdb
-C:\Users\BDX088\Documents\GitHub\Spheres2\ACommon\ACommon\bin\Debug\EFS.ACommon.dll
-C:\Users\BDX088\Documents\GitHub\Spheres2\ACommon\ACommon\bin\Debug\EFS.ACommon.pdb
-C:\Users\BDX088\Documents\GitHub\Spheres2\ACommon\ACommon\obj\Debug\ACommon.csproj.AssemblyReference.cache
-C:\Users\BDX088\Documents\GitHub\Spheres2\ACommon\ACommon\obj\Debug\ACommon.csproj.CoreCompileInputs.cache
-C:\Users\BDX088\Documents\GitHub\Spheres2\ACommon\ACommon\obj\Debug\EFS.ACommon.dll
-C:\Users\BDX088\Documents\GitHub\Spheres2\ACommon\ACommon\obj\Debug\EFS.ACommon.pdb

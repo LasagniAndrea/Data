@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\BDX088\\Documents\\GitHub\\Spheres2\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9FF00E89-DA79-4F89-B3A6-9995F502F080}|ACommon\\ACommon\\ACommon.csproj|c:\\users\\bdx088\\documents\\github\\spheres2\\acommon\\acommon\\constant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9FF00E89-DA79-4F89-B3A6-9995F502F080}|ACommon\\ACommon\\ACommon.csproj|solutionrelative:acommon\\acommon\\constant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,6 +31,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:16:0:{2456bd12-ecf7-4988-a4a6-67d49173f565}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Constant.cs",
+              "DocumentMoniker": "C:\\Users\\BDX088\\Documents\\GitHub\\Spheres2\\ACommon\\ACommon\\Constant.cs",
+              "RelativeDocumentMoniker": "ACommon\\ACommon\\Constant.cs",
+              "ToolTip": "C:\\Users\\BDX088\\Documents\\GitHub\\Spheres2\\ACommon\\ACommon\\Constant.cs",
+              "RelativeToolTip": "ACommon\\ACommon\\Constant.cs",
+              "ViewState": "AQIAAPIkAAAAAAAAAAAvwPokAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-23T09:48:25.141Z",
+              "EditorCaption": ""
             }
           ]
         }
