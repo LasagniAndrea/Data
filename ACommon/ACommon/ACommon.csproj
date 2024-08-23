@@ -208,12 +208,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SpheresResource\SpheresResource.csproj">
+    <ProjectReference Include="..\..\SpheresResource\SpheresResource\SpheresResource.csproj">
       <Project>{568a7d8f-7522-44ec-aeec-2e94c84250db}</Project>
       <Name>SpheresResource</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

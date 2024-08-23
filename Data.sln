@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.10.35201.131
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34729.46
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{1DCDE042-2496-46AE-A0B9-CE9C994D92E2}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DALOleDb", "DALOleDb\DALOleDb.csproj", "{B68C8188-99D4-4600-92A2-3AA8302E87B8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACommon", "ACommon\ACommon\ACommon.csproj", "{9FF00E89-DA79-4F89-B3A6-9995F502F080}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpheresResource", "SpheresResource\SpheresResource\SpheresResource.csproj", "{568A7D8F-7522-44EC-AEEC-2E94C84250DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +85,18 @@ Global
 		{9FF00E89-DA79-4F89-B3A6-9995F502F080}.ReleaseSetup|Any CPU.Build.0 = ReleaseSetup|Any CPU
 		{9FF00E89-DA79-4F89-B3A6-9995F502F080}.ReleaseSetup|x64.ActiveCfg = ReleaseSetup|x64
 		{9FF00E89-DA79-4F89-B3A6-9995F502F080}.ReleaseSetup|x64.Build.0 = ReleaseSetup|x64
+		{568A7D8F-7522-44EC-AEEC-2E94C84250DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{568A7D8F-7522-44EC-AEEC-2E94C84250DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{568A7D8F-7522-44EC-AEEC-2E94C84250DB}.Debug|x64.ActiveCfg = Debug|x64
+		{568A7D8F-7522-44EC-AEEC-2E94C84250DB}.Debug|x64.Build.0 = Debug|x64
+		{568A7D8F-7522-44EC-AEEC-2E94C84250DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{568A7D8F-7522-44EC-AEEC-2E94C84250DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{568A7D8F-7522-44EC-AEEC-2E94C84250DB}.Release|x64.ActiveCfg = Release|x64
+		{568A7D8F-7522-44EC-AEEC-2E94C84250DB}.Release|x64.Build.0 = Release|x64
+		{568A7D8F-7522-44EC-AEEC-2E94C84250DB}.ReleaseSetup|Any CPU.ActiveCfg = ReleaseSetup|Any CPU
+		{568A7D8F-7522-44EC-AEEC-2E94C84250DB}.ReleaseSetup|Any CPU.Build.0 = ReleaseSetup|Any CPU
+		{568A7D8F-7522-44EC-AEEC-2E94C84250DB}.ReleaseSetup|x64.ActiveCfg = ReleaseSetup|x64
+		{568A7D8F-7522-44EC-AEEC-2E94C84250DB}.ReleaseSetup|x64.Build.0 = ReleaseSetup|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
