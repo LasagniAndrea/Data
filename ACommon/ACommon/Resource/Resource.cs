@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Reflection;
 using System.IO;
 using System.Xml;
+using System.Web.Services;
 
 namespace EFS.ACommon
 {
@@ -133,6 +134,7 @@ namespace EFS.ACommon
             /// <param name="pMsgtypeEnum"></param>
             /// <param name="pCulture"></param>
             /// <returns></returns>            
+            [WebMethod]
             public string GetText(string sysCode, string sysNumber, MsgtypeEnum pMsgtypeEnum)
             {
                 string ret = string.Empty;
