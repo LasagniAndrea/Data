@@ -190,9 +190,6 @@
     <EmbeddedResource Include="SpheresResource.fr.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SpheresResource.it-IT.resx">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="SpheresResource.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
