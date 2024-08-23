@@ -112,7 +112,7 @@ namespace EFS.ACommon
             /// <returns></returns>
             public string GetMsg(string sysCode, string sysNumber)
             {
-                return GetText(sysCode, sysNumber, MsgtypeEnum.message, string.Empty);
+                return GetText(sysCode, sysNumber, MsgtypeEnum.message);
             }
 
             /// <summary>
@@ -123,7 +123,7 @@ namespace EFS.ACommon
             /// <returns></returns>
             public string GetShortMsg(string sysCode, string sysNumber)
             {
-                return GetText(sysCode, sysNumber, MsgtypeEnum.shortMessage, string.Empty);
+                return GetText(sysCode, sysNumber, MsgtypeEnum.shortMessage);
             }
             /// <summary>
             /// 
@@ -133,16 +133,12 @@ namespace EFS.ACommon
             /// <param name="pMsgtypeEnum"></param>
             /// <param name="pCulture"></param>
             /// <returns></returns>
-            private string GetText(string sysCode, string sysNumber, MsgtypeEnum pMsgtypeEnum, string pCulture)
+            private string GetText(string sysCode, string sysNumber, MsgtypeEnum pMsgtypeEnum)
             {
                 string ret = string.Empty;
                 XmlNode node = GetNodeData(sysCode, sysNumber);
                 if (null != node)
                 {
-                    //string cultureName = pCulture;
-                    //if (StrFunc.IsEmpty(cultureName))
-                    //    _ = GetCurrentCultureName();
-
                     string expression = StrFunc.AppendFormat("./{0}/{1}/text()", pMsgtypeEnum.ToString(), GetCurrentCultureName());
                     node = node.SelectSingleNode(expression);
                     if (null != node)
