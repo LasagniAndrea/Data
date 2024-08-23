@@ -1,0 +1,2 @@
+C:\Users\BDX088\Documents\GitHub\Spheres2\ACommon\obj\Debug\ACommon.csproj.AssemblyReference.cache
+C:\Users\BDX088\Documents\GitHub\Spheres2\ACommon\obj\Debug\ACommon.csproj.CoreCompileInputs.cache
