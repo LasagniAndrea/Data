@@ -141,9 +141,8 @@ namespace EFS.ACommon
                 XmlNode node = GetNodeData(sysCode, sysNumber);
                 if (null != node)
                 {
-                    //string expression = StrFunc.AppendFormat("./{0}/{1}/text()", pMsgtypeEnum.ToString(), sysCode);
-                    //node = node.SelectSingleNode(expression);
-                    node = node.SelectSingleNode(sysCode);
+                    string expression = StrFunc.AppendFormat("./{0}/{1}/text()", pMsgtypeEnum.ToString(), GetCurrentCultureName());
+                    node = node.SelectSingleNode(expression);                    
                     if (null != node)
                         ret = node.Value;
                 }
@@ -158,8 +157,8 @@ namespace EFS.ACommon
             /// <param name="sysNumber"></param>
             /// <returns></returns>
             private XmlNode GetNodeData(string sysCode, string sysNumber)
-            {
-                string expression = StrFunc.AppendFormat("/root/data[@syscode='{0}' and @sysnumber='{1}']", sysCode, sysNumber);
+            {                
+                string expression = "/root/data[@syscode='" + sysCode + "' and @sysnumber='" + sysNumber + "']";
                 XmlNode node = _xmlDoc.SelectSingleNode(expression);
                 return node;
             }
