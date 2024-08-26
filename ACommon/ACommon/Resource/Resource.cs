@@ -141,7 +141,7 @@ namespace EFS.ACommon
                 XmlNode node = GetNodeData(sysCode, sysNumber);
                 if (null != node)
                 {
-                    string expression = StrFunc.AppendFormat("./{0}/{1}/text()", pMsgtypeEnum.ToString(), GetCurrentCultureName());
+                    string expression = StrFunc.AppendFormat("./{0}/{1}/text()", pMsgtypeEnum.ToString(), sysCode);
                     node = node.SelectSingleNode(expression);
                     if (null != node)
                         ret = node.Value;
